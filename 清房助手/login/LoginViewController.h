@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  LoginViewController.h
 //  清房助手
 //
 //  Created by Larry on 15/10/8.
@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
-
+@interface LoginViewController : UIViewController
 
 @end
-
