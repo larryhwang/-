@@ -448,7 +448,9 @@
                 <constraint firstItem="OQm-6j-25G" firstAttribute="centerX" secondItem="mcd-MU-1En" secondAttribute="centerX" id="XN4-Za-eTB"/>
                 <constraint firstItem="6WR-01-1Xp" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="80" id="be5-Te-Lzq"/>
                 <constraint firstAttribute="trailing" secondItem="mcd-MU-1En" secondAttribute="trailing" constant="41" id="g4T-Nc-ehw"/>
-                <constraint firstItem="OQm-6j-25G" firstAttribute="top" secondItem="mcd-MU-1En" secondAttribute="bottom" constant="57" id="gah-ve-lZd"/>
+                <constraint firstItem="OQm-6j-25G" firstAttribute="top" secondItem="mcd-MU-1En" secondAttribute="bottom" constant="57" id="gah-ve-lZd">
+                    <variation key="widthClass=compact" constant="30"/>
+                </constraint>
                 <constraint firstAttribute="bottom" secondItem="6WR-01-1Xp" secondAttribute="bottom" constant="214" id="mVj-Ou-nEw"/>
                 <constraint firstItem="wjc-vf-yQr" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="15" id="ohK-wx-DDM"/>
                 <constraint firstAttribute="bottom" secondItem="6WR-01-1Xp" secondAttribute="bottom" constant="222" id="tOU-rZ-Qkz"/>
