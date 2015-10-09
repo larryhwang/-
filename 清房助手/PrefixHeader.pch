@@ -25,3 +25,5 @@
 #define isI5  ([UIScreen mainScreen].bounds.size.height == 568)
 #define isI6  ([UIScreen mainScreen].bounds.size.height == 667)
 #define isI6p ([UIScreen mainScreen].bounds.size.height == 736)
+
+#define BasicUrl @"http://192.168.1.38:8080"
