@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "LoginViewController.h"
 #import "WMCommon.h"
+#import "HomeViewController.h"
 @interface AppDelegate ()
 
 @end
@@ -23,8 +24,9 @@
     common.screenH = [[UIScreen mainScreen] bounds].size.height;
 
          LoginViewController *login = [LoginViewController new];
+         HomeViewController  *TEST = [HomeViewController new];
         self.window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
-        self.window.rootViewController = login;
+        self.window.rootViewController = TEST;
         [self.window  makeKeyAndVisible];
 
    

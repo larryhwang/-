@@ -10,11 +10,13 @@
 #import "WMMenuTableViewCell.h"
 #import "WMCommon.h"
 #import "UIImage+WM.h"
+#import "QFSearchBar.h"
 
 @interface WMMenuViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (strong, nonatomic) WMCommon *common;
 @property (strong ,nonatomic) NSArray  *listArray;
-
+@property (weak, nonatomic) IBOutlet UILabel *userNameDis;
+@property (weak, nonatomic) IBOutlet UILabel *userTeleDis;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIButton    *nightModeBtn;
 @property (weak, nonatomic) IBOutlet UIButton    *settingBtn;
@@ -39,7 +41,7 @@
     // 设置tableFooterView为一个空的View，这样就不会显示多余的空白格子了
     self.tableView.tableFooterView = [[UIView alloc] init];
     
-    self.headerImageView.image = [[UIImage imageNamed:@"me"] getRoundImage];
+    self.headerImageView.image = [[UIImage imageNamed:@"Icon"] getRoundImage];
 }
 
 - (void)btnClick:(id)sender {
