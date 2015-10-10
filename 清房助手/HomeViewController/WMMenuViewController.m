@@ -30,7 +30,7 @@
     
     self.common = [WMCommon getInstance];
     
-    self.listArray = @[@"开通会员", @"QQ钱包", @"网上营业厅", @"个性装扮", @"我的收藏", @"我的相册", @"我的文件"];
+    self.listArray = @[@"房源查询", @"客源查询", @"发布", @"我的客源", @"我的房源"];
     
     self.tableView.delegate        = self;
     self.tableView.dataSource      = self;
@@ -59,7 +59,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 7;
+    return 4;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
