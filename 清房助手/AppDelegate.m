@@ -26,7 +26,7 @@
          LoginViewController *login = [LoginViewController new];
          HomeViewController  *TEST = [HomeViewController new];
         self.window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
-        self.window.rootViewController = TEST;
+        self.window.rootViewController = login;
         [self.window  makeKeyAndVisible];
 
    

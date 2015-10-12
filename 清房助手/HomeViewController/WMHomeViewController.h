@@ -15,8 +15,9 @@
 
 @end
 
-@interface WMHomeViewController : WMBaseViewController
+@interface WMHomeViewController : WMBaseViewController<UITableViewDataSource,UITableViewDelegate>
 @property (weak, nonatomic) UIButton *leftBtn;
 @property (weak, nonatomic) id<WMHomeViewControllerDelegate> delegate;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @end

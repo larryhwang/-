@@ -44,7 +44,7 @@
     NSString *completeUrl = [NSString stringWithFormat:@"%@/qfzsapi/user/loginUser.api",BasicUrl];
     NSLog(@"%@",completeUrl);
     HomeViewController *home = [HomeViewController new];
-    KeyWindow.rootViewController = home;
+   // KeyWindow.rootViewController = home;
    [mgr POST:completeUrl parameters:PramaDic success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [MBProgressHUD showMessage:@"正在登录"];
         NSLog(@"返回值%@",responseObject[@"code"]);
