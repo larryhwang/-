@@ -12,6 +12,12 @@
 #import "QFSearchBar.h"
 #import "QFTitleButton.h"
 #import "AFNetworking.h"
+#import "SalesCell.h"
+#import "UIImageView+WebCache.h"
+#import "DetailViewController.h"
+
+
+
 
 @interface WMHomeViewController()
 
@@ -35,23 +41,16 @@
     AFHTTPRequestOperationManager *mgr  = [AFHTTPRequestOperationManager manager];
     NSString *url  = @"http://192.168.1.38:8080/qfzsapi/user/homePage.api?weiTuoDate=0&fangxiang=initdata";
     NSString *url2 =@"http://192.168.1.38:8080/qfzsapi/fangyuan/detailsHouse.api?fenLei=0&fangyuan_id=1";
-    [mgr POST:url
+    NSString *url3=@"http://192.168.1.38:8080/qfzsapi/fangyuan/rentalOrBuyHouseSearch.api?weiTuoDate=0&sum=10&fangxiang=refresh&zuShou=0";
+    [mgr POST:url3
    parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
        NSLog(@"%@",responseObject);
        NSArray *DataArra = responseObject[@"data"];
        self.DataArr =DataArra;
-
-
        [self.tableView reloadData];
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"%@",error);
     }];
-    
-    
-    
-    
-    
-    
     
     
     self.navigationItem.backBarButtonItem.title = @"返回";
@@ -81,8 +80,8 @@
 }
 
 - (void)clicked {
-    if ([self.delegate respondsToSelector:@selector(leftBtnClicked)]) {
-        [self.delegate leftBtnClicked];
+    if ([self.HomeVCdelegate respondsToSelector:@selector(leftBtnClicked)]) {
+        [self.HomeVCdelegate leftBtnClicked];
     }
 }
 
@@ -93,10 +92,11 @@
 
 #pragma mark tableViewDelegate
 
-
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 100;
+}
 
 -(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    NSLog(@"数量获取%d",self.DataArr.count);
      return self.DataArr.count;
    
 }
@@ -104,29 +104,39 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
-    
-    
-
-//    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
-//    if (cell ==nil) {
-//        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:ID];
-//    }
-//    ETWeiBoStatus *dd = self.ModelArray[indexPath.row];
-//    NSLog(@"%@",dd.user.profile_image_url);
-//    [cell.imageView sd_setImageWithURL:dd.user.profile_image_url placeholderImage:[UIImage imageNamed:@"timeline_image_placeholder"]];
-//    cell.textLabel.text = dd.text;
-    
-    NSLog(@"single cell is seting");
     // 1.创建CELL
     static NSString *ID = @"identifer";
-    UITableViewCell *cell =[tableView dequeueReusableCellWithIdentifier:ID];
+    SalesCell *cell =[tableView dequeueReusableCellWithIdentifier:ID];
     if (cell ==nil) {
-            cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:ID];
+            cell = [[[NSBundle mainBundle]loadNibNamed:@"SalesCell" owner:nil options:nil] firstObject];
         }
     NSDictionary *SingleData = self.DataArr[indexPath.row];
-    cell.textLabel.text    = SingleData[@"biaoti"];
+    NSString *imgCollects = SingleData[@"tupian"];
+    NSArray *imgArray = [imgCollects componentsSeparatedByString:@","];
+    NSString *imgURL = [NSString stringWithFormat:@"http://112.74.64.145/hsf/img/%@",[imgArray firstObject]];
+ 
+    NSString *BigTitle = SingleData[@"biaoti"];
+    NSArray *titlePartArra = [BigTitle componentsSeparatedByString:@" "]; //
+    
+    UIImage  *PlaceHoder = [UIImage imageNamed:@"DeafaultImage"];
+    PlaceHoder = [PlaceHoder imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    [cell.QFImageView sd_setImageWithURL:[NSURL URLWithString:imgURL] placeholderImage:PlaceHoder];
+    cell.title.text = [titlePartArra firstObject];
+    cell.area.text  = [NSString stringWithFormat:@"面积:%@㎡",SingleData[@"mianji"]]; //SingleData[@"mianji"];
+#warning 几室几厅数据没有返回
+    cell.style.text = @"两室";
+    cell.elevator.text = @"电梯";
+    cell.price.text = [NSString stringWithFormat:@"%@万",SingleData[@"shoujia"]];
+    cell.postUer.text =  [NSString stringWithFormat:@"发布人:%@",SingleData[@"publisher"]];
+    cell.postTime.text = [NSString stringWithFormat:@"发布时间:%@",SingleData[@"weituodate"]];
     return cell;
 }
 
+//点击查看详情
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+   // DetailViewController *detail = [[DetailViewController alloc]init];
+  //  [self presentViewController:detail animated:YES completion:nil];
+   [self.HomeVCdelegate QFshowDetail];
+    
+}
 @end

@@ -30,6 +30,8 @@
 #define isI6p ([UIScreen mainScreen].bounds.size.height == 736)
 #define DeafaultColor [UIColor colorWithRed:3/255.0 green:164/255.0 blue:255/255.0 alpha:1.0]
 #define DeafaultColor2 [UIColor colorWithRed:0 green:122.0 / 255 blue:1.0 alpha:1.0]
+#define ScreenWidth     [UIScreen mainScreen].bounds.size.width
+#define ScreenHeight    [UIScreen mainScreen].bounds.size.height
 //3, 164, 255
 #define BasicUrl @"http://192.168.1.38:8080"
 #

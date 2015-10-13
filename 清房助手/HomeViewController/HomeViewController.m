@@ -12,6 +12,7 @@
 #import "WMOtherViewController.h"
 #import "WMNavigationController.h"
 #import "WMCommon.h"
+#import "DetailViewController.h"
 
 typedef enum state {
     kStateHome,
@@ -42,7 +43,7 @@ static const CGFloat menuStartNarrowRatio  = 0.70;
 @implementation HomeViewController
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+
     self.common = [WMCommon getInstance];
     self.sta = kStateHome;
     self.distance = 0;
@@ -73,7 +74,7 @@ static const CGFloat menuStartNarrowRatio  = 0.70;
     
     self.homeVC = [[WMHomeViewController alloc] init];
     self.homeVC.view.frame = [[UIScreen mainScreen] bounds];
-    self.homeVC.delegate = self;
+    self.homeVC.HomeVCdelegate = self;
     
     // 设置控制器的状态，添加手势操作
     self.messageNav = [[WMNavigationController alloc] initWithRootViewController:self.homeVC];
@@ -200,6 +201,13 @@ static const CGFloat menuStartNarrowRatio  = 0.70;
     other.hidesBottomBarWhenPushed = YES;
     [self.messageNav pushViewController:other animated:NO];
     [self showHome];
+}
+
+#pragma mark - 表格点击后代理方法 
+-(void)QFshowDetail{
+    DetailViewController *test = [DetailViewController new];
+    [self.messageNav pushViewController:test animated:YES];
+    NSLog(@"表格被点击");
 }
 
 @end

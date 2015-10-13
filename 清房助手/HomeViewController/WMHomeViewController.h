@@ -13,11 +13,13 @@
 @optional
 - (void)leftBtnClicked;
 
+-(void)QFshowDetail;
+
 @end
 
 @interface WMHomeViewController : WMBaseViewController<UITableViewDataSource,UITableViewDelegate>
 @property (weak, nonatomic) UIButton *leftBtn;
-@property (weak, nonatomic) id<WMHomeViewControllerDelegate> delegate;
+@property (weak, nonatomic) id<WMHomeViewControllerDelegate> HomeVCdelegate;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @end

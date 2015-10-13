@@ -10,6 +10,7 @@
 #import "LoginViewController.h"
 #import "WMCommon.h"
 #import "HomeViewController.h"
+#import "DetailViewController.h"
 @interface AppDelegate ()
 
 @end
@@ -25,8 +26,9 @@
 
          LoginViewController *login = [LoginViewController new];
          HomeViewController  *TEST = [HomeViewController new];
+    DetailViewController *TEST2 = [DetailViewController new];
         self.window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
-        self.window.rootViewController = login;
+        self.window.rootViewController = TEST2;
         [self.window  makeKeyAndVisible];
 
    
