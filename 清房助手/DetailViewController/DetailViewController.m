@@ -8,8 +8,14 @@
 
 #import "DetailViewController.h"
 #import "AFNetworking.h"
+#import "FactorydescribeCell.h"
+#import "FactoryDetailCell.h"
+#import "FactoryLoactionCell.h"
+
 
 #define  HeavyFont     [UIFont fontWithName:@"Helvetica-Bold" size:25]
+#define  ToolHeight  60
+
 
 @interface DetailViewController ()<UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *detailInfoTable;
@@ -25,6 +31,20 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    //底部加载
+    UIView *footer = [[UIView alloc]initWithFrame:CGRectMake(0, ScreenHeight-ToolHeight, ScreenWidth, ToolHeight)];
+    
+    footer.backgroundColor = [UIColor redColor];
+    
+    
+    self.detailInfoTable.allowsSelection = NO ;
+    
+    [self.view addSubview:footer];
+    
+    
+    
+    
+    
     self.scrollView3  = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth,ScreenHeight/4)];
     self.scrollView3.pagingEnabled = YES ;
     self.scrollView3.delegate = self ;
@@ -50,22 +70,20 @@
     CurrentCountLable.titleLabel.textAlignment =  NSTextAlignmentCenter ;
     CurrentCountLable.layer.cornerRadius  = 20;
     CurrentCountLable.layer.masksToBounds = YES ;
-   // CurrentCountLable.backgroundColor = [UIColor grayColor];
     [self.view addSubview:CurrentCountLable];
     [self setupScrollViewImages];
     self.scrollView3.delegate = self;
- //   [CurrentCountLable setTextColor:[UIColor clearColor]];
+
     
     [mgr POST:url3
    parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
        NSLog(@"%@",error);
    }];
-    
-    
-    
-   // [self.view addSubview:self.scrollView3];
+
     self.detailInfoTable.tableHeaderView = self.scrollView3;
+  
+    self.detailInfoTable.separatorStyle = UITableViewCellSeparatorStyleNone ;
     
     
 }
@@ -82,7 +100,7 @@
 #pragma mark - ScrollView delegate
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    NSLog(@"%@",scrollView);
+   // NSLog(@"%@",scrollView);
     NSInteger pageIndex = scrollView.contentOffset.x / CGRectGetWidth(scrollView.frame);
     NSString  *nowSelected =[NSString stringWithFormat:@"%d/6",pageIndex + 1];
     [self.CountLabel setTitle:nowSelected forState:UIControlStateNormal];
@@ -110,34 +128,44 @@
 
 #pragma mark -表代理方法
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 1 ;
+    return 3;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath  {
-    UITableViewCell *cell = [UITableViewCell new];
+    
+    FactoryLoactionCell  *LocationCell  = [FactoryLoactionCell new];
+    FactorydescribeCell  *DescribieCell = [FactorydescribeCell new];
+    FactoryDetailCell    *DetailCell = [FactoryDetailCell new];
+    
+    LocationCell  =  [[[NSBundle mainBundle]loadNibNamed:@"FactoryLoactionCell" owner:nil options:nil] firstObject];
+    DescribieCell = [[[NSBundle mainBundle]loadNibNamed:@"FactorydescribeCell" owner:nil options:nil] firstObject];
+    DetailCell = [[[NSBundle mainBundle]loadNibNamed:@"FactoryDetailCell" owner:nil options:nil] firstObject];
+    
+    
     if (indexPath.row ==0) {
-        NSLog(@"0行");
+        return LocationCell;
     }else if (indexPath.row ==1) {
-        NSLog(@"1行");
+        return DetailCell;
     }else {
-        NSLog(@"2行");
+        return DescribieCell;
     }
-    return cell;
+
 }
 
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     NSLog(@"-----");
     if (indexPath.row==0) {
-        return 100.0;
+        return 150.0;
     }
    else if (indexPath.row ==1) {
-        return 90;
+        return 100;
     }
   else {
         return 100;
     }
 }
+
 
 
 @end

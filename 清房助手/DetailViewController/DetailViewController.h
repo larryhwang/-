@@ -12,4 +12,10 @@
 
 @interface DetailViewController : UIViewController
 
+
+
+
+
+
+
 @end

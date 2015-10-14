@@ -55,6 +55,12 @@
 		468E28761BCCD47400560500 /* image5.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 468E28701BCCD47400560500 /* image5.jpg */; settings = {ASSET_TAGS = (); }; };
 		468E28771BCCD47400560500 /* image6.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 468E28711BCCD47400560500 /* image6.jpg */; settings = {ASSET_TAGS = (); }; };
 		468E28791BCCF27C00560500 /* CountBackImg.png in Resources */ = {isa = PBXBuildFile; fileRef = 468E28781BCCF27C00560500 /* CountBackImg.png */; settings = {ASSET_TAGS = (); }; };
+		468E28881BCCFEA400560500 /* FactoryLoactionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 468E28861BCCFEA400560500 /* FactoryLoactionCell.m */; settings = {ASSET_TAGS = (); }; };
+		468E28891BCCFEA400560500 /* FactoryLoactionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 468E28871BCCFEA400560500 /* FactoryLoactionCell.xib */; settings = {ASSET_TAGS = (); }; };
+		468E288D1BCD021A00560500 /* FactoryDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 468E288B1BCD021A00560500 /* FactoryDetailCell.m */; settings = {ASSET_TAGS = (); }; };
+		468E288E1BCD021A00560500 /* FactoryDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 468E288C1BCD021A00560500 /* FactoryDetailCell.xib */; settings = {ASSET_TAGS = (); }; };
+		468E28921BCD025600560500 /* FactorydescribeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 468E28901BCD025600560500 /* FactorydescribeCell.m */; settings = {ASSET_TAGS = (); }; };
+		468E28931BCD025600560500 /* FactorydescribeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 468E28911BCD025600560500 /* FactorydescribeCell.xib */; settings = {ASSET_TAGS = (); }; };
 		4697FB241BCB8CF200D7E24C /* DeafaultImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 4697FB231BCB8CF200D7E24C /* DeafaultImage.png */; settings = {ASSET_TAGS = (); }; };
 		4697FB331BCB9BAE00D7E24C /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4697FB311BCB9BAE00D7E24C /* DetailViewController.m */; settings = {ASSET_TAGS = (); }; };
 		4697FB341BCB9BAE00D7E24C /* DetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4697FB321BCB9BAE00D7E24C /* DetailViewController.xib */; settings = {ASSET_TAGS = (); }; };
@@ -190,6 +196,15 @@
 		468E28701BCCD47400560500 /* image5.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = image5.jpg; sourceTree = "<group>"; };
 		468E28711BCCD47400560500 /* image6.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = image6.jpg; sourceTree = "<group>"; };
 		468E28781BCCF27C00560500 /* CountBackImg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CountBackImg.png; sourceTree = "<group>"; };
+		468E28851BCCFEA400560500 /* FactoryLoactionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FactoryLoactionCell.h; sourceTree = "<group>"; };
+		468E28861BCCFEA400560500 /* FactoryLoactionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FactoryLoactionCell.m; sourceTree = "<group>"; };
+		468E28871BCCFEA400560500 /* FactoryLoactionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FactoryLoactionCell.xib; sourceTree = "<group>"; };
+		468E288A1BCD021A00560500 /* FactoryDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FactoryDetailCell.h; sourceTree = "<group>"; };
+		468E288B1BCD021A00560500 /* FactoryDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FactoryDetailCell.m; sourceTree = "<group>"; };
+		468E288C1BCD021A00560500 /* FactoryDetailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FactoryDetailCell.xib; sourceTree = "<group>"; };
+		468E288F1BCD025600560500 /* FactorydescribeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FactorydescribeCell.h; sourceTree = "<group>"; };
+		468E28901BCD025600560500 /* FactorydescribeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FactorydescribeCell.m; sourceTree = "<group>"; };
+		468E28911BCD025600560500 /* FactorydescribeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FactorydescribeCell.xib; sourceTree = "<group>"; };
 		4697FB231BCB8CF200D7E24C /* DeafaultImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DeafaultImage.png; sourceTree = "<group>"; };
 		4697FB301BCB9BAE00D7E24C /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
 		4697FB311BCB9BAE00D7E24C /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
@@ -502,9 +517,26 @@
 			name = Detail;
 			sourceTree = "<group>";
 		};
+		468E28811BCCFE7B00560500 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				468E28851BCCFEA400560500 /* FactoryLoactionCell.h */,
+				468E28861BCCFEA400560500 /* FactoryLoactionCell.m */,
+				468E28871BCCFEA400560500 /* FactoryLoactionCell.xib */,
+				468E288A1BCD021A00560500 /* FactoryDetailCell.h */,
+				468E288B1BCD021A00560500 /* FactoryDetailCell.m */,
+				468E288C1BCD021A00560500 /* FactoryDetailCell.xib */,
+				468E288F1BCD025600560500 /* FactorydescribeCell.h */,
+				468E28901BCD025600560500 /* FactorydescribeCell.m */,
+				468E28911BCD025600560500 /* FactorydescribeCell.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		4697FB251BCB9A1300D7E24C /* DeatilViewController */ = {
 			isa = PBXGroup;
 			children = (
+				468E28811BCCFE7B00560500 /* View */,
 				4697FB301BCB9BAE00D7E24C /* DetailViewController.h */,
 				4697FB311BCB9BAE00D7E24C /* DetailViewController.m */,
 				4697FB321BCB9BAE00D7E24C /* DetailViewController.xib */,
@@ -732,6 +764,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				468E28891BCCFEA400560500 /* FactoryLoactionCell.xib in Resources */,
 				4643566C1BC6149600A44526 /* password.png in Resources */,
 				4673A5001BC8A0D100700099 /* background-logo(3).png in Resources */,
 				46D6483A1BC8E925000F23EF /* navigationbar_arrow_down@2x.png in Resources */,
@@ -741,6 +774,7 @@
 				46D33C0F1BCB4B9C00B30F2A /* SalesCell.xib in Resources */,
 				4673A4FA1BC8991E00700099 /* background-logo.png in Resources */,
 				464356351BC6093B00A44526 /* Assets.xcassets in Resources */,
+				468E288E1BCD021A00560500 /* FactoryDetailCell.xib in Resources */,
 				464356721BC61E9F00A44526 /* log1.png in Resources */,
 				468E28791BCCF27C00560500 /* CountBackImg.png in Resources */,
 				4697FB371BCBAF8F00D7E24C /* StringFile.strings in Resources */,
@@ -766,6 +800,7 @@
 				4697FB341BCB9BAE00D7E24C /* DetailViewController.xib in Resources */,
 				4697FB241BCB8CF200D7E24C /* DeafaultImage.png in Resources */,
 				46714B871BC7CC9800E7AEE9 /* Icon.png in Resources */,
+				468E28931BCD025600560500 /* FactorydescribeCell.xib in Resources */,
 				4643566A1BC6149600A44526 /* LoginButton.png in Resources */,
 				4643565F1BC611F100A44526 /* LoginViewController.xib in Resources */,
 			);
@@ -814,9 +849,11 @@
 				46AFDF9C1BCB84A200B49CBE /* NSData+ImageContentType.m in Sources */,
 				46C716C71BC69FB800287742 /* AFURLResponseSerialization.m in Sources */,
 				46C716CE1BC69FB800287742 /* NSObject+MJIvar.m in Sources */,
+				468E28881BCCFEA400560500 /* FactoryLoactionCell.m in Sources */,
 				46714B7C1BC7C11F00E7AEE9 /* WMMenuViewController.m in Sources */,
 				46C716C51BC69FB800287742 /* AFURLConnectionOperation.m in Sources */,
 				46D33C0E1BCB4B9C00B30F2A /* SalesCell.m in Sources */,
+				468E288D1BCD021A00560500 /* FactoryDetailCell.m in Sources */,
 				46AFDFA11BCB84A200B49CBE /* SDWebImageDownloaderOperation.m in Sources */,
 				46C716C41BC69FB800287742 /* AFSecurityPolicy.m in Sources */,
 				46C716D81BC7645E00287742 /* MBProgressHUD.m in Sources */,
@@ -832,6 +869,7 @@
 				46C716C61BC69FB800287742 /* AFURLRequestSerialization.m in Sources */,
 				46C716C81BC69FB800287742 /* AFURLSessionManager.m in Sources */,
 				4673A50C1BC8DD4B00700099 /* UIImage+Image.m in Sources */,
+				468E28921BCD025600560500 /* FactorydescribeCell.m in Sources */,
 				46C716CC1BC69FB800287742 /* MJType.m in Sources */,
 				46AFDFA41BCB84A200B49CBE /* UIButton+WebCache.m in Sources */,
 				4643562D1BC6093B00A44526 /* AppDelegate.m in Sources */,
