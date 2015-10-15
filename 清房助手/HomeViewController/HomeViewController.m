@@ -204,8 +204,9 @@ static const CGFloat menuStartNarrowRatio  = 0.70;
 }
 
 #pragma mark - 表格点击后代理方法 
--(void)QFshowDetail{
+-(void)QFshowDetail:(NSString *)HouseId{
     DetailViewController *test = [DetailViewController new];
+    test.DisplayId = HouseId ;
     [self.messageNav pushViewController:test animated:YES];
     NSLog(@"表格被点击");
 }

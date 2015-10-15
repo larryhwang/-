@@ -13,7 +13,7 @@
 @optional
 - (void)leftBtnClicked;
 
--(void)QFshowDetail;
+-(void)QFshowDetail:(NSString *)HouseId;
 
 @end
 

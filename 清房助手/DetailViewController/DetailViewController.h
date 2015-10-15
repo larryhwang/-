@@ -12,10 +12,7 @@
 
 @interface DetailViewController : UIViewController
 
-
-
-
-
+@property(nonatomic,strong)  NSString  *DisplayId;
 
 
 @end

@@ -7,6 +7,7 @@
 //
 #warning 记住密码
 #warning 4s和5点击文本框后整体
+
 #import "LoginViewController.h"
 #import "AFNetworking.h"
 #import "MBProgressHUD+CZ.h"
@@ -37,15 +38,22 @@
     NSString   *passWord = self.passWord.text;
     
     NSMutableDictionary *PramaDic = [NSMutableDictionary new];
+    //http://127.0.0.1:8080/qfzsapi/user/loginUser.api?userID=admin&psWord=2
+    PramaDic[@"userID"] = @"15018639039";
+    PramaDic[@"psWord"] = @"123456";
     
-    PramaDic[@"userID"] = userName;
-    PramaDic[@"psWord"] = passWord;
+    
+    
+    /*
+     15018639039  123456
+     */
     AFHTTPRequestOperationManager *mgr  = [AFHTTPRequestOperationManager manager];
     NSString *completeUrl = [NSString stringWithFormat:@"%@/qfzsapi/user/loginUser.api",BasicUrl];
     NSLog(@"%@",completeUrl);
     HomeViewController *home = [HomeViewController new];
    // KeyWindow.rootViewController = home;
    [mgr POST:completeUrl parameters:PramaDic success:^(AFHTTPRequestOperation *operation, id responseObject) {
+       NSLog(@"登录信息%@",responseObject);
         [MBProgressHUD showMessage:@"正在登录"];
         NSLog(@"返回值%@",responseObject[@"code"]);
        if (responseObject) {
@@ -53,13 +61,13 @@
        }
        long Cp=[responseObject[@"code"] integerValue];
        if (Cp==1) {
-         [self loginErroAlert];
-       }else{
-          //进入主界面
            HomeViewController *home = [HomeViewController new];
            KeyWindow.rootViewController = home;
-        
-           
+    
+       }else{
+          //进入主界面
+           [self loginErroAlert];
+
        }
    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
        NSLog(@"%@",error);
@@ -110,7 +118,6 @@
                                                delegate:self
                                       cancelButtonTitle:@"确定"
                                       otherButtonTitles:nil];
-    
     [AW show];
 }
 

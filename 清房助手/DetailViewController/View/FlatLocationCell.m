@@ -1,14 +1,14 @@
 //
-//  describeCell.m
+//  FlatLocationCell.m
 //  清房助手
 //
-//  Created by Larry on 15/10/13.
+//  Created by Larry on 15/10/15.
 //  Copyright © 2015年 Larry. All rights reserved.
 //
 
-#import "FactorydescribeCell.h"
+#import "FlatLocationCell.h"
 
-@implementation FactorydescribeCell
+@implementation FlatLocationCell
 
 - (void)awakeFromNib {
     // Initialization code

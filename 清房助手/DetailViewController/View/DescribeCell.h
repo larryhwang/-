@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface FactorydescribeCell : UITableViewCell
+@interface DescribeCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UILabel *Describe;
 

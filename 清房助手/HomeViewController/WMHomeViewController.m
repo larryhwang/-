@@ -39,8 +39,7 @@
     [super viewDidLoad];
     self.tableView.delegate = self;
     AFHTTPRequestOperationManager *mgr  = [AFHTTPRequestOperationManager manager];
-    NSString *url  = @"http://192.168.1.38:8080/qfzsapi/user/homePage.api?weiTuoDate=0&fangxiang=initdata";
-    NSString *url2 =@"http://192.168.1.38:8080/qfzsapi/fangyuan/detailsHouse.api?fenLei=0&fangyuan_id=1";
+    
     NSString *url3=@"http://192.168.1.38:8080/qfzsapi/fangyuan/rentalOrBuyHouseSearch.api?weiTuoDate=0&sum=10&fangxiang=refresh&zuShou=0";
     [mgr POST:url3
    parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -134,9 +133,9 @@
 
 //点击查看详情
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-   // DetailViewController *detail = [[DetailViewController alloc]init];
-  //  [self presentViewController:detail animated:YES completion:nil];
-   [self.HomeVCdelegate QFshowDetail];
+    NSDictionary *SingleData = self.DataArr[indexPath.row];
+    NSString *Id = SingleData[@"id"];   //将ID传过去
+    [self.HomeVCdelegate QFshowDetail:Id];
     
 }
 @end
