@@ -20,7 +20,7 @@
 
 
 @interface DetailViewController ()<UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate>
-@property (weak, nonatomic) IBOutlet UITableView *detailInfoTable;
+@property (strong, nonatomic)  UITableView *detailInfoTable;
 @property (strong, nonatomic) NSArray *imagesData;
 @property(nonatomic,weak)  UIButton *CountLabel;
 @property (strong, nonatomic)  UIScrollView *scrollView3;
@@ -44,14 +44,20 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     //底部加载
-    UIView *footer = [[UIView alloc]initWithFrame:CGRectMake(0, self.detailInfoTable.height +40 , ScreenWidth, ToolHeight)];
+   // UIView *footer = [[UIView alloc]initWithFrame:CGRectMake(0, self.detailInfoTable.height , ScreenWidth, ToolHeight)];
     
-    footer.backgroundColor = [UIColor redColor];
-    
-    
+   
+    self.detailInfoTable = [[UITableView alloc]init];
+    self.detailInfoTable.delegate = self ;
+    self.detailInfoTable.dataSource = self;
     self.detailInfoTable.allowsSelection = NO ;
+    [self.detailInfoTable setFrame:CGRectMake(0, 0, ScreenWidth, 607)];
     
-    [self.view addSubview:footer];
+     UIView *footer = [[UIView alloc]initWithFrame:CGRectMake(0,self.detailInfoTable.height, ScreenWidth, ToolHeight)];
+     footer.backgroundColor = [UIColor redColor];
+ 
+    [self.view addSubview:self.detailInfoTable];
+       [self.view addSubview:footer];
     //self.detailInfoTable.tableFooterView  = footer ;
     
     
@@ -103,6 +109,8 @@
     
     
     //尺寸
+    NSLog(@"高度%f",self.detailInfoTable.height);
+    ;
     
 }
 
@@ -203,10 +211,12 @@
         return DetailCell;
     }else {
         DescribieCell.Describe.numberOfLines = 0;
-      DescribieCell.Describe.text = @"李琦参加好声音前就有过不少表演经历。2011和2012年参加了徐州市春节联欢晚会。2011年9月27日于江苏师范大学体育馆和游泳馆之间举办露天“let's琦！”个人演唱会。2012年5月17日参加江苏体育频道节目录制李琦参加好声音前就有过不少表演经历。2011和2012年参加了徐州市春节联欢晚会。2011年9月27日于江苏师范大学体育馆和游泳馆之间举办露天“let's琦！”个人演唱会。2012年5月17日参加江苏体育频道节目录制李琦参加好声音前就有过不少表演经历。2011和2012年参加了徐州市春节联欢晚会。2011年9月27日于江苏师范大学体育馆和游泳馆之间举办露天“let's琦！”个人演唱会。2012年5月17日参加江苏体育频道节目录制";
+        DescribieCell.Describe.backgroundColor = [UIColor blueColor];
+      DescribieCell.Describe.text = @"李琦参加好声音前就有过不少表演经历";
+         NSLog(@"高度%f",self.detailInfoTable.height);
         return DescribieCell;
     }
-
+   
 }
 
 
@@ -219,7 +229,7 @@
         return 200;
     }
   else {
-        return 100;
+        return 200;
     }
 }
 
