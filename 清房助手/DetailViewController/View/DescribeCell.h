@@ -10,7 +10,7 @@
 
 @interface DescribeCell : UITableViewCell
 
-@property (weak, nonatomic) IBOutlet UILabel *Describe;
+@property (strong, nonatomic)  UILabel *Describe;
 
 
 -(void)setDescribeText:(NSString *)context;

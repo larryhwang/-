@@ -25,6 +25,7 @@
 @property(nonatomic,weak)  UIButton *CountLabel;
 @property (strong, nonatomic)  UIScrollView *scrollView3;
 @property(nonatomic,strong)  NSDictionary  *FangData;
+@property(nonatomic) CGFloat CellHeight;
 
 
 
@@ -96,6 +97,19 @@
     [mgr POST:url3
    parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
        self.FangData = responseObject[@"data"];
+       CGSize size = CGSizeMake(ScreenWidth, 1000);
+       NSString *context = self.FangData[@"fangyuanmiaoshu"];
+       NSDictionary *attrs = @{NSFontAttributeName:[UIFont systemFontOfSize:15]};
+
+       CGSize labelSize = [context boundingRectWithSize:size options:NSStringDrawingUsesLineFragmentOrigin attributes:attrs context:nil].size;
+       self.CellHeight = labelSize.height ;
+       /*
+ 
+        self.Describe.text = context ;
+        self.Describe.font = ;
+     
+        NSLog(@"仅仅高度%f",labelSize.height);
+        */
        
        NSLog(@"单房源信息%@",responseObject);
        [self.detailInfoTable reloadData];
@@ -186,7 +200,7 @@
    // UILabel
     
     LocationCell  =  [[[NSBundle mainBundle]loadNibNamed:@"FactoryLoactionCell" owner:nil options:nil] firstObject];
-    DescribieCell = [[[NSBundle mainBundle]loadNibNamed:@"DescribeCell" owner:nil options:nil] firstObject];
+ //   DescribieCell = [[[NSBundle mainBundle]loadNibNamed:@"DescribeCell" owner:nil options:nil] firstObject];
     DetailCell = [[[NSBundle mainBundle]loadNibNamed:@"FlatDetailCell" owner:nil options:nil] firstObject];
     
     
@@ -211,10 +225,14 @@
         return DetailCell;
     }else {
         DescribieCell.Describe.numberOfLines = 0;
-        DescribieCell.Describe.backgroundColor = [UIColor blueColor];
-     // DescribieCell.Describe.text = @"李琦参加好声音前就有过不少表演经历";
+             DescribieCell.Describe.backgroundColor = [UIColor blueColor];
+    //  DescribieCell.Describe.text = @"李琦参加好声音前就有过不少表演经历";
        [DescribieCell setDescribeText:self.FangData[@"fangyuanmiaoshu"]];
-         NSLog(@"高度%f",self.detailInfoTable.height);
+        NSLog(@"label高度%f",DescribieCell.Describe.frame.size.height);
+     //   [DescribieCell.Describe setFrame:CGRectMake(0, 0, ScreenWidth, 100)];
+        NSLog(@"label后高度%f",DescribieCell.Describe.frame.size.height);
+        DescribieCell.Describe.backgroundColor = [UIColor blueColor];
+
         return DescribieCell;
     }
    
@@ -231,10 +249,10 @@
         return 200;
     }
   else {
-      DescribeCell *cell = [self.detailInfoTable cellForRowAtIndexPath:indexPath];
-      NSLog(@"%f",cell.height);
-//       return cell.frame.size.height;
-     return 200;
+//      DescribeCell *cell = [self.detailInfoTable cellForRowAtIndexPath:indexPath];
+//      NSLog(@"%f",cell.height);
+////       return cell.frame.size.height;
+     return self.CellHeight;
     }
 }
 

@@ -64,7 +64,6 @@
 		468E288D1BCD021A00560500 /* FactoryDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 468E288B1BCD021A00560500 /* FactoryDetailCell.m */; settings = {ASSET_TAGS = (); }; };
 		468E288E1BCD021A00560500 /* FactoryDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 468E288C1BCD021A00560500 /* FactoryDetailCell.xib */; settings = {ASSET_TAGS = (); }; };
 		468E28921BCD025600560500 /* DescribeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 468E28901BCD025600560500 /* DescribeCell.m */; settings = {ASSET_TAGS = (); }; };
-		468E28931BCD025600560500 /* DescribeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 468E28911BCD025600560500 /* DescribeCell.xib */; settings = {ASSET_TAGS = (); }; };
 		4697FB241BCB8CF200D7E24C /* DeafaultImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 4697FB231BCB8CF200D7E24C /* DeafaultImage.png */; settings = {ASSET_TAGS = (); }; };
 		4697FB331BCB9BAE00D7E24C /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4697FB311BCB9BAE00D7E24C /* DetailViewController.m */; settings = {ASSET_TAGS = (); }; };
 		4697FB341BCB9BAE00D7E24C /* DetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4697FB321BCB9BAE00D7E24C /* DetailViewController.xib */; settings = {ASSET_TAGS = (); }; };
@@ -214,7 +213,6 @@
 		468E288C1BCD021A00560500 /* FactoryDetailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FactoryDetailCell.xib; sourceTree = "<group>"; };
 		468E288F1BCD025600560500 /* DescribeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DescribeCell.h; sourceTree = "<group>"; };
 		468E28901BCD025600560500 /* DescribeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DescribeCell.m; sourceTree = "<group>"; };
-		468E28911BCD025600560500 /* DescribeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DescribeCell.xib; sourceTree = "<group>"; };
 		4697FB231BCB8CF200D7E24C /* DeafaultImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DeafaultImage.png; sourceTree = "<group>"; };
 		4697FB301BCB9BAE00D7E24C /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
 		4697FB311BCB9BAE00D7E24C /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
@@ -538,7 +536,6 @@
 				468E288C1BCD021A00560500 /* FactoryDetailCell.xib */,
 				468E288F1BCD025600560500 /* DescribeCell.h */,
 				468E28901BCD025600560500 /* DescribeCell.m */,
-				468E28911BCD025600560500 /* DescribeCell.xib */,
 				46256C491BCF5B7300E05C5F /* FlatLocationCell.h */,
 				46256C4A1BCF5B7300E05C5F /* FlatLocationCell.m */,
 				46256C4B1BCF5B7300E05C5F /* FlatLocationCell.xib */,
@@ -818,7 +815,6 @@
 				4697FB341BCB9BAE00D7E24C /* DetailViewController.xib in Resources */,
 				4697FB241BCB8CF200D7E24C /* DeafaultImage.png in Resources */,
 				46714B871BC7CC9800E7AEE9 /* Icon.png in Resources */,
-				468E28931BCD025600560500 /* DescribeCell.xib in Resources */,
 				4643566A1BC6149600A44526 /* LoginButton.png in Resources */,
 				4643565F1BC611F100A44526 /* LoginViewController.xib in Resources */,
 			);
