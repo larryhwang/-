@@ -38,7 +38,7 @@
     NSString   *passWord = self.passWord.text;
     
     NSMutableDictionary *PramaDic = [NSMutableDictionary new];
-    //http://127.0.0.1:8080/qfzsapi/user/loginUser.api?userID=admin&psWord=2
+    //http://127.0.0.1:8080/qfzsapi/user/loginUser.front?userID=admin&psWord=2
     PramaDic[@"userID"] = @"15018639039";
     PramaDic[@"psWord"] = @"123456";
     
@@ -48,7 +48,7 @@
      15018639039  123456
      */
     AFHTTPRequestOperationManager *mgr  = [AFHTTPRequestOperationManager manager];
-    NSString *completeUrl = [NSString stringWithFormat:@"%@/qfzsapi/user/loginUser.api",BasicUrl];
+    NSString *completeUrl = [NSString stringWithFormat:@"%@/qfzsapi/user/loginUser.front",BasicUrl];
     NSLog(@"%@",completeUrl);
     HomeViewController *home = [HomeViewController new];
    // KeyWindow.rootViewController = home;
@@ -63,11 +63,9 @@
        if (Cp==1) {
            HomeViewController *home = [HomeViewController new];
            KeyWindow.rootViewController = home;
-    
        }else{
           //进入主界面
            [self loginErroAlert];
-
        }
    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
        NSLog(@"%@",error);

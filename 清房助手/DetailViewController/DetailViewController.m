@@ -212,7 +212,8 @@
     }else {
         DescribieCell.Describe.numberOfLines = 0;
         DescribieCell.Describe.backgroundColor = [UIColor blueColor];
-      DescribieCell.Describe.text = @"李琦参加好声音前就有过不少表演经历";
+     // DescribieCell.Describe.text = @"李琦参加好声音前就有过不少表演经历";
+       [DescribieCell setDescribeText:self.FangData[@"fangyuanmiaoshu"]];
          NSLog(@"高度%f",self.detailInfoTable.height);
         return DescribieCell;
     }
@@ -221,7 +222,8 @@
 
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"-----");
+    NSLog(@"index:%d",indexPath.row);
+    
     if (indexPath.row==0) {
         return 150.0;
     }
@@ -229,7 +231,10 @@
         return 200;
     }
   else {
-        return 200;
+      DescribeCell *cell = [self.detailInfoTable cellForRowAtIndexPath:indexPath];
+      NSLog(@"%f",cell.height);
+//       return cell.frame.size.height;
+     return 200;
     }
 }
 

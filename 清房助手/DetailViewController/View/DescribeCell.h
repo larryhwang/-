@@ -12,4 +12,7 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *Describe;
 
+
+-(void)setDescribeText:(NSString *)context;
+
 @end
