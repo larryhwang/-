@@ -22,6 +22,7 @@
 
 #import "UIImage+Image.h"
 #import "UIView+Frame.h"
+#import "UILabel+UILabel_SizeWithTest.h"
 
 
 #define isI4  ([UIScreen mainScreen].bounds.size.height == 480)

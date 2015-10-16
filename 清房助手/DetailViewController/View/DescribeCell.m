@@ -19,7 +19,7 @@
     self.Describe = [[UILabel alloc]init];
     self.Describe.numberOfLines = 0 ;
     [self.contentView addSubview:self.Describe];
-    self.backgroundColor = [UIColor greenColor];
+    //self.backgroundColor = [UIColor greenColor];
     self.Describe.font = [UIFont systemFontOfSize:15];
     NSDictionary *attrs = @{NSFontAttributeName:self.Describe.font};
     CGRect frame = [self frame];

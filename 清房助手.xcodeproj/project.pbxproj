@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		460732401BD11C970025D41A /* UILabel+UILabel_SizeWithTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 4607323F1BD11C970025D41A /* UILabel+UILabel_SizeWithTest.m */; settings = {ASSET_TAGS = (); }; };
 		46256C4C1BCF5B7300E05C5F /* FlatLocationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 46256C4A1BCF5B7300E05C5F /* FlatLocationCell.m */; settings = {ASSET_TAGS = (); }; };
 		46256C4D1BCF5B7300E05C5F /* FlatLocationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 46256C4B1BCF5B7300E05C5F /* FlatLocationCell.xib */; settings = {ASSET_TAGS = (); }; };
 		46256C511BCF776F00E05C5F /* FlatDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 46256C4F1BCF776F00E05C5F /* FlatDetailCell.m */; settings = {ASSET_TAGS = (); }; };
@@ -128,6 +129,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4607323E1BD11C970025D41A /* UILabel+UILabel_SizeWithTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+UILabel_SizeWithTest.h"; sourceTree = "<group>"; };
+		4607323F1BD11C970025D41A /* UILabel+UILabel_SizeWithTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+UILabel_SizeWithTest.m"; sourceTree = "<group>"; };
 		46256C491BCF5B7300E05C5F /* FlatLocationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlatLocationCell.h; sourceTree = "<group>"; };
 		46256C4A1BCF5B7300E05C5F /* FlatLocationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlatLocationCell.m; sourceTree = "<group>"; };
 		46256C4B1BCF5B7300E05C5F /* FlatLocationCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FlatLocationCell.xib; sourceTree = "<group>"; };
@@ -507,6 +510,8 @@
 				4673A50E1BC8DDA500700099 /* UIView+Frame.m */,
 				4673A50A1BC8DD4B00700099 /* UIImage+Image.h */,
 				4673A50B1BC8DD4B00700099 /* UIImage+Image.m */,
+				4607323E1BD11C970025D41A /* UILabel+UILabel_SizeWithTest.h */,
+				4607323F1BD11C970025D41A /* UILabel+UILabel_SizeWithTest.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -883,6 +888,7 @@
 				46AFDF9F1BCB84A200B49CBE /* SDWebImageDecoder.m in Sources */,
 				46C716C61BC69FB800287742 /* AFURLRequestSerialization.m in Sources */,
 				46C716C81BC69FB800287742 /* AFURLSessionManager.m in Sources */,
+				460732401BD11C970025D41A /* UILabel+UILabel_SizeWithTest.m in Sources */,
 				4673A50C1BC8DD4B00700099 /* UIImage+Image.m in Sources */,
 				468E28921BCD025600560500 /* DescribeCell.m in Sources */,
 				46C716CC1BC69FB800287742 /* MJType.m in Sources */,

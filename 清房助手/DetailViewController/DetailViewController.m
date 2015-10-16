@@ -14,7 +14,7 @@
 #import "FlatDetailCell.h"
 #import "FlatLocationCell.h"
 #import "UIImageView+WebCache.h"
-
+#import "UILabel+UILabel_SizeWithTest.h"
 
 #define  HeavyFont     [UIFont fontWithName:@"Helvetica-Bold" size:25]
 #define  ToolHeight  60    //固定底部的大小
@@ -106,11 +106,8 @@
        NSLog(@"%@",error);
    }];
 
-//  self.detailInfoTable.tableHeaderView = self.scrollView3;
     self.detailInfoTable.tableHeaderView = HeaderContent;
     self.detailInfoTable.separatorStyle = UITableViewCellSeparatorStyleNone ;
-    
-    
     //尺寸
     NSLog(@"高度%f",self.detailInfoTable.height);
     ;
@@ -167,16 +164,13 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath  {
     
     FactoryLoactionCell  *LocationCell  = [FactoryLoactionCell new];
-    LocationCell.backgroundColor = [UIColor greenColor];
+    LocationCell.Adress.numberOfLines  = 0;
+    LocationCell.Adress.textAlignment = NSTextAlignmentLeft ;
 
     FlatDetailCell   *DetailCell = [FlatDetailCell new];
 
     
     DescribeCell  *DescribieCell = [DescribeCell new];
-    
-
-    
-   // UILabel
     
     LocationCell  =  [[[NSBundle mainBundle]loadNibNamed:@"FactoryLoactionCell" owner:nil options:nil] firstObject];
     DetailCell = [[[NSBundle mainBundle]loadNibNamed:@"FlatDetailCell" owner:nil options:nil] firstObject];
@@ -186,7 +180,19 @@
         LocationCell.Tittle.text = self.FangData[@"biaoti"];
         LocationCell.Time.text = self.FangData[@"weituodate"];
         LocationCell.Positon.text = self.FangData[@"region"];
-        LocationCell.Adress.text = self.FangData[@"dizhi"];
+       LocationCell.Adress.text = self.FangData[@"dizhi"];
+    //    self.FangData[@"dizhi"] = @"嘻嘻哈哈嘻嘻哈哈嘻嘻哈哈嘻嘻哈哈嘻嘻哈哈嘻嘻哈哈嘻嘻哈哈嘻嘻哈哈嘻嘻哈哈嘻嘻哈哈";
+        NSString *test = @"嘻嘻哈哈嘻嘻哈哈嘻嘻哈哈嘻嘻哈哈嘻嘻哈哈嘻嘻哈哈嘻嘻哈哈嘻嘻哈哈嘻嘻哈哈嘻嘻哈哈";
+        
+        LocationCell.Adress.numberOfLines = 0 ;
+       // [LocationCell.Adress  setContentMode:UIViewContentModeTop];//[label setContentMode:UIViewContentModeTop];
+       LocationCell.Adress.frame = [LocationCell.Adress textRectForBounds:LocationCell.Adress.frame limitedToNumberOfLines:0];
+        
+         LocationCell.Adress.backgroundColor = [UIColor grayColor];
+       // [LocationCell.Adress verticalUpAlignmentWithText: test maxHeight:50];
+ 
+        
+        
         LocationCell.Price.text = [NSString stringWithFormat:@"%@",self.FangData[@"shoujia"]];//;
         return LocationCell;
     }else if (indexPath.row ==1) {
@@ -203,13 +209,10 @@
         return DetailCell;
     }else {
         DescribieCell.Describe.numberOfLines = 0;
-             DescribieCell.Describe.backgroundColor = [UIColor blueColor];
-
+        DescribieCell.Describe.backgroundColor = [UIColor blueColor];
        [DescribieCell setDescribeText:self.FangData[@"fangyuanmiaoshu"]];
         NSLog(@"label高度%f",DescribieCell.Describe.frame.size.height);
-     //   [DescribieCell.Describe setFrame:CGRectMake(0, 0, ScreenWidth, 100)];
         NSLog(@"label后高度%f",DescribieCell.Describe.frame.size.height);
-        DescribieCell.Describe.backgroundColor = [UIColor blueColor];
 
         return DescribieCell;
     }
@@ -218,13 +221,13 @@
 
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+
     NSLog(@"index:%d",indexPath.row);
-    
     if (indexPath.row==0) {
-        return 150.0;
+        return 165.0;
     }
    else if (indexPath.row ==1) {
-        return 200;
+        return 165;
     }
   else {
      return self.CellHeight + 10 ;
