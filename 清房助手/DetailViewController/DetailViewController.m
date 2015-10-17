@@ -51,50 +51,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self initTable];
+    [self initFootView];
     [self initHeadScorlImage];
-    [self initCountLabel];
-    AFHTTPRequestOperationManager *mgr  = [AFHTTPRequestOperationManager manager];
-    
-    NSString *url3 = [NSString stringWithFormat:@"http://192.168.1.38:8080/qfzsapi/fangyuan/detailsHouse.api?fenLei=0&fangyuan_id=%@",self.DisplayId];
-    
-
-
-    
-    [mgr POST:url3
-   parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-       self.FangData = responseObject[@"data"];
-       NSLog(@"%@",self.FangData);
-       NSString *collect = self.FangData[@"tupian"];
-       NSArray *imgArray = [collect componentsSeparatedByString:@","];
-       self.ImgTotal = [imgArray count];
-       for (NSString *imgName in imgArray) {
-           NSString *ImgfullUrl = [NSString stringWithFormat:@"http://112.74.64.145/hsf/img/%@",imgName];
-           [self.imagesData addObject:ImgfullUrl];
-       }   //所有图片地址
-
-       
-       CGSize size = CGSizeMake(ScreenWidth, 1000);
-       NSString *context = self.FangData[@"fangyuanmiaoshu"];
-       NSDictionary *attrs = @{NSFontAttributeName:[UIFont systemFontOfSize:15]};
-       CGSize labelSize = [context boundingRectWithSize:size options:NSStringDrawingUsesLineFragmentOrigin attributes:attrs context:nil].size;
-       self.CellHeight = labelSize.height ;
-
-
-       [self.detailInfoTable reloadData];
-       [self viewDidLayoutSubviews];     //设置滚动视图的横向大小
-        [self setupScrollViewImages];   //设置滚动视图内图片
-
-       [self CountReset];
-       
-   } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-       NSLog(@"%@",error);
-   }];
-
-
-    self.detailInfoTable.separatorStyle = UITableViewCellSeparatorStyleNone ;
-    //尺寸
-    NSLog(@"高度%f",self.detailInfoTable.height);
-    ;
+    [self getDataFromNet];
     
 }
 
@@ -107,14 +66,58 @@
     self.detailInfoTable.dataSource = self;
     self.detailInfoTable.allowsSelection = NO ;
     [self.detailInfoTable setFrame:CGRectMake(0, 0, ScreenWidth, 607)];
+    self.detailInfoTable.separatorStyle = UITableViewCellSeparatorStyleNone ;
 }
 
 
--(void)initHeadScorlImage {
+-(void)getDataFromNet {
+    AFHTTPRequestOperationManager *mgr  = [AFHTTPRequestOperationManager manager];
+    
+    NSString *url3 = [NSString stringWithFormat:@"http://192.168.1.38:8080/qfzsapi/fangyuan/detailsHouse.api?fenLei=0&fangyuan_id=%@",self.DisplayId];
+
+    [mgr POST:url3
+   parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+       self.FangData = responseObject[@"data"];
+       NSLog(@"%@",self.FangData);
+       NSString *collect = self.FangData[@"tupian"];
+       NSArray *imgArray = [collect componentsSeparatedByString:@","];
+       self.ImgTotal = [imgArray count];
+       for (NSString *imgName in imgArray) {
+           NSString *ImgfullUrl = [NSString stringWithFormat:@"http://112.74.64.145/hsf/img/%@",imgName];
+           [self.imagesData addObject:ImgfullUrl];
+       }   //所有图片地址
+       
+       
+       CGSize size = CGSizeMake(ScreenWidth, 1000);
+       NSString *context = self.FangData[@"fangyuanmiaoshu"];
+       NSDictionary *attrs = @{NSFontAttributeName:[UIFont systemFontOfSize:15]};
+       CGSize labelSize = [context boundingRectWithSize:size options:NSStringDrawingUsesLineFragmentOrigin attributes:attrs context:nil].size;
+       self.CellHeight = labelSize.height ;
+       [self.detailInfoTable reloadData];
+       [self viewDidLayoutSubviews];     //设置滚动视图的横向大小
+       [self setupScrollViewImages];   //设置滚动视图内图片
+       
+       [self CountReset];
+       
+   } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+       NSLog(@"%@",error);
+   }];
+    ;
+}
+
+
+-(void)initFootView {
     UIView *footer = [[UIView alloc]initWithFrame:CGRectMake(0,self.detailInfoTable.height, ScreenWidth, ToolHeight)];
+    
+    
+    
+    
     footer.backgroundColor = [UIColor redColor];
     [self.view addSubview:self.detailInfoTable];
     [self.view addSubview:footer];
+}
+
+-(void)initHeadScorlImage {
     
     UIView *HeaderContent = [[UIView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth,ScreenHeight/4)];
     self.HeaderContent = HeaderContent;
@@ -125,6 +128,7 @@
     self.scrollView3.showsHorizontalScrollIndicator  =  NO ;
     self.imagesData = [NSMutableArray array];
     self.detailInfoTable.tableHeaderView = HeaderContent;
+    [self initCountLabel];  //计数标签
 }
 
 #pragma mark -layoutMethod
