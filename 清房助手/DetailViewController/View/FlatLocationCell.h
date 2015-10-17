@@ -13,7 +13,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *PostTime;
 @property (weak, nonatomic) IBOutlet UILabel *Price;
 @property (weak, nonatomic) IBOutlet UILabel *LouPanName;
-@property (weak, nonatomic) IBOutlet UILabel *Decoration;
-@property (weak, nonatomic) IBOutlet UILabel *Address;
+@property (weak, nonatomic) IBOutlet UILabel *Region;
 
 @end

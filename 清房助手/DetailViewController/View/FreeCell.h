@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+
+#define Pading 12
 @interface FreeCell : UITableViewCell
 {
    CGSize _ContextSize;
@@ -15,8 +17,10 @@
 
 
 @property(nonatomic,strong)  UILabel  *Title;
+@property(nonatomic,copy) NSString *HeaderPart;
 @property(nonatomic,strong)  UILabel  *DynamicText;
 @property(nonatomic) CGFloat CellHight;
+@property(nonatomic) BOOL iSSeparetorLine;
 
 -(instancetype)initWithTitle:(NSString *)title andContext:(NSString *)text ;
 +(instancetype)freeCellWithTitle:(NSString *)title andContext:(NSString *)text;

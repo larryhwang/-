@@ -29,6 +29,7 @@
 @property(nonatomic,strong)  NSDictionary  *FangData;
 @property(nonatomic) CGFloat CellHeight;
 @property(nonatomic) CGFloat FreeCellHeight;
+@property(nonatomic) CGFloat DescribeCellHeight;
 @property(nonatomic,strong)  UIView  *HeaderContent;
 @property(nonatomic) NSInteger ImgTotal;
 
@@ -49,39 +50,20 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    self.detailInfoTable = [[UITableView alloc]init];
-    self.detailInfoTable.delegate = self ;
-    self.detailInfoTable.dataSource = self;
-    self.detailInfoTable.allowsSelection = NO ;
-    [self.detailInfoTable setFrame:CGRectMake(0, 0, ScreenWidth, 607)];
-    
-     UIView *footer = [[UIView alloc]initWithFrame:CGRectMake(0,self.detailInfoTable.height, ScreenWidth, ToolHeight)];
-     footer.backgroundColor = [UIColor redColor];
-    [self.view addSubview:self.detailInfoTable];
-    [self.view addSubview:footer];
-
-    UIView *HeaderContent = [[UIView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth,ScreenHeight/4)];
-    self.HeaderContent = HeaderContent;
-    self.scrollView3  = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth,ScreenHeight/4)];
-    [HeaderContent addSubview:self.scrollView3];
-    self.scrollView3.pagingEnabled = YES ;
-    self.scrollView3.delegate = self ;
-    self.scrollView3.showsHorizontalScrollIndicator  =  NO ;
-    self.imagesData = [NSMutableArray array];
-
-    
+    [self initTable];
+    [self initHeadScorlImage];
     [self initCountLabel];
     AFHTTPRequestOperationManager *mgr  = [AFHTTPRequestOperationManager manager];
     
     NSString *url3 = [NSString stringWithFormat:@"http://192.168.1.38:8080/qfzsapi/fangyuan/detailsHouse.api?fenLei=0&fangyuan_id=%@",self.DisplayId];
     
-    self.scrollView3.delegate = self;
+
 
     
     [mgr POST:url3
    parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
        self.FangData = responseObject[@"data"];
+       NSLog(@"%@",self.FangData);
        NSString *collect = self.FangData[@"tupian"];
        NSArray *imgArray = [collect componentsSeparatedByString:@","];
        self.ImgTotal = [imgArray count];
@@ -108,7 +90,7 @@
        NSLog(@"%@",error);
    }];
 
-    self.detailInfoTable.tableHeaderView = HeaderContent;
+
     self.detailInfoTable.separatorStyle = UITableViewCellSeparatorStyleNone ;
     //尺寸
     NSLog(@"高度%f",self.detailInfoTable.height);
@@ -117,7 +99,35 @@
 }
 
 
-//设置scoview的大小
+
+#pragma mark -初始化表
+-(void)initTable {
+    self.detailInfoTable = [[UITableView alloc]init];
+    self.detailInfoTable.delegate = self ;
+    self.detailInfoTable.dataSource = self;
+    self.detailInfoTable.allowsSelection = NO ;
+    [self.detailInfoTable setFrame:CGRectMake(0, 0, ScreenWidth, 607)];
+}
+
+
+-(void)initHeadScorlImage {
+    UIView *footer = [[UIView alloc]initWithFrame:CGRectMake(0,self.detailInfoTable.height, ScreenWidth, ToolHeight)];
+    footer.backgroundColor = [UIColor redColor];
+    [self.view addSubview:self.detailInfoTable];
+    [self.view addSubview:footer];
+    
+    UIView *HeaderContent = [[UIView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth,ScreenHeight/4)];
+    self.HeaderContent = HeaderContent;
+    self.scrollView3  = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth,ScreenHeight/4)];
+    [HeaderContent addSubview:self.scrollView3];
+    self.scrollView3.pagingEnabled = YES ;
+    self.scrollView3.delegate = self ;
+    self.scrollView3.showsHorizontalScrollIndicator  =  NO ;
+    self.imagesData = [NSMutableArray array];
+    self.detailInfoTable.tableHeaderView = HeaderContent;
+}
+
+#pragma mark -layoutMethod
 - (void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
@@ -125,7 +135,7 @@
 }
 
 
-#pragma mark - ScrollView delegate
+#pragma mark -ScrollView delegate
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     NSLog(@"%@",scrollView);
@@ -164,34 +174,24 @@
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath  {
-    
-    FactoryLoactionCell  *LocationCell  = [FactoryLoactionCell new];
-    LocationCell.Adress.numberOfLines  = 0;
-    LocationCell.Adress.textAlignment = NSTextAlignmentLeft ;
-
+    FlatLocationCell  *LocationCell  = [FlatLocationCell new];
     FlatDetailCell   *DetailCell = [FlatDetailCell new];
-    DescribeCell  *DescribieCell = [DescribeCell new];
-    FreeCell  *testCell = [FreeCell freeCellWithTitle:@"地址" andContext:@"惠州市东江公园15东湖花园七七八八的5栋楼上"];
-    self.FreeCellHeight  = testCell.CellHight;
-    testCell.backgroundColor = [UIColor blueColor];
+    DescribeCell  *DescribieCell = [DescribeCell freeCellWithTitle:@"房源描述" andContext:self.FangData[@"fangyuanmiaoshu"]];
+    FreeCell  *testCell = [FreeCell freeCellWithTitle:@"地址" andContext:self.FangData[@"dizhi"]];
     
-    LocationCell  =  [[[NSBundle mainBundle]loadNibNamed:@"FactoryLoactionCell" owner:nil options:nil] firstObject];
+    DescribieCell.iSSeparetorLine = NO ;
+    self.FreeCellHeight  = testCell.CellHight;
+    self.DescribeCellHeight = DescribieCell.CellHight;
+   // testCell.backgroundColor = [UIColor blueColor];
+    
+    LocationCell  =  [[[NSBundle mainBundle]loadNibNamed:@"FlatLocationCell" owner:nil options:nil] firstObject];
     DetailCell = [[[NSBundle mainBundle]loadNibNamed:@"FlatDetailCell" owner:nil options:nil] firstObject];
     
     if (indexPath.row ==0) {
-        LocationCell.Tittle.text = self.FangData[@"biaoti"];
-        LocationCell.Time.text = self.FangData[@"weituodate"];
-        LocationCell.Positon.text = self.FangData[@"region"];
-        LocationCell.Adress.text = self.FangData[@"dizhi"];
-        NSString *test = @"嘻嘻哈哈嘻嘻哈哈嘻嘻哈哈嘻嘻哈哈嘻嘻哈哈嘻嘻哈哈嘻嘻哈哈嘻嘻哈哈嘻嘻哈哈嘻嘻哈哈";
-        
-        LocationCell.Adress.numberOfLines = 0 ;
-       // [LocationCell.Adress  setContentMode:UIViewContentModeTop];//[label setContentMode:UIViewContentModeTop];
-       LocationCell.Adress.frame = [LocationCell.Adress textRectForBounds:LocationCell.Adress.frame limitedToNumberOfLines:0];
-        
-         LocationCell.Adress.backgroundColor = [UIColor grayColor];
-       // [LocationCell.Adress verticalUpAlignmentWithText: test maxHeight:50];
-
+        LocationCell.Title.text = self.FangData[@"biaoti"];
+        LocationCell.PostTime.text = self.FangData[@"weituodate"];
+        LocationCell.Region.text = self.FangData[@"qu"];
+        LocationCell.LouPanName.text = self.FangData[@"mingcheng"];
         LocationCell.Price.text = [NSString stringWithFormat:@"%@",self.FangData[@"shoujia"]];//;
         return LocationCell;
     }else if (indexPath.row ==1) {
@@ -209,38 +209,29 @@
         DetailCell.Area.text = [NSString stringWithFormat:@"%@",self.FangData[@"mianji"]];
         DetailCell.Type.text = self.FangData[@"leixing"];
         return DetailCell;
-     
     }
-    
-    
     else {
-        DescribieCell.Describe.numberOfLines = 0;
-        DescribieCell.Describe.backgroundColor = [UIColor blueColor];
-       [DescribieCell setDescribeText:self.FangData[@"fangyuanmiaoshu"]];
-        NSLog(@"label高度%f",DescribieCell.Describe.frame.size.height);
-        NSLog(@"label后高度%f",DescribieCell.Describe.frame.size.height);
-
         return DescribieCell;
     }
    
 }
 
-
+#pragma mark -表高度返回设置
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
 
     NSLog(@"index:%d",indexPath.row);
     if (indexPath.row==0) {
-        return 165.0;
+        return 116.0;
     }
    else if (indexPath.row ==1) {
-      return self.FreeCellHeight;
+       NSLog(@"%f",self.FreeCellHeight);
+       return  self.FreeCellHeight;
     }
    else if (indexPath.row ==2) {
-           return 165;
-     
+           return 131;
    }
   else {
-     return self.CellHeight + 10 ;
+     return self.DescribeCellHeight + 5 ;
     }
 }
 

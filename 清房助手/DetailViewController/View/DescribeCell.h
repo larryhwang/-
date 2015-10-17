@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "FreeCell.h"
 
-@interface DescribeCell : UITableViewCell
+@interface DescribeCell : FreeCell
 
 @property (strong, nonatomic)  UILabel *Describe;
 
