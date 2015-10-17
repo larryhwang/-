@@ -15,6 +15,7 @@
 #import "FlatLocationCell.h"
 #import "UIImageView+WebCache.h"
 #import "UILabel+UILabel_SizeWithTest.h"
+#import "FreeCell.h"
 
 #define  HeavyFont     [UIFont fontWithName:@"Helvetica-Bold" size:25]
 #define  ToolHeight  60    //固定底部的大小
@@ -27,6 +28,7 @@
 @property (strong, nonatomic)  UIScrollView *scrollView3;
 @property(nonatomic,strong)  NSDictionary  *FangData;
 @property(nonatomic) CGFloat CellHeight;
+@property(nonatomic) CGFloat FreeCellHeight;
 @property(nonatomic,strong)  UIView  *HeaderContent;
 @property(nonatomic) NSInteger ImgTotal;
 
@@ -158,7 +160,7 @@
 
 #pragma mark -表代理方法
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 3;
+    return 4;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath  {
@@ -168,20 +170,19 @@
     LocationCell.Adress.textAlignment = NSTextAlignmentLeft ;
 
     FlatDetailCell   *DetailCell = [FlatDetailCell new];
-
-    
     DescribeCell  *DescribieCell = [DescribeCell new];
+    FreeCell  *testCell = [FreeCell freeCellWithTitle:@"地址" andContext:@"惠州市东江公园15东湖花园七七八八的5栋楼上"];
+    self.FreeCellHeight  = testCell.CellHight;
+    testCell.backgroundColor = [UIColor blueColor];
     
     LocationCell  =  [[[NSBundle mainBundle]loadNibNamed:@"FactoryLoactionCell" owner:nil options:nil] firstObject];
     DetailCell = [[[NSBundle mainBundle]loadNibNamed:@"FlatDetailCell" owner:nil options:nil] firstObject];
-    
     
     if (indexPath.row ==0) {
         LocationCell.Tittle.text = self.FangData[@"biaoti"];
         LocationCell.Time.text = self.FangData[@"weituodate"];
         LocationCell.Positon.text = self.FangData[@"region"];
-       LocationCell.Adress.text = self.FangData[@"dizhi"];
-    //    self.FangData[@"dizhi"] = @"嘻嘻哈哈嘻嘻哈哈嘻嘻哈哈嘻嘻哈哈嘻嘻哈哈嘻嘻哈哈嘻嘻哈哈嘻嘻哈哈嘻嘻哈哈嘻嘻哈哈";
+        LocationCell.Adress.text = self.FangData[@"dizhi"];
         NSString *test = @"嘻嘻哈哈嘻嘻哈哈嘻嘻哈哈嘻嘻哈哈嘻嘻哈哈嘻嘻哈哈嘻嘻哈哈嘻嘻哈哈嘻嘻哈哈嘻嘻哈哈";
         
         LocationCell.Adress.numberOfLines = 0 ;
@@ -190,24 +191,29 @@
         
          LocationCell.Adress.backgroundColor = [UIColor grayColor];
        // [LocationCell.Adress verticalUpAlignmentWithText: test maxHeight:50];
- 
-        
-        
+
         LocationCell.Price.text = [NSString stringWithFormat:@"%@",self.FangData[@"shoujia"]];//;
         return LocationCell;
     }else if (indexPath.row ==1) {
-    DetailCell.FlatType.text = [NSString stringWithFormat:@"%@房%@厅",self.FangData[@"fangshu"],self.FangData[@"tingshu"]];
-       DetailCell.Decrorelation.text = self.FangData[@"zhuangxiu"];
+        NSLog(@"test%f,%f",testCell.frame.size.width,testCell.frame.size.height);
+         return testCell;
+    }else if (indexPath.row ==2){
+        DetailCell.FlatType.text = [NSString stringWithFormat:@"%@房%@厅",self.FangData[@"fangshu"],self.FangData[@"tingshu"]];
+        DetailCell.Decrorelation.text = self.FangData[@"zhuangxiu"];
         DetailCell.FloatNo.text =  [NSString stringWithFormat:@"%@/%@层 ",self.FangData[@"louceng"],self.FangData[@"zonglouceng"]];
-      DetailCell.LookTime.text = self.FangData[@"kanfangtime"];
+        DetailCell.LookTime.text = self.FangData[@"kanfangtime"];
         //带有HTML，考虑加载HTML啊
-       DetailCell.WithFacility.text = @"哈哈哈";
+        DetailCell.WithFacility.text = @"哈哈哈";
         DetailCell.ExtryTime.text =[NSString stringWithFormat:@"%@个月",self.FangData[@"youxiaoqi"]];
         DetailCell.Direction.text = self.FangData[@"chaoxiang"];
         DetailCell.Area.text = [NSString stringWithFormat:@"%@",self.FangData[@"mianji"]];
         DetailCell.Type.text = self.FangData[@"leixing"];
         return DetailCell;
-    }else {
+     
+    }
+    
+    
+    else {
         DescribieCell.Describe.numberOfLines = 0;
         DescribieCell.Describe.backgroundColor = [UIColor blueColor];
        [DescribieCell setDescribeText:self.FangData[@"fangyuanmiaoshu"]];
@@ -227,8 +233,12 @@
         return 165.0;
     }
    else if (indexPath.row ==1) {
-        return 165;
+      return self.FreeCellHeight;
     }
+   else if (indexPath.row ==2) {
+           return 165;
+     
+   }
   else {
      return self.CellHeight + 10 ;
     }
