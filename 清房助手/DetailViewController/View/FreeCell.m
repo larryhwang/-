@@ -31,7 +31,7 @@
 {
     self = [super init];
     if (self) {
-        CGSize MaxSize = CGSizeMake(ScreenWidth - Pading, 200);
+        CGSize MaxSize = CGSizeMake(ScreenWidth - Pading, 500);
         _iSSeparetorLine = YES ;
         _HeaderPart = title;
         NSString *allContent = [NSString stringWithFormat:@"   %@:   %@",self.HeaderPart,text];

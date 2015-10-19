@@ -18,7 +18,7 @@
 #import "FreeCell.h"
 
 #define  HeavyFont     [UIFont fontWithName:@"Helvetica-Bold" size:25]
-#define  ToolHeight  80    //固定底部的大小
+#define  ToolHeight  60    //固定底部的大小
 #define LeftViewWidth   ScreenWidth/4
 #define MiddleViewWidth   ScreenWidth/2
 #define RightViewWidth   ScreenWidth/4
@@ -36,6 +36,10 @@
 @property(nonatomic) CGFloat DescribeCellHeight;
 @property(nonatomic,strong)  UIView  *HeaderContent;
 @property(nonatomic) NSInteger ImgTotal;
+
+@property(nonatomic,strong) UILabel *Publisher;
+@property(nonatomic,strong) UILabel *Name;
+@property(nonatomic,strong) UILabel *Tele;
 
 
 
@@ -55,9 +59,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self initTable];
-    [self initFootView];
+
     [self initHeadScorlImage];
     [self getDataFromNet];
+  //  [self initFootView];
     
 }
 
@@ -73,7 +78,7 @@
     self.detailInfoTable.delegate = self ;
     self.detailInfoTable.dataSource = self;
     self.detailInfoTable.allowsSelection = NO ;
-    [self.detailInfoTable setFrame:CGRectMake(0, 0, ScreenWidth, 587)];
+    [self.detailInfoTable setFrame:CGRectMake(0, 0, ScreenWidth, 607)];
     self.detailInfoTable.separatorStyle = UITableViewCellSeparatorStyleNone ;
     [self.view addSubview:self.detailInfoTable];
 }
@@ -105,8 +110,8 @@
        [self.detailInfoTable reloadData];
        [self viewDidLayoutSubviews];     //设置滚动视图的横向大小
        [self setupScrollViewImages];   //设置滚动视图内图片
-       
        [self CountReset];
+       [self initFootView];
        
    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
        NSLog(@"%@",error);
@@ -121,33 +126,37 @@
     UIView *PublisherAndCo = [[UIView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth/4, ToolHeight)];
     PublisherAndCo.backgroundColor = DeafaultColor;
     UILabel *Company  = [[UILabel alloc]init];
+    self.Publisher = Company ;
+ 
     Company.textColor = [UIColor whiteColor];
-    Company.text = @"丰登地产";
+    Company.text = self.FangData[@"name"];  //@"丰登地产";
+    NSLog(@"这里%@",Company.text);
     UIFont *Deafult = [UIFont systemFontOfSize:17];
     CGSize MaxLeftSzie = CGSizeMake(LeftViewWidth-Padding,ToolHeight-Padding);
     CGSize companyLabelSize = [self sizeWithString:Company.text font:Deafult maxSize:MaxLeftSzie];
     UILabel *ContactName  = [[UILabel alloc]init];
+    self.Name = ContactName;
     ContactName.textColor = [UIColor whiteColor];
-    ContactName.text = @"梅西";
+    ContactName.text = self.FangData[@"publisher"];//@"梅西";
     CGSize NameLabelSize = [self sizeWithString:ContactName.text font:Deafult maxSize:MaxLeftSzie];
     [Company setFrame:CGRectMake((LeftViewWidth -companyLabelSize.width)/2 , (ToolHeight - (companyLabelSize.height + NameLabelSize.height))/2, companyLabelSize.width, companyLabelSize.height)];
     [ContactName setFrame:CGRectMake((LeftViewWidth -NameLabelSize.width)/2, (Company.frame.origin.y +Company.frame.size.height +2), NameLabelSize.width, NameLabelSize.height)];
     [PublisherAndCo addSubview:Company];
     [PublisherAndCo addSubview:ContactName];
     [footer addSubview:PublisherAndCo];
-  //  UIView *TeleView = [[UIView alloc]initWithFrame:CGRectMake(ScreenWidth/4 +1 , 0, ScreenWidth/2, ToolHeight)];
-  //  TeleView.backgroundColor = DeafaultColor2;
+
     [footer addSubview:PublisherAndCo];
     
     //中部
     UIView *TeleView = [[UIView alloc]initWithFrame:CGRectMake(ScreenWidth/4 +1 , 0, ScreenWidth/2, ToolHeight)];
     UIImageView  *TeleIcon = [[UIImageView alloc]init];
     UILabel *teleLabel = [[UILabel alloc]init];
+    self.Tele = teleLabel;
     teleLabel.textColor = [UIColor whiteColor];
     CGSize MaxCenter = CGSizeMake(MiddleViewWidth - Padding,ToolHeight - Padding);
     TeleIcon.image  = [UIImage imageNamed:@"tel"];
     [TeleIcon setFrame:CGRectMake(5, 5, 30, 30)];
-    teleLabel.text = @"18720984176";
+    teleLabel.text = self.FangData[@"tel"]; //@"18720984176";
     CGSize TeleLabelSize = [self sizeWithString:teleLabel.text font:Deafult maxSize:MaxCenter];
     [TeleIcon setFrame:CGRectMake((MiddleViewWidth -30 -Padding -TeleLabelSize.width)/2 , (ToolHeight - 30)/2,30, 30)];
     [teleLabel setFrame:CGRectMake(TeleIcon.frame.origin.x + Padding - 5 + 30, (ToolHeight - TeleLabelSize.height)/2, TeleLabelSize.width, TeleLabelSize.height)];
@@ -156,24 +165,8 @@
     TeleView.backgroundColor = DeafaultColor2;
     [footer addSubview:TeleView];
     
-    
-    
-    
-    
-    
-    
+
     //右部
-    
-    /*
-     UIView *Msg = [[UIView alloc]initWithFrame:CGRectMake((3*ScreenWidth/4)+2, 0, ScreenWidth/4, ToolHeight)];
-     Msg.backgroundColor = DeafaultColor;
-     UIImageView *MsgIcon =[[UIImageView alloc]init];
-     MsgIcon.image  = [UIImage imageNamed:@"mail"];
-     [MsgIcon setFrame:CGRectMake((LeftViewWidth - 40)/2, (ToolHeight-20)/2, 40, 20)];
-     [Msg addSubview:MsgIcon];
-     
-     */
-   // UIView *MsgView = [[UIView alloc]initWithFrame:CGRectMake((3*ScreenWidth/4)+2, 0, ScreenWidth/4, ToolHeight)];
 
     
     UIView *MsgView =[[UIImageView alloc]initWithFrame:CGRectMake((3*ScreenWidth/4)+2, 0, ScreenWidth/4, ToolHeight)];
@@ -309,7 +302,7 @@
            return 131;
    }
   else {
-     return self.DescribeCellHeight + 5 ;
+     return self.DescribeCellHeight + 10 ;
     }
 }
 
@@ -352,4 +345,11 @@
 }
 
 
+#pragma mark -更新底部工具栏
+-(void)updateToolBar {
+    self.Tele.text  = self.FangData[@"tel"];
+    NSLog(@"这里%@",self.FangData[@"tel"]);
+    self.Name.text  = self.FangData[@"name"];
+    self.Publisher.text =self.FangData[@"publisher"];
+}
 @end
