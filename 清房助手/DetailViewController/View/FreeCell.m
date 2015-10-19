@@ -64,7 +64,7 @@
 -(void)layoutSubviews {
     
     if(_iSSeparetorLine) {
-        UIView *separateLine = [[UIView alloc]initWithFrame:CGRectMake(0, _ContextSize.height+5, ScreenWidth, 1)];
+        UIView *separateLine = [[UIView alloc]initWithFrame:CGRectMake(0, _ContextSize.height+8, ScreenWidth, 1)];
         separateLine.backgroundColor = [UIColor grayColor];
         [self.contentView addSubview:separateLine];   //增加分割线
     }

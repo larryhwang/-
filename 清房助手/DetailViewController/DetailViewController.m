@@ -18,7 +18,11 @@
 #import "FreeCell.h"
 
 #define  HeavyFont     [UIFont fontWithName:@"Helvetica-Bold" size:25]
-#define  ToolHeight  60    //固定底部的大小
+#define  ToolHeight  80    //固定底部的大小
+#define LeftViewWidth   ScreenWidth/4
+#define MiddleViewWidth   ScreenWidth/2
+#define RightViewWidth   ScreenWidth/4
+#define Padding  8
 
 
 @interface DetailViewController ()<UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate>
@@ -60,13 +64,18 @@
 
 
 #pragma mark -初始化表
+
+
+
+
 -(void)initTable {
     self.detailInfoTable = [[UITableView alloc]init];
     self.detailInfoTable.delegate = self ;
     self.detailInfoTable.dataSource = self;
     self.detailInfoTable.allowsSelection = NO ;
-    [self.detailInfoTable setFrame:CGRectMake(0, 0, ScreenWidth, 607)];
+    [self.detailInfoTable setFrame:CGRectMake(0, 0, ScreenWidth, 587)];
     self.detailInfoTable.separatorStyle = UITableViewCellSeparatorStyleNone ;
+    [self.view addSubview:self.detailInfoTable];
 }
 
 
@@ -107,13 +116,78 @@
 
 
 -(void)initFootView {
-    UIView *footer = [[UIView alloc]initWithFrame:CGRectMake(0,self.detailInfoTable.height, ScreenWidth, ToolHeight)];
+    UIView *footer = [[UIView alloc]initWithFrame:CGRectMake(0,ScreenHeight-ToolHeight, ScreenWidth, ToolHeight)];
+    //左边
+    UIView *PublisherAndCo = [[UIView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth/4, ToolHeight)];
+    PublisherAndCo.backgroundColor = DeafaultColor;
+    UILabel *Company  = [[UILabel alloc]init];
+    Company.textColor = [UIColor whiteColor];
+    Company.text = @"丰登地产";
+    UIFont *Deafult = [UIFont systemFontOfSize:17];
+    CGSize MaxLeftSzie = CGSizeMake(LeftViewWidth-Padding,ToolHeight-Padding);
+    CGSize companyLabelSize = [self sizeWithString:Company.text font:Deafult maxSize:MaxLeftSzie];
+    UILabel *ContactName  = [[UILabel alloc]init];
+    ContactName.textColor = [UIColor whiteColor];
+    ContactName.text = @"梅西";
+    CGSize NameLabelSize = [self sizeWithString:ContactName.text font:Deafult maxSize:MaxLeftSzie];
+    [Company setFrame:CGRectMake((LeftViewWidth -companyLabelSize.width)/2 , (ToolHeight - (companyLabelSize.height + NameLabelSize.height))/2, companyLabelSize.width, companyLabelSize.height)];
+    [ContactName setFrame:CGRectMake((LeftViewWidth -NameLabelSize.width)/2, (Company.frame.origin.y +Company.frame.size.height +2), NameLabelSize.width, NameLabelSize.height)];
+    [PublisherAndCo addSubview:Company];
+    [PublisherAndCo addSubview:ContactName];
+    [footer addSubview:PublisherAndCo];
+  //  UIView *TeleView = [[UIView alloc]initWithFrame:CGRectMake(ScreenWidth/4 +1 , 0, ScreenWidth/2, ToolHeight)];
+  //  TeleView.backgroundColor = DeafaultColor2;
+    [footer addSubview:PublisherAndCo];
+    
+    //中部
+    UIView *TeleView = [[UIView alloc]initWithFrame:CGRectMake(ScreenWidth/4 +1 , 0, ScreenWidth/2, ToolHeight)];
+    UIImageView  *TeleIcon = [[UIImageView alloc]init];
+    UILabel *teleLabel = [[UILabel alloc]init];
+    teleLabel.textColor = [UIColor whiteColor];
+    CGSize MaxCenter = CGSizeMake(MiddleViewWidth - Padding,ToolHeight - Padding);
+    TeleIcon.image  = [UIImage imageNamed:@"tel"];
+    [TeleIcon setFrame:CGRectMake(5, 5, 30, 30)];
+    teleLabel.text = @"18720984176";
+    CGSize TeleLabelSize = [self sizeWithString:teleLabel.text font:Deafult maxSize:MaxCenter];
+    [TeleIcon setFrame:CGRectMake((MiddleViewWidth -30 -Padding -TeleLabelSize.width)/2 , (ToolHeight - 30)/2,30, 30)];
+    [teleLabel setFrame:CGRectMake(TeleIcon.frame.origin.x + Padding - 5 + 30, (ToolHeight - TeleLabelSize.height)/2, TeleLabelSize.width, TeleLabelSize.height)];
+        [TeleView addSubview:TeleIcon];
+    [TeleView addSubview:teleLabel];
+    TeleView.backgroundColor = DeafaultColor2;
+    [footer addSubview:TeleView];
     
     
     
     
-    footer.backgroundColor = [UIColor redColor];
-    [self.view addSubview:self.detailInfoTable];
+    
+    
+    
+    //右部
+    
+    /*
+     UIView *Msg = [[UIView alloc]initWithFrame:CGRectMake((3*ScreenWidth/4)+2, 0, ScreenWidth/4, ToolHeight)];
+     Msg.backgroundColor = DeafaultColor;
+     UIImageView *MsgIcon =[[UIImageView alloc]init];
+     MsgIcon.image  = [UIImage imageNamed:@"mail"];
+     [MsgIcon setFrame:CGRectMake((LeftViewWidth - 40)/2, (ToolHeight-20)/2, 40, 20)];
+     [Msg addSubview:MsgIcon];
+     
+     */
+   // UIView *MsgView = [[UIView alloc]initWithFrame:CGRectMake((3*ScreenWidth/4)+2, 0, ScreenWidth/4, ToolHeight)];
+
+    
+    UIView *MsgView =[[UIImageView alloc]initWithFrame:CGRectMake((3*ScreenWidth/4)+2, 0, ScreenWidth/4, ToolHeight)];
+    MsgView.backgroundColor = DeafaultColor;
+    UIImageView *MsgIcon =[[UIImageView alloc]init];
+    MsgIcon.image  = [UIImage imageNamed:@"mail"];
+    [MsgIcon setFrame:CGRectMake((LeftViewWidth - 40)/2, (ToolHeight-20)/2, 40, 20)];
+    [MsgView addSubview:MsgIcon];
+   [footer addSubview:MsgView];
+    
+    
+    
+    footer.backgroundColor = [UIColor whiteColor];
+
     [self.view addSubview:footer];
 }
 
@@ -177,10 +251,11 @@
     return 4;
 }
 
+#pragma mark -表高度返回设置
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath  {
     FlatLocationCell  *LocationCell  = [FlatLocationCell new];
     FlatDetailCell   *DetailCell = [FlatDetailCell new];
-    DescribeCell  *DescribieCell = [DescribeCell freeCellWithTitle:@"房源描述" andContext:self.FangData[@"fangyuanmiaoshu"]];
+    DescribeCell  *DescribieCell = [DescribeCell freeCellWithTitle:@"描述" andContext:self.FangData[@"fangyuanmiaoshu"]];
     FreeCell  *testCell = [FreeCell freeCellWithTitle:@"地址" andContext:self.FangData[@"dizhi"]];
     
     DescribieCell.iSSeparetorLine = NO ;
@@ -220,7 +295,6 @@
    
 }
 
-#pragma mark -表高度返回设置
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
 
     NSLog(@"index:%d",indexPath.row);
@@ -229,7 +303,7 @@
     }
    else if (indexPath.row ==1) {
        NSLog(@"%f",self.FreeCellHeight);
-       return  self.FreeCellHeight;
+       return  self.FreeCellHeight + 5;
     }
    else if (indexPath.row ==2) {
            return 131;
@@ -266,5 +340,16 @@
     [self.CountLabel setTitle:[NSString stringWithFormat:@"1/%ld",(long)self.ImgTotal] forState:UIControlStateNormal];
     [self scrollViewDidScroll:self.scrollView3];
 }
+
+
+
+#pragma mark -label高度计算
+- (CGSize)sizeWithString:(NSString *)str font:(UIFont *)font maxSize:(CGSize)maxSize
+{
+    NSDictionary *dict = @{NSFontAttributeName : font};
+    CGSize size =  [str boundingRectWithSize:maxSize options:NSStringDrawingUsesLineFragmentOrigin attributes:dict context:nil].size;
+    return size;
+}
+
 
 @end
