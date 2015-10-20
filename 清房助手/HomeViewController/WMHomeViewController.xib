@@ -29,12 +29,39 @@
             <animations/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
+                <constraint firstAttribute="trailing" secondItem="ylS-Cq-Wny" secondAttribute="trailing" id="AfG-Lx-BlA"/>
                 <constraint firstAttribute="bottom" secondItem="ylS-Cq-Wny" secondAttribute="bottom" id="E4x-kU-LM9"/>
                 <constraint firstItem="ylS-Cq-Wny" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="MnL-sN-TDo"/>
                 <constraint firstItem="ylS-Cq-Wny" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="ZVM-uT-oUq"/>
+                <constraint firstAttribute="bottom" secondItem="ylS-Cq-Wny" secondAttribute="bottom" id="ace-70-bLX"/>
                 <constraint firstAttribute="trailing" secondItem="ylS-Cq-Wny" secondAttribute="trailing" id="bz6-Ex-gy4"/>
-                <constraint firstItem="ylS-Cq-Wny" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="wHa-aY-wMS"/>
+                <constraint firstItem="ylS-Cq-Wny" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="fCL-Ma-maG"/>
+                <constraint firstItem="ylS-Cq-Wny" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="wHa-aY-wMS">
+                    <variation key="widthClass=compact" constant="34"/>
+                </constraint>
+                <constraint firstItem="ylS-Cq-Wny" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="34" id="wsy-Si-W1I"/>
             </constraints>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="AfG-Lx-BlA"/>
+                    <exclude reference="ace-70-bLX"/>
+                    <exclude reference="fCL-Ma-maG"/>
+                    <exclude reference="wsy-Si-W1I"/>
+                </mask>
+            </variation>
+            <variation key="widthClass=compact">
+                <mask key="constraints">
+                    <include reference="AfG-Lx-BlA"/>
+                    <exclude reference="E4x-kU-LM9"/>
+                    <exclude reference="MnL-sN-TDo"/>
+                    <exclude reference="ZVM-uT-oUq"/>
+                    <include reference="ace-70-bLX"/>
+                    <exclude reference="bz6-Ex-gy4"/>
+                    <include reference="fCL-Ma-maG"/>
+                    <exclude reference="wHa-aY-wMS"/>
+                    <include reference="wsy-Si-W1I"/>
+                </mask>
+            </variation>
         </view>
     </objects>
 </document>

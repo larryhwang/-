@@ -15,6 +15,7 @@
 #import "SalesCell.h"
 #import "UIImageView+WebCache.h"
 #import "DetailViewController.h"
+#import "SCNavTabBarController.h"
 
 
 
@@ -37,6 +38,45 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    
+    
+#warning 整合部分
+    
+    self.title = @"出租";
+    UIViewController *oneViewController = [[UIViewController alloc] init];
+    oneViewController.title = @"出租";
+    oneViewController.view.backgroundColor = [UIColor whiteColor];
+    
+    UIViewController *twoViewController = [[UIViewController alloc] init];
+    twoViewController.title = @"出售";
+    twoViewController.view.backgroundColor = [UIColor blueColor];
+    
+    
+    self.tableView.backgroundColor = [UIColor redColor];
+    
+    
+    
+
+    
+    
+//    SCNavTabBarController *navTabBarController = [[SCNavTabBarController alloc] init];
+//    navTabBarController.subViewControllers = @[self, twoViewController];
+//    navTabBarController.showArrowButton = NO;
+//  // [navTabBarController addParentController:self];
+//    [self.view addSubview:navTabBarController.view];
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     self.tableView.delegate = self;
     AFHTTPRequestOperationManager *mgr  = [AFHTTPRequestOperationManager manager];
     
@@ -75,6 +115,19 @@
     search.layer.cornerRadius  = 5.0 ;
     search.backgroundColor = [UIColor  lightGrayColor];
     self.navigationItem.titleView = search;
+    
+
+    
+#warning 测试部分
+    //    SCNavTabBarController *navTabBarController = [[SCNavTabBarController alloc] init];
+    //    navTabBarController.subViewControllers = @[self, twoViewController];
+    //    navTabBarController.showArrowButton = NO;
+    //  // [navTabBarController addParentController:self];
+    //    [self.view addSubview:navTabBarController.view];
+    SCNavTabBarController *navTabBarController = [[SCNavTabBarController alloc]init];
+  //  navTabBarController
+   // TabBar.backgroundColor = [UIColor blueColor];
+  //  [self.view addSubview:navTabBarController.view];
 
 }
 
