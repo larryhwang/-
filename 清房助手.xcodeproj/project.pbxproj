@@ -71,6 +71,13 @@
 		468ED01B1BD5E0DD001605A7 /* SCNavTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 468ED01A1BD5E0DD001605A7 /* SCNavTabBarController.m */; settings = {ASSET_TAGS = (); }; };
 		468ED0201BD5E0E5001605A7 /* SCNavTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 468ED01D1BD5E0E5001605A7 /* SCNavTabBar.m */; settings = {ASSET_TAGS = (); }; };
 		468ED0211BD5E0E5001605A7 /* SCPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 468ED01F1BD5E0E5001605A7 /* SCPopView.m */; settings = {ASSET_TAGS = (); }; };
+		468ED0271BD62537001605A7 /* house.png in Resources */ = {isa = PBXBuildFile; fileRef = 468ED0221BD62537001605A7 /* house.png */; settings = {ASSET_TAGS = (); }; };
+		468ED0281BD62537001605A7 /* pen.png in Resources */ = {isa = PBXBuildFile; fileRef = 468ED0231BD62537001605A7 /* pen.png */; settings = {ASSET_TAGS = (); }; };
+		468ED0291BD62537001605A7 /* people.png in Resources */ = {isa = PBXBuildFile; fileRef = 468ED0241BD62537001605A7 /* people.png */; settings = {ASSET_TAGS = (); }; };
+		468ED02A1BD62537001605A7 /* search-house.png in Resources */ = {isa = PBXBuildFile; fileRef = 468ED0251BD62537001605A7 /* search-house.png */; settings = {ASSET_TAGS = (); }; };
+		468ED02B1BD62537001605A7 /* search-people.png in Resources */ = {isa = PBXBuildFile; fileRef = 468ED0261BD62537001605A7 /* search-people.png */; settings = {ASSET_TAGS = (); }; };
+		468ED02F1BD62B74001605A7 /* MenuListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 468ED02D1BD62B74001605A7 /* MenuListCell.m */; settings = {ASSET_TAGS = (); }; };
+		468ED0301BD62B74001605A7 /* MenuListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 468ED02E1BD62B74001605A7 /* MenuListCell.xib */; settings = {ASSET_TAGS = (); }; };
 		4697FB241BCB8CF200D7E24C /* DeafaultImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 4697FB231BCB8CF200D7E24C /* DeafaultImage.png */; settings = {ASSET_TAGS = (); }; };
 		4697FB331BCB9BAE00D7E24C /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4697FB311BCB9BAE00D7E24C /* DetailViewController.m */; settings = {ASSET_TAGS = (); }; };
 		4697FB341BCB9BAE00D7E24C /* DetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4697FB321BCB9BAE00D7E24C /* DetailViewController.xib */; settings = {ASSET_TAGS = (); }; };
@@ -233,6 +240,14 @@
 		468ED01D1BD5E0E5001605A7 /* SCNavTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCNavTabBar.m; sourceTree = "<group>"; };
 		468ED01E1BD5E0E5001605A7 /* SCPopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCPopView.h; sourceTree = "<group>"; };
 		468ED01F1BD5E0E5001605A7 /* SCPopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCPopView.m; sourceTree = "<group>"; };
+		468ED0221BD62537001605A7 /* house.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = house.png; sourceTree = "<group>"; };
+		468ED0231BD62537001605A7 /* pen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pen.png; sourceTree = "<group>"; };
+		468ED0241BD62537001605A7 /* people.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = people.png; sourceTree = "<group>"; };
+		468ED0251BD62537001605A7 /* search-house.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "search-house.png"; sourceTree = "<group>"; };
+		468ED0261BD62537001605A7 /* search-people.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "search-people.png"; sourceTree = "<group>"; };
+		468ED02C1BD62B74001605A7 /* MenuListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuListCell.h; sourceTree = "<group>"; };
+		468ED02D1BD62B74001605A7 /* MenuListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuListCell.m; sourceTree = "<group>"; };
+		468ED02E1BD62B74001605A7 /* MenuListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MenuListCell.xib; sourceTree = "<group>"; };
 		4697FB231BCB8CF200D7E24C /* DeafaultImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DeafaultImage.png; sourceTree = "<group>"; };
 		4697FB301BCB9BAE00D7E24C /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
 		4697FB311BCB9BAE00D7E24C /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
@@ -489,6 +504,11 @@
 		46714B831BC7CB8A00E7AEE9 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				468ED0221BD62537001605A7 /* house.png */,
+				468ED0231BD62537001605A7 /* pen.png */,
+				468ED0241BD62537001605A7 /* people.png */,
+				468ED0251BD62537001605A7 /* search-house.png */,
+				468ED0261BD62537001605A7 /* search-people.png */,
 				4697FB231BCB8CF200D7E24C /* DeafaultImage.png */,
 				46554CC01BC8F2F700480F1A /* arrowDown@2x.png */,
 				46D648391BC8E925000F23EF /* navigationbar_arrow_down@2x.png */,
@@ -523,6 +543,9 @@
 				46D33C0B1BCB4B9C00B30F2A /* SalesCell.h */,
 				46D33C0C1BCB4B9C00B30F2A /* SalesCell.m */,
 				46D33C0D1BCB4B9C00B30F2A /* SalesCell.xib */,
+				468ED02C1BD62B74001605A7 /* MenuListCell.h */,
+				468ED02D1BD62B74001605A7 /* MenuListCell.m */,
+				468ED02E1BD62B74001605A7 /* MenuListCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -810,6 +833,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				468ED02A1BD62537001605A7 /* search-house.png in Resources */,
 				468E28891BCCFEA400560500 /* FactoryLoactionCell.xib in Resources */,
 				4643566C1BC6149600A44526 /* password.png in Resources */,
 				4673A5001BC8A0D100700099 /* background-logo(3).png in Resources */,
@@ -822,7 +846,9 @@
 				4652B0571BD48DBB00AA29D9 /* tel.png in Resources */,
 				464356351BC6093B00A44526 /* Assets.xcassets in Resources */,
 				468E288E1BCD021A00560500 /* FactoryDetailCell.xib in Resources */,
+				468ED0271BD62537001605A7 /* house.png in Resources */,
 				464356721BC61E9F00A44526 /* log1.png in Resources */,
+				468ED02B1BD62537001605A7 /* search-people.png in Resources */,
 				468E28791BCCF27C00560500 /* CountBackImg.png in Resources */,
 				4697FB371BCBAF8F00D7E24C /* StringFile.strings in Resources */,
 				468E28721BCCD47400560500 /* image1.jpg in Resources */,
@@ -841,6 +867,7 @@
 				4673A5041BC8BE0200700099 /* tab_me_nor@2x.png in Resources */,
 				464356681BC6149600A44526 /* eyes-o.png in Resources */,
 				4673A5121BC8DEE000700099 /* searchbar_textfield_search_icon@2x.png in Resources */,
+				468ED0301BD62B74001605A7 /* MenuListCell.xib in Resources */,
 				468E28751BCCD47400560500 /* image4.jpg in Resources */,
 				4652B0561BD48DBB00AA29D9 /* mail.png in Resources */,
 				46C716D71BC7645E00287742 /* MBProgressHUD.bundle in Resources */,
@@ -848,8 +875,10 @@
 				4673A4FE1BC89DF700700099 /* background-logo(2).png in Resources */,
 				468E28731BCCD47400560500 /* image2.jpg in Resources */,
 				4697FB341BCB9BAE00D7E24C /* DetailViewController.xib in Resources */,
+				468ED0291BD62537001605A7 /* people.png in Resources */,
 				4697FB241BCB8CF200D7E24C /* DeafaultImage.png in Resources */,
 				46714B871BC7CC9800E7AEE9 /* Icon.png in Resources */,
+				468ED0281BD62537001605A7 /* pen.png in Resources */,
 				4643566A1BC6149600A44526 /* LoginButton.png in Resources */,
 				4643565F1BC611F100A44526 /* LoginViewController.xib in Resources */,
 			);
@@ -879,6 +908,7 @@
 				46AFDFA81BCB84A200B49CBE /* UIImageView+HighlightedWebCache.m in Sources */,
 				46C716CD1BC69FB800287742 /* NSObject+MJCoding.m in Sources */,
 				46C716CF1BC69FB800287742 /* NSObject+MJKeyValue.m in Sources */,
+				468ED02F1BD62B74001605A7 /* MenuListCell.m in Sources */,
 				46714B781BC7C11F00E7AEE9 /* WMCommon.m in Sources */,
 				4673A50F1BC8DDA500700099 /* UIView+Frame.m in Sources */,
 				46C716CB1BC69FB800287742 /* MJIvar.m in Sources */,

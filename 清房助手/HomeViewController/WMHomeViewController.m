@@ -95,7 +95,7 @@
     
 
     
-#warning 测试部分
+#warning 顶部TabBar切换部分
     UIView *TabBarContentView = [[UIView alloc]initWithFrame:CGRectMake(0, 64, ScreenWidth, TopTabBarHeight)];
     UIButton *Sales  = [UIButton buttonWithType:UIButtonTypeCustom];
     Sales.tag = 0 ;
@@ -142,6 +142,7 @@
 
 -(void)SalesTableLoad {
     NSString *url3=@"http://192.168.1.38:8080/qfzsapi/fangyuan/rentalOrBuyHouseSearch.api?weiTuoDate=0&sum=10&fangxiang=refresh&zuShou=0";
+#warning 缺少进度加载状态
     [self.shareMgr POST:url3
    parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
        NSLog(@"%@",responseObject);

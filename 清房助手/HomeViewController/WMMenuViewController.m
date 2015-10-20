@@ -11,6 +11,7 @@
 #import "WMCommon.h"
 #import "UIImage+WM.h"
 #import "QFSearchBar.h"
+#import "MenuListCell.h"
 
 @interface WMMenuViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (strong, nonatomic) WMCommon *common;
@@ -37,7 +38,8 @@
     self.tableView.delegate        = self;
     self.tableView.dataSource      = self;
     self.tableView.separatorStyle  = UITableViewCellSeparatorStyleNone;
-    self.tableView.rowHeight       = 44 * (self.common.screenW / 320);
+    self.tableView.rowHeight       = 50 * (self.common.screenW / 320);
+    NSLog(@"高度:%f",   self.tableView.rowHeight);
     // 设置tableFooterView为一个空的View，这样就不会显示多余的空白格子了
     self.tableView.tableFooterView = [[UIView alloc] init];
     
@@ -61,14 +63,39 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 4;
+    return 5;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     // 没有用系统自带的类而用了自己重新定义的cell，仅仅为了之后扩展方便，无他
-    WMMenuTableViewCell *cell = [WMMenuTableViewCell cellWithTableView:tableView];
-    [cell setCellText:self.listArray[indexPath.row]];
+    MenuListCell *cell = [[MenuListCell alloc]init];
+  
+    cell = [[[NSBundle mainBundle]loadNibNamed:@"MenuListCell" owner:nil options:nil] firstObject];
+    NSLog(@"从XIB中加载");
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
+    cell.backgroundColor = [UIColor clearColor];
+
+    if (indexPath.row == 0) {
+        UIImage *img = [UIImage imageNamed:@"search-house"];
+        cell.Icon.image = img;
+    } else if (indexPath.row ==1) {
+        UIImage *img = [UIImage imageNamed:@"search-people"];
+        cell.Icon.image = img;
+    }else if (indexPath.row ==2) {
+        UIImage *img = [UIImage imageNamed:@"pen"];
+        cell.Icon.image = img;
+    }else if (indexPath.row ==3){
+        UIImage *img = [UIImage imageNamed:@"people"];
+        cell.Icon.image = img;
+    }else {
+        UIImage *img = [UIImage imageNamed:@"house"];
+        cell.Icon.image = img;
+    }
+
+
+   // [cell setCellText:self.listArray[indexPath.row]];
+    cell.MenuTitle.text = self.listArray[indexPath.row];
     return cell;
 }
 
@@ -78,5 +105,16 @@
         [self.delegate didSelectItem:self.listArray[indexPath.row]];
     }
 }
+
+- (UIImage *)scaleImage:(UIImage *)image toScale:(float)scaleSize
+{
+    
+    UIGraphicsBeginImageContext(CGSizeMake(image.size.width * scaleSize, image.size.height * scaleSize));
+                                [image drawInRect:CGRectMake(0, 0, image.size.width * scaleSize, image.size.height * scaleSize)];
+                                UIImage *scaledImage = UIGraphicsGetImageFromCurrentImageContext();
+                                UIGraphicsEndImageContext();
+                                
+                                return scaledImage;
+   }
 
 @end
