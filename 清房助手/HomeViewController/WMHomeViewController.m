@@ -160,7 +160,7 @@
 //    } else{
 //        url3 = @"";
 //    }
-    //http://www.123qf.cn/testApp/fangyuan/rentalOrBuyHouseSearch.api?weiTuoDate=0&sum=2&fangxiang=refresh&zuShou=0
+
     NSString *url3=@"http://www.123qf.cn/testApp/fangyuan/rentalOrBuyHouseSearch.api?weiTuoDate=0&sum=10&fangxiang=initdata&zuShou=0";  //这是出售列表
 #warning 缺少进度加载状态
     
@@ -263,8 +263,11 @@
 //点击查看详情
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSDictionary *SingleData = self.DataArr[indexPath.row];
-    NSString *Id = SingleData[@"id"];   //将ID传过去
-    [self.HomeVCdelegate QFshowDetail:Id];
+    NSString *Id = SingleData[@"id"];   //将房源ID传过去
+    NSString *userID = SingleData[@"userid"];
+    NSString *Category = [NSString stringWithFormat:@"%@",SingleData[@"fenlei"]];
     
+    [self.HomeVCdelegate QFshowDetailWithFangYuanID:Id andFenlei:Category userID:userID];
+
 }
 @end

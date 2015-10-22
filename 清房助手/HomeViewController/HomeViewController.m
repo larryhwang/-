@@ -226,9 +226,17 @@ static const CGFloat menuStartNarrowRatio  = 0.70;
 }
 
 #pragma mark - 表格点击后代理方法 
--(void)QFshowDetail:(NSString *)HouseId{
+/**
+ *  加载详情页
+ *
+ *  @param Id     房源ID
+ *  @param Fenlei 分类ID
+ */
+-(void)QFshowDetailWithFangYuanID:(NSString *)FangId andFenlei:(NSString *)Fenlei userID:(NSString *)UserId{
     DetailViewController *test = [DetailViewController new];
-    test.DisplayId = HouseId ;
+    test.DisplayId = FangId ;
+    test.FenLei = Fenlei;
+    test.uerID = UserId;
     [self.messageNav pushViewController:test animated:YES];
     NSLog(@"表格被点击");
 }

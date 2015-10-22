@@ -12,7 +12,9 @@
 
 @interface DetailViewController : UIViewController
 
-@property(nonatomic,strong)  NSString  *DisplayId;
+@property(nonatomic,copy)  NSString  *DisplayId;
+@property(nonatomic,copy)  NSString  *FenLei;
+@property(nonatomic,copy) NSString   *uerID;
 
 
 @end

@@ -86,9 +86,8 @@
 
 -(void)getDataFromNet {
     AFHTTPRequestOperationManager *mgr  = [AFHTTPRequestOperationManager manager];
+    NSString *url3 = [NSString stringWithFormat:@"http://www.123qf.cn/testApp/fangyuan/detailsHouse.api?fenLei=%@&fangyuan_id=%@",self.FenLei,self.DisplayId];
     
-    NSString *url3 = [NSString stringWithFormat:@"http://192.168.1.38:8080/qfzsapi/fangyuan/detailsHouse.api?fenLei=0&fangyuan_id=%@",self.DisplayId];
-    //webapps\testWeb\img\<userid>\userfile\qfzs\fy\mini
     [mgr POST:url3
    parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
        self.FangData = responseObject[@"data"];
@@ -97,7 +96,10 @@
        NSArray *imgArray = [collect componentsSeparatedByString:@","];
        self.ImgTotal = [imgArray count];
        for (NSString *imgName in imgArray) {
-           NSString *ImgfullUrl = [NSString stringWithFormat:@"http://112.74.64.145/hsf/img/%@",imgName];
+           //http://www.123qf.cn/testWeb/img/13719678138/userfile/qfzs/fy/mini/hsf_20151016135218_0.jpg
+           //http://112.74.64.145/hsf/img/%@",imgName
+           NSString *ImgfullUrl = [NSString stringWithFormat:@"http://www.123qf.cn/testWeb/img/%@/userfile/qfzs/fy/mini/%@",self.uerID,imgName];
+           NSLog(@"%@",ImgfullUrl);
            [self.imagesData addObject:ImgfullUrl];
        }   //所有图片地址
        
@@ -230,7 +232,6 @@
     [self.imagesData enumerateObjectsUsingBlock:^(NSString *imageName, NSUInteger idx, BOOL *stop) {
         UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(CGRectGetWidth(self.scrollView3.frame) * idx, 0, CGRectGetWidth(self.scrollView3.frame), CGRectGetHeight(self.scrollView3.frame))];
         imageView.contentMode = UIViewContentModeScaleAspectFill;
-      //  imageView.image = [UIImage imageNamed:imageName];
         NSLog(@"图片地址%@",self.imagesData[idx]);
         [imageView sd_setImageWithURL:self.imagesData[idx] placeholderImage:nil];
         [self.scrollView3 addSubview:imageView];

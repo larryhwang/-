@@ -13,8 +13,7 @@
 @optional
 - (void)leftBtnClicked;
 
--(void)QFshowDetail:(NSString *)HouseId;
-
+-(void)QFshowDetailWithFangYuanID:(NSString *)FangId andFenlei:(NSString *)Fenlei userID:(NSString *)UserId;
 @end
 
 @interface WMHomeViewController : WMBaseViewController<UITableViewDataSource,UITableViewDelegate>
