@@ -160,7 +160,8 @@
 //    } else{
 //        url3 = @"";
 //    }
-    NSString *url3=@"http://192.168.1.38:8080/qfzsapi/fangyuan/rentalOrBuyHouseSearch.api?weiTuoDate=0&sum=10&fangxiang=refresh&zuShou=0";  //这是出售列表
+    //http://www.123qf.cn/testApp/fangyuan/rentalOrBuyHouseSearch.api?weiTuoDate=0&sum=2&fangxiang=refresh&zuShou=0
+    NSString *url3=@"http://www.123qf.cn/testApp/fangyuan/rentalOrBuyHouseSearch.api?weiTuoDate=0&sum=10&fangxiang=initdata&zuShou=0";  //这是出售列表
 #warning 缺少进度加载状态
     
     [self.shareMgr POST:url3

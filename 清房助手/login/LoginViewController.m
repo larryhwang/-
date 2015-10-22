@@ -39,8 +39,9 @@
     
     NSMutableDictionary *PramaDic = [NSMutableDictionary new];
     //http://127.0.0.1:8080/qfzsapi/user/loginUser.front?userID=admin&psWord=2
+    //http://www.123qf.cn/testApp/user/loginUser.front?userID=15018639039&psWord=5798161"
     PramaDic[@"userID"] = @"15018639039";
-    PramaDic[@"psWord"] = @"123456";
+    PramaDic[@"psWord"] = @"5798161";
     
     
     
@@ -48,7 +49,7 @@
      15018639039  123456
      */
     AFHTTPRequestOperationManager *mgr  = [AFHTTPRequestOperationManager manager];
-    NSString *completeUrl = [NSString stringWithFormat:@"%@/qfzsapi/user/loginUser.front",BasicUrl];
+    NSString *completeUrl = @"http://www.123qf.cn/testApp/user/loginUser.front";
     NSLog(@"%@",completeUrl);
     HomeViewController *home = [HomeViewController new];
    // KeyWindow.rootViewController = home;
