@@ -16,7 +16,6 @@
 @implementation WMOtherViewController
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     self.label.text = self.navTitle;
     self.navigationItem.title = self.navTitle;
 }

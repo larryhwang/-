@@ -88,7 +88,7 @@
     AFHTTPRequestOperationManager *mgr  = [AFHTTPRequestOperationManager manager];
     
     NSString *url3 = [NSString stringWithFormat:@"http://192.168.1.38:8080/qfzsapi/fangyuan/detailsHouse.api?fenLei=0&fangyuan_id=%@",self.DisplayId];
-
+    //webapps\testWeb\img\<userid>\userfile\qfzs\fy\mini
     [mgr POST:url3
    parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
        self.FangData = responseObject[@"data"];
@@ -186,9 +186,9 @@
 
 -(void)initHeadScorlImage {
     
-    UIView *HeaderContent = [[UIView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth,ScreenHeight/4)];
+    UIView *HeaderContent = [[UIView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth,ScreenHeight/3 + 20)];
     self.HeaderContent = HeaderContent;
-    self.scrollView3  = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth,ScreenHeight/4)];
+    self.scrollView3  = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth,ScreenHeight/3 +20)];
     [HeaderContent addSubview:self.scrollView3];
     self.scrollView3.pagingEnabled = YES ;
     self.scrollView3.delegate = self ;
@@ -309,9 +309,8 @@
 
 #pragma mark -计数器的初始化
 -(void)initCountLabel {
-    UIButton *CurrentCountLable  = [[UIButton alloc]initWithFrame:CGRectMake(ScreenWidth-50, ScreenHeight/4-50, 40, 40)];
+    UIButton *CurrentCountLable  = [[UIButton alloc]initWithFrame:CGRectMake(ScreenWidth-50, ScreenHeight/3-25, 40, 40)];
     self.CountLabel = CurrentCountLable ;
- 
     self.CountLabel.backgroundColor = [[UIColor grayColor] colorWithAlphaComponent:0.5];
     [CurrentCountLable setTitle:[NSString stringWithFormat:@"1/1"] forState:UIControlStateNormal];
     
@@ -333,8 +332,6 @@
     [self.CountLabel setTitle:[NSString stringWithFormat:@"1/%ld",(long)self.ImgTotal] forState:UIControlStateNormal];
     [self scrollViewDidScroll:self.scrollView3];
 }
-
-
 
 #pragma mark -label高度计算
 - (CGSize)sizeWithString:(NSString *)str font:(UIFont *)font maxSize:(CGSize)maxSize

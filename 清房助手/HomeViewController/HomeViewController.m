@@ -1,5 +1,5 @@
 //
-//  ViewController.m
+//  HomeViewController.m
 //  QQSlideMenu
 //
 //  Created by wamaker on 15/6/10.
@@ -37,6 +37,7 @@ static const CGFloat menuStartNarrowRatio  = 0.70;
 @property (strong, nonatomic) WMNavigationController *messageNav;
 @property (strong, nonatomic) UIView                 *cover;
 @property (strong, nonatomic) UITabBarController     *tabBarController;
+@property(nonatomic,assign) BOOL isOut;
 
 @end
 
@@ -195,11 +196,32 @@ static const CGFloat menuStartNarrowRatio  = 0.70;
 }
 
 #pragma mark - WMMenuViewController代理方法
+
+#pragma mark -侧栏菜单点击实现办法
 - (void)didSelectItem:(NSString *)title {
     WMOtherViewController *other = [[WMOtherViewController alloc] init];
     other.navTitle = title;
     other.hidesBottomBarWhenPushed = YES;
     [self.messageNav pushViewController:other animated:NO];
+    [self showHome];
+}
+
+
+- (void)transToRentAndSale {
+    UIButton *left  = self.homeVC.LeftTab;
+    UIButton *right = self.homeVC.RightTab;
+    [left  setTitle: @"求购" forState:UIControlStateNormal];
+    [right setTitle: @"求租" forState:UIControlStateNormal];
+    //还需更改表的初始数据
+    [self showHome];
+    
+}
+
+- (void)OnlyBack {  //回到首页(出租、出售)
+    UIButton *left  = self.homeVC.LeftTab;
+    UIButton *right = self.homeVC.RightTab;
+    [left  setTitle: @"出租" forState:UIControlStateNormal];
+    [right setTitle: @"出售" forState:UIControlStateNormal];
     [self showHome];
 }
 

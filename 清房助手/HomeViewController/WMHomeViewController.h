@@ -22,4 +22,7 @@
 @property (weak, nonatomic) id<WMHomeViewControllerDelegate> HomeVCdelegate;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
+@property(nonatomic,weak) UIButton *LeftTab;
+@property(nonatomic,weak) UIButton *RightTab;
+
 @end

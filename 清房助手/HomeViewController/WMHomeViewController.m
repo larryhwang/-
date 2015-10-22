@@ -32,6 +32,9 @@
 
 @property(nonatomic,strong)  NSArray  *DataArr;
 @property(nonatomic,strong)  AFHTTPRequestOperationManager  *shareMgr;
+@property(nonatomic,assign) BOOL isWant;
+
+
 
 @end
 
@@ -48,19 +51,16 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    _isWant = NO;  //初始，请求的数据为出租/出售
+    
+    
+    
+    
     
     _TabBarBtns = [NSMutableArray arrayWithCapacity:2];
     
 #warning 整合部分
-    
-    self.title = @"出租";
-    UIViewController *oneViewController = [[UIViewController alloc] init];
-    oneViewController.title = @"出租";
-    oneViewController.view.backgroundColor = [UIColor whiteColor];
-    
-    UIViewController *twoViewController = [[UIViewController alloc] init];
-    twoViewController.title = @"出售";
-    twoViewController.view.backgroundColor = [UIColor blueColor];
+
 
     
     self.tableView.delegate = self;
@@ -98,6 +98,7 @@
 #warning 顶部TabBar切换部分
     UIView *TabBarContentView = [[UIView alloc]initWithFrame:CGRectMake(0, 64, ScreenWidth, TopTabBarHeight)];
     UIButton *Sales  = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.LeftTab = Sales ;
     Sales.tag = 0 ;
     [Sales setTitle:@"出售" forState:UIControlStateNormal];
     [Sales setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
@@ -120,6 +121,7 @@
     
     
     UIButton *Rent  = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.RightTab = Rent;
     Rent.tag  = 1 ;
     [Rent setTitle:@"出租" forState:UIControlStateNormal];
     [Rent setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
@@ -136,16 +138,34 @@
     TabBarContentView.backgroundColor = [UIColor whiteColor];
     
     [self.view addSubview:TabBarContentView];
-
+    
+    
+    
+#warning 测试返回数据
+    NSString *url4  =@"http://192.168.1.38:8080/qfzsapi/keyuan/seekHouse.api?fenLei=2&keyuan_id=7";
+    [self.shareMgr POST:url4
+             parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                 NSLog(@"客源详情%@",responseObject);
+               
+             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                 NSLog(@"%@",error);
+             }];
 }
 
 
 -(void)SalesTableLoad {
-    NSString *url3=@"http://192.168.1.38:8080/qfzsapi/fangyuan/rentalOrBuyHouseSearch.api?weiTuoDate=0&sum=10&fangxiang=refresh&zuShou=0";
+    //左选项卡
+//       if (_isWant) {
+//        url3 = @"";
+//    } else{
+//        url3 = @"";
+//    }
+    NSString *url3=@"http://192.168.1.38:8080/qfzsapi/fangyuan/rentalOrBuyHouseSearch.api?weiTuoDate=0&sum=10&fangxiang=refresh&zuShou=0";  //这是出售列表
 #warning 缺少进度加载状态
+    
     [self.shareMgr POST:url3
    parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-       NSLog(@"%@",responseObject);
+       NSLog(@"出售信息%@",responseObject);
        NSArray *DataArra = responseObject[@"data"];
        self.DataArr =DataArra;
        [self.tableView reloadData];
@@ -157,6 +177,7 @@
 
 
 -(void)RenTableLoad {
+    //右选项卡
         NSString *url3=@"http://192.168.1.38:8080/qfzsapi/fangyuan/rentalOrBuyHouseSearch.api?weiTuoDate=0&sum=10&fangxiang=refresh&zuShou=1";
         [self.shareMgr POST:url3
                  parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -167,8 +188,6 @@
                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                      NSLog(@"%@",error);
                  }];
-        
-
 }
 
 -(void)TabBarBtnClick :(UIButton *)btn {
@@ -179,10 +198,10 @@
         [_bottomLine setFrame:CGRectMake(btn.frame.origin.x + SingleBtnWidth/4, TopTabBarHeight -2 , SingleBtnWidth/2, 2)];
     }];
     if (btn.tag == 0) {  //出售
-        [self SalesTableLoad];
+       // [self SalesTableLoad];
         NSLog(@"出售");
     }else {
-        [self RenTableLoad];
+      //  [self RenTableLoad];
         NSLog(@"出租");
     }
 }

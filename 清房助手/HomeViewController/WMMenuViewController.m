@@ -40,7 +40,6 @@
     self.tableView.separatorStyle  = UITableViewCellSeparatorStyleNone;
     self.tableView.rowHeight       = 50 * (self.common.screenW / 320);
     NSLog(@"高度:%f",   self.tableView.rowHeight);
-    // 设置tableFooterView为一个空的View，这样就不会显示多余的空白格子了
     self.tableView.tableFooterView = [[UIView alloc] init];
     
     self.headerImageView.image = [[UIImage imageNamed:@"Icon"] getRoundImage];
@@ -94,16 +93,30 @@
     }
 
 
-   // [cell setCellText:self.listArray[indexPath.row]];
+   
     cell.MenuTitle.text = self.listArray[indexPath.row];
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+#warning 侧栏菜单选择
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    if ([self.delegate respondsToSelector:@selector(didSelectItem:)]) {
-        [self.delegate didSelectItem:self.listArray[indexPath.row]];
+    if (indexPath.row == 0) {
+        [self.delegate OnlyBack];  //仅仅回到
+    } else if (indexPath.row == 1) {
+        [self.delegate transToRentAndSale];
+         //客源查询
+    } else if (indexPath.row ==2) {
+        //发布
+    } else if (indexPath.row ==3){
+        //我的客源
+    } else {
+        //我的房源
     }
+//    if ([self.delegate respondsToSelector:@selector(didSelectItem:)]) {
+    //    [self.delegate didSelectItem:self.listArray[indexPath.row]];
+//    }
+    
 }
 
 - (UIImage *)scaleImage:(UIImage *)image toScale:(float)scaleSize

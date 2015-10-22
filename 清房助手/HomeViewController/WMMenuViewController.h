@@ -11,7 +11,9 @@
 
 @protocol WMMenuViewControllerDelegate <NSObject>
 @optional
+- (void)transToRentAndSale;
 - (void)didSelectItem:(NSString *)title;
+- (void)OnlyBack;
 
 @end
 
