@@ -238,7 +238,6 @@ static const CGFloat menuStartNarrowRatio  = 0.70;
     test.FenLei = Fenlei;
     test.uerID = UserId;
     [self.messageNav pushViewController:test animated:YES];
-    NSLog(@"表格被点击");
 }
 
 @end

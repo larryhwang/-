@@ -33,6 +33,7 @@
 @property(nonatomic,strong)  NSArray  *DataArr;
 @property(nonatomic,strong)  AFHTTPRequestOperationManager  *shareMgr;
 @property(nonatomic,assign) BOOL isWant;
+@property(nonatomic,copy) NSString *userID;
 
 
 
@@ -142,32 +143,35 @@
     
     
 #warning 测试返回数据
-    NSString *url4  =@"http://192.168.1.38:8080/qfzsapi/keyuan/seekHouse.api?fenLei=2&keyuan_id=7";
-    [self.shareMgr POST:url4
-             parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                 NSLog(@"客源详情%@",responseObject);
-               
-             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                 NSLog(@"%@",error);
-             }];
+//    NSString *url4  =@"http://192.168.1.38:8080/qfzsapi/keyuan/seekHouse.api?fenLei=2&keyuan_id=7";
+//    [self.shareMgr POST:url4
+//             parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//                 NSLog(@"客源详情%@",responseObject);
+//               
+//             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//                 NSLog(@"%@",error);
+//             }];
 }
 
 
 -(void)SalesTableLoad {
     //左选项卡
-//       if (_isWant) {
-//        url3 = @"";
-//    } else{
-//        url3 = @"";
-//    }
+    NSString *url3 = [NSString new];
+       if (!_isWant) {
+          url3=@"http://www.123qf.cn/testApp/fangyuan/rentalOrBuyHouseSearch.api?weiTuoDate=0&sum=10&fangxiang=initdata&zuShou=0";  //这是出售列表
+    } else{
+          url3 = @"";
+    }
 
-    NSString *url3=@"http://www.123qf.cn/testApp/fangyuan/rentalOrBuyHouseSearch.api?weiTuoDate=0&sum=10&fangxiang=initdata&zuShou=0";  //这是出售列表
+  //  NSString *url3=@"http://www.123qf.cn/testApp/fangyuan/rentalOrBuyHouseSearch.api?weiTuoDate=0&sum=10&fangxiang=initdata&zuShou=0";  //这是出售列表
 #warning 缺少进度加载状态
     
     [self.shareMgr POST:url3
    parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
        NSLog(@"出售信息%@",responseObject);
        NSArray *DataArra = responseObject[@"data"];
+       NSLog(@"%@",responseObject[@"userid"]);
+       self.userID = responseObject[@"userid"];
        self.DataArr =DataArra;
        [self.tableView reloadData];
    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -182,8 +186,9 @@
         NSString *url3=@"http://192.168.1.38:8080/qfzsapi/fangyuan/rentalOrBuyHouseSearch.api?weiTuoDate=0&sum=10&fangxiang=refresh&zuShou=1";
         [self.shareMgr POST:url3
                  parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                     NSLog(@"%@",responseObject);
+                     NSLog(@"右选项卡%@",responseObject);
                      NSArray *DataArra = responseObject[@"data"];
+                     self.userID = responseObject[@""];
                      self.DataArr =DataArra;
                      [self.tableView reloadData];
                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -218,7 +223,7 @@
 }
 
 
-#pragma mark tableViewDelegate
+#pragma mark -tableViewDelegate
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 100;
@@ -241,13 +246,14 @@
     NSDictionary *SingleData = self.DataArr[indexPath.row];
     NSString *imgCollects = SingleData[@"tupian"];
     NSArray *imgArray = [imgCollects componentsSeparatedByString:@","];
-    NSString *imgURL = [NSString stringWithFormat:@"http://112.74.64.145/hsf/img/%@",[imgArray firstObject]];
- 
+    NSString *imgURL = [NSString stringWithFormat:@"http://www.123qf.cn/testWeb/img/%@/userfile/qfzs/fy/mini/%@",SingleData[@"userid"],[imgArray firstObject]];
+    NSLog(@"%@",imgURL);
+  //  NSString *imgURL = [NSString stringWithFormat:@"http://112.74.64.145/hsf/img/%@",[imgArray firstObject]];
     NSString *BigTitle = SingleData[@"biaoti"];
     NSArray *titlePartArra = [BigTitle componentsSeparatedByString:@" "]; //
-    
     UIImage  *PlaceHoder = [UIImage imageNamed:@"DeafaultImage"];
     PlaceHoder = [PlaceHoder imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+   
     [cell.QFImageView sd_setImageWithURL:[NSURL URLWithString:imgURL] placeholderImage:PlaceHoder];
     cell.title.text = [titlePartArra firstObject];
     cell.area.text  = [NSString stringWithFormat:@"面积:%@㎡",SingleData[@"mianji"]]; //SingleData[@"mianji"];
@@ -255,7 +261,13 @@
     cell.style.text = @"两室";
     cell.elevator.text = @"电梯";
     cell.price.text = [NSString stringWithFormat:@"%@万",SingleData[@"shoujia"]];
-    cell.postUer.text =  [NSString stringWithFormat:@"发布人:%@",SingleData[@"publisher"]];
+    
+    NSString *Publisher =SingleData[@"publisher"];
+    if ([Publisher isKindOfClass:[NSNull class]]) {
+         cell.postUer.text = @"佚名";
+    }else{
+        cell.postUer.text =[NSString stringWithFormat:@"发布人:%@",SingleData[@"publisher"]];
+    }
     cell.postTime.text = [NSString stringWithFormat:@"发布时间:%@",SingleData[@"weituodate"]];
     return cell;
 }
@@ -266,7 +278,6 @@
     NSString *Id = SingleData[@"id"];   //将房源ID传过去
     NSString *userID = SingleData[@"userid"];
     NSString *Category = [NSString stringWithFormat:@"%@",SingleData[@"fenlei"]];
-    
     [self.HomeVCdelegate QFshowDetailWithFangYuanID:Id andFenlei:Category userID:userID];
 
 }

@@ -50,13 +50,10 @@
      */
     AFHTTPRequestOperationManager *mgr  = [AFHTTPRequestOperationManager manager];
     NSString *completeUrl = @"http://www.123qf.cn/testApp/user/loginUser.front";
-    NSLog(@"%@",completeUrl);
     HomeViewController *home = [HomeViewController new];
    // KeyWindow.rootViewController = home;
    [mgr POST:completeUrl parameters:PramaDic success:^(AFHTTPRequestOperation *operation, id responseObject) {
-       NSLog(@"登录信息%@",responseObject);
         [MBProgressHUD showMessage:@"正在登录"];
-        NSLog(@"返回值%@",responseObject[@"code"]);
        if (responseObject) {
         [MBProgressHUD hideHUD];
        }

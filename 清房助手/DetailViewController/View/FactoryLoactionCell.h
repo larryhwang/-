@@ -17,6 +17,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *Price;
 @property (weak, nonatomic) IBOutlet UILabel *Positon;
 
-@property (weak, nonatomic) IBOutlet UILabel *Adress;
+
 
 @end

@@ -17,15 +17,16 @@
 #import "UILabel+UILabel_SizeWithTest.h"
 #import "FreeCell.h"
 
+
 #define  HeavyFont     [UIFont fontWithName:@"Helvetica-Bold" size:25]
-#define  ToolHeight  60    //固定底部的大小
+#define  ToolHeight  50    //固定底部的大小
 #define LeftViewWidth   ScreenWidth/4
 #define MiddleViewWidth   ScreenWidth/2
 #define RightViewWidth   ScreenWidth/4
 #define Padding  8
 
 
-@interface DetailViewController ()<UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate>
+@interface DetailViewController ()<UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate,UIAlertViewDelegate>
 @property (strong, nonatomic)  UITableView *detailInfoTable;
 @property (strong, nonatomic) NSMutableArray *imagesData;
 @property(nonatomic,weak)  UIButton *CountLabel;
@@ -78,7 +79,11 @@
     self.detailInfoTable.delegate = self ;
     self.detailInfoTable.dataSource = self;
     self.detailInfoTable.allowsSelection = NO ;
-    [self.detailInfoTable setFrame:CGRectMake(0, 0, ScreenWidth, 607)];
+//    if (<#condition#>) {
+//        <#statements#> isI5?607
+//    }
+#warning 表高度
+    [self.detailInfoTable setFrame:CGRectMake(0, 0, ScreenWidth, 568)];
     self.detailInfoTable.separatorStyle = UITableViewCellSeparatorStyleNone ;
     [self.view addSubview:self.detailInfoTable];
 }
@@ -90,8 +95,9 @@
     
     [mgr POST:url3
    parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+#warning 请求成功后的网络处理
        self.FangData = responseObject[@"data"];
-       NSLog(@"%@",self.FangData);
+       NSLog(@"单个数据详情%@",self.FangData);
        NSString *collect = self.FangData[@"tupian"];
        NSArray *imgArray = [collect componentsSeparatedByString:@","];
        self.ImgTotal = [imgArray count];
@@ -99,7 +105,6 @@
            //http://www.123qf.cn/testWeb/img/13719678138/userfile/qfzs/fy/mini/hsf_20151016135218_0.jpg
            //http://112.74.64.145/hsf/img/%@",imgName
            NSString *ImgfullUrl = [NSString stringWithFormat:@"http://www.123qf.cn/testWeb/img/%@/userfile/qfzs/fy/mini/%@",self.uerID,imgName];
-           NSLog(@"%@",ImgfullUrl);
            [self.imagesData addObject:ImgfullUrl];
        }   //所有图片地址
        
@@ -122,8 +127,10 @@
 }
 
 
+#pragma 初始化底部工具条
 -(void)initFootView {
     UIView *footer = [[UIView alloc]initWithFrame:CGRectMake(0,ScreenHeight-ToolHeight, ScreenWidth, ToolHeight)];
+    UITapGestureRecognizer *TeleTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(TeleTap:)];
     //左边
     UIView *PublisherAndCo = [[UIView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth/4, ToolHeight)];
     PublisherAndCo.backgroundColor = DeafaultColor;
@@ -132,21 +139,30 @@
  
     Company.textColor = [UIColor whiteColor];
     Company.text = self.FangData[@"name"];  //@"丰登地产";
-    NSLog(@"这里%@",Company.text);
     UIFont *Deafult = [UIFont systemFontOfSize:17];
     CGSize MaxLeftSzie = CGSizeMake(LeftViewWidth-Padding,ToolHeight-Padding);
     CGSize companyLabelSize = [self sizeWithString:Company.text font:Deafult maxSize:MaxLeftSzie];
     UILabel *ContactName  = [[UILabel alloc]init];
     self.Name = ContactName;
     ContactName.textColor = [UIColor whiteColor];
-    ContactName.text = self.FangData[@"publisher"];//@"梅西";
+    ContactName.text = self.FangData[@"publisher"];
+    
     CGSize NameLabelSize = [self sizeWithString:ContactName.text font:Deafult maxSize:MaxLeftSzie];
     [Company setFrame:CGRectMake((LeftViewWidth -companyLabelSize.width)/2 , (ToolHeight - (companyLabelSize.height + NameLabelSize.height))/2, companyLabelSize.width, companyLabelSize.height)];
     [ContactName setFrame:CGRectMake((LeftViewWidth -NameLabelSize.width)/2, (Company.frame.origin.y +Company.frame.size.height +2), NameLabelSize.width, NameLabelSize.height)];
     [PublisherAndCo addSubview:Company];
     [PublisherAndCo addSubview:ContactName];
     [footer addSubview:PublisherAndCo];
+/*
+ 
+ UITapGestureRecognizer*tapGesture = [[UITapGestureRecognizer alloc]initWithTarget:selfaction:@selector(Actiondo:)];
+ 
+ [uiview addGestureRecognizer:tapGesture];
+ */
+    PublisherAndCo.userInteractionEnabled = YES;
 
+    
+    
     [footer addSubview:PublisherAndCo];
     
     //中部
@@ -166,7 +182,7 @@
     [TeleView addSubview:teleLabel];
     TeleView.backgroundColor = DeafaultColor2;
     [footer addSubview:TeleView];
-    
+    [TeleView addGestureRecognizer:TeleTap];
 
     //右部
 
@@ -185,6 +201,31 @@
 
     [self.view addSubview:footer];
 }
+
+-(void)TeleTap:(id)sender {
+    NSString *tele =self.FangData[@"tel"];//;
+    UIAlertView *AW = [[UIAlertView alloc]initWithTitle:nil
+                                                message:tele
+                                               delegate:self
+                                      cancelButtonTitle:@"取消"
+                                      otherButtonTitles:@"呼叫", nil];
+    
+    [AW show];
+
+}
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    NSString *tele =[NSString stringWithFormat:@"tel://%@", self.FangData[@"tel"]];//;
+    if(buttonIndex == 1 ) {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:tele]];
+    } else {
+        return ;
+    }
+
+
+
+}
+
 
 -(void)initHeadScorlImage {
     
@@ -211,13 +252,10 @@
 #pragma mark -ScrollView delegate
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    NSLog(@"%@",scrollView);
     NSInteger pageIndex = scrollView.contentOffset.x / CGRectGetWidth(scrollView.frame);
     NSString  *nowSelected =[NSString stringWithFormat:@"%d/%d",pageIndex + 1,self.ImgTotal];
-    NSLog(@"哈哈%@",nowSelected);
     [self.CountLabel setTitle:nowSelected forState:UIControlStateNormal];
     self.CountLabel.titleLabel.text = nowSelected ;
-    NSLog(@"嘻嘻:%@",self.CountLabel.titleLabel.text);
     NSMutableAttributedString *HeavyNo = [[NSMutableAttributedString alloc]initWithString:nowSelected];
     NSRange rangeHeavyPart =  NSMakeRange(0, 2);
     [HeavyNo addAttribute:NSFontAttributeName value:HeavyFont range:rangeHeavyPart];
@@ -232,7 +270,6 @@
     [self.imagesData enumerateObjectsUsingBlock:^(NSString *imageName, NSUInteger idx, BOOL *stop) {
         UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(CGRectGetWidth(self.scrollView3.frame) * idx, 0, CGRectGetWidth(self.scrollView3.frame), CGRectGetHeight(self.scrollView3.frame))];
         imageView.contentMode = UIViewContentModeScaleAspectFill;
-        NSLog(@"图片地址%@",self.imagesData[idx]);
         [imageView sd_setImageWithURL:self.imagesData[idx] placeholderImage:nil];
         [self.scrollView3 addSubview:imageView];
     }];
@@ -245,66 +282,86 @@
     return 4;
 }
 
-#pragma mark -表高度返回设置
+#pragma mark -表中单元格设置
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath  {
-    FlatLocationCell  *LocationCell  = [FlatLocationCell new];
-    FlatDetailCell   *DetailCell = [FlatDetailCell new];
-    DescribeCell  *DescribieCell = [DescribeCell freeCellWithTitle:@"描述" andContext:self.FangData[@"fangyuanmiaoshu"]];
-    FreeCell  *testCell = [FreeCell freeCellWithTitle:@"地址" andContext:self.FangData[@"dizhi"]];
-    
-    DescribieCell.iSSeparetorLine = NO ;
-    self.FreeCellHeight  = testCell.CellHight;
-    self.DescribeCellHeight = DescribieCell.CellHight;
-   // testCell.backgroundColor = [UIColor blueColor];
-    
-    LocationCell  =  [[[NSBundle mainBundle]loadNibNamed:@"FlatLocationCell" owner:nil options:nil] firstObject];
-    DetailCell = [[[NSBundle mainBundle]loadNibNamed:@"FlatDetailCell" owner:nil options:nil] firstObject];
-    
-    if (indexPath.row ==0) {
-        LocationCell.Title.text = self.FangData[@"biaoti"];
-        LocationCell.PostTime.text = self.FangData[@"weituodate"];
-        LocationCell.Region.text = self.FangData[@"qu"];
-        LocationCell.LouPanName.text = self.FangData[@"mingcheng"];
-        LocationCell.Price.text = [NSString stringWithFormat:@"%@",self.FangData[@"shoujia"]];//;
-        return LocationCell;
-    }else if (indexPath.row ==1) {
-        NSLog(@"test%f,%f",testCell.frame.size.width,testCell.frame.size.height);
-         return testCell;
-    }else if (indexPath.row ==2){
-        DetailCell.FlatType.text = [NSString stringWithFormat:@"%@房%@厅",self.FangData[@"fangshu"],self.FangData[@"tingshu"]];
-        DetailCell.Decrorelation.text = self.FangData[@"zhuangxiu"];
-        DetailCell.FloatNo.text =  [NSString stringWithFormat:@"%@/%@层 ",self.FangData[@"louceng"],self.FangData[@"zonglouceng"]];
-        DetailCell.LookTime.text = self.FangData[@"kanfangtime"];
-        //带有HTML，考虑加载HTML啊
-        DetailCell.WithFacility.text = @"哈哈哈";
-        DetailCell.ExtryTime.text =[NSString stringWithFormat:@"%@个月",self.FangData[@"youxiaoqi"]];
-        DetailCell.Direction.text = self.FangData[@"chaoxiang"];
-        DetailCell.Area.text = [NSString stringWithFormat:@"%@",self.FangData[@"mianji"]];
-        DetailCell.Type.text = self.FangData[@"leixing"];
-        return DetailCell;
+#pragma mark -住宅类
+    if ([self.FenLei isEqualToString:@"0"]) {  // start_住宅类
+        FlatLocationCell  *LocationCell  = [FlatLocationCell new];
+        FlatDetailCell   *DetailCell = [FlatDetailCell new];
+        DescribeCell  *DescribieCell = [DescribeCell freeCellWithTitle:@"描述" andContext:self.FangData[@"fangyuanmiaoshu"]];
+        FreeCell  *testCell = [FreeCell freeCellWithTitle:@"地址" andContext:self.FangData[@"dizhi"]];
+        
+        DescribieCell.iSSeparetorLine = NO ;
+        self.FreeCellHeight  = testCell.CellHight;
+        self.DescribeCellHeight = DescribieCell.CellHight;
+        // testCell.backgroundColor = [UIColor blueColor];
+        
+        LocationCell  =  [[[NSBundle mainBundle]loadNibNamed:@"FlatLocationCell" owner:nil options:nil] firstObject];
+        DetailCell = [[[NSBundle mainBundle]loadNibNamed:@"FlatDetailCell" owner:nil options:nil] firstObject];
+        
+        if (indexPath.row ==0) {
+            LocationCell.Title.text = self.FangData[@"biaoti"];
+            LocationCell.PostTime.text = self.FangData[@"weituodate"];
+            LocationCell.Region.text = self.FangData[@"qu"];
+            LocationCell.LouPanName.text = self.FangData[@"mingcheng"];
+            LocationCell.Price.text = [NSString stringWithFormat:@"%@",self.FangData[@"shoujia"]];//;
+            return LocationCell;
+        }else if (indexPath.row ==1) {
+            return testCell;
+        }else if (indexPath.row ==2){
+            DetailCell.FlatType.text = [NSString stringWithFormat:@"%@房%@厅",self.FangData[@"fangshu"],self.FangData[@"tingshu"]];
+            DetailCell.Decrorelation.text = self.FangData[@"zhuangxiu"];
+            DetailCell.FloatNo.text =  [NSString stringWithFormat:@"%@/%@层 ",self.FangData[@"louceng"],self.FangData[@"zonglouceng"]];
+            DetailCell.LookTime.text = self.FangData[@"kanfangtime"];
+            //带有HTML，考虑加载HTML啊
+            DetailCell.WithFacility.text = @"哈哈哈";
+            DetailCell.ExtryTime.text =[NSString stringWithFormat:@"%@个月",self.FangData[@"youxiaoqi"]];
+            DetailCell.Direction.text = self.FangData[@"chaoxiang"];
+            DetailCell.Area.text = [NSString stringWithFormat:@"%@",self.FangData[@"mianji"]];
+            DetailCell.Type.text = self.FangData[@"leixing"];
+            return DetailCell;
+        }
+        else {
+            return DescribieCell;
+        }
+    } //end_住宅类
+#pragma mark -商铺类
+     else if([self.FenLei isEqualToString:@"1"]) {  //商铺类
+        FactoryLoactionCell *cell = [[FactoryLoactionCell alloc]init];
+        cell.textLabel.text = @"fuck";
+        return cell;
     }
-    else {
-        return DescribieCell;
-    }
+     else if ([self.FenLei isEqualToString:@"2"]) {  //写字楼
+         
+     }
+     else {
+         //工厂
+     }
    
 }
 
+
+
+#pragma mark -表高度返回设置
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
 
-    NSLog(@"index:%d",indexPath.row);
     if (indexPath.row==0) {
         return 116.0;
     }
    else if (indexPath.row ==1) {
-       NSLog(@"%f",self.FreeCellHeight);
        return  self.FreeCellHeight + 5;
     }
    else if (indexPath.row ==2) {
            return 131;
    }
   else {
-     return self.DescribeCellHeight + 10 ;
-    }
+      //return self.DescribeCellHeight + 10 ;
+      if(isI5){
+           return self.DescribeCellHeight + 60 ;
+  } else {
+         return self.DescribeCellHeight + 10 ;
+  }
+}
 }
 
 
@@ -335,9 +392,10 @@
 }
 
 #pragma mark -label高度计算
+#warning 缺少非空处理,可能引起报错
 - (CGSize)sizeWithString:(NSString *)str font:(UIFont *)font maxSize:(CGSize)maxSize
 {
-    NSDictionary *dict = @{NSFontAttributeName : font};
+    NSDictionary *dict = @{NSFontAttributeName:font};
     CGSize size =  [str boundingRectWithSize:maxSize options:NSStringDrawingUsesLineFragmentOrigin attributes:dict context:nil].size;
     return size;
 }
@@ -346,8 +404,16 @@
 #pragma mark -更新底部工具栏
 -(void)updateToolBar {
     self.Tele.text  = self.FangData[@"tel"];
-    NSLog(@"这里%@",self.FangData[@"tel"]);
     self.Name.text  = self.FangData[@"name"];
-    self.Publisher.text =self.FangData[@"publisher"];
+    
+
+     NSString *Publisher =self.FangData[@"publisher"];
+     if ([Publisher isKindOfClass:[NSNull class]]) {
+     self.Publisher.text = @"佚名";
+     }else{
+     self.Publisher.text =self.FangData[@"publisher"];
+     }
+    
+
 }
 @end

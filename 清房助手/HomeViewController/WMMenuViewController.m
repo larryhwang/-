@@ -32,16 +32,13 @@
     [super viewDidLoad];
     
     self.common = [WMCommon getInstance];
-    
     self.listArray = @[@"房源查询", @"客源查询", @"发布", @"我的客源", @"我的房源"];
-    
     self.tableView.delegate        = self;
     self.tableView.dataSource      = self;
     self.tableView.separatorStyle  = UITableViewCellSeparatorStyleNone;
     self.tableView.rowHeight       = 50 * (self.common.screenW / 320);
     NSLog(@"高度:%f",   self.tableView.rowHeight);
     self.tableView.tableFooterView = [[UIView alloc] init];
-    
     self.headerImageView.image = [[UIImage imageNamed:@"Icon"] getRoundImage];
 }
 
@@ -70,11 +67,8 @@
     MenuListCell *cell = [[MenuListCell alloc]init];
   
     cell = [[[NSBundle mainBundle]loadNibNamed:@"MenuListCell" owner:nil options:nil] firstObject];
-    NSLog(@"从XIB中加载");
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    
     cell.backgroundColor = [UIColor clearColor];
-
     if (indexPath.row == 0) {
         UIImage *img = [UIImage imageNamed:@"search-house"];
         cell.Icon.image = img;
@@ -92,8 +86,6 @@
         cell.Icon.image = img;
     }
 
-
-   
     cell.MenuTitle.text = self.listArray[indexPath.row];
     return cell;
 }

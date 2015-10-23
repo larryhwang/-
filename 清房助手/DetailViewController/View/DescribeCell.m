@@ -26,11 +26,9 @@
     CGSize size = CGSizeMake(ScreenWidth, 1000);
     self.Describe.text = context ;
     CGSize labelSize = [context boundingRectWithSize:size options:NSStringDrawingUsesLineFragmentOrigin attributes:attrs context:nil].size;
-    NSLog(@"仅仅高度%f",labelSize.height);
     self.Describe.frame = CGRectMake(self.Describe.frame.origin.x, self.Describe.frame.origin.y, ScreenWidth, labelSize.height);
     frame.size.height = labelSize.height;
     self.frame = frame;
-    NSLog(@"cell自身高度%f",self.frame.size.height);
     
 
 }

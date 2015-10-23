@@ -37,10 +37,8 @@
         NSString *allContent = [NSString stringWithFormat:@"   %@:   %@",self.HeaderPart,text];
         UIFont *DeafualtFont = [UIFont systemFontOfSize:17];
         _ContextSize = [self sizeWithString:allContent font:DeafualtFont maxSize:MaxSize];
-        NSLog(@"接受到的%f",_ContextSize.height);
         _CellHight = _ContextSize.height + 2;
         self.DynamicText.text = allContent;  //全部的内容设置
-        NSLog(@"%f",_ContextSize.height);
         [self.DynamicText setFrame:CGRectMake(Pading/2, Pading/3, _ContextSize.width, _ContextSize.height)];
         self.Title.backgroundColor =  [UIColor redColor];
         [self.contentView addSubview:self.DynamicText];
@@ -75,7 +73,6 @@
 
     NSDictionary *dict = @{NSFontAttributeName : font};
     CGSize size =  [str boundingRectWithSize:maxSize options:NSStringDrawingUsesLineFragmentOrigin attributes:dict context:nil].size;
-    NSLog(@"内部设置的尺寸变化%f",size.height);
     return size;
 }
 
