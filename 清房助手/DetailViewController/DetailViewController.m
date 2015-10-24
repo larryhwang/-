@@ -68,10 +68,7 @@
 
 
     [self initTable];
-    
     [self addWhiteBack];  //背景加载
-
-    
     [self getDataFromNet];
     [self initHeadScorlImage];
 
@@ -81,16 +78,11 @@
 
 
 #pragma mark -初始化表
-
-
-
-
 -(void)initTable {
     self.detailInfoTable = [[UITableView alloc]init];
     self.detailInfoTable.delegate = self ;
     self.detailInfoTable.dataSource = self;
     self.detailInfoTable.allowsSelection = NO ;
-#warning 表高度
     [self.detailInfoTable setFrame:CGRectMake(0, 0, ScreenWidth,ScreenHeight)];
     self.detailInfoTable.separatorStyle = UITableViewCellSeparatorStyleNone ;
     [self.view addSubview:self.detailInfoTable];
@@ -251,7 +243,6 @@
 
 
 -(void)initHeadScorlImage {
-    
     UIView *HeaderContent = [[UIView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth,ScreenHeight/3 + 20)];
     self.HeaderContent = HeaderContent;
     self.scrollView3  = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth,ScreenHeight/3 +20)];

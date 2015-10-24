@@ -63,21 +63,21 @@ typedef NS_ENUM(NSInteger, CellStatus) {
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    _isWant = NO;  //初始，请求的数据为出租/出售
-    _status = SalesOut ;  //初始，
-    _TabBarBtns = [NSMutableArray arrayWithCapacity:2];
-#warning 整合部分
-    self.tableView.delegate = self;
+
+    [self ParameterInit];
+    [self TopTabBarUISet];  //顶部切换设置
+    
+    
+    
   //  [self.tableView addHeaderWithTarget:self action:@selector(refreshData)];
   //  [self.tableView headerBeginRefreshing];
   //  [self.tableView addFooterWithTarget:self action:@selector(loadMoreData)];
     
-    AFHTTPRequestOperationManager *mgr  = [AFHTTPRequestOperationManager manager];
-    self.shareMgr = mgr ;
+
     
-    [self LeftTableLoad];
+    [self tableInit];  //页面初始化
     
-    self.navigationItem.backBarButtonItem.title = @"返回";
+  //  self.navigationItem.backBarButtonItem.title = @"返回";
     UIButton *IconBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     IconBtn.frame = CGRectMake(0, 0, 33, 33);
     [IconBtn setBackgroundImage:[[UIImage imageNamed:@"Icon"]getRoundImage] forState:UIControlStateNormal];
@@ -102,8 +102,23 @@ typedef NS_ENUM(NSInteger, CellStatus) {
     self.navigationItem.titleView = search;
     
 
+
     
+}
+
+
+- (void)ParameterInit {
+    _isWant = NO;  //初始，请求的数据为出租/出售
+    _status = SalesOut ;  //初始，
+    _TabBarBtns = [NSMutableArray arrayWithCapacity:2];
+    self.tableView.delegate = self;
+    AFHTTPRequestOperationManager *mgr  = [AFHTTPRequestOperationManager manager];
+    self.shareMgr = mgr ;
+}
+
+
 #warning 顶部TabBar切换部分
+- (void)TopTabBarUISet {
     UIView *TabBarContentView = [[UIView alloc]initWithFrame:CGRectMake(0, 64, ScreenWidth, TopTabBarHeight)];
     UIButton *Sales  = [UIButton buttonWithType:UIButtonTypeCustom];
     self.LeftTab = Sales ;
@@ -146,7 +161,12 @@ typedef NS_ENUM(NSInteger, CellStatus) {
     TabBarContentView.backgroundColor = [UIColor whiteColor];
     
     [self.view addSubview:TabBarContentView];
-    
+
+}
+
+- (void)tableInit {
+    [MBProgressHUD showMessage:@"正在加载"];
+    [self LeftTableLoad];
 }
 
 
