@@ -16,10 +16,19 @@
 #import "UIImageView+WebCache.h"
 #import "DetailViewController.h"
 #import "SCNavTabBarController.h"
+#import "MJRefresh.h"
 
 
 #define SingleBtnWidth   ScreenWidth/2
 #define TopTabBarHeight  32
+typedef NS_ENUM(NSInteger, CellStatus) {
+    SalesOut = 0,   //出售
+    RentOut = 1,    //出租
+    WantBuy = 2,   //求购
+    WantRent = 3  //求租
+};
+
+
 
 @interface WMHomeViewController() {
 #pragma mark 优化成结构体
@@ -32,8 +41,10 @@
 
 @property(nonatomic,strong)  NSArray  *DataArr;
 @property(nonatomic,strong)  AFHTTPRequestOperationManager  *shareMgr;
-@property(nonatomic,assign) BOOL isWant;
 @property(nonatomic,copy) NSString *userID;
+@property(nonatomic,assign) CellStatus status;
+@property(nonatomic,copy)  NSString *CurrentRuest;
+
 
 
 
@@ -53,22 +64,18 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     _isWant = NO;  //初始，请求的数据为出租/出售
-    
-    
-    
-    
-    
+    _status = SalesOut ;  //初始，
     _TabBarBtns = [NSMutableArray arrayWithCapacity:2];
-    
 #warning 整合部分
-
-
-    
     self.tableView.delegate = self;
+    [self.tableView addHeaderWithTarget:self action:@selector(refreshData)];
+  //  [self.tableView headerBeginRefreshing];
+    [self.tableView addFooterWithTarget:self action:@selector(loadMoreData)];
+    
     AFHTTPRequestOperationManager *mgr  = [AFHTTPRequestOperationManager manager];
     self.shareMgr = mgr ;
     
-    [self SalesTableLoad];
+    [self LeftTableLoad];
     
     self.navigationItem.backBarButtonItem.title = @"返回";
     UIButton *IconBtn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -140,74 +147,75 @@
     
     [self.view addSubview:TabBarContentView];
     
-    
-    
-#warning 测试返回数据
-//    NSString *url4  =@"http://192.168.1.38:8080/qfzsapi/keyuan/seekHouse.api?fenLei=2&keyuan_id=7";
-//    [self.shareMgr POST:url4
-//             parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//                 NSLog(@"客源详情%@",responseObject);
-//               
-//             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//                 NSLog(@"%@",error);
-//             }];
 }
 
 
--(void)SalesTableLoad {
-    //左选项卡
-    NSString *url3 = [NSString new];
-       if (!_isWant) {
-          url3=@"http://www.123qf.cn/testApp/fangyuan/rentalOrBuyHouseSearch.api?weiTuoDate=0&sum=10&fangxiang=initdata&zuShou=0";  //这是出售列表
-    } else{
-          url3 = @"";
+-(void)LeftTableLoad {
+    if (_isWant == NO) {
+        _status = SalesOut ;
+   _CurrentRuest=@"http://www.123qf.cn/testApp/fangyuan/rentalOrBuyHouseSearch.api?weiTuoDate=0&sum=10&fangxiang=initdata&zuShou=0";  //这是出售列表
+    }else {
+         _status = WantBuy;
+  _CurrentRuest = @"http://www.123qf.cn/testApp/keyuan/rentalOrBuyHouseSearch.api?weiTuoDate=0&sum=20&fangxiang=initdata&zuGou=0";   //求购列表
     }
 
-  //  NSString *url3=@"http://www.123qf.cn/testApp/fangyuan/rentalOrBuyHouseSearch.api?weiTuoDate=0&sum=10&fangxiang=initdata&zuShou=0";  //这是出售列表
+    [self LoadNetDataWithCurentURl];
+}
+
 #warning 缺少进度加载状态
+- (void) LoadNetDataWithURl:(NSString *)url{
+    [self.shareMgr POST:url
+             parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                 NSLog(@"右选项卡%@",responseObject);
+                 NSArray *DataArra = responseObject[@"data"];
+                 self.userID = responseObject[@""];
+                 self.DataArr =DataArra;
+                 [self.tableView reloadData];
+             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                 NSLog(@"%@",error);
+             }];
+
+}
+
+- (void) LoadNetDataWithCurentURl{
+    [self.shareMgr POST:self.CurrentRuest
+             parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                 NSLog(@"右选项卡%@",responseObject);
+                 NSArray *DataArra = responseObject[@"data"];
+                 self.userID = responseObject[@""];
+                 self.DataArr =DataArra;
+                 [self.tableView reloadData];
+             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                 NSLog(@"%@",error);
+             }];
     
-    [self.shareMgr POST:url3
-   parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-       NSLog(@"出售信息%@",responseObject);
-       NSArray *DataArra = responseObject[@"data"];
-       NSLog(@"%@",responseObject[@"userid"]);
-       self.userID = responseObject[@"userid"];
-       self.DataArr =DataArra;
-       [self.tableView reloadData];
-   } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-       NSLog(@"%@",error);
-   }];
-
 }
 
 
--(void)RenTableLoad {
-    //右选项卡
-        NSString *url3=@"http://192.168.1.38:8080/qfzsapi/fangyuan/rentalOrBuyHouseSearch.api?weiTuoDate=0&sum=10&fangxiang=refresh&zuShou=1";
-        [self.shareMgr POST:url3
-                 parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                     NSLog(@"右选项卡%@",responseObject);
-                     NSArray *DataArra = responseObject[@"data"];
-                     self.userID = responseObject[@""];
-                     self.DataArr =DataArra;
-                     [self.tableView reloadData];
-                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                     NSLog(@"%@",error);
-                 }];
+-(void)RightTableLoad {
+    if (_isWant == NO) {
+        _status = RentOut;
+        self.CurrentRuest= @"http://www.123qf.cn/testApp/fangyuan/rentalOrBuyHouseSearch.api?weiTuoDate=0&sum=10&fangxiang=initdata&zuShou=1";  //出租列表
+    }else {
+        _status = WantRent;
+        self.CurrentRuest= @"http://www.123qf.cn/testApp/keyuan/rentalOrBuyHouseSearch.api?weiTuoDate=0&sum=20&fangxiang=initdata&zuGou=1";  //求租列表
+    }
+    [self LoadNetDataWithCurentURl];
 }
 
+#pragma mark -顶部TabBar 切换
 -(void)TabBarBtnClick :(UIButton *)btn {
     btn.selected = YES ;
-    UIButton *anotherBtn = btn.tag ?  _TabBarBtns[0]: _TabBarBtns[1] ;
+    UIButton *anotherBtn = btn.tag ? _TabBarBtns[0]: _TabBarBtns[1] ;
     [UIView animateWithDuration:0.3f animations:^{
         anotherBtn.selected = NO;
         [_bottomLine setFrame:CGRectMake(btn.frame.origin.x + SingleBtnWidth/4, TopTabBarHeight -2 , SingleBtnWidth/2, 2)];
     }];
     if (btn.tag == 0) {  //出售
-       // [self SalesTableLoad];
+        [self LeftTableLoad];
         NSLog(@"出售");
     }else {
-      //  [self RenTableLoad];
+        [self RightTableLoad];
         NSLog(@"出租");
     }
 }
@@ -247,8 +255,8 @@
     NSString *imgCollects = SingleData[@"tupian"];
     NSArray *imgArray = [imgCollects componentsSeparatedByString:@","];
     NSString *imgURL = [NSString stringWithFormat:@"http://www.123qf.cn/testWeb/img/%@/userfile/qfzs/fy/mini/%@",SingleData[@"userid"],[imgArray firstObject]];
-    NSLog(@"%@",imgURL);
-  //  NSString *imgURL = [NSString stringWithFormat:@"http://112.74.64.145/hsf/img/%@",[imgArray firstObject]];
+ 
+    
     NSString *BigTitle = SingleData[@"biaoti"];
     NSArray *titlePartArra = [BigTitle componentsSeparatedByString:@" "]; //
     UIImage  *PlaceHoder = [UIImage imageNamed:@"DeafaultImage"];
@@ -281,4 +289,27 @@
     [self.HomeVCdelegate QFshowDetailWithFangYuanID:Id andFenlei:Category userID:userID];
 
 }
+
+#pragma mark -下拉与上拉方法
+- (void)refreshData {
+    NSLog(@"下拉");
+ //   [self SalesTableLoad];
+}
+
+-(void)loadMoreData {
+    NSLog(@"上拉");
+}
+
+
+
+#pragma mark -侧滑过来的数据初始化
+
+-(void)LeftInit {
+    [self TabBarBtnClick:self.LeftTab];
+}
+
+- (void)RightInit {
+    [self TabBarBtnClick:self.RightTab];
+}
+
 @end

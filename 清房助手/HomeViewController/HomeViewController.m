@@ -171,9 +171,7 @@ static const CGFloat menuStartNarrowRatio  = 0.70;
     [UIView animateWithDuration:0.3 animations:^{
         self.tabBarController.view.center = CGPointMake(self.view.center.x + self.distance, self.view.center.y);
         self.tabBarController.view.transform = CGAffineTransformScale(CGAffineTransformIdentity, proportion, proportion);
-        
         self.homeVC.leftBtn.alpha = self.cover.alpha = proportion == 1 ? 1 : 0;
-        
         CGFloat menuCenterX;
         CGFloat menuProportion;
         if (proportion == 1) {
@@ -212,6 +210,8 @@ static const CGFloat menuStartNarrowRatio  = 0.70;
     UIButton *right = self.homeVC.RightTab;
     [left  setTitle: @"求购" forState:UIControlStateNormal];
     [right setTitle: @"求租" forState:UIControlStateNormal];
+    self.homeVC.isWant = YES ;
+     [self.homeVC LeftInit];
     //还需更改表的初始数据
     [self showHome];
     
@@ -222,6 +222,9 @@ static const CGFloat menuStartNarrowRatio  = 0.70;
     UIButton *right = self.homeVC.RightTab;
     [left  setTitle: @"出租" forState:UIControlStateNormal];
     [right setTitle: @"出售" forState:UIControlStateNormal];
+    self.homeVC.isWant = NO;
+   [self.homeVC LeftInit];
+
     [self showHome];
 }
 

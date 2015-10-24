@@ -16,7 +16,8 @@
 #import "UIImageView+WebCache.h"
 #import "UILabel+UILabel_SizeWithTest.h"
 #import "FreeCell.h"
-
+#import <MessageUI/MessageUI.h>
+#import "MJRefresh.h"
 
 #define  HeavyFont     [UIFont fontWithName:@"Helvetica-Bold" size:25]
 #define  ToolHeight  50    //固定底部的大小
@@ -26,12 +27,14 @@
 #define Padding  8
 
 
-@interface DetailViewController ()<UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate,UIAlertViewDelegate>
+@interface DetailViewController ()
+<UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate,UIAlertViewDelegate,MFMessageComposeViewControllerDelegate>
 @property (strong, nonatomic)  UITableView *detailInfoTable;
 @property (strong, nonatomic) NSMutableArray *imagesData;
 @property(nonatomic,weak)  UIButton *CountLabel;
 @property (strong, nonatomic)  UIScrollView *scrollView3;
 @property(nonatomic,strong)  NSDictionary  *FangData;
+@property(nonatomic,strong) NSDictionary *CurrentSingleData;
 @property(nonatomic) CGFloat CellHeight;
 @property(nonatomic) CGFloat FreeCellHeight;
 @property(nonatomic) CGFloat DescribeCellHeight;
@@ -79,11 +82,12 @@
     self.detailInfoTable.delegate = self ;
     self.detailInfoTable.dataSource = self;
     self.detailInfoTable.allowsSelection = NO ;
-//    if (<#condition#>) {
-//        <#statements#> isI5?607
-//    }
+
+    
+    
+
 #warning 表高度
-    [self.detailInfoTable setFrame:CGRectMake(0, 0, ScreenWidth, 568)];
+    [self.detailInfoTable setFrame:CGRectMake(0, 0, ScreenWidth,ScreenHeight)];
     self.detailInfoTable.separatorStyle = UITableViewCellSeparatorStyleNone ;
     [self.view addSubview:self.detailInfoTable];
 }
@@ -95,7 +99,7 @@
     
     [mgr POST:url3
    parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-#warning 请求成功后的网络处理
+#pragma mark -请求成功后的网络处理
        self.FangData = responseObject[@"data"];
        NSLog(@"单个数据详情%@",self.FangData);
        NSString *collect = self.FangData[@"tupian"];
@@ -130,7 +134,7 @@
 #pragma 初始化底部工具条
 -(void)initFootView {
     UIView *footer = [[UIView alloc]initWithFrame:CGRectMake(0,ScreenHeight-ToolHeight, ScreenWidth, ToolHeight)];
-    UITapGestureRecognizer *TeleTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(TeleTap:)];
+
     //左边
     UIView *PublisherAndCo = [[UIView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth/4, ToolHeight)];
     PublisherAndCo.backgroundColor = DeafaultColor;
@@ -138,7 +142,12 @@
     self.Publisher = Company ;
  
     Company.textColor = [UIColor whiteColor];
-    Company.text = self.FangData[@"name"];  //@"丰登地产";
+    NSString *Coname = self.FangData[@"name"];
+        if ([Coname length]>5) {
+            NSRange  range = NSMakeRange(0, 4);
+            Coname = [NSString stringWithFormat:@"%@..",[Coname substringWithRange:range]];
+        }
+    Company.text = Coname;  //@"丰登地产";
     UIFont *Deafult = [UIFont systemFontOfSize:17];
     CGSize MaxLeftSzie = CGSizeMake(LeftViewWidth-Padding,ToolHeight-Padding);
     CGSize companyLabelSize = [self sizeWithString:Company.text font:Deafult maxSize:MaxLeftSzie];
@@ -166,6 +175,7 @@
     [footer addSubview:PublisherAndCo];
     
     //中部
+    UITapGestureRecognizer *TeleTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(TeleTap:)];
     UIView *TeleView = [[UIView alloc]initWithFrame:CGRectMake(ScreenWidth/4 +1 , 0, ScreenWidth/2, ToolHeight)];
     UIImageView  *TeleIcon = [[UIImageView alloc]init];
     UILabel *teleLabel = [[UILabel alloc]init];
@@ -177,23 +187,26 @@
     teleLabel.text = self.FangData[@"tel"]; //@"18720984176";
     CGSize TeleLabelSize = [self sizeWithString:teleLabel.text font:Deafult maxSize:MaxCenter];
     [TeleIcon setFrame:CGRectMake((MiddleViewWidth -30 -Padding -TeleLabelSize.width)/2 , (ToolHeight - 30)/2,30, 30)];
-    [teleLabel setFrame:CGRectMake(TeleIcon.frame.origin.x + Padding - 5 + 30, (ToolHeight - TeleLabelSize.height)/2, TeleLabelSize.width, TeleLabelSize.height)];
+    [teleLabel setFrame:CGRectMake(TeleIcon.frame.origin.x + Padding - 5 + 30, (ToolHeight - TeleLabelSize.height)/2,TeleLabelSize.width, TeleLabelSize.height)];
         [TeleView addSubview:TeleIcon];
     [TeleView addSubview:teleLabel];
     TeleView.backgroundColor = DeafaultColor2;
-    [footer addSubview:TeleView];
     [TeleView addGestureRecognizer:TeleTap];
+    [footer addSubview:TeleView];
+
 
     //右部
 
-    
+    UITapGestureRecognizer *MsgTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(MsgTap:)];
     UIView *MsgView =[[UIImageView alloc]initWithFrame:CGRectMake((3*ScreenWidth/4)+2, 0, ScreenWidth/4, ToolHeight)];
+    MsgView.userInteractionEnabled = YES;
     MsgView.backgroundColor = DeafaultColor;
     UIImageView *MsgIcon =[[UIImageView alloc]init];
     MsgIcon.image  = [UIImage imageNamed:@"mail"];
     [MsgIcon setFrame:CGRectMake((LeftViewWidth - 40)/2, (ToolHeight-20)/2, 40, 20)];
     [MsgView addSubview:MsgIcon];
    [footer addSubview:MsgView];
+    [MsgView addGestureRecognizer:MsgTap];
     
     
     
@@ -202,6 +215,16 @@
     [self.view addSubview:footer];
 }
 
+#pragma mark -发送短信
+-(void)MsgTap:(id)sender {
+    
+    NSString *tele = self.FangData[@"tel"];//self.FangData[@"tel"];//;
+    NSArray *ReciverArr = [NSArray arrayWithObjects:tele, nil];
+    NSString *content = [NSString stringWithFormat:@"你好,我对\"%@\"这套房产感兴趣，希望做进一步交流^_^",_FangData[@"biaoti"]];
+    [self showMessageView:ReciverArr title:nil body:content];
+}
+
+#pragma mark -拨打电话
 -(void)TeleTap:(id)sender {
     NSString *tele =self.FangData[@"tel"];//;
     UIAlertView *AW = [[UIAlertView alloc]initWithTitle:nil
@@ -209,16 +232,16 @@
                                                delegate:self
                                       cancelButtonTitle:@"取消"
                                       otherButtonTitles:@"呼叫", nil];
-    
-    [AW show];
-
+    AW.tag = 0;
+   [AW show];
 }
 
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     NSString *tele =[NSString stringWithFormat:@"tel://%@", self.FangData[@"tel"]];//;
-    if(buttonIndex == 1 ) {
+    if(buttonIndex == 1 && alertView.tag==0 ) {
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:tele]];
     } else {
+        
         return ;
     }
 
@@ -285,7 +308,7 @@
 #pragma mark -表中单元格设置
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath  {
 #pragma mark -住宅类
-    if ([self.FenLei isEqualToString:@"0"]) {  // start_住宅类
+  //  if ([self.FenLei isEqualToString:@"0"]) {  // start_住宅类
         FlatLocationCell  *LocationCell  = [FlatLocationCell new];
         FlatDetailCell   *DetailCell = [FlatDetailCell new];
         DescribeCell  *DescribieCell = [DescribeCell freeCellWithTitle:@"描述" andContext:self.FangData[@"fangyuanmiaoshu"]];
@@ -324,19 +347,19 @@
         else {
             return DescribieCell;
         }
-    } //end_住宅类
+ //   } //end_住宅类
 #pragma mark -商铺类
-     else if([self.FenLei isEqualToString:@"1"]) {  //商铺类
-        FactoryLoactionCell *cell = [[FactoryLoactionCell alloc]init];
-        cell.textLabel.text = @"fuck";
-        return cell;
-    }
-     else if ([self.FenLei isEqualToString:@"2"]) {  //写字楼
-         
-     }
-     else {
-         //工厂
-     }
+//     else if([self.FenLei isEqualToString:@"1"]) {  //商铺类
+//        FactoryLoactionCell *cell = [[FactoryLoactionCell alloc]init];
+//        cell.textLabel.text = @"fuck";
+//        return cell;
+//    }
+//     else if ([self.FenLei isEqualToString:@"2"]) {  //写字楼
+//         
+//     }
+//     else {
+//         //工厂
+//     }
    
 }
 
@@ -359,7 +382,7 @@
       if(isI5){
            return self.DescribeCellHeight + 60 ;
   } else {
-         return self.DescribeCellHeight + 10 ;
+         return self.DescribeCellHeight + ToolHeight + 5 ;
   }
 }
 }
@@ -401,19 +424,63 @@
 }
 
 
-#pragma mark -更新底部工具栏
--(void)updateToolBar {
-    self.Tele.text  = self.FangData[@"tel"];
-    self.Name.text  = self.FangData[@"name"];
-    
 
-     NSString *Publisher =self.FangData[@"publisher"];
-     if ([Publisher isKindOfClass:[NSNull class]]) {
-     self.Publisher.text = @"佚名";
-     }else{
-     self.Publisher.text =self.FangData[@"publisher"];
-     }
-    
-
+#pragma mark -短信代理
+-(void)messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult)result
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+    switch (result) {
+        case MessageComposeResultSent: {
+            UIAlertView *AW = [[UIAlertView alloc]initWithTitle:nil
+                                                        message:@"短信已发送"
+                                                       delegate:self
+                                              cancelButtonTitle:@"确定"
+                                              otherButtonTitles:nil];
+   
+            [AW show];
+        }
+            
+            
+            break;
+        case MessageComposeResultFailed:
+            //信息传送失败
+            
+            break;
+        case MessageComposeResultCancelled:
+            //信息被用户取消传送
+            
+            break;
+        default:
+            break;
+    }
 }
+
+
+#pragma mark -短信执行方法
+-(void)showMessageView:(NSArray *)phones title:(NSString *)title body:(NSString *)body
+{
+    if( [MFMessageComposeViewController canSendText] )
+    {
+        MFMessageComposeViewController * controller = [[MFMessageComposeViewController alloc] init];
+        controller.recipients = phones;
+        controller.navigationBar.tintColor = [UIColor redColor];
+        controller.body = body;
+        controller.messageComposeDelegate = self;
+        [self presentViewController:controller animated:YES completion:nil];
+        [[[[controller viewControllers] lastObject] navigationItem] setTitle:title];//修改短信界面标题
+    }
+    else
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示信息"
+                                                        message:@"该设备不支持短信功能"
+                                                       delegate:nil
+                                              cancelButtonTitle:@"确定"
+                                              otherButtonTitles:nil, nil];
+        [alert show];
+    }
+}
+
+
+
+
 @end

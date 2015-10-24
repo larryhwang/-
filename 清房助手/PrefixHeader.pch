@@ -32,6 +32,12 @@
 #define DeafaultColor [UIColor colorWithRed:3/255.0 green:164/255.0 blue:255/255.0 alpha:1.0]
 #define DeafaultColor2 [UIColor colorWithRed:0 green:122.0 / 255 blue:1.0 alpha:1.0]
 
+#define DOT_COORDINATE                  0.0f
+#define STATUS_BAR_HEIGHT               20.0f
+#define BAR_ITEM_WIDTH_HEIGHT           30.0f
+#define NAVIGATION_BAR_HEIGHT           44.0f
+#define TAB_TAB_HEIGHT                  49.0f
+
 #define ScreenWidth     [UIScreen mainScreen].bounds.size.width
 #define ScreenHeight    [UIScreen mainScreen].bounds.size.height
 //3, 164, 255
