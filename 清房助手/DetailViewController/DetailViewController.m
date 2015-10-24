@@ -59,14 +59,22 @@
     return _FangData;
 }
 
+-(void)viewDidAppear:(BOOL)animated {
+ 
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self initTable];
 
-    [self initHeadScorlImage];
+
+    [self initTable];
+    
+    [self addWhiteBack];  //背景加载
+
+    
     [self getDataFromNet];
-  //  [self initFootView];
+    [self initHeadScorlImage];
+
     
 }
 
@@ -82,10 +90,6 @@
     self.detailInfoTable.delegate = self ;
     self.detailInfoTable.dataSource = self;
     self.detailInfoTable.allowsSelection = NO ;
-
-    
-    
-
 #warning 表高度
     [self.detailInfoTable setFrame:CGRectMake(0, 0, ScreenWidth,ScreenHeight)];
     self.detailInfoTable.separatorStyle = UITableViewCellSeparatorStyleNone ;
@@ -102,18 +106,17 @@
    parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
 #pragma mark -请求成功后的网络处理
        [MBProgressHUD hideHUD];
+       UIView *back = [self.view viewWithTag:999];
+       [back removeFromSuperview];
        self.FangData = responseObject[@"data"];
        NSLog(@"单个数据详情%@",self.FangData);
        NSString *collect = self.FangData[@"tupian"];
        NSArray *imgArray = [collect componentsSeparatedByString:@","];
        self.ImgTotal = [imgArray count];
        for (NSString *imgName in imgArray) {
-           //http://www.123qf.cn/testWeb/img/13719678138/userfile/qfzs/fy/mini/hsf_20151016135218_0.jpg
-           //http://112.74.64.145/hsf/img/%@",imgName
            NSString *ImgfullUrl = [NSString stringWithFormat:@"http://www.123qf.cn/testWeb/img/%@/userfile/qfzs/fy/mini/%@",self.uerID,imgName];
            [self.imagesData addObject:ImgfullUrl];
        }   //所有图片地址
-       
        
        CGSize size = CGSizeMake(ScreenWidth, 1000);
        NSString *context = self.FangData[@"fangyuanmiaoshu"];
@@ -122,9 +125,9 @@
        self.CellHeight = labelSize.height ;
        [self.detailInfoTable reloadData];
        [self viewDidLayoutSubviews];     //设置滚动视图的横向大小
-       [self setupScrollViewImages];   //设置滚动视图内图片
        [self CountReset];
        [self initFootView];
+       [self setupScrollViewImages];   //设置滚动视图内图片
        
    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
        NSLog(@"%@",error);
@@ -164,12 +167,7 @@
     [PublisherAndCo addSubview:Company];
     [PublisherAndCo addSubview:ContactName];
     [footer addSubview:PublisherAndCo];
-/*
- 
- UITapGestureRecognizer*tapGesture = [[UITapGestureRecognizer alloc]initWithTarget:selfaction:@selector(Actiondo:)];
- 
- [uiview addGestureRecognizer:tapGesture];
- */
+
     PublisherAndCo.userInteractionEnabled = YES;
 
     
@@ -222,7 +220,7 @@
     
     NSString *tele = self.FangData[@"tel"];//self.FangData[@"tel"];//;
     NSArray *ReciverArr = [NSArray arrayWithObjects:tele, nil];
-    NSString *content = [NSString stringWithFormat:@"你好,我对\"%@\"这套房产感兴趣，希望做进一步交流^_^",_FangData[@"biaoti"]];
+    NSString *content = [NSString stringWithFormat:@"你好,我对\"%@\"这套房产感兴趣，希望做进一步交流^_^ ",_FangData[@"biaoti"]];
     [self showMessageView:ReciverArr title:nil body:content];
 }
 
@@ -483,6 +481,15 @@
 }
 
 
+
+#pragma mark -白底背景，用于延迟的填充背景
+- (void)addWhiteBack {
+    UIView *MengBan = [[UIView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight )];
+    [self.view addSubview:MengBan];
+    [self.view bringSubviewToFront:MengBan];
+    MengBan.tag = 999;
+    MengBan.backgroundColor = [UIColor whiteColor];
+}
 
 
 @end
