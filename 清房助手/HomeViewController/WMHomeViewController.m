@@ -17,7 +17,7 @@
 #import "DetailViewController.h"
 #import "SCNavTabBarController.h"
 #import "MJRefresh.h"
-
+#import "MBProgressHUD+CZ.h"
 
 #define SingleBtnWidth   ScreenWidth/2
 #define TopTabBarHeight  32
@@ -68,9 +68,9 @@ typedef NS_ENUM(NSInteger, CellStatus) {
     _TabBarBtns = [NSMutableArray arrayWithCapacity:2];
 #warning 整合部分
     self.tableView.delegate = self;
-    [self.tableView addHeaderWithTarget:self action:@selector(refreshData)];
+  //  [self.tableView addHeaderWithTarget:self action:@selector(refreshData)];
   //  [self.tableView headerBeginRefreshing];
-    [self.tableView addFooterWithTarget:self action:@selector(loadMoreData)];
+  //  [self.tableView addFooterWithTarget:self action:@selector(loadMoreData)];
     
     AFHTTPRequestOperationManager *mgr  = [AFHTTPRequestOperationManager manager];
     self.shareMgr = mgr ;
@@ -178,8 +178,10 @@ typedef NS_ENUM(NSInteger, CellStatus) {
 }
 
 - (void) LoadNetDataWithCurentURl{
+    [MBProgressHUD showMessage:@"正在加载"];
     [self.shareMgr POST:self.CurrentRuest
              parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                 [MBProgressHUD hideHUD];
                  NSLog(@"右选项卡%@",responseObject);
                  NSArray *DataArra = responseObject[@"data"];
                  self.userID = responseObject[@""];

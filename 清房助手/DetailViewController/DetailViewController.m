@@ -97,9 +97,11 @@
     AFHTTPRequestOperationManager *mgr  = [AFHTTPRequestOperationManager manager];
     NSString *url3 = [NSString stringWithFormat:@"http://www.123qf.cn/testApp/fangyuan/detailsHouse.api?fenLei=%@&fangyuan_id=%@",self.FenLei,self.DisplayId];
     
+    [MBProgressHUD showMessage:@"加载中"];
     [mgr POST:url3
    parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
 #pragma mark -请求成功后的网络处理
+       [MBProgressHUD hideHUD];
        self.FangData = responseObject[@"data"];
        NSLog(@"单个数据详情%@",self.FangData);
        NSString *collect = self.FangData[@"tupian"];
