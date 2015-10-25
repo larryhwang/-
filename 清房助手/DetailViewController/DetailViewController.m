@@ -40,7 +40,6 @@
 @property(nonatomic) CGFloat DescribeCellHeight;
 @property(nonatomic,strong)  UIView  *HeaderContent;
 @property(nonatomic) NSInteger ImgTotal;
-
 @property(nonatomic,strong) UILabel *Publisher;
 @property(nonatomic,strong) UILabel *Name;
 @property(nonatomic,strong) UILabel *Tele;
@@ -66,10 +65,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self initNavController];
+    [self initTable];
+    [self addWhiteBack];  //背景加载
+    [self getDataFromNet];
+    [self initHeadScorlImage];
+
     
-    
-    
-    
+}
+#pragma mark -初始化导航栏
+- (void)initNavController {
     
     UIButton  *h = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 24, 24)];
     UIImage *img = [UIImage imageNamed:@"pStar"];
@@ -77,7 +82,6 @@
     UIBarButtonItem *star = [[UIBarButtonItem alloc]initWithCustomView:h];
     UIBarButtonItem *share = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:nil];
     UIBarButtonItem *flexSible = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
-    
     flexSible.width = 5.f ;
     NSArray *arr = [NSArray arrayWithObjects:star,flexSible,share,nil];
     UIToolbar *rightTool =  [[UIToolbar alloc]init];
@@ -90,25 +94,12 @@
     rightTool.tintColor = [UIColor whiteColor];
     [rightTool setFrame:CGRectMake(0, 0, 70, 42.f)];
     [rightTool setItems:arr];
-    
     UIBarButtonItem *Right = [[UIBarButtonItem alloc]initWithCustomView:rightTool];
     self.navigationItem.rightBarButtonItem = Right ;
-    
-    
-    
-    
     DSNavigationBar *TrunscleNavBar = [[DSNavigationBar alloc]init];
     [TrunscleNavBar setNavigationBarWithColor:DeafaultColor2];
     [self.navigationController setValue:TrunscleNavBar forKey:@"navigationBar"];
-    [self initTable];
-    [self addWhiteBack];  //背景加载
-    [self getDataFromNet];
-    [self initHeadScorlImage];
-
-    
 }
-
-
 
 #pragma mark -初始化表
 -(void)initTable {

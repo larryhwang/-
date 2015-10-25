@@ -9,7 +9,6 @@
 #import "HomeViewController.h"
 #import "WMHomeViewController.h"
 #import "WMMenuViewController.h"
-#import "WMOtherViewController.h"
 #import "WMNavigationController.h"
 #import "WMCommon.h"
 #import "DetailViewController.h"
@@ -198,13 +197,6 @@ static const CGFloat menuStartNarrowRatio  = 0.70;
 #pragma mark - WMMenuViewController代理方法
 
 #pragma mark -侧栏菜单点击实现办法
-- (void)didSelectItem:(NSString *)title {
-    WMOtherViewController *other = [[WMOtherViewController alloc] init];
-    other.navTitle = title;
-    other.hidesBottomBarWhenPushed = YES;
-    [self.messageNav pushViewController:other animated:NO];
-    [self showHome];
-}
 
 
 - (void)transToRentAndSale {

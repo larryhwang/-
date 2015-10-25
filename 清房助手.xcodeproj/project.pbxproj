@@ -50,8 +50,6 @@
 		46714B7D1BC7C11F00E7AEE9 /* WMMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 46714B6B1BC7C11F00E7AEE9 /* WMMenuViewController.xib */; };
 		46714B7E1BC7C11F00E7AEE9 /* WMNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 46714B6D1BC7C11F00E7AEE9 /* WMNavigationController.m */; };
 		46714B7F1BC7C11F00E7AEE9 /* WMNavigationInteractiveTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 46714B6F1BC7C11F00E7AEE9 /* WMNavigationInteractiveTransition.m */; };
-		46714B801BC7C11F00E7AEE9 /* WMOtherViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 46714B711BC7C11F00E7AEE9 /* WMOtherViewController.m */; };
-		46714B811BC7C11F00E7AEE9 /* WMOtherViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 46714B721BC7C11F00E7AEE9 /* WMOtherViewController.xib */; };
 		46714B821BC7C11F00E7AEE9 /* WMPopAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 46714B741BC7C11F00E7AEE9 /* WMPopAnimation.m */; };
 		46714B871BC7CC9800E7AEE9 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 46714B861BC7CC9800E7AEE9 /* Icon.png */; };
 		4673A4FA1BC8991E00700099 /* background-logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 4673A4F91BC8991E00700099 /* background-logo.png */; };
@@ -228,9 +226,6 @@
 		46714B6D1BC7C11F00E7AEE9 /* WMNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WMNavigationController.m; sourceTree = "<group>"; };
 		46714B6E1BC7C11F00E7AEE9 /* WMNavigationInteractiveTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WMNavigationInteractiveTransition.h; sourceTree = "<group>"; };
 		46714B6F1BC7C11F00E7AEE9 /* WMNavigationInteractiveTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WMNavigationInteractiveTransition.m; sourceTree = "<group>"; };
-		46714B701BC7C11F00E7AEE9 /* WMOtherViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WMOtherViewController.h; sourceTree = "<group>"; };
-		46714B711BC7C11F00E7AEE9 /* WMOtherViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WMOtherViewController.m; sourceTree = "<group>"; };
-		46714B721BC7C11F00E7AEE9 /* WMOtherViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WMOtherViewController.xib; sourceTree = "<group>"; };
 		46714B731BC7C11F00E7AEE9 /* WMPopAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WMPopAnimation.h; sourceTree = "<group>"; };
 		46714B741BC7C11F00E7AEE9 /* WMPopAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WMPopAnimation.m; sourceTree = "<group>"; };
 		46714B861BC7CC9800E7AEE9 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
@@ -560,9 +555,6 @@
 				46714B6D1BC7C11F00E7AEE9 /* WMNavigationController.m */,
 				46714B6E1BC7C11F00E7AEE9 /* WMNavigationInteractiveTransition.h */,
 				46714B6F1BC7C11F00E7AEE9 /* WMNavigationInteractiveTransition.m */,
-				46714B701BC7C11F00E7AEE9 /* WMOtherViewController.h */,
-				46714B711BC7C11F00E7AEE9 /* WMOtherViewController.m */,
-				46714B721BC7C11F00E7AEE9 /* WMOtherViewController.xib */,
 				46714B731BC7C11F00E7AEE9 /* WMPopAnimation.h */,
 				46714B741BC7C11F00E7AEE9 /* WMPopAnimation.m */,
 			);
@@ -910,7 +902,6 @@
 				46D6483A1BC8E925000F23EF /* navigationbar_arrow_down@2x.png in Resources */,
 				4673A5021BC8A18600700099 /* background-logo(4).png in Resources */,
 				469C787C1BD9D4E800B22410 /* open_logo.png in Resources */,
-				46714B811BC7C11F00E7AEE9 /* WMOtherViewController.xib in Resources */,
 				46714B7D1BC7C11F00E7AEE9 /* WMMenuViewController.xib in Resources */,
 				46D33C0F1BCB4B9C00B30F2A /* SalesCell.xib in Resources */,
 				4673A4FA1BC8991E00700099 /* background-logo.png in Resources */,
@@ -991,7 +982,6 @@
 				46252F8E1BDA648C00C1FA66 /* MJRefreshFooterView.m in Sources */,
 				468ED0211BD5E0E5001605A7 /* SCPopView.m in Sources */,
 				46714B7E1BC7C11F00E7AEE9 /* WMNavigationController.m in Sources */,
-				46714B801BC7C11F00E7AEE9 /* WMOtherViewController.m in Sources */,
 				46C716C01BC69FB800287742 /* AFHTTPRequestOperation.m in Sources */,
 				46C716CA1BC69FB800287742 /* MJFoundation.m in Sources */,
 				4643565E1BC611F100A44526 /* LoginViewController.m in Sources */,

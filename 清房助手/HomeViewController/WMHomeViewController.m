@@ -68,7 +68,7 @@ typedef NS_ENUM(NSInteger, CellStatus) {
     [self TopTabBarUISet];  //顶部切换设置
     UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
     self.navigationItem.backBarButtonItem = item;
-    
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     
 
@@ -271,6 +271,20 @@ typedef NS_ENUM(NSInteger, CellStatus) {
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
+    NSString *preName = nil;
+    
+    if (_status ==SalesOut) {
+        preName = @"[出售]";
+    } else if (_status ==RentOut) {
+        preName = @"[出租]";
+    } else if (_status ==WantBuy) {
+        preName =@"[求购]";
+    }else {
+        preName =@"[求助]";
+    }
+
+    
     // 1.创建CELL
     static NSString *ID = @"identifer";
     SalesCell *cell =[tableView dequeueReusableCellWithIdentifier:ID];
@@ -278,12 +292,19 @@ typedef NS_ENUM(NSInteger, CellStatus) {
             cell = [[[NSBundle mainBundle]loadNibNamed:@"SalesCell" owner:nil options:nil] firstObject];
         }
     NSDictionary *SingleData = self.DataArr[indexPath.row];
+#pragma mark 售价高亮属性
+    NSString *PriceString = [NSString stringWithFormat:@"%@万元",SingleData[@"shoujia"]];
+    NSMutableAttributedString *HiligntNo = [[NSMutableAttributedString alloc]initWithString:PriceString];
+    NSRange NoRange = NSMakeRange(0, [PriceString length]-1);
+    [HiligntNo addAttribute:NSForegroundColorAttributeName value:[UIColor redColor]  range:NoRange];
+    [HiligntNo addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:20 ]  range:NoRange];
+
     NSString *imgCollects = SingleData[@"tupian"];
     NSArray *imgArray = [imgCollects componentsSeparatedByString:@","];
     NSString *imgURL = [NSString stringWithFormat:@"http://www.123qf.cn/testWeb/img/%@/userfile/qfzs/fy/mini/%@",SingleData[@"userid"],[imgArray firstObject]];
  
     
-    NSString *BigTitle = SingleData[@"biaoti"];
+    NSString *BigTitle = [NSString stringWithFormat:@"%@%@",preName,SingleData[@"biaoti"]];
     NSArray *titlePartArra = [BigTitle componentsSeparatedByString:@" "]; //
     UIImage  *PlaceHoder = [UIImage imageNamed:@"DeafaultImage"];
     PlaceHoder = [PlaceHoder imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
@@ -294,7 +315,8 @@ typedef NS_ENUM(NSInteger, CellStatus) {
 #warning 几室几厅数据没有返回
     cell.style.text = @"两室";
     cell.elevator.text = @"电梯";
-    cell.price.text = [NSString stringWithFormat:@"%@万",SingleData[@"shoujia"]];
+    cell.price.text =[NSString stringWithFormat:@"%@万",PriceString];
+    [cell.price setAttributedText:HiligntNo];
     
     NSString *Publisher =SingleData[@"publisher"];
     if ([Publisher isKindOfClass:[NSNull class]]) {
