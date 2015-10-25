@@ -79,7 +79,9 @@ static const CGFloat menuStartNarrowRatio  = 0.70;
     
     // 设置控制器的状态，添加手势操作
     self.messageNav = [[WMNavigationController alloc] initWithRootViewController:self.homeVC];
-    self.messageNav.navigationBar.barTintColor = [UIColor colorWithRed:0 green:122.0 / 255 blue:1.0 alpha:1.0];
+#pragma mark -导航栏颜色
+    self.messageNav.navigationBar.barTintColor = [[UIColor colorWithRed:0 green:122.0 / 255 blue:1.0 alpha:1.0] colorWithAlphaComponent:0.5];
+    self.messageNav.navigationBar.alpha = 0.5 ;
     self.messageNav.navigationBar.tintColor = [UIColor whiteColor];
     [self.messageNav.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],NSForegroundColorAttributeName, nil]];
     self.messageNav.tabBarItem.title = @"消息";
@@ -235,8 +237,9 @@ static const CGFloat menuStartNarrowRatio  = 0.70;
  *  @param Id     房源ID
  *  @param Fenlei 分类ID
  */
--(void)QFshowDetailWithFangYuanID:(NSString *)FangId andFenlei:(NSString *)Fenlei userID:(NSString *)UserId{
+-(void)QFshowDetailWithFangYuanID:(NSString *)FangId andFenlei:(NSString *)Fenlei userID:(NSString *)UserId XiaoquName:(NSString *)name{
     DetailViewController *test = [DetailViewController new];
+    test.title = name;
     test.DisplayId = FangId ;
     test.FenLei = Fenlei;
     test.uerID = UserId;

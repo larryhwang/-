@@ -19,7 +19,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.navigationBar.translucent = YES ;
     UIGestureRecognizer *gesture = self.interactivePopGestureRecognizer;
     gesture.enabled = NO;
     UIView *gestureView = gesture.view;

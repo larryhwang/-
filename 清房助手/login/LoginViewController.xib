@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -21,6 +21,7 @@
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="log1.png" translatesAutoresizingMaskIntoConstraints="NO" id="mcd-MU-1En">
                     <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                    <animations/>
                     <constraints>
                         <constraint firstAttribute="height" constant="94" id="2AD-uW-aPL"/>
                     </constraints>
@@ -37,6 +38,7 @@
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C9e-ag-d6M">
                     <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                    <animations/>
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="gby-dO-P3C"/>
                         <constraint firstAttribute="width" constant="60" id="hfc-tb-5Gg"/>
@@ -59,6 +61,7 @@
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wjc-vf-yQr">
                     <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                    <animations/>
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="KQR-28-VDk"/>
                         <constraint firstAttribute="width" constant="60" id="xRT-Xj-SbB"/>
@@ -84,13 +87,16 @@
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rj9-Wu-5M1" userLabel="SingleLine1">
                             <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                            <animations/>
                             <color key="backgroundColor" red="0.62626539020000005" green="0.82936588290000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         </view>
                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="user.png" translatesAutoresizingMaskIntoConstraints="NO" id="kHS-43-ue7">
                             <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                            <animations/>
                         </imageView>
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eeB-UY-YoA">
                             <rect key="frame" x="-25" y="-30" width="97" height="30"/>
+                            <animations/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="205" id="wcg-ft-HhH"/>
                                 <constraint firstAttribute="height" constant="20" id="yPn-Bm-W7C"/>
@@ -112,6 +118,7 @@
                             </variation>
                         </textField>
                     </subviews>
+                    <animations/>
                     <constraints>
                         <constraint firstItem="eeB-UY-YoA" firstAttribute="top" secondItem="OQm-6j-25G" secondAttribute="top" constant="8" id="0XF-7K-mwL"/>
                         <constraint firstItem="Rj9-Wu-5M1" firstAttribute="leading" secondItem="OQm-6j-25G" secondAttribute="leading" id="1gU-Ii-MU0"/>
@@ -237,6 +244,7 @@
                     <subviews>
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="10a-m4-Vpu">
                             <rect key="frame" x="-25" y="-30" width="97" height="30"/>
+                            <animations/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="205" id="xtB-qA-QHt"/>
                             </constraints>
@@ -255,10 +263,12 @@
                         </textField>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ITJ-iQ-cO8" userLabel="SingleLine2">
                             <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                            <animations/>
                             <color key="backgroundColor" red="0.62626539020000005" green="0.82936588290000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         </view>
                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="password.png" translatesAutoresizingMaskIntoConstraints="NO" id="170-gS-wdb">
                             <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                            <animations/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="18" id="Z1p-N7-dyC"/>
                                 <constraint firstAttribute="width" constant="22" id="Zad-Q8-rlT"/>
@@ -277,6 +287,7 @@
                             </variation>
                         </imageView>
                     </subviews>
+                    <animations/>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="ITJ-iQ-cO8" secondAttribute="trailing" id="2BS-Al-Vbi"/>
                         <constraint firstItem="170-gS-wdb" firstAttribute="leading" secondItem="Ike-JF-AS6" secondAttribute="leading" constant="8" id="3DE-9L-ErK"/>
@@ -408,6 +419,7 @@
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6WR-01-1Xp">
                     <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                    <animations/>
                     <constraints>
                         <constraint firstAttribute="width" constant="240" id="2iv-C7-Sxl"/>
                         <constraint firstAttribute="height" constant="43" id="dDc-jn-wPf"/>
@@ -430,6 +442,7 @@
                     </connections>
                 </button>
             </subviews>
+            <animations/>
             <color key="backgroundColor" red="0.0" green="0.50196081399917603" blue="1" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="6WR-01-1Xp" firstAttribute="top" secondItem="Ike-JF-AS6" secondAttribute="bottom" constant="20" id="0mD-dH-JSX"/>

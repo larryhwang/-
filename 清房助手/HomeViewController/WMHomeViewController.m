@@ -66,9 +66,13 @@ typedef NS_ENUM(NSInteger, CellStatus) {
 
     [self ParameterInit];
     [self TopTabBarUISet];  //顶部切换设置
+    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
+    self.navigationItem.backBarButtonItem = item;
     
     
     
+
+
   //  [self.tableView addHeaderWithTarget:self action:@selector(refreshData)];
   //  [self.tableView headerBeginRefreshing];
   //  [self.tableView addFooterWithTarget:self action:@selector(loadMoreData)];
@@ -302,13 +306,15 @@ typedef NS_ENUM(NSInteger, CellStatus) {
     return cell;
 }
 
-//点击查看详情
+#pragma mark -点击查看详情
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSDictionary *SingleData = self.DataArr[indexPath.row];
     NSString *Id = SingleData[@"id"];   //将房源ID传过去
     NSString *userID = SingleData[@"userid"];
+    NSString *name = SingleData[@"mingcheng"];
     NSString *Category = [NSString stringWithFormat:@"%@",SingleData[@"fenlei"]];
-    [self.HomeVCdelegate QFshowDetailWithFangYuanID:Id andFenlei:Category userID:userID];
+  //  [self.HomeVCdelegate QFshowDetailWithFangYuanID:Id andFenlei:Category userID:userID];
+    [self.HomeVCdelegate QFshowDetailWithFangYuanID:Id andFenlei:Category userID:userID XiaoquName:name];
 
 }
 

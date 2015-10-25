@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "MBProgressHUD+CZ.h"
+#import "DSNavigationBar.h"
 
 
 
@@ -16,6 +17,7 @@
 @property(nonatomic,copy)  NSString  *DisplayId;
 @property(nonatomic,copy)  NSString  *FenLei;
 @property(nonatomic,copy) NSString   *uerID;
+//@property(nonatomic,copy) NSString  *XiaoquName;
 
 
 @end
