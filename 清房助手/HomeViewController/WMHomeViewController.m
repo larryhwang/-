@@ -21,12 +21,7 @@
 
 #define SingleBtnWidth   ScreenWidth/2
 #define TopTabBarHeight  32
-typedef NS_ENUM(NSInteger, CellStatus) {
-    SalesOut = 0,   //出售
-    RentOut = 1,    //出租
-    WantBuy = 2,   //求购
-    WantRent = 3  //求租
-};
+
 
 
 
@@ -36,6 +31,7 @@ typedef NS_ENUM(NSInteger, CellStatus) {
     BOOL            _isSaleStatus;
     NSMutableArray  *_TabBarBtns;
     UIView          *_bottomLine;
+    NSString        *_preName;
     
 }
 
@@ -271,17 +267,14 @@ typedef NS_ENUM(NSInteger, CellStatus) {
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
-    NSString *preName = nil;
-    
     if (_status ==SalesOut) {
-        preName = @"[出售]";
+        _preName = @"[出售]";
     } else if (_status ==RentOut) {
-        preName = @"[出租]";
+        _preName = @"[出租]";
     } else if (_status ==WantBuy) {
-        preName =@"[求购]";
+        _preName =@"[求购]";
     }else {
-        preName =@"[求助]";
+        _preName =@"[求助]";
     }
 
     
@@ -295,7 +288,7 @@ typedef NS_ENUM(NSInteger, CellStatus) {
 #pragma mark 售价高亮属性
     NSString *PriceString = [NSString stringWithFormat:@"%@万元",SingleData[@"shoujia"]];
     NSMutableAttributedString *HiligntNo = [[NSMutableAttributedString alloc]initWithString:PriceString];
-    NSRange NoRange = NSMakeRange(0, [PriceString length]-1);
+    NSRange NoRange = NSMakeRange(0, [PriceString length]-2);
     [HiligntNo addAttribute:NSForegroundColorAttributeName value:[UIColor redColor]  range:NoRange];
     [HiligntNo addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:20 ]  range:NoRange];
 
@@ -304,7 +297,7 @@ typedef NS_ENUM(NSInteger, CellStatus) {
     NSString *imgURL = [NSString stringWithFormat:@"http://www.123qf.cn/testWeb/img/%@/userfile/qfzs/fy/mini/%@",SingleData[@"userid"],[imgArray firstObject]];
  
     
-    NSString *BigTitle = [NSString stringWithFormat:@"%@%@",preName,SingleData[@"biaoti"]];
+    NSString *BigTitle = [NSString stringWithFormat:@"%@%@",_preName,SingleData[@"biaoti"]];
     NSArray *titlePartArra = [BigTitle componentsSeparatedByString:@" "]; //
     UIImage  *PlaceHoder = [UIImage imageNamed:@"DeafaultImage"];
     PlaceHoder = [PlaceHoder imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
@@ -320,7 +313,7 @@ typedef NS_ENUM(NSInteger, CellStatus) {
     
     NSString *Publisher =SingleData[@"publisher"];
     if ([Publisher isKindOfClass:[NSNull class]]) {
-         cell.postUer.text = @"佚名";
+        cell.postUer.text = @"佚名";
     }else{
         cell.postUer.text =[NSString stringWithFormat:@"发布人:%@",SingleData[@"publisher"]];
     }
@@ -335,8 +328,7 @@ typedef NS_ENUM(NSInteger, CellStatus) {
     NSString *userID = SingleData[@"userid"];
     NSString *name = SingleData[@"mingcheng"];
     NSString *Category = [NSString stringWithFormat:@"%@",SingleData[@"fenlei"]];
-  //  [self.HomeVCdelegate QFshowDetailWithFangYuanID:Id andFenlei:Category userID:userID];
-    [self.HomeVCdelegate QFshowDetailWithFangYuanID:Id andFenlei:Category userID:userID XiaoquName:name];
+   [self.HomeVCdelegate QFshowDetailWithFangYuanID:Id andFenlei:Category userID:userID XiaoquName:name ListStatus:_preName];
 
 }
 

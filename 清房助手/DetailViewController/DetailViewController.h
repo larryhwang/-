@@ -16,8 +16,8 @@
 
 @property(nonatomic,copy)  NSString  *DisplayId;
 @property(nonatomic,copy)  NSString  *FenLei;
-@property(nonatomic,copy) NSString   *uerID;
-//@property(nonatomic,copy) NSString  *XiaoquName;
+@property(nonatomic,copy)  NSString   *uerID;
+@property(nonatomic,copy)  NSString  *PreTitle;
 
 
 @end

@@ -156,6 +156,7 @@
 		4607323F1BD11C970025D41A /* UILabel+UILabel_SizeWithTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+UILabel_SizeWithTest.m"; sourceTree = "<group>"; };
 		4610F4F21BD22456002A05E9 /* FreeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FreeCell.h; sourceTree = "<group>"; };
 		4610F4F31BD22456002A05E9 /* FreeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FreeCell.m; sourceTree = "<group>"; };
+		462226461BDDBDD500E0D2E9 /* Common.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
 		46252F7B1BDA648C00C1FA66 /* MJRefresh.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MJRefresh.bundle; sourceTree = "<group>"; };
 		46252F7C1BDA648C00C1FA66 /* MJRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefresh.h; sourceTree = "<group>"; };
 		46252F7D1BDA648C00C1FA66 /* MJRefreshBaseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshBaseView.h; sourceTree = "<group>"; };
@@ -545,6 +546,7 @@
 				46714B631BC7C11F00E7AEE9 /* WMCommon.m */,
 				46714B641BC7C11F00E7AEE9 /* WMHomeViewController.h */,
 				46714B651BC7C11F00E7AEE9 /* WMHomeViewController.m */,
+				462226461BDDBDD500E0D2E9 /* Common.h */,
 				46714B661BC7C11F00E7AEE9 /* WMHomeViewController.xib */,
 				46714B671BC7C11F00E7AEE9 /* WMMenuTableViewCell.h */,
 				46714B681BC7C11F00E7AEE9 /* WMMenuTableViewCell.m */,

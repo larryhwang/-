@@ -42,4 +42,13 @@
 #define ScreenHeight    [UIScreen mainScreen].bounds.size.height
 //3, 164, 255
 #define BasicUrl @"http://www.123qf.cn/testApp/"
+
+
+typedef NS_ENUM(NSInteger, CellStatus) {
+    SalesOut = 0,   //出售
+    RentOut = 1,    //出租
+    WantBuy = 2,   //求购
+    WantRent = 3  //求租
+};
+
 #

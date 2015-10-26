@@ -43,6 +43,7 @@
 @property(nonatomic,strong) UILabel *Publisher;
 @property(nonatomic,strong) UILabel *Name;
 @property(nonatomic,strong) UILabel *Tele;
+@property(nonatomic,assign) CellStatus Status;
 
 
 
@@ -64,7 +65,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     [self initNavController];
     [self initTable];
     [self addWhiteBack];  //背景加载
@@ -75,7 +75,7 @@
 }
 #pragma mark -初始化导航栏
 - (void)initNavController {
-    
+
     UIButton  *h = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 24, 24)];
     UIImage *img = [UIImage imageNamed:@"pStar"];
     [h setImage:img forState:UIControlStateNormal];
@@ -116,7 +116,6 @@
 -(void)getDataFromNet {
     AFHTTPRequestOperationManager *mgr  = [AFHTTPRequestOperationManager manager];
     NSString *url3 = [NSString stringWithFormat:@"http://www.123qf.cn/testApp/fangyuan/detailsHouse.api?fenLei=%@&fangyuan_id=%@",self.FenLei,self.DisplayId];
-    
     [MBProgressHUD showMessage:@"加载中"];
     [mgr POST:url3
    parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -233,7 +232,6 @@
 
 #pragma mark -发送短信
 -(void)MsgTap:(id)sender {
-    
     NSString *tele = self.FangData[@"tel"];//self.FangData[@"tel"];//;
     NSArray *ReciverArr = [NSArray arrayWithObjects:tele, nil];
     NSString *content = [NSString stringWithFormat:@"你好,我对\"%@\"这套房产感兴趣，希望做进一步交流^_^ ",_FangData[@"biaoti"]];
@@ -267,9 +265,9 @@
 
 
 -(void)initHeadScorlImage {
-    UIView *HeaderContent = [[UIView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth,ScreenHeight/3 + 20)];
+    UIView *HeaderContent = [[UIView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth,ScreenHeight/3 + 50)];
     self.HeaderContent = HeaderContent;
-    self.scrollView3  = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth,ScreenHeight/3 +20)];
+    self.scrollView3  = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth,ScreenHeight/3 +50)];
     [HeaderContent addSubview:self.scrollView3];
     self.scrollView3.pagingEnabled = YES ;
     self.scrollView3.delegate = self ;
@@ -328,7 +326,8 @@
         FlatDetailCell   *DetailCell = [FlatDetailCell new];
         DescribeCell  *DescribieCell = [DescribeCell freeCellWithTitle:@"描述" andContext:self.FangData[@"fangyuanmiaoshu"]];
         FreeCell  *testCell = [FreeCell freeCellWithTitle:@"地址" andContext:self.FangData[@"dizhi"]];
-        
+   // testCell.backgroundColor = [UIColor redColor];
+    
         DescribieCell.iSSeparetorLine = NO ;
         self.FreeCellHeight  = testCell.CellHight;
         self.DescribeCellHeight = DescribieCell.CellHight;
@@ -336,13 +335,25 @@
         
         LocationCell  =  [[[NSBundle mainBundle]loadNibNamed:@"FlatLocationCell" owner:nil options:nil] firstObject];
         DetailCell = [[[NSBundle mainBundle]loadNibNamed:@"FlatDetailCell" owner:nil options:nil] firstObject];
-        
         if (indexPath.row ==0) {
-            LocationCell.Title.text = self.FangData[@"biaoti"];
+            LocationCell.Title.text = [NSString stringWithFormat:@"%@%@",self.PreTitle,self.FangData[@"biaoti"]];
             LocationCell.PostTime.text = self.FangData[@"weituodate"];
             LocationCell.Region.text = self.FangData[@"qu"];
             LocationCell.LouPanName.text = self.FangData[@"mingcheng"];
-            LocationCell.Price.text = [NSString stringWithFormat:@"%@",self.FangData[@"shoujia"]];//;
+#pragma mark -价格高亮属性
+            NSString *StringPrice = [NSString stringWithFormat:@"%@万",self.FangData[@"shoujia"]];
+            NSRange   RedPart = NSMakeRange(0, [StringPrice length] -1 );
+            NSMutableAttributedString *priceAttri = [[NSMutableAttributedString alloc]initWithString:StringPrice];
+            [priceAttri addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:25 ] range:RedPart];
+            [priceAttri addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range:RedPart];
+            
+            
+            
+            LocationCell.Price.text = StringPrice;
+            
+            [LocationCell.Price setAttributedText:priceAttri];
+            
+            
             return LocationCell;
         }else if (indexPath.row ==1) {
             return testCell;
@@ -395,7 +406,7 @@
   else {
       //return self.DescribeCellHeight + 10 ;
       if(isI5){
-           return self.DescribeCellHeight + 60 ;
+         return self.DescribeCellHeight + 60 ;
   } else {
          return self.DescribeCellHeight + ToolHeight + 5 ;
   }
@@ -405,7 +416,7 @@
 
 #pragma mark -计数器的初始化
 -(void)initCountLabel {
-    UIButton *CurrentCountLable  = [[UIButton alloc]initWithFrame:CGRectMake(ScreenWidth-50, ScreenHeight/3-25, 40, 40)];
+    UIButton *CurrentCountLable  = [[UIButton alloc]initWithFrame:CGRectMake(ScreenWidth-50, ScreenHeight/3 + 5, 40, 40)];
     self.CountLabel = CurrentCountLable ;
     self.CountLabel.backgroundColor = [[UIColor grayColor] colorWithAlphaComponent:0.5];
     [CurrentCountLable setTitle:[NSString stringWithFormat:@"1/1"] forState:UIControlStateNormal];

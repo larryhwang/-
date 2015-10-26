@@ -214,8 +214,8 @@ static const CGFloat menuStartNarrowRatio  = 0.70;
 - (void)OnlyBack {  //回到首页(出租、出售)
     UIButton *left  = self.homeVC.LeftTab;
     UIButton *right = self.homeVC.RightTab;
-    [left  setTitle: @"出租" forState:UIControlStateNormal];
-    [right setTitle: @"出售" forState:UIControlStateNormal];
+    [left  setTitle: @"出售" forState:UIControlStateNormal];
+    [right setTitle: @"出租" forState:UIControlStateNormal];
     self.homeVC.isWant = NO;
    [self.homeVC LeftInit];
 
@@ -229,13 +229,19 @@ static const CGFloat menuStartNarrowRatio  = 0.70;
  *  @param Id     房源ID
  *  @param Fenlei 分类ID
  */
--(void)QFshowDetailWithFangYuanID:(NSString *)FangId andFenlei:(NSString *)Fenlei userID:(NSString *)UserId XiaoquName:(NSString *)name{
+
+
+-(void)QFshowDetailWithFangYuanID:(NSString *)FangId andFenlei:(NSString *)Fenlei userID:(NSString *)UserId XiaoquName:(NSString *)name ListStatus:(NSString *)status {
     DetailViewController *test = [DetailViewController new];
+    
     test.title = name;
-    test.DisplayId = FangId ;
+    test.PreTitle = status;
+    test.DisplayId = FangId;
     test.FenLei = Fenlei;
     test.uerID = UserId;
     [self.messageNav pushViewController:test animated:YES];
 }
+
+
 
 @end
