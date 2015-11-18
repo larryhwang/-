@@ -73,7 +73,7 @@
 
     
 }
-#pragma mark -初始化导航栏
+#pragma mark -初始化导航栏(收藏和分享)
 - (void)initNavController {
 
     UIButton  *h = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 24, 24)];
@@ -82,7 +82,7 @@
     UIBarButtonItem *star = [[UIBarButtonItem alloc]initWithCustomView:h];
     UIBarButtonItem *share = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:nil];
     UIBarButtonItem *flexSible = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
-    flexSible.width = 5.f ;
+    flexSible.width = 4.f ;
     NSArray *arr = [NSArray arrayWithObjects:star,flexSible,share,nil];
     UIToolbar *rightTool =  [[UIToolbar alloc]init];
     rightTool.barTintColor = [UIColor blueColor];
@@ -92,7 +92,13 @@
     [rightTool setShadowImage:[UIImage new]
            forToolbarPosition:UIToolbarPositionAny];
     rightTool.tintColor = [UIColor whiteColor];
-    [rightTool setFrame:CGRectMake(0, 0, 70, 42.f)];
+    CGFloat tool;
+    if (isI6p) {
+        tool=78;
+    }else{
+        tool=68;
+    }
+    [rightTool setFrame:CGRectMake(0, 0, tool, 42.f)];  //78
     [rightTool setItems:arr];
     UIBarButtonItem *Right = [[UIBarButtonItem alloc]initWithCustomView:rightTool];
     self.navigationItem.rightBarButtonItem = Right ;
@@ -163,22 +169,34 @@
  
     Company.textColor = [UIColor whiteColor];
     NSString *Coname = self.FangData[@"name"];
-        if ([Coname length]>5) {
-            NSRange  range = NSMakeRange(0, 4);
+    NSLog(@"%@",Coname);
+        if ([Coname length]>4) {
+            NSRange  range = NSMakeRange(0, 3);
             Coname = [NSString stringWithFormat:@"%@..",[Coname substringWithRange:range]];
         }
-    Company.text = Coname;  //@"丰登地产";
+    Company.text = Coname ;  //@"丰登地产";
     UIFont *Deafult = [UIFont systemFontOfSize:17];
     CGSize MaxLeftSzie = CGSizeMake(LeftViewWidth-Padding,ToolHeight-Padding);
+    if (Coname == nil) {
+         NSLog(@"DEBUG");
+    } else {
+           }
     CGSize companyLabelSize = [self sizeWithString:Company.text font:Deafult maxSize:MaxLeftSzie];
+
     UILabel *ContactName  = [[UILabel alloc]init];
     self.Name = ContactName;
     ContactName.textColor = [UIColor whiteColor];
-    ContactName.text = self.FangData[@"publisher"];
-    
+    NSLog(@"%@",self.FangData[@"publisher"]);
+    if ([(self.FangData[@"publisher"]) isKindOfClass:[NSNull class]]) {
+        ContactName.text = @"";
+    }else {
+        ContactName.text = self.FangData[@"publisher"];
+
+    }
     CGSize NameLabelSize = [self sizeWithString:ContactName.text font:Deafult maxSize:MaxLeftSzie];
-    [Company setFrame:CGRectMake((LeftViewWidth -companyLabelSize.width)/2 , (ToolHeight - (companyLabelSize.height + NameLabelSize.height))/2, companyLabelSize.width, companyLabelSize.height)];
+    
     [ContactName setFrame:CGRectMake((LeftViewWidth -NameLabelSize.width)/2, (Company.frame.origin.y +Company.frame.size.height +2), NameLabelSize.width, NameLabelSize.height)];
+    [Company setFrame:CGRectMake((LeftViewWidth -companyLabelSize.width)/2 , (ToolHeight - (companyLabelSize.height + NameLabelSize.height))/2, companyLabelSize.width, companyLabelSize.height)];
     [PublisherAndCo addSubview:Company];
     [PublisherAndCo addSubview:ContactName];
     [footer addSubview:PublisherAndCo];
@@ -347,12 +365,9 @@
             [priceAttri addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:25 ] range:RedPart];
             [priceAttri addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range:RedPart];
             
-            
-            
             LocationCell.Price.text = StringPrice;
             
             [LocationCell.Price setAttributedText:priceAttri];
-            
             
             return LocationCell;
         }else if (indexPath.row ==1) {

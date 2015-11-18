@@ -90,8 +90,11 @@
     return cell;
 }
 
+#pragma mark 侧栏菜单选择
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 #warning 侧栏菜单选择
+    [tableView deselectRowAtIndexPath:indexPath animated:YES]; //解除遗留灰色
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.row == 0) {
         [self.delegate OnlyBack];  //仅仅回到

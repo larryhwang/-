@@ -103,17 +103,20 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="285" id="360-c1-wTl"/>
                         <constraint firstAttribute="width" constant="342" id="3Co-j0-4sW"/>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="285" id="guT-Rb-zK7"/>
                     </constraints>
                     <variation key="default">
                         <mask key="constraints">
                             <exclude reference="360-c1-wTl"/>
                             <exclude reference="3Co-j0-4sW"/>
+                            <exclude reference="guT-Rb-zK7"/>
                         </mask>
                     </variation>
                     <variation key="widthClass=compact">
                         <mask key="constraints">
                             <include reference="360-c1-wTl"/>
                             <exclude reference="3Co-j0-4sW"/>
+                            <include reference="guT-Rb-zK7"/>
                         </mask>
                     </variation>
                 </tableView>
@@ -176,6 +179,7 @@
                 <constraint firstAttribute="bottom" secondItem="Mp4-C3-CDa" secondAttribute="bottom" constant="8" id="LHe-xb-WAf"/>
                 <constraint firstItem="YkR-PW-D1O" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="MdG-OQ-Xdo"/>
                 <constraint firstAttribute="trailing" secondItem="uDq-qB-jNZ" secondAttribute="trailing" constant="50" id="Nz4-fh-fDI"/>
+                <constraint firstItem="Mp4-C3-CDa" firstAttribute="top" secondItem="eGt-Fe-0zL" secondAttribute="bottom" constant="89" id="Pxz-FI-cqr"/>
                 <constraint firstItem="rlG-0E-UVa" firstAttribute="top" secondItem="YkR-PW-D1O" secondAttribute="top" id="Us9-5J-hCY"/>
                 <constraint firstItem="uDq-qB-jNZ" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="XJ7-SF-suK"/>
                 <constraint firstItem="rlG-0E-UVa" firstAttribute="leading" secondItem="YkR-PW-D1O" secondAttribute="trailing" constant="30" id="Zsy-gu-eJX"/>
@@ -213,6 +217,7 @@
                     <exclude reference="qlR-GF-zrN"/>
                     <exclude reference="u30-Pv-iwm"/>
                     <exclude reference="9sd-W1-104"/>
+                    <exclude reference="Pxz-FI-cqr"/>
                     <exclude reference="iI7-gO-cWX"/>
                 </mask>
             </variation>
@@ -247,6 +252,7 @@
                     <include reference="9sd-W1-104"/>
                     <exclude reference="CDD-PT-gYC"/>
                     <exclude reference="LHe-xb-WAf"/>
+                    <include reference="Pxz-FI-cqr"/>
                     <include reference="iI7-gO-cWX"/>
                 </mask>
             </variation>

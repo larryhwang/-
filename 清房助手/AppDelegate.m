@@ -20,6 +20,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+     [NSThread sleepForTimeInterval:2.0];
     WMCommon *common = [WMCommon getInstance];
     common.screenW = [[UIScreen mainScreen] bounds].size.width;
     common.screenH = [[UIScreen mainScreen] bounds].size.height;
@@ -35,7 +36,16 @@
 
     return YES;
 }
-
+//- (BOOL)application:(UIApplication*)application
+//didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+//    //–inserta delay of 5 seconds before the splash screendisappears–
+//    [NSThread sleepForTimeInterval:5.0];
+//    //Override point for customization after applicationlaunch.
+//    //Add the view controller’s view to the window anddisplay.
+//    [windowaddSubview:viewController.view];
+//    [windowmakeKeyAndVisible];
+//    return YES;
+//}
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.

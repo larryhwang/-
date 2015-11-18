@@ -323,6 +323,7 @@
 
 #pragma mark -点击查看详情
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES]; //解除遗留灰色
     NSDictionary *SingleData = self.DataArr[indexPath.row];
     NSString *Id = SingleData[@"id"];   //将房源ID传过去
     NSString *userID = SingleData[@"userid"];

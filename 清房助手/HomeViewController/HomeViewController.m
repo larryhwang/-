@@ -211,6 +211,12 @@ static const CGFloat menuStartNarrowRatio  = 0.70;
     
 }
 
+
+
+- (void)transToPostEdit{
+    
+}
+
 - (void)OnlyBack {  //回到首页(出租、出售)
     UIButton *left  = self.homeVC.LeftTab;
     UIButton *right = self.homeVC.RightTab;

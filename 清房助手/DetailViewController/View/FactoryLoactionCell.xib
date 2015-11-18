@@ -36,7 +36,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <view alpha="0.5" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DT9-KH-lfC" userLabel="line">
-                        <rect key="frame" x="0.0" y="122" width="375" height="1"/>
+                        <rect key="frame" x="0.0" y="122" width="414" height="1"/>
                         <animations/>
                         <color key="backgroundColor" red="0.29803922770000002" green="0.29803922770000002" blue="0.29803922770000002" alpha="1" colorSpace="calibratedRGB"/>
                     </view>

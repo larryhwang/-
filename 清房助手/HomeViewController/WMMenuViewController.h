@@ -14,6 +14,7 @@
 - (void)transToRentAndSale;
 - (void)didSelectItem:(NSString *)title;
 - (void)OnlyBack;
+- (void)transToPostEdit;
 
 @end
 

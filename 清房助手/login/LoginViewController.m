@@ -40,19 +40,20 @@
     NSMutableDictionary *PramaDic = [NSMutableDictionary new];
     //http://127.0.0.1:8080/qfzsapi/user/loginUser.front?userID=admin&psWord=2
     //http://www.123qf.cn/testApp/user/loginUser.front?userID=15018639039&psWord=5798161"
-    PramaDic[@"userID"] = @"15018639039";
-    PramaDic[@"psWord"] = @"5798161";
+    PramaDic[@"userid"] = @"15018639039";
+    PramaDic[@"psword"] = @"5798161";
     
     
-    
+    //    NSString *completeUrl = @"http://www.123qf.cn:81/testApp/user/loginUser.front?userid=15018639039&psword=5798161";
     /*
      15018639039  123456
      */
     AFHTTPRequestOperationManager *mgr  = [AFHTTPRequestOperationManager manager];
-    NSString *completeUrl = @"http://www.123qf.cn/testApp/user/loginUser.front";
+    NSString *completeUrl = @"http://www.123qf.cn:81/testApp/user/loginUser.front";
     HomeViewController *home = [HomeViewController new];
    // KeyWindow.rootViewController = home;
    [mgr POST:completeUrl parameters:PramaDic success:^(AFHTTPRequestOperation *operation, id responseObject) {
+       NSLog(@"修理:%@",responseObject);
         [MBProgressHUD showMessage:@"正在登录"];
        if (responseObject) {
         [MBProgressHUD hideHUD];

@@ -73,7 +73,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UNb-dP-glL" userLabel="Line">
-                        <rect key="frame" x="0.0" y="99" width="375" height="1"/>
+                        <rect key="frame" x="0.0" y="99" width="414" height="1"/>
                         <animations/>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
