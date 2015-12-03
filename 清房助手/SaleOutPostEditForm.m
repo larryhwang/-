@@ -742,7 +742,7 @@
     EditCell    *Price= [[EditCell alloc]initWithFrame:CGRectMake(CellPaddingToVertical/2,  CGRectGetMaxY(LookAroundTime.frame) -CellClipPadding , Screen_width - CellPaddingToVertical, CellHeight)];
     Price.title = @"售价:";
     UITextField  *TF_HousePrice = [[UITextField alloc]initWithFrame:CGRectMake(100 +60, 0, 130, 50)];
-    TF_HousePrice.backgroundColor = [UIColor orangeColor];
+    //TF_HousePrice.backgroundColor = [UIColor orangeColor];
     TF_HousePrice.keyboardType  = UIKeyboardTypeNumberPad ;
     [self dealTextfield:TF_HousePrice isTextCenter:YES];
     [Price addSubview:TF_HousePrice];
@@ -853,7 +853,7 @@
     _pictureDisplay = picture;
     self.multiImageView = [[JYBMultiImageView alloc] initWithFrame:CGRectMake(10, 50, self.view.frame.size.width-30, 100)];
     self.multiImageView.delegate = self;
-    self.multiImageView.backgroundColor = [UIColor brownColor];
+  //  self.multiImageView.backgroundColor = [UIColor brownColor];
     [picture addSubview:self.multiImageView];
     [self.view addSubview:picture];
     
@@ -861,7 +861,7 @@
     
 
     UIView *footerView = [[UIView alloc]initWithFrame:CGRectMake(CellPaddingToVertical/2, CGRectGetMaxY(picture.frame)+GroupPadding, CellWidth, CellHeight*4 +FootButtonHeight +10 )];
-        footerView.backgroundColor = [UIColor greenColor];
+      //  footerView.backgroundColor = [UIColor greenColor];
     [main addSubview:footerView];
     
     // Tittle
