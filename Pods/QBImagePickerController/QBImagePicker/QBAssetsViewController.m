@@ -451,10 +451,11 @@ static CGSize CGSizeScale(CGSize size, CGFloat scale) {
     CGSize itemSize = [(UICollectionViewFlowLayout *)collectionView.collectionViewLayout itemSize];
     
 
-    CGSize targetSize = CGSizeScale(itemSize, self.traitCollection.displayScale);
+    CGSize targetSize = CGSizeScale(itemSize, [[UIScreen mainScreen] scale]);
+
     NSLog(@"itemSize  h:%f,w:%f",itemSize.height,itemSize.width);
     NSLog(@"targetSize  h:%f,w:%f",targetSize.height,targetSize.width);
-    targetSize = CGSizeMake(155.0, 155.0);
+   // targetSize = CGSizeMake(155.0, 155.0);
     [self.imageManager requestImageForAsset:asset
                                  targetSize:targetSize
                                 contentMode:PHImageContentModeAspectFill

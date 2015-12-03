@@ -74,7 +74,7 @@
     [self.delegate appendName:proVNname];     //保存当前选择的城市名
     NSString *url = [NSString stringWithFormat:@"http://www.123qf.cn:81/testApp/area/selectArea.api?parentid=%@",code];
     if ([proVNname isEqualToString:@"市辖区"]) {
-        UIViewController *ed = [self.navigationController.viewControllers objectAtIndex:0];
+        UIViewController *ed = [self.navigationController.viewControllers objectAtIndex:3];
         [self.navigationController popToViewController:ed animated:YES];
     } else{
         [HttpTool QFGet:url parameters:nil success:^(id responseObject) {

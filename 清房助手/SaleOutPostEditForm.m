@@ -59,6 +59,11 @@
 
 
 
+#define unCompletedAlertTag 70
+#define SuccessAlertTag     71
+
+
+
 
 
 @interface SaleOutPostEditForm ()<UITextFieldDelegate,UIActionSheetDelegate, UIImagePickerControllerDelegate,SelectRegionDelegate,UIScrollViewDelegate,CZKeyboardToolbarDelegate ,UIActionSheetDelegate,QBImagePickerControllerDelegate,UIAlertViewDelegate>{
@@ -930,7 +935,7 @@
                                                    delegate:self
                                           cancelButtonTitle:nil
                                           otherButtonTitles:@"朕知道了", nil];
-        
+        AW.tag = unCompletedAlertTag;
         [AW show];
         return;
     }
@@ -948,8 +953,6 @@
             [self.PostDataDic setObject:obj forKey:SqlTitleArr[idx]];  //设置
         }];
     }
-
-    
     
     //格式化图片
     for (UIImage *img in self.haSelectedImgs_MARR) {
@@ -1404,7 +1407,11 @@
 
 #pragma mark －alertViewDelegate
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex NS_DEPRECATED_IOS(2_0, 9_0) {
-    NSLog(@"弹窗序号:%d",buttonIndex);
+     NSLog(@"弹窗序号:%d",buttonIndex);
+    if(alertView.tag == SuccessAlertTag) {
+       [self.navigationController popToRootViewControllerAnimated:YES];
+    }
+
     //执行跳转
 }
 
