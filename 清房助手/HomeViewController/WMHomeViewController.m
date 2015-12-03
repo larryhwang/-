@@ -25,7 +25,8 @@
 
 
 
-@interface WMHomeViewController() {
+@interface WMHomeViewController()<UIScrollViewDelegate>
+{
 #pragma mark 优化成结构体
     
     BOOL            _isSaleStatus;
@@ -40,13 +41,22 @@
 @property(nonatomic,copy) NSString *userID;
 @property(nonatomic,assign) CellStatus status;
 @property(nonatomic,copy)  NSString *CurrentRuest;
-
+@property(nonatomic,strong)  NSDictionary  *pramaDic;
 
 
 
 @end
 
 @implementation WMHomeViewController
+
+
+-(NSDictionary *)pramaDic {
+    if (_pramaDic ==nil) {
+        _pramaDic = [NSDictionary new];
+    }
+    return _pramaDic;
+}
+
 
 
 -(NSArray *)DataArr {
@@ -112,6 +122,7 @@
     _status = SalesOut ;  //初始，
     _TabBarBtns = [NSMutableArray arrayWithCapacity:2];
     self.tableView.delegate = self;
+    self.tableView.dataSource =self;
     AFHTTPRequestOperationManager *mgr  = [AFHTTPRequestOperationManager manager];
     self.shareMgr = mgr ;
 }
@@ -172,11 +183,17 @@
 
 -(void)LeftTableLoad {
     if (_isWant == NO) {
-        _status = SalesOut ;
-   _CurrentRuest=@"http://www.123qf.cn/testApp/fangyuan/rentalOrBuyHouseSearch.api?weiTuoDate=0&sum=10&fangxiang=initdata&zuShou=0";  //这是出售列表
+        _status = SalesOut ;   //出售列表
+        _CurrentRuest =@"http://www.123qf.cn:81/testApp/fangyuan/rentalOrBuyHouseSearch.api";
+        NSDictionary *parameters =@{
+                                    @"sum":@"20",
+                                    @"zushou":@"zushou",
+                                    @"shengfen":@"广东省",
+                                    @"currentpage" :@"1"};
+        self.pramaDic = parameters;
     }else {
          _status = WantBuy;
-  _CurrentRuest = @"http://www.123qf.cn/testApp/keyuan/rentalOrBuyHouseSearch.api?weiTuoDate=0&sum=20&fangxiang=initdata&zuGou=0";   //求购列表
+  _CurrentRuest = @"http://www.123qf.cn/testApp/keyuan/rentalOrBuyHouseSearch.api?weiTuodate=0&sum=20&fangxiang=initdata&zugou=0";   //求购列表
     }
 
     [self LoadNetDataWithCurentURl];
@@ -186,7 +203,7 @@
 - (void) LoadNetDataWithURl:(NSString *)url{
     [self.shareMgr POST:url
              parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                 NSLog(@"右选项卡%@",responseObject);
+               //  NSLog(@"右选项卡%@",responseObject);
                  NSArray *DataArra = responseObject[@"data"];
                  self.userID = responseObject[@""];
                  self.DataArr =DataArra;
@@ -200,9 +217,9 @@
 - (void) LoadNetDataWithCurentURl{
     [MBProgressHUD showMessage:@"正在加载"];
     [self.shareMgr POST:self.CurrentRuest
-             parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+             parameters: self.pramaDic success:^(AFHTTPRequestOperation *operation, id responseObject) {
                  [MBProgressHUD hideHUD];
-                 NSLog(@"右选项卡%@",responseObject);
+               //  NSLog(@"右选项卡%@",responseObject);
                  NSArray *DataArra = responseObject[@"data"];
                  self.userID = responseObject[@""];
                  self.DataArr =DataArra;
@@ -217,10 +234,18 @@
 -(void)RightTableLoad {
     if (_isWant == NO) {
         _status = RentOut;
-        self.CurrentRuest= @"http://www.123qf.cn/testApp/fangyuan/rentalOrBuyHouseSearch.api?weiTuoDate=0&sum=10&fangxiang=initdata&zuShou=1";  //出租列表
+                            //出租列表
+        self.CurrentRuest = @"http://www.123qf.cn:81/testApp/fangyuan/rentalOrBuyHouseSearch.api";
+        NSDictionary *parameters =@{
+                                    @"sum":@"20",
+                                    @"zushou":@"1",
+                                    @"shengfen":@"广东省",
+                                    @"currentpage" :@"1"};
+        self.pramaDic = parameters;
+
     }else {
         _status = WantRent;
-        self.CurrentRuest= @"http://www.123qf.cn/testApp/keyuan/rentalOrBuyHouseSearch.api?weiTuoDate=0&sum=20&fangxiang=initdata&zuGou=1";  //求租列表
+        self.CurrentRuest= @"http://www.123qf.cn/testApp/keyuan/rentalOrBuyHouseSearch.api?weituodate=0&sum=20&fangxiang=initdata&zugou=1";  //求租列表
     }
     [self LoadNetDataWithCurentURl];
 }
@@ -252,6 +277,10 @@
     
 }
 
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    NSLog(@"列表滑动");
+    [self.navigationController.view endEditing:YES];
+}
 
 #pragma mark -tableViewDelegate
 
@@ -323,14 +352,13 @@
 
 #pragma mark -点击查看详情
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [tableView deselectRowAtIndexPath:indexPath animated:YES]; //解除遗留灰色
-    NSDictionary *SingleData = self.DataArr[indexPath.row];
-    NSString *Id = SingleData[@"id"];   //将房源ID传过去
-    NSString *userID = SingleData[@"userid"];
-    NSString *name = SingleData[@"mingcheng"];
-    NSString *Category = [NSString stringWithFormat:@"%@",SingleData[@"fenlei"]];
-   [self.HomeVCdelegate QFshowDetailWithFangYuanID:Id andFenlei:Category userID:userID XiaoquName:name ListStatus:_preName];
-
+        [tableView deselectRowAtIndexPath:indexPath animated:YES]; //解除遗留灰色
+        NSDictionary *SingleData = self.DataArr[indexPath.row];
+        NSString *Id = SingleData[@"id"];   //将房源ID传过去
+        NSString *userID = SingleData[@"userid"];
+        NSString *name = [self judgeNullValue:SingleData[@"mingcheng"]];
+        NSString *Category = [NSString stringWithFormat:@"%@",SingleData[@"fenlei"]];
+       [self.HomeVCdelegate QFshowDetailWithFangYuanID:Id andFenlei:Category userID:userID XiaoquName:name ListStatus:_preName];
 }
 
 #pragma mark -下拉与上拉方法
@@ -343,7 +371,12 @@
     NSLog(@"上拉");
 }
 
-
+-(NSString *)judgeNullValue:(NSString *)string{
+    if ([string isKindOfClass:[NSNull class]]) {
+          return @"";
+    }
+    else  return string;
+}
 
 #pragma mark -侧滑过来的数据初始化
 

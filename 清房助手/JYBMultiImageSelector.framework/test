@@ -1,0 +1,8 @@
+lipo JYBMultiImageSelector -thin armv7 -output JYBMultiImageSelector.armv7  
+ lipo JYBMultiImageSelector -thin i386 -output JYBMultiImageSelector.i386
+lipo JYBMultiImageSelector -thin arm64 -output JYBMultiImageSelector.arm64
+ lipo JYBMultiImageSelector -thin x86_64 -output JYBMultiImageSelector.x86_64
+ar -d -sv JYBMultiImageSelector.i386 MBProgressHUD.o
+ar -d -sv JYBMultiImageSelector.armv7s  MBProgressHUD.o
+ar -d -sv JYBMultiImageSelector.armv7  MBProgressHUD.o
+ar -d -sv JYBMultiImageSelector.arm64  MBProgressHUD.o

@@ -25,25 +25,27 @@
 #define MiddleViewWidth   ScreenWidth/2
 #define RightViewWidth   ScreenWidth/4
 #define Padding  8
+#define IMGGALLAERY 10
+#define DETAILTABLE   11
 
 
 @interface DetailViewController ()
 <UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate,UIAlertViewDelegate,MFMessageComposeViewControllerDelegate>
-@property (strong, nonatomic)  UITableView *detailInfoTable;
-@property (strong, nonatomic) NSMutableArray *imagesData;
-@property(nonatomic,weak)  UIButton *CountLabel;
 @property (strong, nonatomic)  UIScrollView *scrollView3;
-@property(nonatomic,strong)  NSDictionary  *FangData;
-@property(nonatomic,strong) NSDictionary *CurrentSingleData;
-@property(nonatomic) CGFloat CellHeight;
-@property(nonatomic) CGFloat FreeCellHeight;
-@property(nonatomic) CGFloat DescribeCellHeight;
-@property(nonatomic,strong)  UIView  *HeaderContent;
-@property(nonatomic) NSInteger ImgTotal;
-@property(nonatomic,strong) UILabel *Publisher;
-@property(nonatomic,strong) UILabel *Name;
-@property(nonatomic,strong) UILabel *Tele;
-@property(nonatomic,assign) CellStatus Status;
+@property (strong, nonatomic)  UITableView *detailInfoTable;
+@property (strong, nonatomic)  NSMutableArray *imagesData;
+@property(nonatomic)           CGFloat CellHeight;
+@property(nonatomic)           CGFloat DescribeCellHeight;
+@property(nonatomic)           CGFloat FreeCellHeight;
+@property(nonatomic)           NSInteger ImgTotal;
+@property(nonatomic,assign)    CellStatus Status;
+@property(nonatomic,strong)    NSDictionary  *FangData;
+@property(nonatomic,strong)    UIView  *HeaderContent;
+@property(nonatomic,strong)    NSDictionary *CurrentSingleData;
+@property(nonatomic,strong)    UILabel *Name;
+@property(nonatomic,strong)    UILabel *Publisher;
+@property(nonatomic,strong)    UILabel *Tele;
+@property(nonatomic,weak)      UIButton *CountLabel;
 
 
 
@@ -63,8 +65,14 @@
     self.navigationController.navigationBar.translucent = YES ;
 }
 
+
+
+
 - (void)viewDidLoad {
+//       NSLog(@"官方:%s",__FUNCTION__);
+   // NSLog(@"官方");
     [super viewDidLoad];
+
     [self initNavController];
     [self initTable];
     [self addWhiteBack];  //背景加载
@@ -98,18 +106,20 @@
     }else{
         tool=68;
     }
+
     [rightTool setFrame:CGRectMake(0, 0, tool, 42.f)];  //78
     [rightTool setItems:arr];
     UIBarButtonItem *Right = [[UIBarButtonItem alloc]initWithCustomView:rightTool];
-    self.navigationItem.rightBarButtonItem = Right ;
+  self.navigationItem.rightBarButtonItem = Right ;
     DSNavigationBar *TrunscleNavBar = [[DSNavigationBar alloc]init];
     [TrunscleNavBar setNavigationBarWithColor:DeafaultColor2];
-    [self.navigationController setValue:TrunscleNavBar forKey:@"navigationBar"];
+   [self.navigationController setValue:TrunscleNavBar forKey:@"navigationBar"];
 }
 
 #pragma mark -初始化表
 -(void)initTable {
     self.detailInfoTable = [[UITableView alloc]init];
+    self.detailInfoTable.tag = DETAILTABLE;
     self.detailInfoTable.delegate = self ;
     self.detailInfoTable.dataSource = self;
     self.detailInfoTable.allowsSelection = NO ;
@@ -118,14 +128,14 @@
     [self.view addSubview:self.detailInfoTable];
 }
 
-
 -(void)getDataFromNet {
     AFHTTPRequestOperationManager *mgr  = [AFHTTPRequestOperationManager manager];
-    NSString *url3 = [NSString stringWithFormat:@"http://www.123qf.cn/testApp/fangyuan/detailsHouse.api?fenLei=%@&fangyuan_id=%@",self.FenLei,self.DisplayId];
+    NSString *url3 = [NSString stringWithFormat:@"http://www.123qf.cn:81/testApp/fangyuan/detailsHouse.api?fenlei=%@&fangyuan_id=%@",self.FenLei,self.DisplayId];
     [MBProgressHUD showMessage:@"加载中"];
     [mgr POST:url3
    parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
 #pragma mark -请求成功后的网络处理
+       NSLog(@"%@",responseObject);
        [MBProgressHUD hideHUD];
        UIView *back = [self.view viewWithTag:999];
        [back removeFromSuperview];
@@ -157,6 +167,7 @@
 }
 
 
+
 #pragma 初始化底部工具条
 -(void)initFootView {
     UIView *footer = [[UIView alloc]initWithFrame:CGRectMake(0,ScreenHeight-ToolHeight, ScreenWidth, ToolHeight)];
@@ -175,6 +186,7 @@
             Coname = [NSString stringWithFormat:@"%@..",[Coname substringWithRange:range]];
         }
     Company.text = Coname ;  //@"丰登地产";
+    //  Company.text = @"地产";
     UIFont *Deafult = [UIFont systemFontOfSize:17];
     CGSize MaxLeftSzie = CGSizeMake(LeftViewWidth-Padding,ToolHeight-Padding);
     if (Coname == nil) {
@@ -191,12 +203,13 @@
         ContactName.text = @"";
     }else {
         ContactName.text = self.FangData[@"publisher"];
+      //    ContactName.text = @"暴走";
 
     }
     CGSize NameLabelSize = [self sizeWithString:ContactName.text font:Deafult maxSize:MaxLeftSzie];
     
     [ContactName setFrame:CGRectMake((LeftViewWidth -NameLabelSize.width)/2, (Company.frame.origin.y +Company.frame.size.height +2), NameLabelSize.width, NameLabelSize.height)];
-    [Company setFrame:CGRectMake((LeftViewWidth -companyLabelSize.width)/2 , (ToolHeight - (companyLabelSize.height + NameLabelSize.height))/2, companyLabelSize.width, companyLabelSize.height)];
+    [Company setFrame:CGRectMake((LeftViewWidth -companyLabelSize.width)/2 , (ToolHeight - (companyLabelSize.height + NameLabelSize.height))/2+20, companyLabelSize.width, companyLabelSize.height)];
     [PublisherAndCo addSubview:Company];
     [PublisherAndCo addSubview:ContactName];
     [footer addSubview:PublisherAndCo];
@@ -273,7 +286,7 @@
     if(buttonIndex == 1 && alertView.tag==0 ) {
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:tele]];
     } else {
-        
+
         return ;
     }
 
@@ -287,6 +300,7 @@
     self.HeaderContent = HeaderContent;
     self.scrollView3  = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth,ScreenHeight/3 +50)];
     [HeaderContent addSubview:self.scrollView3];
+    
     self.scrollView3.pagingEnabled = YES ;
     self.scrollView3.delegate = self ;
     self.scrollView3.showsHorizontalScrollIndicator  =  NO ;
@@ -306,6 +320,12 @@
 #pragma mark -ScrollView delegate
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
+    
+    
+    if (scrollView.tag ==DETAILTABLE) {
+        [self.view endEditing:YES];
+    }
+    
     NSInteger pageIndex = scrollView.contentOffset.x / CGRectGetWidth(scrollView.frame);
     NSString  *nowSelected =[NSString stringWithFormat:@"%d/%d",pageIndex + 1,self.ImgTotal];
     [self.CountLabel setTitle:nowSelected forState:UIControlStateNormal];
@@ -357,7 +377,8 @@
             LocationCell.Title.text = [NSString stringWithFormat:@"%@%@",self.PreTitle,self.FangData[@"biaoti"]];
             LocationCell.PostTime.text = self.FangData[@"weituodate"];
             LocationCell.Region.text = self.FangData[@"qu"];
-            LocationCell.LouPanName.text = self.FangData[@"mingcheng"];
+            LocationCell.LouPanName.text = [self judgeNullValue:self.FangData[@"mingcheng"]];
+                  //  LocationCell.LouPanName.text = @"缺省名称字段";
 #pragma mark -价格高亮属性
             NSString *StringPrice = [NSString stringWithFormat:@"%@万",self.FangData[@"shoujia"]];
             NSRange   RedPart = NSMakeRange(0, [StringPrice length] -1 );
@@ -531,6 +552,15 @@
     MengBan.tag = 999;
     MengBan.backgroundColor = [UIColor whiteColor];
 }
+
+-(NSString *)judgeNullValue:(NSString *)string{
+    if ([string isKindOfClass:[NSNull class]]) {
+        return @"";
+    }
+    else  return string;
+}
+
+
 
 
 @end

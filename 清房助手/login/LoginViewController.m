@@ -44,19 +44,22 @@
     PramaDic[@"psword"] = @"5798161";
     
     
-    //    NSString *completeUrl = @"http://www.123qf.cn:81/testApp/user/loginUser.front?userid=15018639039&psword=5798161";
-    /*
-     15018639039  123456
-     */
-    AFHTTPRequestOperationManager *mgr  = [AFHTTPRequestOperationManager manager];
+
+    
+    
+    
+
+    AFHTTPRequestOperationManager *mgr1  = [AFHTTPRequestOperationManager manager];
     NSString *completeUrl = @"http://www.123qf.cn:81/testApp/user/loginUser.front";
+
     HomeViewController *home = [HomeViewController new];
-   // KeyWindow.rootViewController = home;
-   [mgr POST:completeUrl parameters:PramaDic success:^(AFHTTPRequestOperation *operation, id responseObject) {
+
+   [mgr1 POST:completeUrl parameters:PramaDic success:^(AFHTTPRequestOperation *operation, id responseObject) {
        NSLog(@"修理:%@",responseObject);
         [MBProgressHUD showMessage:@"正在登录"];
        if (responseObject) {
         [MBProgressHUD hideHUD];
+           [self getdata];  //测试数据，可删
        }
        long Cp=[responseObject[@"code"] integerValue];
        if (Cp==1) {
@@ -72,7 +75,16 @@
     
 
 }
-
+-(void)getdata {
+    AFHTTPRequestOperationManager *mgr  = [AFHTTPRequestOperationManager manager];
+    NSString *com2= @"http://www.123qf.cn:81/testApp/fangyuan/detailsHouse.api?fenlei=3&fangyuan_id=268";
+    NSLog(@"即将抓取:%@",com2);
+    [mgr POST:com2 parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"登陆时的抓的详细信息%@",responseObject);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"%@",error);
+    }];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

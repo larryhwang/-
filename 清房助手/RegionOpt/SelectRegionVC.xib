@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SelectRegionVC">
+            <connections>
+                <outlet property="LocationNameTable" destination="hL3-zV-jOn" id="z7A-5V-hhr"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="hL3-zV-jOn">
+                    <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                    <animations/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="fgs-xN-Cdc"/>
+                        <outlet property="delegate" destination="-1" id="Oag-Jv-vel"/>
+                    </connections>
+                </tableView>
+            </subviews>
+            <animations/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="hL3-zV-jOn" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="PNy-Eh-3Z5"/>
+                <constraint firstAttribute="trailing" secondItem="hL3-zV-jOn" secondAttribute="trailing" id="iBl-fu-dYc"/>
+                <constraint firstAttribute="bottom" secondItem="hL3-zV-jOn" secondAttribute="bottom" id="kDD-Mp-p2L"/>
+                <constraint firstItem="hL3-zV-jOn" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="kZv-UP-nuE"/>
+            </constraints>
+            <variation key="default">
+                <mask key="subviews">
+                    <exclude reference="hL3-zV-jOn"/>
+                </mask>
+                <mask key="constraints">
+                    <exclude reference="PNy-Eh-3Z5"/>
+                    <exclude reference="iBl-fu-dYc"/>
+                    <exclude reference="kDD-Mp-p2L"/>
+                    <exclude reference="kZv-UP-nuE"/>
+                </mask>
+            </variation>
+            <variation key="widthClass=compact">
+                <mask key="subviews">
+                    <include reference="hL3-zV-jOn"/>
+                </mask>
+                <mask key="constraints">
+                    <include reference="PNy-Eh-3Z5"/>
+                    <include reference="iBl-fu-dYc"/>
+                    <include reference="kDD-Mp-p2L"/>
+                    <include reference="kZv-UP-nuE"/>
+                </mask>
+            </variation>
+            <point key="canvasLocation" x="326" y="212"/>
+        </view>
+    </objects>
+</document>

@@ -12,6 +12,7 @@
 #import "UIImage+WM.h"
 #import "QFSearchBar.h"
 #import "MenuListCell.h"
+#import "PostViewController.h"
 
 @interface WMMenuViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (strong, nonatomic) WMCommon *common;
@@ -103,6 +104,11 @@
          //客源查询
     } else if (indexPath.row ==2) {
         //发布
+//        PostViewController *Ct = [[PostViewController alloc]init];
+//        Ct.title = @"发布";
+//        [self.navigationController pushViewController:Ct animated:YES];
+        
+        [self.delegate transToPost];
     } else if (indexPath.row ==3){
         //我的客源
     } else {

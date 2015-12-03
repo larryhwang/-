@@ -12,6 +12,7 @@
 #import "WMNavigationController.h"
 #import "WMCommon.h"
 #import "DetailViewController.h"
+#import "PostViewController.h"
 
 typedef enum state {
     kStateHome,
@@ -211,10 +212,19 @@ static const CGFloat menuStartNarrowRatio  = 0.70;
     
 }
 
-
+-(void)transToPost {
+    PostViewController *PostVC = [[PostViewController alloc]init];
+    PostVC.hidesBottomBarWhenPushed =  YES;
+    [self.messageNav pushViewController:PostVC animated:NO];
+    [self showHome];
+}
 
 - (void)transToPostEdit{
-    
+//    WMOtherViewController *other = [[WMOtherViewController alloc] init];
+//    other.navTitle = title;
+//    other.hidesBottomBarWhenPushed = YES;
+//    [self.messageNav pushViewController:other animated:NO];
+//    [self showHome];
 }
 
 - (void)OnlyBack {  //回到首页(出租、出售)
@@ -224,8 +234,7 @@ static const CGFloat menuStartNarrowRatio  = 0.70;
     [right setTitle: @"出租" forState:UIControlStateNormal];
     self.homeVC.isWant = NO;
    [self.homeVC LeftInit];
-
-    [self showHome];
+   [self showHome];
 }
 
 #pragma mark - 表格点击后代理方法 

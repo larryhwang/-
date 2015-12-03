@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SelectJie">
+            <connections>
+                <outlet property="SteetTables" destination="56b-AF-Efr" id="p5g-KO-MP2"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="56b-AF-Efr">
+                    <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                    <animations/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="Q8k-xa-8KG"/>
+                        <outlet property="delegate" destination="-1" id="DPD-Wj-AaM"/>
+                    </connections>
+                </tableView>
+            </subviews>
+            <animations/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="56b-AF-Efr" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Fn6-Rp-pme"/>
+                <constraint firstItem="56b-AF-Efr" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="IRV-eg-ApA"/>
+                <constraint firstAttribute="bottom" secondItem="56b-AF-Efr" secondAttribute="bottom" id="LNz-84-d5s"/>
+                <constraint firstAttribute="trailing" secondItem="56b-AF-Efr" secondAttribute="trailing" id="oru-UH-CYv"/>
+            </constraints>
+            <variation key="default">
+                <mask key="subviews">
+                    <exclude reference="56b-AF-Efr"/>
+                </mask>
+                <mask key="constraints">
+                    <exclude reference="Fn6-Rp-pme"/>
+                    <exclude reference="IRV-eg-ApA"/>
+                    <exclude reference="LNz-84-d5s"/>
+                    <exclude reference="oru-UH-CYv"/>
+                </mask>
+            </variation>
+            <variation key="widthClass=compact">
+                <mask key="subviews">
+                    <include reference="56b-AF-Efr"/>
+                </mask>
+                <mask key="constraints">
+                    <include reference="Fn6-Rp-pme"/>
+                    <include reference="IRV-eg-ApA"/>
+                    <include reference="LNz-84-d5s"/>
+                    <include reference="oru-UH-CYv"/>
+                </mask>
+            </variation>
+        </view>
+    </objects>
+</document>

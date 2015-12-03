@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+        <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PopSelectViewController">
+            <connections>
+                <outlet property="selectOpt" destination="jMN-yX-5Ne" id="bt4-Hm-OOG"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jMN-yX-5Ne">
+                    <rect key="frame" x="0.0" y="-216" width="320" height="216"/>
+                    <animations/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="Vcr-cJ-EqN"/>
+                        <outlet property="delegate" destination="-1" id="GA3-DE-vHI"/>
+                    </connections>
+                </pickerView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Blj-R7-swv">
+                    <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                    <animations/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="VhH-Zk-1lR"/>
+                        <constraint firstAttribute="width" constant="42" id="sST-Sy-hq9"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <state key="normal" title="取消"/>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="VhH-Zk-1lR"/>
+                            <exclude reference="sST-Sy-hq9"/>
+                        </mask>
+                    </variation>
+                    <variation key="widthClass=compact">
+                        <mask key="constraints">
+                            <include reference="VhH-Zk-1lR"/>
+                            <include reference="sST-Sy-hq9"/>
+                        </mask>
+                    </variation>
+                    <connections>
+                        <action selector="cancleClick:" destination="-1" eventType="touchUpInside" id="FhL-In-A2S"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eyz-XN-eY4">
+                    <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                    <animations/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="42" id="bGd-77-4x7"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <state key="normal" title="确定"/>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="bGd-77-4x7"/>
+                        </mask>
+                    </variation>
+                    <variation key="widthClass=compact">
+                        <mask key="constraints">
+                            <include reference="bGd-77-4x7"/>
+                        </mask>
+                    </variation>
+                    <connections>
+                        <action selector="sureClick:" destination="-1" eventType="touchUpInside" id="BKt-b2-DQj"/>
+                    </connections>
+                </button>
+            </subviews>
+            <animations/>
+            <constraints>
+                <constraint firstItem="Blj-R7-swv" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leadingMargin" id="0eq-1e-2Xa"/>
+                <constraint firstAttribute="bottom" secondItem="Blj-R7-swv" secondAttribute="bottom" constant="180" id="EAp-3y-1wK"/>
+                <constraint firstItem="Blj-R7-swv" firstAttribute="top" secondItem="eyz-XN-eY4" secondAttribute="top" id="TCA-Oh-5iB"/>
+                <constraint firstAttribute="trailing" secondItem="jMN-yX-5Ne" secondAttribute="trailing" id="TCn-1j-3EN"/>
+                <constraint firstItem="eyz-XN-eY4" firstAttribute="trailing" secondItem="i5M-Pr-FkT" secondAttribute="trailingMargin" id="rYk-DU-f3B"/>
+                <constraint firstItem="jMN-yX-5Ne" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="vqN-ci-4Tz"/>
+                <constraint firstItem="Blj-R7-swv" firstAttribute="baseline" secondItem="eyz-XN-eY4" secondAttribute="firstBaseline" id="xtG-DJ-2Xg"/>
+                <constraint firstItem="eyz-XN-eY4" firstAttribute="baseline" secondItem="Blj-R7-swv" secondAttribute="firstBaseline" id="y4p-tb-i5c"/>
+                <constraint firstAttribute="bottom" secondItem="jMN-yX-5Ne" secondAttribute="bottom" id="ytd-UV-bNl"/>
+            </constraints>
+            <variation key="default">
+                <mask key="subviews">
+                    <exclude reference="jMN-yX-5Ne"/>
+                    <exclude reference="Blj-R7-swv"/>
+                    <exclude reference="eyz-XN-eY4"/>
+                </mask>
+                <mask key="constraints">
+                    <exclude reference="TCn-1j-3EN"/>
+                    <exclude reference="vqN-ci-4Tz"/>
+                    <exclude reference="ytd-UV-bNl"/>
+                    <exclude reference="0eq-1e-2Xa"/>
+                    <exclude reference="EAp-3y-1wK"/>
+                    <exclude reference="TCA-Oh-5iB"/>
+                    <exclude reference="xtG-DJ-2Xg"/>
+                    <exclude reference="rYk-DU-f3B"/>
+                    <exclude reference="y4p-tb-i5c"/>
+                </mask>
+            </variation>
+            <variation key="widthClass=compact">
+                <mask key="subviews">
+                    <include reference="jMN-yX-5Ne"/>
+                    <include reference="Blj-R7-swv"/>
+                    <include reference="eyz-XN-eY4"/>
+                </mask>
+                <mask key="constraints">
+                    <include reference="TCn-1j-3EN"/>
+                    <include reference="vqN-ci-4Tz"/>
+                    <include reference="ytd-UV-bNl"/>
+                    <include reference="0eq-1e-2Xa"/>
+                    <include reference="EAp-3y-1wK"/>
+                    <include reference="TCA-Oh-5iB"/>
+                    <include reference="xtG-DJ-2Xg"/>
+                    <include reference="rYk-DU-f3B"/>
+                    <include reference="y4p-tb-i5c"/>
+                </mask>
+            </variation>
+        </view>
+    </objects>
+</document>

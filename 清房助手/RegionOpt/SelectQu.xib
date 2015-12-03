@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SelectQu">
+            <connections>
+                <outlet property="Qutables" destination="xwa-cz-NrZ" id="uvW-Iv-95q"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="xwa-cz-NrZ">
+                    <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                    <animations/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="DrP-X9-Wf3"/>
+                        <outlet property="delegate" destination="-1" id="ii3-lZ-KDq"/>
+                    </connections>
+                </tableView>
+            </subviews>
+            <animations/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="xwa-cz-NrZ" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Nlg-U8-Xp5"/>
+                <constraint firstItem="xwa-cz-NrZ" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="YD5-3k-uKB"/>
+                <constraint firstAttribute="bottom" secondItem="xwa-cz-NrZ" secondAttribute="bottom" id="fzi-5l-YFt"/>
+                <constraint firstAttribute="trailing" secondItem="xwa-cz-NrZ" secondAttribute="trailing" id="uVA-hP-cvh"/>
+            </constraints>
+            <variation key="default">
+                <mask key="subviews">
+                    <exclude reference="xwa-cz-NrZ"/>
+                </mask>
+                <mask key="constraints">
+                    <exclude reference="Nlg-U8-Xp5"/>
+                    <exclude reference="YD5-3k-uKB"/>
+                    <exclude reference="fzi-5l-YFt"/>
+                    <exclude reference="uVA-hP-cvh"/>
+                </mask>
+            </variation>
+            <variation key="widthClass=compact">
+                <mask key="subviews">
+                    <include reference="xwa-cz-NrZ"/>
+                </mask>
+                <mask key="constraints">
+                    <include reference="Nlg-U8-Xp5"/>
+                    <include reference="YD5-3k-uKB"/>
+                    <include reference="fzi-5l-YFt"/>
+                    <include reference="uVA-hP-cvh"/>
+                </mask>
+            </variation>
+            <point key="canvasLocation" x="607" y="256"/>
+        </view>
+    </objects>
+</document>
