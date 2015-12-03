@@ -161,6 +161,7 @@ static CGSize CGSizeScale(CGSize size, CGFloat scale) {
 {
     if (_imageManager == nil) {
         _imageManager = [PHCachingImageManager new];
+        _imageManager.allowsCachingHighQualityImages = NO ;
     }
     
     return _imageManager;
@@ -448,8 +449,12 @@ static CGSize CGSizeScale(CGSize size, CGFloat scale) {
     // Image
     PHAsset *asset = self.fetchResult[indexPath.item];
     CGSize itemSize = [(UICollectionViewFlowLayout *)collectionView.collectionViewLayout itemSize];
-    CGSize targetSize = CGSizeScale(itemSize, self.traitCollection.displayScale);
     
+
+    CGSize targetSize = CGSizeScale(itemSize, self.traitCollection.displayScale);
+    NSLog(@"itemSize  h:%f,w:%f",itemSize.height,itemSize.width);
+    NSLog(@"targetSize  h:%f,w:%f",targetSize.height,targetSize.width);
+    targetSize = CGSizeMake(155.0, 155.0);
     [self.imageManager requestImageForAsset:asset
                                  targetSize:targetSize
                                 contentMode:PHImageContentModeAspectFill

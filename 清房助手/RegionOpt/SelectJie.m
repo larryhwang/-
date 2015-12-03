@@ -60,11 +60,11 @@
     
     NSDictionary *dict = [_JieArr objectAtIndex:indexPath.row];
     NSString *proVNname = dict[@"name"]; //街道名
-    self.delegate = [self.navigationController.viewControllers objectAtIndex:0]; //传值到编辑首页
+    self.delegate = [self.navigationController.viewControllers objectAtIndex:3]; //传值到编辑首页
     //保存当前数据
     [self.delegate appendName:proVNname];
     [self.delegate updateTableData];
-    UIViewController *ed = [self.navigationController.viewControllers objectAtIndex:0];
+    UIViewController *ed = [self.navigationController.viewControllers objectAtIndex:3];
      //跳回编辑界面
     [self.navigationController popToViewController:ed animated:YES];
 

@@ -935,7 +935,6 @@
         return;
     }
     [MBProgressHUD showMessage:@"正在发布"];
-
     NSLog(@"上传数据:%@",_PostDataDic);
     NSLog(@"已选状态%@",_hasSelectedAttachMent);
 
@@ -945,7 +944,6 @@
     if ([Quarray count] > 2) {
         [Quarray removeObject:[Quarray lastObject]];
         NSArray *SqlTitleArr = [NSArray arrayWithObjects:@"shengfen",@"shi",@"qu",@"region",nil];
-        
         [Quarray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             [self.PostDataDic setObject:obj forKey:SqlTitleArr[idx]];  //设置
         }];

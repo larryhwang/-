@@ -11,6 +11,8 @@
 #import "WMCommon.h"
 #import "HomeViewController.h"
 #import "DetailViewController.h"
+#import "PostViewController.h"
+#import "SaleOutPostEditForm.h"
 @interface AppDelegate ()
 
 @end
@@ -19,18 +21,20 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    // Override point for customization after application launch
      [NSThread sleepForTimeInterval:2.0];
     WMCommon *common = [WMCommon getInstance];
     common.screenW = [[UIScreen mainScreen] bounds].size.width;
     common.screenH = [[UIScreen mainScreen] bounds].size.height;
-
-         LoginViewController *login = [LoginViewController new];
-         HomeViewController  *TEST = [HomeViewController new];
+    
+    LoginViewController *login = [LoginViewController new];
+    HomeViewController  *TEST = [HomeViewController new];
     DetailViewController *TEST2 = [DetailViewController new];
-        self.window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
-        self.window.rootViewController = login;
-        [self.window  makeKeyAndVisible];
+    SaleOutPostEditForm *SOPE = [SaleOutPostEditForm new];
+    
+    self.window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
+    self.window.rootViewController = login;
+   [self.window  makeKeyAndVisible];
 
    
 

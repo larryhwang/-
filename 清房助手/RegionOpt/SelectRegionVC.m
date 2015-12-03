@@ -169,7 +169,7 @@
     
     //页面跳转
     SelectCityVC *SelectCity = [SelectCityVC new];
-    SelectCity.delegate = [self.navigationController.viewControllers objectAtIndex:0]; //PostEdit
+    SelectCity.delegate = [self.navigationController.viewControllers objectAtIndex:3]; //PostEdit
     [HttpTool QFGet:url parameters:nil success:^(id responseObject) {
 //        NSLog(@"这里:%@",responseObject);
         NSArray *passArr = responseObject[@"data"];
