@@ -21,6 +21,8 @@
     NSLog(@"ViewDidLoad");
    [self TextContentUIChange];
     self.navigationController.interactivePopGestureRecognizer.enabled = NO;
+    //[self.navigationController]
+    NSLog(@"导航栏:%@",self.navigationController);
 }
 
 - (IBAction)SaveAndBackClick:(id)sender {

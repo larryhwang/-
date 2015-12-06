@@ -21,6 +21,7 @@
 #import <AFNetworking/AFHTTPRequestOperationManager.h>
 #import "MBProgressHUD+CZ.h"
 #import "commonFile.h"
+#import "WMNavigationController.h"
 
 #define FootButtonWidth    (CellWidth-100)/2
 #define FootButtonHeight   40
@@ -61,12 +62,13 @@
 
 #define unCompletedAlertTag 70
 #define SuccessAlertTag     71
+#define saveAlertTag       72
 
 
 
 
 
-@interface SaleOutPostEditForm ()<UITextFieldDelegate,UIActionSheetDelegate, UIImagePickerControllerDelegate,SelectRegionDelegate,UIScrollViewDelegate,CZKeyboardToolbarDelegate ,UIActionSheetDelegate,QBImagePickerControllerDelegate,UIAlertViewDelegate>{
+@interface SaleOutPostEditForm ()<UITextFieldDelegate,UIActionSheetDelegate, UIImagePickerControllerDelegate,SelectRegionDelegate,UIScrollViewDelegate,CZKeyboardToolbarDelegate ,UIActionSheetDelegate,QBImagePickerControllerDelegate,UIAlertViewDelegate,WMNavigationControllerDelegate>{
     NSArray *_cleanIndexCollect;
     NSString *_NowCity;
     NSString *_RegionDetailByAppend;
@@ -75,8 +77,9 @@
     float _count;
     float _hasSlidePosition;
     
-    int _lineCount;
-    int _lastCount;
+    int   _lineCount;
+    int   _lastCount;
+    BOOL  _saveAlertBoolFlag;
 }
 
 @property(nonatomic,strong)   EditCell  *pictureDisplay;
@@ -132,6 +135,8 @@
     }
     return _tfArrs;
 }
+
+
 
 -(NSMutableArray*)SelectedImgsData_MARR {
     if (_SelectedImgsData_MARR ==nil) {
@@ -344,8 +349,6 @@
     return NULL;
 }
 
-
-
 -(void)dealTextfield :(UITextField *)textfied isTextCenter:(BOOL)isTextCenter{
     if (isTextCenter) {
         textfied.textAlignment = NSTextAlignmentCenter;
@@ -356,28 +359,76 @@
     [self.tfArrs addObject:textfied];
 
 }
-
+-(void)saveDataAlert {
+    NSLog(@"已拦截");
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    
+//    UIButton *btn1 = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 50, 30)];
+//    [btn1 setTitle:@"哇咔咔" forState:UIControlStateNormal];
+//    [btn1 setTitleColor:[UIColor brownColor] forState:UIControlStateNormal];
+//    btn1.backgroundColor = [UIColor blueColor];
+//    [btn1 addTarget:self action:@selector(saveDataAlert) forControlEvents:UIControlEventTouchUpInside];
+//    UIBarButtonItem *customItem = [[UIBarButtonItem alloc]initWithCustomView:btn1];
+//    self.navigationItem.leftBarButtonItem = customItem;
+    
+    
+    
+    
+    
+    
+    
     UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:nil action:nil];
     self.navigationItem.backBarButtonItem = item;
     [self cellSetting];
-    
     UIButton *postBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [postBtn setFrame:CGRectMake(200, 1180, 40, 50)];
 
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     [postBtn setTitle:@"上传" forState:UIControlStateNormal];
     [postBtn setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
     [postBtn addTarget:self action:@selector(LogPostDic) forControlEvents:UIControlEventTouchUpInside];
     
     [self.view addSubview:postBtn];
     [self addInputView];
+    
+    UIButton *btn =[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 60, 30)];
+    btn.backgroundColor = [UIColor redColor];
+   [self.view addSubview:btn];
+    NSLog(@"%@",self.navigationController);
 
 }
 
 
+#pragma mark -pop_delegate
+-(BOOL)controllerWillPopHandler {
+    UIAlertView *AW = [[UIAlertView alloc]initWithTitle:@"提示"
+                                                message:@"资料未保存"
+                                               delegate:self
+                                      cancelButtonTitle:@"放弃编辑"
+                                      otherButtonTitles:@"留在此页", nil];
+    AW.tag = saveAlertTag;
+    [AW show];
+
+    return NO;
+}
+
+
 #pragma mark - BaseUISetting
+
 
 
 -(void)cellSetting {
@@ -762,7 +813,6 @@
     loan.isOptionalCell = YES ;
     loan.title = @"按揭:";
     loan.placeHoderString = @"请选择";
-
     loan.otherAction =^{
         PopSelectViewController *select = [[PopSelectViewController alloc]init];
         NSArray *Optdata  = [NSArray arrayWithObjects:@"可按揭",@"不可按揭",nil];
@@ -771,7 +821,6 @@
         select.definesPresentationContext = YES;
         select.modalPresentationStyle = UIModalPresentationOverCurrentContext;
         self.preferredContentSize = CGSizeMake(Screen_width/2, 50);
-        
         UIView *modalView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, Screen_width, Screen_height)];
         modalView.tag =ModalViewTag;
         modalView.backgroundColor = [[UIColor lightGrayColor] colorWithAlphaComponent:.4];
@@ -847,7 +896,6 @@
             TextDescibe.contentFiled.adjustsFontSizeToFitWidth = YES ;
         };
         [self.navigationController pushViewController:FlatDesVcontroller animated:YES];
-       
     };
     [main addSubview:TextDescibe];
     
@@ -924,7 +972,6 @@
 }
 
 -(void)LogPostDic {
-    
     [self.PostDataDic setObject:@"15018639039" forKey:@"userid"];
     [self.PostDataDic setObject:@"1" forKey:@"isfangyuan"];
     [self.PostDataDic setObject:@"true" forKey:@"zushou"];
@@ -1407,11 +1454,24 @@
 
 #pragma mark －alertViewDelegate
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex NS_DEPRECATED_IOS(2_0, 9_0) {
-     NSLog(@"弹窗序号:%d",buttonIndex);
+
+    NSLog(@"弹窗序号:%d",buttonIndex);
     if(alertView.tag == SuccessAlertTag) {
        [self.navigationController popToRootViewControllerAnimated:YES];
     }
-
+    
+    
+    if(alertView.tag == saveAlertTag) {
+      if(buttonIndex == 0) {
+            NSLog(@"放弃");
+    [self.navigationController popViewControllerAnimated:YES];
+          
+        } else {
+            [self.navigationController setNavigationBarHidden:YES animated:YES];
+            [self.navigationController setNavigationBarHidden:NO animated:YES];
+            NSLog(@"取消");
+        }
+    }
     //执行跳转
 }
 

@@ -18,6 +18,10 @@
 #import "SCNavTabBarController.h"
 #import "MJRefresh.h"
 #import "MBProgressHUD+CZ.h"
+#import "TableViewController.h"
+
+
+
 
 #define SingleBtnWidth   ScreenWidth/2
 #define TopTabBarHeight  32
@@ -33,6 +37,7 @@
     NSMutableArray  *_TabBarBtns;
     UIView          *_bottomLine;
     NSString        *_preName;
+    UISearchController *_searchVC;
     
 }
 
@@ -109,9 +114,18 @@
     search.tintColor = DeafaultColor2;
     search.layer.cornerRadius  = 5.0 ;
     search.backgroundColor = [UIColor  lightGrayColor];
-    self.navigationItem.titleView = search;
+
+    
     
 
+    
+    TableViewController *tableVC = [[TableViewController alloc] initWithStyle:UITableViewStylePlain];
+    _searchVC = [[UISearchController alloc] initWithSearchResultsController:tableVC];
+    _searchVC.searchResultsUpdater = tableVC;
+    _searchVC.hidesNavigationBarDuringPresentation = NO;
+    [_searchVC.searchBar sizeToFit];
+    self.navigationItem.titleView = _searchVC.searchBar;
+    self.definesPresentationContext = YES;
 
     
 }
@@ -303,7 +317,7 @@
     } else if (_status ==WantBuy) {
         _preName =@"[求购]";
     }else {
-        _preName =@"[求助]";
+        _preName =@"[求租]";
     }
 
     

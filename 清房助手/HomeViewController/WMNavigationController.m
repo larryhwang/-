@@ -9,9 +9,15 @@
 #import "WMNavigationController.h"
 #import "WMNavigationInteractiveTransition.h"
 
-@interface WMNavigationController () <UIGestureRecognizerDelegate>
+@interface UINavigationController(UINavigationControllerNeedshouldPopItem)
+- (BOOL)navigationBar:(UINavigationBar *)navigationBar shouldPopItem:(UINavigationItem *)item;  //扩展方法
+@end
+
+@interface WMNavigationController () <UIGestureRecognizerDelegate,UINavigationBarDelegate>
 @property (nonatomic, weak) UIPanGestureRecognizer *popRecognizer;
 @property (nonatomic, strong) WMNavigationInteractiveTransition *navT;
+
+
 
 @end
 
@@ -22,8 +28,7 @@
     self.navigationBar.translucent = YES ;
     UIGestureRecognizer *gesture = self.interactivePopGestureRecognizer;
     gesture.enabled = NO;
-    UIView *gestureView = gesture.view;
-    
+    UIView *gestureView = gesture.view; //怀疑
     UIPanGestureRecognizer *popRecognizer = [[UIPanGestureRecognizer alloc] init];
     popRecognizer.delegate = self;
     popRecognizer.maximumNumberOfTouches = 1;
@@ -46,8 +51,28 @@
 }
 
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
+- (BOOL)navigationBar:(UINavigationBar *)navigationBar shouldPopItem:(UINavigationItem *)item
+{
+    UIViewController *vc = self.topViewController;
+    
+    if ([vc respondsToSelector:@selector(controllerWillPopHandler)])
+    {
+        
+        if ([vc performSelector:@selector(controllerWillPopHandler)])
+        {
+            return [super navigationBar:navigationBar shouldPopItem:item];
+        }
+        else
+        {
+            return NO;
+        }
+    }
+    else
+    {
+        return [super navigationBar:navigationBar shouldPopItem:item];  //退出
+    }
 }
+
+#pragma mark －alertViewDelegate
 
 @end

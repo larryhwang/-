@@ -15,7 +15,6 @@
 @property (weak, nonatomic) IBOutlet UITableView *CategoryTable;
 
 @end
-
 @implementation PostCategory
 
 
@@ -23,7 +22,11 @@
     [super viewDidLoad];
     self.edgesForExtendedLayout = UIRectEdgeNone;
     UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
-    self.navigationItem.backBarButtonItem = item;
+    
+
+    
+   self.navigationItem.backBarButtonItem = item;
+
     self.CategoryTable.scrollEnabled  = NO;
 
 }
@@ -33,6 +36,9 @@
     return 4;
 }
 
+-(void)saveDataAlert {
+    NSLog(@"已拦截");
+}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
@@ -56,6 +62,7 @@
     if (indexPath.row ==0) {
        // cell.textLabel.text  =@"住宅";
         SaleOutPostEditForm *editForm = [[SaleOutPostEditForm alloc]init];
+        
         editForm.title = @"住宅出售";
         [self.navigationController pushViewController:editForm animated:YES];
     } else if (indexPath.row ==1) {

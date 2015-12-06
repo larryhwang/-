@@ -8,6 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol WMNavigationControllerDelegate <NSObject>
+@optional
+- (BOOL)controllerWillPopHandler;
+@end
+
 @interface WMNavigationController : UINavigationController
 
 @end
