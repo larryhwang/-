@@ -49,10 +49,15 @@
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([UITableViewCell class]) forIndexPath:indexPath];
-    NSDictionary *dic = _dataArray[indexPath.row];
-    cell.textLabel.text = dic[@"biaoti"];
+   // UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([UITableViewCell class]) forIndexPath:indexPath];
     
+
+    
+    
+    UITableViewCell *cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:nil];
+    NSDictionary *dic = _dataArray[indexPath.row];
+    cell.textLabel.text  = dic[@"title"];
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"约%@件",dic[@"count"]];  //dic[@"count"];
     return cell;
 }
 
@@ -62,14 +67,26 @@
     if ([intputStr length] ==0) {
         return;
     }
-    NSLog(@"输入数据:%@",intputStr);
-    NSMutableDictionary *param  = [NSMutableDictionary dictionaryWithObjects:@[@"20",@"0",@"1"]
-                                                       forKeys:@[@"sum",@"zushou",@"currentpage"]];
     
-//    NSString *url = @"http://www.123qf.cn:81/testApp/fangyuan/rentalOrBuyHouseSearch.api?sum=20&zushou=0&shengfen=广东省&currentpage=1";
+    NSLog(@"输入数据:%@",intputStr);
+    //筛选API所用的参数列表
+     NSMutableDictionary *param  = [NSMutableDictionary dictionaryWithObjects:@[@"20",@"0",@"1"]
+                                                       forKeys:@[@"sum",@"zushou",@"currentpage"]];
+
+    // http://www.123qf.cn:81/testApp/seach/echoSeach.api?param=%E6%83%A0&isfangyuan=1&state=0
+    // NSString *url = @"http://www.123qf.cn:81/testApp/fangyuan/rentalOrBuyHouseSearch.api?sum=20&zushou=0&shengfen=广东省&currentpage=1";
     [param setObject:intputStr forKey:@"shengfen"];
+    
+    // http://www.123qf.cn:81/testApp/seach/echoSeach.api?param=%E6%83%A0&isfangyuan=1&state=0
+    
+    
+    NSMutableDictionary *param1  = [NSMutableDictionary dictionaryWithObjects:@[@"0",@"1"]
+                                                                     forKeys:@[@"state",@"isfangyuan"]];
+    [param1 setObject:intputStr forKey:@"param"];
+    NSString *SeachBasicURL = @"http://www.123qf.cn:81/testApp/seach/echoSeach.api";
+    
     NSString *url = @"http://www.123qf.cn:81/testApp/fangyuan/rentalOrBuyHouseSearch.api";
-    [_AFNmanager POST:url parameters:param success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [_AFNmanager POST:SeachBasicURL parameters:param1 success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"数据接收%@",responseObject);
         NSNumber *flag = responseObject[@"code"];
         NSArray *ar = responseObject[@"data"];

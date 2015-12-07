@@ -118,8 +118,9 @@
     
     
 
-    
+    NSLog(@"当前状态%d",_status);
     TableViewController *tableVC = [[TableViewController alloc] initWithStyle:UITableViewStylePlain];
+#warning tableVC 需要携带当前的列表的状态，告诉POST要搜索的是求租还是求购的
     _searchVC = [[UISearchController alloc] initWithSearchResultsController:tableVC];
     _searchVC.searchResultsUpdater = tableVC;
     _searchVC.hidesNavigationBarDuringPresentation = NO;
@@ -127,7 +128,6 @@
     self.navigationItem.titleView = _searchVC.searchBar;
     self.definesPresentationContext = YES;
 
-    
 }
 
 
@@ -167,14 +167,13 @@
     HilghtLine.backgroundColor = DeafaultColor ;
     _bottomLine = HilghtLine;
     
-    
     UIButton *Rent  = [UIButton buttonWithType:UIButtonTypeCustom];
     self.RightTab = Rent;
     Rent.tag  = 1 ;
     [Rent setTitle:@"出租" forState:UIControlStateNormal];
     [Rent setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
     [Rent setTitleColor:DeafaultColor forState:UIControlStateSelected];
-    [Rent setFrame:CGRectMake(SingleBtnWidth, 0, SingleBtnWidth  ,TopTabBarHeight )];
+    [Rent setFrame:CGRectMake(SingleBtnWidth, 0, SingleBtnWidth,TopTabBarHeight )];
     [Rent addTarget:self action:@selector(TabBarBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     [_TabBarBtns addObject:Rent];
     
@@ -214,19 +213,7 @@
 }
 
 #warning 缺少进度加载状态
-- (void) LoadNetDataWithURl:(NSString *)url{
-    [self.shareMgr POST:url
-             parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-               //  NSLog(@"右选项卡%@",responseObject);
-                 NSArray *DataArra = responseObject[@"data"];
-                 self.userID = responseObject[@""];
-                 self.DataArr =DataArra;
-                 [self.tableView reloadData];
-             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                 NSLog(@"%@",error);
-             }];
-
-}
+  //[[UIScreen mainScreen] scale]
 
 - (void) LoadNetDataWithCurentURl{
     [MBProgressHUD showMessage:@"正在加载"];
@@ -235,9 +222,20 @@
                  [MBProgressHUD hideHUD];
                //  NSLog(@"右选项卡%@",responseObject);
                  NSArray *DataArra = responseObject[@"data"];
-                 self.userID = responseObject[@""];
-                 self.DataArr =DataArra;
-                 [self.tableView reloadData];
+                 if ([DataArra isKindOfClass:[NSArray class]]) {
+                     self.userID  = responseObject[@""];
+                     self.DataArr = DataArra;
+                     [self.tableView reloadData];
+                 }else {
+                     self.DataArr = @[];
+                     [self.tableView reloadData];
+                     UIAlertView *aleat=[[UIAlertView alloc] initWithTitle:@"提醒" message:@"暂无相关信息" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+                     [aleat show];
+                 }
+                 
+                 
+                 
+
              } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                  NSLog(@"%@",error);
              }];
@@ -288,12 +286,12 @@
 }
 
 -(void)CitySelect {
-    
+    //区域筛选 弹窗
 }
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView {
     NSLog(@"列表滑动");
-    [self.navigationController.view endEditing:YES];
+   [self.navigationController.view endEditing:YES];
 }
 
 #pragma mark -tableViewDelegate
@@ -319,8 +317,6 @@
     }else {
         _preName =@"[求租]";
     }
-
-    
     // 1.创建CELL
     static NSString *ID = @"identifer";
     SalesCell *cell =[tableView dequeueReusableCellWithIdentifier:ID];

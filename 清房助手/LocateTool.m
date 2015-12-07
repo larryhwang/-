@@ -47,7 +47,6 @@ static LocateTool *sharedInstance;    //静态对象，用于标记
     dispatch_once(&onceToken, ^{
         sharedInstance = [super allocWithZone:zone];
     });
-    
     return sharedInstance;
 }
 
@@ -57,7 +56,6 @@ static LocateTool *sharedInstance;    //静态对象，用于标记
     dispatch_once(&onceToken, ^{
         sharedInstance =[[LocateTool alloc]init];
     });
-    
     return sharedInstance;
 }
 
@@ -84,19 +82,14 @@ static LocateTool *sharedInstance;    //静态对象，用于标记
     CLGeocoder *geocoder = [[CLGeocoder alloc] init];
     [geocoder reverseGeocodeLocation:newLocation
                    completionHandler:^(NSArray *placemarks, NSError *error){
-                       
-                       NSLog(@"%@",error);
-                       
                        for (CLPlacemark *place in placemarks) {
                            _CityName = place.locality ;
                            _update(_CityName);   //更新页面
-                    
                            NSUserDefaults *defaults =[NSUserDefaults standardUserDefaults];
                            [defaults setObject:_CityName forKey:@"NowCityname"];
                            [self.delegate passValue:_CityName];
-
                        }
-                        [_locationManager stopUpdatingLocation];
+                           [_locationManager stopUpdatingLocation];
                    }];
    
 }
