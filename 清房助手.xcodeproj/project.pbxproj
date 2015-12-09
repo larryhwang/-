@@ -79,6 +79,10 @@
 		4673A50F1BC8DDA500700099 /* UIView+Frame.m in Sources */ = {isa = PBXBuildFile; fileRef = 4673A50E1BC8DDA500700099 /* UIView+Frame.m */; };
 		4673A5121BC8DEE000700099 /* searchbar_textfield_search_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4673A5101BC8DEE000700099 /* searchbar_textfield_search_icon@2x.png */; };
 		4673A5131BC8DEE000700099 /* searchbar_textfield_background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4673A5111BC8DEE000700099 /* searchbar_textfield_background@2x.png */; };
+		4677DE1C1C1672D700011D70 /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4677DE1B1C1672D700011D70 /* TableViewController.m */; };
+		4677DE201C16741F00011D70 /* SeachRusultDisplayController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4677DE1E1C16741F00011D70 /* SeachRusultDisplayController.m */; };
+		4677DE211C16741F00011D70 /* SeachRusultDisplayController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4677DE1F1C16741F00011D70 /* SeachRusultDisplayController.xib */; };
+		4677DE231C16889300011D70 /* 返回.png in Resources */ = {isa = PBXBuildFile; fileRef = 4677DE221C16889300011D70 /* 返回.png */; };
 		468E28721BCCD47400560500 /* image1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 468E286C1BCCD47400560500 /* image1.jpg */; };
 		468E28731BCCD47400560500 /* image2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 468E286D1BCCD47400560500 /* image2.jpg */; };
 		468E28741BCCD47400560500 /* image3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 468E286E1BCCD47400560500 /* image3.jpg */; };
@@ -165,7 +169,6 @@
 		46D648321BC8E67E000F23EF /* jian-down.png in Resources */ = {isa = PBXBuildFile; fileRef = 46D648311BC8E67E000F23EF /* jian-down.png */; };
 		46D648381BC8E82C000F23EF /* QFTitleButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 46D648371BC8E82C000F23EF /* QFTitleButton.m */; };
 		46D6483A1BC8E925000F23EF /* navigationbar_arrow_down@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 46D648391BC8E925000F23EF /* navigationbar_arrow_down@2x.png */; };
-		46ECF3611C14668D00DB6D36 /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 46ECF3601C14668D00DB6D36 /* TableViewController.m */; };
 		46FBF74D1BDD17FF00F68EE6 /* pStar.png in Resources */ = {isa = PBXBuildFile; fileRef = 46FBF74C1BDD17FF00F68EE6 /* pStar.png */; };
 		7785FD4973E36DF183E5705C /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 93DCD64313F5A1A452276E13 /* libPods.a */; };
 /* End PBXBuildFile section */
@@ -305,6 +308,12 @@
 		4673A50E1BC8DDA500700099 /* UIView+Frame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Frame.m"; sourceTree = "<group>"; };
 		4673A5101BC8DEE000700099 /* searchbar_textfield_search_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "searchbar_textfield_search_icon@2x.png"; sourceTree = "<group>"; };
 		4673A5111BC8DEE000700099 /* searchbar_textfield_background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "searchbar_textfield_background@2x.png"; sourceTree = "<group>"; };
+		4677DE1A1C1672D700011D70 /* TableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TableViewController.h; path = Search/Controller/TableViewController.h; sourceTree = "<group>"; };
+		4677DE1B1C1672D700011D70 /* TableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TableViewController.m; path = Search/Controller/TableViewController.m; sourceTree = "<group>"; };
+		4677DE1D1C16741F00011D70 /* SeachRusultDisplayController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SeachRusultDisplayController.h; path = Search/Controller/SeachRusultDisplayController.h; sourceTree = "<group>"; };
+		4677DE1E1C16741F00011D70 /* SeachRusultDisplayController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SeachRusultDisplayController.m; path = Search/Controller/SeachRusultDisplayController.m; sourceTree = "<group>"; };
+		4677DE1F1C16741F00011D70 /* SeachRusultDisplayController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SeachRusultDisplayController.xib; path = Search/Controller/SeachRusultDisplayController.xib; sourceTree = "<group>"; };
+		4677DE221C16889300011D70 /* 返回.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "返回.png"; sourceTree = "<group>"; };
 		468E286C1BCCD47400560500 /* image1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = image1.jpg; sourceTree = "<group>"; };
 		468E286D1BCCD47400560500 /* image2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = image2.jpg; sourceTree = "<group>"; };
 		468E286E1BCCD47400560500 /* image3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = image3.jpg; sourceTree = "<group>"; };
@@ -445,8 +454,6 @@
 		46D648361BC8E82C000F23EF /* QFTitleButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QFTitleButton.h; sourceTree = "<group>"; };
 		46D648371BC8E82C000F23EF /* QFTitleButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QFTitleButton.m; sourceTree = "<group>"; };
 		46D648391BC8E925000F23EF /* navigationbar_arrow_down@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "navigationbar_arrow_down@2x.png"; sourceTree = "<group>"; };
-		46ECF35F1C14668D00DB6D36 /* TableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewController.h; sourceTree = "<group>"; };
-		46ECF3601C14668D00DB6D36 /* TableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewController.m; sourceTree = "<group>"; };
 		46FBF74C1BDD17FF00F68EE6 /* pStar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pStar.png; sourceTree = "<group>"; };
 		636FD223987F79DDC4D5924B /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		93DCD64313F5A1A452276E13 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -797,6 +804,19 @@
 			path = Category;
 			sourceTree = "<group>";
 		};
+		4677DE161C16710600011D70 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				4677DE1A1C1672D700011D70 /* TableViewController.h */,
+				4677DE1B1C1672D700011D70 /* TableViewController.m */,
+				4677DE1D1C16741F00011D70 /* SeachRusultDisplayController.h */,
+				4677DE1E1C16741F00011D70 /* SeachRusultDisplayController.m */,
+				4677DE1F1C16741F00011D70 /* SeachRusultDisplayController.xib */,
+			);
+			name = Controller;
+			path = ..;
+			sourceTree = "<group>";
+		};
 		468E286B1BCCD46500560500 /* Detail */ = {
 			isa = PBXGroup;
 			children = (
@@ -1008,8 +1028,8 @@
 		46ECF35E1C14633900DB6D36 /* Search */ = {
 			isa = PBXGroup;
 			children = (
-				46ECF35F1C14668D00DB6D36 /* TableViewController.h */,
-				46ECF3601C14668D00DB6D36 /* TableViewController.m */,
+				4677DE221C16889300011D70 /* 返回.png */,
+				4677DE161C16710600011D70 /* Controller */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -1167,6 +1187,7 @@
 				46256C4D1BCF5B7300E05C5F /* FlatLocationCell.xib in Resources */,
 				469C787A1BD9D32F00B22410 /* Launch Screen.storyboard in Resources */,
 				46BBE8DF1C0FD31C00DE4B14 /* SelectJie.xib in Resources */,
+				4677DE211C16741F00011D70 /* SeachRusultDisplayController.xib in Resources */,
 				46BBE8DD1C0FD31C00DE4B14 /* SelectCityVC.xib in Resources */,
 				46BBE8AB1C0FD19400DE4B14 /* loadingIndicator@2x.png in Resources */,
 				46BBE8BD1C0FD23900DE4B14 /* PopSelectViewController.xib in Resources */,
@@ -1195,6 +1216,7 @@
 				4673A4FE1BC89DF700700099 /* background-logo(2).png in Resources */,
 				468E28731BCCD47400560500 /* image2.jpg in Resources */,
 				4697FB341BCB9BAE00D7E24C /* DetailViewController.xib in Resources */,
+				4677DE231C16889300011D70 /* 返回.png in Resources */,
 				468ED0291BD62537001605A7 /* people.png in Resources */,
 				4697FB241BCB8CF200D7E24C /* DeafaultImage.png in Resources */,
 				46714B871BC7CC9800E7AEE9 /* Icon.png in Resources */,
@@ -1260,7 +1282,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				46AFDFA81BCB84A200B49CBE /* UIImageView+HighlightedWebCache.m in Sources */,
-				46ECF3611C14668D00DB6D36 /* TableViewController.m in Sources */,
+				4677DE1C1C1672D700011D70 /* TableViewController.m in Sources */,
 				46C716CD1BC69FB800287742 /* NSObject+MJCoding.m in Sources */,
 				46BBE8BC1C0FD23900DE4B14 /* PopSelectViewController.m in Sources */,
 				463B40641BDD142900B1D26D /* DSNavigationBar.m in Sources */,
@@ -1271,6 +1293,7 @@
 				46714B781BC7C11F00E7AEE9 /* WMCommon.m in Sources */,
 				4673A50F1BC8DDA500700099 /* UIView+Frame.m in Sources */,
 				46252F8C1BDA648C00C1FA66 /* MJRefreshBaseView.m in Sources */,
+				4677DE201C16741F00011D70 /* SeachRusultDisplayController.m in Sources */,
 				46C716CB1BC69FB800287742 /* MJIvar.m in Sources */,
 				46252F8E1BDA648C00C1FA66 /* MJRefreshFooterView.m in Sources */,
 				468ED0211BD5E0E5001605A7 /* SCPopView.m in Sources */,

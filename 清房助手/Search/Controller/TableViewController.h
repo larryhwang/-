@@ -10,4 +10,6 @@
 
 @interface TableViewController : UITableViewController<UISearchResultsUpdating>
 
+@property(nonatomic,assign) CellStatus searchStyle;
+
 @end

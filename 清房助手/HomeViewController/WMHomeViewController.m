@@ -33,20 +33,21 @@
 {
 #pragma mark 优化成结构体
     
-    BOOL            _isSaleStatus;
-    NSMutableArray  *_TabBarBtns;
-    UIView          *_bottomLine;
-    NSString        *_preName;
+    BOOL               _isSaleStatus;
+    NSMutableArray     *_TabBarBtns;
+    UIView             *_bottomLine;
+    NSString           *_preName;
     UISearchController *_searchVC;
     
 }
 
 @property(nonatomic,strong)  NSArray  *DataArr;
 @property(nonatomic,strong)  AFHTTPRequestOperationManager  *shareMgr;
-@property(nonatomic,copy) NSString *userID;
-@property(nonatomic,assign) CellStatus status;
-@property(nonatomic,copy)  NSString *CurrentRuest;
-@property(nonatomic,strong)  NSDictionary  *pramaDic;
+@property(nonatomic,copy)    NSString *userID;
+@property(nonatomic,assign)  CellStatus status;
+@property(nonatomic,copy)    NSString        *CurrentRuest;
+@property(nonatomic,strong)  NSDictionary          *pramaDic;
+@property(nonatomic,weak)    TableViewController   *ResultTableView;
 
 
 
@@ -115,18 +116,21 @@
     search.layer.cornerRadius  = 5.0 ;
     search.backgroundColor = [UIColor  lightGrayColor];
 
-    
-    
-
     NSLog(@"当前状态%d",_status);
     TableViewController *tableVC = [[TableViewController alloc] initWithStyle:UITableViewStylePlain];
+    NSLog(@"tableVC:%@",tableVC);
+
+    self.ResultTableView = tableVC;
 #warning tableVC 需要携带当前的列表的状态，告诉POST要搜索的是求租还是求购的
     _searchVC = [[UISearchController alloc] initWithSearchResultsController:tableVC];
+    NSLog(@"_searchVC:%@",_searchVC);
     _searchVC.searchResultsUpdater = tableVC;
     _searchVC.hidesNavigationBarDuringPresentation = NO;
     [_searchVC.searchBar sizeToFit];
     self.navigationItem.titleView = _searchVC.searchBar;
     self.definesPresentationContext = YES;
+    
+   // UISearchController
 
 }
 
@@ -151,7 +155,7 @@
     [Sales setTitle:@"出售" forState:UIControlStateNormal];
     [Sales setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
     [Sales setTitleColor:DeafaultColor forState:UIControlStateSelected];
-    Sales.selected = YES;
+     Sales.selected = YES;
     [Sales setFrame:CGRectMake(0, 0, SingleBtnWidth ,TopTabBarHeight )];
     [Sales addTarget:self action:@selector(TabBarBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     [_TabBarBtns addObject:Sales];
@@ -197,6 +201,8 @@
 -(void)LeftTableLoad {
     if (_isWant == NO) {
         _status = SalesOut ;   //出售列表
+        self.ResultTableView.searchStyle  =_status;
+         NSLog(@"当前状态%d",_status);
         _CurrentRuest =@"http://www.123qf.cn:81/testApp/fangyuan/rentalOrBuyHouseSearch.api";
         NSDictionary *parameters =@{
                                     @"sum":@"20",
@@ -206,6 +212,7 @@
         self.pramaDic = parameters;
     }else {
          _status = WantBuy;
+         self.ResultTableView.searchStyle  =_status;
   _CurrentRuest = @"http://www.123qf.cn/testApp/keyuan/rentalOrBuyHouseSearch.api?weiTuodate=0&sum=20&fangxiang=initdata&zugou=0";   //求购列表
     }
 
@@ -232,10 +239,6 @@
                      UIAlertView *aleat=[[UIAlertView alloc] initWithTitle:@"提醒" message:@"暂无相关信息" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
                      [aleat show];
                  }
-                 
-                 
-                 
-
              } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                  NSLog(@"%@",error);
              }];
@@ -246,6 +249,8 @@
 -(void)RightTableLoad {
     if (_isWant == NO) {
         _status = RentOut;
+        self.ResultTableView.searchStyle  =_status;
+         NSLog(@"当前状态%d",_status);
                             //出租列表
         self.CurrentRuest = @"http://www.123qf.cn:81/testApp/fangyuan/rentalOrBuyHouseSearch.api";
         NSDictionary *parameters =@{
@@ -257,6 +262,7 @@
 
     }else {
         _status = WantRent;
+        self.ResultTableView.searchStyle  =_status;
         self.CurrentRuest= @"http://www.123qf.cn/testApp/keyuan/rentalOrBuyHouseSearch.api?weituodate=0&sum=20&fangxiang=initdata&zugou=1";  //求租列表
     }
     [self LoadNetDataWithCurentURl];
@@ -301,7 +307,7 @@
 }
 
 -(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-     return self.DataArr.count;
+   return self.DataArr.count;
    
 }
 

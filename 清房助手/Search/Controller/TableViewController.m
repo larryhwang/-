@@ -8,6 +8,16 @@
 
 #import "TableViewController.h"
 #import "AFHTTPRequestOperationManager.h"
+#import "SeachRusultDisplayController.h"
+#import "DetailViewController.h"
+
+
+
+//#define state        @"state";
+//#define isfangyuan   @"isfangyuan";
+//#define param        @"param";
+//#define sum          @"sum";
+//#define currentpage  @"currentpage";
 
 @interface TableViewController ()
 
@@ -18,18 +28,16 @@
     AFHTTPRequestOperationManager *_AFNmanager;
 }
 
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    NSLog(@"接收到的:%d",self.searchStyle);
     self.view.backgroundColor = [UIColor whiteColor];
     _dataArray = [NSMutableArray new];
     AFHTTPRequestOperationManager *manger = [AFHTTPRequestOperationManager manager];
     _AFNmanager = manger;
 
-
-
-    
-
-    
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:NSStringFromClass([UITableViewCell class])];
 }
 
@@ -50,10 +58,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
    // UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([UITableViewCell class]) forIndexPath:indexPath];
-    
 
-    
-    
     UITableViewCell *cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:nil];
     NSDictionary *dic = _dataArray[indexPath.row];
     cell.textLabel.text  = dic[@"title"];
@@ -63,33 +68,42 @@
 
 #pragma mark - UISearchResultsUpdating
 - (void)updateSearchResultsForSearchController:(UISearchController *)searchController {
+    NSLog(@"接收到的:%d",self.searchStyle);
     NSString *intputStr = searchController.searchBar.text;
     if ([intputStr length] ==0) {
         return;
     }
-    
     NSLog(@"输入数据:%@",intputStr);
-    //筛选API所用的参数列表
-     NSMutableDictionary *param  = [NSMutableDictionary dictionaryWithObjects:@[@"20",@"0",@"1"]
-                                                       forKeys:@[@"sum",@"zushou",@"currentpage"]];
-
-    // http://www.123qf.cn:81/testApp/seach/echoSeach.api?param=%E6%83%A0&isfangyuan=1&state=0
-    // NSString *url = @"http://www.123qf.cn:81/testApp/fangyuan/rentalOrBuyHouseSearch.api?sum=20&zushou=0&shengfen=广东省&currentpage=1";
-    [param setObject:intputStr forKey:@"shengfen"];
+    NSMutableDictionary *param  = [NSMutableDictionary dictionaryWithObjects:@[@"0",@"1"]
+                                                                    forKeys:@[@"state",@"isfangyuan"]];
+    switch (_searchStyle) {
+        case 0:
+            [param setObject:@"0" forKey:@"state"];
+            [param setObject:@"1" forKey:@"isfangyuan"];
+            break;
+        case 1:
+            [param setObject:@"1" forKey:@"state"];
+            [param setObject:@"1" forKey:@"isfangyuan"];
+            break;
+        case 2:
+            [param setObject:@"1" forKey:@"state"];
+            [param setObject:@"0" forKey:@"isfangyuan"];
+            break;
+        case 3:
+            [param setObject:@"0" forKey:@"state"];
+            [param setObject:@"1" forKey:@"isfangyuan"];
+            break;
+        default:
+            break;
+    }
     
-    // http://www.123qf.cn:81/testApp/seach/echoSeach.api?param=%E6%83%A0&isfangyuan=1&state=0
-    
-    
-    NSMutableDictionary *param1  = [NSMutableDictionary dictionaryWithObjects:@[@"0",@"1"]
-                                                                     forKeys:@[@"state",@"isfangyuan"]];
-    [param1 setObject:intputStr forKey:@"param"];
+   [param setObject:intputStr forKey:@"param"];
     NSString *SeachBasicURL = @"http://www.123qf.cn:81/testApp/seach/echoSeach.api";
-    
     NSString *url = @"http://www.123qf.cn:81/testApp/fangyuan/rentalOrBuyHouseSearch.api";
-    [_AFNmanager POST:SeachBasicURL parameters:param1 success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [_AFNmanager POST:SeachBasicURL parameters:param success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"数据接收%@",responseObject);
         NSNumber *flag = responseObject[@"code"];
-        NSArray *ar = responseObject[@"data"];
+        NSArray  *ar = responseObject[@"data"];
         if ([flag isEqualToNumber:[NSNumber numberWithInt:1]] ) {
         _dataArray = responseObject[@"data"];
         [self.tableView reloadData];            
@@ -98,24 +112,44 @@
                 _dataArray = (NSMutableArray *)@[];
                 [self.tableView reloadData];
             }
-
         }
-
-        
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"%@",error);
     }];
-    
-    
 }
 
 
 
-#pragma mark -tableMethodDelegate 
-
--(void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
+#pragma mark -tableMethodDelegate
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     //点击搜索结果，跳到详情页面
+    NSDictionary *dict = _dataArray[indexPath.row];
+
+    
     NSLog(@"点击搜索结果");
+    SeachRusultDisplayController *result = [[SeachRusultDisplayController alloc]init];
+    
+    result.ResultListStatus = _searchStyle ;  //状态
+    result.resultDataArr    = _dataArray;     //数组
+    result.searchParam      = dict[@"title"];
+    result.navigationController.navigationBar.barTintColor = [DeafaultColor2 colorWithAlphaComponent:0.5];
+    UINavigationController *search = [[UINavigationController alloc]initWithRootViewController:result];
+    search.navigationController.navigationBar.barTintColor = [DeafaultColor2 colorWithAlphaComponent:0.5];
+
+
+    NSLog(@"导航栏:%@",self.navigationController);
+    NSLog(@"自己:%@",self);
+    [self presentViewController:search animated:NO completion:nil];
+    
 }
+
+
+
+
+
+
+
+
+
 
 @end
