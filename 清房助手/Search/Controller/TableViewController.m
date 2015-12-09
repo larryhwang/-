@@ -12,13 +12,6 @@
 #import "DetailViewController.h"
 
 
-
-//#define state        @"state";
-//#define isfangyuan   @"isfangyuan";
-//#define param        @"param";
-//#define sum          @"sum";
-//#define currentpage  @"currentpage";
-
 @interface TableViewController ()
 
 @end
@@ -33,6 +26,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     NSLog(@"接收到的:%d",self.searchStyle);
+    NSLog(@"TableVC导航类名:%@",[self.navigationController class]);
     self.view.backgroundColor = [UIColor whiteColor];
     _dataArray = [NSMutableArray new];
     AFHTTPRequestOperationManager *manger = [AFHTTPRequestOperationManager manager];
@@ -124,19 +118,14 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     //点击搜索结果，跳到详情页面
     NSDictionary *dict = _dataArray[indexPath.row];
-
-    
-    NSLog(@"点击搜索结果");
+    NSLog(@"点击搜索到的文字结果");
     SeachRusultDisplayController *result = [[SeachRusultDisplayController alloc]init];
-    
-    result.ResultListStatus = _searchStyle ;  //状态
+    result.ResultListStatus = _searchStyle;  //状态
     result.resultDataArr    = _dataArray;     //数组
     result.searchParam      = dict[@"title"];
     result.navigationController.navigationBar.barTintColor = [DeafaultColor2 colorWithAlphaComponent:0.5];
     UINavigationController *search = [[UINavigationController alloc]initWithRootViewController:result];
     search.navigationController.navigationBar.barTintColor = [DeafaultColor2 colorWithAlphaComponent:0.5];
-
-
     NSLog(@"导航栏:%@",self.navigationController);
     NSLog(@"自己:%@",self);
     [self presentViewController:search animated:NO completion:nil];

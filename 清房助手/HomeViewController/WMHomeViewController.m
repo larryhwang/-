@@ -110,28 +110,18 @@
     [CityBtn addTarget:self action:@selector(CitySelect) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:CityBtn];
 
-    
-    QFSearchBar *search = [[QFSearchBar alloc]initWithFrame:CGRectMake(0, 0, 180, 27)];
-    search.tintColor = DeafaultColor2;
-    search.layer.cornerRadius  = 5.0 ;
-    search.backgroundColor = [UIColor  lightGrayColor];
 
-    NSLog(@"当前状态%d",_status);
+#warning tableVC 需要携带当前的列表的状态，告诉POST要搜索的是求租还是求购的
     TableViewController *tableVC = [[TableViewController alloc] initWithStyle:UITableViewStylePlain];
     NSLog(@"tableVC:%@",tableVC);
-
     self.ResultTableView = tableVC;
-#warning tableVC 需要携带当前的列表的状态，告诉POST要搜索的是求租还是求购的
-    _searchVC = [[UISearchController alloc] initWithSearchResultsController:tableVC];
+    _searchVC = [[UISearchController alloc]initWithSearchResultsController:tableVC];
     NSLog(@"_searchVC:%@",_searchVC);
     _searchVC.searchResultsUpdater = tableVC;
     _searchVC.hidesNavigationBarDuringPresentation = NO;
     [_searchVC.searchBar sizeToFit];
     self.navigationItem.titleView = _searchVC.searchBar;
     self.definesPresentationContext = YES;
-    
-   // UISearchController
-
 }
 
 
@@ -139,8 +129,8 @@
     _isWant = NO;  //初始，请求的数据为出租/出售
     _status = SalesOut ;  //初始，
     _TabBarBtns = [NSMutableArray arrayWithCapacity:2];
-    self.tableView.delegate = self;
-    self.tableView.dataSource =self;
+    self.tableView.delegate   = self;
+    self.tableView.dataSource = self;
     AFHTTPRequestOperationManager *mgr  = [AFHTTPRequestOperationManager manager];
     self.shareMgr = mgr ;
 }

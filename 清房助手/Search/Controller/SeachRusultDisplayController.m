@@ -11,6 +11,7 @@
 #import "SalesCell.h"
 #import "UIImageView+WebCache.h"
 #import "DetailViewController.h"
+#import "OneViewController.h"
 
 /**
  *  本页面用于展示搜索结果后的图列表信息
@@ -40,12 +41,11 @@
     return 100;
 }
 
--(void)viewDidAppear:(BOOL)animated {
-    NSLog(@"带图片搜索结果:%@",_dataFromNet);
-    [self.tableview reloadData];
-}
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    NSLog(@"TableVC导航类名:%@",[self.navigationController class]);
     [self basicUISet];
     [self netData];
     NSLog(@"FUCK:%@",self.navigationController);
@@ -69,7 +69,6 @@
 }
 
 -(void)QFshowDetailWithFangYuanID:(NSString *)FangId andFenlei:(NSString *)Fenlei userID:(NSString *)UserId XiaoquName:(NSString *)name ListStatus:(NSString *)status {
-    
     DetailViewController *test = [DetailViewController new];
     test.title = name;
     test.PreTitle = status;
@@ -77,6 +76,7 @@
     test.FenLei = Fenlei;
     test.uerID = UserId;
    [self.navigationController pushViewController:test animated:YES];
+
 }
 
 
