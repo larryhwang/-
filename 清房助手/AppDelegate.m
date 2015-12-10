@@ -28,9 +28,7 @@
     common.screenH = [[UIScreen mainScreen] bounds].size.height;
     
     LoginViewController *login = [LoginViewController new];
-    HomeViewController  *TEST = [HomeViewController new];
-    DetailViewController *TEST2 = [DetailViewController new];
-    SaleOutPostEditForm *SOPE = [SaleOutPostEditForm new];
+
     
     self.window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
     self.window.rootViewController = login;

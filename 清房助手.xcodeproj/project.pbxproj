@@ -54,6 +54,9 @@
 		464356721BC61E9F00A44526 /* log1.png in Resources */ = {isa = PBXBuildFile; fileRef = 464356711BC61E9F00A44526 /* log1.png */; };
 		4652B0561BD48DBB00AA29D9 /* mail.png in Resources */ = {isa = PBXBuildFile; fileRef = 4652B0541BD48DBB00AA29D9 /* mail.png */; };
 		4652B0571BD48DBB00AA29D9 /* tel.png in Resources */ = {isa = PBXBuildFile; fileRef = 4652B0551BD48DBB00AA29D9 /* tel.png */; };
+		465386781C180C4600454E79 /* 筛选.png in Resources */ = {isa = PBXBuildFile; fileRef = 465386771C180C4600454E79 /* 筛选.png */; };
+		4653867C1C1912DC00454E79 /* FilterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4653867A1C1912DB00454E79 /* FilterViewController.m */; };
+		4653867D1C1912DC00454E79 /* FilterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4653867B1C1912DB00454E79 /* FilterViewController.xib */; };
 		46554CC11BC8F2F700480F1A /* arrowDown@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 46554CC01BC8F2F700480F1A /* arrowDown@2x.png */; };
 		46714B751BC7C11F00E7AEE9 /* UIImage+WM.m in Sources */ = {isa = PBXBuildFile; fileRef = 46714B5D1BC7C11F00E7AEE9 /* UIImage+WM.m */; };
 		46714B761BC7C11F00E7AEE9 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 46714B5F1BC7C11F00E7AEE9 /* HomeViewController.m */; };
@@ -272,6 +275,10 @@
 		464356711BC61E9F00A44526 /* log1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = log1.png; sourceTree = "<group>"; };
 		4652B0541BD48DBB00AA29D9 /* mail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mail.png; sourceTree = "<group>"; };
 		4652B0551BD48DBB00AA29D9 /* tel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tel.png; sourceTree = "<group>"; };
+		465386771C180C4600454E79 /* 筛选.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "筛选.png"; sourceTree = "<group>"; };
+		465386791C1912DB00454E79 /* FilterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterViewController.h; sourceTree = "<group>"; };
+		4653867A1C1912DB00454E79 /* FilterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterViewController.m; sourceTree = "<group>"; };
+		4653867B1C1912DB00454E79 /* FilterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FilterViewController.xib; sourceTree = "<group>"; };
 		46554CC01BC8F2F700480F1A /* arrowDown@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrowDown@2x.png"; sourceTree = "<group>"; };
 		46714B5C1BC7C11F00E7AEE9 /* UIImage+WM.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+WM.h"; sourceTree = "<group>"; };
 		46714B5D1BC7C11F00E7AEE9 /* UIImage+WM.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+WM.m"; sourceTree = "<group>"; };
@@ -820,6 +827,9 @@
 				4677DEB11C17F83F00011D70 /* OneViewController.m */,
 				4677DEB21C17F83F00011D70 /* OneViewController.xib */,
 				4677DE1F1C16741F00011D70 /* SeachRusultDisplayController.xib */,
+				465386791C1912DB00454E79 /* FilterViewController.h */,
+				4653867A1C1912DB00454E79 /* FilterViewController.m */,
+				4653867B1C1912DB00454E79 /* FilterViewController.xib */,
 			);
 			name = Controller;
 			path = ..;
@@ -1036,6 +1046,7 @@
 		46ECF35E1C14633900DB6D36 /* Search */ = {
 			isa = PBXGroup;
 			children = (
+				465386771C180C4600454E79 /* 筛选.png */,
 				4677DE221C16889300011D70 /* 返回.png */,
 				4677DE161C16710600011D70 /* Controller */,
 			);
@@ -1205,6 +1216,7 @@
 				4673A4FC1BC89BCB00700099 /* background-logo(1).png in Resources */,
 				4673A5131BC8DEE000700099 /* searchbar_textfield_background@2x.png in Resources */,
 				462847DB1C0EEDC200273B3A /* wenzi.png in Resources */,
+				4653867D1C1912DC00454E79 /* FilterViewController.xib in Resources */,
 				46252F8B1BDA648C00C1FA66 /* MJRefresh.bundle in Resources */,
 				46BBE8CB1C0FD25C00DE4B14 /* CZKeyboardToolbar.xib in Resources */,
 				46D648321BC8E67E000F23EF /* jian-down.png in Resources */,
@@ -1219,6 +1231,7 @@
 				4652B0561BD48DBB00AA29D9 /* mail.png in Resources */,
 				46C716D71BC7645E00287742 /* MBProgressHUD.bundle in Resources */,
 				46714B7A1BC7C11F00E7AEE9 /* WMHomeViewController.xib in Resources */,
+				465386781C180C4600454E79 /* 筛选.png in Resources */,
 				46BBE8E31C0FD31C00DE4B14 /* SelectRegionVC.xib in Resources */,
 				46BBE8AC1C0FD19400DE4B14 /* Overlay.png in Resources */,
 				46BBE8A71C0FD19400DE4B14 /* ELCAssetCollectionPicker.xib in Resources */,
@@ -1374,6 +1387,7 @@
 				4643562A1BC6093B00A44526 /* main.m in Sources */,
 				46714B821BC7C11F00E7AEE9 /* WMPopAnimation.m in Sources */,
 				46C716C91BC69FB800287742 /* MJConst.m in Sources */,
+				4653867C1C1912DC00454E79 /* FilterViewController.m in Sources */,
 				46AFDF9E1BCB84A200B49CBE /* SDWebImageCompat.m in Sources */,
 				46AFDF9D1BCB84A200B49CBE /* SDImageCache.m in Sources */,
 				46CB1A571BFF096000762ACE /* NULLValueJudge.m in Sources */,

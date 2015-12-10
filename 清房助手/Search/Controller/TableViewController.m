@@ -33,6 +33,10 @@
     _AFNmanager = manger;
 
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:NSStringFromClass([UITableViewCell class])];
+    
+
+
+    
 }
 
 
@@ -128,8 +132,13 @@
     search.navigationController.navigationBar.barTintColor = [DeafaultColor2 colorWithAlphaComponent:0.5];
     NSLog(@"导航栏:%@",self.navigationController);
     NSLog(@"自己:%@",self);
-    [self presentViewController:search animated:NO completion:nil];
     
+//    [self presentViewController:search animated:NO completion:nil];
+//    [self dismissViewControllerAnimated:YES completion:nil];
+    
+    UIWindow *mainWindow = [UIApplication sharedApplication].keyWindow;
+    mainWindow.rootViewController = search ;
+
 }
 
 

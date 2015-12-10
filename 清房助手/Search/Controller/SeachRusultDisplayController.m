@@ -12,6 +12,7 @@
 #import "UIImageView+WebCache.h"
 #import "DetailViewController.h"
 #import "OneViewController.h"
+#import "HomeViewController.h"
 
 /**
  *  本页面用于展示搜索结果后的图列表信息
@@ -30,7 +31,6 @@
 
 
 -(NSArray *) dataFromNet {
-    
     if (_dataFromNet ==nil) {
         _dataFromNet = [NSArray new];
     }
@@ -46,6 +46,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     NSLog(@"TableVC导航类名:%@",[self.navigationController class]);
+    self.edgesForExtendedLayout = NO;
+    [self initNav];
     [self basicUISet];
     [self netData];
     NSLog(@"FUCK:%@",self.navigationController);
@@ -53,6 +55,19 @@
 }
 
 
+
+-(void)initNav {
+    UIButton *RightBarBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 65, 27)];
+    UIImageView *img = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"筛选"]];
+    [img setFrame:CGRectMake(0, 0, 27, 27)];
+    [RightBarBtn addSubview:img];
+    [RightBarBtn setTitle:@"筛选" forState:UIControlStateNormal];
+    [RightBarBtn addTarget:self action:@selector(ConditionsFilter) forControlEvents:UIControlEventTouchUpInside];
+    [RightBarBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    RightBarBtn.titleEdgeInsets = UIEdgeInsetsMake(0, 27, 0, 0);
+    UIBarButtonItem *gripeBarBtn = [[UIBarButtonItem alloc]initWithCustomView:RightBarBtn];
+    self.navigationItem.rightBarButtonItem =gripeBarBtn;
+}
 -(void)basicUISet {
     self.title = @"搜索结果";
     [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithRed:20/255.0 green:155/255.0 blue:213/255.0 alpha:1.0]];
@@ -81,10 +96,10 @@
 
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     NSDictionary *dic = self.dataFromNet[indexPath.row];
-    [self QFshowDetailWithFangYuanID:dic[@"id"] andFenlei:dic[@"fenlei"] userID:dic[@"17090239027"] XiaoquName:dic[@"mingcheng"] ListStatus:_preName];
+    [self QFshowDetailWithFangYuanID:dic[@"id"] andFenlei:dic[@"fenlei"] userID:dic[@"userid"] XiaoquName:dic[@"mingcheng"] ListStatus:_preName];
 }
-
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     NSLog(@"单元格数量%d",self.dataFromNet.count);
@@ -92,7 +107,7 @@
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-//
+
     if (_ResultListStatus ==SalesOut) {
         _preName = @"[出售]";
     } else if (_ResultListStatus ==RentOut) {
@@ -119,7 +134,7 @@
     NSString *imgCollects = SingleData[@"tupian"];
     NSArray *imgArray = [imgCollects componentsSeparatedByString:@","];
     NSString *imgURL = [NSString stringWithFormat:@"http://www.123qf.cn/testWeb/img/%@/userfile/qfzs/fy/mini/%@",SingleData[@"userid"],[imgArray firstObject]];
-    
+    NSLog(@"图片地址:%@",imgURL);
     
     NSString *BigTitle = [NSString stringWithFormat:@"%@%@",_preName,SingleData[@"biaoti"]];
     NSArray *titlePartArra = [BigTitle componentsSeparatedByString:@" "]; //
@@ -143,17 +158,6 @@
     }
     cell.postTime.text = [NSString stringWithFormat:@"发布时间:%@",SingleData[@"weituodate"]];
     return cell;
-    
-    
-    
-    
-//以下用于测试
-//    NSDictionary *SingleData = self.dataFromNet[indexPath.row];
-//    UITableViewCell *Cell =[[UITableViewCell alloc]init];
-//    Cell.backgroundColor = [UIColor redColor];
-//    Cell.textLabel.text = SingleData[@"biaoti"];
-//    return Cell;
-
 
 }
 
@@ -162,6 +166,7 @@
     [param setObject:_searchParam forKey:@"param"];
     [param setObject:@"20" forKey:@"sum"];
     [param setObject:@"1"  forKey:@"currentpage"];
+    
     switch (_ResultListStatus) {
         case 0:
             [param setObject:@"0" forKey:@"state"];
@@ -185,20 +190,25 @@
     
     _HttpManager   =  [AFHTTPRequestOperationManager manager];
      NSString *url = @"http://www.123qf.cn:81/testApp/seach/echoSeachFKYuanList.api";
+    
    [_HttpManager POST:url parameters:param success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-      NSLog(@"%@",responseObject);
-      self.dataFromNet = responseObject[@"data"];
-     [self.tableview reloadData];
+    NSLog(@"%@",responseObject);
+    self.dataFromNet = responseObject[@"data"];
+    [self.tableview reloadData];
      } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
          NSLog(@"%@",error);
      }];
-
 }
 
 -(void)Dissback {
     [self dismissViewControllerAnimated:YES completion:nil];
+    HomeViewController *home = [HomeViewController new];
+    KeyWindow.rootViewController = home;
 }
 
+-(void)ConditionsFilter {
+   
+}
 
 
 @end
