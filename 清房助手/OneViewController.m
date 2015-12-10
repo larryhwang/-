@@ -18,7 +18,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    _FilterOptions_ARR = @[@""]
+    _FilterOptions_ARR = @[@"区域",@"用途",@"价格",@"面积",@"电梯"];
+   //用途:  住宅／写字楼／商铺／厂房
+   //商铺:  价格
 
 }
 
