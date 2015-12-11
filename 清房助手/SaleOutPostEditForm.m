@@ -480,7 +480,9 @@
         SelectRegionVC *selectRegion = [SelectRegionVC new];
         selectRegion.delegate = self ;
         selectRegion.indexData = _indexData ;
+        _RegionTF.contentString = @"";
         [self.navigationController pushViewController:selectRegion animated:YES];
+
         NSLog(@"跳转已经执行完");
         
     };
@@ -507,7 +509,7 @@
         select.modalPresentationStyle = UIModalPresentationOverCurrentContext;
         self.preferredContentSize = CGSizeMake(Screen_width/2, 50);
         UIView *modalView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, Screen_width, Screen_height)];
-        modalView.tag =ModalViewTag;
+        modalView.tag = ModalViewTag;
         modalView.backgroundColor = [[UIColor lightGrayColor] colorWithAlphaComponent:.4];
         [self.view addSubview:modalView];
         select.DismissView = ^(){

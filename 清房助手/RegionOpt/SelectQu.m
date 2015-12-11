@@ -10,7 +10,7 @@
 #import "HttpTool.h"
 #import "SelectJie.h"
 
-@interface SelectQu ()<UITableViewDataSource,UITableViewDelegate>
+@interface SelectQu ()<UITableViewDataSource,UITableViewDelegate,SelectRegionDelegate>
 
 @end
 
@@ -55,8 +55,6 @@
         [cell.textLabel setTextColor:[UIColor blackColor]];
         cell.textLabel.font = [UIFont systemFontOfSize:18];
     }
-    
-    
     cell.textLabel.text = singleCityData[@"name"];
     cell.detailTextLabel.text = [NSString stringWithFormat:@"%@", singleCityData[@"code"]];
     
@@ -67,6 +65,19 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
+    //打印导航栏全部视图 :
+    NSLog(@"NavArrs:%@",self.navigationController.viewControllers);
+    //打印如下:
+//    
+//    "<WMHomeViewController: 0x7fc71c17fc60>",
+//    "<PostViewController: 0x7fc71c8558d0>",
+//    "<PostCategory: 0x7fc71c7c7cd0>",
+//    "<SaleOutPostEditForm: 0x7fc71c694ac0>",
+//    "<SelectRegionVC: 0x7fc71c6d0f20>",
+//    "<SelectCityVC: 0x7fc71cb7e4e0>",
+//    "<SelectQu: 0x7fc71ce868f0>"
+    
+    //[self.navigationController.viewControllers objectAtIndex:0];
     
     NSDictionary *dict = [_QuArr objectAtIndex:indexPath.row];
     NSString *proVNname = dict[@"name"]; //城市名
@@ -74,13 +85,15 @@
     [self.delegate appendName:proVNname];     //保存当前选择的城市名
     NSString *url = [NSString stringWithFormat:@"http://www.123qf.cn:81/testApp/area/selectArea.api?parentid=%@",code];
     if ([proVNname isEqualToString:@"市辖区"]) {
-        UIViewController *ed = [self.navigationController.viewControllers objectAtIndex:3];
+        UIViewController *ed = [self.navigationController.viewControllers objectAtIndex:3]; //奇怪的是，序号是0也是一样的
         [self.navigationController popToViewController:ed animated:YES];
     } else{
         [HttpTool QFGet:url parameters:nil success:^(id responseObject) {
         NSArray *arr = responseObject[@"data"];
         SelectJie   *selctJ = [SelectJie new];
-        selctJ.delegate = [self.navigationController.viewControllers objectAtIndex:0]; //传值到编辑首页
+            selctJ.delegate = self;
+            //
+            NSLog(@"街:%@",self.delegate);
         selctJ.JieArr = arr;
         [self.navigationController pushViewController:selctJ animated:YES];             //界面跳转
 
@@ -88,5 +101,9 @@
         NSLog(@"%@",error);
     }];
     }
+}
+
+-(void)appendName:(NSString *)locationName {
+    [self.delegate appendName:locationName];
 }
 @end
