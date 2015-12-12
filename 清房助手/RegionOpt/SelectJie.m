@@ -8,6 +8,10 @@
 
 #import "SelectJie.h"
 #import "HttpTool.h"
+#import "WMNavigationController.h"
+#import "FilterSelectJieViewController.h"
+
+
 
 
 @interface SelectJie ()<UITableViewDataSource,UITableViewDelegate>
@@ -43,7 +47,7 @@
         cell.backgroundColor = [UIColor clearColor];
         cell.contentView.backgroundColor = [UIColor clearColor];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        [cell.textLabel setTextColor:[UIColor blackColor]];
+       [cell.textLabel setTextColor:[UIColor blackColor]];
         cell.textLabel.font = [UIFont systemFontOfSize:18];
     }
 
@@ -57,16 +61,29 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
+//    NSLog(@"%@",self.navigationController.viewControllers);
+//    "<SeachRusultDisplayController: 0x7fdfb73cfc30>",
+//    "<FilterViewController: 0x7fdfb7817ae0>",
+//    "<SelectRegionVC: 0x7fdfb757ea70>",
+//    "<SelectCityVC: 0x7fdfb758b420>",
+//    "<SelectQu: 0x7fdfb7a118a0>"
     
+    NSLog(@"%@",self.navigationController.viewControllers);
     NSDictionary *dict = [_JieArr objectAtIndex:indexPath.row];
     NSString *proVNname = dict[@"name"]; //街道名
-    self.delegate = [self.navigationController.viewControllers objectAtIndex:0]; //传值到编辑首页
-    //保存当前数据
-    [self.delegate appendName:proVNname];
-    [self.delegate updateTableData];
-    UIViewController *ed = self;
+   [self.delegate appendName:proVNname];
+    UIViewController *ed;
+    if ([self.navigationController isKindOfClass:[WMNavigationController class]]) {
+          ed = [self.navigationController.viewControllers objectAtIndex:3];  //发布模块的街道选择
+    }else {
+          ed = [self.navigationController.viewControllers objectAtIndex:1];  //筛选模块的街道选择
+    }
+    
+    
+
+
      //跳回编辑界面
-    [self.navigationController popToViewController:ed animated:YES];
+   [self.navigationController popToViewController:ed animated:YES];
 
 }
 

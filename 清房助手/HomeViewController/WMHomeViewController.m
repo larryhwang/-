@@ -32,13 +32,11 @@
 @interface WMHomeViewController()<UIScrollViewDelegate>
 {
 #pragma mark 优化成结构体
-    
     BOOL               _isSaleStatus;
     NSMutableArray     *_TabBarBtns;
     UIView             *_bottomLine;
     NSString           *_preName;
     UISearchController *_searchVC;
-    
 }
 
 @property(nonatomic,strong)  NSArray  *DataArr;
@@ -286,7 +284,6 @@
 }
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    NSLog(@"列表滑动");
    [self.navigationController.view endEditing:YES];
 }
 

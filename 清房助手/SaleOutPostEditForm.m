@@ -22,6 +22,7 @@
 #import "MBProgressHUD+CZ.h"
 #import "commonFile.h"
 #import "WMNavigationController.h"
+#import "AppDelegate.h"
 
 #define FootButtonWidth    (CellWidth-100)/2
 #define FootButtonHeight   40
@@ -73,6 +74,7 @@
     NSString *_NowCity;
     NSString *_RegionDetailByAppend;
     NSString *_RegionName;
+    NSString *_lastRegionName;
     NSString *_imgs;
     float _count;
     float _hasSlidePosition;
@@ -1090,13 +1092,10 @@
                                                        delegate:self
                                               cancelButtonTitle:nil
                                               otherButtonTitles:@"确定", nil];
-            
             [AW setFrame:CGRectMake(20, 20, 150, 60)];
-            
             [AW show];
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        
     }];
 }
 
@@ -1125,8 +1124,12 @@
 #pragma mark -RegionOptDelegate
 -(void)appendName:(NSString *)locationName {
     //长区域拼接
-    _RegionName  = [_RegionName stringByAppendingString:[NSString stringWithFormat:@"%@ ",locationName]];
-    _RegionTF.contentString = _RegionName ;
+    NSRange isHave = [_lastRegionName rangeOfString:locationName];
+    if (!(isHave.length)) {
+        _RegionName  = [_RegionName stringByAppendingString:[NSString stringWithFormat:@"%@ ",locationName]];
+        _RegionTF.contentString = _RegionName;
+        _lastRegionName = _RegionName;
+    }
 }
 
 
@@ -1142,8 +1145,12 @@
         };
         [Locat StartGetCityName];
         NSLog(@"%@",[Locat GetCityName]);
-        NSDictionary *test =[LoacationNameTool dictionaryWithUrl:@"http://www.123qf.cn:81/testApp/area/selectArea.api?parentid=0"];
-        _indexData   = test;  //地址信息获取
+        
+        AppDelegate  *app = [UIApplication sharedApplication].delegate;
+        
+        
+       // NSDictionary *test =[LoacationNameTool dictionaryWithUrl:@"http://www.123qf.cn:81/testApp/area/selectArea.api?parentid=0"];
+        _indexData   = app.provnceIndexDic;
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"%@",error);
     }];
@@ -1338,7 +1345,7 @@
     // 图片放大显示，或删除等操作
     NSLog(@"index => %ld", (long)index);
     NSArray * arr = @[@"01.jpg",@"02.jpg",@"03.jpg",@"04.jpg",@"05.jpg"];
-
+    
 }
 
 

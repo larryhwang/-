@@ -13,6 +13,8 @@
 #import "DetailViewController.h"
 #import "OneViewController.h"
 #import "HomeViewController.h"
+#import "FilterViewController.h"
+#import "QFTableView_Sco.h"
 
 /**
  *  本页面用于展示搜索结果后的图列表信息
@@ -207,7 +209,12 @@
 }
 
 -(void)ConditionsFilter {
-   
+
+    FilterViewController *FVC =[[FilterViewController alloc]init];
+    FVC.title = @"筛选条件";
+    [self.navigationController pushViewController:FVC animated:YES];
+    
+    
 }
 
 

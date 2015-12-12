@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		460732401BD11C970025D41A /* UILabel+UILabel_SizeWithTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 4607323F1BD11C970025D41A /* UILabel+UILabel_SizeWithTest.m */; };
 		4610F4F41BD22456002A05E9 /* FreeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4610F4F31BD22456002A05E9 /* FreeCell.m */; };
+		4617E63A1C1BADD5007BECBF /* FilterSelectJieViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4617E6391C1BADD5007BECBF /* FilterSelectJieViewController.m */; };
 		46252F8B1BDA648C00C1FA66 /* MJRefresh.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 46252F7B1BDA648C00C1FA66 /* MJRefresh.bundle */; };
 		46252F8C1BDA648C00C1FA66 /* MJRefreshBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 46252F7E1BDA648C00C1FA66 /* MJRefreshBaseView.m */; };
 		46252F8D1BDA648C00C1FA66 /* MJRefreshConst.m in Sources */ = {isa = PBXBuildFile; fileRef = 46252F801BDA648C00C1FA66 /* MJRefreshConst.m */; };
@@ -110,6 +111,7 @@
 		468ED02B1BD62537001605A7 /* search-people.png in Resources */ = {isa = PBXBuildFile; fileRef = 468ED0261BD62537001605A7 /* search-people.png */; };
 		468ED02F1BD62B74001605A7 /* MenuListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 468ED02D1BD62B74001605A7 /* MenuListCell.m */; };
 		468ED0301BD62B74001605A7 /* MenuListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 468ED02E1BD62B74001605A7 /* MenuListCell.xib */; };
+		4692C9CF1C1AC7B40056E706 /* QFTableView_Sco.m in Sources */ = {isa = PBXBuildFile; fileRef = 4692C9CE1C1AC7B40056E706 /* QFTableView_Sco.m */; };
 		4697FB241BCB8CF200D7E24C /* DeafaultImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 4697FB231BCB8CF200D7E24C /* DeafaultImage.png */; };
 		4697FB331BCB9BAE00D7E24C /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4697FB311BCB9BAE00D7E24C /* DetailViewController.m */; };
 		4697FB341BCB9BAE00D7E24C /* DetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4697FB321BCB9BAE00D7E24C /* DetailViewController.xib */; };
@@ -200,6 +202,8 @@
 		4607323F1BD11C970025D41A /* UILabel+UILabel_SizeWithTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+UILabel_SizeWithTest.m"; sourceTree = "<group>"; };
 		4610F4F21BD22456002A05E9 /* FreeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FreeCell.h; sourceTree = "<group>"; };
 		4610F4F31BD22456002A05E9 /* FreeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FreeCell.m; sourceTree = "<group>"; };
+		4617E6381C1BADD5007BECBF /* FilterSelectJieViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterSelectJieViewController.h; sourceTree = "<group>"; };
+		4617E6391C1BADD5007BECBF /* FilterSelectJieViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterSelectJieViewController.m; sourceTree = "<group>"; };
 		462226461BDDBDD500E0D2E9 /* Common.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
 		46252F7B1BDA648C00C1FA66 /* MJRefresh.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MJRefresh.bundle; sourceTree = "<group>"; };
 		46252F7C1BDA648C00C1FA66 /* MJRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefresh.h; sourceTree = "<group>"; };
@@ -356,6 +360,8 @@
 		468ED02C1BD62B74001605A7 /* MenuListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuListCell.h; sourceTree = "<group>"; };
 		468ED02D1BD62B74001605A7 /* MenuListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuListCell.m; sourceTree = "<group>"; };
 		468ED02E1BD62B74001605A7 /* MenuListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MenuListCell.xib; sourceTree = "<group>"; };
+		4692C9CD1C1AC7B40056E706 /* QFTableView_Sco.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QFTableView_Sco.h; sourceTree = "<group>"; };
+		4692C9CE1C1AC7B40056E706 /* QFTableView_Sco.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QFTableView_Sco.m; sourceTree = "<group>"; };
 		4697FB231BCB8CF200D7E24C /* DeafaultImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DeafaultImage.png; sourceTree = "<group>"; };
 		4697FB301BCB9BAE00D7E24C /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
 		4697FB311BCB9BAE00D7E24C /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
@@ -830,6 +836,8 @@
 				465386791C1912DB00454E79 /* FilterViewController.h */,
 				4653867A1C1912DB00454E79 /* FilterViewController.m */,
 				4653867B1C1912DB00454E79 /* FilterViewController.xib */,
+				4617E6381C1BADD5007BECBF /* FilterSelectJieViewController.h */,
+				4617E6391C1BADD5007BECBF /* FilterSelectJieViewController.m */,
 			);
 			name = Controller;
 			path = ..;
@@ -870,6 +878,15 @@
 				46256C501BCF776F00E05C5F /* FlatDetailCell.xib */,
 				4610F4F21BD22456002A05E9 /* FreeCell.h */,
 				4610F4F31BD22456002A05E9 /* FreeCell.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		4692C9CC1C1AC76A0056E706 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				4692C9CD1C1AC7B40056E706 /* QFTableView_Sco.h */,
+				4692C9CE1C1AC7B40056E706 /* QFTableView_Sco.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1046,6 +1063,7 @@
 		46ECF35E1C14633900DB6D36 /* Search */ = {
 			isa = PBXGroup;
 			children = (
+				4692C9CC1C1AC76A0056E706 /* View */,
 				465386771C180C4600454E79 /* 筛选.png */,
 				4677DE221C16889300011D70 /* 返回.png */,
 				4677DE161C16710600011D70 /* Controller */,
@@ -1309,6 +1327,7 @@
 				46BBE8BC1C0FD23900DE4B14 /* PopSelectViewController.m in Sources */,
 				463B40641BDD142900B1D26D /* DSNavigationBar.m in Sources */,
 				46C716CF1BC69FB800287742 /* NSObject+MJKeyValue.m in Sources */,
+				4692C9CF1C1AC7B40056E706 /* QFTableView_Sco.m in Sources */,
 				468ED02F1BD62B74001605A7 /* MenuListCell.m in Sources */,
 				4628481D1C0FCC6C00273B3A /* PostTool.m in Sources */,
 				46BBE8C91C0FD25C00DE4B14 /* CoreLabelModel.m in Sources */,
@@ -1340,6 +1359,7 @@
 				46714B7C1BC7C11F00E7AEE9 /* WMMenuViewController.m in Sources */,
 				46BBE8B01C0FD1A800DE4B14 /* pinyin.m in Sources */,
 				46D33C0E1BCB4B9C00B30F2A /* SalesCell.m in Sources */,
+				4617E63A1C1BADD5007BECBF /* FilterSelectJieViewController.m in Sources */,
 				468E288D1BCD021A00560500 /* FactoryDetailCell.m in Sources */,
 				462847F91C0FCB5600273B3A /* FlatDescirbeVcontroller.m in Sources */,
 				46252F921BDA648C00C1FA66 /* UIView+MJExtension.m in Sources */,

@@ -13,9 +13,9 @@
 @property(nonatomic,strong) UIView   *leftview;
 @property(nonatomic,assign) BOOL isOptionalCell;
 @property(nonatomic,assign) BOOL isNoKeyboardPad;
-@property(nonatomic,strong) NSString  *title;
-@property(nonatomic,strong) NSString  *placeHoderString;
-@property(nonatomic,strong) NSString  *contentString;
+@property(nonatomic,copy) NSString  *title;
+@property(nonatomic,copy) NSString  *placeHoderString;
+@property(nonatomic,copy) NSString  *contentString;
 @property (nonatomic, copy) void (^otherAction)(void);
 @property(nonatomic,strong)  UITextField  *contentFiled;
 +(id)cellWithEqualTitle:(NSString *)name;

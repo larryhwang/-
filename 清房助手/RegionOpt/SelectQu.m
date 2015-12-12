@@ -79,6 +79,13 @@
     
     //[self.navigationController.viewControllers objectAtIndex:0];
     
+    
+    //推向选择街道
+    
+    NSLog(@"当前导航%@",self.navigationController);
+    
+    
+    
     NSDictionary *dict = [_QuArr objectAtIndex:indexPath.row];
     NSString *proVNname = dict[@"name"]; //城市名
     NSString *code = dict[@"code"];
@@ -96,7 +103,6 @@
             NSLog(@"街:%@",self.delegate);
         selctJ.JieArr = arr;
         [self.navigationController pushViewController:selctJ animated:YES];             //界面跳转
-
     } failure:^(NSError *error) {
         NSLog(@"%@",error);
     }];
