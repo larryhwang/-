@@ -87,8 +87,6 @@
 		4677DE201C16741F00011D70 /* SeachRusultDisplayController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4677DE1E1C16741F00011D70 /* SeachRusultDisplayController.m */; };
 		4677DE211C16741F00011D70 /* SeachRusultDisplayController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4677DE1F1C16741F00011D70 /* SeachRusultDisplayController.xib */; };
 		4677DE231C16889300011D70 /* 返回.png in Resources */ = {isa = PBXBuildFile; fileRef = 4677DE221C16889300011D70 /* 返回.png */; };
-		4677DEB31C17F83F00011D70 /* OneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4677DEB11C17F83F00011D70 /* OneViewController.m */; };
-		4677DEB41C17F83F00011D70 /* OneViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4677DEB21C17F83F00011D70 /* OneViewController.xib */; };
 		468E28721BCCD47400560500 /* image1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 468E286C1BCCD47400560500 /* image1.jpg */; };
 		468E28731BCCD47400560500 /* image2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 468E286D1BCCD47400560500 /* image2.jpg */; };
 		468E28741BCCD47400560500 /* image3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 468E286E1BCCD47400560500 /* image3.jpg */; };
@@ -327,9 +325,6 @@
 		4677DE1E1C16741F00011D70 /* SeachRusultDisplayController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SeachRusultDisplayController.m; path = Search/Controller/SeachRusultDisplayController.m; sourceTree = "<group>"; };
 		4677DE1F1C16741F00011D70 /* SeachRusultDisplayController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SeachRusultDisplayController.xib; path = Search/Controller/SeachRusultDisplayController.xib; sourceTree = "<group>"; };
 		4677DE221C16889300011D70 /* 返回.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "返回.png"; sourceTree = "<group>"; };
-		4677DEB01C17F83F00011D70 /* OneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OneViewController.h; sourceTree = "<group>"; };
-		4677DEB11C17F83F00011D70 /* OneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OneViewController.m; sourceTree = "<group>"; };
-		4677DEB21C17F83F00011D70 /* OneViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OneViewController.xib; sourceTree = "<group>"; };
 		468E286C1BCCD47400560500 /* image1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = image1.jpg; sourceTree = "<group>"; };
 		468E286D1BCCD47400560500 /* image2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = image2.jpg; sourceTree = "<group>"; };
 		468E286E1BCCD47400560500 /* image3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = image3.jpg; sourceTree = "<group>"; };
@@ -829,9 +824,6 @@
 				4677DE1B1C1672D700011D70 /* TableViewController.m */,
 				4677DE1D1C16741F00011D70 /* SeachRusultDisplayController.h */,
 				4677DE1E1C16741F00011D70 /* SeachRusultDisplayController.m */,
-				4677DEB01C17F83F00011D70 /* OneViewController.h */,
-				4677DEB11C17F83F00011D70 /* OneViewController.m */,
-				4677DEB21C17F83F00011D70 /* OneViewController.xib */,
 				4677DE1F1C16741F00011D70 /* SeachRusultDisplayController.xib */,
 				465386791C1912DB00454E79 /* FilterViewController.h */,
 				4653867A1C1912DB00454E79 /* FilterViewController.m */,
@@ -1229,7 +1221,6 @@
 				46BBE8AB1C0FD19400DE4B14 /* loadingIndicator@2x.png in Resources */,
 				46BBE8BD1C0FD23900DE4B14 /* PopSelectViewController.xib in Resources */,
 				46BBE8A91C0FD19400DE4B14 /* goods_add_plus@3x.png in Resources */,
-				4677DEB41C17F83F00011D70 /* OneViewController.xib in Resources */,
 				4643566B1BC6149600A44526 /* logo.png in Resources */,
 				4673A4FC1BC89BCB00700099 /* background-logo(1).png in Resources */,
 				4673A5131BC8DEE000700099 /* searchbar_textfield_background@2x.png in Resources */,
@@ -1353,7 +1344,6 @@
 				46AFDF9C1BCB84A200B49CBE /* NSData+ImageContentType.m in Sources */,
 				46BBE8C81C0FD25C00DE4B14 /* CoreLabel.m in Sources */,
 				46C716CE1BC69FB800287742 /* NSObject+MJIvar.m in Sources */,
-				4677DEB31C17F83F00011D70 /* OneViewController.m in Sources */,
 				468E28881BCCFEA400560500 /* FactoryLoactionCell.m in Sources */,
 				462848191C0FCC6C00273B3A /* HttpTool.m in Sources */,
 				46714B7C1BC7C11F00E7AEE9 /* WMMenuViewController.m in Sources */,

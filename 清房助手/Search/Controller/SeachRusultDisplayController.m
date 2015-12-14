@@ -11,7 +11,6 @@
 #import "SalesCell.h"
 #import "UIImageView+WebCache.h"
 #import "DetailViewController.h"
-#import "OneViewController.h"
 #import "HomeViewController.h"
 #import "FilterViewController.h"
 #import "QFTableView_Sco.h"
@@ -20,7 +19,7 @@
  *  本页面用于展示搜索结果后的图列表信息
  */
 
-@interface SeachRusultDisplayController ()<UITableViewDelegate,UITableViewDataSource> {
+@interface SeachRusultDisplayController ()<UITableViewDelegate,UITableViewDataSource,SeachRusultDisplayVCdelegate> {
     AFHTTPRequestOperationManager     *_HttpManager;
     NSString                          *_preName;
 }
@@ -53,7 +52,6 @@
     [self basicUISet];
     [self netData];
     NSLog(@"FUCK:%@",self.navigationController);
-
 }
 
 
@@ -93,7 +91,6 @@
     test.FenLei = Fenlei;
     test.uerID = UserId;
    [self.navigationController pushViewController:test animated:YES];
-
 }
 
 
@@ -196,7 +193,7 @@
    [_HttpManager POST:url parameters:param success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
     NSLog(@"%@",responseObject);
     self.dataFromNet = responseObject[@"data"];
-    [self.tableview reloadData];
+   [self.tableview reloadData];
      } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
          NSLog(@"%@",error);
      }];
@@ -209,13 +206,17 @@
 }
 
 -(void)ConditionsFilter {
-
     FilterViewController *FVC =[[FilterViewController alloc]init];
+    FVC.filterStatus = self.ResultListStatus;
+    FVC.param = _searchParam;  //输入文字后，返回某某几件的title
     FVC.title = @"筛选条件";
-    [self.navigationController pushViewController:FVC animated:YES];
-    
+    FVC.delegate = self;
+   [self.navigationController pushViewController:FVC animated:YES];
     
 }
 
-
+-(void)updateTableWithNewDataArr:(NSArray *)array{
+    self.dataFromNet = array;
+    [self.tableview reloadData];
+}
 @end

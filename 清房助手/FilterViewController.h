@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SeachRusultDisplayController.h"
 
 @interface FilterViewController : UIViewController
+
+@property(nonatomic,copy)   NSString *param;
+@property(nonatomic,assign) CellStatus filterStatus;
+@property(nonatomic,assign) id<SeachRusultDisplayVCdelegate> delegate;
 
 @end

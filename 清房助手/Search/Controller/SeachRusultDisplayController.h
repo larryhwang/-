@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol SeachRusultDisplayVCdelegate <NSObject>
+
+-(void)updateTableWithNewDataArr:(NSArray *)array;
+
+@end
+
 @interface SeachRusultDisplayController : UIViewController
 /**
  *  图列表数据结果
