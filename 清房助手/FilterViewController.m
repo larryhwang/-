@@ -553,28 +553,7 @@
     NSLog(@"输入的内容%@",TFcontentStr);
     //如果没填，就确认为N
 
-    
-#define CustomPriceCellTag 20
-#define RoomStyleCellTag   30
-#define AcreageCellTag     40
-    
-#define RegionTFTag             50
-#define HouseTFTypeTag          60
-#define PriceRangeTFTag         70
-#define AcreageCellTFTag        80
-#define LiftCellTFTag           90
-    
-#define MinPriceTFTag         100
-#define MaxPriceTFTag         110
-    
-#define MinAcreageTFTag       120
-#define MaxAcreageTFTag       130
-    
-    
-    
-#define fangshuTag      150
-#define tingshuTag      160
-#define toiletsTag      170
+
     
     
     switch (textField.tag) {

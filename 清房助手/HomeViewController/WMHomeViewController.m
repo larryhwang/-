@@ -19,6 +19,7 @@
 #import "MJRefresh.h"
 #import "MBProgressHUD+CZ.h"
 #import "TableViewController.h"
+#import "PopSeletedView.h"
 
 
 
@@ -37,15 +38,16 @@
     UIView             *_bottomLine;
     NSString           *_preName;
     UISearchController *_searchVC;
+    BOOL               isSelectedViewPop;   //区域选择是否
 }
 
-@property(nonatomic,strong)  NSArray  *DataArr;
-@property(nonatomic,strong)  AFHTTPRequestOperationManager  *shareMgr;
-@property(nonatomic,copy)    NSString *userID;
-@property(nonatomic,assign)  CellStatus status;
-@property(nonatomic,copy)    NSString        *CurrentRuest;
-@property(nonatomic,strong)  NSDictionary          *pramaDic;
-@property(nonatomic,weak)    TableViewController   *ResultTableView;
+@property(nonatomic,strong)  NSArray                           *DataArr;
+@property(nonatomic,strong)  AFHTTPRequestOperationManager     *shareMgr;
+@property(nonatomic,copy)    NSString                          *userID;
+@property(nonatomic,assign)  CellStatus                        status;
+@property(nonatomic,copy)    NSString                          *CurrentRuest;
+@property(nonatomic,strong)  NSDictionary                      *pramaDic;
+@property(nonatomic,weak)    TableViewController               *ResultTableView;
 
 
 
@@ -281,6 +283,16 @@
 
 -(void)CitySelect {
     //区域筛选 弹窗
+    PopSeletedView *mm = [[PopSeletedView alloc]initWithFrame:CGRectMake(0, 64, ScreenWidth, ScreenHeight/4)];
+    mm.backgroundColor = [UIColor brownColor];
+    [self.view addSubview:mm];
+    [UIView animateWithDuration:2.0 animations:^{
+        [mm setFrame:CGRectMake(0, 64  , ScreenWidth, ScreenHeight/4)];
+    } completion:^(BOOL finished) {
+        
+    }];
+    
+    
 }
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView {

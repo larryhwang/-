@@ -53,6 +53,7 @@
 		4643566C1BC6149600A44526 /* password.png in Resources */ = {isa = PBXBuildFile; fileRef = 464356661BC6149600A44526 /* password.png */; };
 		4643566D1BC6149600A44526 /* user.png in Resources */ = {isa = PBXBuildFile; fileRef = 464356671BC6149600A44526 /* user.png */; };
 		464356721BC61E9F00A44526 /* log1.png in Resources */ = {isa = PBXBuildFile; fileRef = 464356711BC61E9F00A44526 /* log1.png */; };
+		464E17CB1C1FC6CE009ABB88 /* PopSeletedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 464E17CA1C1FC6CE009ABB88 /* PopSeletedView.m */; };
 		4652B0561BD48DBB00AA29D9 /* mail.png in Resources */ = {isa = PBXBuildFile; fileRef = 4652B0541BD48DBB00AA29D9 /* mail.png */; };
 		4652B0571BD48DBB00AA29D9 /* tel.png in Resources */ = {isa = PBXBuildFile; fileRef = 4652B0551BD48DBB00AA29D9 /* tel.png */; };
 		465386781C180C4600454E79 /* 筛选.png in Resources */ = {isa = PBXBuildFile; fileRef = 465386771C180C4600454E79 /* 筛选.png */; };
@@ -275,6 +276,8 @@
 		464356671BC6149600A44526 /* user.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = user.png; sourceTree = "<group>"; };
 		4643566E1BC6159300A44526 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		464356711BC61E9F00A44526 /* log1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = log1.png; sourceTree = "<group>"; };
+		464E17C91C1FC6CE009ABB88 /* PopSeletedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopSeletedView.h; sourceTree = "<group>"; };
+		464E17CA1C1FC6CE009ABB88 /* PopSeletedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopSeletedView.m; sourceTree = "<group>"; };
 		4652B0541BD48DBB00AA29D9 /* mail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mail.png; sourceTree = "<group>"; };
 		4652B0551BD48DBB00AA29D9 /* tel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tel.png; sourceTree = "<group>"; };
 		465386771C180C4600454E79 /* 筛选.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "筛选.png"; sourceTree = "<group>"; };
@@ -547,6 +550,7 @@
 		462847DC1C0EEEBF00273B3A /* Interface */ = {
 			isa = PBXGroup;
 			children = (
+				464E17C71C1FC531009ABB88 /* HomePageSeach */,
 				46ECF35E1C14633900DB6D36 /* Search */,
 				462847DD1C0EEED800273B3A /* Post */,
 				4697FB251BCB9A1300D7E24C /* DeatilViewController */,
@@ -721,6 +725,23 @@
 				4697FB391BCBAF8F00D7E24C /* StringFile.strings */,
 			);
 			name = other;
+			sourceTree = "<group>";
+		};
+		464E17C71C1FC531009ABB88 /* HomePageSeach */ = {
+			isa = PBXGroup;
+			children = (
+				464E17C81C1FC608009ABB88 /* VIew */,
+			);
+			path = HomePageSeach;
+			sourceTree = "<group>";
+		};
+		464E17C81C1FC608009ABB88 /* VIew */ = {
+			isa = PBXGroup;
+			children = (
+				464E17C91C1FC6CE009ABB88 /* PopSeletedView.h */,
+				464E17CA1C1FC6CE009ABB88 /* PopSeletedView.m */,
+			);
+			name = VIew;
 			sourceTree = "<group>";
 		};
 		46714B5B1BC7BFFB00E7AEE9 /* HomeViewController */ = {
@@ -1395,6 +1416,7 @@
 				468ED0201BD5E0E5001605A7 /* SCNavTabBar.m in Sources */,
 				46BBE8DC1C0FD31C00DE4B14 /* SelectCityVC.m in Sources */,
 				4643562A1BC6093B00A44526 /* main.m in Sources */,
+				464E17CB1C1FC6CE009ABB88 /* PopSeletedView.m in Sources */,
 				46714B821BC7C11F00E7AEE9 /* WMPopAnimation.m in Sources */,
 				46C716C91BC69FB800287742 /* MJConst.m in Sources */,
 				4653867C1C1912DC00454E79 /* FilterViewController.m in Sources */,
