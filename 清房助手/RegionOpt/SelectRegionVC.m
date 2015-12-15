@@ -22,7 +22,7 @@
 
 
 
-@interface SelectRegionVC ()<UITableViewDataSource,UITableViewDelegate>
+@interface SelectRegionVC ()<UITableViewDataSource,UITableViewDelegate,SelectRegionDelegate>
 
 @end
 
@@ -166,10 +166,11 @@
     NSString *url = [NSString stringWithFormat:@"http://www.123qf.cn:81/testApp/area/selectArea.api?parentid=%@",code];
     //保存当前数据
     [self.delegate appendName:proVNname];
-    
+    NSLog(@"delegate:%@",self.delegate);
     //页面跳转
     SelectCityVC *SelectCity = [SelectCityVC new];
-    SelectCity.delegate = [self.navigationController.viewControllers objectAtIndex:3]; //PostEdit
+    SelectCity.delegate = self;
+  
     [HttpTool QFGet:url parameters:nil success:^(id responseObject) {
 //        NSLog(@"这里:%@",responseObject);
         NSArray *passArr = responseObject[@"data"];
@@ -179,9 +180,10 @@
     } failure:^(NSError *error) {
         NSLog(@"%@",error);
     }];
-    
-    
-   
+}
+
+-(void)appendName:(NSString *)locationName {
+    [self.delegate appendName:locationName];
 }
 
 @end

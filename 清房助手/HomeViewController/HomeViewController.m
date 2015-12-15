@@ -14,17 +14,17 @@
 #import "DetailViewController.h"
 #import "PostViewController.h"
 
-typedef enum state {
+typedef enum Slidestate {
     kStateHome,
     kStateMenu
-}state;
+}Slidestate;
 
 static const CGFloat viewSlideHorizonRatio = 0.75;
 static const CGFloat viewHeightNarrowRatio = 0.80;
 static const CGFloat menuStartNarrowRatio  = 0.70;
 
 @interface HomeViewController () <WMHomeViewControllerDelegate, WMMenuViewControllerDelegate>
-@property (assign, nonatomic) state   sta;              // 状态(Home or Menu)
+@property (assign, nonatomic) Slidestate   sta;              // 状态(Home or Menu)
 @property (assign, nonatomic) CGFloat distance;         // 距离左边的边距
 @property (assign, nonatomic) CGFloat leftDistance;
 @property (assign, nonatomic) CGFloat menuCenterXStart; // menu起始中点的X
@@ -80,7 +80,7 @@ static const CGFloat menuStartNarrowRatio  = 0.70;
     // 设置控制器的状态，添加手势操作
     self.messageNav = [[WMNavigationController alloc] initWithRootViewController:self.homeVC];
 #pragma mark -导航栏颜色
-    self.messageNav.navigationBar.barTintColor = [[UIColor colorWithRed:0 green:122.0 / 255 blue:1.0 alpha:1.0] colorWithAlphaComponent:0.5];
+    self.messageNav.navigationBar.barTintColor = [DeafaultColor2 colorWithAlphaComponent:0.5];
     self.messageNav.navigationBar.alpha = 0.5 ;
     self.messageNav.navigationBar.tintColor = [UIColor whiteColor];
     [self.messageNav.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],NSForegroundColorAttributeName, nil]];

@@ -146,6 +146,7 @@
        self.ImgTotal = [imgArray count];
        for (NSString *imgName in imgArray) {
            NSString *ImgfullUrl = [NSString stringWithFormat:@"http://www.123qf.cn/testWeb/img/%@/userfile/qfzs/fy/mini/%@",self.uerID,imgName];
+           NSLog(@"详情页的图片地址%@",ImgfullUrl);
            [self.imagesData addObject:ImgfullUrl];
        }   //所有图片地址
        

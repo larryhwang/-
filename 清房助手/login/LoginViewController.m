@@ -12,6 +12,8 @@
 #import "AFNetworking.h"
 #import "MBProgressHUD+CZ.h"
 #import "HomeViewController.h"
+#import "AppDelegate.h"
+#import "LoacationNameTool.h"
 
 @interface LoginViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *userName;
@@ -63,6 +65,9 @@
        }
        long Cp=[responseObject[@"code"] integerValue];
        if (Cp==1) {
+           //获取到省份的数据，并且按首字母拼音分开了
+           AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+           appDelegate.provnceIndexDic = [LoacationNameTool dictionaryWithUrl:@"http://www.123qf.cn:81/testApp/area/selectArea.api?parentid=0"];
            HomeViewController *home = [HomeViewController new];
            KeyWindow.rootViewController = home;
        }else{

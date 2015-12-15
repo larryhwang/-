@@ -20,12 +20,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "&#x6e05;&#x623f;&#x52a9;&#x624b;/HomeViewController/WMHomeViewController.m"
-            timestampString = "471102264.235428"
+            timestampString = "471578822.411547"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "279"
-            endingLineNumber = "279"
-            landmarkName = "-TabBarBtnClick:"
+            startingLineNumber = "281"
+            endingLineNumber = "281"
+            landmarkName = "-CitySelect"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -36,12 +36,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "&#x6e05;&#x623f;&#x52a9;&#x624b;/HomeViewController/WMHomeViewController.m"
-            timestampString = "471102264.235428"
+            timestampString = "471578822.411547"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "258"
-            endingLineNumber = "258"
-            landmarkName = "-RightTableLoad"
+            startingLineNumber = "259"
+            endingLineNumber = "259"
+            landmarkName = "-TabBarBtnClick:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

@@ -9,7 +9,7 @@
 #import "SelectCityVC.h"
 #import "HttpTool.h"
 #import "SelectQu.h"
-@interface SelectCityVC ()<UITableViewDataSource,UITableViewDelegate>
+@interface SelectCityVC ()<UITableViewDataSource,UITableViewDelegate,SelectRegionDelegate>
 
 @end
 
@@ -41,7 +41,6 @@
 - (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     //   NSDictionary
     static NSString *CellIdentifier = @"Cell";
-
     NSDictionary *singleCityData = [_CitiesArr objectAtIndex:indexPath.row];
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
@@ -52,11 +51,8 @@
         [cell.textLabel setTextColor:[UIColor blackColor]];
         cell.textLabel.font = [UIFont systemFontOfSize:18];
     }
-
-    
     cell.textLabel.text = singleCityData[@"name"];
     cell.detailTextLabel.text = [NSString stringWithFormat:@"%@", singleCityData[@"code"]];
-    
     return cell;
     
     
@@ -72,11 +68,15 @@
     [HttpTool QFGet:url parameters:nil success:^(id responseObject) {
         NSArray *arr = responseObject[@"data"];
         SelectQu *selctQ = [SelectQu new];
-        selctQ.delegate = [self.navigationController.viewControllers objectAtIndex:3]; //传值到编辑首页
+        selctQ.delegate = self;
         selctQ.QuArr = arr;
         [self.navigationController pushViewController:selctQ animated:YES];
     } failure:^(NSError *error) {
         NSLog(@"%@",error);
     }];
+}
+
+-(void)appendName:(NSString *)locationName {
+    [self.delegate appendName:locationName];
 }
 @end

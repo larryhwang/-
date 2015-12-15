@@ -32,21 +32,20 @@
 @interface WMHomeViewController()<UIScrollViewDelegate>
 {
 #pragma mark 优化成结构体
-    
-    BOOL            _isSaleStatus;
-    NSMutableArray  *_TabBarBtns;
-    UIView          *_bottomLine;
-    NSString        *_preName;
+    BOOL               _isSaleStatus;
+    NSMutableArray     *_TabBarBtns;
+    UIView             *_bottomLine;
+    NSString           *_preName;
     UISearchController *_searchVC;
-    
 }
 
 @property(nonatomic,strong)  NSArray  *DataArr;
 @property(nonatomic,strong)  AFHTTPRequestOperationManager  *shareMgr;
-@property(nonatomic,copy) NSString *userID;
-@property(nonatomic,assign) CellStatus status;
-@property(nonatomic,copy)  NSString *CurrentRuest;
-@property(nonatomic,strong)  NSDictionary  *pramaDic;
+@property(nonatomic,copy)    NSString *userID;
+@property(nonatomic,assign)  CellStatus status;
+@property(nonatomic,copy)    NSString        *CurrentRuest;
+@property(nonatomic,strong)  NSDictionary          *pramaDic;
+@property(nonatomic,weak)    TableViewController   *ResultTableView;
 
 
 
@@ -109,25 +108,18 @@
     [CityBtn addTarget:self action:@selector(CitySelect) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:CityBtn];
 
-    
-    QFSearchBar *search = [[QFSearchBar alloc]initWithFrame:CGRectMake(0, 0, 180, 27)];
-    search.tintColor = DeafaultColor2;
-    search.layer.cornerRadius  = 5.0 ;
-    search.backgroundColor = [UIColor  lightGrayColor];
 
-    
-    
-
-    
+#warning tableVC 需要携带当前的列表的状态，告诉POST要搜索的是求租还是求购的
     TableViewController *tableVC = [[TableViewController alloc] initWithStyle:UITableViewStylePlain];
-    _searchVC = [[UISearchController alloc] initWithSearchResultsController:tableVC];
+    NSLog(@"tableVC:%@",tableVC);
+    self.ResultTableView = tableVC;
+    _searchVC = [[UISearchController alloc]initWithSearchResultsController:tableVC];
+    NSLog(@"_searchVC:%@",_searchVC);
     _searchVC.searchResultsUpdater = tableVC;
     _searchVC.hidesNavigationBarDuringPresentation = NO;
     [_searchVC.searchBar sizeToFit];
     self.navigationItem.titleView = _searchVC.searchBar;
     self.definesPresentationContext = YES;
-
-    
 }
 
 
@@ -135,8 +127,8 @@
     _isWant = NO;  //初始，请求的数据为出租/出售
     _status = SalesOut ;  //初始，
     _TabBarBtns = [NSMutableArray arrayWithCapacity:2];
-    self.tableView.delegate = self;
-    self.tableView.dataSource =self;
+    self.tableView.delegate   = self;
+    self.tableView.dataSource = self;
     AFHTTPRequestOperationManager *mgr  = [AFHTTPRequestOperationManager manager];
     self.shareMgr = mgr ;
 }
@@ -151,7 +143,7 @@
     [Sales setTitle:@"出售" forState:UIControlStateNormal];
     [Sales setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
     [Sales setTitleColor:DeafaultColor forState:UIControlStateSelected];
-    Sales.selected = YES;
+     Sales.selected = YES;
     [Sales setFrame:CGRectMake(0, 0, SingleBtnWidth ,TopTabBarHeight )];
     [Sales addTarget:self action:@selector(TabBarBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     [_TabBarBtns addObject:Sales];
@@ -167,14 +159,13 @@
     HilghtLine.backgroundColor = DeafaultColor ;
     _bottomLine = HilghtLine;
     
-    
     UIButton *Rent  = [UIButton buttonWithType:UIButtonTypeCustom];
     self.RightTab = Rent;
     Rent.tag  = 1 ;
     [Rent setTitle:@"出租" forState:UIControlStateNormal];
     [Rent setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
     [Rent setTitleColor:DeafaultColor forState:UIControlStateSelected];
-    [Rent setFrame:CGRectMake(SingleBtnWidth, 0, SingleBtnWidth  ,TopTabBarHeight )];
+    [Rent setFrame:CGRectMake(SingleBtnWidth, 0, SingleBtnWidth,TopTabBarHeight )];
     [Rent addTarget:self action:@selector(TabBarBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     [_TabBarBtns addObject:Rent];
     
@@ -198,6 +189,8 @@
 -(void)LeftTableLoad {
     if (_isWant == NO) {
         _status = SalesOut ;   //出售列表
+        self.ResultTableView.searchStyle  =_status;
+         NSLog(@"当前状态%d",_status);
         _CurrentRuest =@"http://www.123qf.cn:81/testApp/fangyuan/rentalOrBuyHouseSearch.api";
         NSDictionary *parameters =@{
                                     @"sum":@"20",
@@ -207,6 +200,7 @@
         self.pramaDic = parameters;
     }else {
          _status = WantBuy;
+         self.ResultTableView.searchStyle  =_status;
   _CurrentRuest = @"http://www.123qf.cn/testApp/keyuan/rentalOrBuyHouseSearch.api?weiTuodate=0&sum=20&fangxiang=initdata&zugou=0";   //求购列表
     }
 
@@ -214,19 +208,7 @@
 }
 
 #warning 缺少进度加载状态
-- (void) LoadNetDataWithURl:(NSString *)url{
-    [self.shareMgr POST:url
-             parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-               //  NSLog(@"右选项卡%@",responseObject);
-                 NSArray *DataArra = responseObject[@"data"];
-                 self.userID = responseObject[@""];
-                 self.DataArr =DataArra;
-                 [self.tableView reloadData];
-             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                 NSLog(@"%@",error);
-             }];
-
-}
+  //[[UIScreen mainScreen] scale]
 
 - (void) LoadNetDataWithCurentURl{
     [MBProgressHUD showMessage:@"正在加载"];
@@ -235,9 +217,16 @@
                  [MBProgressHUD hideHUD];
                //  NSLog(@"右选项卡%@",responseObject);
                  NSArray *DataArra = responseObject[@"data"];
-                 self.userID = responseObject[@""];
-                 self.DataArr =DataArra;
-                 [self.tableView reloadData];
+                 if ([DataArra isKindOfClass:[NSArray class]]) {
+                     self.userID  = responseObject[@""];
+                     self.DataArr = DataArra;
+                     [self.tableView reloadData];
+                 }else {
+                     self.DataArr = @[];
+                     [self.tableView reloadData];
+                     UIAlertView *aleat=[[UIAlertView alloc] initWithTitle:@"提醒" message:@"暂无相关信息" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+                     [aleat show];
+                 }
              } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                  NSLog(@"%@",error);
              }];
@@ -248,6 +237,8 @@
 -(void)RightTableLoad {
     if (_isWant == NO) {
         _status = RentOut;
+        self.ResultTableView.searchStyle  =_status;
+         NSLog(@"当前状态%d",_status);
                             //出租列表
         self.CurrentRuest = @"http://www.123qf.cn:81/testApp/fangyuan/rentalOrBuyHouseSearch.api";
         NSDictionary *parameters =@{
@@ -259,6 +250,7 @@
 
     }else {
         _status = WantRent;
+        self.ResultTableView.searchStyle  =_status;
         self.CurrentRuest= @"http://www.123qf.cn/testApp/keyuan/rentalOrBuyHouseSearch.api?weituodate=0&sum=20&fangxiang=initdata&zugou=1";  //求租列表
     }
     [self LoadNetDataWithCurentURl];
@@ -288,12 +280,11 @@
 }
 
 -(void)CitySelect {
-    
+    //区域筛选 弹窗
 }
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    NSLog(@"列表滑动");
-    [self.navigationController.view endEditing:YES];
+   [self.navigationController.view endEditing:YES];
 }
 
 #pragma mark -tableViewDelegate
@@ -303,7 +294,7 @@
 }
 
 -(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-     return self.DataArr.count;
+   return self.DataArr.count;
    
 }
 
@@ -319,8 +310,6 @@
     }else {
         _preName =@"[求租]";
     }
-
-    
     // 1.创建CELL
     static NSString *ID = @"identifer";
     SalesCell *cell =[tableView dequeueReusableCellWithIdentifier:ID];
