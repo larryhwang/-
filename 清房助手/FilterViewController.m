@@ -22,7 +22,6 @@
      地址如果是不限呢
  
  *
- *  @return <#return value description#>
  */
 
 #define ModalViewTag   99
@@ -103,6 +102,23 @@
     return _AdressKeyArr;
 }
 
+
+
+
+-(void)addCell:(EditCell *)headcell After:(EditCell *)cell {
+    int index =0;
+    for (EditCell *Singlecell in self.main.Cell_NSArr) {
+        NSLog(@"insertCell:%@",cell);
+         ++index ;
+        if ([Singlecell isEqual:cell]) {
+            NSLog(@"hunted");
+            break;
+        }
+    }
+     [self.main.Cell_NSArr insertObject:headcell atIndex:index];
+    
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self pramaInit];
@@ -110,7 +126,7 @@
     _RegionTF = RegionOption;
     RegionOption.title = @"区域:";
     RegionOption.isOptionalCell = YES;
-    RegionOption.placeHoderString = @"请选择";
+    RegionOption.placeHoderString = @"不限";
     //区域选择可以不限
     RegionOption.otherAction = ^(){
         NSLog(@"区域选项!");
@@ -126,7 +142,7 @@
     EditCell *HouseType = [[EditCell alloc]init];
     HouseType.isOptionalCell = YES ;
     HouseType.title = @"用途:";
-    HouseType.placeHoderString = @"请选择:";
+    HouseType.placeHoderString = @"不限";
     HouseType.otherAction =^{
         PopSelectViewController *select = [[PopSelectViewController alloc]init];
         NSArray *Optdata  = [NSArray arrayWithObjects:@"住宅",@"商铺",@"厂房",@"写字楼",nil];
@@ -182,7 +198,8 @@
                 YangTaiLabel.text = @"阳台";
                 [YangTaiLabel setTextColor:[UIColor lightGrayColor]];
                 [RoomStyle addSubview:YangTaiLabel];
-                [self.main.Cell_NSArr insertObject:RoomStyle atIndex:2];
+             //   [self.main.Cell_NSArr insertObject:RoomStyle atIndex:2];
+                [self addCell:RoomStyle After:HouseType];
                 [self.main layoutSubviews];
             } else {
                 //若不是住宅，1.删除之前添加的Cell  2.保存数据
@@ -214,10 +231,10 @@
     EditCell *PriceRange = [[EditCell alloc]init];
     PriceRange.isOptionalCell = YES ;
     PriceRange.title = @"价格:";
-    PriceRange.placeHoderString = @"请选择:";
+    PriceRange.placeHoderString = @"不限";
     PriceRange.otherAction =^{
         PopSelectViewController *select = [[PopSelectViewController alloc]init];
-        NSArray *Optdata  = [NSArray arrayWithObjects:@"20-30",@"30-50",@"50-80",@"自定义",nil];
+        NSArray *Optdata  = [NSArray arrayWithObjects:@"20-30",@"30-50",@"50-80",@"自定义",@"不限",nil];
         select.pikerDataArr = Optdata;
         select.providesPresentationContextTransitionStyle = YES;
         select.definesPresentationContext = YES;
@@ -260,11 +277,12 @@
                 [UnintLable setTextColor:[UIColor lightGrayColor]];
                 UnintLable.text = @"万元";
                 [CustomsPriceRange addSubview:UnintLable];
-                [self.main.Cell_NSArr insertObject:CustomsPriceRange atIndex:3];
+               // [self.main.Cell_NSArr insertObject:CustomsPriceRange atIndex:3];
+                [self addCell:CustomsPriceRange After:PriceRange];
                 [self.main layoutSubviews];
             } else {
                 if ([passString isEqualToString:@"不限"]) {
-                   [self.PostDictionary setObject:@"" forKey:@"price"];
+                //   [self.PostDictionary setObject:@"" forKey:@"price"];
                 }else {
                    [self.PostDictionary setObject:passString forKey:@"price"];
                    [self removeCellWithTag:CustomPriceCellTag];
@@ -280,10 +298,10 @@
     EditCell *AcreageCell = [[EditCell alloc]init];
     AcreageCell.isOptionalCell = YES ;
     AcreageCell.title = @"面积:";
-    AcreageCell.placeHoderString = @"请选择:";
+    AcreageCell.placeHoderString = @"不限";
     AcreageCell.otherAction =^{
         PopSelectViewController *select = [[PopSelectViewController alloc]init];
-        NSArray *Optdata  = [NSArray arrayWithObjects:@"20-30",@"30-50",@"50+",@"不限",@"自定义",nil];  //面积有没有不限，不限传什么参数
+        NSArray *Optdata  = [NSArray arrayWithObjects:@"20-30",@"30-50",@"50-100",@"不限",@"自定义",nil];  //面积有没有不限，不限传什么参数
         select.pikerDataArr = Optdata;
         select.providesPresentationContextTransitionStyle = YES;
         select.definesPresentationContext = YES;
@@ -325,12 +343,13 @@
                 [UnintLable setTextColor:[UIColor lightGrayColor]];
                 UnintLable.text = @"平方米";
                 [CustomsAcreageRange addSubview:UnintLable];
-                [self.main.Cell_NSArr insertObject:CustomsAcreageRange atIndex:4];
+               // [self.main.Cell_NSArr insertObject:CustomsAcreageRange atIndex:4];
+                [self addCell:CustomsAcreageRange After:AcreageCell];
                 [self.main layoutSubviews];
             } else {
                 //如果不是自定义 ，先保存数据
                 if([passString isEqualToString:@"不限"]) {
-                    [self.PostDictionary setObject:@"" forKey:@"mianji"];
+                   // [self.PostDictionary setObject:@"" forKey:@"mianji"];
                 } else {
                     [self.PostDictionary setObject:passString forKey:@"mianji"];
                     [self removeCellWithTag:AcreageCellTag];
@@ -346,7 +365,7 @@
     EditCell *LiftCell = [[EditCell alloc]init];
     LiftCell.isOptionalCell = YES ;
     LiftCell.title = @"电梯:";
-    LiftCell.placeHoderString = @"请选择:";
+    LiftCell.placeHoderString = @"不限";
     LiftCell.otherAction =^{
         PopSelectViewController *select = [[PopSelectViewController alloc]init];
         NSArray *Optdata  = [NSArray arrayWithObjects:@"有电梯",@"无电梯",@"不限",nil];
@@ -371,7 +390,7 @@
             } else if([passString isEqualToString:@"无电梯"]){
                 [self.PostDictionary setObject:[NSNumber numberWithInt:0] forKey:@"dianti"];
             } else {
-                [self.PostDictionary setObject:@"" forKey:@"dianti"]; //不限
+              //  [self.PostDictionary setObject:@"" forKey:@"dianti"]; //不限
             }
             
             
@@ -433,8 +452,7 @@
     _tingshuStr = @"N";
     _toiletsStr = @"N";
     _balconysStr= @"N";
-    
-//    http://www.123qf.cn:81/testApp/seach/echoSeachFKYuanList.api?param=%E5%93%87%E5%92%94%E5%92%94%E4%B8%9A%E4%B8%BB%E6%80%A5%E5%94%AE&isfangyuan=1&state=1&currentpage=1&sum=20&shengfen=%E5%B9%BF%E4%B8%9C%E7%9C%81&shi=%E6%83%A0%E5%B7%9E%E5%B8%82&qu=%E6%83%A0%E5%9F%8E%E5%8C%BA&region=%E6%B2%B3%E5%8D%97%E5%B2%B8&zhuangtai=0&yongtu=0&price=1-1000&unit=%E4%B8%87%E5%85%83&mianji=1-1000&dianti=true&hucate=4-N-N-N
+
 //    //设置地址的KeyArr
     self.AdressKeyArr =  @[@"shengfen",@"shi",@"qu",@"region"];
     
@@ -458,7 +476,6 @@
     [self FormatHouseTypeData];  //拼接上传户型的参数
     [self FormatAdressData];     //拼接地址参赛
   // 跳转到上一个页面，并更新数据 是这个？
-//http://www.123qf.cn:81/testApp/seach/echoSeachFKYuanList.api?param=%E5%B9%BF%E4%B8%9C%E7%9C%81&isfangyuan=0&state=1&sum=20&fangxiang=refresh&zone=%E6%B2%B3%E5%8D%97%E5%B2%B8&yongtu=0&price=10-100&mianji=10-120&dianti=1&hucate=N-1-N-N&currentpage=1
     
     //所需参数   param //上一次用什么关键字检索的
     /**
@@ -500,10 +517,6 @@
     NSLog(@"上传参数:%@",_PostDictionary);
     
     
-    
-    
-    
-    
     //开始网络请求
     [MBProgressHUD showMessage:@"正在加载"];
     NSString *basicURL = @"http://www.123qf.cn:81/testApp/seach/echoSeachFKYuanList.api";
@@ -531,15 +544,6 @@
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         NSLog(@"");
     }];
-    
-    
-    
-    
-    
-    
-    
-    
-
 }
 
 -(void)textFieldDidEndEditing:(UITextField *)textField {
@@ -607,22 +611,26 @@
 -(void)FormatHouseTypeData {
     _completeHuXing = @"";
     _completeHuXing = [NSString stringWithFormat:@"%@-%@-%@-%@",_fangshuStr,_tingshuStr,_toiletsStr,_balconysStr];
+    if ([_completeHuXing isEqualToString:@"N-N-N-N"]) {
+        return;
+    }
     [self.PostDictionary setObject:_completeHuXing forKey:@"hucate"];
 }
 
 
 
 -(void)FormatAdressData {
-//  NSString
     NSMutableArray *Namespart  = (NSMutableArray *)[_RegionName componentsSeparatedByString:@" "];
-    [Namespart removeObject:[Namespart lastObject ]];
-    NSLog(@"地域名称拆分%@---数量%d",Namespart,[Namespart count]);
-    
-    int i = 0;
-    for (NSString *str in Namespart) {
-        [self.PostDictionary setObject:str forKey:self.AdressKeyArr[i++]];
+    if (Namespart.count >1) {
+        [Namespart removeObject:[Namespart lastObject]];
     }
     
+    if ([Namespart count]>1) {
+        int i = 0;
+        for (NSString *str in Namespart) {
+            [self.PostDictionary setObject:str forKey:self.AdressKeyArr[i++]];
+        }
+    }
 }
 
 
