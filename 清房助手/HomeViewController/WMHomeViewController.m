@@ -73,11 +73,19 @@
     return _DataArr;
 }
 
+-(void)back {
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
 
     [self ParameterInit];
     [self TopTabBarUISet];  //顶部切换设置
+    
+    UIButton *btn =[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 30, 40)];
+    [btn setTitle:@"反" forState:UIControlStateNormal];
+    [btn addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
     self.navigationItem.backBarButtonItem = item;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;

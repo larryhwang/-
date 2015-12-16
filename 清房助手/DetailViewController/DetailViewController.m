@@ -30,6 +30,9 @@
 #define ImgScoviewTag 12
 
 
+#define DSystenVersion            ([[[UIDevice currentDevice] systemVersion] doubleValue])
+#define SSystemVersion            ([[UIDevice currentDevice] systemVersion])
+
 @interface DetailViewController ()
 <UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate,UIAlertViewDelegate,MFMessageComposeViewControllerDelegate>
 @property (strong, nonatomic)  UIScrollView *scrollView3;
@@ -46,7 +49,7 @@
 @property(nonatomic,strong)    UILabel *Name;
 @property(nonatomic,strong)    UILabel *Publisher;
 @property(nonatomic,strong)    UILabel *Tele;
-@property(nonatomic,weak)      UIButton *CountLabel;
+@property(nonatomic,strong)      UIButton *CountLabel;
 
 
 
@@ -324,7 +327,6 @@
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     
-    
     if (scrollView.tag ==ImgScoviewTag) {
         NSInteger pageIndex = scrollView.contentOffset.x / CGRectGetWidth(scrollView.frame);
         NSString  *nowSelected =[NSString stringWithFormat:@"%d/%d",pageIndex + 1,self.ImgTotal];
@@ -335,8 +337,7 @@
         [HeavyNo addAttribute:NSFontAttributeName value:HeavyFont range:rangeHeavyPart];
         [self.CountLabel.titleLabel setAttributedText:HeavyNo];
     }else {
-        NSLog(@"啊");
-         return ;
+        return ;
     }
 
 
@@ -508,7 +509,6 @@
             [AW show];
         }
             
-            
             break;
         case MessageComposeResultFailed:
             //信息传送失败
@@ -567,6 +567,10 @@
 }
 
 
+-(void)dealloc {
+ self.scrollView3.delegate = nil;
+ self.detailInfoTable.delegate = nil;
 
+}
 
 @end
