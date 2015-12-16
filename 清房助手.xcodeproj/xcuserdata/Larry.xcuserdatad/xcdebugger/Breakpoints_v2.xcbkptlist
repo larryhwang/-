@@ -25,7 +25,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "282"
             endingLineNumber = "282"
-            landmarkName = "-CitySelect"
+            landmarkName = "-clicked"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -41,8 +41,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "260"
             endingLineNumber = "260"
-            landmarkName = "-TabBarBtnClick:"
-            landmarkType = "5">
+            landmarkName = "@implementation WMHomeViewController"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

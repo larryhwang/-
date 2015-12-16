@@ -9,6 +9,8 @@
 #import "PopSeletedView.h"
 #import <AFNetworking/AFHTTPRequestOperationManager.h>
 
+
+
 @implementation PopSeletedView
 
 -(id)initWithFrame:(CGRect)frame {

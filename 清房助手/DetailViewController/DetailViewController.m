@@ -27,6 +27,7 @@
 #define Padding  8
 #define IMGGALLAERY 10
 #define DETAILTABLE   11
+#define ImgScoviewTag 12
 
 
 @interface DetailViewController ()
@@ -304,6 +305,7 @@
     
     self.scrollView3.pagingEnabled = YES ;
     self.scrollView3.delegate = self ;
+    self.scrollView3.tag = ImgScoviewTag;
     self.scrollView3.showsHorizontalScrollIndicator  =  NO ;
     self.imagesData = [NSMutableArray array];
     self.detailInfoTable.tableHeaderView = HeaderContent;
@@ -323,18 +325,21 @@
 {
     
     
-    if (scrollView.tag ==DETAILTABLE) {
-        [self.view endEditing:YES];
+    if (scrollView.tag ==ImgScoviewTag) {
+        NSInteger pageIndex = scrollView.contentOffset.x / CGRectGetWidth(scrollView.frame);
+        NSString  *nowSelected =[NSString stringWithFormat:@"%d/%d",pageIndex + 1,self.ImgTotal];
+        [self.CountLabel setTitle:nowSelected forState:UIControlStateNormal];
+        self.CountLabel.titleLabel.text = nowSelected ;
+        NSMutableAttributedString *HeavyNo = [[NSMutableAttributedString alloc]initWithString:nowSelected];
+        NSRange rangeHeavyPart =  NSMakeRange(0, 2);
+        [HeavyNo addAttribute:NSFontAttributeName value:HeavyFont range:rangeHeavyPart];
+        [self.CountLabel.titleLabel setAttributedText:HeavyNo];
+    }else {
+        NSLog(@"啊");
+         return ;
     }
-    
-    NSInteger pageIndex = scrollView.contentOffset.x / CGRectGetWidth(scrollView.frame);
-    NSString  *nowSelected =[NSString stringWithFormat:@"%d/%d",pageIndex + 1,self.ImgTotal];
-    [self.CountLabel setTitle:nowSelected forState:UIControlStateNormal];
-    self.CountLabel.titleLabel.text = nowSelected ;
-    NSMutableAttributedString *HeavyNo = [[NSMutableAttributedString alloc]initWithString:nowSelected];
-    NSRange rangeHeavyPart =  NSMakeRange(0, 2);
-    [HeavyNo addAttribute:NSFontAttributeName value:HeavyFont range:rangeHeavyPart];
-    [self.CountLabel.titleLabel setAttributedText:HeavyNo];
+
+
     
 }
 

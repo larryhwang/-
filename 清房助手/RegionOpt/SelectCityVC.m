@@ -48,14 +48,12 @@
         cell.backgroundColor = [UIColor clearColor];
         cell.contentView.backgroundColor = [UIColor clearColor];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        [cell.textLabel setTextColor:[UIColor blackColor]];
+       [cell.textLabel setTextColor:[UIColor blackColor]];
         cell.textLabel.font = [UIFont systemFontOfSize:18];
     }
     cell.textLabel.text = singleCityData[@"name"];
     cell.detailTextLabel.text = [NSString stringWithFormat:@"%@", singleCityData[@"code"]];
     return cell;
-    
-    
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
