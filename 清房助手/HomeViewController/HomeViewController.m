@@ -215,6 +215,7 @@ static const CGFloat menuStartNarrowRatio  = 0.70;
 
 -(void)transToPost {
     PostViewController *PostVC = [[PostViewController alloc]init];
+    PostVC.title = @"发布";
     PostVC.hidesBottomBarWhenPushed =  YES;
     [self.messageNav pushViewController:PostVC animated:NO];
     [self showHome];
