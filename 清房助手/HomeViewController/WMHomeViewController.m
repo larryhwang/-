@@ -281,7 +281,10 @@
     }else {
          _status = WantBuy;
          self.ResultTableView.searchStyle  =_status;
-  _CurrentRuest = @"http://www.123qf.cn/testApp/keyuan/rentalOrBuyHouseSearch.api?weiTuodate=0&sum=20&fangxiang=initdata&zugou=0";   //求购列表
+  _CurrentRuest = @"http://www.123qf.cn:81/testApp/fang/rentalOrBuyHouseSearch.api?&sum=20&zugou=0";   //求购列表
+  _CurrentRuest = @"http://www.123qf.cn:81/testApp/keyuan/rentalOrBuyHouseSearch.api?sum=20&zugou=1&currentpage=1";
+//        http://www.123qf.cn:81/testApp/fangyuan/rentalOrBuyHouseSearch.api?sum=20&zushou=0&shengfen=%E5%B9%BF%E4%B8%9C%E7%9C%81&currentpage=1
+//        http://www.123qf.cn:81/testApp/keyuan/rentalOrBuyHouseSearch.api?sum=20&zugou=1&shengfen%20=%E5%B9%BF%E4%B8%9C%E7%9C%81&currentpage=1
     }
 
     [self LoadNetDataWithCurentURl];
@@ -292,6 +295,7 @@
 
 - (void) LoadNetDataWithCurentURl{
     [MBProgressHUD showMessage:@"正在加载"];
+    NSLog(@"即将上线:%@,  %@",_CurrentRuest,self.pramaDic);
     [self.shareMgr POST:self.CurrentRuest
              parameters: self.pramaDic success:^(AFHTTPRequestOperation *operation, id responseObject) {
                  [MBProgressHUD hideHUD];
@@ -331,7 +335,9 @@
     }else {
         _status = WantRent;
         self.ResultTableView.searchStyle  =_status;
-        self.CurrentRuest= @"http://www.123qf.cn/testApp/keyuan/rentalOrBuyHouseSearch.api?weituodate=0&sum=20&fangxiang=initdata&zugou=1";  //求租列表
+//    http://www.123qf.cn:81/testApp/keyuan/seekHouse.api?fenlei=2&keyuan_id=3
+        self.CurrentRuest= @"http://www.123qf.cn:81/testApp/keyuan/rentalOrBuyHouseSearch.api?sum=20&zugou=0";  //求租列表
+
     }
     [self LoadNetDataWithCurentURl];
 }
