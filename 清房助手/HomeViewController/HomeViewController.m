@@ -219,6 +219,14 @@ static const CGFloat menuStartNarrowRatio  = 0.70;
     [self showHome];
 }
 
+
+-(void)transToSetting {
+    UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"SettingInterface" bundle:[NSBundle mainBundle]];
+    UIViewController *SettingViewController = (UIViewController*)[storyboard instantiateViewControllerWithIdentifier:@"settingPage"];
+    [self.messageNav pushViewController:SettingViewController animated:NO];
+    [self showHome];
+}
+
 - (void)transToPostEdit{
 //    WMOtherViewController *other = [[WMOtherViewController alloc] init];
 //    other.navTitle = title;

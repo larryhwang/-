@@ -13,6 +13,10 @@
 #import "DetailViewController.h"
 #import "PostViewController.h"
 #import "SaleOutPostEditForm.h"
+
+
+
+
 @interface AppDelegate ()
 
 @end
@@ -36,18 +40,52 @@
 
    
 
+#pragma 蒲公英内测信息
+    
+    [[PgyUpdateManager sharedPgyManager] startManagerWithAppId:PGY_APPKEY];
+    [[PgyManager sharedPgyManager] startManagerWithAppId:PGY_APPKEY];
+    
+    
+//     [[PgyUpdateManager sharedPgyManager] updateLocalBuildNumber]; //本地版本号
+    
+    [[PgyUpdateManager sharedPgyManager] checkUpdate];  //检查更新
+    
+    
+    
     return YES;
 }
-//- (BOOL)application:(UIApplication*)application
-//didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-//    //–inserta delay of 5 seconds before the splash screendisappears–
-//    [NSThread sleepForTimeInterval:5.0];
-//    //Override point for customization after applicationlaunch.
-//    //Add the view controller’s view to the window anddisplay.
-//    [windowaddSubview:viewController.view];
-//    [windowmakeKeyAndVisible];
-//    return YES;
-//}
+
+
+
+
+
+
+/**
+ *  检查更新回调
+ *
+ *  @param response 检查更新的返回结果
+ */
+- (void)updateMethod:(NSDictionary *)response
+{
+    NSLog(@"Pgy Dic :%@",response);
+    if (response[@"downloadURL"]) {
+        
+        NSString *message = response[@"releaseNote"];
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"发现新版本"
+                                                            message:message
+                                                           delegate:self
+                                                  cancelButtonTitle:@"好的"
+                                                  otherButtonTitles:nil,
+                                  nil];
+        
+        [alertView show];
+    }
+    
+    //    调用checkUpdateWithDelegete后可用此方法来更新本地的版本号，如果有更新的话，在调用了此方法后再次调用将不提示更新信息。
+    //        [[PgyUpdateManager sharedPgyManager] updateLocalBuildNumber];
+}
+
+
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.

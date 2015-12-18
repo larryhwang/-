@@ -9,6 +9,13 @@
 /* Begin PBXBuildFile section */
 		460732401BD11C970025D41A /* UILabel+UILabel_SizeWithTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 4607323F1BD11C970025D41A /* UILabel+UILabel_SizeWithTest.m */; };
 		4610F4F41BD22456002A05E9 /* FreeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4610F4F31BD22456002A05E9 /* FreeCell.m */; };
+		4616EDC71C240AEE00BAF5C3 /* afterMarket.png in Resources */ = {isa = PBXBuildFile; fileRef = 4616EDC41C240AEE00BAF5C3 /* afterMarket.png */; };
+		4616EDC81C240AEE00BAF5C3 /* company.png in Resources */ = {isa = PBXBuildFile; fileRef = 4616EDC51C240AEE00BAF5C3 /* company.png */; };
+		4616EDC91C240AEE00BAF5C3 /* person.png in Resources */ = {isa = PBXBuildFile; fileRef = 4616EDC61C240AEE00BAF5C3 /* person.png */; };
+		4616EDCF1C2436CE00BAF5C3 /* PgySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4616EDCE1C2436CE00BAF5C3 /* PgySDK.framework */; };
+		4616EDD11C2436D000BAF5C3 /* PgyUpdate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4616EDD01C2436D000BAF5C3 /* PgyUpdate.framework */; };
+		4616EDD41C24509700BAF5C3 /* SettingInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4616EDD31C24509700BAF5C3 /* SettingInterface.storyboard */; };
+		4616EDD71C24569200BAF5C3 /* SettingViewCotroller.m in Sources */ = {isa = PBXBuildFile; fileRef = 4616EDD61C24569200BAF5C3 /* SettingViewCotroller.m */; };
 		4617E63A1C1BADD5007BECBF /* FilterSelectJieViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4617E6391C1BADD5007BECBF /* FilterSelectJieViewController.m */; };
 		46252F8B1BDA648C00C1FA66 /* MJRefresh.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 46252F7B1BDA648C00C1FA66 /* MJRefresh.bundle */; };
 		46252F8C1BDA648C00C1FA66 /* MJRefreshBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 46252F7E1BDA648C00C1FA66 /* MJRefreshBaseView.m */; };
@@ -203,6 +210,14 @@
 		4607323F1BD11C970025D41A /* UILabel+UILabel_SizeWithTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+UILabel_SizeWithTest.m"; sourceTree = "<group>"; };
 		4610F4F21BD22456002A05E9 /* FreeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FreeCell.h; sourceTree = "<group>"; };
 		4610F4F31BD22456002A05E9 /* FreeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FreeCell.m; sourceTree = "<group>"; };
+		4616EDC41C240AEE00BAF5C3 /* afterMarket.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = afterMarket.png; sourceTree = "<group>"; };
+		4616EDC51C240AEE00BAF5C3 /* company.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = company.png; sourceTree = "<group>"; };
+		4616EDC61C240AEE00BAF5C3 /* person.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = person.png; sourceTree = "<group>"; };
+		4616EDCE1C2436CE00BAF5C3 /* PgySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PgySDK.framework; path = Pods/PgySDK.framework; sourceTree = "<group>"; };
+		4616EDD01C2436D000BAF5C3 /* PgyUpdate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PgyUpdate.framework; path = Pods/PgyUpdate.framework; sourceTree = "<group>"; };
+		4616EDD31C24509700BAF5C3 /* SettingInterface.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = SettingInterface.storyboard; path = ../../SettingInterface.storyboard; sourceTree = "<group>"; };
+		4616EDD51C24569200BAF5C3 /* SettingViewCotroller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewCotroller.h; sourceTree = "<group>"; };
+		4616EDD61C24569200BAF5C3 /* SettingViewCotroller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewCotroller.m; sourceTree = "<group>"; };
 		4617E6381C1BADD5007BECBF /* FilterSelectJieViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterSelectJieViewController.h; sourceTree = "<group>"; };
 		4617E6391C1BADD5007BECBF /* FilterSelectJieViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterSelectJieViewController.m; sourceTree = "<group>"; };
 		462226461BDDBDD500E0D2E9 /* Common.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
@@ -489,6 +504,8 @@
 			files = (
 				7785FD4973E36DF183E5705C /* libPods.a in Frameworks */,
 				46BBE8AA1C0FD19400DE4B14 /* JYBMultiImageSelector.framework in Frameworks */,
+				4616EDCF1C2436CE00BAF5C3 /* PgySDK.framework in Frameworks */,
+				4616EDD11C2436D000BAF5C3 /* PgyUpdate.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -516,6 +533,37 @@
 				EFED8970995BD6F905BDF387 /* Pods.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		4616EDC01C2409B900BAF5C3 /* InnerFangResource */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = InnerFangResource;
+			sourceTree = "<group>";
+		};
+		4616EDC11C2409D900BAF5C3 /* InnerCustromerResource */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = InnerCustromerResource;
+			sourceTree = "<group>";
+		};
+		4616EDC21C240A1300BAF5C3 /* AfterMarket */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = AfterMarket;
+			sourceTree = "<group>";
+		};
+		4616EDC31C240A9B00BAF5C3 /* InnerXXX */ = {
+			isa = PBXGroup;
+			children = (
+				4616EDC41C240AEE00BAF5C3 /* afterMarket.png */,
+				4616EDC51C240AEE00BAF5C3 /* company.png */,
+				4616EDC61C240AEE00BAF5C3 /* person.png */,
+			);
+			name = InnerXXX;
 			sourceTree = "<group>";
 		};
 		46252F7A1BDA648C00C1FA66 /* MJRefresh */ = {
@@ -556,6 +604,9 @@
 		462847DC1C0EEEBF00273B3A /* Interface */ = {
 			isa = PBXGroup;
 			children = (
+				4616EDC21C240A1300BAF5C3 /* AfterMarket */,
+				4616EDC11C2409D900BAF5C3 /* InnerCustromerResource */,
+				4616EDC01C2409B900BAF5C3 /* InnerFangResource */,
 				464E17C71C1FC531009ABB88 /* HomePageSeach */,
 				46ECF35E1C14633900DB6D36 /* Search */,
 				462847DD1C0EEED800273B3A /* Post */,
@@ -685,6 +736,7 @@
 		464356601BC613A500A44526 /* resource */ = {
 			isa = PBXGroup;
 			children = (
+				4616EDC31C240A9B00BAF5C3 /* InnerXXX */,
 				46FBF74C1BDD17FF00F68EE6 /* pStar.png */,
 				462847D11C0EEDA600273B3A /* postPart */,
 				468E286B1BCCD46500560500 /* Detail */,
@@ -757,6 +809,9 @@
 		46714B5B1BC7BFFB00E7AEE9 /* HomeViewController */ = {
 			isa = PBXGroup;
 			children = (
+				4616EDD31C24509700BAF5C3 /* SettingInterface.storyboard */,
+				4616EDD51C24569200BAF5C3 /* SettingViewCotroller.h */,
+				4616EDD61C24569200BAF5C3 /* SettingViewCotroller.m */,
 				4673A5051BC8DC9200700099 /* View */,
 				46714B5C1BC7C11F00E7AEE9 /* UIImage+WM.h */,
 				46714B5D1BC7C11F00E7AEE9 /* UIImage+WM.m */,
@@ -1097,6 +1152,8 @@
 		C1601311CBEE81D2050A5A8E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4616EDD01C2436D000BAF5C3 /* PgyUpdate.framework */,
+				4616EDCE1C2436CE00BAF5C3 /* PgySDK.framework */,
 				93DCD64313F5A1A452276E13 /* libPods.a */,
 			);
 			name = Frameworks;
@@ -1211,6 +1268,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4616EDD41C24509700BAF5C3 /* SettingInterface.storyboard in Resources */,
 				468ED02A1BD62537001605A7 /* search-house.png in Resources */,
 				468E28891BCCFEA400560500 /* FactoryLoactionCell.xib in Resources */,
 				4643566C1BC6149600A44526 /* password.png in Resources */,
@@ -1223,6 +1281,7 @@
 				46D33C0F1BCB4B9C00B30F2A /* SalesCell.xib in Resources */,
 				4673A4FA1BC8991E00700099 /* background-logo.png in Resources */,
 				4652B0571BD48DBB00AA29D9 /* tel.png in Resources */,
+				4616EDC91C240AEE00BAF5C3 /* person.png in Resources */,
 				464356351BC6093B00A44526 /* Assets.xcassets in Resources */,
 				468E288E1BCD021A00560500 /* FactoryDetailCell.xib in Resources */,
 				46BBE8AD1C0FD19400DE4B14 /* Overlay@2x.png in Resources */,
@@ -1235,6 +1294,7 @@
 				468ED02B1BD62537001605A7 /* search-people.png in Resources */,
 				468E28791BCCF27C00560500 /* CountBackImg.png in Resources */,
 				4697FB371BCBAF8F00D7E24C /* StringFile.strings in Resources */,
+				4616EDC81C240AEE00BAF5C3 /* company.png in Resources */,
 				468E28721BCCD47400560500 /* image1.jpg in Resources */,
 				4643566D1BC6149600A44526 /* user.png in Resources */,
 				464356691BC6149600A44526 /* eyes.png in Resources */,
@@ -1263,6 +1323,7 @@
 				46BBE8E11C0FD31C00DE4B14 /* SelectQu.xib in Resources */,
 				4673A5041BC8BE0200700099 /* tab_me_nor@2x.png in Resources */,
 				464356681BC6149600A44526 /* eyes-o.png in Resources */,
+				4616EDC71C240AEE00BAF5C3 /* afterMarket.png in Resources */,
 				4673A5121BC8DEE000700099 /* searchbar_textfield_search_icon@2x.png in Resources */,
 				468ED0301BD62B74001605A7 /* MenuListCell.xib in Resources */,
 				462847D71C0EEDC200273B3A /* chushou.png in Resources */,
@@ -1349,6 +1410,7 @@
 				46BBE8BC1C0FD23900DE4B14 /* PopSelectViewController.m in Sources */,
 				463B40641BDD142900B1D26D /* DSNavigationBar.m in Sources */,
 				46C716CF1BC69FB800287742 /* NSObject+MJKeyValue.m in Sources */,
+				4616EDD71C24569200BAF5C3 /* SettingViewCotroller.m in Sources */,
 				4692C9CF1C1AC7B40056E706 /* QFTableView_Sco.m in Sources */,
 				468ED02F1BD62B74001605A7 /* MenuListCell.m in Sources */,
 				4628481D1C0FCC6C00273B3A /* PostTool.m in Sources */,
@@ -1580,6 +1642,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/清房助手",
+					"$(PROJECT_DIR)/Pods",
 				);
 				INFOPLIST_FILE = "清房助手/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
@@ -1601,6 +1664,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/清房助手",
+					"$(PROJECT_DIR)/Pods",
 				);
 				INFOPLIST_FILE = "清房助手/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;

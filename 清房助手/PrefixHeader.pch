@@ -40,6 +40,7 @@
 
 #define ScreenWidth     [UIScreen mainScreen].bounds.size.width
 #define ScreenHeight    [UIScreen mainScreen].bounds.size.height
+#define PGY_APPKEY  @"1532dd72458c0cd6552d9ab261f5c7df"
 //3, 164, 255
 #define BasicUrl @"http://www.123qf.cn/testApp/"
 

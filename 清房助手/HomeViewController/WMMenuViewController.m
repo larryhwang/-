@@ -24,11 +24,20 @@
 @property (weak, nonatomic) IBOutlet UIButton    *settingBtn;
 @property (weak, nonatomic) IBOutlet UIImageView *headerImageView;
 
-- (IBAction)btnClick:(id)sender;
+
 
 @end
 
 @implementation WMMenuViewController
+- (IBAction)settingBtnClick:(id)sender {
+    NSLog(@"setting @@@————@@@@");
+    //可以由StoryBoard 来设置的
+
+    [self.delegate transToSetting];
+}
+
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -60,7 +69,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 5;
+    return 6;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -80,10 +89,16 @@
         UIImage *img = [UIImage imageNamed:@"pen"];
         cell.Icon.image = img;
     }else if (indexPath.row ==3){
+        UIImage *img = [UIImage imageNamed:@"house"];
+        cell.Icon.image = img;
+    }else if (indexPath.row ==4){
         UIImage *img = [UIImage imageNamed:@"people"];
         cell.Icon.image = img;
-    }else {
-        UIImage *img = [UIImage imageNamed:@"house"];
+    }
+    
+    
+    else {
+        UIImage *img = [UIImage imageNamed:@"afterMarket"];
         cell.Icon.image = img;
     }
 

@@ -13,6 +13,7 @@
 @optional
 - (void)transToRentAndSale;
 - (void)transToPost;
+-(void)transToSetting;
 - (void)didSelectItem:(NSString *)title;
 - (void)OnlyBack;
 - (void)transToPostEdit;

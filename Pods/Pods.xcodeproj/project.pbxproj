@@ -27,6 +27,7 @@
 		37EBE94F1EE94D8AFA27C822605A43CA /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 168C78AD619B59511DDAB63A1060A9EE /* Photos.framework */; };
 		3F6A74A124E29DEFAE8E371ACDF3F753 /* AFURLSessionManager.h in Headers */ = {isa = PBXBuildFile; fileRef = E5D3517BB6CBB5CB31A8899854CF47AC /* AFURLSessionManager.h */; };
 		4409E36FED69DDEED011E755D1330548 /* UIProgressView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = AC7D7FA68AF73217204380CC17EE787B /* UIProgressView+AFNetworking.m */; };
+		4616EDD21C243E5400BAF5C3 /* PgyUpdate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4616EDCB1C24369C00BAF5C3 /* PgyUpdate.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		4C55E2F6242A36171E9A5B3E06CC7469 /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C6C7352EA3571A60615A88694DB6CFA /* AFURLResponseSerialization.m */; };
 		590FF4A30F6C6437D9A9963BF60DF426 /* AFSecurityPolicy.m in Sources */ = {isa = PBXBuildFile; fileRef = 6031A1D61028EB02975FEC9A9B7B77E3 /* AFSecurityPolicy.m */; };
 		5C18B200E24899D984558C2FB1E7DD7E /* QBAssetCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 8C75210E0550ED3D66B1B9870A68FC3B /* QBAssetCell.h */; };
@@ -128,6 +129,8 @@
 		41D14CBC094D7218B3497F40559A7F85 /* AFURLRequestSerialization.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = AFURLRequestSerialization.m; path = AFNetworking/AFURLRequestSerialization.m; sourceTree = "<group>"; };
 		42F79195B741278671EB9FB1795F9BBF /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.3.sdk/System/Library/Frameworks/MobileCoreServices.framework; sourceTree = DEVELOPER_DIR; };
 		45E73222D2CEAD9D4F5A07C39CED4F71 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Pods.debug.xcconfig; sourceTree = "<group>"; };
+		4616EDCA1C24369C00BAF5C3 /* PgySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PgySDK.framework; sourceTree = "<group>"; };
+		4616EDCB1C24369C00BAF5C3 /* PgyUpdate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PgyUpdate.framework; sourceTree = "<group>"; };
 		49943D3284E45CB3D7C9476506896E3D /* QBCheckmarkView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = QBCheckmarkView.h; path = QBImagePicker/QBCheckmarkView.h; sourceTree = "<group>"; };
 		4C4E31E4D9FF1F20741EC02F2120249C /* AFNetworking-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "AFNetworking-dummy.m"; sourceTree = "<group>"; };
 		504A2881C2046726D3D112650F0DD0D4 /* AFURLResponseSerialization.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AFURLResponseSerialization.h; path = AFNetworking/AFURLResponseSerialization.h; sourceTree = "<group>"; };
@@ -197,6 +200,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4616EDD21C243E5400BAF5C3 /* PgyUpdate.framework in Frameworks */,
 				0DCEC0D7B5608887A208F0639364BD47 /* CoreGraphics.framework in Frameworks */,
 				B69EE59DCF9DA62AF1EDB7D871E124B0 /* Foundation.framework in Frameworks */,
 				D610C34BF718263B9F2754BEB6023EC6 /* MobileCoreServices.framework in Frameworks */,
@@ -240,6 +244,8 @@
 		0F75DF6C7C5F002280EC53F48E80B587 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4616EDCA1C24369C00BAF5C3 /* PgySDK.framework */,
+				4616EDCB1C24369C00BAF5C3 /* PgyUpdate.framework */,
 				0187A7F001A8A651D6EA35A07689BB6E /* iOS */,
 			);
 			name = Frameworks;
@@ -696,6 +702,10 @@
 			baseConfigurationReference = 1C13020FE5159FE955C81EA35C2D138A /* AFNetworking-Private.xcconfig */;
 			buildSettings = {
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GCC_PREFIX_HEADER = "Target Support Files/AFNetworking/AFNetworking-prefix.pch";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
@@ -712,6 +722,10 @@
 			baseConfigurationReference = 1C13020FE5159FE955C81EA35C2D138A /* AFNetworking-Private.xcconfig */;
 			buildSettings = {
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GCC_PREFIX_HEADER = "Target Support Files/AFNetworking/AFNetworking-prefix.pch";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				MTL_ENABLE_DEBUG_INFO = NO;

@@ -20,6 +20,8 @@
 #import "MBProgressHUD+CZ.h"
 #import "TableViewController.h"
 #import "PopSeletedView.h"
+#import <PgySDK/PgyManager.h>
+#import <PgyUpdate/PgyUpdateManager.h>
 
 
 
@@ -60,6 +62,8 @@
 @end
 
 @implementation WMHomeViewController
+
+
 
 
 -(NSDictionary *)pramaDic {
@@ -146,6 +150,8 @@
     [self setOriginPopView];  //设置弹窗功能
     [self localNameGet];
     
+   // [[PgyUpdateManager sharedPgyManager] checkUpdate];  //检查更新
+
     
 }
 
