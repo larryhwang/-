@@ -13,6 +13,7 @@
 #import "WMCommon.h"
 #import "DetailViewController.h"
 #import "PostViewController.h"
+#import "SettingPage_TableVC.h"
 
 typedef enum Slidestate {
     kStateHome,
@@ -223,6 +224,8 @@ static const CGFloat menuStartNarrowRatio  = 0.70;
 -(void)transToSetting {
     UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"SettingInterface" bundle:[NSBundle mainBundle]];
     UIViewController *SettingViewController = (UIViewController*)[storyboard instantiateViewControllerWithIdentifier:@"settingPage"];
+    
+     SettingViewController.title = @"设置";
     [self.messageNav pushViewController:SettingViewController animated:NO];
     [self showHome];
 }

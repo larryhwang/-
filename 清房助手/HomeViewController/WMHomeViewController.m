@@ -522,8 +522,7 @@
 #pragma mark 弹窗代理 
 
 -(void)popViewCitySwitchClick {
-//    [MBProgressHUD showMessage:@"敬请期待" toView:nil];
-    [MBProgressHUD showSuccess:@"敬请期待"];
+    [MBProgressHUD showSuccess:@"建设中"];
 }
 
 -(void)popViewSectionOneBtnclickWithName:(NSString *)name and:(NSString *)code {

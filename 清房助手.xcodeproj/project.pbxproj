@@ -16,6 +16,8 @@
 		4616EDD11C2436D000BAF5C3 /* PgyUpdate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4616EDD01C2436D000BAF5C3 /* PgyUpdate.framework */; };
 		4616EDD41C24509700BAF5C3 /* SettingInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4616EDD31C24509700BAF5C3 /* SettingInterface.storyboard */; };
 		4616EDD71C24569200BAF5C3 /* SettingViewCotroller.m in Sources */ = {isa = PBXBuildFile; fileRef = 4616EDD61C24569200BAF5C3 /* SettingViewCotroller.m */; };
+		4616EDDA1C24651600BAF5C3 /* SettingPage_TableVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4616EDD91C24651600BAF5C3 /* SettingPage_TableVC.m */; };
+		4616EDDC1C24653000BAF5C3 /* settingPageTableVC.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4616EDDB1C24653000BAF5C3 /* settingPageTableVC.storyboard */; };
 		4617E63A1C1BADD5007BECBF /* FilterSelectJieViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4617E6391C1BADD5007BECBF /* FilterSelectJieViewController.m */; };
 		46252F8B1BDA648C00C1FA66 /* MJRefresh.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 46252F7B1BDA648C00C1FA66 /* MJRefresh.bundle */; };
 		46252F8C1BDA648C00C1FA66 /* MJRefreshBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 46252F7E1BDA648C00C1FA66 /* MJRefreshBaseView.m */; };
@@ -218,6 +220,9 @@
 		4616EDD31C24509700BAF5C3 /* SettingInterface.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = SettingInterface.storyboard; path = ../../SettingInterface.storyboard; sourceTree = "<group>"; };
 		4616EDD51C24569200BAF5C3 /* SettingViewCotroller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewCotroller.h; sourceTree = "<group>"; };
 		4616EDD61C24569200BAF5C3 /* SettingViewCotroller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewCotroller.m; sourceTree = "<group>"; };
+		4616EDD81C24651600BAF5C3 /* SettingPage_TableVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingPage_TableVC.h; sourceTree = "<group>"; };
+		4616EDD91C24651600BAF5C3 /* SettingPage_TableVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingPage_TableVC.m; sourceTree = "<group>"; };
+		4616EDDB1C24653000BAF5C3 /* settingPageTableVC.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = settingPageTableVC.storyboard; sourceTree = "<group>"; };
 		4617E6381C1BADD5007BECBF /* FilterSelectJieViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterSelectJieViewController.h; sourceTree = "<group>"; };
 		4617E6391C1BADD5007BECBF /* FilterSelectJieViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterSelectJieViewController.m; sourceTree = "<group>"; };
 		462226461BDDBDD500E0D2E9 /* Common.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
@@ -810,6 +815,9 @@
 			isa = PBXGroup;
 			children = (
 				4616EDD31C24509700BAF5C3 /* SettingInterface.storyboard */,
+				4616EDD81C24651600BAF5C3 /* SettingPage_TableVC.h */,
+				4616EDD91C24651600BAF5C3 /* SettingPage_TableVC.m */,
+				4616EDDB1C24653000BAF5C3 /* settingPageTableVC.storyboard */,
 				4616EDD51C24569200BAF5C3 /* SettingViewCotroller.h */,
 				4616EDD61C24569200BAF5C3 /* SettingViewCotroller.m */,
 				4673A5051BC8DC9200700099 /* View */,
@@ -1332,6 +1340,7 @@
 				4652B0561BD48DBB00AA29D9 /* mail.png in Resources */,
 				46C716D71BC7645E00287742 /* MBProgressHUD.bundle in Resources */,
 				46714B7A1BC7C11F00E7AEE9 /* WMHomeViewController.xib in Resources */,
+				4616EDDC1C24653000BAF5C3 /* settingPageTableVC.storyboard in Resources */,
 				465386781C180C4600454E79 /* 筛选.png in Resources */,
 				46BBE8E31C0FD31C00DE4B14 /* SelectRegionVC.xib in Resources */,
 				46BBE8AC1C0FD19400DE4B14 /* Overlay.png in Resources */,
@@ -1478,6 +1487,7 @@
 				4643562D1BC6093B00A44526 /* AppDelegate.m in Sources */,
 				46AFDFA31BCB84A200B49CBE /* SDWebImagePrefetcher.m in Sources */,
 				46256C4C1BCF5B7300E05C5F /* FlatLocationCell.m in Sources */,
+				4616EDDA1C24651600BAF5C3 /* SettingPage_TableVC.m in Sources */,
 				46AFDFAA1BCB84A200B49CBE /* UIView+WebCacheOperation.m in Sources */,
 				46252F8F1BDA648C00C1FA66 /* MJRefreshHeaderView.m in Sources */,
 				46714B751BC7C11F00E7AEE9 /* UIImage+WM.m in Sources */,
