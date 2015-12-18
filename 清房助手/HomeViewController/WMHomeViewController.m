@@ -30,15 +30,18 @@
 
 
 
-@interface WMHomeViewController()<UIScrollViewDelegate>
+@interface WMHomeViewController()<UIScrollViewDelegate,PopSelectViewDelegate>
 {
 #pragma mark 优化成结构体
     BOOL               _isSaleStatus;
+    BOOL               _popStatus;   //区域选择是否
     NSMutableArray     *_TabBarBtns;
+    NSMutableDictionary *_updateLocationParam;
     UIView             *_bottomLine;
     NSString           *_preName;
     UISearchController *_searchVC;
-    BOOL               isSelectedViewPop;   //区域选择是否
+
+    PopSeletedView *_popView;
 }
 
 @property(nonatomic,strong)  NSArray                           *DataArr;
@@ -48,6 +51,9 @@
 @property(nonatomic,copy)    NSString                          *CurrentRuest;
 @property(nonatomic,strong)  NSDictionary                      *pramaDic;
 @property(nonatomic,weak)    TableViewController               *ResultTableView;
+
+@property(nonatomic,strong)  NSMutableArray  *LocationNameDicPartOne_NSarr;
+@property(nonatomic,strong)  NSMutableArray  *LocationNameDicPartTwo_NSarr;
 
 
 
@@ -63,8 +69,6 @@
     return _pramaDic;
 }
 
-
-
 -(NSArray *)DataArr {
     if (_DataArr ==nil) {
         _DataArr = [NSArray array];
@@ -73,8 +77,18 @@
     return _DataArr;
 }
 
--(void)back {
-    [self.navigationController popViewControllerAnimated:YES];
+-(NSMutableArray*)LocationNameDic_NSArr {
+    if (_LocationNameDicPartOne_NSarr ==nil) {
+        _LocationNameDicPartOne_NSarr = [NSMutableArray new];
+    }
+    return _LocationNameDicPartOne_NSarr;
+}
+
+-(NSMutableArray*)LocationNameDicPartTwo_NSarr {
+    if (_LocationNameDicPartTwo_NSarr ==nil) {
+        _LocationNameDicPartTwo_NSarr = [NSMutableArray new];
+    }
+    return _LocationNameDicPartTwo_NSarr;
 }
 
 - (void)viewDidLoad {
@@ -83,9 +97,7 @@
     [self ParameterInit];
     [self TopTabBarUISet];  //顶部切换设置
     
-    UIButton *btn =[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 30, 40)];
-    [btn setTitle:@"反" forState:UIControlStateNormal];
-    [btn addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
+
     UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
     self.navigationItem.backBarButtonItem = item;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -130,8 +142,20 @@
     [_searchVC.searchBar sizeToFit];
     self.navigationItem.titleView = _searchVC.searchBar;
     self.definesPresentationContext = YES;
+    
+    [self setOriginPopView];  //设置弹窗功能
+    [self localNameGet];
+    
+    
 }
 
+-(void)setOriginPopView {
+    PopSeletedView *pop = [[PopSeletedView alloc]init];
+    pop.PopViewdelegate =self;
+    [self.view addSubview:pop];
+    [pop setHidden:YES];
+    _popView = pop;
+}
 
 - (void)ParameterInit {
     _isWant = NO;  //初始，请求的数据为出租/出售
@@ -139,10 +163,33 @@
     _TabBarBtns = [NSMutableArray arrayWithCapacity:2];
     self.tableView.delegate   = self;
     self.tableView.dataSource = self;
+    _popStatus = NO ; //初始时，处于不弹窗状态
     AFHTTPRequestOperationManager *mgr  = [AFHTTPRequestOperationManager manager];
     self.shareMgr = mgr ;
 }
 
+
+-(void)localNameGet {
+    NSString *url = @"http://www.123qf.cn:81/testApp/area/selectArea.api?parentid=4413";  //惠州市
+    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
+    [mgr POST:url parameters:nil success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+        NSLog(@"地点:%@",responseObject);
+        NSArray *ar = responseObject[@"data"];
+        self.LocationNameDicPartOne_NSarr = [NSMutableArray arrayWithArray:ar];
+        NSDictionary *firstDic =@{
+                                  @"name":@"全市",
+                                  @"code":@"0000",  //此处不详
+                                  };
+        [(NSMutableArray *)self.LocationNameDic_NSArr insertObject:firstDic atIndex:0];
+        _popView.LocationNameDicPartOne_NSarr =  self.LocationNameDic_NSArr;
+        [_popView layoutSectionA];
+
+        
+        
+    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
+        NSLog(@"%@",error);
+    }];
+}
 
 #warning 顶部TabBar切换部分
 - (void)TopTabBarUISet {
@@ -202,12 +249,35 @@
         self.ResultTableView.searchStyle  =_status;
          NSLog(@"当前状态%d",_status);
         _CurrentRuest =@"http://www.123qf.cn:81/testApp/fangyuan/rentalOrBuyHouseSearch.api";
-        NSDictionary *parameters =@{
+        //这个参数是默认初始化的字典，其他参数说明
+        /*
+           currentpage  当前页
+           sum     每次最多能返回的条数
+           zushou  0 出售   ／1 出租
+           zhuangtai  ? 弃用
+         
+           shengfen   省份
+           shi        城市
+            qu        区
+           region     街
+         
+         */
+        
+        //zushou: 0  出售
+        //zushou: 1  出租
+        //        parameters set
+        
+        
+        
+        NSMutableDictionary *parameters =(NSMutableDictionary *)@{
                                     @"sum":@"20",
-                                    @"zushou":@"zushou",
+                                    @"zushou":@"0",
                                     @"shengfen":@"广东省",
+                                    @"shi":@"惠州市",
                                     @"currentpage" :@"1"};
         self.pramaDic = parameters;
+        
+        
     }else {
          _status = WantBuy;
          self.ResultTableView.searchStyle  =_status;
@@ -225,7 +295,7 @@
     [self.shareMgr POST:self.CurrentRuest
              parameters: self.pramaDic success:^(AFHTTPRequestOperation *operation, id responseObject) {
                  [MBProgressHUD hideHUD];
-               //  NSLog(@"右选项卡%@",responseObject);
+                 NSLog(@"右选项卡%@",responseObject);
                  NSArray *DataArra = responseObject[@"data"];
                  if ([DataArra isKindOfClass:[NSArray class]]) {
                      self.userID  = responseObject[@""];
@@ -284,24 +354,49 @@
 }
 
 - (void)clicked {
+    
+    if (_popStatus) {
+        [self popViewHide];
+    }
+
     if ([self.HomeVCdelegate respondsToSelector:@selector(leftBtnClicked)]) {
         [self.HomeVCdelegate leftBtnClicked];
     }
+
 }
 
 -(void)CitySelect {
     //区域筛选 弹窗
-    PopSeletedView *mm = [[PopSeletedView alloc]initWithFrame:CGRectMake(0, 64, ScreenWidth, ScreenHeight/4)];
-    mm.backgroundColor = [UIColor brownColor];
-    [self.view addSubview:mm];
-    [UIView animateWithDuration:2.0 animations:^{
-        [mm setFrame:CGRectMake(0, 64  , ScreenWidth, ScreenHeight/4)];
-    } completion:^(BOOL finished) {
-        
-    }];
+    NSLog(@"hi ,pop");
+    if (!_popStatus) {
+        [self popViewMoveOut];
+    } else {
+        [self popViewHide];
+    }
     
     
 }
+
+
+-(void)popViewMoveOut {
+    [UIView animateWithDuration:.5 animations:^{
+        _popView.hidden = NO;
+        [_popView setFrame:_popView.popViewDispRect];
+    } completion:^(BOOL finished) {
+        _popStatus = YES;
+    }];
+}
+
+-(void)popViewHide {
+    [UIView animateWithDuration:.5 animations:^{
+        [_popView setFrame:_popView.popViewOriginRect];
+        _popStatus = NO;
+    } completion:^(BOOL finished) {
+        _popView.hidden = YES;
+    }];
+}
+
+
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView {
    [self.navigationController.view endEditing:YES];
@@ -409,6 +504,39 @@
 
 - (void)RightInit {
     [self TabBarBtnClick:self.RightTab];
+}
+
+
+#pragma mark 弹窗代理 
+
+-(void)popViewCitySwitchClick {
+//    [MBProgressHUD showMessage:@"敬请期待" toView:nil];
+    [MBProgressHUD showSuccess:@"敬请期待"];
+}
+
+-(void)popViewSectionOneBtnclickWithName:(NSString *)name and:(NSString *)code {
+    [self popViewHide];
+    NSMutableDictionary *parameters;
+    NSLog(@"%@",name);
+    if ([name isEqualToString:@"全市"]||[name isEqualToString:@"市辖区"]) {
+         parameters =(NSMutableDictionary *)@{
+                                                                  @"sum":@"20",
+                                                                  @"zushou":@"0",
+                                                                  @"shengfen":@"广东省",
+                                                                  @"shi":@"惠州市",
+                                                                  @"currentpage" :@"1"};
+    }else{
+       parameters =(NSMutableDictionary *)@{
+                                                                  @"sum":@"20",
+                                                                  @"zushou":@"0",
+                                                                  @"shengfen":@"广东省",
+                                                                  @"shi":@"惠州市",
+                                                                  @"qu":name,
+                                                                  @"currentpage" :@"1"};
+    }
+
+    self.pramaDic = parameters;
+      [self LoadNetDataWithCurentURl];
 }
 
 @end
