@@ -13,6 +13,7 @@
 #import "DetailViewController.h"
 #import "PostViewController.h"
 #import "SaleOutPostEditForm.h"
+#import "CZNewFeatureController.h"
 
 
 
@@ -26,16 +27,24 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch
-     [NSThread sleepForTimeInterval:2.0];
+    [NSThread sleepForTimeInterval:2.0];
+    self.window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
     WMCommon *common = [WMCommon getInstance];
     common.screenW = [[UIScreen mainScreen] bounds].size.width;
     common.screenH = [[UIScreen mainScreen] bounds].size.height;
     
     LoginViewController *login = [LoginViewController new];
+    CZNewFeatureController *featurePage = [[CZNewFeatureController alloc]init];
 
-    
-    self.window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
-    self.window.rootViewController = login;
+
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"SecondLanch"]) {
+        self.window.rootViewController = login;
+    }else {
+       self.window.rootViewController = featurePage;    //第一次启动则进入新特性
+         [[NSUserDefaults standardUserDefaults]setObject:@"1" forKey:@"SecondLanch"];
+    }
+
+
    [self.window  makeKeyAndVisible];
 
    
@@ -46,7 +55,6 @@
     [[PgyManager sharedPgyManager] startManagerWithAppId:PGY_APPKEY];
     
     
-//     [[PgyUpdateManager sharedPgyManager] updateLocalBuildNumber]; //本地版本号
     
     [[PgyUpdateManager sharedPgyManager] checkUpdate];  //检查更新
     

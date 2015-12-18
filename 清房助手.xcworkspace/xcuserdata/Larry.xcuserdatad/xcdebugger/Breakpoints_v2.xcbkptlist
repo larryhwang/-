@@ -426,11 +426,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "&#x6e05;&#x623f;&#x52a9;&#x624b;/HomeViewController/WMHomeViewController.m"
-            timestampString = "472141377.662494"
+            timestampString = "472152180.259662"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "550"
-            endingLineNumber = "550"
+            startingLineNumber = "549"
+            endingLineNumber = "549"
             landmarkName = "-popViewSectionOneBtnclickWithName:and:"
             landmarkType = "5">
          </BreakpointContent>
