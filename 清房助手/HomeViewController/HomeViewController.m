@@ -14,6 +14,7 @@
 #import "DetailViewController.h"
 #import "PostViewController.h"
 #import "SettingPage_TableVC.h"
+#import "InnerTabBarController.h"
 
 typedef enum Slidestate {
     kStateHome,
@@ -221,6 +222,15 @@ static const CGFloat menuStartNarrowRatio  = 0.70;
     [self showHome];
 }
 
+-(void)transtoInnerFang {
+    InnerTabBarController *innerTabarVC =[[InnerTabBarController alloc]init];
+    [self.messageNav pushViewController:innerTabarVC animated:YES];
+    [self showHome];
+}
+
+-(void)transtoInnerKeyuan {
+    NSLog(@"内部客源");
+}
 
 -(void)transToSetting {
     UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"SettingInterface" bundle:[NSBundle mainBundle]];

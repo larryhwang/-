@@ -13,6 +13,7 @@
 #import "QFSearchBar.h"
 #import "MenuListCell.h"
 #import "PostViewController.h"
+#import "MBProgressHUD+CZ.h"
 
 @interface WMMenuViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (strong, nonatomic) WMCommon *common;
@@ -95,8 +96,6 @@
         UIImage *img = [UIImage imageNamed:@"people"];
         cell.Icon.image = img;
     }
-    
-    
     else {
         UIImage *img = [UIImage imageNamed:@"afterMarket"];
         cell.Icon.image = img;
@@ -125,9 +124,13 @@
         
         [self.delegate transToPost];
     } else if (indexPath.row ==3){
-        //我的客源
+        //内部房源
+        [MBProgressHUD showSuccess:@"建设中"];
+       // [self.delegate transtoInnerFang];
     } else {
-        //我的房源
+        //内部客源
+        [MBProgressHUD showSuccess:@"建设中"];
+       // [self.delegate transtoInnerKeyuan];
     }
 //    if ([self.delegate respondsToSelector:@selector(didSelectItem:)]) {
     //    [self.delegate didSelectItem:self.listArray[indexPath.row]];
