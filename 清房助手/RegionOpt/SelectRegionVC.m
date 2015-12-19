@@ -23,7 +23,7 @@
 
 
 @interface SelectRegionVC ()<UITableViewDataSource,UITableViewDelegate,SelectRegionDelegate>
-
+@property(nonatomic,strong)  UILabel  *cityLable;
 @end
 
 @implementation SelectRegionVC
@@ -45,6 +45,7 @@
     UILabel *CurrentCityNameLable = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 120, 60)];
     [CurrentCityNameLable setFont:[UIFont systemFontOfSize:26]];
     CurrentCityNameLable.center = curentCity.center;
+    self.cityLable = CurrentCityNameLable;
     
     NSUserDefaults *DefaultHandle = [NSUserDefaults standardUserDefaults];
     NSString *currentCityName = [DefaultHandle objectForKey:CurrentCityName];
@@ -61,6 +62,14 @@
     }
     [title setTextColor:[UIColor blackColor]];
     [curentCity addSubview:CurrentCityNameLable];
+    
+    //GPS 定位的View 添加事件
+    
+//  UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(Actiondo)];
+    UITapGestureRecognizer *tagGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(Actiondo)];
+    [curentCity addGestureRecognizer:tagGesture];
+    
+    
     curentCity.backgroundColor = [UIColor whiteColor];
     self.LocationNameTable.tableHeaderView = curentCity;
     }
@@ -184,6 +193,21 @@
 
 -(void)appendName:(NSString *)locationName {
     [self.delegate appendName:locationName];
+}
+
+-(void)Actiondo {   // 0 1 2 3 4
+    
+    NSLog(@"获取到GPS定位到了，准备回去");
+    NSString *name = self.cityLable.text;
+    [self.delegate appendName:name];
+    int count =(int)[self.navigationController.viewControllers count];
+    UIViewController *VC = self.navigationController.viewControllers[count -2];
+    
+//    UIViewController *View = self.navigationController.viewControllers[];
+    [self.navigationController popViewControllerAnimated:YES];
+//    [self.navigationController popToViewController:VC animated:YES];
+//    self.navigationController
+    
 }
 
 @end

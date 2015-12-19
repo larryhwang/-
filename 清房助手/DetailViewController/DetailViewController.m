@@ -392,11 +392,8 @@
             NSMutableAttributedString *priceAttri = [[NSMutableAttributedString alloc]initWithString:StringPrice];
             [priceAttri addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:25 ] range:RedPart];
             [priceAttri addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range:RedPart];
-            
             LocationCell.Price.text = StringPrice;
-            
             [LocationCell.Price setAttributedText:priceAttri];
-            
             return LocationCell;
         }else if (indexPath.row ==1) {
             return testCell;
@@ -406,7 +403,7 @@
             DetailCell.FloatNo.text =  [NSString stringWithFormat:@"%@/%@层 ",self.FangData[@"louceng"],self.FangData[@"zonglouceng"]];
             DetailCell.LookTime.text = self.FangData[@"kanfangtime"];
             //带有HTML，考虑加载HTML啊
-            DetailCell.WithFacility.text = @"哈哈哈";
+            DetailCell.WithFacility.text = @" 空调 电视 洗衣机";
             DetailCell.ExtryTime.text =[NSString stringWithFormat:@"%@个月",self.FangData[@"youxiaoqi"]];
             DetailCell.Direction.text = self.FangData[@"chaoxiang"];
             DetailCell.Area.text = [NSString stringWithFormat:@"%@",self.FangData[@"mianji"]];

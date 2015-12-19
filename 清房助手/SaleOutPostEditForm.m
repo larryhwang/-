@@ -82,6 +82,8 @@
     int   _lineCount;
     int   _lastCount;
     BOOL  _saveAlertBoolFlag;
+    
+    BOOL  _isFromSelectPro;
 }
 
 @property(nonatomic,strong)   EditCell  *pictureDisplay;
@@ -416,16 +418,38 @@
 
 
 #pragma mark -pop_delegate
--(BOOL)controllerWillPopHandler {
-    UIAlertView *AW = [[UIAlertView alloc]initWithTitle:@"提示"
-                                                message:@"资料未保存"
-                                               delegate:self
-                                      cancelButtonTitle:@"放弃编辑"
-                                      otherButtonTitles:@"留在此页", nil];
-    AW.tag = saveAlertTag;
-    [AW show];
 
-    return NO;
+
+/**
+ *  在这里拦截，发布页面的返回，并触发弹窗，但在区域选择的界面中是 使用 popViewControllerAnimated 返回时
+ 也会触发弹窗，所以现在 在这里 做一个 _isFromSelectPro 设置一个标记
+ *
+ *  @param navigationBar <#navigationBar description#>
+ *  @param item          <#item description#>
+ *
+ *  @return <#return value description#>
+ */
+
+
+-(BOOL)controllerWillPopHandler {
+    
+    if (_isFromSelectPro) {
+        _isFromSelectPro  = NO;
+        return NO;   //如果从定位界面跳转过来，就不弹窗
+    } else {
+        NSLog(@"TopVC in nav :%@",self.navigationController.topViewController);
+        
+        UIAlertView *AW = [[UIAlertView alloc]initWithTitle:@"提示"
+                                                    message:@"资料未保存"
+                                                   delegate:self
+                                          cancelButtonTitle:@"放弃编辑"
+                                          otherButtonTitles:@"留在此页", nil];
+        AW.tag = saveAlertTag;
+        [AW show];
+        return NO;
+    }
+    
+
 }
 
 
@@ -483,6 +507,7 @@
         selectRegion.delegate = self ;
         selectRegion.indexData = _indexData ;
         _RegionTF.contentString = @"";
+        _isFromSelectPro = YES;
         [self.navigationController pushViewController:selectRegion animated:YES];
 
         NSLog(@"跳转已经执行完");

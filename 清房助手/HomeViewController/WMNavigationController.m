@@ -33,7 +33,6 @@
     popRecognizer.delegate = self;
     popRecognizer.maximumNumberOfTouches = 1;
     [gestureView addGestureRecognizer:popRecognizer];
-    
     _navT = [[WMNavigationInteractiveTransition alloc] initWithViewController:self];
     [popRecognizer addTarget:_navT action:@selector(handleControllerPop:)];
 }
@@ -51,24 +50,32 @@
 }
 
 
+
+
 - (BOOL)navigationBar:(UINavigationBar *)navigationBar shouldPopItem:(UINavigationItem *)item
 {
     UIViewController *vc = self.topViewController;
-    
+    NSLog(@"VC：%@",vc);
+    NSLog(@"0navigationBar :%@  item: %@",navigationBar,item);
+
+
     if ([vc respondsToSelector:@selector(controllerWillPopHandler)])
     {
         
         if ([vc performSelector:@selector(controllerWillPopHandler)])
         {
+            NSLog(@"1navigationBar :%@  item: %@",navigationBar,item);
             return [super navigationBar:navigationBar shouldPopItem:item];
         }
         else
         {
-            return NO;
+            NSLog(@"2navigationBar :%@  item: %@",navigationBar,item);
+            return YES;
         }
     }
     else
     {
+        NSLog(@"3navigationBar :%@  item: %@",navigationBar,item);
         return [super navigationBar:navigationBar shouldPopItem:item];  //退出
     }
 }
