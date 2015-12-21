@@ -241,7 +241,7 @@
     [teleLabel setFrame:CGRectMake(TeleIcon.frame.origin.x + Padding - 5 + 30, (ToolHeight - TeleLabelSize.height)/2,TeleLabelSize.width, TeleLabelSize.height)];
         [TeleView addSubview:TeleIcon];
     [TeleView addSubview:teleLabel];
-    TeleView.backgroundColor = DeafaultColor2;
+    TeleView.backgroundColor = DeafaultColor3;
     [TeleView addGestureRecognizer:TeleTap];
     [footer addSubview:TeleView];
 
@@ -251,7 +251,7 @@
     UITapGestureRecognizer *MsgTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(MsgTap:)];
     UIView *MsgView =[[UIImageView alloc]initWithFrame:CGRectMake((3*ScreenWidth/4)+2, 0, ScreenWidth/4, ToolHeight)];
     MsgView.userInteractionEnabled = YES;
-    MsgView.backgroundColor = DeafaultColor;
+    MsgView.backgroundColor = DeafaultColor3;
     UIImageView *MsgIcon =[[UIImageView alloc]init];
     MsgIcon.image  = [UIImage imageNamed:@"mail"];
     [MsgIcon setFrame:CGRectMake((LeftViewWidth - 40)/2, (ToolHeight-20)/2, 40, 20)];

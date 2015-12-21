@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Setting View Cotroller-->
@@ -14,6 +15,7 @@
                         <viewControllerLayoutGuide type="bottom" id="MlO-0l-cNp"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" restorationIdentifier="settingPage" id="dmg-DD-lrt">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I2M-7W-s5c">
@@ -86,51 +88,63 @@
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                                 <animations/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="43" id="l6d-Wz-5NJ"/>
+                                </constraints>
                                 <state key="normal" title="版本记录">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="l6d-Wz-5NJ"/>
+                                    </mask>
+                                </variation>
+                                <variation key="widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="l6d-Wz-5NJ"/>
+                                    </mask>
+                                </variation>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EWF-em-hWS">
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                                 <animations/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="43" id="R87-wn-e9T"/>
+                                    <constraint firstAttribute="height" constant="43" id="de2-hv-iNA"/>
                                 </constraints>
                                 <state key="normal" title="清除缓存">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <variation key="default">
                                     <mask key="constraints">
-                                        <exclude reference="R87-wn-e9T"/>
+                                        <exclude reference="de2-hv-iNA"/>
                                     </mask>
                                 </variation>
                                 <variation key="widthClass=compact">
                                     <mask key="constraints">
-                                        <include reference="R87-wn-e9T"/>
+                                        <include reference="de2-hv-iNA"/>
                                     </mask>
                                 </variation>
                             </button>
                         </subviews>
                         <animations/>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="HMu-67-G11" firstAttribute="leading" secondItem="C4P-eR-t2Q" secondAttribute="leading" id="21b-og-pe3"/>
-                            <constraint firstItem="HMu-67-G11" firstAttribute="leading" secondItem="EWF-em-hWS" secondAttribute="leading" id="4V7-Rh-G6s"/>
-                            <constraint firstItem="EWF-em-hWS" firstAttribute="leading" secondItem="W8X-EN-qg7" secondAttribute="leading" id="4wS-zT-WdQ"/>
+                            <constraint firstItem="EWF-em-hWS" firstAttribute="top" secondItem="W8X-EN-qg7" secondAttribute="bottom" constant="8" id="1Qy-hu-0mp"/>
+                            <constraint firstItem="W8X-EN-qg7" firstAttribute="leading" secondItem="EWF-em-hWS" secondAttribute="leading" id="7cA-El-NYn"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="EWF-em-hWS" secondAttribute="trailing" constant="-20" id="7nV-J3-oag"/>
+                            <constraint firstItem="HMu-67-G11" firstAttribute="top" secondItem="EWF-em-hWS" secondAttribute="bottom" constant="8" id="8r3-4F-7Jx"/>
                             <constraint firstItem="W8X-EN-qg7" firstAttribute="top" secondItem="I2M-7W-s5c" secondAttribute="bottom" constant="8" symbolic="YES" id="Dsd-ho-svM"/>
-                            <constraint firstItem="MlO-0l-cNp" firstAttribute="top" secondItem="C4P-eR-t2Q" secondAttribute="bottom" constant="317" id="DtN-Py-4eJ"/>
-                            <constraint firstItem="EWF-em-hWS" firstAttribute="leading" secondItem="dmg-DD-lrt" secondAttribute="leading" id="FUa-F1-kKw"/>
-                            <constraint firstAttribute="trailing" secondItem="EWF-em-hWS" secondAttribute="trailing" id="J5w-UE-NXb"/>
-                            <constraint firstItem="HMu-67-G11" firstAttribute="top" secondItem="EWF-em-hWS" secondAttribute="bottom" constant="8" symbolic="YES" id="JxQ-ys-4l0"/>
+                            <constraint firstItem="EWF-em-hWS" firstAttribute="leading" secondItem="dmg-DD-lrt" secondAttribute="leadingMargin" constant="-20" id="E5H-4s-hAq"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="C4P-eR-t2Q" secondAttribute="trailing" constant="-20" id="S7S-vd-aC9"/>
                             <constraint firstItem="W8X-EN-qg7" firstAttribute="trailing" secondItem="I2M-7W-s5c" secondAttribute="trailing" id="TMc-Bb-bgb"/>
-                            <constraint firstItem="C4P-eR-t2Q" firstAttribute="trailing" secondItem="HMu-67-G11" secondAttribute="trailing" id="ZkO-sw-CVN"/>
-                            <constraint firstItem="W8X-EN-qg7" firstAttribute="trailing" secondItem="EWF-em-hWS" secondAttribute="trailing" id="aw7-Xc-iXl"/>
+                            <constraint firstItem="C4P-eR-t2Q" firstAttribute="leading" secondItem="dmg-DD-lrt" secondAttribute="leadingMargin" constant="-20" id="aWe-We-qWm"/>
+                            <constraint firstItem="W8X-EN-qg7" firstAttribute="trailing" secondItem="HMu-67-G11" secondAttribute="trailing" id="c8Z-Qf-n7D"/>
+                            <constraint firstItem="W8X-EN-qg7" firstAttribute="leading" secondItem="HMu-67-G11" secondAttribute="leading" id="ecR-F5-CTM"/>
                             <constraint firstItem="I2M-7W-s5c" firstAttribute="leading" secondItem="W8X-EN-qg7" secondAttribute="leading" id="jRz-fu-lLK"/>
-                            <constraint firstItem="C4P-eR-t2Q" firstAttribute="top" secondItem="HMu-67-G11" secondAttribute="bottom" constant="8" symbolic="YES" id="jkp-XW-Kmn"/>
-                            <constraint firstItem="EWF-em-hWS" firstAttribute="top" secondItem="W8X-EN-qg7" secondAttribute="bottom" constant="8" symbolic="YES" id="qg8-6b-jtB"/>
                             <constraint firstItem="I2M-7W-s5c" firstAttribute="top" secondItem="yCb-5R-Dpj" secondAttribute="bottom" constant="16" id="ruj-qo-ZGd"/>
-                            <constraint firstItem="EWF-em-hWS" firstAttribute="trailing" secondItem="HMu-67-G11" secondAttribute="trailing" id="tz7-V7-uNt"/>
+                            <constraint firstItem="W8X-EN-qg7" firstAttribute="trailing" secondItem="EWF-em-hWS" secondAttribute="trailing" id="uqB-fW-3Wm"/>
+                            <constraint firstItem="C4P-eR-t2Q" firstAttribute="top" secondItem="HMu-67-G11" secondAttribute="bottom" constant="8" id="xdc-Ll-CXs"/>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
@@ -143,20 +157,19 @@
                             <mask key="constraints">
                                 <exclude reference="jRz-fu-lLK"/>
                                 <exclude reference="ruj-qo-ZGd"/>
+                                <exclude reference="7cA-El-NYn"/>
                                 <exclude reference="Dsd-ho-svM"/>
                                 <exclude reference="TMc-Bb-bgb"/>
-                                <exclude reference="aw7-Xc-iXl"/>
-                                <exclude reference="4wS-zT-WdQ"/>
-                                <exclude reference="FUa-F1-kKw"/>
-                                <exclude reference="J5w-UE-NXb"/>
-                                <exclude reference="qg8-6b-jtB"/>
-                                <exclude reference="tz7-V7-uNt"/>
-                                <exclude reference="21b-og-pe3"/>
-                                <exclude reference="4V7-Rh-G6s"/>
-                                <exclude reference="JxQ-ys-4l0"/>
-                                <exclude reference="ZkO-sw-CVN"/>
-                                <exclude reference="jkp-XW-Kmn"/>
-                                <exclude reference="DtN-Py-4eJ"/>
+                                <exclude reference="c8Z-Qf-n7D"/>
+                                <exclude reference="ecR-F5-CTM"/>
+                                <exclude reference="uqB-fW-3Wm"/>
+                                <exclude reference="1Qy-hu-0mp"/>
+                                <exclude reference="7nV-J3-oag"/>
+                                <exclude reference="E5H-4s-hAq"/>
+                                <exclude reference="8r3-4F-7Jx"/>
+                                <exclude reference="S7S-vd-aC9"/>
+                                <exclude reference="aWe-We-qWm"/>
+                                <exclude reference="xdc-Ll-CXs"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -170,20 +183,19 @@
                             <mask key="constraints">
                                 <include reference="jRz-fu-lLK"/>
                                 <include reference="ruj-qo-ZGd"/>
+                                <include reference="7cA-El-NYn"/>
                                 <include reference="Dsd-ho-svM"/>
                                 <include reference="TMc-Bb-bgb"/>
-                                <include reference="aw7-Xc-iXl"/>
-                                <include reference="4wS-zT-WdQ"/>
-                                <include reference="FUa-F1-kKw"/>
-                                <include reference="J5w-UE-NXb"/>
-                                <include reference="qg8-6b-jtB"/>
-                                <include reference="tz7-V7-uNt"/>
-                                <include reference="21b-og-pe3"/>
-                                <include reference="4V7-Rh-G6s"/>
-                                <include reference="JxQ-ys-4l0"/>
-                                <include reference="ZkO-sw-CVN"/>
-                                <include reference="jkp-XW-Kmn"/>
-                                <include reference="DtN-Py-4eJ"/>
+                                <include reference="c8Z-Qf-n7D"/>
+                                <include reference="ecR-F5-CTM"/>
+                                <include reference="uqB-fW-3Wm"/>
+                                <include reference="1Qy-hu-0mp"/>
+                                <include reference="7nV-J3-oag"/>
+                                <include reference="E5H-4s-hAq"/>
+                                <include reference="8r3-4F-7Jx"/>
+                                <include reference="S7S-vd-aC9"/>
+                                <include reference="aWe-We-qWm"/>
+                                <include reference="xdc-Ll-CXs"/>
                             </mask>
                         </variation>
                     </view>

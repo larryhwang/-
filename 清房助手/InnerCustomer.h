@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "InnerBasicViewController.h"
 
-@interface InnerCustomer : UIViewController
+@interface InnerCustomer : InnerBasicViewController
 
+@property(nonatomic,assign)  CellStatus ResultListStatus;
+@property(nonatomic,)  UISearchController  *searchVC;
 @end

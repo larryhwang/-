@@ -31,6 +31,8 @@
 #define isI6p ([UIScreen mainScreen].bounds.size.height == 736)
 #define DeafaultColor [UIColor colorWithRed:3/255.0 green:164/255.0 blue:255/255.0 alpha:1.0]
 #define DeafaultColor2 [UIColor colorWithRed:0 green:122.0 / 255 blue:1.0 alpha:1.0]
+//40 102 137
+#define DeafaultColor3 [UIColor colorWithRed:40.0/255 green:102.0/255 blue:137.0/255 alpha:1.0]
 
 #define DOT_COORDINATE                  0.0f
 #define STATUS_BAR_HEIGHT               20.0f
@@ -52,7 +54,11 @@ typedef NS_ENUM(NSInteger, CellStatus) {
     WantRent = 3  //求租
 };
 
-
+typedef NS_OPTIONS(NSInteger, TabBarType) {
+    FangYuan = 0,
+    Keyuan   =1
+    
+};
 
 
 #

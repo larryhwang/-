@@ -31,6 +31,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+     NSString *name = [[NSUserDefaults standardUserDefaults]objectForKey:@"acount"];
+    if (name.length>0) {
+        self.userName.text = name;
+    }   else {
+        self.userName.text =@"";
+    }
+    self.passWord.text = @"";
 }
 
 
@@ -42,10 +49,11 @@
     NSMutableDictionary *PramaDic = [NSMutableDictionary new];
     //http://127.0.0.1:8080/qfzsapi/user/loginUser.front?userID=admin&psWord=2
     //http://www.123qf.cn/testApp/user/loginUser.front?userID=15018639039&psWord=5798161"
-    PramaDic[@"userid"] = @"15018639039";
-    PramaDic[@"psword"] = @"5798161";
+//    PramaDic[@"userid"] = @"17090239027";
+//    PramaDic[@"psword"] = @"123456";
     
-    
+        PramaDic[@"userid"] = userName;
+        PramaDic[@"psword"] = passWord;
 
     
     
@@ -61,6 +69,13 @@
         [MBProgressHUD showMessage:@"正在登录"];
        if (responseObject) {
         [MBProgressHUD hideHUD];
+           
+           //保存到本地账号信息
+           [[NSUserDefaults standardUserDefaults]setObject:userName forKey:@"acount"];
+           [[NSUserDefaults standardUserDefaults]setObject:passWord forKey:@"pw"];
+           
+           
+           
            [self getdata];  //测试数据，可删
        }
        long Cp=[responseObject[@"code"] integerValue];

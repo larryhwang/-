@@ -15,6 +15,7 @@
 #import "PostViewController.h"
 #import "SettingPage_TableVC.h"
 #import "InnerTabBarController.h"
+#import "ZuGouDetailViewController.h"
 
 typedef enum Slidestate {
     kStateHome,
@@ -154,6 +155,8 @@ static const CGFloat menuStartNarrowRatio  = 0.70;
 - (void)showMenu {
     self.distance = self.leftDistance;
     self.sta = kStateMenu;
+   // self.view.userInteractionEnabled = NO;
+    self.homeVC.view.userInteractionEnabled = NO;  //当侧滑过去时，首页的界面变的不可以交互
     [self doSlide:viewHeightNarrowRatio];
 }
 
@@ -163,6 +166,8 @@ static const CGFloat menuStartNarrowRatio  = 0.70;
 - (void)showHome {
     self.distance = 0;
     self.sta = kStateHome;
+//    self.view.userInteractionEnabled = YES;
+    self.homeVC.view.userInteractionEnabled = YES;
     [self doSlide:1];
 }
 
@@ -208,7 +213,7 @@ static const CGFloat menuStartNarrowRatio  = 0.70;
     [left  setTitle: @"求购" forState:UIControlStateNormal];
     [right setTitle: @"求租" forState:UIControlStateNormal];
     self.homeVC.isWant = YES ;
-     [self.homeVC LeftInit];
+   [self.homeVC LeftInit];
     //还需更改表的初始数据
     [self showHome];
     
@@ -223,30 +228,29 @@ static const CGFloat menuStartNarrowRatio  = 0.70;
 }
 
 -(void)transtoInnerFang {
-    InnerTabBarController *innerTabarVC =[[InnerTabBarController alloc]init];
-    [self.messageNav pushViewController:innerTabarVC animated:YES];
+    InnerTabBarController *innerTabarVC_FANG =[[InnerTabBarController alloc]initWithTabBarType:FangYuan];
     [self showHome];
+    KeyWindow.rootViewController = innerTabarVC_FANG;
+   
 }
 
 -(void)transtoInnerKeyuan {
-    NSLog(@"内部客源");
+    InnerTabBarController *innerTabarVC_KE =[[InnerTabBarController alloc]initWithTabBarType:Keyuan];
+    [self showHome];
+    KeyWindow.rootViewController = innerTabarVC_KE;
+
 }
 
 -(void)transToSetting {
     UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"SettingInterface" bundle:[NSBundle mainBundle]];
     UIViewController *SettingViewController = (UIViewController*)[storyboard instantiateViewControllerWithIdentifier:@"settingPage"];
-    
      SettingViewController.title = @"设置";
     [self.messageNav pushViewController:SettingViewController animated:NO];
     [self showHome];
 }
 
 - (void)transToPostEdit{
-//    WMOtherViewController *other = [[WMOtherViewController alloc] init];
-//    other.navTitle = title;
-//    other.hidesBottomBarWhenPushed = YES;
-//    [self.messageNav pushViewController:other animated:NO];
-//    [self showHome];
+
 }
 
 - (void)OnlyBack {  //回到首页(出租、出售)
@@ -270,13 +274,20 @@ static const CGFloat menuStartNarrowRatio  = 0.70;
 
 -(void)QFshowDetailWithFangYuanID:(NSString *)FangId andFenlei:(NSString *)Fenlei userID:(NSString *)UserId XiaoquName:(NSString *)name ListStatus:(NSString *)status {
     DetailViewController *test = [DetailViewController new];
-    
     test.title = name;
     test.PreTitle = status;
     test.DisplayId = FangId;
     test.FenLei = Fenlei;
     test.uerID = UserId;
     [self.messageNav pushViewController:test animated:YES];
+}
+
+-(void)QFShowZugouDetailWithFanLei:(NSString *)fenlei andKeyuanID:(NSString *)keyuanId andTitle:(NSString *)title{
+    ZuGouDetailViewController *VC  = [[ZuGouDetailViewController alloc]init];
+    VC.title = title;
+    VC.fenlei = fenlei;
+    VC.keYuanID = keyuanId;
+    [self.messageNav pushViewController:VC animated:YES];
 }
 
 

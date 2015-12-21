@@ -118,23 +118,18 @@
          //客源查询
     } else if (indexPath.row ==2) {
         //发布
-//        PostViewController *Ct = [[PostViewController alloc]init];
-//        Ct.title = @"发布";
-//        [self.navigationController pushViewController:Ct animated:YES];
-        
         [self.delegate transToPost];
     } else if (indexPath.row ==3){
         //内部房源
-        [MBProgressHUD showSuccess:@"建设中"];
-       // [self.delegate transtoInnerFang];
-    } else {
+       // [MBProgressHUD showSuccess:@"建设中"];
+        [self.delegate transtoInnerFang];
+    } else if (indexPath.row ==4) {
         //内部客源
-        [MBProgressHUD showSuccess:@"建设中"];
-       // [self.delegate transtoInnerKeyuan];
+        [self.delegate transtoInnerKeyuan];
+    }else {
+     [MBProgressHUD showSuccess:@"建设中"];
     }
-//    if ([self.delegate respondsToSelector:@selector(didSelectItem:)]) {
-    //    [self.delegate didSelectItem:self.listArray[indexPath.row]];
-//    }
+
     
 }
 

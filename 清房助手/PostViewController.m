@@ -54,6 +54,10 @@
 
 -(void) setTitleLable {
     UIImageView *tittleImgView = [[UIImageView alloc]initWithFrame:CGRectMake((SCREEN_WIDTH - ImgWidth)/2, self.view.frame.origin.y + 2*ImgHeight -30 , ImgWidth, ImgHeight)];
+    if(isI5){
+        [tittleImgView setFrame:CGRectMake((SCREEN_WIDTH - ImgWidth)/2, self.view.frame.origin.y + 2*ImgHeight -70 , ImgWidth, ImgHeight)];
+    }
+    
     tittleImgView.image = [UIImage imageNamed:@"wenzi"];
     [self.view addSubview:tittleImgView];
 }

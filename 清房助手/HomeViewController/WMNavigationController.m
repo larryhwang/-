@@ -57,8 +57,6 @@
     UIViewController *vc = self.topViewController;
     NSLog(@"VC：%@",vc);
     NSLog(@"0navigationBar :%@  item: %@",navigationBar,item);
-
-
     if ([vc respondsToSelector:@selector(controllerWillPopHandler)])
     {
         

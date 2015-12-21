@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "InnerBasicViewController.h"
 
-@interface InnerFangVC : UIViewController
+@interface InnerFangVC : InnerBasicViewController
+
 
 @end

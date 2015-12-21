@@ -58,6 +58,8 @@
 
 -(void)initNav {
     UIButton *RightBarBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 65, 27)];
+      NSLog(@"NavController:%@",self.navigationController);
+       NSLog(@"QIAN ：rightBtn : %@", RightBarBtn);
     UIImageView *img = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"筛选"]];
     [img setFrame:CGRectMake(0, 0, 27, 27)];
     [RightBarBtn addSubview:img];
@@ -67,6 +69,7 @@
     RightBarBtn.titleEdgeInsets = UIEdgeInsetsMake(0, 27, 0, 0);
     UIBarButtonItem *gripeBarBtn = [[UIBarButtonItem alloc]initWithCustomView:RightBarBtn];
     self.navigationItem.rightBarButtonItem =gripeBarBtn;
+        NSLog(@"HOU ：rightBtn : %@", self.navigationItem.rightBarButtonItem);
 }
 -(void)basicUISet {
     self.title = @"搜索结果";

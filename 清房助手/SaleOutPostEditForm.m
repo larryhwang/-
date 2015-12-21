@@ -85,7 +85,7 @@
     
     BOOL  _isFromSelectPro;
 }
-
+ //UIScrollView
 @property(nonatomic,strong)   EditCell  *pictureDisplay;
 @property (nonatomic, strong) JYBMultiImageView *multiImageView;
 @property (nonatomic, copy)   UIView *(^viewGetter)(NSString *imageName);
@@ -468,12 +468,20 @@
     [self netInitialLog];
     
     UIScrollView *main = [[UIScrollView alloc]initWithFrame:CGRectMake(0, -54,Screen_width , Screen_height + 100)];
+    
+    if (isI5) {
+        [main setFrame:CGRectMake(0, -54,Screen_width , Screen_height + 100 + 64)];
+    }
+    
     main.delegate = self;
     main.indicatorStyle = UIScrollViewIndicatorStyleWhite ;
     
     [main setContentSize:CGSizeMake(Screen_width, Screen_height + 630)];
     
   //      [main setContentSize:CGSizeMake(Screen_width, Screen_height + 830)];
+    if (isI5) {
+        [main setContentSize:CGSizeMake(Screen_width, Screen_height + 730 + 64)];
+    }
     
     main.backgroundColor = UIColorWithRGBA(233, 233, 233, 1);
     self.mainScrollview = main;

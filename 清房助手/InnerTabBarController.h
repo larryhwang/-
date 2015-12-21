@@ -10,4 +10,7 @@
 
 @interface InnerTabBarController : UITabBarController
 
+
+-(id)initWithTabBarType:(TabBarType )type;
+
 @end
