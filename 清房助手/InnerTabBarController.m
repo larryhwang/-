@@ -69,6 +69,7 @@
 - (void)setUpAllChildViewController
 {
     InnerBasicViewController *LeftViewController =   [[InnerBasicViewController alloc]initWithUrl:_LeftListUrl] ;
+    
     LeftViewController.type = _type;
     [self setUpOneChildViewController:LeftViewController image:[UIImage imageNamed:@"company"] title:@"公司"];
     
@@ -82,17 +83,11 @@
 
 - (void)setUpOneChildViewController:(InnerBasicViewController *)vc image:(UIImage *)image  title:(NSString *)title
 {
-    //    // navigationItem模型
-    //    vc.navigationItem.title = title;
-    //
-    //    // 设置子控件对应tabBarItem的模型属性
-    //    vc.tabBarItem.title = title;
+
     vc.title = title;
     vc.tabBarItem.image = image;
-    
-    // 保存tabBarItem模型到数组
-    // [self.items addObject:vc.tabBarItem];
     vc.type = _type;
+    
     QFNavController *nav = [[QFNavController alloc] initWithRootViewController:vc];
     [self addChildViewController:nav];
 

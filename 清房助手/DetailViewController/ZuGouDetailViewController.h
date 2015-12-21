@@ -14,4 +14,9 @@
 @property(nonatomic,copy) NSString *fenlei;
 @property(nonatomic,copy) NSString *keYuanID;
 
+/**
+ *  用于判读是否是内部XX，如果是则要显示查看信息按钮
+ */
+@property(nonatomic,assign) BOOL  isInner;
+
 @end

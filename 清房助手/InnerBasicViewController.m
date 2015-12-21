@@ -130,7 +130,6 @@
         return self;
 }
 
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self initNavColor];
@@ -139,6 +138,10 @@
     self.edgesForExtendedLayout = UIRectEdgeNone ;
 }
 
+
+/**
+ *  添加查看业主信息的按钮
+ */
 -(void)setUpCheckBtn {
     UIButton *checkTeleNoBtn = [[UIButton alloc]init];
     [checkTeleNoBtn addTarget:self action:@selector(CheckBtn) forControlEvents:UIControlEventTouchUpInside];
@@ -148,14 +151,25 @@
     checkTeleNoBtn.layer.borderColor  = [DeafaultColor3 CGColor];
     
     [checkTeleNoBtn setTitleColor:DeafaultColor3 forState:UIControlStateNormal];
-    [checkTeleNoBtn setFrame:CGRectMake(ScreenWidth- checkNoBtnWidght -6 , (100 -checkNoBtnHeight)/2 + 64   ,checkNoBtnWidght, checkNoBtnHeight)];
+    
+    
+    /**
+     *  <#Description#>
+     */
+    //ScreenHeight/3 +50
+    if(_type == Keyuan) {
+        [checkTeleNoBtn setFrame:CGRectMake(ScreenWidth- checkNoBtnWidght -6 , (100 -checkNoBtnHeight)/2 + 64   ,checkNoBtnWidght, checkNoBtnHeight)];
+    }else {
+        //ScreenHeight/3 +50
+        [checkTeleNoBtn setFrame:CGRectMake(ScreenWidth/3 ,ScreenHeight/3 +50  ,checkNoBtnWidght, checkNoBtnHeight)];
+    }
+
     [self.view addSubview:checkTeleNoBtn];
 }
 
 -(void)CheckBtn {
     LesveMsgVC *LMsg = [[LesveMsgVC alloc]init];
-    LMsg.ownerNameStr= @"刘强东";
-    LMsg.ownerTeleStr = @"1876561233";
+
     [self.navigationController pushViewController:LMsg animated:YES];
 }
 
@@ -164,10 +178,7 @@
     self.navigationController.navigationBar.barTintColor = [DeafaultColor2 colorWithAlphaComponent:0.5];
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],NSForegroundColorAttributeName, nil]];
-    
     //跳转时隐藏
-    
-
 }
 
 //返回系统首页
@@ -233,27 +244,8 @@
 
 
     }else {
-        //展示客源的列表
-//        static NSString *ID = @"identifer";
-//        
-//        KeyuanCell *cell =[tableView dequeueReusableCellWithIdentifier:ID];
-//        if (cell ==nil) {
-//            cell = [[[NSBundle mainBundle]loadNibNamed:@"KeyuanCell" owner:nil options:nil] firstObject];
-//        }
-//        cell.titileLabel.text =@"求购一套廉价的住房";
-//        cell.acreaLabel.text =@"面积:110㎡";
-//        cell.roomsContLabel.text = @"2室2厅1阳台";
-//        cell.attachmentLabel.text =@"洗衣机 冰箱";
-//        cell.requestDescrbeLabel.text = @"阳光采光要好";
-//        cell.priceLabel.text = @"110万";
-//        cell.publisherLabel.text = @"内马尔";
-//        cell.postTimeLabel.text =@"2015-12-10 10:32:28";
-//        return cell;
-        
-        
-        
-        
-      
+
+
         static NSString *ID = @"identiferWantBuy";
         
         KeyuanCell *cell =[tableView dequeueReusableCellWithIdentifier:ID];
@@ -315,6 +307,7 @@
         NSString *Category = [NSString stringWithFormat:@"%@",SingleData[@"fenlei"]];
         
         DetailViewController *test = [DetailViewController new];
+        test.isInner = YES;
         test.title = name;
         test.PreTitle = @"出售";
         test.DisplayId = Id;
@@ -324,17 +317,12 @@
     }else {
         //展示客源的详情页面
         ZuGouDetailViewController *VC  = [[ZuGouDetailViewController alloc]init];
+        VC.isInner = YES;
         VC.title = SingleData[@"biaoti"];
         VC.fenlei = SingleData[@"fenlei"];
         VC.keYuanID = SingleData[@"id"];
         [self.navigationController pushViewController:VC animated:YES];
-        
     }
-    
-    
-    
-    
-    
 
 }
 
@@ -345,27 +333,6 @@
     else  return string;
 }
 
-//-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-//    [tableView deselectRowAtIndexPath:indexPath animated:YES]; //解除遗留灰色
-//    NSDictionary *SingleData = self.DataArr[indexPath.row];
-//    NSString *Id = SingleData[@"id"];   //将房源ID传过去
-//    NSString *userID = SingleData[@"userid"];
-//    NSString *name = [self judgeNullValue:SingleData[@"mingcheng"]];
-//    NSString *Category = [NSString stringWithFormat:@"%@",SingleData[@"fenlei"]];
-//    [self.HomeVCdelegate QFshowDetailWithFangYuanID:Id andFenlei:Category userID:userID XiaoquName:name ListStatus:_preName];
-//}
-
-
-
-//-(void)QFshowDetailWithFangYuanID:(NSString *)FangId andFenlei:(NSString *)Fenlei userID:(NSString *)UserId XiaoquName:(NSString *)name ListStatus:(NSString *)status {
-//    DetailViewController *test = [DetailViewController new];
-//    test.title = name;
-//    test.PreTitle = status;
-//    test.DisplayId = FangId;
-//    test.FenLei = Fenlei;
-//    test.uerID = UserId;
-//    [self.messageNav pushViewController:test animated:YES];
-//}
 
 /**
  *  加载网络数据

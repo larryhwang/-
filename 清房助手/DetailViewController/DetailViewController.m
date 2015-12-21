@@ -18,6 +18,7 @@
 #import "FreeCell.h"
 #import <MessageUI/MessageUI.h>
 #import "MJRefresh.h"
+#import "LesveMsgVC.h"
 
 #define  HeavyFont     [UIFont fontWithName:@"Helvetica-Bold" size:25]
 #define  ToolHeight  50    //固定底部的大小
@@ -29,6 +30,9 @@
 #define DETAILTABLE   11
 #define ImgScoviewTag 12
 
+
+#define  checkNoBtnHeight  30
+#define  checkNoBtnWidght  100
 
 #define DSystenVersion            ([[[UIDevice currentDevice] systemVersion] doubleValue])
 #define SSystemVersion            ([[UIDevice currentDevice] systemVersion])
@@ -50,6 +54,8 @@
 @property(nonatomic,strong)    UILabel *Publisher;
 @property(nonatomic,strong)    UILabel *Tele;
 @property(nonatomic,strong)      UIButton *CountLabel;
+@property(nonatomic,strong)  AFHTTPRequestOperationManager  *sharedMgr;
+@property(nonatomic,strong)  NSDictionary  *CheckBtnInfoDic;
 
 
 
@@ -69,7 +75,12 @@
     self.navigationController.navigationBar.translucent = YES ;
 }
 
-
+-(NSDictionary*)CheckBtnInfoDic {
+    if (_CheckBtnInfoDic ==nil) {
+        _CheckBtnInfoDic = [NSDictionary new];
+    }
+    return _CheckBtnInfoDic;
+}
 
 
 - (void)viewDidLoad {
@@ -134,6 +145,7 @@
 
 -(void)getDataFromNet {
     AFHTTPRequestOperationManager *mgr  = [AFHTTPRequestOperationManager manager];
+    self.sharedMgr = mgr;
     NSString *url3 = [NSString stringWithFormat:@"http://www.123qf.cn:81/testApp/fangyuan/detailsHouse.api?fenlei=%@&fangyuan_id=%@",self.FenLei,self.DisplayId];
     [MBProgressHUD showMessage:@"加载中"];
     [mgr POST:url3
@@ -363,6 +375,55 @@
     return 4;
 }
 
+-(void)CheckBtn {
+    //http://www.123qf.cn:81/testApp/fkyuan/selectOwnerInfo.api?kid=5&currentpage=1
+    
+    //    self.sharedMgr po
+    NSString *URL =@"http://www.123qf.cn:81/testApp/fkyuan/selectOwnerInfo.api";
+    NSMutableDictionary *pramaDic = [NSMutableDictionary new];
+    pramaDic[@"fid"] = self.FangData[@"id"];
+    pramaDic[@"currentpage"] = @"1";
+    NSLog(@"发钱:%@",pramaDic);
+    [self.sharedMgr POST:URL parameters:pramaDic success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+        NSLog(@"SeeOwnList :%@",responseObject);
+        NSString *flagStr = responseObject[@"msg"];
+        if ([flagStr isEqualToString:@"无数据"]) {
+            UIAlertView *AW = [[UIAlertView alloc]initWithTitle:@"未含信息"
+                                                        message:nil
+                                                       delegate:self
+                                              cancelButtonTitle:nil
+                                              otherButtonTitles:@"确定", nil];
+            
+            [AW show];
+        } else{
+            self.CheckBtnInfoDic = responseObject[@"data"];
+            
+            LesveMsgVC *LMsg = [[LesveMsgVC alloc]init];
+            NSDictionary *dict = responseObject[@"data"];
+            LMsg.OwnerInfoDic= dict[@"OwnerInfo"];
+            
+            [self.navigationController pushViewController:LMsg animated:YES];
+            
+        }
+    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
+        NSLog(@"%@",error);
+    }];
+}
+
+-(void)setCheckBtn:(UITableViewCell *)cell {
+    UIButton *checkTeleNoBtn = [[UIButton alloc]init];
+    [checkTeleNoBtn addTarget:self action:@selector(CheckBtn) forControlEvents:UIControlEventTouchUpInside];
+    [checkTeleNoBtn setTitle:@"业主信息  >" forState:UIControlStateNormal];
+    checkTeleNoBtn.layer.cornerRadius = 4;
+    checkTeleNoBtn.layer.borderWidth  = 1;
+    checkTeleNoBtn.layer.borderColor  = [DeafaultColor3 CGColor];
+    
+    [checkTeleNoBtn setTitleColor:DeafaultColor3 forState:UIControlStateNormal];
+    [checkTeleNoBtn setFrame:CGRectMake(2*ScreenWidth/3 ,35  ,checkNoBtnWidght, checkNoBtnHeight)];
+
+    [cell addSubview:checkTeleNoBtn];
+}
+
 #pragma mark -表中单元格设置
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath  {
 #pragma mark -住宅类
@@ -385,7 +446,10 @@
             LocationCell.PostTime.text = self.FangData[@"weituodate"];
             LocationCell.Region.text = self.FangData[@"qu"];
             LocationCell.LouPanName.text = [self judgeNullValue:self.FangData[@"mingcheng"]];
-                  //  LocationCell.LouPanName.text = @"缺省名称字段";
+            if(self.isInner)
+                [self setCheckBtn:LocationCell]; //如果是内部请求,添加查看按钮
+            
+            
 #pragma mark -价格高亮属性
             NSString *StringPrice = [NSString stringWithFormat:@"%@万",self.FangData[@"shoujia"]];
             NSRange   RedPart = NSMakeRange(0, [StringPrice length] -1 );
@@ -394,6 +458,12 @@
             [priceAttri addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range:RedPart];
             LocationCell.Price.text = StringPrice;
             [LocationCell.Price setAttributedText:priceAttri];
+            
+#pragma mark -添加查看业主信息
+            
+            
+            
+            
             return LocationCell;
         }else if (indexPath.row ==1) {
             return testCell;

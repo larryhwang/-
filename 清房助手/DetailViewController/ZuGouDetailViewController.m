@@ -53,7 +53,8 @@
 @property(nonatomic,strong)    UILabel *Publisher;
 @property(nonatomic,strong)    UILabel *Tele;
 @property(nonatomic,strong)      UIButton *CountLabel;
-
+@property(nonatomic,strong)    AFHTTPRequestOperationManager *sharedMgr;
+@property(nonatomic,strong)  NSDictionary  *CheckBtnInfoDic;
 
 
 
@@ -66,13 +67,16 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-  //  [self addWhiteBack];   //为加载前的白色背景
+ //   [self addWhiteBack];   //为加载前的白色背景
  //   [self navigationController];   //变更一下导航栏
     [self initTable];
     [self initFootView];
     [self initNavController];
     [self getDataFromNet];
-  //  [self setUpCheckBtn];
+    if (self.isInner == YES) {
+        [self setUpCheckBtn];
+    }
+    [self setUpCheckBtn];
     
     
 }
@@ -84,12 +88,22 @@
     return _FangData;
 }
 
+-(NSDictionary*)CheckBtnInfoDic {
+    if (_CheckBtnInfoDic ==nil) {
+        _CheckBtnInfoDic = [NSDictionary new];
+    }
+    return _CheckBtnInfoDic;
+}
+
+
+//加白布遮挡，会有瑕疵动画
 - (void)addWhiteBack {
     UIView *MengBan = [[UIView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight )];
+    MengBan.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:MengBan];
     [self.view bringSubviewToFront:MengBan];
     MengBan.tag = 999;
-    MengBan.backgroundColor = [UIColor whiteColor];
+ 
 }
 
 
@@ -98,10 +112,39 @@
  */
 
 -(void)CheckBtn {
-    LesveMsgVC *LMsg = [[LesveMsgVC alloc]init];
-    LMsg.ownerNameStr= @"刘强东";
-    LMsg.ownerTeleStr = @"1876561233";
-    [self.navigationController pushViewController:LMsg animated:YES];
+    //http://www.123qf.cn:81/testApp/fkyuan/selectOwnerInfo.api?kid=5&currentpage=1
+    
+//    self.sharedMgr po
+    NSString *URL =@"http://www.123qf.cn:81/testApp/fkyuan/selectOwnerInfo.api";
+    NSMutableDictionary *pramaDic = [NSMutableDictionary new];
+    pramaDic[@"kid"] = self.FangData[@"id"];
+    pramaDic[@"currentpage"] = @"1";
+        NSLog(@"发钱:%@",pramaDic);
+    [self.sharedMgr POST:URL parameters:pramaDic success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+        NSLog(@"SeeOwnList :%@",responseObject);
+        NSString *flagStr = responseObject[@"msg"];
+        NSString *data = responseObject[@"data"];
+        if ([flagStr isEqualToString:@"无数据"] ) {
+            UIAlertView *AW = [[UIAlertView alloc]initWithTitle:@"未含信息"
+                                                        message:nil
+                                                       delegate:self
+                                              cancelButtonTitle:nil
+                                              otherButtonTitles:@"确定", nil];
+            
+            [AW show];
+        } else{
+            self.CheckBtnInfoDic = responseObject[@"data"];
+            
+            LesveMsgVC *LMsg = [[LesveMsgVC alloc]init];
+            NSDictionary *dict = responseObject[@"data"];
+            LMsg.OwnerInfoDic= dict[@"OwnerInfo"];
+            
+            [self.navigationController pushViewController:LMsg animated:YES];
+            
+        }
+    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
+        NSLog(@"%@",error);
+    }];
 }
 
 
@@ -127,6 +170,7 @@
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return 3;
 }
+
 //{"code":1,"msg":"对应fy_id存在详情","data":{"region":"河南岸","tingchechang":true,"biaoti":"1500-2000元2房 2厅","tingshu":2,"kuandai":null,"tel":"13516666006","shengfen":"广东省","userid":"13480556006","pricef":1500,"acreage":null,"jiadian":true,"publisher":"曾剑军","fangshu":2,"id":5,"dianshi":null,"name":"悦和地产","mingcheng":null,"qu":"惠城区","shi":"惠州市","tupian":null,"zhuangxiuyaoqiu":"精装修","weituodate":"2015-11-02 10:31:45","meiqi":null,"leixing":null,"zugou":false,"dianhua":null,"fangyuanmiaoshu":"以沃尔玛附近为佳","pricel":2000,"unit":"元","balconys":1,"fenlei":0,"youxiaoqi":1,"toilets":1,"dianti":null}}
 
 
@@ -161,12 +205,7 @@
                                                                              [self judgeNullValue:dic[@"shi"]],
                                                                              [self judgeNullValue:dic[@"qu"]],
                                                                              [self judgeNullValue:dic[@"region"]]];
-        //@"广东省惠州市惠城区河南岸";
-        
-//        cell.roomsContLabel.text = [NSString stringWithFormat:@"%@室%@厅%@卫%@阳台", [self judgeNullValue: SingleData[@"fangshu"]],
-//                                    [self judgeNullValue: SingleData[@"tingshu"]],
-//                                    [self judgeNullValue: SingleData[@"toilets"]],
-//                                    [self judgeNullValue: SingleData[@"balconys"]]];//@"%@室%@厅%阳台";
+
         
         Detailcell.RoomStyleLabel.text =[NSString stringWithFormat:@"%@室%@厅%@卫%@阳台", [self judgeNullValue: dic[@"fangshu"]],
                                                                              [self judgeNullValue: dic[@"tingshu"]],
@@ -281,20 +320,18 @@
 
 -(void)getDataFromNet {
     AFHTTPRequestOperationManager *mgr  = [AFHTTPRequestOperationManager manager];
+    self.sharedMgr = mgr ;
 //    http://www.123qf.cn:81/testApp/keyuan/seekHouse.api?fenlei=0&keyuan_id=5
     NSString *url3 = [NSString stringWithFormat:@"http://www.123qf.cn:81/testApp/keyuan/seekHouse.api?fenlei=%@&keyuan_id=%@",self.fenlei   ,self.keYuanID];
     [MBProgressHUD showMessage:@"加载中"];
     [mgr POST:url3
    parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
 #pragma mark -请求成功后的网络处理
-       NSLog(@"%@",responseObject);
+       NSLog(@"ZuGou:%@",responseObject);
        [MBProgressHUD hideHUD];
        UIView *back = [self.view viewWithTag:999];
        [back removeFromSuperview];  //移除白色背景
        self.FangData = responseObject[@"data"];
-       NSLog(@"单个求租数据详情%@",self.FangData);
-
-
        [self initFootView];
        [self.detailInfoTable reloadData];
 

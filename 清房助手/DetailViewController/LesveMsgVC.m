@@ -16,8 +16,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.ownerName.text = self.ownerNameStr;
-    self.ownerTele.text = self.ownerTeleStr;
+    
+    NSLog(@"LMsg:%@",_OwnerInfoDic);
+    
 }
 
 

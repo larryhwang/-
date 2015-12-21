@@ -7,9 +7,6 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LesveMsgVC">
             <connections>
-                <outlet property="CheckReason" destination="Ne3-HT-LbM" id="tDE-f8-NcA"/>
-                <outlet property="ownerName" destination="fVN-bI-Xvh" id="DIP-1J-rwI"/>
-                <outlet property="ownerTele" destination="c9j-Yc-dnn" id="wIo-bT-xvt"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="ts2-z0-wsk"/>
             </connections>
         </placeholder>

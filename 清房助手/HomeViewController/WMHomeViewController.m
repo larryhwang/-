@@ -304,6 +304,8 @@
 - (void) LoadNetDataWithCurentURl{
     [MBProgressHUD showMessage:@"正在加载"];
     NSLog(@"即将上线:%@,  %@",_CurrentRuest,self.pramaDic);
+    //设置网络超时
+    self.shareMgr.requestSerializer.timeoutInterval = 2.0;
     [self.shareMgr POST:self.CurrentRuest
              parameters: self.pramaDic success:^(AFHTTPRequestOperation *operation, id responseObject) {
                  [MBProgressHUD hideHUD];
@@ -320,7 +322,10 @@
                      [aleat show];
                  }
              } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                 [MBProgressHUD hideHUD];
+                 [MBProgressHUD showError:@"网络超时，稍后尝试"];
                  NSLog(@"%@",error);
+                 NSLog(@"网络超时");
              }];
     
 }

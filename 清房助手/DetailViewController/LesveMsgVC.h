@@ -10,15 +10,13 @@
 
 @interface LesveMsgVC : UIViewController
 
-@property (weak, nonatomic) IBOutlet UILabel *ownerName;
 
-@property (weak, nonatomic) IBOutlet UILabel *ownerTele;
 
-@property (weak, nonatomic) IBOutlet UITextView *CheckReason;
+@property (copy, nonatomic)  NSString *QFownerNameStr;
 
-@property (copy, nonatomic)  NSString *ownerNameStr;
+@property (copy, nonatomic)  NSString *QFownerTeleStr;
 
-@property (copy, nonatomic)  NSString *ownerTeleStr;
+@property(nonatomic,strong)  NSDictionary  *OwnerInfoDic;
 
 
 @end
