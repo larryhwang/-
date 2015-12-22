@@ -36,7 +36,9 @@
 #define SSystemVersion            ([[UIDevice currentDevice] systemVersion])
 
 
-@interface ZuGouDetailViewController ()<UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate,UIAlertViewDelegate,MFMessageComposeViewControllerDelegate>
+@interface ZuGouDetailViewController ()<UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate,UIAlertViewDelegate,MFMessageComposeViewControllerDelegate> {
+//    isThereOwnerInfo;
+}
 
 @property (strong, nonatomic)  UIScrollView *scrollView3;
 @property (strong, nonatomic)  UITableView *detailInfoTable;
@@ -45,6 +47,7 @@
 @property(nonatomic)           CGFloat DescribeCellHeight;
 @property(nonatomic)           CGFloat FreeCellHeight;
 @property(nonatomic)           NSInteger ImgTotal;
+@property(nonatomic,assign)    BOOL isThereOwnerInfo;
 @property(nonatomic,assign)    CellStatus Status;
 @property(nonatomic,strong)    NSDictionary  *FangData;
 @property(nonatomic,strong)    UIView  *HeaderContent;
@@ -67,16 +70,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
- //   [self addWhiteBack];   //为加载前的白色背景
- //   [self navigationController];   //变更一下导航栏
     [self initTable];
     [self initFootView];
     [self initNavController];
     [self getDataFromNet];
-    if (self.isInner == YES) {
-        [self setUpCheckBtn];
-    }
-    [self setUpCheckBtn];
+
     
     
 }
@@ -108,49 +106,12 @@
 
 
 /**
- *  查看业主信息
+ *  设置查看业主信息按钮
  */
-
--(void)CheckBtn {
-    //http://www.123qf.cn:81/testApp/fkyuan/selectOwnerInfo.api?kid=5&currentpage=1
-    
-//    self.sharedMgr po
-    NSString *URL =@"http://www.123qf.cn:81/testApp/fkyuan/selectOwnerInfo.api";
-    NSMutableDictionary *pramaDic = [NSMutableDictionary new];
-    pramaDic[@"kid"] = self.FangData[@"id"];
-    pramaDic[@"currentpage"] = @"1";
-        NSLog(@"发钱:%@",pramaDic);
-    [self.sharedMgr POST:URL parameters:pramaDic success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-        NSLog(@"SeeOwnList :%@",responseObject);
-        NSString *flagStr = responseObject[@"msg"];
-        NSString *data = responseObject[@"data"];
-        if ([flagStr isEqualToString:@"无数据"] ) {
-            UIAlertView *AW = [[UIAlertView alloc]initWithTitle:@"未含信息"
-                                                        message:nil
-                                                       delegate:self
-                                              cancelButtonTitle:nil
-                                              otherButtonTitles:@"确定", nil];
-            
-            [AW show];
-        } else{
-            self.CheckBtnInfoDic = responseObject[@"data"];
-            
-            LesveMsgVC *LMsg = [[LesveMsgVC alloc]init];
-            NSDictionary *dict = responseObject[@"data"];
-            LMsg.OwnerInfoDic= dict[@"OwnerInfo"];
-            
-            [self.navigationController pushViewController:LMsg animated:YES];
-            
-        }
-    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
-        NSLog(@"%@",error);
-    }];
-}
-
 
 -(void)setUpCheckBtn {
     UIButton *checkTeleNoBtn = [[UIButton alloc]init];
-    [checkTeleNoBtn addTarget:self action:@selector(CheckBtn) forControlEvents:UIControlEventTouchUpInside];
+    [checkTeleNoBtn addTarget:self action:@selector(CheckBtnClick) forControlEvents:UIControlEventTouchUpInside];
     [checkTeleNoBtn setTitle:@"客户电话  >" forState:UIControlStateNormal];
     checkTeleNoBtn.layer.cornerRadius = 4;
     checkTeleNoBtn.layer.borderWidth  = 1;
@@ -161,18 +122,61 @@
     [self.view addSubview:checkTeleNoBtn];
 }
 
+
 /**
- *  查看业主信息
+ *  查看按钮被按下
  */
+-(void)CheckBtnClick {
+    if (_isThereOwnerInfo) {
+
+        
+        LesveMsgVC *LMsg  = [[LesveMsgVC alloc]init];
+        LMsg.OwnerInfoDic = self.CheckBtnInfoDic;
+        
+        [self.navigationController pushViewController:LMsg animated:YES];
+    }else {
+        UIAlertView *AW = [[UIAlertView alloc]initWithTitle:@"未含信息"
+                                                    message:nil
+                                                   delegate:self
+                                          cancelButtonTitle:nil
+                                          otherButtonTitles:@"确定", nil];
+        
+        [AW show];
+    }
+}
+
+/**
+ *  检查业主信息
+ */
+-(void)checkKeyuanInfo {
+    NSString *URL =@"http://www.123qf.cn:81/testApp/fkyuan/selectOwnerInfo.api";
+    NSMutableDictionary *pramaDic = [NSMutableDictionary new];
+    pramaDic[@"kid"] = @"5";//self.FangData[@"id"];
+    pramaDic[@"currentpage"] = @"1";
+    [self.sharedMgr POST:URL parameters:pramaDic success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+        NSLog(@"%@",responseObject);
+        self.CheckBtnInfoDic = responseObject[@"data"];
+        NSNumber *flag = responseObject[@"code"];
+        NSNumber *Judge =  [NSNumber numberWithInt:1];
+        if ([flag isEqualToNumber:Judge]) {
+            _isThereOwnerInfo =  YES;
+            NSLog(@" xxx  %d",_isThereOwnerInfo);
+        }else {
+            _isThereOwnerInfo =  NO;
+        }
+    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
+        NSLog(@"%@",error);
+    }];
+}
 
 
 
+
+
+#pragma mark -tableViewDelegate
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return 3;
 }
-
-//{"code":1,"msg":"对应fy_id存在详情","data":{"region":"河南岸","tingchechang":true,"biaoti":"1500-2000元2房 2厅","tingshu":2,"kuandai":null,"tel":"13516666006","shengfen":"广东省","userid":"13480556006","pricef":1500,"acreage":null,"jiadian":true,"publisher":"曾剑军","fangshu":2,"id":5,"dianshi":null,"name":"悦和地产","mingcheng":null,"qu":"惠城区","shi":"惠州市","tupian":null,"zhuangxiuyaoqiu":"精装修","weituodate":"2015-11-02 10:31:45","meiqi":null,"leixing":null,"zugou":false,"dianhua":null,"fangyuanmiaoshu":"以沃尔玛附近为佳","pricel":2000,"unit":"元","balconys":1,"fenlei":0,"youxiaoqi":1,"toilets":1,"dianti":null}}
-
 
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -222,10 +226,6 @@
                                      [self judgeAttachment:@"meiqi" andIsTrue:dic[@"meiqi"]],
                                      [self judgeAttachment:@"dianhua" andIsTrue:dic[@"dianhua"]]];
 
-        
-        
-        
-        //@"%@室%@厅%阳台";
         return Detailcell;
     }else{
         Describecell =  [[[NSBundle mainBundle]loadNibNamed:@"ZuGouDescribeCell" owner:nil options:nil] firstObject];
@@ -234,9 +234,7 @@
         return Describecell;
     }
     
-//    UITableViewCell *cell  = [[UITableViewCell alloc]init];
-//    cell.textLabel.text = @"哈哈哈";
-//    return cell;
+
 }
 
 
@@ -321,23 +319,30 @@
 -(void)getDataFromNet {
     AFHTTPRequestOperationManager *mgr  = [AFHTTPRequestOperationManager manager];
     self.sharedMgr = mgr ;
-//    http://www.123qf.cn:81/testApp/keyuan/seekHouse.api?fenlei=0&keyuan_id=5
-    NSString *url3 = [NSString stringWithFormat:@"http://www.123qf.cn:81/testApp/keyuan/seekHouse.api?fenlei=%@&keyuan_id=%@",self.fenlei   ,self.keYuanID];
+    NSString *url3 = [NSString stringWithFormat:@"http://www.123qf.cn:81/testApp/keyuan/seekHouse.api?fenlei=%@&keyuan_id=%@",self.fenlei,self.keYuanID];
     [MBProgressHUD showMessage:@"加载中"];
     [mgr POST:url3
    parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
 #pragma mark -请求成功后的网络处理
        NSLog(@"ZuGou:%@",responseObject);
+       
+       
+       if (self.isInner == YES) {  //如果是来自内部XX
+           [self checkKeyuanInfo];
+           [self setUpCheckBtn];
+       }
+       
+       
        [MBProgressHUD hideHUD];
        UIView *back = [self.view viewWithTag:999];
        [back removeFromSuperview];  //移除白色背景
        self.FangData = responseObject[@"data"];
        [self initFootView];
        [self.detailInfoTable reloadData];
-
-       
    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
        NSLog(@"%@",error);
+       [MBProgressHUD hideHUD];
+       [MBProgressHUD showError:@"网络超时，稍后尝试"];
    }];
     ;
 }
@@ -345,9 +350,6 @@
 #pragma 初始化底部工具条
 -(void)initFootView {
   UIView *footer = [[UIView alloc]initWithFrame:CGRectMake(0,ScreenHeight-ToolHeight, ScreenWidth, ToolHeight)];
- // UIView *footer = [[UIView alloc]initWithFrame:CGRectMake(0,ScreenHeight/2, ScreenWidth, ToolHeight)];
-    
- //    UIView *footer = [[UIView alloc]initWithFrame:CGRectMake(0,0, ScreenWidth, ToolHeight)];
     footer.backgroundColor = [UIColor redColor];
     [self.view addSubview:footer];
     //左边
@@ -357,14 +359,13 @@
     self.Publisher = Company ;
     
     Company.textColor = [UIColor whiteColor];
-    NSString *Coname = @"益和地产";//self.FangData[@"name"];
+    NSString *Coname = self.FangData[@"name"];
     NSLog(@"%@",Coname);
     if ([Coname length]>4) {
         NSRange  range = NSMakeRange(0, 3);
         Coname = [NSString stringWithFormat:@"%@..",[Coname substringWithRange:range]];
     }
     Company.text = Coname ;  //@"丰登地产";
-    //  Company.text = @"地产";
     UIFont *Deafult = [UIFont systemFontOfSize:17];
     CGSize MaxLeftSzie = CGSizeMake(LeftViewWidth-Padding,ToolHeight-Padding);
     if (Coname == nil) {
@@ -380,8 +381,7 @@
     if ([(self.FangData[@"publisher"]) isKindOfClass:[NSNull class]]) {
         ContactName.text = @"";
     }else {
-        ContactName.text = @"张泽";//self.FangData[@"publisher"];
-        //    ContactName.text = @"暴走";
+        ContactName.text = self.FangData[@"publisher"];
         
     }
     CGSize NameLabelSize = [self sizeWithString:ContactName.text font:Deafult maxSize:MaxLeftSzie];

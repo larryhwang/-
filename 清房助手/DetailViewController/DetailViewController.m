@@ -145,6 +145,7 @@
 
 -(void)getDataFromNet {
     AFHTTPRequestOperationManager *mgr  = [AFHTTPRequestOperationManager manager];
+     mgr.requestSerializer.timeoutInterval  = 5.0;
     self.sharedMgr = mgr;
     NSString *url3 = [NSString stringWithFormat:@"http://www.123qf.cn:81/testApp/fangyuan/detailsHouse.api?fenlei=%@&fangyuan_id=%@",self.FenLei,self.DisplayId];
     [MBProgressHUD showMessage:@"加载中"];
@@ -179,6 +180,8 @@
        
    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
        NSLog(@"%@",error);
+       [MBProgressHUD hideHUD];
+       [MBProgressHUD showError:@"网络超时，稍后尝试"];
    }];
     ;
 }
@@ -404,6 +407,31 @@
             
             [self.navigationController pushViewController:LMsg animated:YES];
             
+        }
+    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
+        NSLog(@"%@",error);
+    }];
+}
+
+-(void)checkOwnerInfo {
+    NSString *URL =@"http://www.123qf.cn:81/testApp/fkyuan/selectOwnerInfo.api";
+    NSMutableDictionary *pramaDic = [NSMutableDictionary new];
+    pramaDic[@"fid"] = self.FangData[@"id"];
+    pramaDic[@"currentpage"] = @"1";
+    NSLog(@"发钱:%@",pramaDic);
+    [self.sharedMgr POST:URL parameters:pramaDic success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+        NSLog(@"SeeOwnList :%@",responseObject);
+        NSString *flagStr = responseObject[@"msg"];
+        if ([flagStr isEqualToString:@"无数据"]) {
+            UIAlertView *AW = [[UIAlertView alloc]initWithTitle:@"未含信息"
+                                                        message:nil
+                                                       delegate:self
+                                              cancelButtonTitle:nil
+                                              otherButtonTitles:@"确定", nil];
+            
+            [AW show];
+        } else{
+            self.CheckBtnInfoDic = responseObject[@"data"];
         }
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         NSLog(@"%@",error);

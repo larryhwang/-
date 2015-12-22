@@ -101,12 +101,16 @@
 }
 -(void)getdata {
     AFHTTPRequestOperationManager *mgr  = [AFHTTPRequestOperationManager manager];
+    mgr.requestSerializer.timeoutInterval  = 5.0;
+
     NSString *com2= @"http://www.123qf.cn:81/testApp/fangyuan/detailsHouse.api?fenlei=3&fangyuan_id=268";
     NSLog(@"即将抓取:%@",com2);
     [mgr POST:com2 parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"登陆时的抓的详细信息%@",responseObject);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"%@",error);
+        [MBProgressHUD hideHUD];
+        [MBProgressHUD showError:@"网络超时，稍后尝试"];
     }];
 }
 

@@ -521,6 +521,7 @@
     [MBProgressHUD showMessage:@"正在加载"];
     NSString *basicURL = @"http://www.123qf.cn:81/testApp/seach/echoSeachFKYuanList.api";
     AFHTTPRequestOperationManager *manger =[AFHTTPRequestOperationManager manager];
+     manger.requestSerializer.timeoutInterval  = 5.0;
     [manger POST:basicURL parameters:_PostDictionary success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
          [MBProgressHUD hideHUD];
          NSLog(@"列表:%@",responseObject);
@@ -543,6 +544,8 @@
 
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         NSLog(@"");
+        [MBProgressHUD hideHUD];
+        [MBProgressHUD showError:@"网络超时，稍后尝试"];
     }];
 }
 

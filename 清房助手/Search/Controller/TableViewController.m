@@ -30,6 +30,7 @@
     self.view.backgroundColor = [UIColor whiteColor];
     _dataArray = [NSMutableArray new];
     AFHTTPRequestOperationManager *manger = [AFHTTPRequestOperationManager manager];
+     manger.requestSerializer.timeoutInterval  = 5.0;
     _AFNmanager = manger;
 
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:NSStringFromClass([UITableViewCell class])];
@@ -113,6 +114,8 @@
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"%@",error);
+        [MBProgressHUD hideHUD];
+        [MBProgressHUD showError:@"网络超时，稍后尝试"];
     }];
 }
 

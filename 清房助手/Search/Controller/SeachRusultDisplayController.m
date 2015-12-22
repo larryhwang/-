@@ -191,6 +191,7 @@
     }
     
     _HttpManager   =  [AFHTTPRequestOperationManager manager];
+    _HttpManager.requestSerializer.timeoutInterval  = 5.0;
      NSString *url = @"http://www.123qf.cn:81/testApp/seach/echoSeachFKYuanList.api";
     
    [_HttpManager POST:url parameters:param success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
@@ -199,6 +200,8 @@
    [self.tableview reloadData];
      } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
          NSLog(@"%@",error);
+         [MBProgressHUD hideHUD];
+         [MBProgressHUD showError:@"网络超时，稍后尝试"];
      }];
 }
 

@@ -110,8 +110,7 @@
                                     <exclude reference="yPn-Bm-W7C"/>
                                 </mask>
                             </variation>
-                            <variation key="widthClass=compact" misplaced="YES">
-                                <rect key="frame" x="35" y="8" width="205" height="21"/>
+                            <variation key="widthClass=compact">
                                 <mask key="constraints">
                                     <include reference="wcg-ft-HhH"/>
                                     <include reference="yPn-Bm-W7C"/>
@@ -257,8 +256,7 @@
                                     <exclude reference="xtB-qA-QHt"/>
                                 </mask>
                             </variation>
-                            <variation key="widthClass=compact" misplaced="YES">
-                                <rect key="frame" x="35" y="7" width="205" height="21"/>
+                            <variation key="widthClass=compact">
                                 <mask key="constraints">
                                     <include reference="xtB-qA-QHt"/>
                                 </mask>

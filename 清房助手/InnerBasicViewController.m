@@ -71,6 +71,7 @@
 -(AFHTTPRequestOperationManager *)shareMgr {
     if (_shareMgr ==nil) {
         _shareMgr = [AFHTTPRequestOperationManager new];
+        _shareMgr.requestSerializer.timeoutInterval  = 5.0;
     }
     return _shareMgr;
 }

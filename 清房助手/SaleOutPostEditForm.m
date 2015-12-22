@@ -1046,6 +1046,7 @@
     
     //先把图片上传过去
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+     manager.requestSerializer.timeoutInterval  = 5.0;
     NSString *url2 = @"http://www.123qf.cn:81/testApp/file/upload.front?userID=15018639039";
     [manager POST:url2 parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         for (NSData *imgData in self.SelectedImgsData_MARR) {
@@ -1058,6 +1059,8 @@
         [self PostAll]; //POST提交所有信息
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"失败%@",error);
+        [MBProgressHUD hideHUD];
+        [MBProgressHUD showError:@"网络超时，稍后尝试"];
     }];
     //获得图片名称，在把整个字典传过去
 }
@@ -1066,6 +1069,7 @@
 -(void)PostAll {
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+     manager.requestSerializer.timeoutInterval  = 5.0;
     NSString *url4 = @"http://www.123qf.cn:81/testApp/user/releaseFKYuan.api";
     NSLog(@"最后参数:%@",self.PostDataDic);
     NSDictionary *parameters =@{
@@ -1129,6 +1133,8 @@
             [AW show];
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [MBProgressHUD hideHUD];
+        [MBProgressHUD showError:@"网络超时，稍后尝试"];
     }];
 }
 
@@ -1168,6 +1174,7 @@
 
 -(void)netInitialLog {
     AFHTTPRequestOperationManager *mgr  = [AFHTTPRequestOperationManager manager];
+     mgr.requestSerializer.timeoutInterval  = 5.0;
     NSString *completeUrl = @"http://www.123qf.cn:81/testApp/user/loginUser.front?userid=15018639039&psword=5798161";
     [mgr POST:completeUrl parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"登录信息%@",responseObject);
@@ -1186,6 +1193,8 @@
         _indexData   = app.provnceIndexDic;
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"%@",error);
+        [MBProgressHUD hideHUD];
+        [MBProgressHUD showError:@"网络超时，稍后尝试"];
     }];
 }
 

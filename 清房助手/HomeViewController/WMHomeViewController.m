@@ -173,6 +173,7 @@
     self.tableView.dataSource = self;
     _popStatus = NO ; //初始时，处于不弹窗状态
     AFHTTPRequestOperationManager *mgr  = [AFHTTPRequestOperationManager manager];
+     mgr.requestSerializer.timeoutInterval  = 5.0;
     self.shareMgr = mgr ;
 }
 
@@ -196,6 +197,7 @@
         
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         NSLog(@"%@",error);
+        [MBProgressHUD showError:@"网络超时，稍后尝试"];
     }];
 }
 
