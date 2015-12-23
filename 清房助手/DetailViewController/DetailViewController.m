@@ -403,7 +403,7 @@
             
             LesveMsgVC *LMsg = [[LesveMsgVC alloc]init];
             NSDictionary *dict = responseObject[@"data"];
-            LMsg.OwnerInfoDic= dict[@"OwnerInfo"];
+            LMsg.QFownerInfoDic= dict[@"OwnerInfo"];
             
             [self.navigationController pushViewController:LMsg animated:YES];
             

@@ -74,6 +74,11 @@
     [self initFootView];
     [self initNavController];
     [self getDataFromNet];
+    
+    
+    UIBarButtonItem *backItem = [[UIBarButtonItem alloc] init];
+    backItem.title = @"";
+    self.navigationItem.backBarButtonItem = backItem;
 
     
     
@@ -131,7 +136,7 @@
 
         
         LesveMsgVC *LMsg  = [[LesveMsgVC alloc]init];
-        LMsg.OwnerInfoDic = self.CheckBtnInfoDic;
+        LMsg.QFownerInfoDic = self.CheckBtnInfoDic;
         
         [self.navigationController pushViewController:LMsg animated:YES];
     }else {
@@ -146,13 +151,18 @@
 }
 
 /**
+ 
  *  检查业主信息
  */
 -(void)checkKeyuanInfo {
     NSString *URL =@"http://www.123qf.cn:81/testApp/fkyuan/selectOwnerInfo.api";
     NSMutableDictionary *pramaDic = [NSMutableDictionary new];
-    pramaDic[@"kid"] = @"5";//self.FangData[@"id"];
+    NSLog(@"FangData:%@",self.FangData);
+    pramaDic[@"kid"] = self.FangData[@"id"];
     pramaDic[@"currentpage"] = @"1";
+    
+        NSLog(@"kid:%@",pramaDic[@"kid"]);
+    NSLog(@"Dic:%@",pramaDic);
     [self.sharedMgr POST:URL parameters:pramaDic success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         NSLog(@"%@",responseObject);
         self.CheckBtnInfoDic = responseObject[@"data"];
@@ -327,10 +337,7 @@
        NSLog(@"ZuGou:%@",responseObject);
        
        
-       if (self.isInner == YES) {  //如果是来自内部XX
-           [self checkKeyuanInfo];
-           [self setUpCheckBtn];
-       }
+
        
        
        [MBProgressHUD hideHUD];
@@ -338,7 +345,12 @@
        [back removeFromSuperview];  //移除白色背景
        self.FangData = responseObject[@"data"];
        [self initFootView];
+       if (self.isInner == YES) {  //如果是来自内部XX
+           [self checkKeyuanInfo];
+           [self setUpCheckBtn];
+       }
        [self.detailInfoTable reloadData];
+       
    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
        NSLog(@"%@",error);
        [MBProgressHUD hideHUD];

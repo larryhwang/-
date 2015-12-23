@@ -121,13 +121,13 @@
         [self.delegate transToPost];
     } else if (indexPath.row ==3){
         //内部房源
-       // [MBProgressHUD showSuccess:@"建设中"];
         [self.delegate transtoInnerFang];
     } else if (indexPath.row ==4) {
         //内部客源
         [self.delegate transtoInnerKeyuan];
     }else {
-     [MBProgressHUD showSuccess:@"建设中"];
+        //综合业务
+        [self.delegate transtoMutiTask];
     }
 
     

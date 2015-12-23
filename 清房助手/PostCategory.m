@@ -4,7 +4,15 @@
 //
 //  Created by Larry on 15/10/28.
 //  Copyright © 2015年 Larry. All rights reserved.
+
+/*
+    说明: 此页面描述发布界面前四大选项(动画)后，的四个房屋类别选择
+ */
 //
+
+
+
+
 
 #import "PostCategory.h"
 #import "SaleOutPostEditForm.h"
@@ -22,13 +30,8 @@
     [super viewDidLoad];
     self.edgesForExtendedLayout = UIRectEdgeNone;
     UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
-    
-
-    
-   self.navigationItem.backBarButtonItem = item;
-
+    self.navigationItem.backBarButtonItem = item;
     self.CategoryTable.scrollEnabled  = NO;
-
 }
 
 

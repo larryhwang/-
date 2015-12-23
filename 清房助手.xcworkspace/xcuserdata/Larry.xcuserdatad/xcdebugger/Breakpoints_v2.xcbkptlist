@@ -140,12 +140,12 @@
                   moduleName = "&#x6e05;&#x623f;&#x52a9;&#x624b;"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Larry/Documents/%E6%B8%85%E6%88%BF%E5%8A%A9%E6%89%8B/%E6%B8%85%E6%88%BF%E5%8A%A9%E6%89%8B/DetailViewController/DetailViewController.m"
-                  timestampString = "472405622.962683"
+                  timestampString = "472523775.697406"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "390"
                   endingLineNumber = "390"
-                  offsetFromSymbolStart = "204">
+                  offsetFromSymbolStart = "192">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -155,12 +155,12 @@
                   moduleName = "&#x6e05;&#x623f;&#x52a9;&#x624b;"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Larry/Documents/%E6%B8%85%E6%88%BF%E5%8A%A9%E6%89%8B/%E6%B8%85%E6%88%BF%E5%8A%A9%E6%89%8B/DetailViewController/DetailViewController.m"
-                  timestampString = "472405622.962914"
+                  timestampString = "472523775.697689"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "391"
                   endingLineNumber = "391"
-                  offsetFromSymbolStart = "44">
+                  offsetFromSymbolStart = "32">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -203,13 +203,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "&#x6e05;&#x623f;&#x52a9;&#x624b;/DetailViewController/ZuGouDetailViewController.m"
-            timestampString = "472405388.480584"
+            filePath = "&#x6e05;&#x623f;&#x52a9;&#x624b;/DetailViewController/LesveMsgVC.m"
+            timestampString = "472466953.498164"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "162"
-            endingLineNumber = "162"
-            landmarkName = "-checkKeyuanInfo"
+            startingLineNumber = "58"
+            endingLineNumber = "58"
+            landmarkName = "-SureBtnClick"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -219,13 +219,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "&#x6e05;&#x623f;&#x52a9;&#x624b;/DetailViewController/ZuGouDetailViewController.m"
-            timestampString = "472405388.480584"
+            filePath = "&#x6e05;&#x623f;&#x52a9;&#x624b;/DetailViewController/LesveMsgVC.m"
+            timestampString = "472466953.498164"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "133"
-            endingLineNumber = "133"
-            landmarkName = "-CheckBtnClick"
+            startingLineNumber = "64"
+            endingLineNumber = "64"
+            landmarkName = "-SureBtnClick"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -235,13 +235,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "&#x6e05;&#x623f;&#x52a9;&#x624b;/DetailViewController/ZuGouDetailViewController.m"
-            timestampString = "472405388.480584"
+            filePath = "&#x6e05;&#x623f;&#x52a9;&#x624b;/DetailViewController/LesveMsgVC.m"
+            timestampString = "472466953.498164"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "130"
-            endingLineNumber = "130"
-            landmarkName = "-CheckBtnClick"
+            startingLineNumber = "62"
+            endingLineNumber = "62"
+            landmarkName = "-SureBtnClick"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -251,13 +251,75 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "&#x6e05;&#x623f;&#x52a9;&#x624b;/DetailViewController/ZuGouDetailViewController.m"
-            timestampString = "472405388.480584"
+            filePath = "&#x6e05;&#x623f;&#x52a9;&#x624b;/CommitOrderVC.m"
+            timestampString = "472489657.883549"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "165"
-            endingLineNumber = "165"
-            landmarkName = "-checkKeyuanInfo"
+            startingLineNumber = "1"
+            endingLineNumber = "1">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[CommitOrderVC QFServiceTypeName]"
+                  moduleName = "&#x6e05;&#x623f;&#x52a9;&#x624b;"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Larry/Documents/%E6%B8%85%E6%88%BF%E5%8A%A9%E6%89%8B/%E6%B8%85%E6%88%BF%E5%8A%A9%E6%89%8B/CommitOrderVC.m"
+                  timestampString = "472523775.704624"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "19"
+                  endingLineNumber = "19"
+                  offsetFromSymbolStart = "4">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[CommitOrderVC setQFServiceTypeName:]"
+                  moduleName = "&#x6e05;&#x623f;&#x52a9;&#x624b;"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Larry/Documents/%E6%B8%85%E6%88%BF%E5%8A%A9%E6%89%8B/%E6%B8%85%E6%88%BF%E5%8A%A9%E6%89%8B/CommitOrderVC.m"
+                  timestampString = "472523775.704852"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "4">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "&#x6e05;&#x623f;&#x52a9;&#x624b;/MutiTaskOrderBusinessVC.m"
+            timestampString = "472500203.893818"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "28"
+            endingLineNumber = "28"
+            landmarkName = "-viewDidLoad"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "&#x6e05;&#x623f;&#x52a9;&#x624b;/InnerBasicViewController.m"
+            timestampString = "472500280.633049"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "150"
+            endingLineNumber = "150"
+            landmarkName = "-viewDidLoad"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

@@ -17,6 +17,8 @@
 #import "InnerTabBarController.h"
 #import "ZuGouDetailViewController.h"
 
+#import "MutiTaskOrderBusinessVC.h"
+
 typedef enum Slidestate {
     kStateHome,
     kStateMenu
@@ -232,6 +234,16 @@ static const CGFloat menuStartNarrowRatio  = 0.70;
     [self showHome];
     KeyWindow.rootViewController = innerTabarVC_FANG;
    
+}
+
+
+-(void)transtoMutiTask {
+    MutiTaskOrderBusinessVC *OrderTask = [[MutiTaskOrderBusinessVC alloc]init];
+    OrderTask.title =@"综合业务";
+    //这里不需要定制新的导航栏，所以可以用原来的
+    [self showHome];
+    [self.messageNav pushViewController:OrderTask animated:YES];
+    
 }
 
 -(void)transtoInnerKeyuan {

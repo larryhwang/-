@@ -89,6 +89,9 @@
     vc.type = _type;
     
     QFNavController *nav = [[QFNavController alloc] initWithRootViewController:vc];
+    
+//    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
+
     [self addChildViewController:nav];
 
 }

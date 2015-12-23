@@ -15,6 +15,10 @@
 - (void)transToPost;
 - (void)transtoInnerFang;
 - (void)transtoInnerKeyuan;
+/**
+ *  综合业务
+ */
+- (void)transtoMutiTask;
 - (void)transToSetting;
 - (void)didSelectItem:(NSString *)title;
 - (void)OnlyBack;

@@ -16,7 +16,7 @@
 
 @property (copy, nonatomic)  NSString *QFownerTeleStr;
 
-@property(nonatomic,strong)  NSDictionary  *OwnerInfoDic;
+@property(nonatomic,strong)  NSDictionary  *QFownerInfoDic;
 
 
 @end
