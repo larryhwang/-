@@ -57,10 +57,7 @@
     CGRect jj = self.QFScoView.frame;
     
 
-    
-    
-    
-    
+
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(willShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(willHide) name:UIKeyboardWillHideNotification object:nil];
 }
@@ -158,7 +155,6 @@
 
 -(void)dealTextfield :(UITextField *)textfied isTextCenter:(BOOL)isTextCenter{
     textfied.font = [UIFont systemFontOfSize:15];
-  //  textfied.backgroundColor = [UIColor brownColor];
     textfied.tag = TFCountTag ++;
     [self.tfArrs addObject:textfied];
     if (isTextCenter) {

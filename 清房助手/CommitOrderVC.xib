@@ -133,15 +133,35 @@
                     <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                     <animations/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <variation key="widthClass=compact" fixedFrame="YES">
-                        <rect key="frame" x="8" y="71" width="341" height="2"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="2" id="k2G-BR-Klg">
+                            <variation key="widthClass=compact" constant="10"/>
+                        </constraint>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="2" id="slx-3B-e1I"/>
+                    </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="k2G-BR-Klg"/>
+                            <exclude reference="slx-3B-e1I"/>
+                        </mask>
+                    </variation>
+                    <variation key="widthClass=compact">
+                        <mask key="constraints">
+                            <include reference="k2G-BR-Klg"/>
+                            <include reference="slx-3B-e1I"/>
+                        </mask>
                     </variation>
                 </view>
             </subviews>
             <animations/>
             <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
+                <constraint firstItem="UOS-Ja-c7U" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="38P-N4-6M0"/>
+                <constraint firstAttribute="trailing" secondItem="UOS-Ja-c7U" secondAttribute="trailing" id="8OT-Cs-ncR"/>
                 <constraint firstItem="dY1-6Q-d1l" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="W7X-gU-4jq"/>
+                <constraint firstAttribute="trailing" secondItem="UOS-Ja-c7U" secondAttribute="trailing" id="XEa-LC-cD7"/>
+                <constraint firstItem="UOS-Ja-c7U" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="b45-0V-Huc"/>
+                <constraint firstItem="dY1-6Q-d1l" firstAttribute="top" secondItem="UOS-Ja-c7U" secondAttribute="bottom" id="mnq-Gj-KZm"/>
                 <constraint firstAttribute="trailing" secondItem="dY1-6Q-d1l" secondAttribute="trailing" constant="1" id="rHW-vm-coZ"/>
                 <constraint firstItem="dY1-6Q-d1l" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="71" id="yDP-dB-8tT"/>
             </constraints>
@@ -151,7 +171,12 @@
                     <exclude reference="UOS-Ja-c7U"/>
                 </mask>
                 <mask key="constraints">
+                    <exclude reference="38P-N4-6M0"/>
+                    <exclude reference="8OT-Cs-ncR"/>
+                    <exclude reference="XEa-LC-cD7"/>
+                    <exclude reference="b45-0V-Huc"/>
                     <exclude reference="W7X-gU-4jq"/>
+                    <exclude reference="mnq-Gj-KZm"/>
                     <exclude reference="rHW-vm-coZ"/>
                     <exclude reference="yDP-dB-8tT"/>
                 </mask>
@@ -162,7 +187,12 @@
                     <include reference="UOS-Ja-c7U"/>
                 </mask>
                 <mask key="constraints">
+                    <include reference="38P-N4-6M0"/>
+                    <include reference="8OT-Cs-ncR"/>
+                    <include reference="XEa-LC-cD7"/>
+                    <include reference="b45-0V-Huc"/>
                     <include reference="W7X-gU-4jq"/>
+                    <include reference="mnq-Gj-KZm"/>
                     <include reference="rHW-vm-coZ"/>
                     <include reference="yDP-dB-8tT"/>
                 </mask>
