@@ -6,6 +6,8 @@
 //  Copyright © 2015 HuiZhou S&F NetworkTechCo.,Ltd . All rights reserved.
 //
 
+// 说明:本页面用来描述售后业务两大功能的选择
+
 #import "MutiTaskOrderBusinessVC.h"
 #import "CommitOrderVC.h"
 
@@ -25,13 +27,7 @@
     
     NSLog(@"导航栏:%@",self.navigationController);
     
-    CGRect origin = CGRectMake(0, 100, ScreenWidth, 200);
-    CGRect popOrigin = CGRectMake(60, 79+20 , ScreenWidth, 200);
-    NSArray *nibs = [[NSBundle mainBundle]loadNibNamed:@"TypesSelect" owner:self options:nil];
-    TypesSelect *popView  = [nibs lastObject];
-    popView.backgroundColor = [UIColor redColor];
-    [self.view addSubview:popView];
-    [popView setFrame:popOrigin];
+
 
 }
 

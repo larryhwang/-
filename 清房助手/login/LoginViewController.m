@@ -60,7 +60,7 @@
     
 
     AFHTTPRequestOperationManager *mgr1  = [AFHTTPRequestOperationManager manager];
-    mgr1.requestSerializer.timeoutInterval  = 3.0;
+    mgr1.requestSerializer.timeoutInterval  = 6.0;
     NSString *completeUrl = @"http://www.123qf.cn:81/testApp/user/loginUser.front";
 
     HomeViewController *home = [HomeViewController new];

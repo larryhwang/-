@@ -22,18 +22,18 @@
         [self setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [self setTitleColor:[UIColor blackColor] forState:UIControlStateSelected];
     
-//  
-  //  [self.titleLabel sizeToFit];
     return self;
 }
 
 
 -(void)becameSelected {
+    NSLog(@"确定");
     self.selected = YES;
     self.backgroundColor = [UIColor whiteColor];
     [self setTitleColor:[UIColor blackColor] forState:UIControlStateSelected];
 }
 -(void)becameUslected {
+    NSLog(@"取消");
     self.selected = NO;
     self.backgroundColor = [UIColor clearColor];
 }

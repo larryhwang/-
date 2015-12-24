@@ -220,8 +220,6 @@
 
 -(void)willHide {
     NSLog(@"willHide");
-    
-    
     if (_ScoSwitch) {
         [UIView animateWithDuration:0.25 animations:^{
             self.view.transform = CGAffineTransformIdentity;
@@ -354,6 +352,7 @@
 }
 
 -(void)dealTextfield :(UITextField *)textfied isTextCenter:(BOOL)isTextCenter{
+    
     if (isTextCenter) {
         textfied.textAlignment = NSTextAlignmentCenter;
     }

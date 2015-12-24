@@ -2,15 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:TESTViewController.h">
-   </FileRef>
-   <FileRef
-      location = "group:TESTViewController.m">
-   </FileRef>
-   <FileRef
-      location = "group:TESTViewController.xib">
-   </FileRef>
-   <FileRef
       location = "group:&#x6e05;&#x623f;&#x52a9;&#x624b;.xcodeproj">
    </FileRef>
    <FileRef

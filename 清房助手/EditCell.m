@@ -20,6 +20,7 @@
 #define CellClipPadding 0.5
 #define DetailHeight 20
 #define CellWidth Screen_width-CellPaddingToVertical
+
 @implementation EditCell
 
 
@@ -49,9 +50,10 @@
 }
 
 -(void)setPlaceHoderString:(NSString *)placeHoderString {
-    if (_contentFiled ==nil) {
-        UITextField *TF = [[UITextField alloc]initWithFrame:CGRectMake(100, 0, CellWidth - 60 -60, 50)];
-     //   TF.backgroundColor = [UIColor blueColor];
+    if (_contentFiled == nil) {
+        UITextField *TF = [[UITextField alloc]initWithFrame:CGRectMake(100, 0, CellWidth - 60, 50)];
+        
+      //  TF.backgroundColor = [UIColor blueColor];
         if (_isNoKeyboardPad) {
             TF.keyboardType = UIKeyboardTypeNamePhonePad;
         }
@@ -59,7 +61,7 @@
         TF.placeholder = placeHoderString ;
         [self addSubview:TF];
     } else {
-        _contentFiled.placeholder = placeHoderString ;
+        _contentFiled.text = placeHoderString ;
     }
     if (_isOptionalCell) {
         _contentFiled.enabled = NO;
@@ -95,7 +97,7 @@
 
 -(void)setTitle:(NSString *)Title {
     CoreLabel *label=[[CoreLabel alloc] initWithFrame:CGRectMake(10, 0, 110, 50)];
-
+    label.font = [UIFont systemFontOfSize:15];
     label.text =Title;
     if ([Title length]==3) {  //2字
         [label addAttr:CoreLabelAttrKern value:@(37) range:NSMakeRange(0, 1)];

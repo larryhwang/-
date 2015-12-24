@@ -10,72 +10,164 @@
                 <outlet property="ChosenBtn" destination="7oG-mn-gWi" id="Jju-rV-gpT"/>
                 <outlet property="QFServiceTypeName" destination="r08-5a-3IQ" id="IQO-xh-Dw4"/>
                 <outlet property="QFarrowImg" destination="MSu-bW-YHT" id="GTl-ga-YVx"/>
+                <outlet property="trikBoard" destination="UOS-Ja-c7U" id="0lr-8v-Hlx"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT" userLabel="Content">
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7oG-mn-gWi">
-                    <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dY1-6Q-d1l" userLabel="CellOne">
+                    <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7oG-mn-gWi">
+                            <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                            <animations/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <variation key="widthClass=compact" fixedFrame="YES">
+                                <rect key="frame" x="0.0" y="0.0" width="400" height="45"/>
+                            </variation>
+                            <connections>
+                                <action selector="ChosenBtnClick:" destination="-1" eventType="touchUpInside" id="XNC-0D-6RR"/>
+                            </connections>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="房产证在手－按揭付款" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r08-5a-3IQ">
+                            <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                            <animations/>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                            <variation key="widthClass=compact" fixedFrame="YES">
+                                <rect key="frame" x="124" y="12" width="150" height="21"/>
+                            </variation>
+                        </label>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrowRightBlack.png" translatesAutoresizingMaskIntoConstraints="NO" id="MSu-bW-YHT">
+                            <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                            <animations/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="20" id="cwD-eb-nCG"/>
+                            </constraints>
+                            <variation key="default">
+                                <mask key="constraints">
+                                    <exclude reference="cwD-eb-nCG"/>
+                                </mask>
+                            </variation>
+                            <variation key="widthClass=compact">
+                                <mask key="constraints">
+                                    <include reference="cwD-eb-nCG"/>
+                                </mask>
+                            </variation>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="选择服务类型:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Zs-jL-KAB">
+                            <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                            <animations/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="100" id="eq0-bK-eG5"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                            <variation key="default">
+                                <mask key="constraints">
+                                    <exclude reference="eq0-bK-eG5"/>
+                                </mask>
+                            </variation>
+                            <variation key="widthClass=compact">
+                                <mask key="constraints">
+                                    <include reference="eq0-bK-eG5"/>
+                                </mask>
+                            </variation>
+                        </label>
+                    </subviews>
+                    <animations/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="45" id="BKi-6T-YNO"/>
+                        <constraint firstAttribute="bottom" secondItem="5Zs-jL-KAB" secondAttribute="bottom" constant="12" id="DNF-SP-74O"/>
+                        <constraint firstAttribute="trailing" secondItem="MSu-bW-YHT" secondAttribute="trailing" constant="13" id="QON-Xb-M7I"/>
+                        <constraint firstAttribute="bottom" secondItem="MSu-bW-YHT" secondAttribute="bottom" constant="12" id="QmH-ec-Wvv"/>
+                        <constraint firstItem="5Zs-jL-KAB" firstAttribute="leading" secondItem="dY1-6Q-d1l" secondAttribute="leading" constant="16" id="r5P-Dp-Sgt">
+                            <variation key="widthClass=compact" constant="10"/>
+                        </constraint>
+                        <constraint firstItem="MSu-bW-YHT" firstAttribute="top" secondItem="dY1-6Q-d1l" secondAttribute="top" constant="13" id="sRI-cc-wCt"/>
+                        <constraint firstItem="5Zs-jL-KAB" firstAttribute="top" secondItem="dY1-6Q-d1l" secondAttribute="top" constant="12" id="ynH-Uf-hsd"/>
+                    </constraints>
+                    <variation key="default">
+                        <mask key="subviews">
+                            <exclude reference="7oG-mn-gWi"/>
+                            <exclude reference="r08-5a-3IQ"/>
+                            <exclude reference="MSu-bW-YHT"/>
+                            <exclude reference="5Zs-jL-KAB"/>
+                        </mask>
+                        <mask key="constraints">
+                            <exclude reference="BKi-6T-YNO"/>
+                            <exclude reference="DNF-SP-74O"/>
+                            <exclude reference="r5P-Dp-Sgt"/>
+                            <exclude reference="ynH-Uf-hsd"/>
+                            <exclude reference="QON-Xb-M7I"/>
+                            <exclude reference="QmH-ec-Wvv"/>
+                            <exclude reference="sRI-cc-wCt"/>
+                        </mask>
+                    </variation>
+                    <variation key="widthClass=compact">
+                        <mask key="subviews">
+                            <include reference="7oG-mn-gWi"/>
+                            <include reference="r08-5a-3IQ"/>
+                            <include reference="MSu-bW-YHT"/>
+                            <include reference="5Zs-jL-KAB"/>
+                        </mask>
+                        <mask key="constraints">
+                            <include reference="BKi-6T-YNO"/>
+                            <include reference="DNF-SP-74O"/>
+                            <include reference="r5P-Dp-Sgt"/>
+                            <include reference="ynH-Uf-hsd"/>
+                            <include reference="QON-Xb-M7I"/>
+                            <include reference="QmH-ec-Wvv"/>
+                            <include reference="sRI-cc-wCt"/>
+                        </mask>
+                    </variation>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UOS-Ja-c7U" userLabel="弹窗挡板">
+                    <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                     <animations/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <variation key="widthClass=compact" fixedFrame="YES">
-                        <rect key="frame" x="0.0" y="34" width="400" height="45"/>
+                        <rect key="frame" x="8" y="71" width="341" height="2"/>
                     </variation>
-                    <connections>
-                        <action selector="ChosenBtnClick:" destination="-1" eventType="touchUpInside" id="XNC-0D-6RR"/>
-                    </connections>
-                </button>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="选择服务类型:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Zs-jL-KAB">
-                    <rect key="frame" x="-42" y="-21" width="42" height="21"/>
-                    <animations/>
-                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                    <nil key="highlightedColor"/>
-                    <variation key="widthClass=compact" fixedFrame="YES">
-                        <rect key="frame" x="8" y="46" width="107" height="21"/>
-                    </variation>
-                </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="房产证在手－按揭付款" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r08-5a-3IQ">
-                    <rect key="frame" x="-42" y="-21" width="42" height="21"/>
-                    <animations/>
-                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                    <nil key="highlightedColor"/>
-                    <variation key="widthClass=compact" fixedFrame="YES">
-                        <rect key="frame" x="133" y="46" width="174" height="21"/>
-                    </variation>
-                </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrowRightBlack.png" translatesAutoresizingMaskIntoConstraints="NO" id="MSu-bW-YHT">
-                    <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                    <animations/>
-                    <variation key="widthClass=compact" fixedFrame="YES">
-                        <rect key="frame" x="366" y="47" width="20" height="20"/>
-                    </variation>
-                </imageView>
+                </view>
             </subviews>
             <animations/>
-            <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+            <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstItem="dY1-6Q-d1l" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="W7X-gU-4jq"/>
+                <constraint firstAttribute="trailing" secondItem="dY1-6Q-d1l" secondAttribute="trailing" constant="1" id="rHW-vm-coZ"/>
+                <constraint firstItem="dY1-6Q-d1l" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="71" id="yDP-dB-8tT"/>
+            </constraints>
             <variation key="default">
                 <mask key="subviews">
-                    <exclude reference="7oG-mn-gWi"/>
-                    <exclude reference="5Zs-jL-KAB"/>
-                    <exclude reference="r08-5a-3IQ"/>
-                    <exclude reference="MSu-bW-YHT"/>
+                    <exclude reference="dY1-6Q-d1l"/>
+                    <exclude reference="UOS-Ja-c7U"/>
+                </mask>
+                <mask key="constraints">
+                    <exclude reference="W7X-gU-4jq"/>
+                    <exclude reference="rHW-vm-coZ"/>
+                    <exclude reference="yDP-dB-8tT"/>
                 </mask>
             </variation>
             <variation key="widthClass=compact">
                 <mask key="subviews">
-                    <include reference="7oG-mn-gWi"/>
-                    <include reference="5Zs-jL-KAB"/>
-                    <include reference="r08-5a-3IQ"/>
-                    <include reference="MSu-bW-YHT"/>
+                    <include reference="dY1-6Q-d1l"/>
+                    <include reference="UOS-Ja-c7U"/>
+                </mask>
+                <mask key="constraints">
+                    <include reference="W7X-gU-4jq"/>
+                    <include reference="rHW-vm-coZ"/>
+                    <include reference="yDP-dB-8tT"/>
                 </mask>
             </variation>
-            <point key="canvasLocation" x="43" y="141"/>
+            <point key="canvasLocation" x="163" y="235"/>
         </view>
     </objects>
     <resources>

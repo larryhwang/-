@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -155,6 +156,13 @@
                                 <exclude reference="EWF-em-hWS"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="S7S-vd-aC9"/>
+                                <exclude reference="aWe-We-qWm"/>
+                                <exclude reference="xdc-Ll-CXs"/>
+                                <exclude reference="1Qy-hu-0mp"/>
+                                <exclude reference="7nV-J3-oag"/>
+                                <exclude reference="E5H-4s-hAq"/>
+                                <exclude reference="8r3-4F-7Jx"/>
                                 <exclude reference="jRz-fu-lLK"/>
                                 <exclude reference="ruj-qo-ZGd"/>
                                 <exclude reference="7cA-El-NYn"/>
@@ -163,13 +171,6 @@
                                 <exclude reference="c8Z-Qf-n7D"/>
                                 <exclude reference="ecR-F5-CTM"/>
                                 <exclude reference="uqB-fW-3Wm"/>
-                                <exclude reference="1Qy-hu-0mp"/>
-                                <exclude reference="7nV-J3-oag"/>
-                                <exclude reference="E5H-4s-hAq"/>
-                                <exclude reference="8r3-4F-7Jx"/>
-                                <exclude reference="S7S-vd-aC9"/>
-                                <exclude reference="aWe-We-qWm"/>
-                                <exclude reference="xdc-Ll-CXs"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -181,6 +182,13 @@
                                 <include reference="EWF-em-hWS"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="S7S-vd-aC9"/>
+                                <include reference="aWe-We-qWm"/>
+                                <include reference="xdc-Ll-CXs"/>
+                                <include reference="1Qy-hu-0mp"/>
+                                <include reference="7nV-J3-oag"/>
+                                <include reference="E5H-4s-hAq"/>
+                                <include reference="8r3-4F-7Jx"/>
                                 <include reference="jRz-fu-lLK"/>
                                 <include reference="ruj-qo-ZGd"/>
                                 <include reference="7cA-El-NYn"/>
@@ -189,13 +197,6 @@
                                 <include reference="c8Z-Qf-n7D"/>
                                 <include reference="ecR-F5-CTM"/>
                                 <include reference="uqB-fW-3Wm"/>
-                                <include reference="1Qy-hu-0mp"/>
-                                <include reference="7nV-J3-oag"/>
-                                <include reference="E5H-4s-hAq"/>
-                                <include reference="8r3-4F-7Jx"/>
-                                <include reference="S7S-vd-aC9"/>
-                                <include reference="aWe-We-qWm"/>
-                                <include reference="xdc-Ll-CXs"/>
                             </mask>
                         </variation>
                     </view>

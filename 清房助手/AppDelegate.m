@@ -16,7 +16,7 @@
 #import "CZNewFeatureController.h"
 
 
-#import "TESTViewController.h"
+
 
 @interface AppDelegate ()
 
@@ -48,10 +48,6 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch
     
-    
-    
-    
-    
     [NSThread sleepForTimeInterval:2.0];
     self.window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
     WMCommon *common = [WMCommon getInstance];
@@ -62,16 +58,16 @@
     CZNewFeatureController *featurePage = [[CZNewFeatureController alloc]init];
 
 
-//    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"SecondLanch"]) {
-//        self.window.rootViewController = login;
-//    }else {
-//       self.window.rootViewController = featurePage;    //第一次启动则进入新特性
-//         [[NSUserDefaults standardUserDefaults]setObject:@"1" forKey:@"SecondLanch"];
-//    }
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"SecondLanch"]) {
+        self.window.rootViewController = login;
+    }else {
+       self.window.rootViewController = featurePage;    //第一次启动则进入新特性
+     [[NSUserDefaults standardUserDefaults]setObject:@"1" forKey:@"SecondLanch"];
+    }
 
-    TESTViewController *tt = [TESTViewController new];
-    self.window.rootViewController = tt;
-    
+//    TESTViewController *tt = [TESTViewController new];
+//    self.window.rootViewController = tt;
+//    
     
    [self.window  makeKeyAndVisible];
 

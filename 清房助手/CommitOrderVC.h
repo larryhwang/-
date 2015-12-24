@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface CommitOrderVC : UIViewController
+@property (weak, nonatomic) IBOutlet UIScrollView *QFScoView;
 @property (weak, nonatomic) IBOutlet UIButton *ChosenBtn;
-
+@property (weak, nonatomic) IBOutlet UIImageView *QFarrowImg;
+@property (weak, nonatomic) IBOutlet UIView *trikBoard;
 @end
