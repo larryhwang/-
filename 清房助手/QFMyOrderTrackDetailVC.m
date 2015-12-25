@@ -10,7 +10,8 @@
 #import "QFMyOrderTrackDetailVC.h"
 #import "QFProcessCell.h"
 #import "detailHeadView.h"
-
+#import "MBProgressHUD+CZ.h"
+#import "AFNetworking.h"
 
 @interface QFMyOrderTrackDetailVC ()
 @property (strong, nonatomic)  UITableView *tableView;
@@ -62,15 +63,17 @@
     QFProcessCell  *Cell =[[QFProcessCell alloc]init];
     Cell  =  [[[NSBundle mainBundle]loadNibNamed:@"QFProcessCell" owner:nil options:nil] firstObject];
     //Cell.QFSingleCellDataDic = sinlgeCellDic;
-    
-    
-    Cell.QFProcessLabel.text = @"我在这里等着你回来啊，等着你回来，看那桃花开，啊啊哈哈哈";
+
+    Cell.QFProcessLabel.text = @"我在这里等着你回来啊，等iOS开发-使用storyboard实现UILabel的自适应高度（iOS8）哈哈iOS开发-使用storyboard实现UILabel的自适应高度（iOiOS8）哈";
+    Cell.QFProcessLabel.backgroundColor = [UIColor brownColor];
     NSLog(@"%d",indexPath.row);
     if (indexPath.row ==0) {
         Cell.QF_isLastestCell = YES;
     }
     return Cell;
 }
+
+
 
 
 

@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -11,7 +12,7 @@
             <rect key="frame" x="0.0" y="0.0" width="386" height="120"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="386" height="120"/>
+                <rect key="frame" x="0.0" y="0.0" width="386" height="119.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="24w-0p-MmG" userLabel="Line">
@@ -31,17 +32,21 @@
                             <constraint firstAttribute="width" constant="20" id="9Ri-tf-cpJ"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="2015-12-19 12:13:06" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZnB-7T-Bej">
-                        <rect key="frame" x="74" y="9" width="159" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2015-12-19 12:13:06" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZnB-7T-Bej">
+                        <rect key="frame" x="74" y="9" width="159" height="15"/>
                         <animations/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="159" id="NMr-q5-BeO"/>
+                            <constraint firstAttribute="height" constant="15" id="ZIw-eK-XZL"/>
+                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="买方已到银行抵押新证" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I09-Ir-snc">
-                        <rect key="frame" x="74" y="38" width="298" height="74"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="买方已到银行抵押新证" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I09-Ir-snc">
+                        <rect key="frame" x="74" y="27" width="298" height="17"/>
                         <animations/>
-                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -49,10 +54,15 @@
                 <animations/>
                 <constraints>
                     <constraint firstItem="24w-0p-MmG" firstAttribute="centerX" secondItem="CHH-06-u0w" secondAttribute="centerX" id="2Fp-7b-Q2E"/>
+                    <constraint firstItem="ZnB-7T-Bej" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="1" id="410-aQ-peN"/>
                     <constraint firstItem="CHH-06-u0w" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="25" id="4R1-iW-Lds"/>
+                    <constraint firstItem="I09-Ir-snc" firstAttribute="leading" secondItem="24w-0p-MmG" secondAttribute="trailing" constant="38" id="8GQ-kR-zS9"/>
                     <constraint firstAttribute="bottom" secondItem="24w-0p-MmG" secondAttribute="bottom" id="Aqh-ho-99p"/>
+                    <constraint firstItem="ZnB-7T-Bej" firstAttribute="leading" secondItem="I09-Ir-snc" secondAttribute="leading" id="DWf-EE-8gQ"/>
+                    <constraint firstItem="I09-Ir-snc" firstAttribute="top" secondItem="ZnB-7T-Bej" secondAttribute="bottom" constant="3" id="L5Q-Mf-ko8"/>
                     <constraint firstItem="24w-0p-MmG" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="Zdh-36-OpA"/>
                     <constraint firstItem="CHH-06-u0w" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="iVO-DV-4In"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="I09-Ir-snc" secondAttribute="trailing" constant="6" id="r2U-JF-pX2"/>
                 </constraints>
             </tableViewCellContentView>
             <animations/>
