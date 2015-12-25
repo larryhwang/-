@@ -8,6 +8,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CommitOrderVC">
             <connections>
                 <outlet property="ChosenBtn" destination="7oG-mn-gWi" id="Jju-rV-gpT"/>
+                <outlet property="QFPostBtn" destination="SPN-HV-W8p" id="6iG-f7-JkX"/>
                 <outlet property="QFServiceTypeName" destination="r08-5a-3IQ" id="IQO-xh-Dw4"/>
                 <outlet property="QFarrowImg" destination="MSu-bW-YHT" id="GTl-ga-YVx"/>
                 <outlet property="trikBoard" destination="UOS-Ja-c7U" id="0lr-8v-Hlx"/>
@@ -36,11 +37,26 @@
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="房产证在手－按揭付款" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r08-5a-3IQ">
                             <rect key="frame" x="-42" y="-21" width="42" height="21"/>
                             <animations/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="150" id="QCp-Nv-hDC">
+                                    <variation key="widthClass=compact" constant="190"/>
+                                </constraint>
+                                <constraint firstAttribute="height" constant="21" id="oG4-ES-we3"/>
+                            </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
-                            <variation key="widthClass=compact" fixedFrame="YES">
-                                <rect key="frame" x="124" y="12" width="150" height="21"/>
+                            <variation key="default">
+                                <mask key="constraints">
+                                    <exclude reference="QCp-Nv-hDC"/>
+                                    <exclude reference="oG4-ES-we3"/>
+                                </mask>
+                            </variation>
+                            <variation key="widthClass=compact">
+                                <mask key="constraints">
+                                    <include reference="QCp-Nv-hDC"/>
+                                    <include reference="oG4-ES-we3"/>
+                                </mask>
                             </variation>
                         </label>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrowRightBlack.png" translatesAutoresizingMaskIntoConstraints="NO" id="MSu-bW-YHT">
@@ -84,10 +100,15 @@
                     <animations/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
+                        <constraint firstItem="r08-5a-3IQ" firstAttribute="leading" secondItem="5Zs-jL-KAB" secondAttribute="trailing" constant="5" id="2iP-7H-s9N"/>
                         <constraint firstAttribute="height" constant="45" id="BKi-6T-YNO"/>
                         <constraint firstAttribute="bottom" secondItem="5Zs-jL-KAB" secondAttribute="bottom" constant="12" id="DNF-SP-74O"/>
-                        <constraint firstAttribute="trailing" secondItem="MSu-bW-YHT" secondAttribute="trailing" constant="13" id="QON-Xb-M7I"/>
+                        <constraint firstAttribute="bottom" secondItem="r08-5a-3IQ" secondAttribute="bottom" constant="12" id="NA9-R0-Ajg"/>
+                        <constraint firstAttribute="trailing" secondItem="MSu-bW-YHT" secondAttribute="trailing" constant="13" id="QON-Xb-M7I">
+                            <variation key="widthClass=compact" constant="4"/>
+                        </constraint>
                         <constraint firstAttribute="bottom" secondItem="MSu-bW-YHT" secondAttribute="bottom" constant="12" id="QmH-ec-Wvv"/>
+                        <constraint firstItem="r08-5a-3IQ" firstAttribute="top" secondItem="dY1-6Q-d1l" secondAttribute="top" constant="12" id="nES-b2-FCH"/>
                         <constraint firstItem="5Zs-jL-KAB" firstAttribute="leading" secondItem="dY1-6Q-d1l" secondAttribute="leading" constant="16" id="r5P-Dp-Sgt">
                             <variation key="widthClass=compact" constant="10"/>
                         </constraint>
@@ -106,6 +127,9 @@
                             <exclude reference="DNF-SP-74O"/>
                             <exclude reference="r5P-Dp-Sgt"/>
                             <exclude reference="ynH-Uf-hsd"/>
+                            <exclude reference="2iP-7H-s9N"/>
+                            <exclude reference="NA9-R0-Ajg"/>
+                            <exclude reference="nES-b2-FCH"/>
                             <exclude reference="QON-Xb-M7I"/>
                             <exclude reference="QmH-ec-Wvv"/>
                             <exclude reference="sRI-cc-wCt"/>
@@ -123,6 +147,9 @@
                             <include reference="DNF-SP-74O"/>
                             <include reference="r5P-Dp-Sgt"/>
                             <include reference="ynH-Uf-hsd"/>
+                            <include reference="2iP-7H-s9N"/>
+                            <include reference="NA9-R0-Ajg"/>
+                            <include reference="nES-b2-FCH"/>
                             <include reference="QON-Xb-M7I"/>
                             <include reference="QmH-ec-Wvv"/>
                             <include reference="sRI-cc-wCt"/>
@@ -152,6 +179,18 @@
                         </mask>
                     </variation>
                 </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SPN-HV-W8p">
+                    <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                    <animations/>
+                    <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                    <state key="normal" title="提交"/>
+                    <variation key="widthClass=compact" fixedFrame="YES">
+                        <rect key="frame" x="139" y="417" width="120" height="35"/>
+                    </variation>
+                    <connections>
+                        <action selector="Post:" destination="-1" eventType="touchUpInside" id="8DB-Ta-O4e"/>
+                    </connections>
+                </button>
             </subviews>
             <animations/>
             <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -169,6 +208,7 @@
                 <mask key="subviews">
                     <exclude reference="dY1-6Q-d1l"/>
                     <exclude reference="UOS-Ja-c7U"/>
+                    <exclude reference="SPN-HV-W8p"/>
                 </mask>
                 <mask key="constraints">
                     <exclude reference="38P-N4-6M0"/>
@@ -185,6 +225,7 @@
                 <mask key="subviews">
                     <include reference="dY1-6Q-d1l"/>
                     <include reference="UOS-Ja-c7U"/>
+                    <include reference="SPN-HV-W8p"/>
                 </mask>
                 <mask key="constraints">
                     <include reference="38P-N4-6M0"/>

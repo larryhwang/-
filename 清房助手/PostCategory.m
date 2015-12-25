@@ -54,7 +54,7 @@
     }else if (indexPath.row ==2) {
         cell.textLabel.text = @"写字楼";
     }else  {
-        cell.textLabel.text = @"广场";
+        cell.textLabel.text = @"厂房";
     }
     return cell;
     

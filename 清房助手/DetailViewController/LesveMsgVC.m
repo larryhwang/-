@@ -12,7 +12,7 @@
 #import "AFNetworking.h"
 #import "MBProgressHUD+CZ.h"
 
- #define  TableBackColor [UIColor colorWithRed:237.0/255 green:236.0/255 blue:242.0/255 alpha:1.0]
+
 
 #define   ViewCellPaddingToX     20
 #define   ViewCellWidth          (ScreenWidth-2*ViewCellPaddingToX)
@@ -41,7 +41,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self initTable];
-    UIButton *SureBtn =[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 60, 40)];
+     UIButton *SureBtn =[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 60, 40)];
     [SureBtn addTarget:self action:@selector(SureBtnClick) forControlEvents:UIControlEventTouchUpInside];
     [SureBtn setTitle:@"提交" forState:UIControlStateNormal];
     [SureBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];

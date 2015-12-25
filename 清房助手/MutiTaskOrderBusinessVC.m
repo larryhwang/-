@@ -12,7 +12,7 @@
 #import "CommitOrderVC.h"
 
 #import "TypesSelect.h"
-
+#import "QFMyOrderTableVC.h"
 
 @interface MutiTaskOrderBusinessVC ()<UITableViewDataSource,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *QFtable;
@@ -62,8 +62,9 @@
         commitVC.title = @"提交订单";
         [self.navigationController pushViewController:commitVC animated:YES];
     } else if (indexPath.row ==1) {
-        
       //我的订单
+        QFMyOrderTableVC *OrderListTableVC = [[QFMyOrderTableVC alloc]init];
+        [self.navigationController pushViewController:OrderListTableVC animated:YES];
     }
 
     

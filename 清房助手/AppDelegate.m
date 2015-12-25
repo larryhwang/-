@@ -15,10 +15,10 @@
 #import "SaleOutPostEditForm.h"
 #import "CZNewFeatureController.h"
 
+#import "GBWXPayManager.h"
 
 
-
-@interface AppDelegate ()
+@interface AppDelegate ()<WXApiDelegate>
 
 @end
 
@@ -47,28 +47,19 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch
-    
     [NSThread sleepForTimeInterval:2.0];
     self.window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
     WMCommon *common = [WMCommon getInstance];
     common.screenW = [[UIScreen mainScreen] bounds].size.width;
     common.screenH = [[UIScreen mainScreen] bounds].size.height;
-    
     LoginViewController *login = [LoginViewController new];
     CZNewFeatureController *featurePage = [[CZNewFeatureController alloc]init];
-
-
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"SecondLanch"]) {
         self.window.rootViewController = login;
     }else {
        self.window.rootViewController = featurePage;    //第一次启动则进入新特性
      [[NSUserDefaults standardUserDefaults]setObject:@"1" forKey:@"SecondLanch"];
     }
-
-//    TESTViewController *tt = [TESTViewController new];
-//    self.window.rootViewController = tt;
-//    
-    
    [self.window  makeKeyAndVisible];
 
    
@@ -77,25 +68,50 @@
     
     [[PgyUpdateManager sharedPgyManager] startManagerWithAppId:PGY_APPKEY];
     [[PgyManager sharedPgyManager] startManagerWithAppId:PGY_APPKEY];
-    
-    
-    
     [[PgyUpdateManager sharedPgyManager] checkUpdate];  //检查更新
-    
-    
-      [[PgyManager sharedPgyManager] setEnableFeedback:NO];
+    [[PgyManager sharedPgyManager] setEnableFeedback:NO];
     
     
     
+#pragma 向微信注册
+    [WXApi registerApp:APP_ID withDescription:nil];
     return YES;
 }
 
 
+#pragma mark - 微信支付回调
+-(void) onResp:(BaseResp*)resp
+{
+    NSString *strMsg = [NSString stringWithFormat:@"errcode:%d", resp.errCode];
+    NSString *strTitle;
+    
+    if([resp isKindOfClass:[SendMessageToWXResp class]])
+    {
+        strTitle = [NSString stringWithFormat:@"发送媒体消息结果"];
+    }
+    if([resp isKindOfClass:[PayResp class]]){
+        //支付返回结果，实际支付结果需要去微信服务器端查询
+        strTitle = [NSString stringWithFormat:@"支付结果"];
+        
+        switch (resp.errCode) {
+            case WXSuccess:
+                strMsg = @"支付结果：成功！";
+                NSLog(@"支付成功－PaySuccess，retcode = %d", resp.errCode);
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"WXpayresult" object:@"1"];
+                break;
+                
+            default:
+                strMsg = [NSString stringWithFormat:@"支付结果：失败！retcode = %d, retstr = %@", resp.errCode,resp.errStr];
+                 [[NSNotificationCenter defaultCenter] postNotificationName:@"WXpayresult" object:@"0"];
+                NSLog(@"错误，retcode = %d, retstr = %@", resp.errCode,resp.errStr);
+                break;
+        }
+    }
+
+}
 
 
-
-
-/**
+/** 蒲公英:
  *  检查更新回调
  *
  *  @param response 检查更新的返回结果
@@ -124,6 +140,11 @@
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
+}
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+{
+    return  [WXApi handleOpenURL:url delegate:self];
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
