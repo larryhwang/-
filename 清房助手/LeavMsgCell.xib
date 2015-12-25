@@ -129,7 +129,7 @@
                 <outlet property="QFname" destination="fM3-Vu-7Ky" id="9L6-ET-rWX"/>
                 <outlet property="QFteleNo" destination="wCf-1l-KNs" id="q9c-XH-0PM"/>
             </connections>
-            <point key="canvasLocation" x="754.5" y="255"/>
+            <point key="canvasLocation" x="523.5" y="223"/>
         </tableViewCell>
     </objects>
 </document>

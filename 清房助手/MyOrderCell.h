@@ -16,8 +16,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *QFChargePerson;
 @property (weak, nonatomic) IBOutlet UILabel *QFChargeTeleNo;
 
-
-
-@property(nonatomic,weak) NSDictionary *CellDataDic;
+@property(nonatomic,strong) NSDictionary *QFCellDataDic;
 
 @end

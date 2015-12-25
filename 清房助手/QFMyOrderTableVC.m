@@ -38,11 +38,12 @@
 
 -(void)getTableDataFromNet {
     AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
-    NSString *url = @"";
+    NSString *url = @"http://www.123qf.cn:81/testApp/integrateFindByUser.api?page=1";
     [mgr POST:url parameters:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
         NSLog(@"%@",responseObject);
-        self.QFSingleCellData_Arr = responseObject[@""];
-        [self.QFMyOrderTable reloadData];
+        self.QFSingleCellData_Arr = responseObject[@"data"];
+        NSLog(@"%@",self.QFSingleCellData_Arr);
+       [self.QFMyOrderTable reloadData];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"%@",error);
     }];
@@ -54,19 +55,21 @@
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 15;
+    return [self.QFSingleCellData_Arr count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString    *identifer = @"identifer";
-    MyOrderCell    *Cell = [tableView dequeueReusableCellWithIdentifier:identifer];
-    if (nil == Cell)
-    {
-      Cell = [[[NSBundle mainBundle]loadNibNamed:@"MyOrderCell" owner:nil options:nil] firstObject];
-    }
+    NSDictionary *dic = self.QFSingleCellData_Arr[indexPath.row];
+    NSLog(@"%@",dic);
+    MyOrderCell    *Cell = [[MyOrderCell alloc]init];
+    Cell = [[[NSBundle mainBundle]loadNibNamed:@"MyOrderCell" owner:nil options:nil] firstObject];
+    Cell.QFCellDataDic = dic;
     
-
+    NSLog(@"fuzhi hou ： %@ ,%@ ,%@",    Cell.QFOrderNo.text,
+          Cell.QFOrderStatus.text ,
+          Cell.QFServiceType.text);
+  
     return Cell;
 }
 

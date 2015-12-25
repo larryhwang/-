@@ -115,6 +115,7 @@
 		465415491C2CD064003E5743 /* QFProcessCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 465415471C2CD064003E5743 /* QFProcessCell.xib */; };
 		4654154C1C2CD46E003E5743 /* 60x60-hui (1).png in Resources */ = {isa = PBXBuildFile; fileRef = 4654154A1C2CD46E003E5743 /* 60x60-hui (1).png */; };
 		4654154D1C2CD46E003E5743 /* 60x60-hui (2).png in Resources */ = {isa = PBXBuildFile; fileRef = 4654154B1C2CD46E003E5743 /* 60x60-hui (2).png */; };
+		465415501C2D3C05003E5743 /* QFOrderStatusTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 4654154F1C2D3C05003E5743 /* QFOrderStatusTool.m */; };
 		46554CC11BC8F2F700480F1A /* arrowDown@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 46554CC01BC8F2F700480F1A /* arrowDown@2x.png */; };
 		46714B751BC7C11F00E7AEE9 /* UIImage+WM.m in Sources */ = {isa = PBXBuildFile; fileRef = 46714B5D1BC7C11F00E7AEE9 /* UIImage+WM.m */; };
 		46714B761BC7C11F00E7AEE9 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 46714B5F1BC7C11F00E7AEE9 /* HomeViewController.m */; };
@@ -439,6 +440,8 @@
 		465415471C2CD064003E5743 /* QFProcessCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QFProcessCell.xib; sourceTree = "<group>"; };
 		4654154A1C2CD46E003E5743 /* 60x60-hui (1).png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "60x60-hui (1).png"; sourceTree = "<group>"; };
 		4654154B1C2CD46E003E5743 /* 60x60-hui (2).png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "60x60-hui (2).png"; sourceTree = "<group>"; };
+		4654154E1C2D3C05003E5743 /* QFOrderStatusTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QFOrderStatusTool.h; sourceTree = "<group>"; };
+		4654154F1C2D3C05003E5743 /* QFOrderStatusTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QFOrderStatusTool.m; sourceTree = "<group>"; };
 		46554CC01BC8F2F700480F1A /* arrowDown@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrowDown@2x.png"; sourceTree = "<group>"; };
 		46714B5C1BC7C11F00E7AEE9 /* UIImage+WM.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+WM.h"; sourceTree = "<group>"; };
 		46714B5D1BC7C11F00E7AEE9 /* UIImage+WM.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+WM.m"; sourceTree = "<group>"; };
@@ -1561,6 +1564,8 @@
 				462848181C0FCC6C00273B3A /* SandBoxTool.m */,
 				46CB1A551BFF096000762ACE /* NULLValueJudge.h */,
 				46CB1A561BFF096000762ACE /* NULLValueJudge.m */,
+				4654154E1C2D3C05003E5743 /* QFOrderStatusTool.h */,
+				4654154F1C2D3C05003E5743 /* QFOrderStatusTool.m */,
 			);
 			name = Tool;
 			sourceTree = "<group>";
@@ -1977,6 +1982,7 @@
 				4643562A1BC6093B00A44526 /* main.m in Sources */,
 				46BB59A31C23B02E0021DCEA /* PopSeletedView.m in Sources */,
 				46BC5E581C298A0000B1247A /* MutiTaskOrderBusinessVC.m in Sources */,
+				465415501C2D3C05003E5743 /* QFOrderStatusTool.m in Sources */,
 				46714B821BC7C11F00E7AEE9 /* WMPopAnimation.m in Sources */,
 				46C716C91BC69FB800287742 /* MJConst.m in Sources */,
 				46D6BCA31C2B15EA00883F50 /* FormCellInMutiTast.m in Sources */,

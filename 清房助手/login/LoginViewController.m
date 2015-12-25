@@ -49,14 +49,16 @@
     NSMutableDictionary *PramaDic = [NSMutableDictionary new];
     //http://127.0.0.1:8080/qfzsapi/user/loginUser.front?userID=admin&psWord=2
     //http://www.123qf.cn/testApp/user/loginUser.front?userID=15018639039&psWord=5798161"
-    PramaDic[@"userid"] = @"17090239027";
-    PramaDic[@"psword"] = @"123456";
+//    PramaDic[@"userid"] = @"17090239027";
+//    PramaDic[@"psword"] = @"123456";
     
 //        PramaDic[@"userid"] = userName;
 //        PramaDic[@"psword"] = passWord;
 
     
-    
+    //这个账号有订单跟踪数据
+    PramaDic[@"userid"] = @"13725007900";
+    PramaDic[@"psword"] = @"123456";
     
 
     AFHTTPRequestOperationManager *mgr1  = [AFHTTPRequestOperationManager manager];
