@@ -10,6 +10,7 @@
 #import "MyOrderCell.h"
 #import "AFNetworking.h"
 #import "QFMyOrderTrackDetailVC.h"
+#import "MBProgressHUD+CZ.h"
 
 
 @interface QFMyOrderTableVC ()<UITableViewDataSource,UITableViewDelegate>
@@ -75,25 +76,33 @@
 
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-//    NSString *url= @"";
-//    NSDictionary *dic = self.QFSingleCellData_Arr [indexPath.row];
-//    NSMutableDictionary *m_dic = [NSMutableDictionary new];
-    
+  //integratePicFind.api  ordernum
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    NSString *url= @"http://www.123qf.cn:81/testApp/integratePicFind.api";
+    
+    NSDictionary *CellDic = self.QFSingleCellData_Arr [indexPath.row];
+    NSMutableDictionary *pramam_dic = [NSMutableDictionary new];
+    pramam_dic[@"ordernum"] = CellDic[@"ordernum"];
+    
+
      QFMyOrderTrackDetailVC *detailVC = [[QFMyOrderTrackDetailVC alloc]init];
-    detailVC.title = @"订单详情";
+     detailVC.title = @"订单详情";
+
+    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
+    [MBProgressHUD showMessage:@"加载中"];
+    [mgr POST:url parameters:pramam_dic success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+        NSLog(@"%@",responseObject);
+        [MBProgressHUD  hideHUD];
+        NSDictionary *dict = responseObject[@"data"];
+        NSLog(@"dict : %@",dict);
+        detailVC.QFHeadViewDic = dict[@"user"];  //表头信息
+        detailVC.QFTableArr    = dict[@"info"];  //追踪的数组信息
     [self.navigationController pushViewController:detailVC animated:YES];
+    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
+        NSLog(@"%@",error);
+    }];
     
-    
-//    AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
-//    [mgr POST:url parameters:m_dic success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
-//        /**
-//         *  眺望为hangh
-//         */
-//         NSLog(@"");
-//    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-//        NSLog(@"%@",error);
-//    }];
+
     
 }
 

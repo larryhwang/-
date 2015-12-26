@@ -30,7 +30,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:NO];
      NSString *name = [[NSUserDefaults standardUserDefaults]objectForKey:@"acount"];
     if (name.length>0) {
         self.userName.text = name;

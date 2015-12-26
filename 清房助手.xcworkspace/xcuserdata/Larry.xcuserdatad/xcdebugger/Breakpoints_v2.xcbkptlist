@@ -19,13 +19,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "&#x6e05;&#x623f;&#x52a9;&#x624b;/MyOrderCell.m"
-            timestampString = "472729997.90635"
+            filePath = "&#x6e05;&#x623f;&#x52a9;&#x624b;/QFMyOrderTrackDetailVC.m"
+            timestampString = "472754444.282889"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "29"
-            endingLineNumber = "29"
-            landmarkName = "-setQFCellDataDic:"
+            startingLineNumber = "69"
+            endingLineNumber = "69"
+            landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -35,13 +35,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "&#x6e05;&#x623f;&#x52a9;&#x624b;/MyOrderCell.m"
-            timestampString = "472730029.018386"
+            filePath = "&#x6e05;&#x623f;&#x52a9;&#x624b;/QFMyOrderTableVC.m"
+            timestampString = "472754150.300221"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "80"
-            endingLineNumber = "80"
-            landmarkName = "-setQFCellDataDic:"
+            startingLineNumber = "99"
+            endingLineNumber = "99"
+            landmarkName = "-tableView:didSelectRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

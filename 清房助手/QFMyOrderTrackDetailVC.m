@@ -13,13 +13,19 @@
 #import "MBProgressHUD+CZ.h"
 #import "AFNetworking.h"
 
-@interface QFMyOrderTrackDetailVC ()
+@interface QFMyOrderTrackDetailVC ()<UITableViewDataSource,UITableViewDelegate>
 @property (strong, nonatomic)  UITableView *tableView;
-@property(nonatomic,strong)    NSArray  *tableDataArr;
+@property(nonatomic,weak)  detailHeadView *headview;
 
 @end
 
 @implementation QFMyOrderTrackDetailVC
+
+
+
+
+
+
 
 
 - (void)viewDidLoad {
@@ -44,28 +50,28 @@
     self.tableView.backgroundColor = TableBackColor ;
     NSArray *nibsS = [[NSBundle mainBundle]loadNibNamed:@"detailHeadView" owner:self options:nil];
     detailHeadView *headView = [nibsS lastObject];
-
-//    NSDictionary *usrInfoDic = self.QFownerInfoDic[@"OwnerInfo"];
-//    headView.userNameLabel.text   = usrInfoDic[@"ownername"];
-//    headView.userTeleNoLabel.text = usrInfoDic[@"ownertel"];
+    headView.QFheadViewDic = self.QFHeadViewDic;
     self.tableView.tableHeaderView = headView;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return 10;
+   // return [self.tableDataArr count];
   //  return [self.tableDataArr count];
+    return 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
- //   NSDictionary *sinlgeCellDic = self.tableDataArr[indexPath.row];
+    NSDictionary *sinlgeCellDic = self.QFTableArr[indexPath.row];
+    
+    NSLog(@"QFTable :%@  %@",sinlgeCellDic,self.QFTableArr);
     QFProcessCell  *Cell =[[QFProcessCell alloc]init];
     Cell  =  [[[NSBundle mainBundle]loadNibNamed:@"QFProcessCell" owner:nil options:nil] firstObject];
-    //Cell.QFSingleCellDataDic = sinlgeCellDic;
-
-    Cell.QFProcessLabel.text = @"我在这里等着你回来啊，等iOS开发-使用storyboard实现UILabel的自适应高度（iOS8）哈哈iOS开发-使用storyboard实现UILabel的自适应高度（iOiOS8）哈";
-    Cell.QFProcessLabel.backgroundColor = [UIColor brownColor];
+    Cell.QFDateLabel.text = sinlgeCellDic[@"createtime"];
+    Cell.QFProcessLabel.text = sinlgeCellDic[@"msg"];
+    
+    Cell.QFProcessLabel.backgroundColor = DeafaultColor2;
     NSLog(@"%d",indexPath.row);
     if (indexPath.row ==0) {
         Cell.QF_isLastestCell = YES;

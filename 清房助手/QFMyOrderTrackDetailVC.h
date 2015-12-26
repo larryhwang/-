@@ -10,4 +10,8 @@
 
 @interface QFMyOrderTrackDetailVC : UIViewController
 
+
+@property(nonatomic,strong) NSDictionary *QFHeadViewDic;
+@property(nonatomic,strong) NSArray *QFTableArr;
+
 @end
