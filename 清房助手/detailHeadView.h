@@ -32,7 +32,7 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *QFSalerBtn;
 
-@property(nonatomic,weak) NSDictionary *QFheadViewDic;
+@property(nonatomic,weak)   NSDictionary *QFheadViewDic;
 
 
 

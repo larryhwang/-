@@ -33,9 +33,9 @@
         //若是最新进展的Cell，则把颜色全部换掉
         
         CGRect newRect = CGRectMake(self.QF_VetiLine.frame.origin.x, self.QF_VetiLine.frame.origin.y + 100, self.QF_VetiLine.frame.size.width, self.QF_VetiLine.frame.size.height);
-        [self.QFDateLabel setTextColor:[UIColor blueColor]];
+        [self.QFDateLabel setTextColor:DeafaultColor2];
         [self.QFimg setImage:[UIImage imageNamed:@"60x60-hui (2)"]];
-        [self.QFProcessLabel setTextColor:[UIColor blueColor]];
+        [self.QFProcessLabel setTextColor:DeafaultColor2];
         [self.QF_VetiLine setFrame:newRect];
     }
 }

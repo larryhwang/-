@@ -56,9 +56,9 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-   // return [self.tableDataArr count];
-  //  return [self.tableDataArr count];
-    return 1;
+    return _QFTableArr.count;
+
+   
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -70,8 +70,6 @@
     Cell  =  [[[NSBundle mainBundle]loadNibNamed:@"QFProcessCell" owner:nil options:nil] firstObject];
     Cell.QFDateLabel.text = sinlgeCellDic[@"createtime"];
     Cell.QFProcessLabel.text = sinlgeCellDic[@"msg"];
-    
-    Cell.QFProcessLabel.backgroundColor = DeafaultColor2;
     NSLog(@"%d",indexPath.row);
     if (indexPath.row ==0) {
         Cell.QF_isLastestCell = YES;
@@ -84,11 +82,7 @@
 
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    //    if((indexPath.row%2)==0){
-    //        return 10;
-    //    }else {
-    //        return 100;
-    //    }
+
     return 100;
     
 }
