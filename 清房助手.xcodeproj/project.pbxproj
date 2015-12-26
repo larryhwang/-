@@ -248,6 +248,8 @@
 		46D648381BC8E82C000F23EF /* QFTitleButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 46D648371BC8E82C000F23EF /* QFTitleButton.m */; };
 		46D6483A1BC8E925000F23EF /* navigationbar_arrow_down@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 46D648391BC8E925000F23EF /* navigationbar_arrow_down@2x.png */; };
 		46D6BCA31C2B15EA00883F50 /* FormCellInMutiTast.m in Sources */ = {isa = PBXBuildFile; fileRef = 46D6BCA21C2B15EA00883F50 /* FormCellInMutiTast.m */; };
+		46E8BAF41C2E4B86009E808D /* QFOrderFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 46E8BAF21C2E4B86009E808D /* QFOrderFilter.m */; };
+		46E8BAF51C2E4B86009E808D /* QFOrderFilter.xib in Resources */ = {isa = PBXBuildFile; fileRef = 46E8BAF31C2E4B86009E808D /* QFOrderFilter.xib */; };
 		46FBF74D1BDD17FF00F68EE6 /* pStar.png in Resources */ = {isa = PBXBuildFile; fileRef = 46FBF74C1BDD17FF00F68EE6 /* pStar.png */; };
 		7785FD4973E36DF183E5705C /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 93DCD64313F5A1A452276E13 /* libPods.a */; };
 /* End PBXBuildFile section */
@@ -654,6 +656,9 @@
 		46D648391BC8E925000F23EF /* navigationbar_arrow_down@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "navigationbar_arrow_down@2x.png"; sourceTree = "<group>"; };
 		46D6BCA11C2B15EA00883F50 /* FormCellInMutiTast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FormCellInMutiTast.h; sourceTree = "<group>"; };
 		46D6BCA21C2B15EA00883F50 /* FormCellInMutiTast.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FormCellInMutiTast.m; sourceTree = "<group>"; };
+		46E8BAF11C2E4B85009E808D /* QFOrderFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QFOrderFilter.h; sourceTree = "<group>"; };
+		46E8BAF21C2E4B86009E808D /* QFOrderFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QFOrderFilter.m; sourceTree = "<group>"; };
+		46E8BAF31C2E4B86009E808D /* QFOrderFilter.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QFOrderFilter.xib; sourceTree = "<group>"; };
 		46FBF74C1BDD17FF00F68EE6 /* pStar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pStar.png; sourceTree = "<group>"; };
 		636FD223987F79DDC4D5924B /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		93DCD64313F5A1A452276E13 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1142,6 +1147,9 @@
 				4654153A1C2C5208003E5743 /* QFMyOrderTableVC.xib */,
 				4654153D1C2CCA5A003E5743 /* QFMyOrderTrackDetailVC.h */,
 				4654153E1C2CCA5A003E5743 /* QFMyOrderTrackDetailVC.m */,
+				46E8BAF11C2E4B85009E808D /* QFOrderFilter.h */,
+				46E8BAF21C2E4B86009E808D /* QFOrderFilter.m */,
+				46E8BAF31C2E4B86009E808D /* QFOrderFilter.xib */,
 			);
 			name = ViewCotroller;
 			sourceTree = "<group>";
@@ -1770,6 +1778,7 @@
 				4673A5131BC8DEE000700099 /* searchbar_textfield_background@2x.png in Resources */,
 				462847DB1C0EEDC200273B3A /* wenzi.png in Resources */,
 				4616EE231C24E44500BAF5C3 /* 640x1136_3.png in Resources */,
+				46E8BAF51C2E4B86009E808D /* QFOrderFilter.xib in Resources */,
 				4653867D1C1912DC00454E79 /* FilterViewController.xib in Resources */,
 				46252F8B1BDA648C00C1FA66 /* MJRefresh.bundle in Resources */,
 				46BBE8CB1C0FD25C00DE4B14 /* CZKeyboardToolbar.xib in Resources */,
@@ -1869,6 +1878,7 @@
 			files = (
 				467820641C28FDE30076C761 /* LeavMsgHeadView.m in Sources */,
 				46AFDFA81BCB84A200B49CBE /* UIImageView+HighlightedWebCache.m in Sources */,
+				46E8BAF41C2E4B86009E808D /* QFOrderFilter.m in Sources */,
 				465415311C2C4AAE003E5743 /* MyOrderCell.m in Sources */,
 				4677DE1C1C1672D700011D70 /* TableViewController.m in Sources */,
 				46C716CD1BC69FB800287742 /* NSObject+MJCoding.m in Sources */,

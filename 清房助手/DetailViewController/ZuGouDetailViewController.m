@@ -76,6 +76,7 @@
     [self getDataFromNet];
     
     
+    
     UIBarButtonItem *backItem = [[UIBarButtonItem alloc] init];
     backItem.title = @"";
     self.navigationItem.backBarButtonItem = backItem;
@@ -338,8 +339,6 @@
        
        
 
-       
-       
        [MBProgressHUD hideHUD];
        UIView *back = [self.view viewWithTag:999];
        [back removeFromSuperview];  //移除白色背景
@@ -394,8 +393,8 @@
         ContactName.text = @"";
     }else {
         ContactName.text = self.FangData[@"publisher"];
-        
     }
+    
     CGSize NameLabelSize = [self sizeWithString:ContactName.text font:Deafult maxSize:MaxLeftSzie];
     [ContactName setFrame:CGRectMake((LeftViewWidth -NameLabelSize.width)/2, (Company.frame.origin.y +Company.frame.size.height +2), NameLabelSize.width, NameLabelSize.height)];
     [Company setFrame:CGRectMake((LeftViewWidth -companyLabelSize.width)/2 , (ToolHeight - (companyLabelSize.height + NameLabelSize.height))/2+20, companyLabelSize.width, companyLabelSize.height)];
@@ -405,9 +404,9 @@
     
     PublisherAndCo.userInteractionEnabled = YES;
     
-    
-    
+
     [footer addSubview:PublisherAndCo];
+    
     
     //中部
     UITapGestureRecognizer *TeleTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(TeleTap:)];

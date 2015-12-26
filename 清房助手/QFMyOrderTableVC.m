@@ -3,7 +3,7 @@
 //  
 //
 //  Created by Larry on 12/25/15.
-//
+//  说明:本页面用来描述 我的订单 里面的列表内容
 //
 
 #import "QFMyOrderTableVC.h"
@@ -31,11 +31,42 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.edgesForExtendedLayout = UIRectEdgeNone ;
-   [self getTableDataFromNet];
+    self.edgesForExtendedLayout = UIRectEdgeNone;
+    
+    UIBarButtonItem *backItem = [[UIBarButtonItem alloc] init];
+    backItem.title = @"哈哈";
+    self.navigationItem.backBarButtonItem = backItem;
+    
+    [self getTableDataFromNet];
+    
     self.QFMyOrderTable.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
+    [self initNav];
 }
 
+
+-(void)initNav {
+    UIButton *RightBarBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 65, 27)];
+    NSLog(@"NavController:%@",self.navigationController);
+    NSLog(@"QIAN ：rightBtn : %@", RightBarBtn);
+    UIImageView *img = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"筛选"]];
+    [img setFrame:CGRectMake(0, 0, 27, 27)];
+    [RightBarBtn addSubview:img];
+    [RightBarBtn setTitle:@"筛选" forState:UIControlStateNormal];
+    [RightBarBtn addTarget:self action:@selector(RightBtnClick) forControlEvents:UIControlEventTouchUpInside];
+    [RightBarBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    RightBarBtn.titleEdgeInsets = UIEdgeInsetsMake(0, 27, 0, 0);
+    UIBarButtonItem *gripeBarBtn = [[UIBarButtonItem alloc]initWithCustomView:RightBarBtn];
+    self.navigationItem.rightBarButtonItem =gripeBarBtn;
+}
+
+/**
+ *  筛选按钮点击
+ */
+-(void)RightBtnClick {
+//    [MBProgressHUD showSuccess:@""];
+    NSLog(@"嘻嘻哈哈哈哈");
+}
 
 -(void)getTableDataFromNet {
     AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
@@ -63,8 +94,11 @@
 {
     NSDictionary *dic = self.QFSingleCellData_Arr[indexPath.row];
     NSLog(@"%@",dic);
+    
     MyOrderCell    *Cell = [[MyOrderCell alloc]init];
+    
     Cell = [[[NSBundle mainBundle]loadNibNamed:@"MyOrderCell" owner:nil options:nil] firstObject];
+    
     Cell.QFCellDataDic = dic;
     
     NSLog(@"fuzhi hou ： %@ ,%@ ,%@",    Cell.QFOrderNo.text,
@@ -89,14 +123,23 @@
      detailVC.title = @"订单详情";
 
     AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
+    
     [MBProgressHUD showMessage:@"加载中"];
+    
     [mgr POST:url parameters:pramam_dic success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+        
         NSLog(@"%@",responseObject);
+        
         [MBProgressHUD  hideHUD];
+        
         NSDictionary *dict = responseObject[@"data"];
+        
         NSLog(@"dict : %@",dict);
+        
         detailVC.QFHeadViewDic = dict[@"user"];  //表头信息
+        
         detailVC.QFTableArr    = dict[@"info"];  //追踪的数组信息
+        
     [self.navigationController pushViewController:detailVC animated:YES];
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         NSLog(@"%@",error);

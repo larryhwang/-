@@ -76,7 +76,9 @@
     self.QFPostBtn.backgroundColor = DeafaultColor;
     [self.QFPostBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     
-    
+    UIBarButtonItem *backItem = [[UIBarButtonItem alloc] init];
+    backItem.title = @"";
+    self.navigationItem.backBarButtonItem = backItem;
     
 
 

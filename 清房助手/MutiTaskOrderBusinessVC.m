@@ -60,11 +60,18 @@
       //提交订单
         CommitOrderVC *commitVC = [[CommitOrderVC alloc]init];
         commitVC.title = @"提交订单";
+        
+
         [self.navigationController pushViewController:commitVC animated:YES];
+        
+        
     } else if (indexPath.row ==1) {
       //我的订单
         QFMyOrderTableVC *OrderListTableVC = [[QFMyOrderTableVC alloc]init];
+        
+
         [self.navigationController pushViewController:OrderListTableVC animated:YES];
+        
     }
 
     

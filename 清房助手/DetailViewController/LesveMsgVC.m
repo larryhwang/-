@@ -50,7 +50,6 @@
     [SureBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     UIBarButtonItem *RightNavBar = [[UIBarButtonItem alloc]initWithCustomView:SureBtn];
     self.navigationItem.rightBarButtonItem = RightNavBar;
-    
     [self.view addSubview:self.tableView];
     
 
@@ -83,9 +82,6 @@
         } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
             NSLog(@"%@",error);
         }];
-        
-
-        
     }
     else {
         UIAlertView *AW = [[UIAlertView alloc]initWithTitle:nil
