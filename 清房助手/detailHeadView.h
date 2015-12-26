@@ -34,6 +34,8 @@
 
 @property(nonatomic,weak)   NSDictionary *QFheadViewDic;
 
+@property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *QFteleBtns;
+
 
 
 

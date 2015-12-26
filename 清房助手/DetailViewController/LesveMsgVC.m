@@ -26,6 +26,9 @@
 @property(nonatomic,strong)  NSArray  *tableDataArr;
 @property(nonatomic,weak) LeavMsgHeadView *headView;
 
+
+
+
 @end //237 236 242
 
 @implementation LesveMsgVC

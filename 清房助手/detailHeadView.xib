@@ -203,6 +203,9 @@
                 <outlet property="QFSalerBtn" destination="kcN-jz-SYD" id="Sgq-JE-MAI"/>
                 <outlet property="QFSalerName" destination="rPb-WU-VbJ" id="HMS-vg-guD"/>
                 <outlet property="QFServiceType" destination="KeR-AW-d32" id="SaW-YJ-G5d"/>
+                <outletCollection property="QFteleBtns" destination="8Sp-Wv-huM" id="Oma-eR-5qc"/>
+                <outletCollection property="QFteleBtns" destination="crO-Pw-Nh1" id="wqq-h8-Kyq"/>
+                <outletCollection property="QFteleBtns" destination="kcN-jz-SYD" id="zTE-8H-N0P"/>
             </connections>
             <point key="canvasLocation" x="426.5" y="501"/>
         </view>
