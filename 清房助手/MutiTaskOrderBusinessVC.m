@@ -25,7 +25,10 @@
     [super viewDidLoad];
     self.edgesForExtendedLayout = UIRectEdgeNone;
     
-    NSLog(@"导航栏:%@",self.navigationController);
+    UIBarButtonItem *backItem = [[UIBarButtonItem alloc] init];
+    backItem.title = @" ";
+    self.navigationItem.backBarButtonItem = backItem;
+
     
 
 

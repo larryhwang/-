@@ -4,7 +4,17 @@
 //
 //  Created by Larry on 12/19/15.
 //  Copyright © 2015 HuiZhou S&F NetworkTechCo.,Ltd . All rights reserved.
+
+/**
+ *   说明:  1.内部房源和内部客源都用同一个 InnerBasicViewController  类 ， 由参数决定申请展示内容
+            2.
+ *
+ *
+ */
+
 //
+
+
 
 #import "InnerTabBarController.h"
 #import "InnerCustomer.h"
@@ -15,12 +25,7 @@
 #import "QFNavController.h"
 
 
-/**
- *  决定是房源还是客源
- */
-//@property(nonatomic,assign) TabBarType type;
-//@property(nonatomic,copy) NSString *LeftListUrl;
-//@property(nonatomic,copy) NSString *RightListUrl;
+
 
 @interface InnerTabBarController () {
     NSString   *_LeftListUrl;

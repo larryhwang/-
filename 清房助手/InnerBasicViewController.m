@@ -119,7 +119,6 @@
     self.navigationController.navigationItem.leftBarButtonItem = back ;
     self.navigationItem.leftBarButtonItem = back ;
     
-    
     //搜索
     TableViewController *tableVC = [[TableViewController alloc] initWithStyle:UITableViewStylePlain];
     NSLog(@"tableVC:%@",tableVC);
@@ -131,10 +130,12 @@
     [_searchVC.searchBar sizeToFit];
     self.navigationItem.titleView = _searchVC.searchBar;
     self.definesPresentationContext = YES; //2152632369
-    
-        _CurentUrl  = CurrentTableUrl ;
-        return self;
+   _CurentUrl  = CurrentTableUrl ;
+    return self;
 }
+
+
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];

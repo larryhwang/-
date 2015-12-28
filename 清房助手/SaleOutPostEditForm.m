@@ -352,7 +352,6 @@
 }
 
 -(void)dealTextfield :(UITextField *)textfied isTextCenter:(BOOL)isTextCenter{
-    
     if (isTextCenter) {
         textfied.textAlignment = NSTextAlignmentCenter;
     }
@@ -360,8 +359,9 @@
     textfied.inputAccessoryView = self.keyBoardBar;
     textfied.tag = [self.tfArrs count];
     [self.tfArrs addObject:textfied];
-
 }
+
+
 -(void)saveDataAlert {
     NSLog(@"已拦截");
 }
@@ -761,7 +761,6 @@
         select.definesPresentationContext = YES;
         select.modalPresentationStyle = UIModalPresentationOverCurrentContext;
         self.preferredContentSize = CGSizeMake(Screen_width/2, 50);
-        
         UIView *modalView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, Screen_width, Screen_height)];
         modalView.tag =ModalViewTag;
         modalView.backgroundColor = [[UIColor lightGrayColor] colorWithAlphaComponent:.4];

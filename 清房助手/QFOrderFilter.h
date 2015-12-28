@@ -10,4 +10,7 @@
 
 @interface QFOrderFilter : UIViewController
 
+
+@property(nonatomic,copy) void (^uptableData)( NSDictionary *newDic);
+
 @end

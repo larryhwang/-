@@ -38,10 +38,7 @@
     
   [label updateLabelStyle];
    cell.tittleLabel = label;
-
   return cell;
-    
-
 }
 
 

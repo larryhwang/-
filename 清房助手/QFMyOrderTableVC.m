@@ -11,6 +11,7 @@
 #import "AFNetworking.h"
 #import "QFMyOrderTrackDetailVC.h"
 #import "MBProgressHUD+CZ.h"
+#import "QFOrderFilter.h"
 
 
 @interface QFMyOrderTableVC ()<UITableViewDataSource,UITableViewDelegate>
@@ -34,7 +35,7 @@
     self.edgesForExtendedLayout = UIRectEdgeNone;
     
     UIBarButtonItem *backItem = [[UIBarButtonItem alloc] init];
-    backItem.title = @"哈哈";
+    backItem.title = @" ";
     self.navigationItem.backBarButtonItem = backItem;
     
     [self getTableDataFromNet];
@@ -61,11 +62,17 @@
 }
 
 /**
- *  筛选按钮点击
+ *  订单筛选按钮点击
  */
 -(void)RightBtnClick {
-//    [MBProgressHUD showSuccess:@""];
-    NSLog(@"嘻嘻哈哈哈哈");
+    QFOrderFilter *filter = [[QFOrderFilter alloc]init];
+    filter.uptableData = ^(NSDictionary *dic) {
+       //截取到新的数组
+        
+        [self.QFMyOrderTable reloadData];
+    };
+    filter.title  = @"筛选";
+    [self.navigationController pushViewController:filter animated:YES];
 }
 
 -(void)getTableDataFromNet {

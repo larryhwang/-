@@ -27,7 +27,9 @@
 
 - (IBAction)sureClick:(id)sender {
     self.SureBtnAciton(_test);
+
     [self cancleClick:nil];
+    
 }
 
 
@@ -59,9 +61,17 @@
 }
 
 
+
 -(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
     _test = _pikerDataArr[row];
-    NSLog(@"滚轮:%@,数据:%d",_test,row);
+}
+
+
+- (NSString *)stringFromDate:(NSDate *)date{
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    NSString *destDateString = [dateFormatter stringFromDate:date];
+    return destDateString;
 }
 
 

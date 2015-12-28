@@ -18,7 +18,7 @@
  *   // 本页面用于筛选界面的控制
  
  接口问题 1 //面积有没有不限，不限传什么参数
- http://www.123qf.cn:81/testApp/seach/echoSeachFKYuanList.api?param=%E6%83%A0%E5%B7%9E%E5%B8%82&isfangyuan=1&state=0&currentpage=1&sum=20&shengfen=%E5%B9%BF%E4%B8%9C%E7%9C%81&shi=%E6%83%A0%E5%B7%9E%E5%B8%82&zhuangtai=0&yongtu=0&price=1-10000&unit=%E4%B8%87%E5%85%83&mianji=1-10000&dianti=true&hucate=3-N-N-N
+
      地址如果是不限呢
  
  *
@@ -74,8 +74,6 @@
     NSString *_region;
     
     NSString *_completeHuXing;  //已完成的户型拼接
-    
-    
 }
 
 @property(nonatomic,strong)  NSMutableDictionary  *PostDictionary;
@@ -101,9 +99,6 @@
     }
     return _AdressKeyArr;
 }
-
-
-
 
 -(void)addCell:(EditCell *)headcell After:(EditCell *)cell {
     int index =0;
@@ -204,7 +199,6 @@
             } else {
                 //若不是住宅，1.删除之前添加的Cell  2.保存数据
 #warning 住宅数据存取有误，需要再了解
-        
                 if ([passString isEqualToString:@"住宅"]) {
                     typeInt =0;
                 } else if ([passString isEqualToString:@"商铺"]){
@@ -484,10 +478,6 @@
                fangxiang         //refresh
        ?  //区域数据为空可以
      */
-    
-    
-    
-    
     //设置 求租、求售问题
     switch (_filterStatus) {
         case 0:
