@@ -478,10 +478,7 @@
 
 -(void)filterClick {
     NSLog(@"哈哈");
-    
     NSString *url = @"";
-    
-    
  //   从网上获得数据
         AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
         [mgr POST:url parameters:_QFPostDic success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
@@ -493,11 +490,5 @@
         } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
             NSLog(@"%@",error);
         }];
-    
-    
-    
-    
-    self.uptableData(_QFNewDic);
-    [self.navigationController popViewControllerAnimated:YES];
 }
 @end

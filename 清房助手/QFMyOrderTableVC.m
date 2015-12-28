@@ -67,7 +67,8 @@
     QFOrderFilter *filter = [[QFOrderFilter alloc]init];
     filter.uptableData = ^(NSDictionary *dic) {
        //截取到新的数组
-        
+        NSLog(@"嘻嘻哈哈:%@",dic);
+        self.QFSingleCellData_Arr = dic[@"data"];
         [self.QFMyOrderTable reloadData];
     };
     filter.title  = @"筛选";
@@ -106,10 +107,7 @@
     Cell = [[[NSBundle mainBundle]loadNibNamed:@"MyOrderCell" owner:nil options:nil] firstObject];
     
     Cell.QFCellDataDic = dic;
-    
-    NSLog(@"fuzhi hou ： %@ ,%@ ,%@",    Cell.QFOrderNo.text,
-          Cell.QFOrderStatus.text ,
-          Cell.QFServiceType.text);
+
   
     return Cell;
 }
