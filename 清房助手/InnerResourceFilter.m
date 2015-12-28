@@ -91,6 +91,15 @@
     QFTableView_Sco *mainContent   = [[QFTableView_Sco alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth,ScreenHeight)];
     self.main = mainContent ;
     [self.view addSubview:mainContent];
+    
+    
+    UIButton *RightBarBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 70, 27)];
+    [RightBarBtn setTitle:@"确定" forState:UIControlStateNormal];
+    [RightBarBtn addTarget:self action:@selector(filterClick) forControlEvents:UIControlEventTouchUpInside];
+    [RightBarBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    RightBarBtn.titleEdgeInsets = UIEdgeInsetsMake(0, 27, 0, 0);
+    UIBarButtonItem *gripeBarBtn = [[UIBarButtonItem alloc]initWithCustomView:RightBarBtn];
+    self.navigationItem.rightBarButtonItem =gripeBarBtn;
 }
 
 
@@ -456,11 +465,13 @@
 
 
 -(void)initNav {
-    UIButton *SureBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    SureBtn.frame = CGRectMake(0, 0, 60, 33);
-    [SureBtn setTitle:@"确定" forState:UIControlStateNormal];
-    [SureBtn addTarget:self action:@selector(InnerfilterClick) forControlEvents:UIControlEventTouchUpInside];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:SureBtn];
+
+    
+    
+    
+    UIBarButtonItem *backItem = [[UIBarButtonItem alloc] init];
+    backItem.title = @"";
+    self.navigationItem.backBarButtonItem = backItem;
 }
 
 
@@ -471,17 +482,17 @@
     NSString *url = @"";
     
     
-    //从网上获得数据
-    //    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
-    //    [mgr POST:url parameters:_QFPostDic success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-    //        self.QFNewDic = responseObject[@"data"];
-    //        //重载上一个页面的表内容
-    //        self.uptableData(_QFNewDic);
-    //        //返回上一个界面
-    //        [self.navigationController popViewControllerAnimated:YES];
-    //    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
-    //        NSLog(@"%@",error);
-    //    }];
+ //   从网上获得数据
+        AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
+        [mgr POST:url parameters:_QFPostDic success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+            self.QFNewDic = responseObject[@"data"];
+            //重载上一个页面的表内容
+            self.uptableData(_QFNewDic);
+            //返回上一个界面
+            [self.navigationController popViewControllerAnimated:YES];
+        } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
+            NSLog(@"%@",error);
+        }];
     
     
     

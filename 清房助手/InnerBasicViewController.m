@@ -378,6 +378,14 @@
     //公司、个人、资源 的筛选
 
     InnerResourceFilter *filter = [[InnerResourceFilter alloc]init];
+    
+    filter.uptableData = ^ (NSDictionary *dic) {
+        //接受新的数据
+        self.DataArr = dic[@""];
+        [self.tableView reloadData];  //重载数据
+    };
+    
+    filter.title = @"分类";
     [self.navigationController pushViewController:filter animated:YES];
     
 }

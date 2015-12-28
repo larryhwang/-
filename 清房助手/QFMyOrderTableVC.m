@@ -13,7 +13,6 @@
 #import "MBProgressHUD+CZ.h"
 #import "QFOrderFilter.h"
 
-
 @interface QFMyOrderTableVC ()<UITableViewDataSource,UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *QFMyOrderTable;
 @property(nonatomic,strong)  NSArray  *QFSingleCellData_Arr;
@@ -126,8 +125,8 @@
     pramam_dic[@"ordernum"] = CellDic[@"ordernum"];
     
 
-     QFMyOrderTrackDetailVC *detailVC = [[QFMyOrderTrackDetailVC alloc]init];
-     detailVC.title = @"订单详情";
+    QFMyOrderTrackDetailVC *detailVC = [[QFMyOrderTrackDetailVC alloc]init];
+    detailVC.title = @"订单详情";
 
     AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
     
@@ -135,11 +134,11 @@
     
     [mgr POST:url parameters:pramam_dic success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         
-        NSLog(@"%@",responseObject);
+    NSLog(@"%@",responseObject);
         
-        [MBProgressHUD  hideHUD];
+    [MBProgressHUD  hideHUD];
         
-        NSDictionary *dict = responseObject[@"data"];
+    NSDictionary *dict = responseObject[@"data"];
         
         NSLog(@"dict : %@",dict);
         
