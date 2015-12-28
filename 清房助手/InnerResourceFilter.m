@@ -1,32 +1,24 @@
 //
-//  FilterViewController.m
+//  InnerResourceFilter.m
 //  清房助手
 //
-//  Created by Larry on 12/10/15.
+//  Created by Larry on 12/28/15.
 //  Copyright © 2015 HuiZhou S&F NetworkTechCo.,Ltd . All rights reserved.
 //
 
-#import  "FilterViewController.h"
-#import  "QFTableView_Sco.h"
-#import  "EditCell.h"
-#import  "AppDelegate.h"
+#import "InnerResourceFilter.h"
+#import "EditCell.h"
+#import "FormCellInMutiTast.h"
+#import "PopSelectViewController.h"
+#import "commonFile.h"
+#import "QFDateSelectStartToEnd.h"
+#import "MBProgressHUD+CZ.h"
+#import "AFNetworking.h"
+#import "AppDelegate.h"
 #import  "SelectRegionVC.h"
-#import  "PopViewController/PopSelectViewController.h"
-#import  "AFNetworking/AFHTTPRequestOperationManager.h"
-#import  "MBProgressHUD+CZ.h"
-/**
- *   // 本页面用于筛选界面的控制
- 
- 接口问题 1 //面积有没有不限，不限传什么参数
-
-     地址如果是不限呢
- 
- *
- */
+#import "QFTableView_Sco.h"
 
 #define ModalViewTag   99
-
-
 
 #define CustomPriceCellTag 20
 #define RoomStyleCellTag   30
@@ -51,39 +43,22 @@
 #define toiletsTag      170
 #define balconysTag     180
 
+@interface InnerResourceFilter() <UITextFieldDelegate>
 
-@interface FilterViewController ()<SelectRegionDelegate,UITextFieldDelegate>{
-    NSString *_RegionName;
-    NSString *_lastRegionName;
-    
-    
-    NSString *_MinPriceStr;
-    NSString *_MaxPriceStr;
-    
-    NSString *_MinAcreageStr;
-    NSString *_MaxAcreageStr;
-    
-    NSString *_fangshuStr;
-    NSString *_tingshuStr;
-    NSString *_toiletsStr;
-    NSString *_balconysStr;
-
-    NSString *_shengfen;
-    NSString *_shi;
-    NSString *_qu;
-    NSString *_region;
-    
-    NSString *_completeHuXing;  //已完成的户型拼接
-}
+@property(nonatomic,strong)  NSDictionary  *QFNewDic;
+@property(nonatomic,strong)  NSMutableDictionary  *QFPostDic;
+@property(nonatomic,weak)    EditCell *RegionTF;
+@property(nonatomic,weak)   QFTableView_Sco *main;
 
 @property(nonatomic,strong)  NSMutableDictionary  *PostDictionary;
-@property(nonatomic,weak)    QFTableView_Sco *main;
-@property(nonatomic,weak)    EditCell *RegionTF;
 @property(nonatomic,strong)  NSArray  *AdressKeyArr;
+
 
 @end
 
-@implementation FilterViewController
+
+
+@implementation InnerResourceFilter
 
 -(NSMutableDictionary*)PostDictionary {
     if (_PostDictionary==nil) {
@@ -102,29 +77,64 @@
 
 
 
-/**
- *  在一个Cell之后，再添加一个Cell
- *
- *  @param headcell 前面的Cell
- *  @param cell     需要加入的Cell
- */
--(void)addCell:(EditCell *)headcell After:(EditCell *)cell {
-    int index =0;
-    for (EditCell *Singlecell in self.main.Cell_NSArr) {
-        NSLog(@"insertCell:%@",cell);
-         ++index ;
-        if ([Singlecell isEqual:cell]) {
-            NSLog(@"hunted");
-            break;
-        }
-    }
-     [self.main.Cell_NSArr insertObject:headcell atIndex:index];
-    
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self pramaInit];
+    self.view.backgroundColor = [UIColor whiteColor];
+    [self cellSetting];
+    [self.main layoutSubviews];
+ 
+}
+
+
+-(void)pramaInit {
+    QFTableView_Sco *mainContent   = [[QFTableView_Sco alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth,ScreenHeight)];
+    self.main = mainContent ;
+    [self.view addSubview:mainContent];
+}
+
+
+-(void)cellSetting {
+    //租购
+    EditCell *Zougou = [[EditCell alloc]init];
+    Zougou.isOptionalCell = YES ;
+    Zougou.title = @"电梯:";
+    Zougou.placeHoderString = @"不限";
+    Zougou.otherAction =^{
+        PopSelectViewController *select = [[PopSelectViewController alloc]init];
+        NSArray *Optdata  = [NSArray arrayWithObjects:@"求租",@"求售",@"不限",nil];
+        select.pikerDataArr = Optdata;
+        select.providesPresentationContextTransitionStyle = YES;
+        select.definesPresentationContext = YES;
+        select.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+        self.preferredContentSize = CGSizeMake(ScreenWidth/2, 50);
+        UIView *modalView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight)];
+        modalView.tag = ModalViewTag;
+        modalView.backgroundColor = [[UIColor lightGrayColor] colorWithAlphaComponent:.4];
+        [self.view addSubview:modalView];
+        select.DismissView = ^(){
+            [modalView removeFromSuperview];
+        };  //取消
+        select.SureBtnAciton    =^(NSString *passString) {
+            int a;
+            
+            if ([passString isEqualToString:@"求租"]) {
+                a = 1;
+                [self.PostDictionary setObject:[NSNumber numberWithInt:1] forKey:@"dianti"];
+            } else if([passString isEqualToString:@"求购"]){
+                [self.PostDictionary setObject:[NSNumber numberWithInt:0] forKey:@"dianti"];
+            } else {
+                //  [self.PostDictionary setObject:@"" forKey:@"dianti"]; //不限
+            }
+            
+            
+            Zougou.contentString = passString;
+        };
+        [self presentViewController:select animated:YES completion:nil]; };
+    [self.main.Cell_NSArr addObject:Zougou];
+    
+    
+    //区域
     EditCell    *RegionOption  = [[EditCell alloc]init];
     _RegionTF = RegionOption;
     RegionOption.title = @"区域:";
@@ -142,6 +152,8 @@
     };
     [self.main.Cell_NSArr addObject:RegionOption];
     
+    
+    //用途
     EditCell *HouseType = [[EditCell alloc]init];
     HouseType.isOptionalCell = YES ;
     HouseType.title = @"用途:";
@@ -159,7 +171,7 @@
         modalView.backgroundColor = [[UIColor lightGrayColor] colorWithAlphaComponent:.4];
         [self.view addSubview:modalView];
         select.DismissView = ^(){
-          [modalView removeFromSuperview];
+            [modalView removeFromSuperview];
         };  //取消
         select.SureBtnAciton    =^(NSString *passString) {
             //如果是住宅,增加厅数Cell
@@ -201,7 +213,7 @@
                 YangTaiLabel.text = @"阳台";
                 [YangTaiLabel setTextColor:[UIColor lightGrayColor]];
                 [RoomStyle addSubview:YangTaiLabel];
-             //   [self.main.Cell_NSArr insertObject:RoomStyle atIndex:2];
+                //   [self.main.Cell_NSArr insertObject:RoomStyle atIndex:2];
                 [self addCell:RoomStyle After:HouseType];
                 [self.main layoutSubviews];
             } else {
@@ -217,12 +229,12 @@
                     typeInt =3;   //厂房
                 }
                 //typeInt
-   
+                
                 [self removeCellWithTag:RoomStyleCellTag];
                 
             }
-       [self.PostDictionary setObject:[NSNumber numberWithInt:typeInt] forKey:@"yongtu"];
-        HouseType.contentString = passString;
+            [self.PostDictionary setObject:[NSNumber numberWithInt:typeInt] forKey:@"yongtu"];
+            HouseType.contentString = passString;
         };
         [self presentViewController:select animated:YES completion:nil];
     };
@@ -230,6 +242,8 @@
     
     
     
+    
+    //价格
     EditCell *PriceRange = [[EditCell alloc]init];
     PriceRange.isOptionalCell = YES ;
     PriceRange.title = @"价格:";
@@ -251,7 +265,7 @@
         };  //取消
         select.SureBtnAciton =^(NSString *passString) {
             //如果是自定义则添加新的Cell
-            EditCell *CustomsPriceRange = [[EditCell alloc]init];
+            EditCell *CustomsPriceRange = [[EditCell alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(RegionOption.frame),  Screen_width, CellHeight)];
             CustomsPriceRange.tag = CustomPriceCellTag;
             if([passString isEqualToString:@"自定义"]) {
                 
@@ -279,24 +293,26 @@
                 [UnintLable setTextColor:[UIColor lightGrayColor]];
                 UnintLable.text = @"万元";
                 [CustomsPriceRange addSubview:UnintLable];
-               // [self.main.Cell_NSArr insertObject:CustomsPriceRange atIndex:3];
+                // [self.main.Cell_NSArr insertObject:CustomsPriceRange atIndex:3];
                 [self addCell:CustomsPriceRange After:PriceRange];
                 [self.main layoutSubviews];
             } else {
                 if ([passString isEqualToString:@"不限"]) {
-                //   [self.PostDictionary setObject:@"" forKey:@"price"];
+                    //   [self.PostDictionary setObject:@"" forKey:@"price"];
                 }else {
-                   [self.PostDictionary setObject:passString forKey:@"price"];
-                   [self removeCellWithTag:CustomPriceCellTag];
+                    [self.PostDictionary setObject:passString forKey:@"price"];
+                    [self removeCellWithTag:CustomPriceCellTag];
                 }
             }
             
             PriceRange.contentString = passString;
         };
-    [self presentViewController:select animated:YES completion:nil]; };
+        [self presentViewController:select animated:YES completion:nil]; };
     [self.main.Cell_NSArr addObject:PriceRange];
     
     
+    
+    //面积
     EditCell *AcreageCell = [[EditCell alloc]init];
     AcreageCell.isOptionalCell = YES ;
     AcreageCell.title = @"面积:";
@@ -345,13 +361,13 @@
                 [UnintLable setTextColor:[UIColor lightGrayColor]];
                 UnintLable.text = @"平方米";
                 [CustomsAcreageRange addSubview:UnintLable];
-               // [self.main.Cell_NSArr insertObject:CustomsAcreageRange atIndex:4];
+                // [self.main.Cell_NSArr insertObject:CustomsAcreageRange atIndex:4];
                 [self addCell:CustomsAcreageRange After:AcreageCell];
                 [self.main layoutSubviews];
             } else {
                 //如果不是自定义 ，先保存数据
                 if([passString isEqualToString:@"不限"]) {
-                   // [self.PostDictionary setObject:@"" forKey:@"mianji"];
+                    // [self.PostDictionary setObject:@"" forKey:@"mianji"];
                 } else {
                     [self.PostDictionary setObject:passString forKey:@"mianji"];
                     [self removeCellWithTag:AcreageCellTag];
@@ -362,8 +378,9 @@
         };
         [self presentViewController:select animated:YES completion:nil]; };
     [self.main.Cell_NSArr addObject:AcreageCell];
+
     
-    
+    //电梯
     EditCell *LiftCell = [[EditCell alloc]init];
     LiftCell.isOptionalCell = YES ;
     LiftCell.title = @"电梯:";
@@ -387,12 +404,12 @@
             int a;
             
             if ([passString isEqualToString:@"有电梯"]) {
-                 a = 1;
+                a = 1;
                 [self.PostDictionary setObject:[NSNumber numberWithInt:1] forKey:@"dianti"];
             } else if([passString isEqualToString:@"无电梯"]){
                 [self.PostDictionary setObject:[NSNumber numberWithInt:0] forKey:@"dianti"];
             } else {
-              //  [self.PostDictionary setObject:@"" forKey:@"dianti"]; //不限
+                //  [self.PostDictionary setObject:@"" forKey:@"dianti"]; //不限
             }
             
             
@@ -402,10 +419,27 @@
     [self.main.Cell_NSArr addObject:LiftCell];
     
     
-    
-    
-    [self.main layoutSubviews];
 }
+
+/**
+ *  在一个Cell之后，再添加一个Cell
+ *
+ *  @param headcell 前面的Cell
+ *  @param cell     需要加入的Cell
+ */
+-(void)addCell:(EditCell *)headcell After:(EditCell *)cell {
+    int index =0;
+    for (EditCell *Singlecell in self.main.Cell_NSArr) {
+        NSLog(@"insertCell:%@",cell);
+        ++index ;
+        if ([Singlecell isEqual:cell]) {
+            NSLog(@"hunted");
+            break;
+        }
+    }
+    [self.main.Cell_NSArr insertObject:headcell atIndex:index];
+}
+
 
 -(void)removeCellWithTag:(NSInteger)tag {
     for (EditCell *cell in self.main.Cell_NSArr) {
@@ -421,194 +455,38 @@
 }
 
 
--(void)appendName:(NSString *)locationName {
-    NSRange isHave = [_lastRegionName rangeOfString:locationName];
-    if (!(isHave.length)) {
-        _RegionName  = [_RegionName stringByAppendingString:[NSString stringWithFormat:@"%@ ",locationName]];
-        _RegionTF.contentString = _RegionName;
-        _lastRegionName = _RegionName;
-    }
-
-}
-
-
--(void)pramaInit {
-    _RegionName = @"";
-    
-    //装载Cell的容器
-    QFTableView_Sco *mainContent   = [[QFTableView_Sco alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth,ScreenHeight)];
-    self.main = mainContent ;
-    [self.view addSubview:mainContent];
-    
-    //UI
-    UIButton *RightBarBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 70, 27)];
-    [RightBarBtn setTitle:@"确定" forState:UIControlStateNormal];
-    [RightBarBtn addTarget:self action:@selector(FilterSureClick) forControlEvents:UIControlEventTouchUpInside];
-    [RightBarBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    RightBarBtn.titleEdgeInsets = UIEdgeInsetsMake(0, 27, 0, 0);
-    UIBarButtonItem *gripeBarBtn = [[UIBarButtonItem alloc]initWithCustomView:RightBarBtn];
-    self.navigationItem.rightBarButtonItem =gripeBarBtn;
-    
-    //房数、厅数的默认值,即当房数没填时，默认为N
-    _fangshuStr = @"N";
-    _tingshuStr = @"N";
-    _toiletsStr = @"N";
-    _balconysStr= @"N";
-
-//    //设置地址的KeyArr
-    self.AdressKeyArr =  @[@"shengfen",@"shi",@"qu",@"region"];
-    
-    
-    //其他属性
-    [self.PostDictionary setObject:@"1"    forKey:@"currentpage"];
-    [self.PostDictionary setObject:@"万元"  forKey:@"unit"];
-    [self.PostDictionary setObject:@"20"   forKey:@"sum"];
-    [self.PostDictionary setObject:@"0"    forKey:@"zhuangtai"];
-    
-}
-
--(void)updateTableData {
-    
-}
-
--(void)FilterSureClick {
-    [self FormatHouseTypeData];  //拼接上传户型的参数
-    [self FormatAdressData];     //拼接地址参赛
-  // 跳转到上一个页面，并更新数据 是这个？
-    
-    //所需参数   param //上一次用什么关键字检索的
-    /**
-     *         isFangyuan&state  //状态
-               sum               //20默认
-               fangxiang         //refresh
-       ?  //区域数据为空可以
-     */
-    //设置 求租、求售问题
-    switch (_filterStatus) {
-        case 0:
-            [self.PostDictionary setObject:@"0" forKey:@"state"];
-            [self.PostDictionary setObject:@"1" forKey:@"isfangyuan"];
-            break;
-        case 1:
-            [self.PostDictionary setObject:@"1" forKey:@"state"];
-            [self.PostDictionary setObject:@"1" forKey:@"isfangyuan"];
-            break;
-        case 2:
-            [self.PostDictionary setObject:@"1" forKey:@"state"];
-            [self.PostDictionary setObject:@"0" forKey:@"isfangyuan"];
-            break;
-        case 3:
-            [self.PostDictionary setObject:@"0" forKey:@"state"];
-            [self.PostDictionary setObject:@"1" forKey:@"isfangyuan"];
-            break;
-        default:
-            break;
-    }
-    
-    
-    //设置搜索参数
-    [self.PostDictionary setObject:_param forKey:@"param"];
-    
-    NSLog(@"上传参数:%@",_PostDictionary);
-    
-    
-    //开始网络请求
-    [MBProgressHUD showMessage:@"正在加载"];
-    NSString *basicURL = @"http://www.123qf.cn:81/testApp/seach/echoSeachFKYuanList.api";
-    AFHTTPRequestOperationManager *manger =[AFHTTPRequestOperationManager manager];
-     manger.requestSerializer.timeoutInterval  = 5.0;
-    [manger POST:basicURL parameters:_PostDictionary success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-         [MBProgressHUD hideHUD];
-         NSLog(@"列表:%@",responseObject);
-#warning 未联网不知道数据是否正确
-        int  a = (int)responseObject[@"code"];
-        if (a==19) {
-            // 有数据则，更新上一个页面的表
-            NSArray  *data = responseObject[@"data"];
-           [self.delegate updateTableWithNewDataArr:data];
-           [self.navigationController popViewControllerAnimated:YES];
-        } else {
-            UIAlertView *AW = [[UIAlertView alloc]initWithTitle:@"提示"
-                                                        message:@"在该条件下未查询到相关数据"
-                                                       delegate:self
-                                              cancelButtonTitle:@"确定"
-                                              otherButtonTitles:nil, nil];
-            
-            [AW show];
-        }
-
-    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
-        NSLog(@"");
-        [MBProgressHUD hideHUD];
-        [MBProgressHUD showError:@"网络超时，稍后尝试"];
-    }];
-}
-
--(void)textFieldDidEndEditing:(UITextField *)textField {
-    //由tag值确定内容,并保存好参数
-  //  float flag = textField.tag ;
-    NSString *TFcontentStr = textField.text;
-    NSLog(@"输入的内容%@",TFcontentStr);
-    //如果没填，就确认为N
-
-
-    
-    
-    switch (textField.tag) {
-        case fangshuTag:
-            _fangshuStr  = TFcontentStr;
-            break;
-        case tingshuTag:
-            _tingshuStr  = TFcontentStr;
-            break;
-        case toiletsTag:
-            _toiletsStr  = TFcontentStr;
-            break;
-        case balconysTag:
-            _balconysStr = TFcontentStr;
-             break;
-        case MinPriceTFTag:
-            _MinPriceStr = TFcontentStr;
-             break;
-        case MaxPriceTFTag:
-            _MaxPriceStr = TFcontentStr;
-             break;
-        case MinAcreageTFTag:
-            _MinAcreageStr = TFcontentStr;
-             break;
-        case MaxAcreageTFTag:
-            _MaxAcreageStr = TFcontentStr;
-             break;
-        default:
-            break;
-    }
-}
-
-
--(void)FormatHouseTypeData {
-    _completeHuXing = @"";
-    _completeHuXing = [NSString stringWithFormat:@"%@-%@-%@-%@",_fangshuStr,_tingshuStr,_toiletsStr,_balconysStr];
-    if ([_completeHuXing isEqualToString:@"N-N-N-N"]) {
-        return;
-    }
-    [self.PostDictionary setObject:_completeHuXing forKey:@"hucate"];
+-(void)initNav {
+    UIButton *SureBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    SureBtn.frame = CGRectMake(0, 0, 60, 33);
+    [SureBtn setTitle:@"确定" forState:UIControlStateNormal];
+    [SureBtn addTarget:self action:@selector(InnerfilterClick) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:SureBtn];
 }
 
 
 
--(void)FormatAdressData {
-    NSMutableArray *Namespart  = (NSMutableArray *)[_RegionName componentsSeparatedByString:@" "];
-    if (Namespart.count >1) {
-        [Namespart removeObject:[Namespart lastObject]];
-    }
+-(void)filterClick {
+    NSLog(@"哈哈");
     
-    if ([Namespart count]>1) {
-        int i = 0;
-        for (NSString *str in Namespart) {
-            [self.PostDictionary setObject:str forKey:self.AdressKeyArr[i++]];
-        }
-    }
+    NSString *url = @"";
+    
+    
+    //从网上获得数据
+    //    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
+    //    [mgr POST:url parameters:_QFPostDic success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+    //        self.QFNewDic = responseObject[@"data"];
+    //        //重载上一个页面的表内容
+    //        self.uptableData(_QFNewDic);
+    //        //返回上一个界面
+    //        [self.navigationController popViewControllerAnimated:YES];
+    //    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
+    //        NSLog(@"%@",error);
+    //    }];
+    
+    
+    
+    
+    self.uptableData(_QFNewDic);
+    [self.navigationController popViewControllerAnimated:YES];
 }
-
-
 @end

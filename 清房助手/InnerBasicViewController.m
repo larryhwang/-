@@ -45,6 +45,8 @@
 #import "ZuGouDetailViewController.h"
 
 
+#import "InnerResourceFilter.h"
+
 
 #import "TypesSelect.h"
 
@@ -373,7 +375,11 @@
 
 
 -(void)ConditionsFilter{
-   [MBProgressHUD showSuccess:@"建设中"];
+    //公司、个人、资源 的筛选
+
+    InnerResourceFilter *filter = [[InnerResourceFilter alloc]init];
+    [self.navigationController pushViewController:filter animated:YES];
+    
 }
 
 

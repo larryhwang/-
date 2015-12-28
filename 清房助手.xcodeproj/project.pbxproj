@@ -198,6 +198,7 @@
 		46AFDFAA1BCB84A200B49CBE /* UIView+WebCacheOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 46AFDF9A1BCB84A200B49CBE /* UIView+WebCacheOperation.m */; };
 		46B21AC61C30C48B0053AE7F /* QFDateSelectStartToEnd.m in Sources */ = {isa = PBXBuildFile; fileRef = 46B21AC41C30C48B0053AE7F /* QFDateSelectStartToEnd.m */; };
 		46B21AC71C30C48B0053AE7F /* QFDateSelectStartToEnd.xib in Resources */ = {isa = PBXBuildFile; fileRef = 46B21AC51C30C48B0053AE7F /* QFDateSelectStartToEnd.xib */; };
+		46B21ACA1C3108750053AE7F /* InnerResourceFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 46B21AC91C3108750053AE7F /* InnerResourceFilter.m */; };
 		46BB59A31C23B02E0021DCEA /* PopSeletedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 46BB59A21C23B02E0021DCEA /* PopSeletedView.m */; };
 		46BB59A61C23B2BB0021DCEA /* QFCitySwitchCellBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = 46BB59A51C23B2BB0021DCEA /* QFCitySwitchCellBtn.m */; };
 		46BB59A91C23B2F30021DCEA /* QFLocateButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 46BB59A81C23B2F30021DCEA /* QFLocateButton.m */; };
@@ -575,6 +576,8 @@
 		46B21AC31C30C48B0053AE7F /* QFDateSelectStartToEnd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QFDateSelectStartToEnd.h; sourceTree = "<group>"; };
 		46B21AC41C30C48B0053AE7F /* QFDateSelectStartToEnd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QFDateSelectStartToEnd.m; sourceTree = "<group>"; };
 		46B21AC51C30C48B0053AE7F /* QFDateSelectStartToEnd.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QFDateSelectStartToEnd.xib; sourceTree = "<group>"; };
+		46B21AC81C3108750053AE7F /* InnerResourceFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InnerResourceFilter.h; sourceTree = "<group>"; };
+		46B21AC91C3108750053AE7F /* InnerResourceFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InnerResourceFilter.m; sourceTree = "<group>"; };
 		46BB59A11C23B02E0021DCEA /* PopSeletedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopSeletedView.h; sourceTree = "<group>"; };
 		46BB59A21C23B02E0021DCEA /* PopSeletedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopSeletedView.m; sourceTree = "<group>"; };
 		46BB59A41C23B2BB0021DCEA /* QFCitySwitchCellBtn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QFCitySwitchCellBtn.h; sourceTree = "<group>"; };
@@ -731,6 +734,8 @@
 				46A5788E1C269074004423E8 /* InnerBasicViewController.h */,
 				46A5788F1C269074004423E8 /* InnerBasicViewController.m */,
 				46A5788B1C269051004423E8 /* InnerBasicViewController.xib */,
+				46B21AC81C3108750053AE7F /* InnerResourceFilter.h */,
+				46B21AC91C3108750053AE7F /* InnerResourceFilter.m */,
 			);
 			name = InnerCustromerResource;
 			sourceTree = "<group>";
@@ -1911,6 +1916,7 @@
 				46BB59A91C23B2F30021DCEA /* QFLocateButton.m in Sources */,
 				468ED0211BD5E0E5001605A7 /* SCPopView.m in Sources */,
 				4654153F1C2CCA5A003E5743 /* QFMyOrderTrackDetailVC.m in Sources */,
+				46B21ACA1C3108750053AE7F /* InnerResourceFilter.m in Sources */,
 				46714B7E1BC7C11F00E7AEE9 /* WMNavigationController.m in Sources */,
 				46BBE8CA1C0FD25C00DE4B14 /* CZKeyboardToolbar.m in Sources */,
 				4654153B1C2C5208003E5743 /* QFMyOrderTableVC.m in Sources */,

@@ -31,7 +31,7 @@
     CGFloat orignY = 12;
     
 
-    
+    //增加Cell后，重置所有Cell
     [_Cell_NSArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         [(UIView *)obj setFrame:CGRectMake(0, orignY + (Padding + CellHeight) * idx ,ScreenWidth, CellHeight)];
         [self addSubview:obj];
