@@ -461,7 +461,6 @@
 //    //设置地址的KeyArr
     self.AdressKeyArr =  @[@"shengfen",@"shi",@"qu",@"region"];
     
-    
     //其他属性
     [self.PostDictionary setObject:@"1"    forKey:@"currentpage"];
     [self.PostDictionary setObject:@"万元"  forKey:@"unit"];

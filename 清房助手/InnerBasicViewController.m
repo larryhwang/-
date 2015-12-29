@@ -92,7 +92,7 @@
 }
 
 -(id)initWithUrl:(NSString *)CurrentTableUrl;{
-        self = [super init];
+    self = [super init];
     UIButton *RightBarBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 65, 27)];
     UIImageView *img = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"筛选"]];
     [img setFrame:CGRectMake(0, 0, 27, 27)];
@@ -140,11 +140,6 @@
     [self LoadNetDataWithCurentURl];
     [self setUpCheckBtn];
     self.edgesForExtendedLayout = UIRectEdgeNone ;
-    
-
-    
-    
-
 }
 
 
