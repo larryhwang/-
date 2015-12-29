@@ -6,6 +6,17 @@
 //  Copyright © 2015 HuiZhou S&F NetworkTechCo.,Ltd . All rights reserved.
 //
 
+
+/**
+ 
+ 1-u  0个人房源出售 1个人房源出租     state ＝ 0 为售  ／1为租
+ 1-c  0公司房源出售  1公司房源出租
+ 
+ *  接口说明
+ *    1.租售   isfangyuan =1-c  &state=0  //表示公司房源出售
+ *            isfangyuan =1-c  &state=1       //表示公司房源出租  以此类推全部筛选状态
+ */
+
 #import "InnerResourceFilter.h"
 #import "EditCell.h"
 #import "FormCellInMutiTast.h"
@@ -43,13 +54,41 @@
 #define toiletsTag      170
 #define balconysTag     180
 
-@interface InnerResourceFilter() <UITextFieldDelegate>
+@interface InnerResourceFilter() <UITextFieldDelegate,SelectRegionDelegate> {
+    NSString   *_RegionName;
+    NSString   *_lastRegionName;
+    
+    NSString   *_completeHuXing;
+    
+    
+    NSString *_fangshuStr;
+    NSString *_tingshuStr;
+    NSString *_toiletsStr;
+    NSString *_balconysStr;
+    
+    
+    
+
+    
+    
+    NSString *_MinPriceStr;
+    NSString *_MaxPriceStr;
+    
+    NSString *_MinAcreageStr;
+    NSString *_MaxAcreageStr;
+    
+
+    NSString *_shengfen;
+    NSString *_shi;
+    NSString *_qu;
+    NSString *_region;
+    
+
+}
 
 @property(nonatomic,strong)  NSDictionary  *QFNewDic;
-@property(nonatomic,strong)  NSMutableDictionary  *QFPostDic;
 @property(nonatomic,weak)    EditCell *RegionTF;
-@property(nonatomic,weak)   QFTableView_Sco *main;
-
+@property(nonatomic,weak)    QFTableView_Sco *main;
 @property(nonatomic,strong)  NSMutableDictionary  *PostDictionary;
 @property(nonatomic,strong)  NSArray  *AdressKeyArr;
 
@@ -88,9 +127,34 @@
 
 
 -(void)pramaInit {
+    
+    
+    _RegionName = @"";
+    _lastRegionName = @"";
+    
+    
+    
+    //房数、厅数的默认值,即当房数没填时，默认为N
+    _fangshuStr = @"N";
+    _tingshuStr = @"N";
+    _toiletsStr = @"N";
+    _balconysStr= @"N";
+    
+    
+    
+    //先确定一个参数，从哪里搜索
+   [self.PostDictionary setObject:_QFPramaIsFangyuan forKey:@"isfangyuan"];
+    
     QFTableView_Sco *mainContent   = [[QFTableView_Sco alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth,ScreenHeight)];
     self.main = mainContent ;
     [self.view addSubview:mainContent];
+    
+    
+    
+    [self.PostDictionary setObject:@"1"    forKey:@"currentpage"];
+    [self.PostDictionary setObject:@"万元"  forKey:@"unit"];
+    [self.PostDictionary setObject:@"20"   forKey:@"pagecount"];
+    [self.PostDictionary setObject:@"0"    forKey:@"zhuangtai"];
     
     
     UIButton *RightBarBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 70, 27)];
@@ -105,13 +169,21 @@
 
 -(void)cellSetting {
     //租购
+#warning 未处理上传字段  isFangyuan
     EditCell *Zougou = [[EditCell alloc]init];
     Zougou.isOptionalCell = YES ;
-    Zougou.title = @"电梯:";
+    Zougou.title = @"租售:";
     Zougou.placeHoderString = @"不限";
     Zougou.otherAction =^{
         PopSelectViewController *select = [[PopSelectViewController alloc]init];
-        NSArray *Optdata  = [NSArray arrayWithObjects:@"求租",@"求售",@"不限",nil];
+        NSArray *Optdata = NULL;
+        NSRange range = [_QFPramaIsFangyuan rangeOfString:@"0"];
+        if(range.length){
+          Optdata  = [NSArray arrayWithObjects:@"求租",@"求售",@"不限",nil];
+        }else {
+          Optdata  = [NSArray arrayWithObjects:@"出租",@"出售",@"不限",nil];
+        }
+
         select.pikerDataArr = Optdata;
         select.providesPresentationContextTransitionStyle = YES;
         select.definesPresentationContext = YES;
@@ -126,16 +198,14 @@
         };  //取消
         select.SureBtnAciton    =^(NSString *passString) {
             int a;
-            
-            if ([passString isEqualToString:@"求租"]) {
-                a = 1;
-                [self.PostDictionary setObject:[NSNumber numberWithInt:1] forKey:@"dianti"];
-            } else if([passString isEqualToString:@"求购"]){
-                [self.PostDictionary setObject:[NSNumber numberWithInt:0] forKey:@"dianti"];
-            } else {
-                //  [self.PostDictionary setObject:@"" forKey:@"dianti"]; //不限
+            NSRange shou = [passString rangeOfString:@"售"];
+            NSRange zu   = [passString rangeOfString:@"租"];
+            if (shou.length) {
+                a = 0;
+                [self.PostDictionary setObject:@"0" forKey:@"state"];
+            } else if(zu.length) {
+                [self.PostDictionary setObject:@"1" forKey:@"state"];
             }
-            
             
             Zougou.contentString = passString;
         };
@@ -152,6 +222,7 @@
     //区域选择可以不限
     RegionOption.otherAction = ^(){
         NSLog(@"区域选项!");
+        
         SelectRegionVC *selectRegion = [SelectRegionVC new];
         AppDelegate *app = [UIApplication sharedApplication].delegate;
         selectRegion.indexData = app.provnceIndexDic;
@@ -192,6 +263,7 @@
                 RoomStyle.title = @"户型:";
                 
                 UITextField  *RoomTextfield = [[UITextField alloc]initWithFrame:CGRectMake(90, 0, 40, 50)];
+                RoomTextfield.delegate = self;
                 RoomTextfield.tag = fangshuTag;
                 [RoomStyle addSubview:RoomTextfield];
                 UILabel *RoomLabel = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(RoomTextfield.frame)+5, 0, 20, 50)];
@@ -200,6 +272,7 @@
                 [RoomStyle addSubview:RoomLabel];
                 
                 UITextField *TingTextfield = [[UITextField alloc]initWithFrame:CGRectMake(CGRectGetMaxX(RoomLabel.frame)-5, 0, 35, 50)];
+                TingTextfield.delegate = self;
                 [RoomStyle addSubview:TingTextfield];
                 TingTextfield.tag = tingshuTag;
                 UILabel *TingLabel = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(TingTextfield.frame), 0, 20, 50)];
@@ -208,6 +281,7 @@
                 [RoomStyle addSubview:TingLabel];
                 
                 UITextField *WeiTextfield = [[UITextField alloc]initWithFrame:CGRectMake(CGRectGetMaxX(TingLabel.frame), 0, 30, 50)];
+                WeiTextfield.delegate = self;
                 [RoomStyle addSubview:WeiTextfield];
                 WeiTextfield.tag = toiletsTag;
                 UILabel *WeiLabel = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(WeiTextfield.frame), 0, 20, 50)];
@@ -216,6 +290,7 @@
                 [RoomStyle addSubview:WeiLabel];
                 
                 UITextField *YangTaiTextfield = [[UITextField alloc]initWithFrame:CGRectMake(CGRectGetMaxX(WeiLabel.frame), 0, 30, 50)];
+                YangTaiTextfield.delegate = self;
                 [RoomStyle addSubview:YangTaiTextfield];
                 YangTaiTextfield.tag = balconysTag;
                 UILabel *YangTaiLabel = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(YangTaiTextfield.frame), 0, 40, 50)];
@@ -242,7 +317,7 @@
                 [self removeCellWithTag:RoomStyleCellTag];
                 
             }
-            [self.PostDictionary setObject:[NSNumber numberWithInt:typeInt] forKey:@"yongtu"];
+            [self.PostDictionary setObject:[NSNumber numberWithInt:typeInt] forKey:@"fenlei"];
             HouseType.contentString = passString;
         };
         [self presentViewController:select animated:YES completion:nil];
@@ -259,7 +334,7 @@
     PriceRange.placeHoderString = @"不限";
     PriceRange.otherAction =^{
         PopSelectViewController *select = [[PopSelectViewController alloc]init];
-        NSArray *Optdata  = [NSArray arrayWithObjects:@"20-30",@"30-50",@"50-80",@"自定义",@"不限",nil];
+        NSArray *Optdata  = [NSArray arrayWithObjects:@"20-30",@"30-60",@"60-80",@"80以上",@"自定义",@"不限",nil];
         select.pikerDataArr = Optdata;
         select.providesPresentationContextTransitionStyle = YES;
         select.definesPresentationContext = YES;
@@ -309,11 +384,13 @@
                 if ([passString isEqualToString:@"不限"]) {
                     //   [self.PostDictionary setObject:@"" forKey:@"price"];
                 }else {
-                    [self.PostDictionary setObject:passString forKey:@"price"];
+                    //自己截取最大值和最低值
+                    [self getMaxAndMinPrice:passString];
+                    [self.PostDictionary setObject:_MinPriceStr forKey:@"fprice"];
+                    [self.PostDictionary setObject:_MaxPriceStr forKey:@"lprice"];
                     [self removeCellWithTag:CustomPriceCellTag];
                 }
             }
-            
             PriceRange.contentString = passString;
         };
         [self presentViewController:select animated:YES completion:nil]; };
@@ -328,7 +405,7 @@
     AcreageCell.placeHoderString = @"不限";
     AcreageCell.otherAction =^{
         PopSelectViewController *select = [[PopSelectViewController alloc]init];
-        NSArray *Optdata  = [NSArray arrayWithObjects:@"20-30",@"30-50",@"50-100",@"不限",@"自定义",nil];
+        NSArray *Optdata  = [NSArray arrayWithObjects:@"60-90",@"90-120",@"120以上",@"不限",@"自定义",nil];
         select.pikerDataArr = Optdata;
         select.providesPresentationContextTransitionStyle = YES;
         select.definesPresentationContext = YES;
@@ -378,10 +455,14 @@
                 if([passString isEqualToString:@"不限"]) {
                     // [self.PostDictionary setObject:@"" forKey:@"mianji"];
                 } else {
-                    [self.PostDictionary setObject:passString forKey:@"mianji"];
+                    //自己截取最大值和最小值
+                    [self getMaxAndMinArea:passString];
+                    
+                    
+                    [self.PostDictionary setObject:_MinAcreageStr forKey:@"fmianji"];
+                    [self.PostDictionary setObject:_MaxAcreageStr forKey:@"lmianji"];
                     [self removeCellWithTag:AcreageCellTag];
                 }
-                
             }
             AcreageCell.contentString = passString;
         };
@@ -420,8 +501,6 @@
             } else {
                 //  [self.PostDictionary setObject:@"" forKey:@"dianti"]; //不限
             }
-            
-            
             LiftCell.contentString = passString;
         };
         [self presentViewController:select animated:YES completion:nil]; };
@@ -429,6 +508,48 @@
     
     
 }
+
+//http://www.123qf.cn:81/testApp/fkyuan/companyFKyuan.api
+
+-(void)getMaxAndMinPrice:(NSString *)str {
+   // @"20-30",@"30-60",@"60-80",@"80以上
+    
+    if ([str isEqualToString:@"20-30"]) {
+        _MinPriceStr = @"20";
+        _MaxPriceStr = @"30";
+    }else if ([str isEqualToString:@"30-60"]) {
+        _MinPriceStr = @"30";
+        _MaxPriceStr = @"60";
+    }else if ([str isEqualToString:@"60-80"]) {
+        _MinPriceStr = @"60";
+        _MaxPriceStr = @"80";
+    }else {
+        _MinPriceStr = @"80";
+    }
+}
+
+
+-(void)getMaxAndMinArea:(NSString *) str {
+//    "60-90",@"90-120",@"120以上"
+    /**
+     *      NSString *_MinAcreageStr;
+     NSString *_MaxAcreageStr;
+     */
+    
+    if ([str isEqualToString:@"60-90"]) {
+         _MinAcreageStr = @"60";
+         _MaxAcreageStr = @"90";
+    } else if ([str isEqualToString:@"90-120"]) {
+         _MinAcreageStr = @"90";
+         _MaxAcreageStr = @"120";
+    }else {
+         _MinAcreageStr = @"120";
+    }
+    
+    
+#warning 面积无上限问题是一个隐藏BUG
+}
+
 
 /**
  *  在一个Cell之后，再添加一个Cell
@@ -465,10 +586,6 @@
 
 
 -(void)initNav {
-
-    
-    
-    
     UIBarButtonItem *backItem = [[UIBarButtonItem alloc] init];
     backItem.title = @"";
     self.navigationItem.backBarButtonItem = backItem;
@@ -477,12 +594,21 @@
 
 
 -(void)filterClick {
-    NSLog(@"哈哈");
-    NSString *url = @"";
+    NSLog(@"筛选");
+    NSString *url = @"http://www.123qf.cn:81/testApp/fkyuan/companyFKyuan.api";
+
+    //拼接参数
+    
+    
+    [self FormatHouseTypeData]; //户型参数拼接
+    [self FormatAdressData];   //地址参数拼接
+    NSLog(@"参数:%@",_PostDictionary);
+    
  //   从网上获得数据
         AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
-        [mgr POST:url parameters:_QFPostDic success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-            self.QFNewDic = responseObject[@"data"];
+        [mgr POST:url parameters:_PostDictionary success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+            NSLog(@"内部新 : %@",responseObject);
+            self.QFNewDic = responseObject;
             //重载上一个页面的表内容
             self.uptableData(_QFNewDic);
             //返回上一个界面
@@ -491,4 +617,93 @@
             NSLog(@"%@",error);
         }];
 }
+
+
+
+#pragma mark -参数拼接的方法
+
+-(void)appendName:(NSString *)locationName {
+    //避免重复
+    NSRange isHave = [_lastRegionName rangeOfString:locationName];
+    if (!(isHave.length)) {  //若当前区域不含选中区域的
+        _RegionName  = [_RegionName stringByAppendingString:[NSString stringWithFormat:@"%@ ",locationName]];
+        _RegionTF.contentString = _RegionName;
+        _lastRegionName = _RegionName;
+    }
+}
+
+
+
+
+-(void)FormatHouseTypeData {
+    _completeHuXing = @"";
+    _completeHuXing = [NSString stringWithFormat:@"%@-%@-%@-%@",_fangshuStr,_tingshuStr,_toiletsStr,_balconysStr];
+    if ([_completeHuXing isEqualToString:@"N-N-N-N"]) {
+        return;
+    }
+    [self.PostDictionary setObject:_completeHuXing forKey:@"hucate"];
+}
+
+
+
+-(void)FormatAdressData {
+    NSMutableArray *Namespart  = (NSMutableArray *)[_RegionName componentsSeparatedByString:@" "];
+    if (Namespart.count >1) {
+        [Namespart removeObject:[Namespart lastObject]];
+    }
+    
+    if ([Namespart count]>1) {
+        int i = 0;
+        for (NSString *str in Namespart) {
+            [self.PostDictionary setObject:str forKey:self.AdressKeyArr[i++]];
+        }
+    }
+}
+
+
+
+
+-(void)textFieldDidEndEditing:(UITextField *)textField {
+    //由tag值确定内容,并保存好参数
+    //  float flag = textField.tag ;
+    NSString *TFcontentStr = textField.text;
+    NSLog(@"输入的内容%@",TFcontentStr);
+    //如果没填，就确认为N
+    
+    
+    
+    //户型参数保留
+    switch (textField.tag) {
+        case fangshuTag:
+            _fangshuStr  = TFcontentStr;
+            break;
+        case tingshuTag:
+            _tingshuStr  = TFcontentStr;
+            break;
+        case toiletsTag:
+            _toiletsStr  = TFcontentStr;
+            break;
+        case balconysTag:
+            _balconysStr = TFcontentStr;
+            break;
+        case MinPriceTFTag:
+            _MinPriceStr = TFcontentStr;
+            break;
+        case MaxPriceTFTag:
+            _MaxPriceStr = TFcontentStr;
+            break;
+        case MinAcreageTFTag:
+            _MinAcreageStr = TFcontentStr;
+            break;
+        case MaxAcreageTFTag:
+            _MaxAcreageStr = TFcontentStr;
+            break;
+        default:
+            break;
+    }
+}
+
+
+
+
 @end

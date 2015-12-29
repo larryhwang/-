@@ -663,9 +663,10 @@
 
 
 -(void)dealloc {
+    
  self.scrollView3.delegate = nil;
  self.detailInfoTable.delegate = nil;
-
+    
 }
 
 @end

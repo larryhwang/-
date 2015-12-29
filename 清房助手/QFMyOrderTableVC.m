@@ -66,8 +66,6 @@
 -(void)RightBtnClick {
     QFOrderFilter *filter = [[QFOrderFilter alloc]init];
     filter.uptableData = ^(NSDictionary *dic) {
-       //截取到新的数组
-        NSLog(@"嘻嘻哈哈:%@",dic);
         self.QFSingleCellData_Arr = dic[@"data"];
         [self.QFMyOrderTable reloadData];
     };
@@ -79,9 +77,7 @@
     AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
     NSString *url = @"http://www.123qf.cn:81/testApp/integrateFindByUser.api?page=1";
     [mgr POST:url parameters:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
-        NSLog(@"%@",responseObject);
-        self.QFSingleCellData_Arr = responseObject[@"data"];
-        NSLog(@"%@",self.QFSingleCellData_Arr);
+       self.QFSingleCellData_Arr = responseObject[@"data"];
        [self.QFMyOrderTable reloadData];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"%@",error);

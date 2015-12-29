@@ -233,7 +233,6 @@ static const CGFloat menuStartNarrowRatio  = 0.70;
     InnerTabBarController *innerTabarVC_FANG =[[InnerTabBarController alloc]initWithTabBarType:FangYuan];
     [self showHome];
     KeyWindow.rootViewController = innerTabarVC_FANG;
-   
 }
 
 

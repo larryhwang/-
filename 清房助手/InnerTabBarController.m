@@ -45,14 +45,14 @@
          _LeftListUrl  = @"http://www.123qf.cn:81/testApp/fkyuan/companyFKyuan.api?isfangyuan=1-c";
         
         //个人房源
-         _RightListUrl = @"http://www.123qf.cn:81/testApp/fkyuan/companyFKyuan.api?isfangyuan=1-c";
+         _RightListUrl = @"http://www.123qf.cn:81/testApp/fkyuan/companyFKyuan.api?isfangyuan=1-u";
     } else {
          // 公司客源
           _LeftListUrl  = @"http://www.123qf.cn:81/testApp/fkyuan/companyFKyuan.api?isfangyuan=0-c";
        
           // 个人客源
           _RightListUrl = @"http://www.123qf.cn:81/testApp/fkyuan/companyFKyuan.api?isfangyuan=0-u";
-        // 个人客源
+
 
     }
 

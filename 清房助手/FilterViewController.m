@@ -92,6 +92,7 @@
     return _PostDictionary;
 }
 
+
 -(NSArray*)AdressKeyArr {
     if (_AdressKeyArr ==nil) {
         _AdressKeyArr = [NSArray new];
@@ -172,6 +173,7 @@
                 
                 UITextField  *RoomTextfield = [[UITextField alloc]initWithFrame:CGRectMake(90, 0, 40, 50)];
                 RoomTextfield.tag = fangshuTag;
+                RoomTextfield.delegate = self;
                 [RoomStyle addSubview:RoomTextfield];
                 UILabel *RoomLabel = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(RoomTextfield.frame)+5, 0, 20, 50)];
                 [RoomLabel setTextColor:[UIColor lightGrayColor]];
@@ -179,6 +181,7 @@
                 [RoomStyle addSubview:RoomLabel];
                 
                 UITextField *TingTextfield = [[UITextField alloc]initWithFrame:CGRectMake(CGRectGetMaxX(RoomLabel.frame)-5, 0, 35, 50)];
+                TingTextfield.delegate = self;
                 [RoomStyle addSubview:TingTextfield];
                 TingTextfield.tag = tingshuTag;
                 UILabel *TingLabel = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(TingTextfield.frame), 0, 20, 50)];
@@ -187,6 +190,7 @@
                 [RoomStyle addSubview:TingLabel];
                 
                 UITextField *WeiTextfield = [[UITextField alloc]initWithFrame:CGRectMake(CGRectGetMaxX(TingLabel.frame), 0, 30, 50)];
+                WeiTextfield.delegate = self;
                 [RoomStyle addSubview:WeiTextfield];
                 WeiTextfield.tag = toiletsTag;
                 UILabel *WeiLabel = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(WeiTextfield.frame), 0, 20, 50)];
@@ -195,6 +199,7 @@
                 [RoomStyle addSubview:WeiLabel];
                 
                 UITextField *YangTaiTextfield = [[UITextField alloc]initWithFrame:CGRectMake(CGRectGetMaxX(WeiLabel.frame), 0, 30, 50)];
+                YangTaiTextfield.delegate = self ;
                 [RoomStyle addSubview:YangTaiTextfield];
                 YangTaiTextfield.tag = balconysTag;
                 UILabel *YangTaiLabel = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(YangTaiTextfield.frame), 0, 40, 50)];
@@ -217,7 +222,6 @@
                     typeInt =3;   //厂房
                 }
                 //typeInt
-   
                 [self removeCellWithTag:RoomStyleCellTag];
                 
             }
@@ -428,7 +432,6 @@
         _RegionTF.contentString = _RegionName;
         _lastRegionName = _RegionName;
     }
-
 }
 
 
@@ -475,7 +478,6 @@
     [self FormatHouseTypeData];  //拼接上传户型的参数
     [self FormatAdressData];     //拼接地址参赛
   // 跳转到上一个页面，并更新数据 是这个？
-    
     //所需参数   param //上一次用什么关键字检索的
     /**
      *         isFangyuan&state  //状态

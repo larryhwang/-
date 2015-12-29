@@ -12,5 +12,5 @@
 
 
 @property(nonatomic,copy) void (^uptableData)( NSDictionary *newDic);
-
+@property(nonatomic,copy) NSString *QFPramaIsFangyuan;
 @end

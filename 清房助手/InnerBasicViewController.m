@@ -59,7 +59,7 @@
     NSString   *_RightListUrl;
     NSString   *_CurentUrl;
 }
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic)  IBOutlet UITableView *tableView;
 @property(nonatomic,strong)  AFHTTPRequestOperationManager            *shareMgr;
 @property(nonatomic,strong)  NSMutableDictionary                      *pramaDic;
 @property(nonatomic,strong)  NSArray                                 *DataArr;
@@ -94,8 +94,6 @@
 -(id)initWithUrl:(NSString *)CurrentTableUrl;{
         self = [super init];
     UIButton *RightBarBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 65, 27)];
-    NSLog(@"QIAN ：rightBtn : %@", RightBarBtn);
-    NSLog(@"NavController:%@",self.navigationController);
     UIImageView *img = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"筛选"]];
     [img setFrame:CGRectMake(0, 0, 27, 27)];
     [RightBarBtn addSubview:img];
@@ -105,7 +103,6 @@
     RightBarBtn.titleEdgeInsets = UIEdgeInsetsMake(0, 27, 0, 0);
     UIBarButtonItem *gripeBarBtn = [[UIBarButtonItem alloc]initWithCustomView:RightBarBtn];
     self.navigationItem.rightBarButtonItem =gripeBarBtn;
-    NSLog(@"HOU ：rightBtn : %@", self.navigationItem.rightBarButtonItem);
     
     //导航栏颜色
     self.navigationController.navigationBar.barTintColor = [DeafaultColor2 colorWithAlphaComponent:0.5];
@@ -123,10 +120,8 @@
     
     //搜索
     TableViewController *tableVC = [[TableViewController alloc] initWithStyle:UITableViewStylePlain];
-    NSLog(@"tableVC:%@",tableVC);
     self.ResultTableView = tableVC;
     _searchVC = [[UISearchController alloc]initWithSearchResultsController:tableVC];
-    NSLog(@"_searchVC:%@",_searchVC);
     _searchVC.searchResultsUpdater = tableVC;
     _searchVC.hidesNavigationBarDuringPresentation = NO;
     [_searchVC.searchBar sizeToFit];
@@ -145,6 +140,8 @@
     [self LoadNetDataWithCurentURl];
     [self setUpCheckBtn];
     self.edgesForExtendedLayout = UIRectEdgeNone ;
+    
+
     
     
 
@@ -205,8 +202,13 @@
 #pragma mark TableMethodDelegate
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-  //  return 15;
-       return self.DataArr.count;
+   
+    if (self.DataArr ==nil) {
+        return 0;
+    }
+    NSLog(@"数组 :%@",self.DataArr);
+    
+    return self.DataArr.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -381,11 +383,30 @@
     
     filter.uptableData = ^ (NSDictionary *dic) {
         //接受新的数据
-        self.DataArr = dic[@""];
+        
+        if (dic[@"msg"]) {
+            self.DataArr  =@[]; //检索不到数据的情况下，将数组清空
+            [self.tableView reloadData];  //重载数据
+            return ;
+        }
+        
+        self.DataArr = dic[@"data"];
         [self.tableView reloadData];  //重载数据
     };
     
     filter.title = @"分类";
+
+    
+    
+    
+    NSInteger a = [_CurentUrl length] - 3;
+    
+   NSString *str = [_CurentUrl substringFromIndex:a];
+    
+    filter.QFPramaIsFangyuan  = str;
+    
+    NSLog(@" FUCK : %@",str);
+    
     [self.navigationController pushViewController:filter animated:YES];
     
 }
