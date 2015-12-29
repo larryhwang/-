@@ -278,10 +278,6 @@
                                     [self judgeNullValue: SingleData[@"tingshu"]],
                                     [self judgeNullValue: SingleData[@"toilets"]],
                                     [self judgeNullValue: SingleData[@"balconys"]]];//@"%@室%@厅%阳台";
-        
-        
-        
-        
         cell.attachmentLabel.text =@"   ";
         cell.requestDescrbeLabel.text = [self judgeNullValue:SingleData[@"fangyuanmiaoshu"]];   // @"阳光采光要好";
         cell.priceLabel.text = PriceString;//@"110万";

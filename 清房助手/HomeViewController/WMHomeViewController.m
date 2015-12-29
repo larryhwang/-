@@ -23,7 +23,7 @@
 #import <PgySDK/PgyManager.h>
 #import <PgyUpdate/PgyUpdateManager.h>
 
-
+#import "HomeCitySelecVC.h"
 
 #import "ZuGouDetailCell.h"
 #import "KeyuanCell.h"
@@ -53,11 +53,23 @@
 @property(nonatomic,copy)    NSString                          *userID;
 @property(nonatomic,assign)  CellStatus                        status;
 @property(nonatomic,copy)    NSString                          *CurrentRuest;
-@property(nonatomic,strong)  NSDictionary                      *pramaDic;
+@property(nonatomic,strong)  NSMutableDictionary                      *pramaDic;
 @property(nonatomic,weak)    TableViewController               *ResultTableView;
 
 @property(nonatomic,strong)  NSMutableArray  *LocationNameDicPartOne_NSarr;
 @property(nonatomic,strong)  NSMutableArray  *LocationNameDicPartTwo_NSarr;
+
+
+/**
+ *  城市下拉选择按钮
+ */
+@property(nonatomic,weak) QFTitleButton *NavSeacherBtn;
+
+
+/**
+ *  当前城市名
+ */
+@property(nonatomic,copy) NSString *nowCityName;
 
 
 
@@ -68,9 +80,9 @@
 
 
 
--(NSDictionary *)pramaDic {
+-(NSMutableDictionary *)pramaDic {
     if (_pramaDic ==nil) {
-        _pramaDic = [NSDictionary new];
+        _pramaDic = [NSMutableDictionary new];
     }
     return _pramaDic;
 }
@@ -126,13 +138,13 @@
     [IconBtn addTarget:self action:@selector(clicked) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:IconBtn];
     
-    
     QFTitleButton *CityBtn = [[QFTitleButton alloc]init];
+    self.NavSeacherBtn = CityBtn;
     CityBtn.backgroundColor = [UIColor clearColor];
     CityBtn.tintColor = [UIColor whiteColor];
     [CityBtn setImage:[UIImage imageNamed:@"arrowDown"] forState:UIControlStateNormal];
     [CityBtn setTitle:@"惠州" forState:UIControlStateNormal];
-    CityBtn.frame = CGRectMake(0, 0,60,23);
+    CityBtn.frame = CGRectMake(0, 0,95,23);
     [CityBtn addTarget:self action:@selector(CitySelect) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:CityBtn];
 
@@ -173,33 +185,144 @@
     self.tableView.dataSource = self;
     _popStatus = NO ; //初始时，处于不弹窗状态
     AFHTTPRequestOperationManager *mgr  = [AFHTTPRequestOperationManager manager];
-     mgr.requestSerializer.timeoutInterval  = 5.0;
+    mgr.requestSerializer.timeoutInterval  = 5.0;
     self.shareMgr = mgr ;
 }
-
-
+/**
+ *  获取地名，用于筛选
+ */
 -(void)localNameGet {
     NSString *url = @"http://www.123qf.cn:81/testApp/area/selectArea.api?parentid=4413";  //惠州市
     AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
     [mgr POST:url parameters:nil success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-        NSLog(@"地点:%@",responseObject);
+       NSLog(@"地点:%@",responseObject);
+       NSLog(@"1JJ：%@",self.LocationNameDic_NSArr);
         NSArray *ar = responseObject[@"data"];
         self.LocationNameDicPartOne_NSarr = [NSMutableArray arrayWithArray:ar];
+        NSLog(@"2JJ：%@",self.LocationNameDic_NSArr);
         NSDictionary *firstDic =@{
-                                  @"name":@"全市",
+                                  @"name":@"全市区",
                                   @"code":@"0000",  //此处不详
                                   };
         [(NSMutableArray *)self.LocationNameDic_NSArr insertObject:firstDic atIndex:0];
+        
+        
+        NSLog(@"3 JJ：%@",self.LocationNameDic_NSArr);
         _popView.LocationNameDicPartOne_NSarr =  self.LocationNameDic_NSArr;
-        [_popView layoutSectionA];
-
-        
-        
+       [_popView layoutSectionA];
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         NSLog(@"%@",error);
         [MBProgressHUD showError:@"网络超时，稍后尝试"];
     }];
 }
+
+- (void)clicked {
+    
+    if (_popStatus) {
+        [self popViewHide];
+    }
+    
+    if ([self.HomeVCdelegate respondsToSelector:@selector(leftBtnClicked)]) {
+        [self.HomeVCdelegate leftBtnClicked];
+    }
+    
+}
+
+-(void)CitySelect {
+    //区域筛选 弹窗
+    NSLog(@"hi ,pop");
+    if (!_popStatus) {
+        [self popViewMoveOut];
+    } else {
+        [self popViewHide];
+    }
+}
+
+-(void)popViewMoveOut {
+    [UIView animateWithDuration:.5 animations:^{
+        _popView.hidden = NO;
+        [_popView setFrame:_popView.popViewDispRect];
+    } completion:^(BOOL finished) {
+        _popStatus = YES;
+    }];
+}
+
+-(void)popViewHide {
+    [UIView animateWithDuration:.5 animations:^{
+        [_popView setFrame:_popView.popViewOriginRect];
+        _popStatus = NO;
+    } completion:^(BOOL finished) {
+        _popView.hidden = YES;
+    }];
+}
+
+#pragma mark 弹窗代理
+-(void)popViewCitySwitchClick {
+    [self popViewHide];
+    //获取省份
+    HomeCitySelecVC *selet = [[HomeCitySelecVC alloc]init];
+    
+    
+    //拿到新的城市要做的事情
+    selet.updateCityOptionsWithDic = ^(NSDictionary *dic ,NSString *proName, NSString *cityName) {
+        NSLog(@"更新要的DIC : %@",dic);
+        self.nowCityName  = dic[@"name"];
+        _popView.nowCityName = self.nowCityName;
+        NSString *code = dic[@"code"];
+        //这里只更改部分 请求参数信息
+        NSLog(@"更改前:%@",self.pramaDic);
+        //更新用于请求展示表列表的参数
+        if (proName==nil) {  //如果第一级即传来市,则不赋值，且删掉之前的省份-key
+            [self.pramaDic removeObjectForKey:@"shengfen"];
+        } else {
+            [self.pramaDic setObject:proName  forKey:@"shengfen"];
+        }
+        
+            [self.pramaDic setObject:cityName forKey:@"shi"];
+        NSString *url = [NSString stringWithFormat:@"http://www.123qf.cn:81/testApp/area/selectArea.api?parentid=%@",code];
+         NSLog(@"更改后:%@",self.pramaDic);
+        
+
+        //更新标题
+        [self.NavSeacherBtn setTitle:_nowCityName forState:UIControlStateNormal];
+        
+        //重新布局布局弹窗内的地方按钮
+        [self.shareMgr POST:url parameters:nil success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+             //数组赋值
+            
+            
+            
+            NSArray *ar = responseObject[@"data"];
+            self.LocationNameDicPartOne_NSarr = [NSMutableArray arrayWithArray:ar];
+            NSLog(@"2JJ：%@",self.LocationNameDic_NSArr);
+            NSDictionary *firstDic =@{
+                                      @"name":@"全市区",
+                                      @"code":@"0000",  //此处不详
+                                      };
+            
+            [(NSMutableArray *)self.LocationNameDic_NSArr insertObject:firstDic atIndex:0]; // 这个实际上是 LocationNameDicPartOne_NSarr
+            _popView.LocationNameDicPartOne_NSarr = self.LocationNameDicPartOne_NSarr;
+            
+            [_popView layoutSectionA];
+            
+            [self LoadNetDataWithCurentURl];
+            //额外的动作 ?
+        } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
+            NSLog(@"%@",error);
+        }];
+    };
+    
+    
+    //获取城市省份
+     NSString *url = @"http://www.123qf.cn:81/testApp/area/selectArea.api?parentid=0";
+     [self.shareMgr POST:url parameters:nil success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+     selet.QFProvinces_Arr = responseObject[@"data"];
+     [self.navigationController pushViewController:selet animated:YES];
+    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
+       NSLog(@"%@",error);
+    }];
+}
+
 
 #warning 顶部TabBar切换部分
 - (void)TopTabBarUISet {
@@ -259,55 +382,47 @@
         self.ResultTableView.searchStyle  =_status;
          NSLog(@"当前状态%d",_status);
         _CurrentRuest =@"http://www.123qf.cn:81/testApp/fangyuan/rentalOrBuyHouseSearch.api";
-        //这个参数是默认初始化的字典，其他参数说明
-        /*
-           currentpage  当前页
-           sum     每次最多能返回的条数
-           zushou  0 出售   ／1 出租
-           zhuangtai  ? 弃用
-         
-           shengfen   省份
-           shi        城市
-            qu        区
-           region     街
-         
-         */
-        
-        //zushou: 0  出售
-        //zushou: 1  出租
-        //        parameters set
         
         
         
-        NSMutableDictionary *parameters =(NSMutableDictionary *)@{
-                                    @"sum":@"20",
-                                    @"zushou":@"0",
-                                    @"shengfen":@"广东省",
-                                    @"shi":@"惠州市",
-                                    @"currentpage" :@"1"};
-        self.pramaDic = parameters;
+        NSMutableDictionary *parameters = [NSMutableDictionary new];
+        if(_pramaDic ==nil) {  //即初始化
+            NSDictionary *dict = @{
+                                   @"sum":@"20",
+                                   @"zushou":@"0",
+                                   @"shengfen":@"广东省",
+                                   @"shi":@"惠州市",
+                                   @"currentpage" :@"1"};
+            [parameters setValuesForKeysWithDictionary:dict];
+             self.pramaDic = parameters;
+
+        }
+       
+       
+        [self.pramaDic setObject:@"20" forKey:@"sum"];
+        [self.pramaDic setObject:@"0" forKey:@"zushou"];
+        [self.pramaDic setObject:@"1" forKey:@"currentpage"];
+
+        
+        
+        
+
         
         
     }else {
          _status = WantBuy;
          self.ResultTableView.searchStyle  =_status;
-
-  _CurrentRuest = @"http://www.123qf.cn:81/testApp/keyuan/rentalOrBuyHouseSearch.api?sum=20&zugou=1&currentpage=1";
-//        http://www.123qf.cn:81/testApp/fangyuan/rentalOrBuyHouseSearch.api?sum=20&zushou=0&shengfen=%E5%B9%BF%E4%B8%9C%E7%9C%81&currentpage=1
-//        http://www.123qf.cn:81/testApp/keyuan/rentalOrBuyHouseSearch.api?sum=20&zugou=1&shengfen%20=%E5%B9%BF%E4%B8%9C%E7%9C%81&currentpage=1
+        _CurrentRuest = @"http://www.123qf.cn:81/testApp/keyuan/rentalOrBuyHouseSearch.api";
     }
-
-    [self LoadNetDataWithCurentURl];
+       [self LoadNetDataWithCurentURl];
 }
 
-#warning 缺少进度加载状态
-  //[[UIScreen mainScreen] scale]
 
 - (void) LoadNetDataWithCurentURl{
     [MBProgressHUD showMessage:@"正在加载"];
     NSLog(@"即将上线:%@,  %@",_CurrentRuest,self.pramaDic);
     //设置网络超时
-    self.shareMgr.requestSerializer.timeoutInterval = 2.0;
+     self.shareMgr.requestSerializer.timeoutInterval = 2.0;
     [self.shareMgr POST:self.CurrentRuest
              parameters: self.pramaDic success:^(AFHTTPRequestOperation *operation, id responseObject) {
                  [MBProgressHUD hideHUD];
@@ -329,8 +444,8 @@
                  NSLog(@"%@",error);
                  NSLog(@"网络超时");
              }];
-    
 }
+
 
 
 -(void)RightTableLoad {
@@ -340,23 +455,27 @@
          NSLog(@"当前状态%d",_status);
                             //出租列表 ,服务器暂无数据
         self.CurrentRuest = @"http://www.123qf.cn:81/testApp/fangyuan/rentalOrBuyHouseSearch.api";
-        NSDictionary *parameters =@{
-                                    @"sum":@"20",
-                                    @"zushou":@"1",
-                                    @"shengfen":@"广东省",
-                                    @"currentpage" :@"1"};
+        
+         NSMutableDictionary *parameters = [NSMutableDictionary new];
+        
+        NSDictionary *dic = @{
+                                 @"sum":@"20",
+                                 @"zushou":@"1",
+                                 @"shengfen":@"广东省",
+                                 @"currentpage" :@"1"};
+        
+        [parameters setValuesForKeysWithDictionary:dic];
         self.pramaDic = parameters;
+        
 
     }else {
         _status = WantRent;
         self.ResultTableView.searchStyle  =_status;
-//    http://www.123qf.cn:81/testApp/keyuan/seekHouse.api?fenlei=2&keyuan_id=3
-        self.CurrentRuest= @"http://www.123qf.cn:81/testApp/keyuan/rentalOrBuyHouseSearch.api?sum=20&zugou=0";  //求租列表
+        self.CurrentRuest= @"http://www.123qf.cn:81/testApp/keyuan/rentalOrBuyHouseSearch.api";  //求租列表
 
     }
     [self LoadNetDataWithCurentURl];
 }
-
 #pragma mark -顶部TabBar 切换
 -(void)TabBarBtnClick :(UIButton *)btn {
     btn.selected = YES ;
@@ -372,49 +491,6 @@
         [self RightTableLoad];
         NSLog(@"出租");
     }
-}
-
-- (void)clicked {
-    
-    if (_popStatus) {
-        [self popViewHide];
-    }
-
-    if ([self.HomeVCdelegate respondsToSelector:@selector(leftBtnClicked)]) {
-        [self.HomeVCdelegate leftBtnClicked];
-    }
-
-}
-
--(void)CitySelect {
-    //区域筛选 弹窗
-    NSLog(@"hi ,pop");
-    if (!_popStatus) {
-        [self popViewMoveOut];
-    } else {
-        [self popViewHide];
-    }
-    
-    
-}
-
-
--(void)popViewMoveOut {
-    [UIView animateWithDuration:.5 animations:^{
-        _popView.hidden = NO;
-        [_popView setFrame:_popView.popViewDispRect];
-    } completion:^(BOOL finished) {
-        _popStatus = YES;
-    }];
-}
-
--(void)popViewHide {
-    [UIView animateWithDuration:.5 animations:^{
-        [_popView setFrame:_popView.popViewOriginRect];
-        _popStatus = NO;
-    } completion:^(BOOL finished) {
-        _popView.hidden = YES;
-    }];
 }
 
 
@@ -626,10 +702,7 @@
     NSLog(@"上拉");
 }
 
-
-
 #pragma mark -侧滑过来的数据初始化
-
 -(void)LeftInit {
     [self TabBarBtnClick:self.LeftTab];
 }
@@ -639,35 +712,25 @@
 }
 
 
-#pragma mark 弹窗代理 
 
--(void)popViewCitySwitchClick {
-    [MBProgressHUD showSuccess:@"建设中"];
-}
-
--(void)popViewSectionOneBtnclickWithName:(NSString *)name and:(NSString *)code {
+#pragma mark -区域筛选的按钮 代理方法在这里
+//弹窗小按钮所执行的操作,第一级的按钮和第二级按钮
+-(void)popViewSectionOneBtnclickWithName:(NSString *)name requesNo:(NSString *)code andType:(NSInteger)type {
     [self popViewHide];
-    NSMutableDictionary *parameters;
-    NSLog(@"%@",name);
-    if ([name isEqualToString:@"全市"]||[name isEqualToString:@"市辖区"]) {
-         parameters =(NSMutableDictionary *)@{
-                                                                  @"sum":@"20",
-                                                                  @"zushou":@"0",
-                                                                  @"shengfen":@"广东省",
-                                                                  @"shi":@"惠州市",
-                                                                  @"currentpage" :@"1"};
-    }else{
-       parameters =(NSMutableDictionary *)@{
-                                                                  @"sum":@"20",
-                                                                  @"zushou":@"0",
-                                                                  @"shengfen":@"广东省",
-                                                                  @"shi":@"惠州市",
-                                                                  @"qu":name,
-                                                                  @"currentpage" :@"1"};
+    if(type ==0) {
+      [self.pramaDic setObject:name forKey:@"qu"];
+        if ([name isEqualToString:@"全市区"]) {
+            [self.pramaDic removeObjectForKey:@"qu"];    //qu:"全市区" 当然要去掉啦
+        }
+    }else {
+        /**
+         *  说明: 由于技术难度及时间成本问题，二级区域筛选功能暂未实现   更新人:Larry  时间: 2015-12-29
+         */
+
+      [self.pramaDic setObject:name forKey:@"region"];
     }
 
-    self.pramaDic = parameters;
-      [self LoadNetDataWithCurentURl];
+    [self LoadNetDataWithCurentURl];
 }
 
 @end

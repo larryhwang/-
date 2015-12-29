@@ -11,7 +11,17 @@
 @protocol PopSelectViewDelegate <NSObject>
 
 -(void)popViewCitySwitchClick;
--(void)popViewSectionOneBtnclickWithName:(NSString *)name and:(NSString *)code;
+
+
+
+/**
+ *  通知首页更改信息
+ *
+ *  @param name 地名
+ *  @param code 下次的请求码
+ *  @param type 区分是第一级小按钮 和 第二级小按钮 ，0 是一级  1 是二级
+ */
+-(void)popViewSectionOneBtnclickWithName:(NSString *)name requesNo:(NSString *)code andType:(NSInteger ) type;
 
 
 @end
@@ -24,7 +34,16 @@
 @property(nonatomic,assign)  int     SecondSectionCount;
 @property(nonatomic,assign)  id<PopSelectViewDelegate> PopViewdelegate;
 @property(nonatomic,copy)    NSString *nowCityName;
+
+/**
+ *  第一级地名数组
+ */
 @property(nonatomic,strong)  NSMutableArray  *LocationNameDicPartOne_NSarr;
+
+
+/**
+ *  第二级地名数组
+ */
 @property(nonatomic,strong)  NSMutableArray  *LocationNameDicPartTwo_NSarr;
 
 

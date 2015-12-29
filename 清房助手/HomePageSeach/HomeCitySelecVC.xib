@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9060" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HomeCitySelecVC">
+            <connections>
+                <outlet property="QFtable" destination="M3I-Pf-kLQ" id="BDM-WM-8KR"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="M3I-Pf-kLQ">
+                    <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                    <animations/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="ytl-w4-F7v"/>
+                        <outlet property="delegate" destination="-1" id="nek-oZ-GNf"/>
+                    </connections>
+                </tableView>
+            </subviews>
+            <animations/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="M3I-Pf-kLQ" secondAttribute="trailing" id="1F0-we-AgS"/>
+                <constraint firstItem="M3I-Pf-kLQ" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="H5x-Sl-qv4"/>
+                <constraint firstItem="M3I-Pf-kLQ" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="NM2-yw-9Ks"/>
+                <constraint firstAttribute="bottom" secondItem="M3I-Pf-kLQ" secondAttribute="bottom" id="f5U-kV-Qnj"/>
+            </constraints>
+            <variation key="default">
+                <mask key="subviews">
+                    <exclude reference="M3I-Pf-kLQ"/>
+                </mask>
+                <mask key="constraints">
+                    <exclude reference="1F0-we-AgS"/>
+                    <exclude reference="H5x-Sl-qv4"/>
+                    <exclude reference="NM2-yw-9Ks"/>
+                    <exclude reference="f5U-kV-Qnj"/>
+                </mask>
+            </variation>
+            <variation key="widthClass=compact">
+                <mask key="subviews">
+                    <include reference="M3I-Pf-kLQ"/>
+                </mask>
+                <mask key="constraints">
+                    <include reference="1F0-we-AgS"/>
+                    <include reference="H5x-Sl-qv4"/>
+                    <include reference="NM2-yw-9Ks"/>
+                    <include reference="f5U-kV-Qnj"/>
+                </mask>
+            </variation>
+        </view>
+    </objects>
+</document>

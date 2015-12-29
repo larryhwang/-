@@ -117,6 +117,8 @@
 		4654154D1C2CD46E003E5743 /* 60x60-hui (2).png in Resources */ = {isa = PBXBuildFile; fileRef = 4654154B1C2CD46E003E5743 /* 60x60-hui (2).png */; };
 		465415501C2D3C05003E5743 /* QFOrderStatusTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 4654154F1C2D3C05003E5743 /* QFOrderStatusTool.m */; };
 		46554CC11BC8F2F700480F1A /* arrowDown@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 46554CC01BC8F2F700480F1A /* arrowDown@2x.png */; };
+		466C32DB1C325E6300CDF467 /* HomeCitySelecVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 466C32D91C325E6300CDF467 /* HomeCitySelecVC.m */; };
+		466C32DC1C325E6300CDF467 /* HomeCitySelecVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 466C32DA1C325E6300CDF467 /* HomeCitySelecVC.xib */; };
 		46714B751BC7C11F00E7AEE9 /* UIImage+WM.m in Sources */ = {isa = PBXBuildFile; fileRef = 46714B5D1BC7C11F00E7AEE9 /* UIImage+WM.m */; };
 		46714B761BC7C11F00E7AEE9 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 46714B5F1BC7C11F00E7AEE9 /* HomeViewController.m */; };
 		46714B771BC7C11F00E7AEE9 /* WMBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 46714B611BC7C11F00E7AEE9 /* WMBaseViewController.m */; };
@@ -448,6 +450,9 @@
 		4654154E1C2D3C05003E5743 /* QFOrderStatusTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QFOrderStatusTool.h; sourceTree = "<group>"; };
 		4654154F1C2D3C05003E5743 /* QFOrderStatusTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QFOrderStatusTool.m; sourceTree = "<group>"; };
 		46554CC01BC8F2F700480F1A /* arrowDown@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrowDown@2x.png"; sourceTree = "<group>"; };
+		466C32D81C325E6300CDF467 /* HomeCitySelecVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeCitySelecVC.h; sourceTree = "<group>"; };
+		466C32D91C325E6300CDF467 /* HomeCitySelecVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeCitySelecVC.m; sourceTree = "<group>"; };
+		466C32DA1C325E6300CDF467 /* HomeCitySelecVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeCitySelecVC.xib; sourceTree = "<group>"; };
 		46714B5C1BC7C11F00E7AEE9 /* UIImage+WM.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+WM.h"; sourceTree = "<group>"; };
 		46714B5D1BC7C11F00E7AEE9 /* UIImage+WM.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+WM.m"; sourceTree = "<group>"; };
 		46714B5E1BC7C11F00E7AEE9 /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
@@ -1061,6 +1066,9 @@
 			isa = PBXGroup;
 			children = (
 				464E17C81C1FC608009ABB88 /* VIew */,
+				466C32D81C325E6300CDF467 /* HomeCitySelecVC.h */,
+				466C32D91C325E6300CDF467 /* HomeCitySelecVC.m */,
+				466C32DA1C325E6300CDF467 /* HomeCitySelecVC.xib */,
 			);
 			path = HomePageSeach;
 			sourceTree = "<group>";
@@ -1781,6 +1789,7 @@
 				46B21AC71C30C48B0053AE7F /* QFDateSelectStartToEnd.xib in Resources */,
 				46256C4D1BCF5B7300E05C5F /* FlatLocationCell.xib in Resources */,
 				469C787A1BD9D32F00B22410 /* Launch Screen.storyboard in Resources */,
+				466C32DC1C325E6300CDF467 /* HomeCitySelecVC.xib in Resources */,
 				46BBE8DF1C0FD31C00DE4B14 /* SelectJie.xib in Resources */,
 				4677DE211C16741F00011D70 /* SeachRusultDisplayController.xib in Resources */,
 				46BBE8DD1C0FD31C00DE4B14 /* SelectCityVC.xib in Resources */,
@@ -1945,6 +1954,7 @@
 				46714B7C1BC7C11F00E7AEE9 /* WMMenuViewController.m in Sources */,
 				46BBE8B01C0FD1A800DE4B14 /* pinyin.m in Sources */,
 				46D33C0E1BCB4B9C00B30F2A /* SalesCell.m in Sources */,
+				466C32DB1C325E6300CDF467 /* HomeCitySelecVC.m in Sources */,
 				4617E63A1C1BADD5007BECBF /* FilterSelectJieViewController.m in Sources */,
 				468E288D1BCD021A00560500 /* FactoryDetailCell.m in Sources */,
 				46BC5E641C29A8CF00B1247A /* TypesSelect.m in Sources */,

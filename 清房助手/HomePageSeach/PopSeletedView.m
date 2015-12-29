@@ -45,10 +45,13 @@
 
 @implementation PopSeletedView
 
--(NSMutableArray*)LocationNameDic_NSArr {
+
+
+-(NSMutableArray*)LocationNameDicPartOne_NSarr {
     if (_LocationNameDicPartOne_NSarr ==nil) {
         _LocationNameDicPartOne_NSarr = [NSMutableArray new];
     }
+    //在这里计算
     return _LocationNameDicPartOne_NSarr;
 }
 
@@ -101,7 +104,7 @@
 
 
     //摆放按钮
-    self.nowCityName = @"惠州市";
+  //  self.nowCityName = @"惠州市";
     //清除之前的按钮
     for (QFLocateButton *btn in self.FirstSecton.subviews) {
         [btn removeFromSuperview];
@@ -245,6 +248,7 @@
     }
     
     [btn becameSelected];  //被选高亮
-    [self.PopViewdelegate popViewSectionOneBtnclickWithName:name and:code];
+   
+    [self.PopViewdelegate popViewSectionOneBtnclickWithName:name requesNo:code andType:0];
 }
 @end
