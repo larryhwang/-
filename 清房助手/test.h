@@ -1,5 +1,5 @@
 //
-//  UserInfoVC.h
+//  test.h
 //  清房助手
 //
 //  Created by Larry on 12/30/15.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface UserInfoVC : UIViewController
+@interface test : UIViewController
 
 @end

@@ -16,9 +16,11 @@
 #import "SettingPage_TableVC.h"
 #import "InnerTabBarController.h"
 #import "ZuGouDetailViewController.h"
-#import "UserInfoVC.h"
+#import "UserInfoVC_iSIX.h"
 
 #import "MutiTaskOrderBusinessVC.h"
+
+#import "test.h"
 
 typedef enum Slidestate {
     kStateHome,
@@ -216,13 +218,21 @@ static const CGFloat menuStartNarrowRatio  = 0.70;
  */
 
 -(void)transToUserInfo {
-   // UserInfoVC *infoVC = [[UserInfoVC alloc]init];
+//    UserInfoVC_iSIX  *infoVC = [[UserInfoVC_iSIX alloc]init];
     
-    UserInfoVC *infoVC = [[UserInfoVC alloc]initWithNibName:@"UserInfoVC" bundle:nil];
-//    infoVC = [[[NSBundle mainBundle]loadNibNamed:@"UserInfoVC" owner:self options:nil]lastObject];
+    test *infoVC = [[test alloc]init];
+
+    if (isI6) {
+        infoVC.view = [[[NSBundle mainBundle]loadNibNamed:@"test" owner:nil options:nil]firstObject];
+        NSLog(@"%d",isI5);
+    } else if (isI5){
+        infoVC.view = [[[NSBundle mainBundle]loadNibNamed:@"test" owner:nil options:nil]lastObject];
+    }
+    
     infoVC.title = @"个人信息";
     infoVC.hidesBottomBarWhenPushed =  YES;
     [self.messageNav pushViewController:infoVC animated:NO];
+    self.messageNav.navigationBarHidden = YES;
     [self showHome];
 }
 

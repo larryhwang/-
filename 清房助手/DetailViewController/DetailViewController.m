@@ -458,14 +458,27 @@
   //  if ([self.FenLei isEqualToString:@"0"]) {  // start_住宅类
         FlatLocationCell  *LocationCell  = [FlatLocationCell new];
         FlatDetailCell   *DetailCell = [FlatDetailCell new];
-        DescribeCell  *DescribieCell = [DescribeCell freeCellWithTitle:@"描述" andContext:self.FangData[@"fangyuanmiaoshu"]];
-        FreeCell  *testCell = [FreeCell freeCellWithTitle:@"地址" andContext:self.FangData[@"dizhi"]];
-   // testCell.backgroundColor = [UIColor redColor];
+    DescribeCell  *DescribieCell = NULL;
+    NSLog(@"描述字段:%@",self.FangData[@"fangyuanmiaoshu"]);
     
-        DescribieCell.iSSeparetorLine = NO ;
-        self.FreeCellHeight  = testCell.CellHight;
+#warning 描述地方
+    NSString *miaoshuStr =  self.FangData[@"fangyuanmiaoshu"];
+    
+    NSRange isHaveHTML = [miaoshuStr rangeOfString:@"style"];
+    
+    //判断是不是网页
+    if(isHaveHTML.length) {
+        DescribieCell = [DescribeCell freeCellWithHtmlStr:miaoshuStr];   //+(instancetype)freeCellWithHtmlStr:(NSString *)htmlStr]
+        self.DescribeCellHeight = 200;
+    }else {
+        DescribieCell = [DescribeCell freeCellWithTitle:@"描述" andContext:self.FangData[@"fangyuanmiaoshu"]];
         self.DescribeCellHeight = DescribieCell.CellHight;
-        // testCell.backgroundColor = [UIColor blueColor];
+        DescribieCell.iSSeparetorLine = NO ;
+    }
+    
+        FreeCell  *testCell = [FreeCell freeCellWithTitle:@"地址" andContext:self.FangData[@"dizhi"]];
+        self.FreeCellHeight  = testCell.CellHight;
+
         
         LocationCell  =  [[[NSBundle mainBundle]loadNibNamed:@"FlatLocationCell" owner:nil options:nil] firstObject];
         DetailCell = [[[NSBundle mainBundle]loadNibNamed:@"FlatDetailCell" owner:nil options:nil] firstObject];

@@ -6,24 +6,30 @@
 //  Copyright © 2015 HuiZhou S&F NetworkTechCo.,Ltd . All rights reserved.
 //
 
-#import "UserInfoVC.h"
+#import "UserInfoVC_iSIX.h"
+#import "Masonry.h"
 
-@interface UserInfoVC ()
-@property (weak, nonatomic) IBOutlet UIImageView *headBackImg;
+@interface UserInfoVC_iSIX ()
+
+
 
 @end
 
-@implementation UserInfoVC
+@implementation UserInfoVC_iSIX
+
 
 
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
     
 
     
     
-    
+
+
+
     self.navigationController.navigationBarHidden = YES;
 }
 

@@ -25,4 +25,9 @@
 -(instancetype)initWithTitle:(NSString *)title andContext:(NSString *)text ;
 +(instancetype)freeCellWithTitle:(NSString *)title andContext:(NSString *)text;
 
++(instancetype)freeCellWithHtmlStr:(NSString *)htmlStr;
+
+
+
+
 @end

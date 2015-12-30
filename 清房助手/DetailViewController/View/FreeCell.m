@@ -36,25 +36,15 @@
         _HeaderPart = title;
         NSString *allContent = [NSString stringWithFormat:@"   %@:   %@",self.HeaderPart,text];
         NSRange preTitle = NSMakeRange(3, 5);
-        /*
-         NSMutableAttributedString *HilightNo = [[NSMutableAttributedString alloc]initWithString:cell.exchangeCount.text];
-         NSRange noRange = NSMakeRange(4,[ExchanegCount length]);  //红色数字范围
-         [HilightNo addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range:noRange];
-         [cell.exchangeCount setAttributedText:HilightNo];
-         */
-
         UIFont *DeafualtFont = [UIFont systemFontOfSize:17];
         _ContextSize = [self sizeWithString:allContent font:DeafualtFont maxSize:MaxSize];
         _CellHight = _ContextSize.height + 2;
         self.DynamicText.text = allContent;  //全部的内容设置
         [self.DynamicText setFrame:CGRectMake(Pading/2, Pading/3, _ContextSize.width, _ContextSize.height)];
         self.Title.backgroundColor =  [UIColor redColor];
-        
         NSMutableAttributedString *DarkGrayTittle = [[NSMutableAttributedString alloc]initWithString:allContent];
         [DarkGrayTittle addAttribute:NSForegroundColorAttributeName value:[UIColor darkGrayColor] range:preTitle];
-        
         [self.DynamicText setAttributedText:DarkGrayTittle];
-        
         [self.contentView addSubview:self.DynamicText];
     }
     return  self;
@@ -66,15 +56,44 @@
 
 
 
+
+-(id)initWIthHtmlStr:(NSString *)string {
+    self = [super init];
+    if (self) {
+        UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 200)];
+        [self.contentView addSubview:webView];
+        [webView loadHTMLString:string baseURL:nil];
+    }
+    
+    return  self;
+}
+
+
++(instancetype)freeCellWithHtmlStr:(NSString *)htmlStr  {
+    
+    
+    /**
+     *  从网页拿下来的宽度是518，这里做下更改
+     */
+    NSRange tableRange = [htmlStr rangeOfString:@"width=\"518\""];
+    NSLog(@"%d  %d",tableRange.length,tableRange.location);
+    
+    NSString *newWidth = [NSString stringWithFormat:@"width=\"%f\"",ScreenWidth -10];
+    
+     htmlStr = [htmlStr stringByReplacingCharactersInRange:tableRange withString:newWidth];
+    
+    
+    NSLog(@"newStr:%@",htmlStr);
+    return [[self alloc]initWIthHtmlStr:htmlStr];
+}
+
+
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
 }
 
 
 -(void)layoutSubviews {
-    
     if(_iSSeparetorLine) {
         UIView *separateLine = [[UIView alloc]initWithFrame:CGRectMake(0, _ContextSize.height+8, ScreenWidth, 2)];
         separateLine.backgroundColor = [UIColor lightGrayColor];
