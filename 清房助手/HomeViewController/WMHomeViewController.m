@@ -78,8 +78,6 @@
 @implementation WMHomeViewController
 
 
-
-
 -(NSMutableDictionary *)pramaDic {
     if (_pramaDic ==nil) {
         _pramaDic = [NSMutableDictionary new];

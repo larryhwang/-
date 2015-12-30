@@ -18,18 +18,55 @@
 @interface WMMenuViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (strong, nonatomic) WMCommon *common;
 @property (strong ,nonatomic) NSArray  *listArray;
+
+/**
+ *  名字
+ */
 @property (weak, nonatomic) IBOutlet UILabel *userNameDis;
+
+/**
+ *  电话号码
+ */
 @property (weak, nonatomic) IBOutlet UILabel *userTeleDis;
+
+
+/**
+ *  功能列表
+ */
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+
+
+/**
+ *  弃用的
+ */
 @property (weak, nonatomic) IBOutlet UIButton    *nightModeBtn;
+
+
+/**
+ *  设置功能按钮
+ */
 @property (weak, nonatomic) IBOutlet UIButton    *settingBtn;
+
+
+
+
+
+/**
+ *  用户头像
+ */
 @property (weak, nonatomic) IBOutlet UIImageView *headerImageView;
 
-
+/**
+ *  头像点击按钮，覆盖了头像图像
+ */
+@property (weak, nonatomic) IBOutlet UIButton *userInfoBtn;
 
 @end
 
 @implementation WMMenuViewController
+
+
+//设置按钮
 - (IBAction)settingBtnClick:(id)sender {
     NSLog(@"setting @@@————@@@@");
     //可以由StoryBoard 来设置的
@@ -64,6 +101,20 @@
     }
 }
 
+
+
+
+- (IBAction)userInfoClick:(id)sender {
+    NSLog(@"头像点击");
+    //通知代理去跳转
+    [self.delegate transToUserInfo];
+}
+
+
+
+
+
+
 #pragma mark - tableView代理方法及数据源方法
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
@@ -74,6 +125,9 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    //定义图片
+    
     // 没有用系统自带的类而用了自己重新定义的cell，仅仅为了之后扩展方便，无他
     MenuListCell *cell = [[MenuListCell alloc]init];
   

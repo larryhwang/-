@@ -16,6 +16,7 @@
 #import "SettingPage_TableVC.h"
 #import "InnerTabBarController.h"
 #import "ZuGouDetailViewController.h"
+#import "UserInfoVC.h"
 
 #import "MutiTaskOrderBusinessVC.h"
 
@@ -207,6 +208,23 @@ static const CGFloat menuStartNarrowRatio  = 0.70;
 #pragma mark - WMMenuViewController代理方法
 
 #pragma mark -侧栏菜单点击实现办法
+
+
+
+/**
+ *  跳转到个人信息
+ */
+
+-(void)transToUserInfo {
+   // UserInfoVC *infoVC = [[UserInfoVC alloc]init];
+    
+    UserInfoVC *infoVC = [[UserInfoVC alloc]initWithNibName:@"UserInfoVC" bundle:nil];
+//    infoVC = [[[NSBundle mainBundle]loadNibNamed:@"UserInfoVC" owner:self options:nil]lastObject];
+    infoVC.title = @"个人信息";
+    infoVC.hidesBottomBarWhenPushed =  YES;
+    [self.messageNav pushViewController:infoVC animated:NO];
+    [self showHome];
+}
 
 
 - (void)transToRentAndSale {
