@@ -269,6 +269,17 @@
 		46D648381BC8E82C000F23EF /* QFTitleButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 46D648371BC8E82C000F23EF /* QFTitleButton.m */; };
 		46D6483A1BC8E925000F23EF /* navigationbar_arrow_down@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 46D648391BC8E925000F23EF /* navigationbar_arrow_down@2x.png */; };
 		46D6BCA31C2B15EA00883F50 /* FormCellInMutiTast.m in Sources */ = {isa = PBXBuildFile; fileRef = 46D6BCA21C2B15EA00883F50 /* FormCellInMutiTast.m */; };
+		46E5C7A81C34B45200F4829D /* UserInfoBasic.m in Sources */ = {isa = PBXBuildFile; fileRef = 46E5C7A71C34B45200F4829D /* UserInfoBasic.m */; };
+		46E5C7AA1C34B63F00F4829D /* logoInfo.png in Resources */ = {isa = PBXBuildFile; fileRef = 46E5C7A91C34B63F00F4829D /* logoInfo.png */; };
+		46E5C7AC1C34B64F00F4829D /* head.png in Resources */ = {isa = PBXBuildFile; fileRef = 46E5C7AB1C34B64F00F4829D /* head.png */; };
+		46E5C7B01C34C2A500F4829D /* UserInfoVC_iFive.m in Sources */ = {isa = PBXBuildFile; fileRef = 46E5C7AE1C34C2A500F4829D /* UserInfoVC_iFive.m */; };
+		46E5C7B11C34C2A500F4829D /* UserInfoVC_iFive.xib in Resources */ = {isa = PBXBuildFile; fileRef = 46E5C7AF1C34C2A500F4829D /* UserInfoVC_iFive.xib */; };
+		46E5C7B51C34D11900F4829D /* UserInfo_iSIXP.m in Sources */ = {isa = PBXBuildFile; fileRef = 46E5C7B31C34D11900F4829D /* UserInfo_iSIXP.m */; };
+		46E5C7B61C34D11900F4829D /* UserInfo_iSIXP.xib in Resources */ = {isa = PBXBuildFile; fileRef = 46E5C7B41C34D11900F4829D /* UserInfo_iSIXP.xib */; };
+		46E5C7BA1C34D88500F4829D /* UserInfo_Four.m in Sources */ = {isa = PBXBuildFile; fileRef = 46E5C7B81C34D88500F4829D /* UserInfo_Four.m */; };
+		46E5C7BB1C34D88500F4829D /* UserInfo_Four.xib in Resources */ = {isa = PBXBuildFile; fileRef = 46E5C7B91C34D88500F4829D /* UserInfo_Four.xib */; };
+		46E5C8031C35283E00F4829D /* hsf_20151231155029_0.png in Resources */ = {isa = PBXBuildFile; fileRef = 46E5C8021C35283E00F4829D /* hsf_20151231155029_0.png */; };
+		46E5C80A1C35969100F4829D /* UIImage+CJZ.m in Sources */ = {isa = PBXBuildFile; fileRef = 46E5C8091C35969100F4829D /* UIImage+CJZ.m */; };
 		46E8BAF41C2E4B86009E808D /* QFOrderFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 46E8BAF21C2E4B86009E808D /* QFOrderFilter.m */; };
 		46E8BAF51C2E4B86009E808D /* QFOrderFilter.xib in Resources */ = {isa = PBXBuildFile; fileRef = 46E8BAF31C2E4B86009E808D /* QFOrderFilter.xib */; };
 		46FBF74D1BDD17FF00F68EE6 /* pStar.png in Resources */ = {isa = PBXBuildFile; fileRef = 46FBF74C1BDD17FF00F68EE6 /* pStar.png */; };
@@ -718,6 +729,22 @@
 		46D648391BC8E925000F23EF /* navigationbar_arrow_down@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "navigationbar_arrow_down@2x.png"; sourceTree = "<group>"; };
 		46D6BCA11C2B15EA00883F50 /* FormCellInMutiTast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FormCellInMutiTast.h; sourceTree = "<group>"; };
 		46D6BCA21C2B15EA00883F50 /* FormCellInMutiTast.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FormCellInMutiTast.m; sourceTree = "<group>"; };
+		46E5C7A61C34B45200F4829D /* UserInfoBasic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfoBasic.h; sourceTree = "<group>"; };
+		46E5C7A71C34B45200F4829D /* UserInfoBasic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfoBasic.m; sourceTree = "<group>"; };
+		46E5C7A91C34B63F00F4829D /* logoInfo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logoInfo.png; sourceTree = "<group>"; };
+		46E5C7AB1C34B64F00F4829D /* head.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = head.png; sourceTree = "<group>"; };
+		46E5C7AD1C34C2A500F4829D /* UserInfoVC_iFive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfoVC_iFive.h; sourceTree = "<group>"; };
+		46E5C7AE1C34C2A500F4829D /* UserInfoVC_iFive.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfoVC_iFive.m; sourceTree = "<group>"; };
+		46E5C7AF1C34C2A500F4829D /* UserInfoVC_iFive.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserInfoVC_iFive.xib; sourceTree = "<group>"; };
+		46E5C7B21C34D11900F4829D /* UserInfo_iSIXP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfo_iSIXP.h; sourceTree = "<group>"; };
+		46E5C7B31C34D11900F4829D /* UserInfo_iSIXP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfo_iSIXP.m; sourceTree = "<group>"; };
+		46E5C7B41C34D11900F4829D /* UserInfo_iSIXP.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserInfo_iSIXP.xib; sourceTree = "<group>"; };
+		46E5C7B71C34D88500F4829D /* UserInfo_Four.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfo_Four.h; sourceTree = "<group>"; };
+		46E5C7B81C34D88500F4829D /* UserInfo_Four.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfo_Four.m; sourceTree = "<group>"; };
+		46E5C7B91C34D88500F4829D /* UserInfo_Four.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserInfo_Four.xib; sourceTree = "<group>"; };
+		46E5C8021C35283E00F4829D /* hsf_20151231155029_0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hsf_20151231155029_0.png; sourceTree = "<group>"; };
+		46E5C8081C35969100F4829D /* UIImage+CJZ.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+CJZ.h"; sourceTree = "<group>"; };
+		46E5C8091C35969100F4829D /* UIImage+CJZ.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+CJZ.m"; sourceTree = "<group>"; };
 		46E8BAF11C2E4B85009E808D /* QFOrderFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QFOrderFilter.h; sourceTree = "<group>"; };
 		46E8BAF21C2E4B86009E808D /* QFOrderFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QFOrderFilter.m; sourceTree = "<group>"; };
 		46E8BAF31C2E4B86009E808D /* QFOrderFilter.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QFOrderFilter.xib; sourceTree = "<group>"; };
@@ -1244,6 +1271,7 @@
 		46714B5B1BC7BFFB00E7AEE9 /* HomeViewController */ = {
 			isa = PBXGroup;
 			children = (
+				46E5C8021C35283E00F4829D /* hsf_20151231155029_0.png */,
 				4616EDD31C24509700BAF5C3 /* SettingInterface.storyboard */,
 				4616EDD81C24651600BAF5C3 /* SettingPage_TableVC.h */,
 				4616EDD91C24651600BAF5C3 /* SettingPage_TableVC.m */,
@@ -1336,6 +1364,8 @@
 		4673A5091BC8DD2700700099 /* Category */ = {
 			isa = PBXGroup;
 			children = (
+				46E5C8081C35969100F4829D /* UIImage+CJZ.h */,
+				46E5C8091C35969100F4829D /* UIImage+CJZ.m */,
 				46BBE8CD1C0FD29B00DE4B14 /* commonFile.h */,
 				4673A50D1BC8DDA500700099 /* UIView+Frame.h */,
 				4673A50E1BC8DDA500700099 /* UIView+Frame.m */,
@@ -1499,6 +1529,8 @@
 		46B23C931C336CC200C78B43 /* UserInfo */ = {
 			isa = PBXGroup;
 			children = (
+				46E5C7AB1C34B64F00F4829D /* head.png */,
+				46E5C7A91C34B63F00F4829D /* logoInfo.png */,
 				46B23C991C336D2B00C78B43 /* UserInfoback.png */,
 				46B23C941C336CE200C78B43 /* UserInfoVC_iSIX.h */,
 				46B23C951C336CE200C78B43 /* UserInfoVC_iSIX.m */,
@@ -1506,6 +1538,17 @@
 				46B23D281C3435E700C78B43 /* test.h */,
 				46B23D291C3435E700C78B43 /* test.m */,
 				46B23D2A1C3435E700C78B43 /* test.xib */,
+				46E5C7A61C34B45200F4829D /* UserInfoBasic.h */,
+				46E5C7A71C34B45200F4829D /* UserInfoBasic.m */,
+				46E5C7B21C34D11900F4829D /* UserInfo_iSIXP.h */,
+				46E5C7B31C34D11900F4829D /* UserInfo_iSIXP.m */,
+				46E5C7B41C34D11900F4829D /* UserInfo_iSIXP.xib */,
+				46E5C7AD1C34C2A500F4829D /* UserInfoVC_iFive.h */,
+				46E5C7AE1C34C2A500F4829D /* UserInfoVC_iFive.m */,
+				46E5C7AF1C34C2A500F4829D /* UserInfoVC_iFive.xib */,
+				46E5C7B71C34D88500F4829D /* UserInfo_Four.h */,
+				46E5C7B81C34D88500F4829D /* UserInfo_Four.m */,
+				46E5C7B91C34D88500F4829D /* UserInfo_Four.xib */,
 			);
 			name = UserInfo;
 			sourceTree = "<group>";
@@ -1831,6 +1874,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				465415321C2C4AAE003E5743 /* MyOrderCell.xib in Resources */,
+				46E5C7AA1C34B63F00F4829D /* logoInfo.png in Resources */,
 				4616EDD41C24509700BAF5C3 /* SettingInterface.storyboard in Resources */,
 				468ED02A1BD62537001605A7 /* search-house.png in Resources */,
 				468E28891BCCFEA400560500 /* FactoryLoactionCell.xib in Resources */,
@@ -1866,11 +1910,13 @@
 				46B23D2C1C3435E700C78B43 /* test.xib in Resources */,
 				462847D81C0EEDC200273B3A /* chuzu.png in Resources */,
 				468ED02B1BD62537001605A7 /* search-people.png in Resources */,
+				46E5C7AC1C34B64F00F4829D /* head.png in Resources */,
 				4646C6AB1C2742B500896964 /* LesveMsgVC.xib in Resources */,
 				4616EE1B1C24CED100BAF5C3 /* company@2x.png in Resources */,
 				468E28791BCCF27C00560500 /* CountBackImg.png in Resources */,
 				4697FB371BCBAF8F00D7E24C /* StringFile.strings in Resources */,
 				4616EDC81C240AEE00BAF5C3 /* company.png in Resources */,
+				46E5C7B11C34C2A500F4829D /* UserInfoVC_iFive.xib in Resources */,
 				4654154C1C2CD46E003E5743 /* 60x60-hui (1).png in Resources */,
 				4646C6801C26E5B600896964 /* KeyuanCell.xib in Resources */,
 				4616EE131C24C9B500BAF5C3 /* InnerFangVC.xib in Resources */,
@@ -1906,9 +1952,11 @@
 				4653867D1C1912DC00454E79 /* FilterViewController.xib in Resources */,
 				46252F8B1BDA648C00C1FA66 /* MJRefresh.bundle in Resources */,
 				46BBE8CB1C0FD25C00DE4B14 /* CZKeyboardToolbar.xib in Resources */,
+				46E5C8031C35283E00F4829D /* hsf_20151231155029_0.png in Resources */,
 				46D648321BC8E67E000F23EF /* jian-down.png in Resources */,
 				46BBE8E11C0FD31C00DE4B14 /* SelectQu.xib in Resources */,
 				4673A5041BC8BE0200700099 /* tab_me_nor@2x.png in Resources */,
+				46E5C7BB1C34D88500F4829D /* UserInfo_Four.xib in Resources */,
 				4646C6A61C27145500896964 /* ZuGouDetailViewController.xib in Resources */,
 				464356681BC6149600A44526 /* eyes-o.png in Resources */,
 				46B23C9A1C336D2B00C78B43 /* UserInfoback.png in Resources */,
@@ -1925,6 +1973,7 @@
 				4616EDDC1C24653000BAF5C3 /* settingPageTableVC.storyboard in Resources */,
 				465386781C180C4600454E79 /* 筛选.png in Resources */,
 				46BBE8E31C0FD31C00DE4B14 /* SelectRegionVC.xib in Resources */,
+				46E5C7B61C34D11900F4829D /* UserInfo_iSIXP.xib in Resources */,
 				46BBE8AC1C0FD19400DE4B14 /* Overlay.png in Resources */,
 				46BBE8A71C0FD19400DE4B14 /* ELCAssetCollectionPicker.xib in Resources */,
 				4678206C1C291E6B0076C761 /* LeavMsgCell.xib in Resources */,
@@ -2043,6 +2092,7 @@
 				46BC5E5D1C2999AB00B1247A /* CommitOrderVC.m in Sources */,
 				462847E41C0EEF0B00273B3A /* PostCategory.m in Sources */,
 				4678206B1C291E6B0076C761 /* LeavMsgCell.m in Sources */,
+				46E5C7BA1C34D88500F4829D /* UserInfo_Four.m in Sources */,
 				46AFDFA91BCB84A200B49CBE /* UIImageView+WebCache.m in Sources */,
 				4673A5081BC8DCD200700099 /* QFSearchBar.m in Sources */,
 				4628481B1C0FCC6C00273B3A /* LocateTool.m in Sources */,
@@ -2059,6 +2109,7 @@
 				465415481C2CD064003E5743 /* QFProcessCell.m in Sources */,
 				46BB59A61C23B2BB0021DCEA /* QFCitySwitchCellBtn.m in Sources */,
 				46714B7C1BC7C11F00E7AEE9 /* WMMenuViewController.m in Sources */,
+				46E5C7A81C34B45200F4829D /* UserInfoBasic.m in Sources */,
 				46BBE8B01C0FD1A800DE4B14 /* pinyin.m in Sources */,
 				46D33C0E1BCB4B9C00B30F2A /* SalesCell.m in Sources */,
 				466C32DB1C325E6300CDF467 /* HomeCitySelecVC.m in Sources */,
@@ -2107,6 +2158,7 @@
 				46256C4C1BCF5B7300E05C5F /* FlatLocationCell.m in Sources */,
 				46B23C971C336CE200C78B43 /* UserInfoVC_iSIX.m in Sources */,
 				4616EDDA1C24651600BAF5C3 /* SettingPage_TableVC.m in Sources */,
+				46E5C7B51C34D11900F4829D /* UserInfo_iSIXP.m in Sources */,
 				4646C6781C26A0B100896964 /* CZNewFeatureCell.m in Sources */,
 				46AFDFAA1BCB84A200B49CBE /* UIView+WebCacheOperation.m in Sources */,
 				4646C6AA1C2742B500896964 /* LesveMsgVC.m in Sources */,
@@ -2115,6 +2167,8 @@
 				46252F8F1BDA648C00C1FA66 /* MJRefreshHeaderView.m in Sources */,
 				46B23D221C33B26B00C78B43 /* NSArray+MASAdditions.m in Sources */,
 				465415241C2C015A003E5743 /* ApiXml.mm in Sources */,
+				46E5C7B01C34C2A500F4829D /* UserInfoVC_iFive.m in Sources */,
+				46E5C80A1C35969100F4829D /* UIImage+CJZ.m in Sources */,
 				46714B751BC7C11F00E7AEE9 /* UIImage+WM.m in Sources */,
 				4646C6A01C27137300896964 /* ZuGouDescribeCell.m in Sources */,
 				46252F8D1BDA648C00C1FA66 /* MJRefreshConst.m in Sources */,

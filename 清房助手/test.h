@@ -10,4 +10,6 @@
 
 @interface test : UIViewController
 
+
+@property(nonatomic,strong)  NSArray  *QFteleArr;
 @end

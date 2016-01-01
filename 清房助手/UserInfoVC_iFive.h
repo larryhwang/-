@@ -1,18 +1,13 @@
 //
-//  UserInfoVC_iSIX.h
+//  UserInfoVC_iFive.h
 //  清房助手
 //
-//  Created by Larry on 12/30/15.
+//  Created by Larry on 12/31/15.
 //  Copyright © 2015 HuiZhou S&F NetworkTechCo.,Ltd . All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
 #import "UserInfoBasic.h"
 
-@interface UserInfoVC_iSIX :UserInfoBasic
-
-
-
-
+@interface UserInfoVC_iFive : UserInfoBasic
 
 @end

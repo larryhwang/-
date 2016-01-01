@@ -29,9 +29,13 @@
  *  我们把用户的每次Pan手势操作作为一次pop动画的执行
  */
 - (void)handleControllerPop:(UIPanGestureRecognizer *)recognizer {
+    
+    self.vc.navigationBarHidden = NO;
+    
     /**
      *  interactivePopTransition就是我们说的方法2返回的对象，我们需要更新它的进度来控制Pop动画的流程，我们用手指在视图中的位置与视图宽度比例作为它的进度。
      */
+    
     CGFloat progress = [recognizer translationInView:recognizer.view].x / recognizer.view.bounds.size.width;
     /**
      *  稳定进度区间，让它在0.0（未完成）～1.0（已完成）之间

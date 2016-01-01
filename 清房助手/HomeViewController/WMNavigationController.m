@@ -25,7 +25,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.interactivePopGestureRecognizer.enabled = NO;
     self.navigationBar.translucent = YES ;
+    
     UIGestureRecognizer *gesture = self.interactivePopGestureRecognizer;
     gesture.enabled = NO;
     UIView *gestureView = gesture.view; //怀疑
@@ -33,6 +35,7 @@
     popRecognizer.delegate = self;
     popRecognizer.maximumNumberOfTouches = 1;
     [gestureView addGestureRecognizer:popRecognizer];
+    
     _navT = [[WMNavigationInteractiveTransition alloc] initWithViewController:self];
     [popRecognizer addTarget:_navT action:@selector(handleControllerPop:)];
 }

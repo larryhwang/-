@@ -15,6 +15,12 @@
 #import "PostViewController.h"
 #import "MBProgressHUD+CZ.h"
 
+
+
+#import "UIImageView+WebCache.h"
+
+#import "AppDelegate.h"
+
 @interface WMMenuViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (strong, nonatomic) WMCommon *common;
 @property (strong ,nonatomic) NSArray  *listArray;
@@ -47,10 +53,6 @@
  */
 @property (weak, nonatomic) IBOutlet UIButton    *settingBtn;
 
-
-
-
-
 /**
  *  用户头像
  */
@@ -78,7 +80,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     self.common = [WMCommon getInstance];
     self.listArray = @[@"房源查询", @"客源查询", @"发布", @"内部房源", @"内部客源",@"售后业务"];
     self.tableView.delegate        = self;
@@ -87,7 +88,11 @@
     self.tableView.rowHeight       = 50 * (self.common.screenW / 320);
     NSLog(@"高度:%f",   self.tableView.rowHeight);
     self.tableView.tableFooterView = [[UIView alloc] init];
-    self.headerImageView.image = [[UIImage imageNamed:@"Icon"] getRoundImage];
+    self.headerImageView.image = [UIImage imageNamed:@"head"];
+    self.headerImageView.layer.masksToBounds = YES;
+    self.headerImageView.layer.cornerRadius = 40;
+    [self updateHeadimg];
+    [self updateNameAndTele];
 }
 
 - (void)btnClick:(id)sender {
@@ -102,7 +107,34 @@
 }
 
 
+/**
+ *  更改头像
+ */
+-(void)updateHeadimg {
+    AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+    NSDictionary *dic = appDelegate.usrInfoDic;
+    
+    NSString *urlStr = [NSString stringWithFormat:@"http://www.123qf.cn:81/portrait/%@/%@",dic[@"userid"],dic[@"portrait"]];
+    
+    NSLog(@"%@",urlStr);
+    NSURL *url = [NSURL URLWithString:urlStr];
+    UIImageView *imgView = [[UIImageView alloc]initWithFrame:self.headerImageView.frame];
+    [imgView sd_setImageWithURL:url];
+  //  [self.headerImageView sd_setImageWithURL:url];
+    [self.headerImageView sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"head"]];
+}
 
+
+/**
+ *  更新姓名和电话
+ */
+-(void)updateNameAndTele {
+    AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+    NSDictionary *dic = appDelegate.usrInfoDic;
+    self.userNameDis.text = dic[@"username"];
+    self.userTeleDis.text = dic[@"tel"];
+    
+}
 
 - (IBAction)userInfoClick:(id)sender {
     NSLog(@"头像点击");

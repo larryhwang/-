@@ -16,7 +16,11 @@
 #import "SettingPage_TableVC.h"
 #import "InnerTabBarController.h"
 #import "ZuGouDetailViewController.h"
+
 #import "UserInfoVC_iSIX.h"
+#import "UserInfoVC_iFive.h"
+#import "UserInfo_iSIXP.h"
+#import "UserInfo_Four.h"
 
 #import "MutiTaskOrderBusinessVC.h"
 
@@ -218,21 +222,24 @@ static const CGFloat menuStartNarrowRatio  = 0.70;
  */
 
 -(void)transToUserInfo {
-//    UserInfoVC_iSIX  *infoVC = [[UserInfoVC_iSIX alloc]init];
+    UserInfoBasic  *infoVC = NULL;
     
-    test *infoVC = [[test alloc]init];
 
     if (isI6) {
-        infoVC.view = [[[NSBundle mainBundle]loadNibNamed:@"test" owner:nil options:nil]firstObject];
+        infoVC = [[UserInfoVC_iSIX alloc]init];
         NSLog(@"%d",isI5);
     } else if (isI5){
-        infoVC.view = [[[NSBundle mainBundle]loadNibNamed:@"test" owner:nil options:nil]lastObject];
+        infoVC = [[UserInfoVC_iFive alloc]init];
+    } else if (isI6p) {
+        infoVC = [[UserInfo_iSIXP alloc]init];
+    } else if (isI4) {
+        infoVC = [[UserInfo_Four alloc]init];
     }
     
     infoVC.title = @"个人信息";
-    infoVC.hidesBottomBarWhenPushed =  YES;
+
     [self.messageNav pushViewController:infoVC animated:NO];
-    self.messageNav.navigationBarHidden = YES;
+    self.messageNav.interactivePopGestureRecognizer.enabled = NO;
     [self showHome];
 }
 

@@ -10,9 +10,15 @@
 
 @interface test ()
 
+@property (strong, nonatomic) IBOutletCollection(UILabel) NSArray *teleArrs;
+
+
 @end
 
 @implementation test
+
+
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -21,13 +27,6 @@
     
     
     
-}
-
-
-- (IBAction)ifiveClick:(id)sender {
-    UIButton *btn = (UIButton *)sender;
-    
-    NSLog(@"%@",btn.titleLabel.text);
 }
 
 

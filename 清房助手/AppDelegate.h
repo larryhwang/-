@@ -15,8 +15,25 @@
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
+
+/**
+ *  省市资料
+ */
 @property(nonatomic,strong)  NSDictionary  *provnceIndexDic;
 
+
+/**
+ *  用户资料
+ */
+@property(nonatomic,strong)  NSDictionary  *usrInfoDic;
+
+
+
+/**
+ *    权限列表数组
+ */
+
+@property(nonatomic,strong)  NSArray  *QFUserPermissionDic_Arr;
 
 @end
 

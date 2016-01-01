@@ -60,12 +60,17 @@
     PramaDic[@"userid"] = @"13725007900";
     PramaDic[@"psword"] = @"123456";
     
+    
+    //江哥账号 ／ 有头像
+    PramaDic[@"userid"] = @"15018639039";
+    PramaDic[@"psword"] = @"5798161";
+    
 
     AFHTTPRequestOperationManager *mgr1  = [AFHTTPRequestOperationManager manager];
     mgr1.requestSerializer.timeoutInterval  = 6.0;
     NSString *completeUrl = @"http://www.123qf.cn:81/testApp/user/loginUser.front";
 
-    HomeViewController *home = [HomeViewController new];
+
   [MBProgressHUD showMessage:@"正在登录"];
    [mgr1 POST:completeUrl parameters:PramaDic success:^(AFHTTPRequestOperation *operation, id responseObject) {
        NSLog(@"修理:%@",responseObject);
@@ -86,8 +91,11 @@
            //获取到省份的数据，并且按首字母拼音分开了
            AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
            appDelegate.provnceIndexDic = [LoacationNameTool dictionaryWithUrl:@"http://www.123qf.cn:81/testApp/area/selectArea.api?parentid=0"];
-           HomeViewController *home = [HomeViewController new];
-           KeyWindow.rootViewController = home;
+
+           [self getUserInfoAndPermissions];
+           
+
+        
        }else{
           //进入主界面
            [self loginErroAlert];
@@ -116,8 +124,31 @@
     }];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
+
+/**
+ *  返回该用户数据
+ *
+ *  @return NSDictionary
+ */
+-(void)getUserInfoAndPermissions {
+    NSString *url = @"http://www.123qf.cn:81/testApp/user/getUserInfo.api";
+  __block  NSDictionary *dic = NULL;
+    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
+    [mgr POST:url parameters:nil success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+        NSLog(@"用户资料:%@",responseObject);
+        dic = responseObject[@"data"];
+        
+        AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+        appDelegate.QFUserPermissionDic_Arr = dic[@"menus"];
+        appDelegate.usrInfoDic = dic[@"userInfo"];
+        
+        NSLog(@"arr:%@,usrInfo:%@",appDelegate.QFUserPermissionDic_Arr,appDelegate.usrInfoDic);
+        
+            HomeViewController *home = [HomeViewController new];
+           KeyWindow.rootViewController = home;
+    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
+        NSLog(@"%@",error);
+    }];
 }
 
 -(void)BasicUIset {

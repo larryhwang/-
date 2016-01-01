@@ -165,7 +165,7 @@
                         </mask>
                     </variation>
                 </label>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6B9-fo-FhN">
+                <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6B9-fo-FhN">
                     <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                     <animations/>
                     <constraints>
@@ -231,18 +231,18 @@
                 </mask>
                 <mask key="constraints">
                     <exclude reference="2wc-Uh-N6R"/>
-                    <exclude reference="EJ1-EC-ye8"/>
-                    <exclude reference="eOf-TO-qHx"/>
+                    <exclude reference="FWX-4b-2u1"/>
                     <exclude reference="Us9-5J-hCY"/>
                     <exclude reference="Zsy-gu-eJX"/>
                     <exclude reference="ucr-KF-wyK"/>
+                    <exclude reference="EJ1-EC-ye8"/>
+                    <exclude reference="eOf-TO-qHx"/>
                     <exclude reference="C41-ed-5VZ"/>
                     <exclude reference="EWM-fS-Z27"/>
                     <exclude reference="Nz4-fh-fDI"/>
                     <exclude reference="Wnl-y6-AJW"/>
                     <exclude reference="XJ7-SF-suK"/>
                     <exclude reference="rCG-oq-P5R"/>
-                    <exclude reference="FWX-4b-2u1"/>
                     <exclude reference="iMs-Qh-kGx"/>
                     <exclude reference="qlR-GF-zrN"/>
                     <exclude reference="u30-Pv-iwm"/>
@@ -259,14 +259,15 @@
                 </mask>
                 <mask key="constraints">
                     <include reference="2wc-Uh-N6R"/>
+                    <include reference="FWX-4b-2u1"/>
+                    <include reference="Us9-5J-hCY"/>
+                    <include reference="Zsy-gu-eJX"/>
+                    <include reference="ucr-KF-wyK"/>
                     <exclude reference="DT2-eN-UtJ"/>
                     <include reference="EJ1-EC-ye8"/>
                     <exclude reference="MdG-OQ-Xdo"/>
                     <include reference="eOf-TO-qHx"/>
                     <exclude reference="tSv-lh-uj2"/>
-                    <include reference="Us9-5J-hCY"/>
-                    <include reference="Zsy-gu-eJX"/>
-                    <include reference="ucr-KF-wyK"/>
                     <include reference="C41-ed-5VZ"/>
                     <include reference="EWM-fS-Z27"/>
                     <exclude reference="Nz4-fh-fDI"/>
@@ -275,7 +276,6 @@
                     <exclude reference="gIg-wC-2dI"/>
                     <exclude reference="hWw-sF-BKT"/>
                     <include reference="rCG-oq-P5R"/>
-                    <include reference="FWX-4b-2u1"/>
                     <exclude reference="If5-Ce-x0H"/>
                     <exclude reference="KrM-8T-oAM"/>
                     <include reference="iMs-Qh-kGx"/>

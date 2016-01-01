@@ -1,38 +1,30 @@
 //
-//  UserInfoVC_iSIX.m
+//  UserInfo_iSIXP.m
 //  清房助手
 //
-//  Created by Larry on 12/30/15.
+//  Created by Larry on 12/31/15.
 //  Copyright © 2015 HuiZhou S&F NetworkTechCo.,Ltd . All rights reserved.
 //
 
-#import "UserInfoVC_iSIX.h"
-#import "Masonry.h"
+#import "UserInfo_iSIXP.h"
 
-@interface UserInfoVC_iSIX ()
-
-
-
+@interface UserInfo_iSIXP ()
 @property (weak, nonatomic) IBOutlet UIImageView *iCoView;
-
-
-
-
-
-
 @end
 
-@implementation UserInfoVC_iSIX
+@implementation UserInfo_iSIXP
 
--(void)setQFDataDic:(NSDictionary *)QFDataDic {
-    
+-(void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    self.navigationController.interactivePopGestureRecognizer.enabled = NO;
 }
-
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
+    self.navigationController.interactivePopGestureRecognizer.enabled = NO;
     self.iCoView.layer.cornerRadius = 35;
-     self.iCoView.layer.masksToBounds = YES;
+    self.iCoView.layer.masksToBounds = YES;
     self.navigationController.navigationBarHidden = YES;
 }
 
@@ -43,8 +35,6 @@
     [self.navigationController popViewControllerAnimated:YES];
      self.navigationController.navigationBarHidden = NO;
 }
-
-
 
 
 @end
