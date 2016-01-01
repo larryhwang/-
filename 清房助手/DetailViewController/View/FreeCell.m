@@ -80,7 +80,10 @@
     
     NSString *newWidth = [NSString stringWithFormat:@"width=\"%f\"",ScreenWidth -10];
     
-     htmlStr = [htmlStr stringByReplacingCharactersInRange:tableRange withString:newWidth];
+    if (tableRange.length) {
+      htmlStr = [htmlStr stringByReplacingCharactersInRange:tableRange withString:newWidth];        
+    }
+
     
     
     NSLog(@"newStr:%@",htmlStr);

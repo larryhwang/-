@@ -7,6 +7,14 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UserInfoVC_iSIX">
             <connections>
+                <outlet property="QFSex" destination="gNd-Dc-Wsa" id="8GN-We-ROp"/>
+                <outlet property="QFbirthDate" destination="evB-f0-tJ0" id="Pyv-Ze-rJp"/>
+                <outlet property="QFcompanyName" destination="ble-sP-uuv" id="VVC-kF-s6d"/>
+                <outlet property="QFemail" destination="PZC-Qj-Dx9" id="icd-le-9wD"/>
+                <outlet property="QFminzu" destination="04Q-Yu-mDz" id="wYd-Ly-SLF"/>
+                <outlet property="QFregion" destination="gj2-vb-MPt" id="Jha-pV-gfW"/>
+                <outlet property="QFuserID" destination="o5C-2y-jv0" id="jkh-5V-kQh"/>
+                <outlet property="QFuserName" destination="ryM-AP-Wrt" id="tuu-Hu-GiA"/>
                 <outlet property="iCoView" destination="YwJ-3K-u3u" id="KYb-6n-O7U"/>
                 <outlet property="view" destination="QVF-dn-1SO" id="u7c-iT-fBG"/>
             </connections>
@@ -21,15 +29,6 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <animations/>
                 </imageView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="hPh-7A-r22">
-                    <rect key="frame" x="8" y="25" width="22" height="22"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <animations/>
-                    <state key="normal" backgroundImage="返回.png"/>
-                    <connections>
-                        <action selector="backBtn:" destination="-1" eventType="touchUpInside" id="7dk-5k-8Nl"/>
-                    </connections>
-                </button>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logoInfo.png" id="cNh-B8-k7q">
                     <rect key="frame" x="0.0" y="55" width="375" height="43"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -228,7 +227,7 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="惠州和四方网络科技公司" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ble-sP-uuv">
-                            <rect key="frame" x="144" y="72" width="187" height="21"/>
+                            <rect key="frame" x="124" y="74" width="251" height="21"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <animations/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -239,16 +238,6 @@
                     <animations/>
                     <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="head.png" id="YwJ-3K-u3u">
-                    <rect key="frame" x="23" y="214" width="70" height="70"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <animations/>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius ">
-                            <integer key="value" value="45"/>
-                        </userDefinedRuntimeAttribute>
-                    </userDefinedRuntimeAttributes>
-                </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="曾燕江" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ryM-AP-Wrt">
                     <rect key="frame" x="193" y="214" width="62" height="22"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -257,11 +246,32 @@
                     <color key="textColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="head.png" id="YwJ-3K-u3u">
+                    <rect key="frame" x="35" y="214" width="70" height="70"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <animations/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius ">
+                            <integer key="value" value="45"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="hPh-7A-r22">
+                    <rect key="frame" x="0.0" y="14" width="56" height="53"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <animations/>
+                    <inset key="contentEdgeInsets" minX="10" minY="10" maxX="0.0" maxY="0.0"/>
+                    <inset key="imageEdgeInsets" minX="0.0" minY="10" maxX="20" maxY="10"/>
+                    <state key="normal" image="返回.png"/>
+                    <connections>
+                        <action selector="backBtn:" destination="-1" eventType="touchUpInside" id="7dk-5k-8Nl"/>
+                    </connections>
+                </button>
             </subviews>
             <animations/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
-            <point key="canvasLocation" x="570.5" y="-271.5"/>
+            <point key="canvasLocation" x="717.5" y="-263.5"/>
         </view>
     </objects>
     <resources>

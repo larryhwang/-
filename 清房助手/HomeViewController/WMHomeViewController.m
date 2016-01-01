@@ -137,31 +137,27 @@
     
   //  self.navigationItem.backBarButtonItem.title = @"返回";
     UIButton *IconBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [IconBtn setBackgroundImage:[UIImage imageNamed:@"head"] forState:UIControlStateNormal];
     IconBtn.frame = CGRectMake(0, 0, 33, 33);
-    UIImageView *Imgview = [[UIImageView alloc]initWithFrame:IconBtn.frame];
+
     
     AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
     NSDictionary *dic = appDelegate.usrInfoDic;
-    
     NSString *urlStr = [NSString stringWithFormat:@"http://www.123qf.cn:81/portrait/%@/%@",dic[@"userid"],dic[@"portrait"]];
-    NSLog(@"%@",urlStr);
+    NSLog(@"indexImg：%@",urlStr);
     NSURL *url = [NSURL URLWithString:urlStr];
-//    [Imgview sd_setImageWithURL:url];
- //   [Imgview sd_setImageWithURL:url placeholderImage:[[UIImage imageNamed:@"head"]getRoundImage]];
-  
-    [Imgview sd_setImageWithURL:url completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-       
-     //   UIImage *img =[UIImage circleImageWithImage:image borderWidth:0 borderColor:nil];
-        
-//        3.    imageView.layer.masksToBounds = YES;     //这样的话才可以显示圆角
-//        4.    imageView.layer.cornerRadius = 50;
-//        
-        [IconBtn setBackgroundImage:image forState:UIControlStateNormal];
-        IconBtn.layer.masksToBounds = YES;
-        IconBtn.layer.cornerRadius = 16;
-    }];
     
-//    [IconBtn setBackgroundImage:[[UIImage imageNamed:@"Icon"]getRoundImage] forState:UIControlStateNormal];
+    UIImageView *Imgview = [[UIImageView alloc]init];
+   [self.view addSubview:Imgview];
+    
+
+    [Imgview sd_setImageWithURL:url completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+          NSLog(@"indexImg:%@",error);
+         [IconBtn setBackgroundImage:image forState:UIControlStateNormal];
+    }];
+    IconBtn.layer.masksToBounds = YES;
+    IconBtn.layer.cornerRadius = 16;
+
     
     
     

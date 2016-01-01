@@ -10,7 +10,10 @@
 
 @interface UserInfoBasic : UIViewController
 
-
 @property(nonatomic,strong)  NSDictionary  *QFDataDic;
+
+
+
+
 
 @end

@@ -24,7 +24,7 @@
 
 #import "MutiTaskOrderBusinessVC.h"
 
-#import "test.h"
+#import "AppDelegate.h"
 
 typedef enum Slidestate {
     kStateHome,
@@ -151,7 +151,6 @@ static const CGFloat menuStartNarrowRatio  = 0.70;
     self.tabBarController.view.transform = CGAffineTransformScale(CGAffineTransformIdentity, proportion, proportion);
     
     self.homeVC.leftBtn.alpha = self.cover.alpha = 1 - dis / self.leftDistance;
-    
     CGFloat menuProportion = dis * (1 - menuStartNarrowRatio) / self.leftDistance + menuStartNarrowRatio;
     CGFloat menuCenterMove = dis * (self.menuCenterXEnd - self.menuCenterXStart) / self.leftDistance;
     self.menuVC.view.center = CGPointMake(self.menuCenterXStart + menuCenterMove, self.view.center.y);
@@ -223,11 +222,12 @@ static const CGFloat menuStartNarrowRatio  = 0.70;
 
 -(void)transToUserInfo {
     UserInfoBasic  *infoVC = NULL;
-    
-
+    AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+     infoVC.QFDataDic = appDelegate.usrInfoDic;
     if (isI6) {
         infoVC = [[UserInfoVC_iSIX alloc]init];
-        NSLog(@"%d",isI5);
+       infoVC.QFDataDic = appDelegate.usrInfoDic;
+
     } else if (isI5){
         infoVC = [[UserInfoVC_iFive alloc]init];
     } else if (isI6p) {
@@ -237,6 +237,7 @@ static const CGFloat menuStartNarrowRatio  = 0.70;
     }
     
     infoVC.title = @"个人信息";
+
 
     [self.messageNav pushViewController:infoVC animated:NO];
     self.messageNav.interactivePopGestureRecognizer.enabled = NO;

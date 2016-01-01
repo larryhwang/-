@@ -11,6 +11,9 @@
       location = "group:QFMyOrderTableVC.xib">
    </FileRef>
    <FileRef
+      location = "group:navBack.png">
+   </FileRef>
+   <FileRef
       location = "group:&#x6e05;&#x623f;&#x52a9;&#x624b;.xcodeproj">
    </FileRef>
    <FileRef

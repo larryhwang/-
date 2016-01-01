@@ -36,6 +36,7 @@
     popRecognizer.maximumNumberOfTouches = 1;
     [gestureView addGestureRecognizer:popRecognizer];
     
+    NSLog(@"表示%ld",popRecognizer.view.tag);
     _navT = [[WMNavigationInteractiveTransition alloc] initWithViewController:self];
     [popRecognizer addTarget:_navT action:@selector(handleControllerPop:)];
 }

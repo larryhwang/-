@@ -30,7 +30,24 @@
  */
 - (void)handleControllerPop:(UIPanGestureRecognizer *)recognizer {
     
-    self.vc.navigationBarHidden = NO;
+    NSLog(@"手势:%@",recognizer);
+    
+    if (recognizer.state == UIGestureRecognizerStateBegan || recognizer.state == UIGestureRecognizerStateChanged ||recognizer.state == UIGestureRecognizerStateEnded) {
+        return ;
+    }
+    UIView *Tagetview = recognizer.view;
+    NSLog(@"表示%ld",recognizer.view.tag);
+    NSLog(@"fuji表示%@",Tagetview.superview.superview.superview.superview.superview);
+
+    //用于解决个人详情的自带右滑手势在主页上隐藏导航栏的问题
+//   CGPoint translatedPoint = [recognizer translationInView:recognizer.view];
+//    NSLog(@"x:%f,y:%f",translatedPoint.x,translatedPoint.y);
+//    if (translatedPoint.x<0) { //当向右滑动时，导航栏不要隐藏了
+//       self.vc.navigationBarHidden = NO;
+//    }
+
+
+    
     
     /**
      *  interactivePopTransition就是我们说的方法2返回的对象，我们需要更新它的进度来控制Pop动画的流程，我们用手指在视图中的位置与视图宽度比例作为它的进度。
