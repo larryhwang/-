@@ -7,6 +7,14 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UserInfo_iSIXP">
             <connections>
+                <outlet property="QFSex" destination="i7p-9K-dwM" id="Ujq-N3-GsV"/>
+                <outlet property="QFbirthDate" destination="es6-ud-4fq" id="mot-cV-sj2"/>
+                <outlet property="QFcompanyName" destination="eUN-a5-9bT" id="1d8-Ie-LlI"/>
+                <outlet property="QFemail" destination="eJh-gt-AUb" id="ZFy-aS-Ozi"/>
+                <outlet property="QFminzu" destination="Y8q-KF-wm0" id="Sfe-Ch-RTM"/>
+                <outlet property="QFregion" destination="fbu-B4-yTT" id="m5C-ID-dHo"/>
+                <outlet property="QFuserID" destination="yre-k7-QNg" id="n9b-IZ-k5y"/>
+                <outlet property="QFuserName" destination="Qga-fa-WNk" id="TcT-MT-Gne"/>
                 <outlet property="iCoView" destination="9jK-ow-uwv" id="U50-wn-pXS"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -228,7 +236,7 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="惠州和四方网络科技公司" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="eUN-a5-9bT">
-                            <rect key="frame" x="194" y="80" width="187" height="21"/>
+                            <rect key="frame" x="128" y="80" width="264" height="21"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <animations/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -250,7 +258,7 @@
                     </userDefinedRuntimeAttributes>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="曾燕江" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Qga-fa-WNk">
-                    <rect key="frame" x="254" y="211" width="62" height="22"/>
+                    <rect key="frame" x="217" y="211" width="62" height="22"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <animations/>
                     <fontDescription key="fontDescription" type="system" pointSize="18"/>

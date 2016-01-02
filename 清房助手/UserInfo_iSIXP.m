@@ -10,6 +10,26 @@
 
 @interface UserInfo_iSIXP ()
 @property (weak, nonatomic) IBOutlet UIImageView *iCoView;
+
+
+
+
+
+@property (weak, nonatomic) IBOutlet UILabel *QFuserName;
+
+@property (weak, nonatomic) IBOutlet UILabel *QFcompanyName;
+
+@property (weak, nonatomic) IBOutlet UILabel *QFuserID;
+
+@property (weak, nonatomic) IBOutlet UILabel *QFSex;
+
+@property (weak, nonatomic) IBOutlet UILabel *QFminzu;
+
+@property (weak, nonatomic) IBOutlet UILabel *QFbirthDate;
+
+@property (weak, nonatomic) IBOutlet UILabel *QFemail;
+
+@property (weak, nonatomic) IBOutlet UILabel *QFregion;
 @end
 
 @implementation UserInfo_iSIXP
@@ -21,11 +41,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+  
     self.navigationController.interactivePopGestureRecognizer.enabled = NO;
     self.iCoView.layer.cornerRadius = 35;
     self.iCoView.layer.masksToBounds = YES;
     self.navigationController.navigationBarHidden = YES;
+    [self displayDataFromNet];
 }
 
 

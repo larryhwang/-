@@ -7,6 +7,14 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UserInfoVC_iFive">
             <connections>
+                <outlet property="QFSex" destination="5tQ-lw-7fD" id="rwN-8j-A7H"/>
+                <outlet property="QFbirthDate" destination="gep-h9-tFI" id="Qb4-Z1-zRM"/>
+                <outlet property="QFcompanyName" destination="iSJ-Ef-Ox2" id="ygN-ip-t4D"/>
+                <outlet property="QFemail" destination="Fd2-CN-xjT" id="rr7-Po-SUh"/>
+                <outlet property="QFminzu" destination="s3s-Tp-NHw" id="ahg-Bp-zzW"/>
+                <outlet property="QFregion" destination="CqJ-8n-8dg" id="ZeM-A8-BFd"/>
+                <outlet property="QFuserID" destination="OMV-BZ-c4j" id="B8Q-KF-5WT"/>
+                <outlet property="QFuserName" destination="YdW-0J-p25" id="Ol6-aR-CFN"/>
                 <outlet property="iCoView" destination="f8c-f9-Zr9" id="6Uj-Mk-5DT"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -223,22 +231,12 @@
                     <animations/>
                     <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                 </view>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="head.png" id="f8c-f9-Zr9">
-                    <rect key="frame" x="23" y="164" width="50" height="50"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <animations/>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius ">
-                            <integer key="value" value="45"/>
-                        </userDefinedRuntimeAttribute>
-                    </userDefinedRuntimeAttributes>
-                </imageView>
                 <view alpha="0.5" contentMode="scaleToFill" id="Cnw-Lp-Jc2" userLabel="InnerContent">
                     <rect key="frame" x="0.0" y="156" width="320" height="76"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="惠州和四方网络科技公司" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="iSJ-Ef-Ox2">
-                            <rect key="frame" x="130" y="47" width="187" height="21"/>
+                            <rect key="frame" x="84" y="47" width="228" height="21"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <animations/>
                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -257,6 +255,16 @@
                     <color key="textColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="head.png" id="f8c-f9-Zr9">
+                    <rect key="frame" x="23" y="164" width="50" height="50"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <animations/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius ">
+                            <integer key="value" value="45"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </imageView>
             </subviews>
             <animations/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>

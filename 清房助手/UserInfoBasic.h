@@ -12,7 +12,7 @@
 
 @property(nonatomic,strong)  NSDictionary  *QFDataDic;
 
-
+-(void)displayDataFromNet;
 
 
 

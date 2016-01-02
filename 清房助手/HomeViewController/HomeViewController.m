@@ -223,17 +223,19 @@ static const CGFloat menuStartNarrowRatio  = 0.70;
 -(void)transToUserInfo {
     UserInfoBasic  *infoVC = NULL;
     AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
-     infoVC.QFDataDic = appDelegate.usrInfoDic;
     if (isI6) {
         infoVC = [[UserInfoVC_iSIX alloc]init];
-       infoVC.QFDataDic = appDelegate.usrInfoDic;
+        infoVC.QFDataDic = appDelegate.usrInfoDic;
 
     } else if (isI5){
         infoVC = [[UserInfoVC_iFive alloc]init];
+        infoVC.QFDataDic = appDelegate.usrInfoDic;
     } else if (isI6p) {
         infoVC = [[UserInfo_iSIXP alloc]init];
+        infoVC.QFDataDic = appDelegate.usrInfoDic;
     } else if (isI4) {
         infoVC = [[UserInfo_Four alloc]init];
+        infoVC.QFDataDic = appDelegate.usrInfoDic;
     }
     
     infoVC.title = @"个人信息";

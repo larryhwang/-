@@ -7,6 +7,14 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UserInfo_Four">
             <connections>
+                <outlet property="QFSex" destination="doS-J4-L0c" id="CEc-1B-hqq"/>
+                <outlet property="QFbirthDate" destination="lQn-CY-psb" id="pcS-bo-8FY"/>
+                <outlet property="QFcompanyName" destination="z05-7I-mvf" id="9Ql-a8-MgJ"/>
+                <outlet property="QFemail" destination="mwU-Oo-Dlo" id="CH5-R4-PBr"/>
+                <outlet property="QFminzu" destination="L2d-zT-hWN" id="K6T-cu-k1x"/>
+                <outlet property="QFregion" destination="Z37-yI-mXQ" id="7Nc-Na-JNi"/>
+                <outlet property="QFuserID" destination="omR-zZ-eKg" id="oz5-8F-ayG"/>
+                <outlet property="QFuserName" destination="CB6-Wm-Jth" id="bEA-7P-PFN"/>
                 <outlet property="iCoView" destination="Efw-si-pSI" id="kTb-zW-tkg"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -227,8 +235,8 @@
                     <rect key="frame" x="0.0" y="137" width="320" height="66"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="惠州和四方网络科技公司" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="z05-7I-mvf">
-                            <rect key="frame" x="140" y="37" width="160" height="21"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="惠州和四方网络科技公司" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="z05-7I-mvf">
+                            <rect key="frame" x="84" y="37" width="228" height="21"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <animations/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -249,8 +257,8 @@
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="曾燕江" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="CB6-Wm-Jth">
-                    <rect key="frame" x="188" y="145" width="62" height="22"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="曾燕江" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="CB6-Wm-Jth">
+                    <rect key="frame" x="170" y="145" width="80" height="22"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <animations/>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
