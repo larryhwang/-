@@ -124,14 +124,9 @@
     self.navigationItem.backBarButtonItem = item;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
-    
-
-
   //  [self.tableView addHeaderWithTarget:self action:@selector(refreshData)];
   //  [self.tableView headerBeginRefreshing];
   //  [self.tableView addFooterWithTarget:self action:@selector(loadMoreData)];
-    
-
     
     [self tableInit];  //页面初始化
     
@@ -139,7 +134,6 @@
     UIButton *IconBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [IconBtn setBackgroundImage:[UIImage imageNamed:@"head"] forState:UIControlStateNormal];
     IconBtn.frame = CGRectMake(0, 0, 33, 33);
-
     
     AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
     NSDictionary *dic = appDelegate.usrInfoDic;
@@ -149,27 +143,19 @@
     
     UIImageView *Imgview = [[UIImageView alloc]init];
    [self.view addSubview:Imgview];
-    
+    if(dic[@"portrait"]){
+        [Imgview sd_setImageWithURL:url completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            NSLog(@"indexImg:%@",error);
+            [IconBtn setBackgroundImage:image forState:UIControlStateNormal];
+        }];
+    }
 
-    [Imgview sd_setImageWithURL:url completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-          NSLog(@"indexImg:%@",error);
-         [IconBtn setBackgroundImage:image forState:UIControlStateNormal];
-    }];
     IconBtn.layer.masksToBounds = YES;
     IconBtn.layer.cornerRadius = 16;
 
-    
-    
-    
-    
+
     [IconBtn addTarget:self action:@selector(clicked) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:IconBtn];
-    
-    
-    
-    
-    
-    
     
     
     QFTitleButton *CityBtn = [[QFTitleButton alloc]init];
@@ -198,7 +184,7 @@
     [self setOriginPopView];  //设置弹窗功能
     [self localNameGet];
     
-   // [[PgyUpdateManager sharedPgyManager] checkUpdate];  //检查更新
+
 
     
 }
@@ -295,8 +281,6 @@
     [self popViewHide];
     //获取省份
     HomeCitySelecVC *selet = [[HomeCitySelecVC alloc]init];
-    
-    
     //拿到新的城市要做的事情
     selet.updateCityOptionsWithDic = ^(NSDictionary *dic ,NSString *proName, NSString *cityName) {
         NSLog(@"更新要的DIC : %@",dic);
@@ -416,9 +400,6 @@
         self.ResultTableView.searchStyle  =_status;
          NSLog(@"当前状态%d",_status);
         _CurrentRuest =@"http://www.123qf.cn:81/testApp/fangyuan/rentalOrBuyHouseSearch.api";
-        
-        
-        
         NSMutableDictionary *parameters = [NSMutableDictionary new];
         if(_pramaDic ==nil) {  //即初始化
             NSDictionary *dict = @{
@@ -429,20 +410,10 @@
                                    @"currentpage" :@"1"};
             [parameters setValuesForKeysWithDictionary:dict];
              self.pramaDic = parameters;
-
         }
-       
-       
         [self.pramaDic setObject:@"20" forKey:@"sum"];
         [self.pramaDic setObject:@"0" forKey:@"zushou"];
         [self.pramaDic setObject:@"1" forKey:@"currentpage"];
-
-        
-        
-        
-
-        
-        
     }else {
          _status = WantBuy;
          self.ResultTableView.searchStyle  =_status;
@@ -456,7 +427,7 @@
     [MBProgressHUD showMessage:@"正在加载"];
     NSLog(@"即将上线:%@,  %@",_CurrentRuest,self.pramaDic);
     //设置网络超时
-     self.shareMgr.requestSerializer.timeoutInterval = 2.0;
+     self.shareMgr.requestSerializer.timeoutInterval = 3.0;
     [self.shareMgr POST:self.CurrentRuest
              parameters: self.pramaDic success:^(AFHTTPRequestOperation *operation, id responseObject) {
                  [MBProgressHUD hideHUD];
@@ -578,12 +549,11 @@
         
         [cell.QFImageView sd_setImageWithURL:[NSURL URLWithString:imgURL] placeholderImage:PlaceHoder];
         cell.title.text = [titlePartArra firstObject];
-        cell.area.text  = [NSString stringWithFormat:@"面积:%@㎡",SingleData[@"mianji"]]; //SingleData[@"mianji"];
-#warning 几室几厅数据没有返回
+        cell.area.text  = [NSString stringWithFormat:@"面积:%@㎡",SingleData[@"mianji"]];
         cell.style.text = @"两室";
         cell.elevator.text = @"电梯";
         cell.price.text =[NSString stringWithFormat:@"%@万",PriceString];
-        [cell.price setAttributedText:HiligntNo];
+       [cell.price setAttributedText:HiligntNo];
         
         NSString *Publisher =SingleData[@"publisher"];
         if ([Publisher isKindOfClass:[NSNull class]]) {
@@ -599,9 +569,46 @@
     } else if (_status ==RentOut) {
         _preName = @"[出租]";
         //这里服务器暂无数据
-        UITableViewCell *cell= [UITableViewCell new];
-        cell.textLabel.text =@"出租列表";
+        static NSString *ID = @"identifer";
+        SalesCell *cell =[tableView dequeueReusableCellWithIdentifier:ID];
+        if (cell ==nil) {
+            cell = [[[NSBundle mainBundle]loadNibNamed:@"SalesCell" owner:nil options:nil] firstObject];
+        }
+        
+#pragma mark 售价高亮属性
+        NSString *PriceString = [NSString stringWithFormat:@"%@万元",SingleData[@"shoujia"]];
+        NSMutableAttributedString *HiligntNo = [[NSMutableAttributedString alloc]initWithString:PriceString];
+        NSRange NoRange = NSMakeRange(0, [PriceString length]-2);
+        [HiligntNo addAttribute:NSForegroundColorAttributeName value:[UIColor redColor]  range:NoRange];
+        [HiligntNo addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:20 ]  range:NoRange];
+        
+        NSString *imgCollects = SingleData[@"tupian"];
+        NSArray *imgArray = [imgCollects componentsSeparatedByString:@","];
+        NSString *imgURL = [NSString stringWithFormat:@"http://www.123qf.cn/testWeb/img/%@/userfile/qfzs/fy/mini/%@",SingleData[@"userid"],[imgArray firstObject]];
+        
+        
+        NSString *BigTitle = [NSString stringWithFormat:@"%@%@",_preName,SingleData[@"biaoti"]];
+        NSArray *titlePartArra = [BigTitle componentsSeparatedByString:@" "]; //
+        UIImage  *PlaceHoder = [UIImage imageNamed:@"DeafaultImage"];
+        PlaceHoder = [PlaceHoder imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+        
+        [cell.QFImageView sd_setImageWithURL:[NSURL URLWithString:imgURL] placeholderImage:PlaceHoder];
+        cell.title.text = [titlePartArra firstObject];
+        cell.area.text  = [NSString stringWithFormat:@"面积:%@㎡",SingleData[@"mianji"]];
+        cell.style.text = @"两室";
+        cell.elevator.text = @"电梯";
+        cell.price.text =[NSString stringWithFormat:@"%@万",PriceString];
+        [cell.price setAttributedText:HiligntNo];
+        
+        NSString *Publisher =SingleData[@"publisher"];
+        if ([Publisher isKindOfClass:[NSNull class]]) {
+            cell.postUer.text = @"佚名";
+        }else{
+            cell.postUer.text =[NSString stringWithFormat:@"发布人:%@",SingleData[@"publisher"]];
+        }
+        cell.postTime.text = [NSString stringWithFormat:@"发布时间:%@",SingleData[@"weituodate"]];
         return cell;
+
     } else if (_status ==WantBuy) {
         _preName =@"[求购]";
         static NSString *ID = @"identiferWantBuy";
@@ -695,10 +702,6 @@
         [tableView deselectRowAtIndexPath:indexPath animated:YES]; //解除遗留灰色
 
     
-    //  [self.HomeVCdelegate QFShowZugouDetailWithFanLei:@"0" andKeyuanID:@"9"];
-    
-    
-    
     NSDictionary *SingleData = self.DataArr[indexPath.row];
     if (_status ==SalesOut) {
         //出售详情页
@@ -710,6 +713,11 @@
     } else if (_status == RentOut) {
         //出租详情页  (服务器暂无数据，小灰手机也没有参考的)
         
+        NSString *Id = SingleData[@"id"];   //将房源ID传过去
+        NSString *userID = SingleData[@"userid"];
+        NSString *name = [self judgeNullValue:SingleData[@"mingcheng"]];
+        NSString *Category = [NSString stringWithFormat:@"%@",SingleData[@"fenlei"]];
+        [self.HomeVCdelegate QFshowDetailWithFangYuanID:Id andFenlei:Category userID:userID XiaoquName:name ListStatus:_preName];
 
     } else if (_status == WantBuy) {
         //求购详情页

@@ -81,7 +81,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.common = [WMCommon getInstance];
-    self.listArray = @[@"房源查询", @"客源查询", @"发布", @"内部房源", @"内部客源",@"售后业务"];
+    self.listArray = @[@"房源查询", @"客源查询", @"信息发布", @"内部房源", @"内部客源",@"售后业务"];
     self.tableView.delegate        = self;
     self.tableView.dataSource      = self;
     self.tableView.separatorStyle  = UITableViewCellSeparatorStyleNone;

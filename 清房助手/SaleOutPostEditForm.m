@@ -5,6 +5,14 @@
 //  Created by Larry on 15/11/14.
 //  Copyright © 2015年 Larry. All rights reserved.
 //
+/**
+ *  说明:本页代码描述－出售发布写字楼
+        !接口注意
+ *        1."shengfen",@"shi",@"qu"   这个三个字段如果是空，则 返回发布失败
+ *
+ *
+ *
+ */
 
 #import "SaleOutPostEditForm.h"
 #import "EditCell.h"
@@ -64,9 +72,6 @@
 #define unCompletedAlertTag 70
 #define SuccessAlertTag     71
 #define saveAlertTag       72
-
-
-
 
 
 @interface SaleOutPostEditForm ()<UITextFieldDelegate,UIActionSheetDelegate, UIImagePickerControllerDelegate,SelectRegionDelegate,UIScrollViewDelegate,CZKeyboardToolbarDelegate ,UIActionSheetDelegate,QBImagePickerControllerDelegate,UIAlertViewDelegate,WMNavigationControllerDelegate>{
@@ -140,16 +145,12 @@
     return _tfArrs;
 }
 
-
-
 -(NSMutableArray*)SelectedImgsData_MARR {
     if (_SelectedImgsData_MARR ==nil) {
         _SelectedImgsData_MARR = [NSMutableArray new];
     }
     return _SelectedImgsData_MARR;
 }
-
-
 
 -(CZKeyboardToolbar *)keyBoardBar {
     if (_keyBoardBar == nil) {
@@ -234,68 +235,47 @@
     
     NSLog(@"1:%d,2:%d",lastEditedTag1,lastEditedTag2);
     
-    if (lastEditedTag1 <=[self.tfArrs count] && lastEditedTag2 >0) {
-        if (lastEditedTag1 ==[self.tfArrs count]) {
-            return ;
-        }
-        
-        UITextField *lastTextFiled1 = [self.tfArrs objectAtIndex:lastEditedTag1];
-        UITextField *lastTextFiled2 = [self.tfArrs objectAtIndex:lastEditedTag2];
-        NSLog(@"t1:%d T2%d E:%d",lastTextFiled1.isFirstResponder,lastTextFiled2.isFirstResponder,editingField.isFirstResponder);
-        if ([lastTextFiled1 superview]==[editingField superview] || [lastTextFiled2 superview]==[editingField superview]) {
-            NSLog(@"DEBUG");
-            return ;
-        }
-    }
+//    if (lastEditedTag1 <=[self.tfArrs count] && lastEditedTag2 >0) {
+//        if (lastEditedTag1 ==[self.tfArrs count]) {
+//            return ;
+//        }
+//        
+//        UITextField *lastTextFiled1 = [self.tfArrs objectAtIndex:lastEditedTag1];
+//        UITextField *lastTextFiled2 = [self.tfArrs objectAtIndex:lastEditedTag2];
+//        NSLog(@"t1:%d T2%d E:%d",lastTextFiled1.isFirstResponder,lastTextFiled2.isFirstResponder,editingField.isFirstResponder);
+//        if ([lastTextFiled1 superview]==[editingField superview] || [lastTextFiled2 superview]==[editingField superview]) {
+//            NSLog(@"DEBUG");
+//            return ;
+//        }
+//    }
     
-    
-
-    
-
-
-//    [UIView animateWithDuration:0.25 animations:^{
-//        self.view.transform = CGAffineTransformIdentity;
-//    }];
 }
 
 
 -(void)willShow:(NSNotification *)notifi{
     UITextField *editingField = [self getFirstResponderTextfield];
-    
-    
     UIWindow * window=[[[UIApplication sharedApplication] delegate] window];
     CGRect rect=[editingField convertRect: editingField.bounds toView:window];
-        NSLog(@"boudY:%f",rect.origin.y);
-    
-    
-    UIView *tmp  = [[editingField superview] superview];
+
 
     if ([editingField isKindOfClass:[NSNull class]]) {
         return ;
     }
-    UIView *currentCell;
-    if (editingField.tag >13) {
-        currentCell = [[editingField superview] superview];
-    }else {
-        currentCell = [editingField superview];
-    }
+
     
-    
-    NSLog(@"%@",currentCell.subviews);
-    //键盘一弹出，就判断上一个，下一个按钮可不可用
-    NSLog(@"willsour:%d",editingField.tag);
     if(editingField.tag == 0){
         self.keyBoardBar.previousItem.enabled = NO;
+    } else {
+        self.keyBoardBar.previousItem.enabled = YES;
     }
-    
-    
+
     if(editingField.tag == self.tfArrs.count ){
         self.keyBoardBar.nextItem.enabled = NO;
+    }else {
+        self.keyBoardBar.nextItem.enabled = YES;
     }
     
-  //  CGFloat maxY = CGRectGetMaxY(currentCell.frame) + self.mainScrollview.frame.origin.y + 40 ;
-    CGFloat maxY = rect.origin.y; //相对屏幕位置
-    NSLog(@"最大值的 view:%f,table:%f",CGRectGetMaxY(currentCell.frame),self.mainScrollview.frame.origin.y);
+    CGFloat TextFiledY = rect.origin.y; //相对屏幕位置
     
     //2.获取键盘的y值
     CGRect kbEndFrm = [notifi.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
@@ -303,8 +283,8 @@
     
     //3.进行比较
     //计算距离
-    NSLog(@"键盘位置:%f,最大位置进度:%f",kbY,maxY);
-    CGFloat delta = kbY - maxY;   //键盘位置－最大位置
+    NSLog(@"键盘位置:%f,输入框位置:%f",kbY,TextFiledY);
+    CGFloat delta = kbY - TextFiledY;   //键盘位置－输入框位置
     delta = delta - 120;
     if(delta < 80){//需要往上移
         //添加个动画
@@ -330,6 +310,10 @@
     return -1;
 }
 
+
+/**
+ *  给输入板添加工具条
+ */
 -(void)addInputView {
     for (UITextField *tf in self.tfArrs ) {
         if (tf.inputAccessoryView ==nil) {
@@ -356,7 +340,7 @@
         textfied.textAlignment = NSTextAlignmentCenter;
     }
     textfied.delegate = self;
-    textfied.inputAccessoryView = self.keyBoardBar;
+//    textfied.inputAccessoryView = self.keyBoardBar;
     textfied.tag = [self.tfArrs count];
     [self.tfArrs addObject:textfied];
 }
@@ -368,50 +352,26 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    
-//    UIButton *btn1 = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 50, 30)];
-//    [btn1 setTitle:@"哇咔咔" forState:UIControlStateNormal];
-//    [btn1 setTitleColor:[UIColor brownColor] forState:UIControlStateNormal];
-//    btn1.backgroundColor = [UIColor blueColor];
-//    [btn1 addTarget:self action:@selector(saveDataAlert) forControlEvents:UIControlEventTouchUpInside];
-//    UIBarButtonItem *customItem = [[UIBarButtonItem alloc]initWithCustomView:btn1];
-//    self.navigationItem.leftBarButtonItem = customItem;
-    
-    
-    
-    
-    
-    
+
     
     UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:nil action:nil];
-    self.navigationItem.backBarButtonItem = item;
+   self.navigationItem.backBarButtonItem = item;
     [self cellSetting];
     UIButton *postBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [postBtn setFrame:CGRectMake(200, 1180, 40, 50)];
 
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
     
     [postBtn setTitle:@"上传" forState:UIControlStateNormal];
     [postBtn setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
     [postBtn addTarget:self action:@selector(LogPostDic) forControlEvents:UIControlEventTouchUpInside];
     
     [self.view addSubview:postBtn];
+    
+    
     [self addInputView];
     
-    UIButton *btn =[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 60, 30)];
-    btn.backgroundColor = [UIColor redColor];
-   [self.view addSubview:btn];
-    NSLog(@"%@",self.navigationController);
+
 
 }
 
@@ -464,7 +424,6 @@
     
     
     _RegionName=@"";
-    [self netInitialLog];
     
     UIScrollView *main = [[UIScrollView alloc]initWithFrame:CGRectMake(0, -54,Screen_width , Screen_height + 100)];
     
@@ -918,7 +877,7 @@
     
     
     
-    EditCell *TextDescibe = [[EditCell alloc]initWithFrame:CGRectMake(CellPaddingToVertical/2, CGRectGetMaxY(loan.frame)-CellClipPadding , Screen_width - CellPaddingToVertical, CellHeight)];
+    EditCell *TextDescibe = [[EditCell alloc]initWithFrame:CGRectMake(CellPaddingToVertical/2, CGRectGetMaxY(ExpiryTime.frame)-CellClipPadding , Screen_width - CellPaddingToVertical, CellHeight)];
     TextDescibe.isOptionalCell = YES ;
     TextDescibe.title = @"房屋描述:";
     TextDescibe.placeHoderString = @"至少10个字";
@@ -1011,16 +970,22 @@
     [self.PostDataDic setObject:@"1" forKey:@"isfangyuan"];
     [self.PostDataDic setObject:@"true" forKey:@"zushou"];
     [self.PostDataDic setObject:@"0" forKey:@"fenlei"];
-    if (![self checkPostData:self.PostDataDic]) {
-        UIAlertView *AW = [[UIAlertView alloc]initWithTitle:@"所填资料不完整"
-                                                    message:nil
-                                                   delegate:self
-                                          cancelButtonTitle:nil
-                                          otherButtonTitles:@"朕知道了", nil];
-        AW.tag = unCompletedAlertTag;
-        [AW show];
-        return;
-    }
+    /**
+     *  数据所填的监测
+     */
+    
+//    if (![self checkPostData:self.PostDataDic]) {
+//        UIAlertView *AW = [[UIAlertView alloc]initWithTitle:@"所填资料不完整"
+//                                                    message:nil
+//                                                   delegate:self
+//                                          cancelButtonTitle:nil
+//                                          otherButtonTitles:@"朕知道了", nil];
+//        AW.tag = unCompletedAlertTag;
+//        [AW show];
+//        return;
+//    }
+    
+    
     [MBProgressHUD showMessage:@"正在发布"];
     NSLog(@"上传数据:%@",_PostDataDic);
     NSLog(@"已选状态%@",_hasSelectedAttachMent);
@@ -1067,13 +1032,13 @@
 -(void)PostAll {
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-     manager.requestSerializer.timeoutInterval  = 5.0;
+     manager.requestSerializer.timeoutInterval  = 30.0;
     NSString *url4 = @"http://www.123qf.cn:81/testApp/user/releaseFKYuan.api";
-    NSLog(@"最后参数:%@",self.PostDataDic);
+
     NSDictionary *parameters =@{
                                 @"userid":@"15018639039",
                                 @"isfangyuan":@"1",
-                                @"zushou":@"true",
+                                @"zushou":@"0",
                                 @"usertel":@"1398888",
                                 @"fenlei" :@"0",
                                 @"shengfen":@"广东省",
@@ -1115,20 +1080,43 @@
                                 };
 
     [self.PostDataDic setObject:@"15018639039" forKey:@"usertel"];
+    
+    
+    [self.PostDataDic setObject:@"1" forKey:@"youxiaoq"];
+    
+//    @"shengfen":@"广东省",
+//    @"shi":@"惠州",
+//    @"qu":@"惠城区",
+//    @"region":@"河南岸",
+//    @"dizhi":@"演达大道",
+//    @"zhuangtai":@"0",
+    
+    [self.PostDataDic setObject:@"广东省" forKey:@"shengfen"];
+    [self.PostDataDic setObject:@" " forKey:@"shi"];
+    [self.PostDataDic setObject:@"惠城区" forKey:@"qu"];
+   // [self.PostDataDic setObject:@"河南岸" forKey:@"region"];
+  //  [self.PostDataDic setObject:@"演达大道" forKey:@"dizhi"];
+    [self.PostDataDic setObject:@"0" forKey:@"zhuangtai"];
+    
+    
+     NSLog(@"最后参数:%@",self.PostDataDic);
     [manager POST:url4 parameters:self.PostDataDic success:^(AFHTTPRequestOperation *operation, id responseObject) {
     NSLog(@"第二次提交的返回数据%@",responseObject);
         NSString *sucessFlagStr = responseObject[@"code"];
         NSInteger sucessFlagInt = [sucessFlagStr intValue];
         if (sucessFlagInt == 1) {
-         [MBProgressHUD hideHUD];
+      [MBProgressHUD hideHUD];
             //在这里弹窗,确定并返回
-            UIAlertView *AW = [[UIAlertView alloc]initWithTitle:@"发布成功"
+         UIAlertView *AW = [[UIAlertView alloc]initWithTitle:@"发布成功"
                                                         message:nil
                                                        delegate:self
                                               cancelButtonTitle:nil
                                               otherButtonTitles:@"确定", nil];
-            [AW setFrame:CGRectMake(20, 20, 150, 60)];
-            [AW show];
+         [AW setFrame:CGRectMake(20, 20, 150, 60)];
+         [AW show];
+        } else {
+            [MBProgressHUD hideHUD];
+            [MBProgressHUD showError:@"发布失败，请重试"];
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [MBProgressHUD hideHUD];
@@ -1170,31 +1158,7 @@
 }
 
 
--(void)netInitialLog {
-    AFHTTPRequestOperationManager *mgr  = [AFHTTPRequestOperationManager manager];
-     mgr.requestSerializer.timeoutInterval  = 5.0;
-    NSString *completeUrl = @"http://www.123qf.cn:81/testApp/user/loginUser.front?userid=15018639039&psword=5798161";
-    [mgr POST:completeUrl parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"登录信息%@",responseObject);
-        LocateTool *Locat = [LocateTool sharedLocateTool];
-        Locat.update = ^(NSString *cityName){
-            NSUserDefaults *DefaultHandle = [NSUserDefaults standardUserDefaults];
-           [DefaultHandle setObject:cityName forKey:CurrentCityName];
-        };
-        [Locat StartGetCityName];
-        NSLog(@"%@",[Locat GetCityName]);
-        
-        AppDelegate  *app = [UIApplication sharedApplication].delegate;
-        
-        
-       // NSDictionary *test =[LoacationNameTool dictionaryWithUrl:@"http://www.123qf.cn:81/testApp/area/selectArea.api?parentid=0"];
-        _indexData   = app.provnceIndexDic;
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"%@",error);
-        [MBProgressHUD hideHUD];
-        [MBProgressHUD showError:@"网络超时，稍后尝试"];
-    }];
-}
+
 
 
 #pragma mark DealingTextfield

@@ -41,16 +41,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
-
+    self.iCoView.layer.cornerRadius = 35;
+    self.iCoView.layer.masksToBounds = YES;
+ 
     [self displayDataFromNet];
 
 }
 
--(void)displayDataFromNet {
-    //父亲执行了数据加载操作
-    [super displayDataFromNet];
-}
+
 
 
 - (IBAction)backBtn:(id)sender {

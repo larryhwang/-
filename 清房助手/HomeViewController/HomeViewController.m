@@ -17,6 +17,7 @@
 #import "InnerTabBarController.h"
 #import "ZuGouDetailViewController.h"
 
+
 #import "UserInfoVC_iSIX.h"
 #import "UserInfoVC_iFive.h"
 #import "UserInfo_iSIXP.h"
@@ -25,6 +26,8 @@
 #import "MutiTaskOrderBusinessVC.h"
 
 #import "AppDelegate.h"
+
+#import "MBProgressHUD+CZ.h"
 
 typedef enum Slidestate {
     kStateHome,
@@ -51,12 +54,21 @@ static const CGFloat menuStartNarrowRatio  = 0.70;
 @property (strong, nonatomic) UITabBarController     *tabBarController;
 @property(nonatomic,assign) BOOL isOut;
 
+/**
+ *  权限列表
+ */
+@property(nonatomic,weak) NSArray *QFlimits;
+
 @end
 
 @implementation HomeViewController
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    AppDelegate *app = [UIApplication sharedApplication].delegate;
+    self.QFlimits =  app.QFUserPermissionDic_NSMArr;
+    NSLog(@"哈哈:%@",self.QFlimits);
+    
     self.common = [WMCommon getInstance];
     self.sta = kStateHome;
     self.distance = 0;
@@ -237,10 +249,7 @@ static const CGFloat menuStartNarrowRatio  = 0.70;
         infoVC = [[UserInfo_Four alloc]init];
         infoVC.QFDataDic = appDelegate.usrInfoDic;
     }
-    
     infoVC.title = @"个人信息";
-
-
     [self.messageNav pushViewController:infoVC animated:NO];
     self.messageNav.interactivePopGestureRecognizer.enabled = NO;
     [self showHome];
@@ -259,14 +268,35 @@ static const CGFloat menuStartNarrowRatio  = 0.70;
     
 }
 
+
+/**
+ *  跳转到  信息发布
+ */
 -(void)transToPost {
-    PostViewController *PostVC = [[PostViewController alloc]init];
-    PostVC.title = @"发布";
-    PostVC.hidesBottomBarWhenPushed =  YES;
-    [self.messageNav pushViewController:PostVC animated:NO];
-    [self showHome];
+//        NSString *match = @"imagexyz-999.png";
+//        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF == %@", match];
+//        NSArray *results = [directoryContents filteredArrayUsingPredicate:predicate];﻿
+    
+
+    if ([self isFunctionPersmisionWithTitle:@"信息发布"]) {
+        PostViewController *PostVC = [[PostViewController alloc]init];
+        PostVC.title = @"发布";
+        PostVC.hidesBottomBarWhenPushed =  YES;
+        [self.messageNav pushViewController:PostVC animated:NO];
+        [self showHome];
+    }else{
+        [MBProgressHUD showError:@"权限不足，请联系管理员"];
+    }
+    
+
 }
 
+
+
+
+/**
+ *  跳转到 内部房源
+ */
 -(void)transtoInnerFang {
     InnerTabBarController *innerTabarVC_FANG =[[InnerTabBarController alloc]initWithTabBarType:FangYuan];
     [self showHome];
@@ -274,21 +304,34 @@ static const CGFloat menuStartNarrowRatio  = 0.70;
 }
 
 
+
+/**
+ *  跳转到 综合业务
+ */
 -(void)transtoMutiTask {
-    MutiTaskOrderBusinessVC *OrderTask = [[MutiTaskOrderBusinessVC alloc]init];
-    OrderTask.title =@"综合业务";
-    //这里不需要定制新的导航栏，所以可以用原来的
-    [self showHome];
-    [self.messageNav pushViewController:OrderTask animated:YES];
     
+    if([self isFunctionPersmisionWithTitle:@"售后业务"]){
+        MutiTaskOrderBusinessVC *OrderTask = [[MutiTaskOrderBusinessVC alloc]init];
+        OrderTask.title =@"售后业务";
+        [self.messageNav pushViewController:OrderTask animated:YES];
+    } else {
+        [MBProgressHUD showError:@"权限不足，请联系管理员"];
+    }
 }
 
+
+
+/**
+ *  跳转到 内部客源
+ */
 -(void)transtoInnerKeyuan {
+
     InnerTabBarController *innerTabarVC_KE =[[InnerTabBarController alloc]initWithTabBarType:Keyuan];
     [self showHome];
     KeyWindow.rootViewController = innerTabarVC_KE;
-
 }
+
+
 
 -(void)transToSetting {
     UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"SettingInterface" bundle:[NSBundle mainBundle]];
@@ -315,7 +358,6 @@ static const CGFloat menuStartNarrowRatio  = 0.70;
 #pragma mark - 表格点击后代理方法 
 /**
  *  加载详情页
- *
  *  @param Id     房源ID
  *  @param Fenlei 分类ID
  */
@@ -339,6 +381,20 @@ static const CGFloat menuStartNarrowRatio  = 0.70;
     [self.messageNav pushViewController:VC animated:YES];
 }
 
-
-
+/**
+ *  用于判断功能是否具有权限
+ *
+ *  @param name 功能名称
+ *
+ *  @return bool值
+ */
+-(BOOL) isFunctionPersmisionWithTitle:(NSString *)name {
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF == %@", name];
+    NSArray *results = [self.QFlimits filteredArrayUsingPredicate:predicate];
+    if (results) {
+        return YES;
+    }else {
+        return NO;
+    }
+}
 @end

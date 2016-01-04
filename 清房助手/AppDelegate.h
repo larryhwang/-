@@ -10,7 +10,8 @@
 #import <PgySDK/PgyManager.h>
 #import <PgyUpdate/PgyUpdateManager.h>
 
-#define PGY_APPKEY  @"1532dd72458c0cd6552d9ab261f5c7df"
+
+#define PGY_APPKEY  @"1532dd72458c0cd6552d9ab261f5c7df"  //蒲公英Key
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
@@ -33,7 +34,7 @@
  *    权限列表数组
  */
 
-@property(nonatomic,strong)  NSArray  *QFUserPermissionDic_Arr;
+@property(nonatomic,strong)  NSMutableArray  *QFUserPermissionDic_NSMArr;
 
 @end
 

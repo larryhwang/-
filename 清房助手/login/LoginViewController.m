@@ -49,8 +49,8 @@
     NSMutableDictionary *PramaDic = [NSMutableDictionary new];
     //http://127.0.0.1:8080/qfzsapi/user/loginUser.front?userID=admin&psWord=2
     //http://www.123qf.cn/testApp/user/loginUser.front?userID=15018639039&psWord=5798161"
-//    PramaDic[@"userid"] = @"17090239027";
-//    PramaDic[@"psword"] = @"123456";
+    PramaDic[@"userid"] = @"17090239027";
+    PramaDic[@"psword"] = @"123456";
     
 //        PramaDic[@"userid"] = userName;
 //        PramaDic[@"psword"] = passWord;
@@ -132,17 +132,23 @@
  */
 -(void)getUserInfoAndPermissions {
     NSString *url = @"http://www.123qf.cn:81/testApp/user/getUserInfo.api";
-  __block  NSDictionary *dic = NULL;
+    __block  NSDictionary *dic = NULL;
     AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
     [mgr POST:url parameters:nil success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         NSLog(@"用户资料:%@",responseObject);
         dic = responseObject[@"data"];
         
         AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
-        appDelegate.QFUserPermissionDic_Arr = dic[@"menus"];
+        NSArray *arr = dic[@"menus"];
+        
+        for (NSDictionary *SingleMenuDic in arr) {
+            NSString *funcitonStr = SingleMenuDic[@"text"];
+            [appDelegate.QFUserPermissionDic_NSMArr  addObject:funcitonStr];
+        }
+//        appDelegate.QFUserPermissionDic_NSMArr = dic[@"menus"];
         appDelegate.usrInfoDic = dic[@"userInfo"];
         
-        NSLog(@"arr:%@,usrInfo:%@",appDelegate.QFUserPermissionDic_Arr,appDelegate.usrInfoDic);
+        NSLog(@"arr:%@,usrInfo:%@",appDelegate.QFUserPermissionDic_NSMArr,appDelegate.usrInfoDic);
         
             HomeViewController *home = [HomeViewController new];
            KeyWindow.rootViewController = home;

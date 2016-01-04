@@ -20,6 +20,9 @@
 #import "MJRefresh.h"
 #import "LesveMsgVC.h"
 
+
+#import "AppDelegate.h"
+
 #define  HeavyFont     [UIFont fontWithName:@"Helvetica-Bold" size:25]
 #define  ToolHeight  50    //固定底部的大小
 #define LeftViewWidth   ScreenWidth/4
@@ -87,7 +90,10 @@
 //       NSLog(@"官方:%s",__FUNCTION__);
    // NSLog(@"官方");
     [super viewDidLoad];
-
+    AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+    NSLog(@"权限列表:%@",appDelegate.QFUserPermissionDic_NSMArr);
+    
+    
     [self initNavController];
     [self initTable];
     [self addWhiteBack];  //背景加载
@@ -98,7 +104,6 @@
 }
 #pragma mark -初始化导航栏(收藏和分享)
 - (void)initNavController {
-
     UIButton  *h = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 24, 24)];
     UIImage *img = [UIImage imageNamed:@"pStar"];
     [h setImage:img forState:UIControlStateNormal];
@@ -370,7 +375,7 @@
         [self.scrollView3 addSubview:imageView];
     }];
     
-    
+    NSLog(@"完成滚动图设置");
 }
 
 #pragma mark -表代理方法
@@ -463,9 +468,7 @@
     
 #warning 描述地方
     NSString *miaoshuStr =  self.FangData[@"fangyuanmiaoshu"];
-    
     NSRange isHaveHTML = [miaoshuStr rangeOfString:@"style"];
-    
     //判断是不是网页
     if(isHaveHTML.length) {
         DescribieCell = [DescribeCell freeCellWithHtmlStr:miaoshuStr];   //+(instancetype)freeCellWithHtmlStr:(NSString *)htmlStr]
@@ -475,11 +478,8 @@
         self.DescribeCellHeight = DescribieCell.CellHight;
         DescribieCell.iSSeparetorLine = NO ;
     }
-    
         FreeCell  *testCell = [FreeCell freeCellWithTitle:@"地址" andContext:self.FangData[@"dizhi"]];
         self.FreeCellHeight  = testCell.CellHight;
-
-        
         LocationCell  =  [[[NSBundle mainBundle]loadNibNamed:@"FlatLocationCell" owner:nil options:nil] firstObject];
         DetailCell = [[[NSBundle mainBundle]loadNibNamed:@"FlatDetailCell" owner:nil options:nil] firstObject];
         if (indexPath.row ==0) {
@@ -488,7 +488,7 @@
             LocationCell.Region.text = self.FangData[@"qu"];
             LocationCell.LouPanName.text = [self judgeNullValue:self.FangData[@"mingcheng"]];
             if(self.isInner)
-                [self setCheckBtn:LocationCell]; //如果是内部请求,添加查看按钮
+            [self setCheckBtn:LocationCell]; //如果是内部请求,添加查看按钮
             
             
 #pragma mark -价格高亮属性
@@ -501,10 +501,6 @@
             [LocationCell.Price setAttributedText:priceAttri];
             
 #pragma mark -添加查看业主信息
-            
-            
-            
-            
             return LocationCell;
         }else if (indexPath.row ==1) {
             return testCell;
@@ -516,7 +512,8 @@
             //带有HTML，考虑加载HTML啊
             DetailCell.WithFacility.text = @" 空调 电视 洗衣机";
             DetailCell.ExtryTime.text =[NSString stringWithFormat:@"%@个月",self.FangData[@"youxiaoqi"]];
-            DetailCell.Direction.text = self.FangData[@"chaoxiang"];
+            NSString *chaoxingStr = self.FangData[@"chaoxiang"];
+            DetailCell.Direction.text = [self judgeNullValue:chaoxingStr];
             DetailCell.Area.text = [NSString stringWithFormat:@"%@",self.FangData[@"mianji"]];
             DetailCell.Type.text = self.FangData[@"leixing"];
             return DetailCell;
