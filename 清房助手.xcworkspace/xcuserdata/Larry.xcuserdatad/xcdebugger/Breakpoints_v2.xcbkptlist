@@ -10,11 +10,43 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "&#x6e05;&#x623f;&#x52a9;&#x624b;/SaleOutPostEditForm.m"
-            timestampString = "473654487.157836"
+            timestampString = "473670902.890289"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "284"
-            endingLineNumber = "284"
+            startingLineNumber = "291"
+            endingLineNumber = "291"
+            landmarkName = "-willShow:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "&#x6e05;&#x623f;&#x52a9;&#x624b;/SaleOutPostEditForm.m"
+            timestampString = "473670475.083549"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "282"
+            endingLineNumber = "282"
+            landmarkName = "-willShow:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "&#x6e05;&#x623f;&#x52a9;&#x624b;/SaleOutPostEditForm.m"
+            timestampString = "473670902.890289"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "294"
+            endingLineNumber = "294"
             landmarkName = "-willShow:"
             landmarkType = "5">
             <Locations>
@@ -22,45 +54,30 @@
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "__32-[SaleOutPostEditForm willShow:]_block_invoke"
+                  symbolName = "-[SaleOutPostEditForm willShow:]"
                   moduleName = "&#x6e05;&#x623f;&#x52a9;&#x624b;"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Larry/Documents/%E6%B8%85%E6%88%BF%E5%8A%A9%E6%89%8B/%E6%B8%85%E6%88%BF%E5%8A%A9%E6%89%8B/SaleOutPostEditForm.m"
-                  timestampString = "473655230.108095"
+                  timestampString = "473670476.150222"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "284"
-                  endingLineNumber = "284"
-                  offsetFromSymbolStart = "172">
+                  startingLineNumber = "293"
+                  endingLineNumber = "293"
+                  offsetFromSymbolStart = "804">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "__copy_helper_block_71"
+                  symbolName = "__32-[SaleOutPostEditForm willShow:]_block_invoke74"
                   moduleName = "&#x6e05;&#x623f;&#x52a9;&#x624b;"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Larry/Documents/%E6%B8%85%E6%88%BF%E5%8A%A9%E6%89%8B/%E6%B8%85%E6%88%BF%E5%8A%A9%E6%89%8B/SaleOutPostEditForm.m"
-                  timestampString = "473655230.109071"
+                  timestampString = "473670476.150476"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "0"
-                  endingLineNumber = "0"
-                  offsetFromSymbolStart = "24">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__destroy_helper_block_72"
-                  moduleName = "&#x6e05;&#x623f;&#x52a9;&#x624b;"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Larry/Documents/%E6%B8%85%E6%88%BF%E5%8A%A9%E6%89%8B/%E6%B8%85%E6%88%BF%E5%8A%A9%E6%89%8B/SaleOutPostEditForm.m"
-                  timestampString = "473655230.109541"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "0"
-                  endingLineNumber = "0"
+                  startingLineNumber = "298"
+                  endingLineNumber = "298"
                   offsetFromSymbolStart = "20">
                </Location>
             </Locations>
@@ -73,75 +90,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "&#x6e05;&#x623f;&#x52a9;&#x624b;/SaleOutPostEditForm.m"
-            timestampString = "473654522.67204"
+            timestampString = "473670902.890289"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "276"
-            endingLineNumber = "276"
-            landmarkName = "-willShow:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "&#x6e05;&#x623f;&#x52a9;&#x624b;/SaleOutPostEditForm.m"
-            timestampString = "473654527.337647"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "287"
-            endingLineNumber = "287"
-            landmarkName = "-willShow:"
-            landmarkType = "5">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[SaleOutPostEditForm willShow:]"
-                  moduleName = "&#x6e05;&#x623f;&#x52a9;&#x624b;"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Larry/Documents/%E6%B8%85%E6%88%BF%E5%8A%A9%E6%89%8B/%E6%B8%85%E6%88%BF%E5%8A%A9%E6%89%8B/SaleOutPostEditForm.m"
-                  timestampString = "473655230.1124"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "287"
-                  endingLineNumber = "287"
-                  offsetFromSymbolStart = "1392">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__32-[SaleOutPostEditForm willShow:]_block_invoke74"
-                  moduleName = "&#x6e05;&#x623f;&#x52a9;&#x624b;"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Larry/Documents/%E6%B8%85%E6%88%BF%E5%8A%A9%E6%89%8B/%E6%B8%85%E6%88%BF%E5%8A%A9%E6%89%8B/SaleOutPostEditForm.m"
-                  timestampString = "473655230.11266"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "287"
-                  endingLineNumber = "287"
-                  offsetFromSymbolStart = "24">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "&#x6e05;&#x623f;&#x52a9;&#x624b;/SaleOutPostEditForm.m"
-            timestampString = "473654528.327807"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "281"
-            endingLineNumber = "281"
+            startingLineNumber = "288"
+            endingLineNumber = "288"
             landmarkName = "-willShow:"
             landmarkType = "5">
             <Locations>
@@ -153,12 +106,12 @@
                   moduleName = "&#x6e05;&#x623f;&#x52a9;&#x624b;"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Larry/Documents/%E6%B8%85%E6%88%BF%E5%8A%A9%E6%89%8B/%E6%B8%85%E6%88%BF%E5%8A%A9%E6%89%8B/SaleOutPostEditForm.m"
-                  timestampString = "473655230.113866"
+                  timestampString = "473670476.151698"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "281"
-                  endingLineNumber = "281"
-                  offsetFromSymbolStart = "64">
+                  startingLineNumber = "287"
+                  endingLineNumber = "287"
+                  offsetFromSymbolStart = "20">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -168,30 +121,14 @@
                   moduleName = "&#x6e05;&#x623f;&#x52a9;&#x624b;"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Larry/Documents/%E6%B8%85%E6%88%BF%E5%8A%A9%E6%89%8B/%E6%B8%85%E6%88%BF%E5%8A%A9%E6%89%8B/SaleOutPostEditForm.m"
-                  timestampString = "473655230.114098"
+                  timestampString = "473670476.151929"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "281"
-                  endingLineNumber = "281"
+                  startingLineNumber = "288"
+                  endingLineNumber = "288"
                   offsetFromSymbolStart = "24">
                </Location>
             </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "&#x6e05;&#x623f;&#x52a9;&#x624b;/SaleOutPostEditForm.m"
-            timestampString = "473656419.000556"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1187"
-            endingLineNumber = "1187"
-            landmarkName = "-scrollViewDidScroll:"
-            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

@@ -152,13 +152,13 @@
     return _SelectedImgsData_MARR;
 }
 
-//-(CZKeyboardToolbar *)keyBoardBar {
-//    if (_keyBoardBar == nil) {
-//        _keyBoardBar = [CZKeyboardToolbar toolbar];
-//        _keyBoardBar.kbDelegate = self;
-//    }
-//    return _keyBoardBar;
-//}
+-(CZKeyboardToolbar *)keyBoardBar {
+    if (_keyBoardBar == nil) {
+        _keyBoardBar = [CZKeyboardToolbar toolbar];
+        _keyBoardBar.kbDelegate = self;
+    }
+    return _keyBoardBar;
+}
 
 
 #pragma mark 键盘以及表视图的滚动
@@ -265,29 +265,45 @@
     
     //3.进行比较
     //计算距离
+    
+    
+    /**
+     *  尝试纪录:
+     */
     NSLog(@"键盘位置:%f,输入框位置:%f",kbY,TextFiledY);
     CGFloat delta = kbY - TextFiledY;   //键盘位置－输入框位置
     
     int deltaInt = floorl(delta);
-    NSLog(@"差值:%d",deltaInt);
+        NSLog(@"差值1:%d",deltaInt);
     
-    //当前输入框和键盘位置相差为120
-    deltaInt = deltaInt - 60;
-    if(0<deltaInt && deltaInt< 60){  //在键盘上，但间差未满120
+    //要求当前输入框和键盘位置相差为60
+   
+     NSLog(@"差值:%d",deltaInt);
+    if(0<deltaInt && deltaInt< 60){  //在键盘上，但间差未满60
         //添加个动画
+       //  deltaInt = deltaInt - 60;
         [UIView animateWithDuration:0.25 animations:^{
                //每次都是以最初位置的中心点为起始参照
           //  self.view.transform = CGAffineTransformMakeTranslation(0, delta);
             [UIView animateWithDuration:0.25 animations:^{
-                self.view.transform = CGAffineTransformTranslate(self.view.transform,0, deltaInt-60);
+                self.view.transform = CGAffineTransformTranslate(self.view.transform,0, deltaInt-100);
             }];
         }];
     } else if(deltaInt<0){
         //在键盘下
         [UIView animateWithDuration:0.25 animations:^{
-            self.view.transform = CGAffineTransformTranslate(self.view.transform,0, deltaInt-60);
+        //    self.view.transform = CGAffineTransformTranslate(self.view.transform,0, deltaInt-60);
             
-          //   self.view.transform = CGAffineTransformMakeTranslation(0, delta-100);
+          //  [self.mainScrollview setContentOffset:CGPointMake(0, 100)];
+        //    [self.mainScrollview setContentOffset:CGPointMake(0, -deltaInt) animated:YES];
+             self.view.transform = CGAffineTransformMakeTranslation(0, deltaInt-60);
+            
+            
+            
+        //     UIScrollView *main = [[UIScrollView alloc]initWithFrame:CGRectMake(0, -54,
+            
+           // CGRect originRect = self.mainScrollview.frame;
+          //  [self.mainScrollview setFrame:CGRectMake(originRect.origin.x, originRect.origin.y+ (delta-100), originRect.size.width , originRect.size.height)];
         }];
     }
 }
@@ -350,8 +366,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-
-    
+//     AppDelegate *app = [UIApplication sharedApplication].
+    self.view.window.backgroundColor = [UIColor blueColor];
+//    self.view.window.viewForBaselineLayout.
     UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:nil action:nil];
    self.navigationItem.backBarButtonItem = item;
     [self cellSetting];
@@ -359,6 +376,8 @@
     [postBtn setFrame:CGRectMake(200, 1180, 40, 50)];
 
 
+
+    
     
     [postBtn setTitle:@"上传" forState:UIControlStateNormal];
     [postBtn setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
