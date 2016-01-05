@@ -152,13 +152,13 @@
     return _SelectedImgsData_MARR;
 }
 
--(CZKeyboardToolbar *)keyBoardBar {
-    if (_keyBoardBar == nil) {
-        _keyBoardBar = [CZKeyboardToolbar toolbar];
-        _keyBoardBar.kbDelegate = self;
-    }
-    return _keyBoardBar;
-}
+//-(CZKeyboardToolbar *)keyBoardBar {
+//    if (_keyBoardBar == nil) {
+//        _keyBoardBar = [CZKeyboardToolbar toolbar];
+//        _keyBoardBar.kbDelegate = self;
+//    }
+//    return _keyBoardBar;
+//}
 
 
 #pragma mark 键盘以及表视图的滚动
@@ -235,19 +235,7 @@
     
     NSLog(@"1:%d,2:%d",lastEditedTag1,lastEditedTag2);
     
-//    if (lastEditedTag1 <=[self.tfArrs count] && lastEditedTag2 >0) {
-//        if (lastEditedTag1 ==[self.tfArrs count]) {
-//            return ;
-//        }
-//        
-//        UITextField *lastTextFiled1 = [self.tfArrs objectAtIndex:lastEditedTag1];
-//        UITextField *lastTextFiled2 = [self.tfArrs objectAtIndex:lastEditedTag2];
-//        NSLog(@"t1:%d T2%d E:%d",lastTextFiled1.isFirstResponder,lastTextFiled2.isFirstResponder,editingField.isFirstResponder);
-//        if ([lastTextFiled1 superview]==[editingField superview] || [lastTextFiled2 superview]==[editingField superview]) {
-//            NSLog(@"DEBUG");
-//            return ;
-//        }
-//    }
+
     
 }
 
@@ -257,12 +245,6 @@
     UIWindow * window=[[[UIApplication sharedApplication] delegate] window];
     CGRect rect=[editingField convertRect: editingField.bounds toView:window];
 
-
-    if ([editingField isKindOfClass:[NSNull class]]) {
-        return ;
-    }
-
-    
     if(editingField.tag == 0){
         self.keyBoardBar.previousItem.enabled = NO;
     } else {
@@ -285,11 +267,27 @@
     //计算距离
     NSLog(@"键盘位置:%f,输入框位置:%f",kbY,TextFiledY);
     CGFloat delta = kbY - TextFiledY;   //键盘位置－输入框位置
-    delta = delta - 120;
-    if(delta < 80){//需要往上移
+    
+    int deltaInt = floorl(delta);
+    NSLog(@"差值:%d",deltaInt);
+    
+    //当前输入框和键盘位置相差为120
+    deltaInt = deltaInt - 60;
+    if(0<deltaInt && deltaInt< 60){  //在键盘上，但间差未满120
         //添加个动画
         [UIView animateWithDuration:0.25 animations:^{
-            self.view.transform = CGAffineTransformMakeTranslation(0, delta);
+               //每次都是以最初位置的中心点为起始参照
+          //  self.view.transform = CGAffineTransformMakeTranslation(0, delta);
+            [UIView animateWithDuration:0.25 animations:^{
+                self.view.transform = CGAffineTransformTranslate(self.view.transform,0, deltaInt-60);
+            }];
+        }];
+    } else if(deltaInt<0){
+        //在键盘下
+        [UIView animateWithDuration:0.25 animations:^{
+            self.view.transform = CGAffineTransformTranslate(self.view.transform,0, deltaInt-60);
+            
+          //   self.view.transform = CGAffineTransformMakeTranslation(0, delta-100);
         }];
     }
 }
@@ -428,17 +426,21 @@
     UIScrollView *main = [[UIScrollView alloc]initWithFrame:CGRectMake(0, -54,Screen_width , Screen_height + 100)];
     
     if (isI5) {
-        [main setFrame:CGRectMake(0, -54,Screen_width , Screen_height + 100 + 64)];
+        [main setFrame:CGRectMake(0, -54,Screen_width , Screen_height + 100 + 94)];
     }
     
     main.delegate = self;
     main.indicatorStyle = UIScrollViewIndicatorStyleWhite ;
     
-    [main setContentSize:CGSizeMake(Screen_width, Screen_height + 630)];
+    [main setContentSize:CGSizeMake(Screen_width, Screen_height + 687)];
     
   //      [main setContentSize:CGSizeMake(Screen_width, Screen_height + 830)];
     if (isI5) {
-        [main setContentSize:CGSizeMake(Screen_width, Screen_height + 730 + 64)];
+        [main setContentSize:CGSizeMake(Screen_width, Screen_height + 730 + 144)];
+    }
+    
+    if (isI4) {
+        [main setContentSize:CGSizeMake(Screen_width, Screen_height + 730 + 200)];
     }
     
     main.backgroundColor = UIColorWithRGBA(233, 233, 233, 1);
@@ -1182,13 +1184,12 @@
             }
         }
     }
-    [self.view endEditing:YES];
+   [self.view endEditing:YES];
 }
 
+
+
 #pragma mark UITextfiledDelegate
-
-
-
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
     NSInteger EditedTextFieldTag = textField.tag ;
