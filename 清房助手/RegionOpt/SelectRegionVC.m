@@ -12,6 +12,8 @@
 #import "LocateTool.h"
 #import "commonFile.h"
 
+#import "SelectQu.h"
+
 
 
 #define SCREEN_WIDTH                  ([UIScreen mainScreen].bounds.size.width)
@@ -64,8 +66,7 @@
     [curentCity addSubview:CurrentCityNameLable];
     
     //GPS 定位的View 添加事件
-    
-//  UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(Actiondo)];
+
     UITapGestureRecognizer *tagGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(Actiondo)];
     [curentCity addGestureRecognizer:tagGesture];
     
@@ -181,7 +182,6 @@
     SelectCity.delegate = self;
   
     [HttpTool QFGet:url parameters:nil success:^(id responseObject) {
-//        NSLog(@"这里:%@",responseObject);
         NSArray *passArr = responseObject[@"data"];
         SelectCity.CitiesArr = passArr ;
          [self.navigationController pushViewController:SelectCity animated:YES];
@@ -200,13 +200,20 @@
     NSLog(@"获取到GPS定位到了，准备回去");
     NSString *name = self.cityLable.text;
     [self.delegate appendName:name];
-    int count =(int)[self.navigationController.viewControllers count];
-    UIViewController *VC = self.navigationController.viewControllers[count -2];
+   //跳转到区域
+     NSString *url =@"http://www.123qf.cn:81/testApp/area/selectArea.api?parentid=4413";
     
-//    UIViewController *View = self.navigationController.viewControllers[];
-    [self.navigationController popViewControllerAnimated:YES];
-//    [self.navigationController popToViewController:VC animated:YES];
-//    self.navigationController
+    SelectQu *SelectCity = [SelectQu new];
+    SelectCity.delegate = self;
+    
+    [HttpTool QFGet:url parameters:nil success:^(id responseObject) {
+        NSArray *passArr = responseObject[@"data"];
+        SelectCity.QuArr = passArr ;
+        [self.navigationController pushViewController:SelectCity animated:YES];
+        NSLog(@"DEBUG");
+    } failure:^(NSError *error) {
+        NSLog(@"%@",error);
+    }];
     
 }
 

@@ -10,6 +10,6 @@
 
 @interface LoacationNameTool : NSObject
 
-+ (NSDictionary *) dictionaryWithUrl:(NSString *)url;
++ (void) dictionaryWithUrl:(NSString *)url;
 
 @end

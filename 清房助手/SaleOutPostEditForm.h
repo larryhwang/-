@@ -10,6 +10,7 @@
 
 @interface SaleOutPostEditForm : UIViewController
 
+@property (nonatomic,strong)  NSDictionary *indexData;
 
 @end
 

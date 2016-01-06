@@ -90,8 +90,10 @@
        if (Cp==1) {
            //获取到省份的数据，并且按首字母拼音分开了
            AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
-           appDelegate.provnceIndexDic = [LoacationNameTool dictionaryWithUrl:@"http://www.123qf.cn:81/testApp/area/selectArea.api?parentid=0"];
+           [LoacationNameTool dictionaryWithUrl:@"http://www.123qf.cn:81/testApp/area/selectArea.api?parentid=0"];
 
+           NSLog(@"省市资料:%@",appDelegate.provnceIndexDic);
+           
            [self getUserInfoAndPermissions];
            
 

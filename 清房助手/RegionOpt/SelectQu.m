@@ -67,21 +67,8 @@
     
     //打印导航栏全部视图 :
     NSLog(@"NavArrs:%@",self.navigationController.viewControllers);
-    //打印如下:
-//    
-//    "<WMHomeViewController: 0x7fc71c17fc60>",
-//    "<PostViewController: 0x7fc71c8558d0>",
-//    "<PostCategory: 0x7fc71c7c7cd0>",
-//    "<SaleOutPostEditForm: 0x7fc71c694ac0>",
-//    "<SelectRegionVC: 0x7fc71c6d0f20>",
-//    "<SelectCityVC: 0x7fc71cb7e4e0>",
-//    "<SelectQu: 0x7fc71ce868f0>"
-    
-    //[self.navigationController.viewControllers objectAtIndex:0];
-    
-    
+
     //推向选择街道
-    
     NSLog(@"当前导航%@",self.navigationController);
     
     

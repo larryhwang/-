@@ -16,7 +16,24 @@
 @property(nonatomic,copy) NSString  *title;
 @property(nonatomic,copy) NSString  *placeHoderString;
 @property(nonatomic,copy) NSString  *contentString;
-@property (nonatomic, copy) void (^otherAction)(void);
+
+/**
+ *  触发弹窗选择功能
+ */
+@property(nonatomic,copy) void (^otherAction) (void);
+
+
+/**
+ *  加载上一次的参数 
+ */
+@property(nonatomic,copy)   void   (^updateAction) (void);
+
+
+
+
+/**
+ *  单元格内容的输入框
+ */
 @property(nonatomic,strong)  UITextField  *contentFiled;
 +(id)cellWithEqualTitle:(NSString *)name;
 @end

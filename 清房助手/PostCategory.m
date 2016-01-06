@@ -16,7 +16,7 @@
 
 #import "PostCategory.h"
 #import "SaleOutPostEditForm.h"
-
+#import "AppDelegate.h"
 
 
 @interface PostCategory ()<UITableViewDataSource,UITableViewDelegate>
@@ -65,7 +65,9 @@
     if (indexPath.row ==0) {
        // cell.textLabel.text  =@"住宅";
         SaleOutPostEditForm *editForm = [[SaleOutPostEditForm alloc]init];
-        
+        AppDelegate *app = [UIApplication sharedApplication].delegate;
+        NSLog(@"%@",app.provnceIndexDic);
+        editForm.indexData    =   app.provnceIndexDic;
         editForm.title = @"住宅出售";
         [self.navigationController pushViewController:editForm animated:YES];
     } else if (indexPath.row ==1) {

@@ -11,9 +11,6 @@
 #import "WMNavigationController.h"
 #import "FilterSelectJieViewController.h"
 
-
-
-
 @interface SelectJie ()<UITableViewDataSource,UITableViewDelegate>
 
 @end
@@ -26,8 +23,6 @@
    
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    
-    
     return [_JieArr count];
 }
 
@@ -61,16 +56,8 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-//    NSLog(@"%@",self.navigationController.viewControllers);
-//    "<SeachRusultDisplayController: 0x7fdfb73cfc30>",
-//    "<FilterViewController: 0x7fdfb7817ae0>",
-//    "<SelectRegionVC: 0x7fdfb757ea70>",
-//    "<SelectCityVC: 0x7fdfb758b420>",
-//    "<SelectQu: 0x7fdfb7a118a0>"
-    
-    NSLog(@"%@",self.navigationController.viewControllers);
     NSDictionary *dict = [_JieArr objectAtIndex:indexPath.row];
-    NSString *proVNname = dict[@"name"]; //街道名
+    NSString *proVNname = dict[@"name"];
    [self.delegate appendName:proVNname];
     UIViewController *ed;
     if ([self.navigationController isKindOfClass:[WMNavigationController class]]) {
@@ -78,10 +65,6 @@
     }else {
           ed = [self.navigationController.viewControllers objectAtIndex:1];  //筛选模块的街道选择
     }
-    
-    
-
-
      //跳回编辑界面
    [self.navigationController popToViewController:ed animated:YES];
 
@@ -90,4 +73,5 @@
 -(void)appendName:(NSString *)locationName {
     [self.delegate appendName:locationName];
 }
+
 @end

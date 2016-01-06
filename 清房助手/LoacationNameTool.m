@@ -9,6 +9,7 @@
 #import "LoacationNameTool.h"
 #import "HttpTool.h"
 #import "pinyin.h"
+#import "AppDelegate.h"
 
 @interface LoacationNameTool (){
     
@@ -21,12 +22,13 @@
 
 
 
-+(NSDictionary *)dictionaryWithUrl:(NSString *)url {
++(void)dictionaryWithUrl:(NSString *)url {
     NSMutableDictionary  *NSMdict = [NSMutableDictionary dictionary];
     NSMutableSet *NStempSave = [NSMutableSet new];
     [HttpTool QFGet:url parameters:nil success:^(id responseObject) {
         NSArray *dt = [NSArray array];
         NSLog(@"地址获取");
+        NSLog(@"这里:%@",responseObject);
         dt = responseObject[@"data"];
         for (NSDictionary *dict in dt) {
             NSString *name = dict[@"name"];
@@ -422,11 +424,16 @@
             }
 
         }
+
+        AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+        appDelegate.provnceIndexDic = NSMdict;
+        
     } failure:^(NSError *error) {
         NSLog(@"%@",error);
     }];
     
-    return NSMdict;
+    NSLog(@"已得到:%@",NSMdict);
+
   }
 # pragma  mark 获取已存在的首字母
 + (NSArray *) nameArratoCharaterIndexArrayWithfullnames:(NSArray *)array{

@@ -9,9 +9,9 @@
  *  说明:本页代码描述－出售发布写字楼
         !接口注意
  *        1."shengfen",@"shi",@"qu"   这个三个字段如果是空，则 返回发布失败
+ *        2.输入框切换的功能，仍有瑕疵。
  *
- *
- *
+ *               16-1-5-Larry
  */
 
 #import "SaleOutPostEditForm.h"
@@ -72,6 +72,7 @@
 #define unCompletedAlertTag 70
 #define SuccessAlertTag     71
 #define saveAlertTag       72
+#define checkLastTag       73
 
 
 @interface SaleOutPostEditForm ()<UITextFieldDelegate,UIActionSheetDelegate, UIImagePickerControllerDelegate,SelectRegionDelegate,UIScrollViewDelegate,CZKeyboardToolbarDelegate ,UIActionSheetDelegate,QBImagePickerControllerDelegate,UIAlertViewDelegate,WMNavigationControllerDelegate>{
@@ -95,10 +96,25 @@
 @property (nonatomic, strong) JYBMultiImageView *multiImageView;
 @property (nonatomic, copy)   UIView *(^viewGetter)(NSString *imageName);
 @property (nonatomic, copy)   void (^blockTest)(void);
-@property (nonatomic,strong)  NSDictionary *indexData;
+
 @property(nonatomic,strong)   NSMutableArray  *tfArrs;
 @property(nonatomic,strong)   NSMutableArray  *footArrs;
+
+
+
+/**
+ *  上传的参数信息
+ */
 @property(nonatomic,strong)   NSMutableDictionary  *PostDataDic;
+
+
+/**
+ *  上一次上传的参数信息
+ */
+@property(nonatomic,strong)  NSDictionary  *LatPostDataDic;
+
+
+
 @property(nonatomic,strong)   CZKeyboardToolbar  *keyBoardBar;
 @property(nonatomic,strong)   UIScrollView  *mainScrollview;
 @property(nonatomic,assign)   BOOL ScoSwitch;
@@ -107,7 +123,7 @@
 @property(nonatomic,weak)     NSMutableArray *haSelectedImgs_MARR;
 @property(nonatomic,strong)   NSMutableArray  *SelectedImgsData_MARR;
 
-
+@property(nonatomic,strong)  NSMutableArray *cellMARR;
 
 @property(nonatomic,strong)  EditCell  *RegionTF;
 @end
@@ -161,6 +177,14 @@
 }
 
 
+-(NSMutableArray*)cellMARR {
+    if (_cellMARR==nil) {
+        _cellMARR = [NSMutableArray new];
+    }
+    return _cellMARR;
+}
+
+
 #pragma mark 键盘以及表视图的滚动
 -(void)keyboardToolbar:(CZKeyboardToolbar *)toolbar btndidSelected:(UIBarButtonItem *)item{
     switch (item.tag) {
@@ -202,6 +226,7 @@
     
     
 }
+
 -(void)next{
     //获取当前焦点
     NSInteger currentIndex = [self indexOfFirstResponder];
@@ -216,8 +241,6 @@
         [self.tfArrs[nextIndex] becomeFirstResponder];
     }
 }
-
-
 
 -(void)willHide {
     NSLog(@"willHide");
@@ -244,14 +267,16 @@
     UITextField *editingField = [self getFirstResponderTextfield];
     UIWindow * window=[[[UIApplication sharedApplication] delegate] window];
     CGRect rect=[editingField convertRect: editingField.bounds toView:window];
+   
 
+    
     if(editingField.tag == 0){
         self.keyBoardBar.previousItem.enabled = NO;
     } else {
         self.keyBoardBar.previousItem.enabled = YES;
     }
 
-    if(editingField.tag == self.tfArrs.count ){
+    if(editingField.tag +1  == self.tfArrs.count ){
         self.keyBoardBar.nextItem.enabled = NO;
     }else {
         self.keyBoardBar.nextItem.enabled = YES;
@@ -281,10 +306,7 @@
      NSLog(@"差值:%d",deltaInt);
     if(0<deltaInt && deltaInt< 60){  //在键盘上，但间差未满60
         //添加个动画
-       //  deltaInt = deltaInt - 60;
         [UIView animateWithDuration:0.25 animations:^{
-               //每次都是以最初位置的中心点为起始参照
-          //  self.view.transform = CGAffineTransformMakeTranslation(0, delta);
             [UIView animateWithDuration:0.25 animations:^{
                 self.view.transform = CGAffineTransformTranslate(self.view.transform,0, deltaInt-100);
             }];
@@ -292,18 +314,7 @@
     } else if(deltaInt<0){
         //在键盘下
         [UIView animateWithDuration:0.25 animations:^{
-        //    self.view.transform = CGAffineTransformTranslate(self.view.transform,0, deltaInt-60);
-            
-          //  [self.mainScrollview setContentOffset:CGPointMake(0, 100)];
-        //    [self.mainScrollview setContentOffset:CGPointMake(0, -deltaInt) animated:YES];
              self.view.transform = CGAffineTransformMakeTranslation(0, deltaInt-60);
-            
-            
-            
-        //     UIScrollView *main = [[UIScrollView alloc]initWithFrame:CGRectMake(0, -54,
-            
-           // CGRect originRect = self.mainScrollview.frame;
-          //  [self.mainScrollview setFrame:CGRectMake(originRect.origin.x, originRect.origin.y+ (delta-100), originRect.size.width , originRect.size.height)];
         }];
     }
 }
@@ -326,7 +337,7 @@
 
 
 /**
- *  给输入板添加工具条
+ *  给键盘工具条
  */
 -(void)addInputView {
     for (UITextField *tf in self.tfArrs ) {
@@ -336,6 +347,12 @@
     }
 }
 
+
+/**
+ *  获取当前焦点的输入框
+ *
+ *  @return 输入框
+ */
 -(UITextField *) getFirstResponderTextfield {
     for (UITextField *tf in self.tfArrs ) {
         if (tf.inputAccessoryView ==nil) {
@@ -349,12 +366,13 @@
     return NULL;
 }
 
+
+
 -(void)dealTextfield :(UITextField *)textfied isTextCenter:(BOOL)isTextCenter{
     if (isTextCenter) {
         textfied.textAlignment = NSTextAlignmentCenter;
     }
     textfied.delegate = self;
-//    textfied.inputAccessoryView = self.keyBoardBar;
     textfied.tag = [self.tfArrs count];
     [self.tfArrs addObject:textfied];
 }
@@ -363,82 +381,105 @@
 -(void)saveDataAlert {
     NSLog(@"已拦截");
 }
+
+
+/**
+ *  是否继续上一次填写的资料
+ */
+
+-(void)checkContinue{
+   //  1.读取上次保存的字典资料，如果存在则弹窗让用户选择 继续填写 还是 重新选择，不存在则函数返回
+   //  2.继续填写－>遍历字典的值赋值到输入框
+    // 3.
+  
+    
+//    NSDictionary *lastDic = [[NSUserDefaults standardUserDefaults]objectForKey:forKey:@"11"];  //11是状态码，代表 是出售 住宅
+    
+   NSDictionary *lastDic =  [[NSUserDefaults standardUserDefaults]objectForKey:@"11"];
+    
+    
+    
+    if (lastDic) {
+        NSLog(@"存在:%@",lastDic);
+        self.LatPostDataDic = lastDic ;
+        UIAlertView *AW = [[UIAlertView alloc]initWithTitle:nil
+                                                    message:@"是否继续上一次填写"
+                                                   delegate:self
+                                          cancelButtonTitle:@"继续填写"
+                                          otherButtonTitles:@"重写填写",nil];
+        AW.tag = checkLastTag;
+        [AW show];
+    }
+    
+//    NSDictionary *lastDic
+    
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-
-//     AppDelegate *app = [UIApplication sharedApplication].
-    self.view.window.backgroundColor = [UIColor blueColor];
-//    self.view.window.viewForBaselineLayout.
-    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:nil action:nil];
-   self.navigationItem.backBarButtonItem = item;
+     NSLog(@"锁:%@",_indexData);
+    
+    
+    
+    
+  
     [self cellSetting];
-    UIButton *postBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [postBtn setFrame:CGRectMake(200, 1180, 40, 50)];
-
-
-
-    
-    
-    [postBtn setTitle:@"上传" forState:UIControlStateNormal];
-    [postBtn setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
-    [postBtn addTarget:self action:@selector(LogPostDic) forControlEvents:UIControlEventTouchUpInside];
-    
-    [self.view addSubview:postBtn];
-    
-    
     [self addInputView];
+    [self checkContinue];
     
-
-
+   
 }
 
 
 #pragma mark -pop_delegate
 
-
 /**
- *  在这里拦截，发布页面的返回，并触发弹窗，但在区域选择的界面中是 使用 popViewControllerAnimated 返回时
- 也会触发弹窗，所以现在 在这里 做一个 _isFromSelectPro 设置一个标记
+ *  返回按钮的拦截事件
  *
- *  @param navigationBar <#navigationBar description#>
- *  @param item          <#item description#>
- *
- *  @return <#return value description#>
+ *  @return bool
  */
-
-
 -(BOOL)controllerWillPopHandler {
     
-    if (_isFromSelectPro) {
-        _isFromSelectPro  = NO;
-        return NO;   //如果从定位界面跳转过来，就不弹窗
-    } else {
-        NSLog(@"TopVC in nav :%@",self.navigationController.topViewController);
-        
-        UIAlertView *AW = [[UIAlertView alloc]initWithTitle:@"提示"
-                                                    message:@"资料未保存"
-                                                   delegate:self
-                                          cancelButtonTitle:@"放弃编辑"
-                                          otherButtonTitles:@"留在此页", nil];
-        AW.tag = saveAlertTag;
-        [AW show];
-        return NO;
-    }
     
-
+    NSLog(@"TopVC in nav :%@",self.navigationController.topViewController);
+    
+    UIAlertView *AW = [[UIAlertView alloc]initWithTitle:nil
+                                                message:@"资料尚未保存"
+                                               delegate:self
+                                      cancelButtonTitle:@"放弃编辑"
+                                      otherButtonTitles:@"留在此页", @"保存并退出",nil];
+    AW.tag = saveAlertTag;
+    [AW show];
+    return NO;
+    
+    
+    
+//    if (_isFromSelectPro) {
+//        _isFromSelectPro  = NO;
+//        return NO;   //如果从定位界面跳转过来，就不弹窗
+//    } else {
+//        NSLog(@"TopVC in nav :%@",self.navigationController.topViewController);
+//        
+//        UIAlertView *AW = [[UIAlertView alloc]initWithTitle:@"提示"
+//                                                    message:@"资料未保存"
+//                                                   delegate:self
+//                                          cancelButtonTitle:@"放弃编辑"
+//                                          otherButtonTitles:@"留在此页", nil];
+//     AW.tag = saveAlertTag;
+//    [AW show];
+//    return NO;
+//    }
 }
 
 
+
+
 #pragma mark - BaseUISetting
-
-
-
 -(void)cellSetting {
     _ScoSwitch = NO;
     //监听键盘事件
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(willShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(willHide) name:UIKeyboardWillHideNotification object:nil];
-    
     
     _RegionName=@"";
     
@@ -453,7 +494,6 @@
     
     [main setContentSize:CGSizeMake(Screen_width, Screen_height + 687)];
     
-  //      [main setContentSize:CGSizeMake(Screen_width, Screen_height + 830)];
     if (isI5) {
         [main setContentSize:CGSizeMake(Screen_width, Screen_height + 730 + 144)];
     }
@@ -469,9 +509,19 @@
     
     // Tittle
     EditCell *Title  = [[EditCell alloc]initWithFrame:CGRectMake(CellPaddingToVertical/2, 60, CellWidth, CellHeight)];
+    
+    [self.cellMARR addObject:Title];
+    
     Title.title  = @"发布标题:";
     Title.placeHoderString = @"请输入标题8字～12字";
     [self dealTextfield:Title.contentFiled isTextCenter:NO];
+    
+    
+    [self.cellMARR addObject:Title];
+    Title.updateAction = ^ {
+        Title.contentString = self.LatPostDataDic[@"biaoti"];
+    };
+    
     [main addSubview:Title];
     
     
@@ -479,8 +529,18 @@
     EditCell    *BuildingName  = [[EditCell alloc]initWithFrame:CGRectMake(CellPaddingToVertical/2, CGRectGetMaxY(Title.frame)+ GroupPadding, Screen_width - CellPaddingToVertical, CellHeight)];
     BuildingName.title = @"楼盘名称:";
     BuildingName.placeHoderString = @"1～20字";
+    
+    
+    [self.cellMARR addObject:BuildingName];
+    BuildingName.updateAction = ^ {
+        BuildingName.contentString = self.LatPostDataDic[@"mingcheng"];
+    };
+    
+    
     [self dealTextfield:BuildingName.contentFiled isTextCenter:NO];
     [main addSubview:BuildingName];
+    
+    
     
     //RegionOption
     EditCell    *RegionOption  = [[EditCell alloc]initWithFrame:CGRectMake(CellPaddingToVertical/2, CGRectGetMaxY(BuildingName.frame)-CellClipPadding , Screen_width - CellPaddingToVertical, CellHeight)];
@@ -490,6 +550,7 @@
     RegionOption.placeHoderString = @"请选择";
     RegionOption.otherAction = ^(){
         NSLog(@"区域选项!");
+         RegionOption.contentFiled.text = @"";
         SelectRegionVC *selectRegion = [SelectRegionVC new];
         selectRegion.delegate = self ;
         selectRegion.indexData = _indexData ;
@@ -578,7 +639,7 @@
     FlatNo.title = @"楼层:";
     
     
-    UILabel *lable1 = [[UILabel alloc]initWithFrame:CGRectMake(100,0, 30, 50)];
+    UILabel *lable1 = [[UILabel alloc]initWithFrame:CGRectMake(85,0, 30, 50)];
     lable1.text = @"第";
     [lable1 setTextColor:[UIColor lightGrayColor]];
     [FlatNo addSubview:lable1];
@@ -601,7 +662,7 @@
     [lable3 setTextColor:[UIColor lightGrayColor]];
     [FlatNo addSubview:lable3];
     
-    UITextField *TF2= [[UITextField alloc]initWithFrame:CGRectMake(CGRectGetMaxX(lable3.frame), 0, 60, 50)];
+    UITextField *TF2= [[UITextField alloc]initWithFrame:CGRectMake(CGRectGetMaxX(lable3.frame), 0, 50, 50)];
     TF2.textAlignment = NSTextAlignmentCenter;
     TF2.delegate = self ;
     TF2.tag = [self.tfArrs count];
@@ -623,7 +684,7 @@
     [self dealTextfield:TF_Area isTextCenter:YES];
     [Area addSubview:TF_Area];
     
-    UILabel *LABLE_Area = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(TF_Area.frame)+50, 0, 50, 50)];
+    UILabel *LABLE_Area = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(TF_Area.frame)+30, 0, 50, 50)];
     [LABLE_Area setTextColor:[UIColor lightGrayColor]];
     LABLE_Area.text = @"平方";
     
@@ -640,13 +701,13 @@
     
     [RoomStyle addSubview:RoomTextfield];
     
-    UILabel *RoomLabel = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(RoomTextfield.frame)+5, 0, 20, 50)];
+    UILabel *RoomLabel = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(RoomTextfield.frame), 0, 20, 50)];
     
     [RoomLabel setTextColor:[UIColor lightGrayColor]];
     RoomLabel.text = @"室";
     [RoomStyle addSubview:RoomLabel];
     
-    UITextField *TingTextfield = [[UITextField alloc]initWithFrame:CGRectMake(CGRectGetMaxX(RoomLabel.frame)-5, 0, 35, 50)];
+    UITextField *TingTextfield = [[UITextField alloc]initWithFrame:CGRectMake(CGRectGetMaxX(RoomLabel.frame)-10, 0, 35, 50)];
     [self dealTextfield:TingTextfield isTextCenter:YES];
     
     [RoomStyle addSubview:TingTextfield];
@@ -719,7 +780,7 @@
     TF_HouseAge.keyboardType  = UIKeyboardTypeNumberPad ;
     [self dealTextfield:TF_HouseAge isTextCenter:YES];
     [HouseAge addSubview:TF_HouseAge];
-    UILabel *LABLE_TF_HouseAge = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(TF_HouseAge.frame)+50, 0, 50, 50)];
+    UILabel *LABLE_TF_HouseAge = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(TF_HouseAge.frame)+20, 0, 50, 50)];
     [LABLE_TF_HouseAge setTextColor:[UIColor lightGrayColor]];
     LABLE_TF_HouseAge.text = @"年";
     [HouseAge addSubview:LABLE_TF_HouseAge];
@@ -817,7 +878,7 @@
     TF_HousePrice.keyboardType  = UIKeyboardTypeNumberPad ;
     [self dealTextfield:TF_HousePrice isTextCenter:YES];
     [Price addSubview:TF_HousePrice];
-    UILabel *LABLE_TF_HousePrice = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(TF_HousePrice.frame)+50, 0, 50, 50)];
+    UILabel *LABLE_TF_HousePrice = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(TF_HousePrice.frame), 0, 50, 50)];
     [LABLE_TF_HousePrice setTextColor:[UIColor lightGrayColor]];
     LABLE_TF_HousePrice.text = @"万";
     [Price addSubview:LABLE_TF_HousePrice];
@@ -968,7 +1029,7 @@
     
     UIButton *SaveBtn =[[UIButton alloc]initWithFrame:CGRectMake(FootButtonPadding, CGRectGetMaxY(OwnerTele.frame)+20, FootButtonWidth, FootButtonHeight)];
     [SaveBtn setTitle:@"保存" forState:UIControlStateNormal];
-    [SaveBtn addTarget:self action:@selector(LogPostDic) forControlEvents:UIControlEventTouchUpInside];
+    [SaveBtn addTarget:self action:@selector(DataSave) forControlEvents:UIControlEventTouchUpInside];
     [SaveBtn setBackgroundColor:[UIColor brownColor]];
     [footerView addSubview:SaveBtn];
     
@@ -986,11 +1047,45 @@
     [self.view addSubview:main];
 }
 
+
+-(void)DataSave {
+    //数据保存
+    //1.先做必要拼接
+    //2.然后保存到Deafault里面去
+    
+}
+
+/**
+ *  区域选择拼补
+ */
+-(void)FormatRegionParam {
+    NSMutableArray *Quarray =(NSMutableArray *) [_RegionTF.contentFiled.text componentsSeparatedByString:@" "];
+    if ([Quarray count] > 2) {
+        [Quarray removeObject:[Quarray lastObject]];
+        NSArray *SqlTitleArr = [NSArray arrayWithObjects:@"shengfen",@"shi",@"qu",@"region",nil];
+        [Quarray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            [self.PostDataDic setObject:obj forKey:SqlTitleArr[idx]];  //设置
+        }];
+    }
+}
+
+
+
+
 -(void)LogPostDic {
-    [self.PostDataDic setObject:@"15018639039" forKey:@"userid"];
+    
+    
+    //默认参数补齐
+    [self.PostDataDic setObject:@"15018639039" forKey:@"userid"];  //？
     [self.PostDataDic setObject:@"1" forKey:@"isfangyuan"];
     [self.PostDataDic setObject:@"true" forKey:@"zushou"];
     [self.PostDataDic setObject:@"0" forKey:@"fenlei"];
+    
+    
+    
+    [self FormatRegionParam];
+    
+    
     /**
      *  数据所填的监测
      */
@@ -1012,15 +1107,7 @@
     NSLog(@"已选状态%@",_hasSelectedAttachMent);
 
     
-    //区域选择拼补
-   NSMutableArray *Quarray =(NSMutableArray *) [_RegionTF.contentFiled.text componentsSeparatedByString:@" "];
-    if ([Quarray count] > 2) {
-        [Quarray removeObject:[Quarray lastObject]];
-        NSArray *SqlTitleArr = [NSArray arrayWithObjects:@"shengfen",@"shi",@"qu",@"region",nil];
-        [Quarray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            [self.PostDataDic setObject:obj forKey:SqlTitleArr[idx]];  //设置
-        }];
-    }
+
     
     //格式化图片
     for (UIImage *img in self.haSelectedImgs_MARR) {
@@ -1104,13 +1191,7 @@
     
     
     [self.PostDataDic setObject:@"1" forKey:@"youxiaoq"];
-    
-//    @"shengfen":@"广东省",
-//    @"shi":@"惠州",
-//    @"qu":@"惠城区",
-//    @"region":@"河南岸",
-//    @"dizhi":@"演达大道",
-//    @"zhuangtai":@"0",
+
     
     [self.PostDataDic setObject:@"广东省" forKey:@"shengfen"];
     [self.PostDataDic setObject:@" " forKey:@"shi"];
@@ -1276,9 +1357,7 @@
             [self.PostDataDic setObject:textField.text forKey:@"shoujia"];
             break;
             
-#define userNameTag         14                  //参数文档中未见
-            
-            
+#define userNameTag     14                  //参数文档中未见
 #define usertelTag      15
 #define OwnerTag        16
 #define OwnerName       17
@@ -1330,6 +1409,7 @@
     if (showCamare) {
         sourceType = UIImagePickerControllerSourceTypeCamera;
     }
+    
     
     if(![UIImagePickerController isSourceTypeAvailable:sourceType])
     {
@@ -1445,8 +1525,6 @@
 }
 
 
-
-
 -(void)getImgData:(PHAsset *)asset {   //转成NSData再获取
     PHImageManager *imageMannager = [PHImageManager defaultManager];
     [imageMannager requestImageDataForAsset:asset options:nil resultHandler:^(NSData * _Nullable imageData, NSString * _Nullable dataUTI, UIImageOrientation orientation, NSDictionary * _Nullable info) {
@@ -1480,32 +1558,76 @@
     //底部四个移动
     [_footerView setFrame:CGRectMake(CellPaddingToVertical/2, CGRectGetMaxY(_pictureDisplay.frame)+GroupPadding, CellWidth, CellHeight*4 + 50) ];
     NSLog(@"最后行数:%d",_lineCount);
-    [self.mainScrollview setContentSize:CGSizeMake(Screen_width, Screen_height + 50 + 630 + 95 * (_lineCount - 1))];
+    CGSize originSize = CGSizeMake(self.mainScrollview.contentSize.width,self.mainScrollview.contentSize.height);
+    [self.mainScrollview setContentSize:CGSizeMake(Screen_width, originSize.height+ 95 * (_lineCount - 1))];
 
 }
 
 
-#pragma mark －alertViewDelegate
+#pragma mark   －alertViewDelegate
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex NS_DEPRECATED_IOS(2_0, 9_0) {
-
     NSLog(@"弹窗序号:%d",buttonIndex);
     if(alertView.tag == SuccessAlertTag) {
        [self.navigationController popToRootViewControllerAnimated:YES];
     }
     
-    
     if(alertView.tag == saveAlertTag) {
       if(buttonIndex == 0) {
-            NSLog(@"放弃");
-    [self.navigationController popViewControllerAnimated:YES];
           
+          [self.navigationController setNavigationBarHidden:YES animated:YES];
+          [self.navigationController setNavigationBarHidden:NO animated:YES];
+          NSLog(@"取消");
+          
+
+       
+    [self.navigationController popViewControllerAnimated:YES];
+        } else if(buttonIndex ==1) {
+          // 留在此页
+        NSLog(@"保留到此页");
         } else {
-            [self.navigationController setNavigationBarHidden:YES animated:YES];
-            [self.navigationController setNavigationBarHidden:NO animated:YES];
-            NSLog(@"取消");
+        //保存并退出
+        NSLog(@"保存并退出");
+        //参数拼接，这里不用做保存
+            
+        [self FormatRegionParam];
+            
+        NSLog(@"数量:%d", [[self.PostDataDic allKeys] count]);
+        
+            if([[self.PostDataDic allKeys] count] > 0) {
+              [[NSUserDefaults standardUserDefaults]setObject:self.PostDataDic forKey:@"11"];  //11是状态码，代表 是出售 住宅
+            } else {
+                [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"11"];
+            }
+
+        [self.navigationController setNavigationBarHidden:YES animated:YES];
+        [self.navigationController setNavigationBarHidden:NO animated:YES];
+         [self.navigationController popToRootViewControllerAnimated:YES];
+            
         }
     }
-    //执行跳转
+    
+    //是否继续
+    if(alertView.tag == checkLastTag) {
+        if(buttonIndex==0){
+            //继续填写
+            NSLog(@"AA");
+            
+            
+        } else {
+            //重写填写
+            NSLog(@"BB");
+        }
+    }
+}
+
+
+//加载上一次参数数据
+-(void)loadLastParamDic {
+    
+
+
+    
+    
 }
 
 @end
