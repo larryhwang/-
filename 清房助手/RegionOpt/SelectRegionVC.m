@@ -66,7 +66,6 @@
     [curentCity addSubview:CurrentCityNameLable];
     
     //GPS 定位的View 添加事件
-
     UITapGestureRecognizer *tagGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(Actiondo)];
     [curentCity addGestureRecognizer:tagGesture];
     
@@ -195,11 +194,17 @@
     [self.delegate appendName:locationName];
 }
 
+
+
+/**
+ *  点击惠州市
+ */
 -(void)Actiondo {   // 0 1 2 3 4
     
     NSLog(@"获取到GPS定位到了，准备回去");
     NSString *name = self.cityLable.text;
-    [self.delegate appendName:name];
+    [self.delegate appendName:@"广东省"];
+    [self.delegate appendName:@"惠州市"];
    //跳转到区域
      NSString *url =@"http://www.123qf.cn:81/testApp/area/selectArea.api?parentid=4413";
     

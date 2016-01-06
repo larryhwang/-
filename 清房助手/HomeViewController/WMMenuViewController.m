@@ -85,7 +85,12 @@
     self.tableView.delegate        = self;
     self.tableView.dataSource      = self;
     self.tableView.separatorStyle  = UITableViewCellSeparatorStyleNone;
-    self.tableView.rowHeight       = 50 * (self.common.screenW / 320);
+    self.tableView.rowHeight       = 50 * (self.common.screenW / 320);  //i6 = 100
+    
+    if (isI5) {
+        self.tableView.rowHeight = 42;
+    }
+    
     NSLog(@"高度:%f",   self.tableView.rowHeight);
     self.tableView.tableFooterView = [[UIView alloc] init];
     self.headerImageView.image = [UIImage imageNamed:@"head"];

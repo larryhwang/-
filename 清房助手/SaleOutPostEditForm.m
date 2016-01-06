@@ -66,6 +66,7 @@
 #define chaoxiangTag    52   //类型
 #define kanfangtimeTag  53   //看房时间
 #define anjieTag        54   //按揭
+#define fangyuanMiaoshuTag 55
 
 
 
@@ -82,6 +83,8 @@
     NSString *_RegionName;
     NSString *_lastRegionName;
     NSString *_imgs;
+    NSString *_username;
+    
     float _count;
     float _hasSlidePosition;
     
@@ -90,6 +93,7 @@
     BOOL  _saveAlertBoolFlag;
     
     BOOL  _isFromSelectPro;
+    BOOL  _isLoadLastPara;
 }
  //UIScrollView
 @property(nonatomic,strong)   EditCell  *pictureDisplay;
@@ -420,7 +424,8 @@
      NSLog(@"锁:%@",_indexData);
     
     
-    
+    AppDelegate *app = [UIApplication sharedApplication].delegate;
+    _username = app.usrInfoDic[@"username"];
     
   
     [self cellSetting];
@@ -439,8 +444,24 @@
  *  @return bool
  */
 -(BOOL)controllerWillPopHandler {
-    
-    
+    NSLog(@"%d",[[self.PostDataDic allKeys] count]);
+
+    if ([[self.PostDataDic allKeys] count] ==0 ) {  //如果加载了上次数据或者 已经被编辑了
+        if(_isLoadLastPara ==YES) {
+            NSLog(@"TopVC in nav :%@",self.navigationController.topViewController);
+            
+            UIAlertView *AW = [[UIAlertView alloc]initWithTitle:nil
+                                                        message:@"资料尚未保存"
+                                                       delegate:self
+                                              cancelButtonTitle:@"放弃编辑"
+                                              otherButtonTitles:@"留在此页", @"保存并退出",nil];
+            AW.tag = saveAlertTag;
+            [AW show];
+            return NO;
+        }
+        _isLoadLastPara = NO;    //复位
+        return YES;
+    }
     NSLog(@"TopVC in nav :%@",self.navigationController.topViewController);
     
     UIAlertView *AW = [[UIAlertView alloc]initWithTitle:nil
@@ -452,23 +473,6 @@
     [AW show];
     return NO;
     
-    
-    
-//    if (_isFromSelectPro) {
-//        _isFromSelectPro  = NO;
-//        return NO;   //如果从定位界面跳转过来，就不弹窗
-//    } else {
-//        NSLog(@"TopVC in nav :%@",self.navigationController.topViewController);
-//        
-//        UIAlertView *AW = [[UIAlertView alloc]initWithTitle:@"提示"
-//                                                    message:@"资料未保存"
-//                                                   delegate:self
-//                                          cancelButtonTitle:@"放弃编辑"
-//                                          otherButtonTitles:@"留在此页", nil];
-//     AW.tag = saveAlertTag;
-//    [AW show];
-//    return NO;
-//    }
 }
 
 
@@ -519,7 +523,9 @@
     
     [self.cellMARR addObject:Title];
     Title.updateAction = ^ {
-        Title.contentString = self.LatPostDataDic[@"biaoti"];
+        if (self.LatPostDataDic[@"biaoti"]) {
+            Title.contentString = self.LatPostDataDic[@"biaoti"];
+        }
     };
     
     [main addSubview:Title];
@@ -533,7 +539,10 @@
     
     [self.cellMARR addObject:BuildingName];
     BuildingName.updateAction = ^ {
-        BuildingName.contentString = self.LatPostDataDic[@"mingcheng"];
+        if (self.LatPostDataDic[@"mingcheng"]) {
+            BuildingName.contentString = self.LatPostDataDic[@"mingcheng"];
+        }
+       
     };
     
     
@@ -547,6 +556,36 @@
     _RegionTF = RegionOption;
     RegionOption.title = @"区域:";
     RegionOption.isOptionalCell = YES;
+    
+    [self.cellMARR addObject:RegionOption];
+    RegionOption.updateAction = ^ {
+        
+        NSLog(@"%@",self.LatPostDataDic[@"shengfen"]);
+        _RegionName = @"";
+        if ( self.LatPostDataDic[@"shengfen"]) {
+            _RegionName = [_RegionName stringByAppendingString:[NSString stringWithFormat:@"%@ ",self.LatPostDataDic[@"shengfen"]]];
+             NSLog(@"地名1啊:%@",_RegionName);
+        }
+        
+        if ( self.LatPostDataDic[@"shi"]) {
+            _RegionName = [_RegionName stringByAppendingString:[NSString stringWithFormat:@"%@ ",self.LatPostDataDic[@"shi"]]];
+             NSLog(@"地名2啊:%@",_RegionName);
+        }
+        
+        if ( self.LatPostDataDic[@"qu"]) {
+            _RegionName = [_RegionName stringByAppendingString:[NSString stringWithFormat:@"%@ ",self.LatPostDataDic[@"qu"]]];
+             NSLog(@"地名3啊:%@",_RegionName);
+        }
+        
+        if ( self.LatPostDataDic[@"region"]) {
+            _RegionName = [_RegionName stringByAppendingString:[NSString stringWithFormat:@"%@ ",self.LatPostDataDic[@"region"]]];
+             NSLog(@"地名4啊:%@",_RegionName);
+        }
+        NSLog(@"地名啊:%@",_RegionName);
+        RegionOption.contentString = _RegionName;
+    };
+
+    
     RegionOption.placeHoderString = @"请选择";
     RegionOption.otherAction = ^(){
         NSLog(@"区域选项!");
@@ -557,15 +596,23 @@
         _RegionTF.contentString = @"";
         _isFromSelectPro = YES;
         [self.navigationController pushViewController:selectRegion animated:YES];
-
         NSLog(@"跳转已经执行完");
-        
     };
     [main addSubview:RegionOption];
+    
+    
+    
     
     //DetailedAdress
     EditCell    *DetailedAdress = [[EditCell alloc]initWithFrame:CGRectMake(CellPaddingToVertical/2,  CGRectGetMaxY(RegionOption.frame)-CellClipPadding , Screen_width - CellPaddingToVertical, CellHeight)];
     DetailedAdress.title = @"详细地址:";
+    
+    [self.cellMARR addObject:DetailedAdress];
+    DetailedAdress.updateAction = ^ {
+       DetailedAdress.contentString = self.LatPostDataDic[@"dizhi"];
+    };
+    
+    
     DetailedAdress.placeHoderString = @"请输入详细地址";
     [self dealTextfield:DetailedAdress.contentFiled isTextCenter:NO];
     [main addSubview:DetailedAdress];
@@ -575,6 +622,15 @@
     HouseType.isOptionalCell = YES ;
     HouseType.title = @"房屋类型:";
     HouseType.placeHoderString = @"请选择:";
+    
+    
+    [self.cellMARR addObject:HouseType];
+    HouseType.updateAction = ^ {
+        if (self.LatPostDataDic[@"leixing"]) {
+            HouseType.contentString = self.LatPostDataDic[@"leixing"];
+        }
+    };
+    
     HouseType.otherAction =^{
         PopSelectViewController *select = [[PopSelectViewController alloc]init];
         NSArray *Optdata  = [NSArray arrayWithObjects:@"平层",@"整栋",@"复式",@"公寓",@"别墅",nil];
@@ -599,9 +655,9 @@
     };
     [main addSubview:HouseType];
     
-    
     EditCell *FlatLocation = [[EditCell alloc]initWithFrame:CGRectMake(CellPaddingToVertical/2,  CGRectGetMaxY(HouseType.frame)-CellClipPadding, Screen_width - CellPaddingToVertical, CellHeight)];
     FlatLocation.title = @"位置:";
+
     
     UITextField *blockTF = [[UITextField alloc]initWithFrame:CGRectMake(100, 0, 60, 50)];
     blockTF.textAlignment = NSTextAlignmentCenter;
@@ -630,6 +686,20 @@
     [UnintLable setTextColor:[UIColor lightGrayColor]];
     UnintLable.text = @"单元";
     [FlatLocation addSubview:UnintLable];
+    
+    
+    [self.cellMARR addObject:FlatLocation];
+    FlatLocation.updateAction = ^ {
+        
+        if (self.LatPostDataDic[@"dong"]) {
+             blockTF.text = self.LatPostDataDic[@"dong"];
+        }
+        
+        if (self.LatPostDataDic[@"danyuan"]) {
+             UnitTF.text  = self.LatPostDataDic[@"danyuan"];
+        }
+    };
+    
     
     [main addSubview:FlatLocation];
     
@@ -675,7 +745,22 @@
     [lable4 setTextColor:[UIColor lightGrayColor]];
     [FlatNo addSubview:lable4];
     
+    
+    [self.cellMARR addObject:FlatNo];
+    FlatNo.updateAction = ^ {
+        
+        if (self.LatPostDataDic[@"louceng"]) {
+            TF1.text = self.LatPostDataDic[@"louceng"];
+        }
+        
+        if (self.LatPostDataDic[@"zonglouceng"]) {
+            TF2.text  = self.LatPostDataDic[@"zonglouceng"];
+        }
+
+    };
+    
     [main addSubview:FlatNo];
+    
     
     //面积
     EditCell    *Area = [[EditCell alloc]initWithFrame:CGRectMake(CellPaddingToVertical/2,  CGRectGetMaxY(FlatNo.frame) -CellClipPadding , Screen_width - CellPaddingToVertical, CellHeight)];
@@ -687,6 +772,15 @@
     UILabel *LABLE_Area = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(TF_Area.frame)+30, 0, 50, 50)];
     [LABLE_Area setTextColor:[UIColor lightGrayColor]];
     LABLE_Area.text = @"平方";
+    
+    
+    [self.cellMARR addObject:Area];
+    Area.updateAction = ^ {
+        if (self.LatPostDataDic[@"mianji"]) {
+        TF_Area.text = self.LatPostDataDic[@"mianji"];
+        }
+        
+    };
     
     [Area addSubview:LABLE_Area];
     [main addSubview:Area];
@@ -735,7 +829,33 @@
     YangTaiLabel.text = @"阳台";
     [YangTaiLabel setTextColor:[UIColor lightGrayColor]];
     [RoomStyle addSubview:YangTaiLabel];
+    
+    
+    
+    [self.cellMARR addObject:RoomStyle];
+    RoomStyle.updateAction = ^ {
+       
+        if(self.LatPostDataDic[@"fangshu"]) {
+            RoomTextfield.text = self.LatPostDataDic[@"fangshu"];
+        }
+        
+        if (self.LatPostDataDic[@"tingshu"]) {
+            TingTextfield.text = self.LatPostDataDic[@"tingshu"];
+        }
+        
+        if (self.LatPostDataDic[@"toilets"]) {
+            WeiTextfield.text  = self.LatPostDataDic[@"toilets"];
+        }
+        
+        if (self.LatPostDataDic[@"balconys"]) {
+            YangTaiTextfield.text = self.LatPostDataDic[@"balconys"];
+        }
+
+    };
+    
     [main addSubview:RoomStyle];
+    
+    
     
     
     //装修情况(需移动)
@@ -769,6 +889,14 @@
         NSLog(@"表格位置:%f",Decoration.frame.origin.y);
         //        NSLog(@":%f",select.frame.origin.y);
     };
+    
+    [self.cellMARR addObject:Decoration];
+    Decoration.updateAction = ^ {
+      if (self.LatPostDataDic[@"zhuangxiu"]) {
+        RoomTextfield.text = self.LatPostDataDic[@"zhuangxiu"];
+        }
+    };
+    
     [main addSubview:Decoration];
     
     
@@ -784,6 +912,15 @@
     [LABLE_TF_HouseAge setTextColor:[UIColor lightGrayColor]];
     LABLE_TF_HouseAge.text = @"年";
     [HouseAge addSubview:LABLE_TF_HouseAge];
+    
+    [self.cellMARR addObject:HouseAge];
+    HouseAge.updateAction = ^ {
+        if (self.LatPostDataDic[@"zhuangxiu"]) {
+            HouseAge.contentString = self.LatPostDataDic[@"zhuangxiu"];
+        }
+    };
+    
+    
     [main addSubview:HouseAge];
     
     
@@ -815,25 +952,96 @@
         };
         [self presentViewController:select animated:YES completion:nil];
     };
+    
+    [self.cellMARR addObject:orientation];
+    orientation.updateAction = ^ {
+        if (self.LatPostDataDic[@"chaoxiang"]) {
+            HouseAge.contentString = self.LatPostDataDic[@"chaoxiang"];
+        }
+    };
+    
     [main addSubview:orientation];
     
     
     
     //房屋配套
     EditCell *FlatAttachMent = [[EditCell alloc]initWithFrame:CGRectMake(CellPaddingToVertical/2, CGRectGetMaxY(orientation.frame)-CellClipPadding,Screen_width - CellPaddingToVertical, CellHeight)];
+    
+    //获取上次存取的配套设施
+    NSMutableSet *lastSelectAttachMent = [NSMutableSet new];
+    
+    if(self.LatPostDataDic[@"meiqi"])
+       {
+         [lastSelectAttachMent addObject:@"0"];
+      }
+    
+    if (self.LatPostDataDic[@"kuandai"]) {
+        [lastSelectAttachMent addObject:@"1"];
+    }
+    
+    if (self.LatPostDataDic[@"dianti"]) {
+        [lastSelectAttachMent addObject:@"2"];
+    }
+    
+    if (self.LatPostDataDic[@"tingchechang"]) {
+        [lastSelectAttachMent addObject:@"3"];
+    }
+    
+    if (self.LatPostDataDic[@"dianshi"]) {
+        [lastSelectAttachMent addObject:@"4"];
+    }
+    
+    if (self.LatPostDataDic[@"jiadian"]) {
+        [lastSelectAttachMent addObject:@"5"];
+    }
+    
+    if (self.LatPostDataDic[@"dianhua"]) {
+        [lastSelectAttachMent addObject:@"6"];
+    }
+    
+    if (self.LatPostDataDic[@"lingbaoruzhu"]) {
+        [lastSelectAttachMent addObject:@"7"];
+    }
+    
+    MUtiSelectViewController *select = [[MUtiSelectViewController alloc]init];
+
     FlatAttachMent.isOptionalCell = YES;
     FlatAttachMent.title = @"房屋配套:";
     FlatAttachMent.placeHoderString = @"请选择";
+    UIView *modalView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, Screen_width, Screen_height)];
+    modalView.tag =ModalViewTag;
+    modalView.backgroundColor = [[UIColor lightGrayColor] colorWithAlphaComponent:.4];
+    select.dismissAction = ^{
+        [modalView removeFromSuperview];
+    };
     FlatAttachMent.contentFiled.adjustsFontSizeToFitWidth = YES ;
     FlatAttachMent.otherAction =^{
-        MUtiSelectViewController *select = [[MUtiSelectViewController alloc]init];
-        select.hasSelectedArrar =  self.hasSelectedAttachMent;
-        select.HandleDic = self.PostDataDic;  //字典
-        select.HandleTextField = FlatAttachMent.contentFiled;
+
+        [self.view addSubview:modalView];
+       
+        if(select.hasSelectedArrar != lastSelectAttachMent) {        //当没有被执行加载上一次参数时
+            select.hasSelectedArrar =  self.hasSelectedAttachMent;  //这个数组是由数字组成，代表着设施，将地址传给 select 便于纪录
+        }
+        
+
+        
+       
+
+        select.HandleDic = self.PostDataDic;  //字典地址传过去，在select对象里面进行 参数的设置
+        
+
+        select.HandleTextField = FlatAttachMent.contentFiled;   //输入框的地址传过去，同样在里面进行设置
         select.providesPresentationContextTransitionStyle = YES;
         select.definesPresentationContext = YES;
         select.modalPresentationStyle = UIModalPresentationOverCurrentContext;
         [self presentViewController:select animated:YES completion:nil];
+    };
+    
+    [self.cellMARR addObject:FlatAttachMent];
+    orientation.updateAction = ^ {
+        if([lastSelectAttachMent count]>0) {
+            select.hasSelectedArrar = lastSelectAttachMent;  //将上一次选设施载入进去
+        }
     };
     [main addSubview:FlatAttachMent];
     
@@ -866,6 +1074,15 @@
         };
         [self presentViewController:select animated:YES completion:nil];
     };
+    
+    
+    [self.cellMARR addObject:LookAroundTime];
+    LookAroundTime.updateAction = ^ {
+        if (self.LatPostDataDic[@"kanfangtime"]) {
+             LookAroundTime.contentString = self.LatPostDataDic[@"kanfangtime"];
+        }
+    };
+    
     [main addSubview:LookAroundTime];
     
     
@@ -882,7 +1099,18 @@
     [LABLE_TF_HousePrice setTextColor:[UIColor lightGrayColor]];
     LABLE_TF_HousePrice.text = @"万";
     [Price addSubview:LABLE_TF_HousePrice];
+    
+    [self.cellMARR addObject:Price];
+    Price.updateAction = ^ {
+        if (self.LatPostDataDic[@"shoujia"]) {
+            Price.contentString = self.LatPostDataDic[@"shoujia"];
+        }
+    };
+    
     [main addSubview:Price];
+    
+    
+    
     
     
     EditCell *loan = [[EditCell alloc]initWithFrame:CGRectMake(CellPaddingToVertical/2, CGRectGetMaxY(Price.frame)-CellClipPadding , Screen_width - CellPaddingToVertical, CellHeight)];
@@ -915,6 +1143,13 @@
             [self.PostDataDic setObject:passString forKey:@"anjie"];
         };
         [self presentViewController:select animated:YES completion:nil];
+    };
+    
+    [self.cellMARR addObject:loan];
+    loan.updateAction = ^ {
+        if (self.LatPostDataDic[@"anjie"]) {
+            loan.contentString = self.LatPostDataDic[@"anjie"];
+        }
     };
     [main addSubview:loan];
     
@@ -955,6 +1190,13 @@
         };
         [self presentViewController:select animated:YES completion:nil];
     };
+    
+    [self.cellMARR addObject:ExpiryTime];
+    ExpiryTime.updateAction = ^ {
+        if (self.LatPostDataDic[@"youxiaoq"]) {
+            ExpiryTime.contentString = self.LatPostDataDic[@"youxiaoq"];
+        }
+    };
     [main addSubview:ExpiryTime];
     
     
@@ -973,6 +1215,14 @@
         };
         [self.navigationController pushViewController:FlatDesVcontroller animated:YES];
     };
+    
+    [self.cellMARR addObject:TextDescibe];
+    TextDescibe.updateAction = ^ {
+        if (self.LatPostDataDic[@"fangyuanmiaoshu"]) {
+            TextDescibe.contentString = self.LatPostDataDic[@"fangyuanmiaoshu"];
+        }
+    };
+    
     [main addSubview:TextDescibe];
     
     
@@ -982,7 +1232,6 @@
     _pictureDisplay = picture;
     self.multiImageView = [[JYBMultiImageView alloc] initWithFrame:CGRectMake(10, 50, self.view.frame.size.width-30, 100)];
     self.multiImageView.delegate = self;
-  //  self.multiImageView.backgroundColor = [UIColor brownColor];
     [picture addSubview:self.multiImageView];
     [self.view addSubview:picture];
     
@@ -997,15 +1246,31 @@
     EditCell *ContactName  = [[EditCell alloc]initWithFrame:CGRectMake(0, 0, CellWidth, CellHeight)];
     ContactName.title  = @"联系人:";
     ContactName.placeHoderString = @" ";
+    
+    ContactName.contentString = _username;      //此处固定，并不可以更改
+    ContactName.contentFiled.userInteractionEnabled = NO;
+    
     [self dealTextfield:ContactName.contentFiled isTextCenter:NO];
     [self.footArrs addObject:ContactName];
+    
+    [self.cellMARR addObject:ContactName];
+    ContactName.updateAction = ^ {
+
+    };
     [footerView addSubview:ContactName];
+    
     //
     EditCell *ContactNo  = [[EditCell alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(ContactName.frame)-CellClipPadding, CellWidth, CellHeight)];
     ContactNo.title  = @"联系电话:";
     ContactNo.placeHoderString = @" ";
     [self dealTextfield:ContactNo.contentFiled isTextCenter:NO];
     [self.footArrs addObject:ContactNo];
+    [self.cellMARR addObject:ContactNo];
+    ContactNo.updateAction = ^ {
+        if (self.LatPostDataDic[@"usertel"]) {
+            ContactNo.contentString = self.LatPostDataDic[@"usertel"];
+        }
+    };
     [footerView addSubview:ContactNo];
     //
     //
@@ -1014,13 +1279,27 @@
     OnwnerName.placeHoderString = @" ";
     [self dealTextfield:OnwnerName.contentFiled isTextCenter:NO];
     [self.footArrs addObject:OnwnerName];
+    OnwnerName.updateAction = ^ {
+        if (self.LatPostDataDic[@"ownername"]) {
+            OnwnerName.contentString = self.LatPostDataDic[@"ownername"];
+        }
+    };
     [footerView addSubview:OnwnerName];
     //
+    
+    
     //
     EditCell *OwnerTele  = [[EditCell alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(OnwnerName.frame)-CellClipPadding, CellWidth, CellHeight)];
     OwnerTele.title  = @"业主电话:";
     OwnerTele.placeHoderString = @" ";
     [self dealTextfield:OwnerTele.contentFiled isTextCenter:NO];
+    OwnerTele.updateAction = ^ {
+        if (self.LatPostDataDic[@"ownertel"]) {
+            OwnerTele.contentString = self.LatPostDataDic[@"ownertel"];
+        }
+    };
+    
+    
     [self.footArrs addObject:OwnerTele];
     [footerView addSubview:OwnerTele];
     
@@ -1030,13 +1309,13 @@
     UIButton *SaveBtn =[[UIButton alloc]initWithFrame:CGRectMake(FootButtonPadding, CGRectGetMaxY(OwnerTele.frame)+20, FootButtonWidth, FootButtonHeight)];
     [SaveBtn setTitle:@"保存" forState:UIControlStateNormal];
     [SaveBtn addTarget:self action:@selector(DataSave) forControlEvents:UIControlEventTouchUpInside];
-    [SaveBtn setBackgroundColor:[UIColor brownColor]];
+    [SaveBtn setBackgroundColor:DeafaultColor2];
     [footerView addSubview:SaveBtn];
     
     NSLog(@"Buton:Y%f",SaveBtn.bounds.origin.y);
     UIButton *PostBtn =[[UIButton alloc]initWithFrame:CGRectMake(CGRectGetMaxX(SaveBtn.frame)+CellWidth-2*(FootButtonWidth+FootButtonPadding), CGRectGetMaxY(OwnerTele.frame)+20, FootButtonWidth, FootButtonHeight)];
     [PostBtn setTitle:@"发布" forState:UIControlStateNormal];
-    [PostBtn setBackgroundColor:[UIColor redColor]];
+    [PostBtn setBackgroundColor:DeafaultColor2];
     [PostBtn addTarget:self action:@selector(LogPostDic) forControlEvents:UIControlEventTouchUpInside];
     [footerView addSubview:PostBtn];
     
@@ -1052,8 +1331,22 @@
     //数据保存
     //1.先做必要拼接
     //2.然后保存到Deafault里面去
+    //3.导航返回
+    
+    [self FormatRegionParam];
+    if([[self.PostDataDic allKeys] count] > 0) {
+        NSLog(@"保存:%@",self.PostDataDic);
+        [[NSUserDefaults standardUserDefaults]setObject:self.PostDataDic forKey:@"11"];  //11是状态码，代表 是出售 住宅
+    } else {
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"11"];
+    }
+    
+    [self.navigationController popViewControllerAnimated:YES];
     
 }
+
+
+
 
 /**
  *  区域选择拼补
@@ -1080,6 +1373,8 @@
     [self.PostDataDic setObject:@"1" forKey:@"isfangyuan"];
     [self.PostDataDic setObject:@"true" forKey:@"zushou"];
     [self.PostDataDic setObject:@"0" forKey:@"fenlei"];
+    
+    
     
     
     
@@ -1576,6 +1871,7 @@
           
           [self.navigationController setNavigationBarHidden:YES animated:YES];
           [self.navigationController setNavigationBarHidden:NO animated:YES];
+          [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"11"];
           NSLog(@"取消");
           
 
@@ -1592,16 +1888,16 @@
         [self FormatRegionParam];
             
         NSLog(@"数量:%d", [[self.PostDataDic allKeys] count]);
-        
             if([[self.PostDataDic allKeys] count] > 0) {
+                NSLog(@"保存:%@",self.PostDataDic);
               [[NSUserDefaults standardUserDefaults]setObject:self.PostDataDic forKey:@"11"];  //11是状态码，代表 是出售 住宅
             } else {
-                [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"11"];
+              [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"11"];
             }
 
         [self.navigationController setNavigationBarHidden:YES animated:YES];
         [self.navigationController setNavigationBarHidden:NO animated:YES];
-         [self.navigationController popToRootViewControllerAnimated:YES];
+        [self.navigationController popToRootViewControllerAnimated:YES];
             
         }
     }
@@ -1610,9 +1906,8 @@
     if(alertView.tag == checkLastTag) {
         if(buttonIndex==0){
             //继续填写
-            NSLog(@"AA");
-            
-            
+            _isLoadLastPara = YES;
+            [self loadLastParamDic];
         } else {
             //重写填写
             NSLog(@"BB");
@@ -1624,10 +1919,12 @@
 //加载上一次参数数据
 -(void)loadLastParamDic {
     
+    for (EditCell *cell in self.cellMARR) {
+        if (cell.updateAction) {
+            cell.updateAction();
+        }
+    }
 
-
-    
-    
 }
 
 @end

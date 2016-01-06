@@ -13,5 +13,6 @@
 @property(nonatomic,weak) NSMutableDictionary *HandleDic;
 @property(nonatomic,weak) UITextField *HandleTextField;
 @property(nonatomic,weak) NSMutableSet *hasSelectedArrar;
+@property(nonatomic,copy) void  (^dismissAction)(void);   //@property (nonatomic, copy) void (^otherAction)(void);
 
 @end

@@ -30,6 +30,7 @@
     NSArray  *_OptBtnSqlTittles_NARR;
 }
 @property (weak, nonatomic) IBOutlet UIButton *sureBtn;
+@property (weak, nonatomic) IBOutlet UIButton *canleeBtn;
 @property (weak, nonatomic) IBOutlet UIButton *TestBtn;
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *OptBtn;
 @property(nonatomic,assign)   BOOL testSelected;
@@ -61,6 +62,28 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+
+    if (isI5) {
+        
+        [self.sureBtn.titleLabel setFont:[UIFont systemFontOfSize:16]];
+        [self.canleeBtn.titleLabel setFont:[UIFont systemFontOfSize:16]];
+        for (UIButton *btn in self.OptBtn) {
+            [btn.titleLabel setFont:[UIFont systemFontOfSize:16]];
+        }
+    }
+    
+    
+    if (isI4) {
+        
+        [self.sureBtn.titleLabel setFont:[UIFont systemFontOfSize:15]];
+        [self.canleeBtn.titleLabel setFont:[UIFont systemFontOfSize:15]];
+        for (UIButton *btn in self.OptBtn) {
+            [btn.titleLabel setFont:[UIFont systemFontOfSize:15]];
+        }
+    }
+
+    
     [self initialData];
     [self initHasSelecteStatus];  // initial the selected options
 
@@ -146,6 +169,7 @@
 
 
 - (IBAction)cancleBtn:(id)sender {
+    self.dismissAction();
   [self dismissViewControllerAnimated:YES completion:nil];
 }
 
