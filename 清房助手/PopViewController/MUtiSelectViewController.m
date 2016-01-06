@@ -181,6 +181,7 @@
         _AppendAttachMentText  = [_AppendAttachMentText stringByAppendingFormat:@"%@ ",OptTittle];
     }
   self.HandleTextField.text = _AppendAttachMentText ;
+    self.dismissAction();
   [self dismissViewControllerAnimated:YES completion:nil];
 }
 
