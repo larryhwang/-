@@ -11,7 +11,10 @@
 @implementation KeyuanCell
 
 - (void)awakeFromNib {
-    // Initialization code
+    self.QFZhuangTai.layer.borderWidth  = .5;
+    self.QFZhuangTai.layer.cornerRadius = 8.0;
+    self.QFZhuangTai.layer.borderColor = [DeafaultColor2 CGColor];
+    self.QFZhuangTai.textAlignment = NSTextAlignmentCenter;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

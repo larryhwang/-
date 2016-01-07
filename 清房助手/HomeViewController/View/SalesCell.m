@@ -8,6 +8,7 @@
 
 #import "SalesCell.h"
 
+
 @interface SalesCell()
 
 
@@ -17,13 +18,15 @@
 @implementation SalesCell
 
 - (void)awakeFromNib {
-    // Initialization code
+
+    self.QFZhuangTai.layer.borderWidth  = .5;
+    self.QFZhuangTai.layer.cornerRadius = 8.0;
+    self.QFZhuangTai.layer.borderColor = [DeafaultColor2 CGColor];
+    self.QFZhuangTai.textAlignment = NSTextAlignmentCenter;
+
+    
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
 
-    // Configure the view for the selected state
-}
 
 @end

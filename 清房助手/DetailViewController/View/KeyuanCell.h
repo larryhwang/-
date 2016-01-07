@@ -29,4 +29,7 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *postTimeLabel;
 
+@property (weak, nonatomic) IBOutlet UILabel *QFZhuangTai;
+
+
 @end

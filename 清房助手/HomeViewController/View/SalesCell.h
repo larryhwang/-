@@ -17,4 +17,11 @@
 @property (weak, nonatomic) IBOutlet UILabel *price;
 @property (weak, nonatomic) IBOutlet UILabel *postUer;
 @property (weak, nonatomic) IBOutlet UILabel *postTime;
+
+
+@property (weak, nonatomic) IBOutlet UILabel *QFZhuangTai;
+
+
+
+
 @end

@@ -33,7 +33,14 @@
 #define DeafaultColor2 [UIColor colorWithRed:0 green:122.0 / 255 blue:1.0 alpha:1.0]
 //40 102 137
 #define DeafaultColor3 [UIColor colorWithRed:40.0/255 green:102.0/255 blue:137.0/255 alpha:1.0]
- #define  TableBackColor [UIColor colorWithRed:237.0/255 green:236.0/255 blue:242.0/255 alpha:1.0]
+#define  TableBackColor [UIColor colorWithRed:237.0/255 green:236.0/255 blue:242.0/255 alpha:1.0]
+
+#define ZhuangTaiColor0    [UIColor blackColor]
+#define ZhuangTaiColor1    [UIColor colorWithRed:0 green:221.0/255 blue:0 alpha:1.0]
+#define ZhuangTaiColor2    [UIColor colorWithRed:0 green:221.0/255 blue:0 alpha:1.0]
+#define ZhuangTaiColor3    [UIColor colorWithRed:0/255 green:0 blue:211.0/255 alpha:1.0]
+#define ZhuangTaiColor4    [UIColor colorWithRed:255.0/255 green:153.0/255 blue:0 alpha:1.0]
+
 
 #define DOT_COORDINATE                  0.0f
 #define STATUS_BAR_HEIGHT               20.0f

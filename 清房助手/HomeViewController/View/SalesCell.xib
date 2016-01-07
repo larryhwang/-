@@ -77,6 +77,13 @@
                         <animations/>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="交易中" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fz5-s3-2Kd">
+                        <rect key="frame" x="253" y="52" width="67" height="21"/>
+                        <animations/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <animations/>
                 <constraints>
@@ -88,6 +95,7 @@
             <animations/>
             <connections>
                 <outlet property="QFImageView" destination="K8V-vi-b2l" id="WfZ-sM-9RM"/>
+                <outlet property="QFZhuangTai" destination="fz5-s3-2Kd" id="Cho-iC-77X"/>
                 <outlet property="area" destination="dN5-aV-Xdv" id="yYy-vQ-Xh7"/>
                 <outlet property="elevator" destination="FTZ-L1-d7k" id="O31-hB-AcB"/>
                 <outlet property="postTime" destination="u1H-xg-J7X" id="buL-oZ-aHE"/>
@@ -96,7 +104,7 @@
                 <outlet property="style" destination="GsI-QQ-NBT" id="cdF-ib-TlY"/>
                 <outlet property="title" destination="0tv-WP-xZc" id="Gvk-mg-bQm"/>
             </connections>
-            <point key="canvasLocation" x="112" y="126"/>
+            <point key="canvasLocation" x="111.5" y="126"/>
         </tableViewCell>
     </objects>
     <resources>

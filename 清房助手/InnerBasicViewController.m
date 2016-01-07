@@ -62,7 +62,7 @@
 @property (weak, nonatomic)  IBOutlet UITableView *tableView;
 @property(nonatomic,strong)  AFHTTPRequestOperationManager            *shareMgr;
 @property(nonatomic,strong)  NSMutableDictionary                      *pramaDic;
-@property(nonatomic,strong)  NSArray                                 *DataArr;
+@property(nonatomic,strong)  NSArray                                  *DataArr;
 
 @end
 
@@ -208,7 +208,9 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-     NSDictionary *SingleData = self.DataArr[indexPath.row];
+    
+    NSDictionary *SingleData = self.DataArr[indexPath.row];
+    
     if (_type ==FangYuan) {
         //展示房源的列表
         static NSString *ID = @"identifer";
@@ -249,7 +251,41 @@
         }else{
             cell.postUer.text =[NSString stringWithFormat:@"发布人:%@",SingleData[@"publisher"]];
         }
-        cell.postTime.text = [NSString stringWithFormat:@"发布时间:%@",SingleData[@"weituodate"]];
+            cell.postTime.text = [NSString stringWithFormat:@"发布时间:%@",SingleData[@"weituodate"]];
+        
+        NSUInteger type  = [(NSString *)SingleData[@"zhuangtai"] integerValue];
+        NSLog(@"颜色代码:%d",type);
+        
+        UIColor  *zhuangTaiColor = nil;
+        NSString *zhuangTaiStr   = nil;
+        switch (type) {
+            case 0:
+                zhuangTaiColor = ZhuangTaiColor0;
+                zhuangTaiStr   =  @"发布中";
+                break;
+            case 1:
+                zhuangTaiColor = ZhuangTaiColor1;
+                zhuangTaiStr   =  @"已成交";
+                break;
+            case 2:
+                zhuangTaiColor = ZhuangTaiColor2;
+                zhuangTaiStr  =  @"已过期";
+                break;
+            case 3:
+                zhuangTaiColor = ZhuangTaiColor3;
+                zhuangTaiStr  =  @"未发布";
+                break;
+            case 4:
+                zhuangTaiColor =ZhuangTaiColor4;
+                zhuangTaiStr  = @"即将过期";
+            default:
+                break;
+        }
+        
+       [cell.QFZhuangTai setHidden:NO];
+        cell.QFZhuangTai.textColor = zhuangTaiColor;
+        cell.QFZhuangTai.text = zhuangTaiStr;
+        
         return cell;
 
 
@@ -284,6 +320,41 @@
         [cell.priceLabel setAttributedText:HiligntNo]; //将红色属性添加进去
         cell.publisherLabel.text = [self judgeNullValue:SingleData[@"publisher"]]; //@"内马尔";
         cell.postTimeLabel.text  = [self judgeNullValue:SingleData[@"weituodate"]];  //@"2015-12-10 10:32:28";
+        
+        NSUInteger type  = [(NSString *)SingleData[@"zhuangtai"] integerValue];
+        NSLog(@"颜色代码:%d",type);
+        
+        UIColor  *zhuangTaiColor = nil;
+        NSString *zhuangTaiStr   = nil;
+        switch (type) {
+            case 0:
+                zhuangTaiColor = ZhuangTaiColor0;
+                zhuangTaiStr   =  @"发布中";
+                break;
+            case 1:
+                zhuangTaiColor = ZhuangTaiColor1;
+                zhuangTaiStr   =  @"已成交";
+                break;
+            case 2:
+                zhuangTaiColor = ZhuangTaiColor2;
+                zhuangTaiStr  =  @"已过期";
+                break;
+            case 3:
+                zhuangTaiColor = ZhuangTaiColor3;
+                zhuangTaiStr  =  @"未发布";
+                break;
+            case 4:
+                zhuangTaiColor =ZhuangTaiColor4;
+                zhuangTaiStr  = @"即将过期";
+            default:
+                break;
+        }
+        
+        [cell.QFZhuangTai setHidden:NO];
+        cell.QFZhuangTai.textColor = zhuangTaiColor;
+        cell.QFZhuangTai.text = zhuangTaiStr;
+ 
+        
         return cell;
         
         

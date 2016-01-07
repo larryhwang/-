@@ -29,7 +29,7 @@
                             <constraint firstAttribute="width" constant="55" id="08y-sD-AZg"/>
                             <constraint firstAttribute="height" constant="21" id="6I1-iV-xCS"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -41,7 +41,7 @@
                             <constraint firstAttribute="width" constant="120" id="G1v-YQ-czH"/>
                             <constraint firstAttribute="height" constant="21" id="fy9-WM-a5n"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -90,8 +90,15 @@
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="cnd-U0-fFT"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rGv-J9-t0u">
+                        <rect key="frame" x="261" y="47" width="42" height="21"/>
+                        <animations/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
@@ -112,6 +119,7 @@
             </tableViewCellContentView>
             <animations/>
             <connections>
+                <outlet property="QFZhuangTai" destination="rGv-J9-t0u" id="YFW-wD-MH5"/>
                 <outlet property="acreaLabel" destination="FCO-2d-nGV" id="k4j-56-GUd"/>
                 <outlet property="attachmentLabel" destination="wlU-ic-tQe" id="6Fr-8b-1io"/>
                 <outlet property="postTimeLabel" destination="C5e-3V-Gjl" id="SCA-NV-dbc"/>

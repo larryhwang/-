@@ -11,7 +11,7 @@
  *        1."shengfen",@"shi",@"qu"   这个三个字段如果是空，则 返回发布失败
  *        2.输入框切换的功能，仍有瑕疵。
  *
- *               16-1-5-Larry
+ *               16-1-5   by-Larry
  */
 
 #import "SaleOutPostEditForm.h"
@@ -94,7 +94,7 @@
     int   _lastCount;
     BOOL  _saveAlertBoolFlag;
     
-    BOOL  _isFromSelectPro;
+    BOOL  _isFromSelectDescribePage;
     BOOL  _isLoadLastPara;
 }
  //UIScrollView
@@ -447,7 +447,7 @@
  */
 -(BOOL)controllerWillPopHandler {
     NSLog(@"%d",[[self.PostDataDic allKeys] count]);
-
+   
     if ([[self.PostDataDic allKeys] count] ==0 ) {  //如果加载了上次数据或者 已经被编辑了
         if(_isLoadLastPara ==YES) {
             NSLog(@"TopVC in nav :%@",self.navigationController.topViewController);
@@ -464,7 +464,14 @@
         _isLoadLastPara = NO;    //复位
         return YES;
     }
+    
     NSLog(@"TopVC in nav :%@",self.navigationController.topViewController);
+    
+    
+    if (_isFromSelectDescribePage) {
+        _isFromSelectDescribePage = NO;
+        return NO;
+    }
     
     UIAlertView *AW = [[UIAlertView alloc]initWithTitle:nil
                                                 message:@"资料尚未保存"
@@ -596,7 +603,7 @@
         selectRegion.delegate = self ;
         selectRegion.indexData = _indexData ;
         _RegionTF.contentString = @"";
-        _isFromSelectPro = YES;
+
         [self.navigationController pushViewController:selectRegion animated:YES];
         NSLog(@"跳转已经执行完");
     };
@@ -1245,6 +1252,7 @@
             TextDescibe.contentFiled.text = str ;
             TextDescibe.contentFiled.adjustsFontSizeToFitWidth = YES ;
         };
+        _isFromSelectDescribePage = YES;
         [self.navigationController pushViewController:FlatDesVcontroller animated:YES];
     };
     
@@ -1435,7 +1443,7 @@
     
     //先把图片上传过去
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-     manager.requestSerializer.timeoutInterval  = 5.0;
+     manager.requestSerializer.timeoutInterval  = 30.0;
     NSString *url2 = @"http://www.123qf.cn:81/testApp/file/upload.front?userID=15018639039";
     [manager POST:url2 parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         for (NSData *imgData in self.SelectedImgsData_MARR) {
@@ -1925,6 +1933,7 @@
             [self loadLastParamDic];
         } else {
             //重写填写
+            [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"11"];
             NSLog(@"BB");
         }
     }
