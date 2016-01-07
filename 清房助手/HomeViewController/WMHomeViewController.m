@@ -43,7 +43,6 @@
 @interface WMHomeViewController()<UIScrollViewDelegate,PopSelectViewDelegate>
 {
 #pragma mark 优化成结构体
-    BOOL               _isSaleStatus;
     BOOL               _popStatus;   //区域选择是否
     NSMutableArray     *_TabBarBtns;
     NSMutableDictionary *_updateLocationParam;

@@ -77,9 +77,8 @@
 
 
 @interface SaleOutPostEditForm ()<UITextFieldDelegate,UIActionSheetDelegate, UIImagePickerControllerDelegate,SelectRegionDelegate,UIScrollViewDelegate,CZKeyboardToolbarDelegate ,UIActionSheetDelegate,QBImagePickerControllerDelegate,UIAlertViewDelegate,WMNavigationControllerDelegate>{
-    NSArray *_cleanIndexCollect;
-    NSString *_NowCity;
-    NSString *_RegionDetailByAppend;
+    
+
     NSString *_RegionName;
     NSString *_lastRegionName;
     NSString *_imgs;
@@ -505,7 +504,7 @@
     main.delegate = self;
     main.indicatorStyle = UIScrollViewIndicatorStyleWhite ;
     
-    [main setContentSize:CGSizeMake(Screen_width, Screen_height + 687)];
+    [main setContentSize:CGSizeMake(Screen_width, Screen_height + 657)];
     
     if (isI5) {
         [main setContentSize:CGSizeMake(Screen_width, Screen_height + 730 + 144)];
@@ -1315,47 +1314,47 @@
     [footerView addSubview:ContactNo];
     //
     //
-    EditCell *OnwnerName  = [[EditCell alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(ContactNo.frame)-CellClipPadding, CellWidth, CellHeight)];
-    OnwnerName.title  = @"业主姓名:";
-    OnwnerName.placeHoderString = @" ";
-    [self dealTextfield:OnwnerName.contentFiled isTextCenter:NO];
-    [self.footArrs addObject:OnwnerName];
-    [self.cellMARR addObject:OnwnerName];
-    OnwnerName.updateAction = ^ {
-        if (self.LatPostDataDic[@"ownername"]) {
-            OnwnerName.contentString = self.LatPostDataDic[@"ownername"];
-        }
-    };
-    [footerView addSubview:OnwnerName];
-    //
+//    EditCell *OnwnerName  = [[EditCell alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(ContactNo.frame)-CellClipPadding, CellWidth, CellHeight)];
+//    OnwnerName.title  = @"业主姓名:";
+//    OnwnerName.placeHoderString = @" ";
+//    [self dealTextfield:OnwnerName.contentFiled isTextCenter:NO];
+//    [self.footArrs addObject:OnwnerName];
+//    [self.cellMARR addObject:OnwnerName];
+//    OnwnerName.updateAction = ^ {
+//        if (self.LatPostDataDic[@"ownername"]) {
+//            OnwnerName.contentString = self.LatPostDataDic[@"ownername"];
+//        }
+//    };
+//    [footerView addSubview:OnwnerName];
+//    //
+//    
+//    EditCell *OwnerTele  = [[EditCell alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(OnwnerName.frame)-CellClipPadding, CellWidth, CellHeight)];
+//    OwnerTele.title  = @"业主电话:";
+//    OwnerTele.placeHoderString = @" ";
+//    [self dealTextfield:OwnerTele.contentFiled isTextCenter:NO];
+//    OwnerTele.contentFiled.keyboardType = UIKeyboardTypeNumberPad;
+//    [self.cellMARR addObject:OwnerTele];
+//    OwnerTele.updateAction = ^ {
+//        if (self.LatPostDataDic[@"ownertel"]) {
+//            OwnerTele.contentString = self.LatPostDataDic[@"ownertel"];
+//        }
+//    };
     
-    EditCell *OwnerTele  = [[EditCell alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(OnwnerName.frame)-CellClipPadding, CellWidth, CellHeight)];
-    OwnerTele.title  = @"业主电话:";
-    OwnerTele.placeHoderString = @" ";
-    [self dealTextfield:OwnerTele.contentFiled isTextCenter:NO];
-    OwnerTele.contentFiled.keyboardType = UIKeyboardTypeNumberPad;
-    [self.cellMARR addObject:OwnerTele];
-    OwnerTele.updateAction = ^ {
-        if (self.LatPostDataDic[@"ownertel"]) {
-            OwnerTele.contentString = self.LatPostDataDic[@"ownertel"];
-        }
-    };
     
-    
-    [self.footArrs addObject:OwnerTele];
-    [footerView addSubview:OwnerTele];
+//    [self.footArrs addObject:OwnerTele];
+//    [footerView addSubview:OwnerTele];
     
     
     //UIView
     
-    UIButton *SaveBtn =[[UIButton alloc]initWithFrame:CGRectMake(FootButtonPadding, CGRectGetMaxY(OwnerTele.frame)+20, FootButtonWidth, FootButtonHeight)];
+    UIButton *SaveBtn =[[UIButton alloc]initWithFrame:CGRectMake(FootButtonPadding, CGRectGetMaxY(ContactNo.frame)+20, FootButtonWidth, FootButtonHeight)];
     [SaveBtn setTitle:@"保存" forState:UIControlStateNormal];
     [SaveBtn addTarget:self action:@selector(DataSave) forControlEvents:UIControlEventTouchUpInside];
-    [SaveBtn setBackgroundColor:DeafaultColor2];
+    [SaveBtn setBackgroundColor:[UIColor whiteColor]];
     [footerView addSubview:SaveBtn];
     
     NSLog(@"Buton:Y%f",SaveBtn.bounds.origin.y);
-    UIButton *PostBtn =[[UIButton alloc]initWithFrame:CGRectMake(CGRectGetMaxX(SaveBtn.frame)+CellWidth-2*(FootButtonWidth+FootButtonPadding), CGRectGetMaxY(OwnerTele.frame)+20, FootButtonWidth, FootButtonHeight)];
+    UIButton *PostBtn =[[UIButton alloc]initWithFrame:CGRectMake(CGRectGetMaxX(SaveBtn.frame)+CellWidth-2*(FootButtonWidth+FootButtonPadding), CGRectGetMaxY(ContactNo.frame)+20, FootButtonWidth, FootButtonHeight)];
     [PostBtn setTitle:@"发布" forState:UIControlStateNormal];
     [PostBtn setBackgroundColor:DeafaultColor2];
     [PostBtn addTarget:self action:@selector(LogPostDic) forControlEvents:UIControlEventTouchUpInside];
