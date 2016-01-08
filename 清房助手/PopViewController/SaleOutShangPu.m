@@ -302,6 +302,8 @@
     };
     [main addSubview:HouseType];
     
+    
+    
     EditCell *FlatLocation = [[EditCell alloc]initWithFrame:CGRectMake(CellPaddingToVertical/2,  CGRectGetMaxY(HouseType.frame)-CellClipPadding, Screen_width - CellPaddingToVertical, CellHeight)];
     FlatLocation.title = @"楼层:";
     
@@ -319,8 +321,8 @@
     UILabel *foorLable = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(blockTF.frame)+2,0, 30, 50)];
     
     foorLable.text = @"层";
-    [foorLable setTextColor:[UIColor lightGrayColor]];
-    [FlatLocation addSubview:foorLable];
+   [foorLable setTextColor:[UIColor lightGrayColor]];
+   [FlatLocation addSubview:foorLable];
     
 
     
@@ -328,77 +330,17 @@
     [self.cellMARR addObject:FlatLocation];
     FlatLocation.updateAction = ^ {
         
-        if (self.LatPostDataDic[@"dong"]) {
-            blockTF.text = self.LatPostDataDic[@"dong"];
+        if (self.LatPostDataDic[@"louceng"]) {
+            blockTF.text = self.LatPostDataDic[@"louceng"];
         }
-        
-
     };
-    
-    
     [main addSubview:FlatLocation];
     
     
-    //FlatNo ,第  层  第  单元
-    EditCell    *FlatNo = [[EditCell alloc]initWithFrame:CGRectMake(CellPaddingToVertical/2,  CGRectGetMaxY(FlatLocation.frame) + GroupPadding , Screen_width - CellPaddingToVertical, CellHeight)];
-    FlatNo.title = @"楼层:";
-    
-    
-    UILabel *lable1 = [[UILabel alloc]initWithFrame:CGRectMake(85,0, 30, 50)];
-    lable1.text = @"第";
-    [lable1 setTextColor:[UIColor lightGrayColor]];
-    [FlatNo addSubview:lable1];
-    
-    UITextField *TF1= [[UITextField alloc]initWithFrame:CGRectMake(CGRectGetMaxX(lable1.frame), 0, 60, 50)];
-    TF1.textAlignment = NSTextAlignmentCenter;
-    TF1.delegate = self;
-    TF1.tag = [self.tfArrs count];
-    [self.tfArrs addObject:TF1];
-    [FlatNo addSubview:TF1];
-    TF1.keyboardType = UIKeyboardTypeNumberPad;
-    
-    UILabel *lable2 = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(TF1.frame),0, 30, 50)];
-    lable2.text = @"层";
-    [lable2 setTextColor:[UIColor lightGrayColor]];
-    [FlatNo addSubview:lable2];
-    
-    UILabel *lable3 = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(lable2.frame),0, 30, 50)];
-    lable3.text = @"共";
-    [lable3 setTextColor:[UIColor lightGrayColor]];
-    [FlatNo addSubview:lable3];
-    
-    UITextField *TF2= [[UITextField alloc]initWithFrame:CGRectMake(CGRectGetMaxX(lable3.frame), 0, 50, 50)];
-    TF2.textAlignment = NSTextAlignmentCenter;
-    TF2.delegate = self ;
-    TF2.tag = [self.tfArrs count];
-    [self.tfArrs addObject:TF2];
-    [FlatNo addSubview:TF2];
-    TF2.keyboardType = UIKeyboardTypeNumberPad;
-    
-    UILabel *lable4 = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(TF2.frame),0, 30, 50)];
-    lable4.text = @"层";
-    [lable4 setTextColor:[UIColor lightGrayColor]];
-    [FlatNo addSubview:lable4];
-    
-    
-    [self.cellMARR addObject:FlatNo];
-    FlatNo.updateAction = ^ {
-        
-        if (self.LatPostDataDic[@"louceng"]) {
-            TF1.text = self.LatPostDataDic[@"louceng"];
-        }
-        
-        if (self.LatPostDataDic[@"zonglouceng"]) {
-            TF2.text  = self.LatPostDataDic[@"zonglouceng"];
-        }
-        
-    };
-    
-    [main addSubview:FlatNo];
     
     
     //面积
-    EditCell    *Area = [[EditCell alloc]initWithFrame:CGRectMake(CellPaddingToVertical/2,  CGRectGetMaxY(FlatNo.frame) -CellClipPadding , Screen_width - CellPaddingToVertical, CellHeight)];
+    EditCell    *Area = [[EditCell alloc]initWithFrame:CGRectMake(CellPaddingToVertical/2,  CGRectGetMaxY(FlatLocation.frame) -CellClipPadding , Screen_width - CellPaddingToVertical, CellHeight)];
     Area.title = @"面积:";
     UITextField  *TF_Area = [[UITextField alloc]initWithFrame:CGRectMake(100 +60, 0, 70, 50)];
     TF_Area.keyboardType  = UIKeyboardTypeNumberPad;
@@ -407,7 +349,7 @@
     
     UILabel *LABLE_Area = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(TF_Area.frame)+30, 0, 50, 50)];
     [LABLE_Area setTextColor:[UIColor lightGrayColor]];
-    LABLE_Area.text = @"平方";
+    LABLE_Area.text = @"平米";
     
     
     [self.cellMARR addObject:Area];
@@ -422,85 +364,33 @@
     [main addSubview:Area];
     
     
-    //户型
-    EditCell    *RoomStyle = [[EditCell alloc]initWithFrame:CGRectMake(CellPaddingToVertical/2,  CGRectGetMaxY(Area.frame)-CellClipPadding , Screen_width - CellPaddingToVertical, CellHeight)];
-    RoomStyle.title = @"户型:";
+    EditCell    *GuanLiFei = [[EditCell alloc]initWithFrame:CGRectMake(CellPaddingToVertical/2,  CGRectGetMaxY(Area.frame) -CellClipPadding , Screen_width - CellPaddingToVertical, CellHeight)];
+    GuanLiFei.title = @"管理费:";
+    UITextField  *TF_GuanLiFei = [[UITextField alloc]initWithFrame:CGRectMake(100 +60, 0, 70, 50)];
+    TF_Area.keyboardType  = UIKeyboardTypeNumberPad;
+    [self dealTextfield:TF_Area isTextCenter:YES];
+    [Area addSubview:TF_GuanLiFei];
     
-    UITextField  *RoomTextfield = [[UITextField alloc]initWithFrame:CGRectMake(90, 0, 40, 50)];
-    RoomTextfield.keyboardType  = UIKeyboardTypeNumberPad ;
-    [self dealTextfield:RoomTextfield isTextCenter:YES];
-    
-    [RoomStyle addSubview:RoomTextfield];
-    
-    UILabel *RoomLabel = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(RoomTextfield.frame), 0, 20, 50)];
-    
-    [RoomLabel setTextColor:[UIColor lightGrayColor]];
-    RoomLabel.text = @"室";
-    [RoomStyle addSubview:RoomLabel];
-    
-    UITextField *TingTextfield = [[UITextField alloc]initWithFrame:CGRectMake(CGRectGetMaxX(RoomLabel.frame)-10, 0, 35, 50)];
-    TingTextfield.keyboardType  = UIKeyboardTypeNumberPad ;
-    [self dealTextfield:TingTextfield isTextCenter:YES];
-    
-    [RoomStyle addSubview:TingTextfield];
-    
-    UILabel *TingLabel = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(TingTextfield.frame), 0, 20, 50)];
-    TingLabel.text = @"厅";
-    [TingLabel setTextColor:[UIColor lightGrayColor]];
-    [RoomStyle addSubview:TingLabel];
-    
-    UITextField *WeiTextfield = [[UITextField alloc]initWithFrame:CGRectMake(CGRectGetMaxX(TingLabel.frame), 0, 30, 50)];
-    WeiTextfield.keyboardType  = UIKeyboardTypeNumberPad ;
-    [self dealTextfield:WeiTextfield isTextCenter:YES];
-    
-    [RoomStyle addSubview:WeiTextfield];
-    UILabel *WeiLabel = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(WeiTextfield.frame), 0, 20, 50)];
-    WeiLabel.text = @"卫";
-    [WeiLabel setTextColor:[UIColor lightGrayColor]];
-    [RoomStyle addSubview:WeiLabel];
+    UILabel *LABLE_GuanLiFei = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(TF_Area.frame)+30, 0, 70, 50)];
+   [LABLE_GuanLiFei setTextColor:[UIColor lightGrayColor]];
+    LABLE_GuanLiFei.text = @"元/平米";
     
     
-    UITextField *YangTaiTextfield = [[UITextField alloc]initWithFrame:CGRectMake(CGRectGetMaxX(WeiLabel.frame), 0, 30, 50)];
-    YangTaiTextfield.keyboardType  = UIKeyboardTypeNumberPad;
-    [self dealTextfield:YangTaiTextfield isTextCenter:YES];
-    
-    [RoomStyle addSubview:YangTaiTextfield];
-    UILabel *YangTaiLabel = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(YangTaiTextfield.frame), 0, 40, 50)];
-    YangTaiLabel.text = @"阳台";
-    [YangTaiLabel setTextColor:[UIColor lightGrayColor]];
-    [RoomStyle addSubview:YangTaiLabel];
-    
-    
-    
-    [self.cellMARR addObject:RoomStyle];
-    RoomStyle.updateAction = ^ {
-        
-        if(self.LatPostDataDic[@"fangshu"]) {
-            NSLog(@"fangshu:%@",self.LatPostDataDic[@"fangshu"]);
-            RoomTextfield.text = self.LatPostDataDic[@"fangshu"];  //  出现精装修
-        }
-        
-        if (self.LatPostDataDic[@"tingshu"]) {
-            TingTextfield.text = self.LatPostDataDic[@"tingshu"];
-        }
-        
-        if (self.LatPostDataDic[@"toilets"]) {
-            WeiTextfield.text  = self.LatPostDataDic[@"toilets"];
-        }
-        
-        if (self.LatPostDataDic[@"balconys"]) {
-            YangTaiTextfield.text = self.LatPostDataDic[@"balconys"];
+    [self.cellMARR addObject:GuanLiFei];
+    Area.updateAction = ^ {
+        if (self.LatPostDataDic[@"guanlifei"]) {
+            TF_Area.text = self.LatPostDataDic[@"guanlifei"];
         }
         
     };
     
-    [main addSubview:RoomStyle];
-    
+    [GuanLiFei addSubview:LABLE_GuanLiFei];
+    [main addSubview:GuanLiFei];
     
     
     
     //装修情况(需移动)
-    EditCell *Decoration = [[EditCell alloc]initWithFrame:CGRectMake(CellPaddingToVertical/2, CGRectGetMaxY(RoomStyle.frame)-CellClipPadding,Screen_width - CellPaddingToVertical, CellHeight)];
+    EditCell *Decoration = [[EditCell alloc]initWithFrame:CGRectMake(CellPaddingToVertical/2, CGRectGetMaxY(GuanLiFei.frame)-CellClipPadding,Screen_width - CellPaddingToVertical, CellHeight)];
     Decoration.isOptionalCell = YES;
     Decoration.title = @"装修情况:";
     Decoration.placeHoderString = @"请选择";
@@ -536,76 +426,11 @@
             Decoration.contentString = self.LatPostDataDic[@"zhuangxiu"];
         }
     };
-    
     [main addSubview:Decoration];
     
     
-    
-    //房龄
-    EditCell    *HouseAge = [[EditCell alloc]initWithFrame:CGRectMake(CellPaddingToVertical/2,  CGRectGetMaxY(Decoration.frame) -CellClipPadding , Screen_width - CellPaddingToVertical, CellHeight)];
-    HouseAge.title = @"房龄:";
-    UITextField  *TF_HouseAge = [[UITextField alloc]initWithFrame:CGRectMake(100 +60, 0, 110, 50)];
-    TF_HouseAge.keyboardType  = UIKeyboardTypeNumberPad ;
-    [self dealTextfield:TF_HouseAge isTextCenter:YES];
-    [HouseAge addSubview:TF_HouseAge];
-    UILabel *LABLE_TF_HouseAge = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(TF_HouseAge.frame)+20, 0, 50, 50)];
-    [LABLE_TF_HouseAge setTextColor:[UIColor lightGrayColor]];
-    LABLE_TF_HouseAge.text = @"年";
-    [HouseAge addSubview:LABLE_TF_HouseAge];
-    
-    [self.cellMARR addObject:HouseAge];
-    HouseAge.updateAction = ^ {
-        if (self.LatPostDataDic[@"fangling"]) {
-            TF_HouseAge.text = self.LatPostDataDic[@"fangling"];
-        }
-    };
-    
-    
-    [main addSubview:HouseAge];
-    
-    
-    
-    
-    //朝向
-    EditCell *orientation = [[EditCell alloc]initWithFrame:CGRectMake(CellPaddingToVertical/2, CGRectGetMaxY(HouseAge.frame)-CellClipPadding,Screen_width - CellPaddingToVertical, CellHeight)];
-    orientation.isOptionalCell = YES;
-    orientation.title = @"朝向:";
-    orientation.placeHoderString = @"请选择";
-    orientation.otherAction =^{
-        PopSelectViewController *select = [[PopSelectViewController alloc]init];
-        NSArray *Optdata  = [NSArray arrayWithObjects:@"南北通透",@"东",@"南",@"西",@"北",@"东南",@"西南",@"西北",@"东北",nil];
-        select.pikerDataArr = Optdata;
-        select.providesPresentationContextTransitionStyle = YES;
-        select.definesPresentationContext = YES;
-        select.modalPresentationStyle = UIModalPresentationOverCurrentContext;
-        self.preferredContentSize = CGSizeMake(Screen_width/2, 50);
-        UIView *modalView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, Screen_width, Screen_height)];
-        modalView.tag =ModalViewTag;
-        modalView.backgroundColor = [[UIColor lightGrayColor] colorWithAlphaComponent:.4];
-        [self.view addSubview:modalView];
-        select.DismissView = ^(){
-            [modalView removeFromSuperview];
-        };  //取消
-        select.SureBtnAciton =^(NSString *passString) {
-            orientation.contentString = passString;
-            [self.PostDataDic setObject:passString forKey:@"chaoxiang"];
-        };
-        [self presentViewController:select animated:YES completion:nil];
-    };
-    
-    [self.cellMARR addObject:orientation];
-    orientation.updateAction = ^ {
-        if (self.LatPostDataDic[@"chaoxiang"]) {
-            orientation.contentString = self.LatPostDataDic[@"chaoxiang"];
-        }
-    };
-    
-    [main addSubview:orientation];
-    
-    
-    
     //房屋配套
-    EditCell *FlatAttachMent = [[EditCell alloc]initWithFrame:CGRectMake(CellPaddingToVertical/2, CGRectGetMaxY(orientation.frame)-CellClipPadding,Screen_width - CellPaddingToVertical, CellHeight)];
+    EditCell *FlatAttachMent = [[EditCell alloc]initWithFrame:CGRectMake(CellPaddingToVertical/2, CGRectGetMaxY(Decoration.frame)-CellClipPadding,Screen_width - CellPaddingToVertical, CellHeight)];
     
     //获取上次存取的配套设施
     NSMutableSet *lastSelectAttachMent = [NSMutableSet new];
@@ -629,7 +454,7 @@
         [self.view addSubview:modalView];
         
         if(select.hasSelectedArrar != lastSelectAttachMent) {        //当没有被执行加载上一次参数时
-            select.hasSelectedArrar =  self.hasSelectedAttachMent;  //这个数组是由数字组成，代表着设施，将地址传给 select 便于纪录
+            select.hasSelectedArrar = self.hasSelectedAttachMent;  //这个数组是由数字组成，代表着设施，将地址传给 select 便于纪录
         }
         
         
