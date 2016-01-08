@@ -7,10 +7,71 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "EditCell.h"
+#import "CZKeyboardToolbar.h"
+#import "MUtiSelectViewController.h"
+#import <JYBMultiImageSelector/JYBMultiImageSelector.h>
+
+
 
 @interface SaleOutPostEditForm : UIViewController
 
 @property (nonatomic,strong)  NSDictionary *indexData;
+
+@property(nonatomic,copy) NSString *username;
+
+@property(nonatomic,copy) NSString *userId;
+
+@property(nonatomic,strong)  NSMutableArray *cellMARR;
+
+
+//为了便于继承
+
+//UIScrollView
+@property(nonatomic,strong)   EditCell  *pictureDisplay;
+@property (nonatomic, strong) JYBMultiImageView *multiImageView;
+@property (nonatomic, copy)   UIView *(^viewGetter)(NSString *imageName);
+@property (nonatomic, copy)   void (^blockTest)(void);
+
+@property(nonatomic,strong)   NSMutableArray  *tfArrs;
+@property(nonatomic,strong)   NSMutableArray  *footArrs;
+
+
+
+/**
+ *  上传的参数信息
+ */
+@property(nonatomic,strong)   NSMutableDictionary  *PostDataDic;
+
+
+/**
+ *  上一次上传的参数信息
+ */
+@property(nonatomic,strong)  NSDictionary  *LatPostDataDic;
+
+
+
+@property(nonatomic,strong)   CZKeyboardToolbar  *keyBoardBar;
+@property(nonatomic,strong)   UIScrollView  *mainScrollview;
+@property(nonatomic,assign)   BOOL ScoSwitch;
+@property(nonatomic,strong)   NSMutableSet  *hasSelectedAttachMent;
+@property(nonatomic,strong)   UIView  *footerView;
+@property(nonatomic,weak)     NSMutableArray *haSelectedImgs_MARR;
+@property(nonatomic,strong)   NSMutableArray  *SelectedImgsData_MARR;
+
+
+
+@property(nonatomic,strong)  EditCell  *RegionTF;
+
+
+
+
+//公共方法便于继承
+-(UITextField *) getFirstResponderTextfield;
+-(NSInteger ) indexOfFirstResponder;
+-(void)willShow:(NSNotificationCenter *)notifInfo;
+-(void)willHide;
+-(void)dealTextfield :(UITextField *)textfied isTextCenter:(BOOL)isTextCenter;
 
 @end
 

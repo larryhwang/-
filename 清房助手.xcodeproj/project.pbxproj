@@ -61,6 +61,7 @@
 		4628481D1C0FCC6C00273B3A /* PostTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 462848161C0FCC6C00273B3A /* PostTool.m */; };
 		4628481E1C0FCC6C00273B3A /* SandBoxTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 462848181C0FCC6C00273B3A /* SandBoxTool.m */; };
 		463B40641BDD142900B1D26D /* DSNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 463B40631BDD142900B1D26D /* DSNavigationBar.m */; };
+		464185BE1C3E572800650E26 /* SaleOutShangPu.m in Sources */ = {isa = PBXBuildFile; fileRef = 464185BD1C3E572800650E26 /* SaleOutShangPu.m */; };
 		4643562A1BC6093B00A44526 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 464356291BC6093B00A44526 /* main.m */; };
 		4643562D1BC6093B00A44526 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4643562C1BC6093B00A44526 /* AppDelegate.m */; };
 		464356351BC6093B00A44526 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 464356341BC6093B00A44526 /* Assets.xcassets */; };
@@ -392,6 +393,8 @@
 		462848181C0FCC6C00273B3A /* SandBoxTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SandBoxTool.m; sourceTree = "<group>"; };
 		463B40621BDD142900B1D26D /* DSNavigationBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSNavigationBar.h; sourceTree = "<group>"; };
 		463B40631BDD142900B1D26D /* DSNavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSNavigationBar.m; sourceTree = "<group>"; };
+		464185BC1C3E572800650E26 /* SaleOutShangPu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SaleOutShangPu.h; sourceTree = "<group>"; };
+		464185BD1C3E572800650E26 /* SaleOutShangPu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SaleOutShangPu.m; sourceTree = "<group>"; };
 		464356251BC6093B00A44526 /* 清房助手.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "清房助手.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		464356291BC6093B00A44526 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		4643562B1BC6093B00A44526 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -1622,6 +1625,8 @@
 				46BBE8B91C0FD23900DE4B14 /* SelectViewContorller.m */,
 				461518591C39FE8400E030D6 /* SaleOutOfiice.h */,
 				4615185A1C39FE8400E030D6 /* SaleOutOfiice.m */,
+				464185BC1C3E572800650E26 /* SaleOutShangPu.h */,
+				464185BD1C3E572800650E26 /* SaleOutShangPu.m */,
 			);
 			path = PopViewController;
 			sourceTree = "<group>";
@@ -2202,6 +2207,7 @@
 				465415501C2D3C05003E5743 /* QFOrderStatusTool.m in Sources */,
 				46714B821BC7C11F00E7AEE9 /* WMPopAnimation.m in Sources */,
 				46C716C91BC69FB800287742 /* MJConst.m in Sources */,
+				464185BE1C3E572800650E26 /* SaleOutShangPu.m in Sources */,
 				46D6BCA31C2B15EA00883F50 /* FormCellInMutiTast.m in Sources */,
 				4653867C1C1912DC00454E79 /* FilterViewController.m in Sources */,
 				46AFDF9E1BCB84A200B49CBE /* SDWebImageCompat.m in Sources */,

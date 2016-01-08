@@ -313,6 +313,7 @@ static const CGFloat menuStartNarrowRatio  = 0.70;
     if([self isFunctionPersmisionWithTitle:@"售后业务"]){
         MutiTaskOrderBusinessVC *OrderTask = [[MutiTaskOrderBusinessVC alloc]init];
         OrderTask.title =@"售后业务";
+        [self showHome];
         [self.messageNav pushViewController:OrderTask animated:YES];
     } else {
         [MBProgressHUD showError:@"权限不足，请联系管理员"];

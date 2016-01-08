@@ -18,6 +18,8 @@
 #import "SaleOutPostEditForm.h"
 #import "AppDelegate.h"
 
+#import "SaleOutShangPu.h"
+
 
 @interface PostCategory ()<UITableViewDataSource,UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *CategoryTable;
@@ -61,17 +63,27 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-     [tableView deselectRowAtIndexPath:indexPath animated:YES]; //解除遗留灰色
+    SaleOutPostEditForm *editForm = [[SaleOutPostEditForm alloc]init];
+    AppDelegate *app = [UIApplication sharedApplication].delegate;
+    [tableView deselectRowAtIndexPath:indexPath animated:YES]; //解除遗留灰色
     if (indexPath.row ==0) {
-       // cell.textLabel.text  =@"住宅";
-        SaleOutPostEditForm *editForm = [[SaleOutPostEditForm alloc]init];
-        AppDelegate *app = [UIApplication sharedApplication].delegate;
+
         NSLog(@"%@",app.provnceIndexDic);
-        editForm.indexData    =   app.provnceIndexDic;
+        editForm.indexData  = app.provnceIndexDic;
+        editForm.username   = app.usrInfoDic[@"username"];
+        editForm.userId     = app.usrInfoDic[@"userid"];
+
         editForm.title = @"住宅出售";
         [self.navigationController pushViewController:editForm animated:YES];
     } else if (indexPath.row ==1) {
-       // cell.textLabel.text = @"商铺";
+        
+        SaleOutShangPu *pu = [[SaleOutShangPu alloc]init];
+        pu.username   = app.usrInfoDic[@"username"];
+        pu.userId     = app.usrInfoDic[@"userid"];
+        pu.indexData  = app.provnceIndexDic;
+        pu.title = @"商铺出售";
+        
+        [self.navigationController pushViewController:pu animated:YES];
     }else if (indexPath.row ==2) {
       //  cell.textLabel.text = @"写字楼";
     }else  {
