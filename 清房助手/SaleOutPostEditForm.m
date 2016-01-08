@@ -561,7 +561,6 @@
         selectRegion.delegate = self ;
         selectRegion.indexData = _indexData ;
         _RegionTF.contentString = @"";
-
         [self.navigationController pushViewController:selectRegion animated:YES];
         NSLog(@"跳转已经执行完");
     };
@@ -938,13 +937,14 @@
     
     //房屋配套
     EditCell *FlatAttachMent = [[EditCell alloc]initWithFrame:CGRectMake(CellPaddingToVertical/2, CGRectGetMaxY(orientation.frame)-CellClipPadding,Screen_width - CellPaddingToVertical, CellHeight)];
-    
+      __weak __typeof(FlatAttachMent)weakFlatAttachMent = FlatAttachMent;
     //获取上次存取的配套设施
     NSMutableSet *lastSelectAttachMent = [NSMutableSet new];
     
     
     MUtiSelectViewController *select = [[MUtiSelectViewController alloc]init];
-
+    select.OptBtnTitlesArra = [NSArray arrayWithObjects:@"天然气",@"宽带",@"电梯",@"停车场",@"电视",@"家电",@"电话",@"拎包入住", nil];
+    select.OptBtnSqlTittles_NARR =[NSArray arrayWithObjects:@"meiqi",@"kuandai",@"dianti",@"tingchechang",@"dianshi",@"jiadian",@"dianhua",@"lingbaoruzhu", nil];
     FlatAttachMent.isOptionalCell = YES;
     FlatAttachMent.title = @"房屋配套:";
     FlatAttachMent.placeHoderString = @"请选择";
@@ -960,15 +960,11 @@
         
         [self.view addSubview:modalView];
        
-        if(select.hasSelectedArrar != lastSelectAttachMent) {        //当没有被执行加载上一次参数时
-            select.hasSelectedArrar =  self.hasSelectedAttachMent;  //这个数组是由数字组成，代表着设施，将地址传给 select 便于纪录
-        }
-        
 
         select.HandleDic = self.PostDataDic;  //字典地址传过去，在select对象里面进行 参数的设置
         
 
-        select.HandleTextField = FlatAttachMent.contentFiled;   //输入框的地址传过去，同样在里面进行设置
+        select.HandleTextField = weakFlatAttachMent.contentFiled;   //输入框的地址传过去，同样在里面进行设置
         select.providesPresentationContextTransitionStyle = YES;
         select.definesPresentationContext = YES;
         select.modalPresentationStyle = UIModalPresentationOverCurrentContext;
@@ -980,52 +976,52 @@
     
     
     FlatAttachMent.updateAction = ^ {
+     //:@"天然气",@"宽带",@"电梯",@"停车场",@"电视",@"家电",@"电话",@"拎包入住", nil];
         if(self.LatPostDataDic[@"meiqi"])
         {
-            [lastSelectAttachMent addObject:@"0"];
+            [lastSelectAttachMent addObject:@"天然气"];
         }
         
         if (self.LatPostDataDic[@"kuandai"]) {
-            [lastSelectAttachMent addObject:@"1"];
+            [lastSelectAttachMent addObject:@"宽带"];
         }
         
         if (self.LatPostDataDic[@"dianti"]) {
-            [lastSelectAttachMent addObject:@"2"];
+            [lastSelectAttachMent addObject:@"电梯"];
         }
         
         if (self.LatPostDataDic[@"tingchechang"]) {
-            [lastSelectAttachMent addObject:@"3"];
+            [lastSelectAttachMent addObject:@"停车场"];
         }
         
         if (self.LatPostDataDic[@"dianshi"]) {
-            [lastSelectAttachMent addObject:@"4"];
+            [lastSelectAttachMent addObject:@"电视"];
         }
         
         if (self.LatPostDataDic[@"jiadian"]) {
-            [lastSelectAttachMent addObject:@"5"];
+            [lastSelectAttachMent addObject:@"家电"];
         }
         
         if (self.LatPostDataDic[@"dianhua"]) {
-            [lastSelectAttachMent addObject:@"6"];
+            [lastSelectAttachMent addObject:@"电话"];
         }
         
         if (self.LatPostDataDic[@"lingbaoruzhu"]) {
-            [lastSelectAttachMent addObject:@"7"];
+            [lastSelectAttachMent addObject:@"拎包入住"];
         }
 
         if([lastSelectAttachMent count]>0) {
             NSLog(@"原来的配套措施:%@",lastSelectAttachMent);
             NSArray  *arr= [NSArray arrayWithObjects:@"天然气",@"宽带",@"电梯",@"停车场",@"电视",@"家电",@"电话",@"拎包入住", nil];
-            select.hasSelectedArrar = lastSelectAttachMent;  //将上一次选设施载入进去，再一次弹窗时，已选的就会变成高亮
+            select.hasSelectedSets = lastSelectAttachMent;  //将上一次选设施载入进去，再一次弹窗时，已选的就会变成高亮
             
             NSString *str = @"";
             
             for (NSString *indexStr in lastSelectAttachMent) {
-              int index = [indexStr integerValue];
-                str = [str stringByAppendingString:[NSString stringWithFormat:@"%@ ",arr[index]]];
+                str = [str stringByAppendingString:[NSString stringWithFormat:@"%@ ",indexStr]];
             }
             
-            FlatAttachMent.contentString = str;
+            weakFlatAttachMent.contentString = str;
             
             
         }
@@ -1343,16 +1339,8 @@
     [self.PostDataDic setObject:@"0" forKey:@"fenlei"];     //0-住宅，1-商铺，2-写字楼，3-厂房
     [self.PostDataDic setObject:@"0" forKey:@"zhuangtai"];  // 0/交易中 ，1／已完成 ，2/已过期
 
-    
-    
-    
-    
-    
-    [self FormatRegionParam];
-    
-    
 
-    
+    [self FormatRegionParam];
     
     [MBProgressHUD showMessage:@"正在发布"];
     NSLog(@"上传数据:%@",_PostDataDic);
@@ -1465,7 +1453,7 @@
     }];
 }
 
-//              @"zufangxingshi":@"押三付一"
+//
 -(BOOL)checkPostData :(NSMutableDictionary *) dicTionNary {
     __block  BOOL flag = YES;
     NSArray *ar = [dicTionNary allValues];

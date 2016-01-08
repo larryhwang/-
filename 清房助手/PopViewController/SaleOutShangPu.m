@@ -453,9 +453,7 @@
         
         [self.view addSubview:modalView];
         
-        if(select.hasSelectedArrar != lastSelectAttachMent) {        //当没有被执行加载上一次参数时
-            select.hasSelectedArrar = self.hasSelectedAttachMent;  //这个数组是由数字组成，代表着设施，将地址传给 select 便于纪录
-        }
+
         
         
         select.HandleDic = self.PostDataDic;  //字典地址传过去，在select对象里面进行 参数的设置
@@ -509,7 +507,7 @@
         if([lastSelectAttachMent count]>0) {
             NSLog(@"原来的配套措施:%@",lastSelectAttachMent);
             NSArray  *arr= [NSArray arrayWithObjects:@"天然气",@"宽带",@"电梯",@"停车场",@"电视",@"家电",@"电话",@"拎包入住", nil];
-            select.hasSelectedArrar = lastSelectAttachMent;  //将上一次选设施载入进去，再一次弹窗时，已选的就会变成高亮
+           // select.hasSelectedArrar = lastSelectAttachMent;  //将上一次选设施载入进去，再一次弹窗时，已选的就会变成高亮
             
             NSString *str = @"";
             

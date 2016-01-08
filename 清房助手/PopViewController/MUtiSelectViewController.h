@@ -12,7 +12,14 @@
 
 @property(nonatomic,weak) NSMutableDictionary *HandleDic;
 @property(nonatomic,weak) UITextField *HandleTextField;
-@property(nonatomic,weak) NSMutableSet *hasSelectedArrar;
+
+@property(nonatomic,strong)  NSMutableSet  *hasSelectedSets;
+
+@property(nonatomic,strong)   NSArray    *OptBtnTitlesArra;
+@property(nonatomic,strong)   NSArray    *OptBtnSqlTittles_NARR;
+
 @property(nonatomic,copy) void  (^dismissAction)(void);   //@property (nonatomic, copy) void (^otherAction)(void);
+
+@property(nonatomic,strong)  NSArray  *OptionsArr;
 
 @end
