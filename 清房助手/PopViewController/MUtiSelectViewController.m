@@ -45,9 +45,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-   
-
-    
     GBTagListView *tagList=[[GBTagListView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth,0)];
     self.GBTag = tagList;
     /**允许点击 */
@@ -58,17 +55,17 @@
     [tagList setTagWithTagArray:self.OptBtnTitlesArra];
     
     
-    CGFloat ContentHeight = 2 * tagList.frame.size.height;
+    CGFloat ContentHeight = 3 * tagList.frame.size.height;
     
     UIView *contentView = [[UIView alloc]initWithFrame:CGRectMake(0, ScreenHeight - ContentHeight, ScreenWidth, ContentHeight)];
     contentView.backgroundColor = [UIColor whiteColor];
     
-    UIButton *leftBtn  = [[UIButton alloc]initWithFrame:CGRectMake(10, 15, 60, 35)];
+    UIButton *leftBtn  = [[UIButton alloc]initWithFrame:CGRectMake(10, 5, 60, 35)];
     [leftBtn setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
     [leftBtn setTitle:@"取消" forState:UIControlStateNormal];
     [leftBtn addTarget:self action:@selector(cancleBtn:) forControlEvents:UIControlEventTouchUpInside];
 
-    UIButton *rightBtn = [[UIButton alloc]initWithFrame:CGRectMake(ScreenWidth -10 - 60, 15, 60, 35)];
+    UIButton *rightBtn = [[UIButton alloc]initWithFrame:CGRectMake(ScreenWidth -10 - 60, 5, 60, 35)];
     [rightBtn setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
     [rightBtn setTitle:@"确定" forState:UIControlStateNormal];
     [rightBtn addTarget:self action:@selector(sureBtn:) forControlEvents:UIControlEventTouchUpInside];
@@ -85,13 +82,8 @@
         
         //1.通知展示页面更新已选中的配套
         //2.设置上传所需参数
-        [self.hasSelectedArr removeAllObjects];
-        
+       [self.hasSelectedArr removeAllObjects];
         self.hasSelectedArr = [NSMutableArray arrayWithArray:arr];
-        
-
-
-
         NSMutableSet *set = [NSMutableSet setWithArray:self.OptBtnTitlesArra];
         NSDictionary *dic = [NSDictionary dictionaryWithObjects:self.OptBtnSqlTittles_NARR forKeys:self.OptBtnTitlesArra];
         NSLog(@"%@",dic);

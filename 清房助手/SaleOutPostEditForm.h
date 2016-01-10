@@ -39,6 +39,13 @@
 
 
 /**
+ *  发布类型，4种乘以4种
+ */
+@property(nonatomic,copy) NSString *typeStr;
+
+
+
+/**
  *  上传的参数信息
  */
 @property(nonatomic,strong)   NSMutableDictionary  *PostDataDic;
@@ -50,7 +57,7 @@
 @property(nonatomic,strong)  NSDictionary  *LatPostDataDic;
 
 
-
+@property(nonatomic,copy)     NSString *lastRegionName;
 @property(nonatomic,strong)   CZKeyboardToolbar  *keyBoardBar;
 @property(nonatomic,strong)   UIScrollView  *mainScrollview;
 @property(nonatomic,assign)   BOOL ScoSwitch;
@@ -72,6 +79,14 @@
 -(void)willShow:(NSNotificationCenter *)notifInfo;
 -(void)willHide;
 -(void)dealTextfield :(UITextField *)textfied isTextCenter:(BOOL)isTextCenter;
+-(void)loadLastParamDic;
+-(void)FormatRegionParam;
+
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex NS_DEPRECATED_IOS(2_0, 9_0);
+-(void)checkContinue;
+-(void)DataSave;
+-(void)textFieldDidEndEditing:(UITextField *)textField;
 
 @end
 

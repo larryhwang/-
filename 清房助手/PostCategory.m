@@ -72,12 +72,14 @@
         editForm.indexData  = app.provnceIndexDic;
         editForm.username   = app.usrInfoDic[@"username"];
         editForm.userId     = app.usrInfoDic[@"userid"];
+        editForm.typeStr    = @"11";
 
         editForm.title = @"住宅出售";
         [self.navigationController pushViewController:editForm animated:YES];
     } else if (indexPath.row ==1) {
         
         SaleOutShangPu *pu = [[SaleOutShangPu alloc]init];
+        pu.typeStr    = @"12";
         pu.username   = app.usrInfoDic[@"username"];
         pu.userId     = app.usrInfoDic[@"userid"];
         pu.indexData  = app.provnceIndexDic;

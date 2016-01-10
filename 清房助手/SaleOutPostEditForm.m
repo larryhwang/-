@@ -80,7 +80,6 @@
     
 
     NSString *_RegionName;
-    NSString *_lastRegionName;
     NSString *_imgs;
     
     NSString *_username;
@@ -104,6 +103,7 @@
     if (_PostDataDic==nil) {
         _PostDataDic =[NSMutableDictionary new];
     }
+    NSLog(@"构造时:%p",_PostDataDic);
     return _PostDataDic;
 }
 
@@ -363,9 +363,9 @@
     // 3.
   
     
-//    NSDictionary *lastDic = [[NSUserDefaults standardUserDefaults]objectForKey:forKey:@"11"];  //11是状态码，代表 是出售 住宅
+//    NSDictionary *lastDic = [[NSUserDefaults standardUserDefaults]objectForKey:forKey:self.typeStr];  //11是状态码，代表 是出售 住宅
     
-   NSDictionary *lastDic =  [[NSUserDefaults standardUserDefaults]objectForKey:@"11"];
+   NSDictionary *lastDic =  [[NSUserDefaults standardUserDefaults]objectForKey:self.typeStr];
     
     
     
@@ -1012,7 +1012,7 @@
 
         if([lastSelectAttachMent count]>0) {
             NSLog(@"原来的配套措施:%@",lastSelectAttachMent);
-            NSArray  *arr= [NSArray arrayWithObjects:@"天然气",@"宽带",@"电梯",@"停车场",@"电视",@"家电",@"电话",@"拎包入住", nil];
+
             select.hasSelectedSets = lastSelectAttachMent;  //将上一次选设施载入进去，再一次弹窗时，已选的就会变成高亮
             
             NSString *str = @"";
@@ -1300,9 +1300,9 @@
     [self FormatRegionParam];
     if([[self.PostDataDic allKeys] count] > 0) {
         NSLog(@"保存:%@",self.PostDataDic);
-        [[NSUserDefaults standardUserDefaults]setObject:self.PostDataDic forKey:@"11"];  //11是状态码，代表 是出售 住宅
+        [[NSUserDefaults standardUserDefaults]setObject:self.PostDataDic forKey:self.typeStr];  //11是状态码，代表 是出售 住宅
     } else {
-        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"11"];
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:self.typeStr];
     }
     
     [self.navigationController popViewControllerAnimated:YES];
@@ -1523,7 +1523,8 @@
     switch (EditedTextFieldTag) {
           case biaotiTag:
             NSLog(@"标题是:%@",textField.text);
-            [self.PostDataDic setObject:textField.text forKey:@"biaoti"];
+            NSLog(@"%@",self);
+            [_PostDataDic setObject:textField.text forKey:@"biaoti"];
             break;
           case mingchengTag:
               NSLog(@"名称是:%@",textField.text);
@@ -1803,7 +1804,7 @@
           
           [self.navigationController setNavigationBarHidden:YES animated:YES];
           [self.navigationController setNavigationBarHidden:NO animated:YES];
-          [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"11"];
+          [[NSUserDefaults standardUserDefaults] removeObjectForKey:self.typeStr];
           NSLog(@"取消");
           
 
@@ -1815,21 +1816,20 @@
         } else {
         //保存并退出
         NSLog(@"保存并退出");
-            //问题: 1.再次进入后的加载数据，然后再保存，仅有地址参数
+
         //参数拼接，这里不用做保存
-        [self loadLastParamDic];
+//        [self loadLastParamDic];   //加载上一次保存的数据，这里有逻辑错误,如果上次的某个键值为空的话，再次即便更改这个键值也会，也会变得空
         [self FormatRegionParam];
             
-            NSDictionary *oldSavedDic = [[NSUserDefaults standardUserDefaults] objectForKey:@"11"];
+            NSDictionary *oldSavedDic = [[NSUserDefaults standardUserDefaults] objectForKey:self.typeStr];
             
         
         NSLog(@"数量:%d", [[self.PostDataDic allKeys] count]);
             if([[self.PostDataDic allKeys] count] > 0) {
                 NSLog(@"保存:%@",self.PostDataDic);
-
-              [[NSUserDefaults standardUserDefaults]setObject:self.PostDataDic forKey:@"11"];  //11是状态码，代表 是出售 住宅
+              [[NSUserDefaults standardUserDefaults]setObject:self.PostDataDic forKey:self.typeStr];  //11是状态码，代表 是出售 住宅
             } else {
-              [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"11"];
+              [[NSUserDefaults standardUserDefaults] removeObjectForKey:self.typeStr];
             }
 
         [self.navigationController setNavigationBarHidden:YES animated:YES];
@@ -1847,7 +1847,7 @@
             [self loadLastParamDic];
         } else {
             //重写填写
-            [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"11"];
+            [[NSUserDefaults standardUserDefaults] removeObjectForKey:self.typeStr];
             NSLog(@"BB");
         }
     }
@@ -1856,14 +1856,17 @@
 
 //加载上一次参数数据  , 这里只是展示界面的数据，
 -(void)loadLastParamDic {
-    
     //上传参数赋值
-    NSDictionary *tempDic = [[NSUserDefaults standardUserDefaults] objectForKey:@"11"];
+    NSDictionary *tempDic = [[NSUserDefaults standardUserDefaults] objectForKey:self.typeStr];
     NSMutableDictionary *oldDic= [NSMutableDictionary dictionaryWithDictionary:tempDic];
-    if([[oldDic allKeys] count]>0)   self.PostDataDic = oldDic;
+    if([[oldDic allKeys] count]>0)
+        //重载数据前需要进行判断，如果新键的值变更了，以新的值为准，如果没有则赋予旧值
+        self.PostDataDic = oldDic;
     
     //表象参数赋值
     for (EditCell *cell in self.cellMARR) {
+        NSLog(@"Father,Arr%p",self.cellMARR);
+       NSLog(@"cell名字:%@",cell.title);
         if (cell.updateAction) {
             cell.updateAction();
         }
