@@ -125,8 +125,49 @@
 
 
 
+-(BOOL)controllerWillPopHandler {
+    NSLog(@"%d",[[self.PostDataDic allKeys] count]);
+    
+    if ([[self.PostDataDic allKeys] count] ==0 ) {  //如果加载了上次数据或者 已经被编辑了
+        if(_isLoadLastPara ==YES) {
+            NSLog(@"TopVC in nav :%@",self.navigationController.topViewController);
+            
+            UIAlertView *AW = [[UIAlertView alloc]initWithTitle:nil
+                                                        message:@"资料尚未保存"
+                                                       delegate:self
+                                              cancelButtonTitle:@"放弃编辑"
+                                              otherButtonTitles:@"留在此页", @"保存并退出",nil];
+            AW.tag = saveAlertTag;
+            [AW show];
+            return NO;
+        }
+        _isLoadLastPara = NO;    //复位
+        return YES;
+    }
+    
+    NSLog(@"TopVC in nav :%@",self.navigationController.topViewController);
+    
+    
+    if (_isFromSelectDescribePage) {
+        _isFromSelectDescribePage = NO;
+        return NO;
+    }
+    
+    UIAlertView *AW = [[UIAlertView alloc]initWithTitle:nil
+                                                message:@"资料尚未保存"
+                                               delegate:self
+                                      cancelButtonTitle:@"放弃编辑"
+                                      otherButtonTitles:@"留在此页", @"保存并退出",nil];
+    AW.tag = saveAlertTag;
+    [AW show];
+    return NO;
+    
+}
+
+
 #pragma mark - BaseUISetting
 -(void)cellSetting {
+    NSLog(@"zi:%p",self.ScoSwitch);
     self.ScoSwitch = NO;
     //监听键盘事件
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(willShow:) name:UIKeyboardWillShowNotification object:nil];
@@ -446,7 +487,7 @@
     select.OptBtnTitlesArra = [NSArray arrayWithObjects:@"客梯",@"货梯",@"扶梯",@"空调",@"网络", nil];
     select.OptBtnSqlTittles_NARR =[NSArray arrayWithObjects:@"keti",@"huoti",@"futi",@"kongtiao",@"wangluo", nil];
     FlatAttachMent.isOptionalCell = YES;
-    FlatAttachMent.title = @"商铺配套:";
+    FlatAttachMent.title = @"写字楼级别:";
     FlatAttachMent.placeHoderString = @"请选择";
     UIView *modalView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, Screen_width, Screen_height)];
     modalView.tag =ModalViewTag;
@@ -469,8 +510,7 @@
     
     [self.cellMARR addObject:FlatAttachMent];
     
-    
-    
+
     FlatAttachMent.updateAction = ^ {
         if(self.LatPostDataDic[@"keti"])
         {
@@ -893,6 +933,12 @@
     NSLog(@"弹窗序号:%d",buttonIndex);
     if(alertView.tag == SuccessAlertTag) {
         [self.navigationController popViewControllerAnimated:YES];
+        
+        //删除缓存数据
+        
+        if([[NSUserDefaults standardUserDefaults] objectForKey:self.typeStr]){
+           [[NSUserDefaults standardUserDefaults] removeObjectForKey:self.typeStr];
+        }
     }
     
     if(alertView.tag == saveAlertTag) {

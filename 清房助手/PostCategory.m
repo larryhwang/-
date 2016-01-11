@@ -17,7 +17,7 @@
 #import "PostCategory.h"
 #import "SaleOutPostEditForm.h"
 #import "AppDelegate.h"
-
+#import "SaleOutOfiice.h"
 #import "SaleOutShangPu.h"
 
 
@@ -88,6 +88,13 @@
         [self.navigationController pushViewController:pu animated:YES];
     }else if (indexPath.row ==2) {
       //  cell.textLabel.text = @"写字楼";
+        SaleOutOfiice *saleOffice = [SaleOutOfiice new];
+        saleOffice.typeStr    = @"12";
+        saleOffice.username   = app.usrInfoDic[@"username"];
+        saleOffice.userId     = app.usrInfoDic[@"userid"];
+        saleOffice.indexData  = app.provnceIndexDic;
+        saleOffice.title = @"出售写字楼";
+        [self.navigationController pushViewController:saleOffice animated:YES];
     }else  {
         //cell.textLabel.text = @"广场";
     }

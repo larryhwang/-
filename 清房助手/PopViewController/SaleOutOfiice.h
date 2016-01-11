@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SaleOutShangPu.h"
 
-@interface SaleOutOfiice : UIViewController
+@interface SaleOutOfiice : SaleOutShangPu
 
 @end

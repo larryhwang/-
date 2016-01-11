@@ -87,6 +87,7 @@
 -(void)checkContinue;
 -(void)DataSave;
 -(void)textFieldDidEndEditing:(UITextField *)textField;
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView;
 
 @end
 

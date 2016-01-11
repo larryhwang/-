@@ -623,8 +623,6 @@
     
     EditCell *FlatLocation = [[EditCell alloc]initWithFrame:CGRectMake(CellPaddingToVertical/2,  CGRectGetMaxY(HouseType.frame)-CellClipPadding, Screen_width - CellPaddingToVertical, CellHeight)];
     FlatLocation.title = @"位置:";
-
-    
     UITextField *blockTF = [[UITextField alloc]initWithFrame:CGRectMake(100, 0, 60, 50)];
     blockTF.textAlignment = NSTextAlignmentCenter;
     blockTF.inputAccessoryView = self.keyBoardBar;
@@ -1441,6 +1439,7 @@
                                                        delegate:self
                                               cancelButtonTitle:nil
                                               otherButtonTitles:@"确定", nil];
+          AW.tag = SuccessAlertTag;
          [AW setFrame:CGRectMake(20, 20, 150, 60)];
          [AW show];
         } else {
@@ -1503,14 +1502,13 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView;  {
     _hasSlidePosition = scrollView.contentOffset.y;
-    if ([self.tfArrs count]>10) {
         for (UITextField *tf in self.tfArrs) {
             if (tf.isFirstResponder) {
+                NSLog(@"fu:%p",self.ScoSwitch);
                 _ScoSwitch = YES ;
                 break ;
             }
         }
-    }
    [self.view endEditing:YES];
 }
 
@@ -1862,7 +1860,6 @@
     if([[oldDic allKeys] count]>0)
         //重载数据前需要进行判断，如果新键的值变更了，以新的值为准，如果没有则赋予旧值
         self.PostDataDic = oldDic;
-    
     //表象参数赋值
     for (EditCell *cell in self.cellMARR) {
         NSLog(@"Father,Arr%p",self.cellMARR);
