@@ -40,10 +40,10 @@
     CGRect WanPurch = CGRectMake(0, ButtonHeight + Pading ,ButtonHeight, ButtonHeight);
     CGRect WanRent  = CGRectMake(ContenterHeight-ButtonHeight, ButtonHeight + Pading ,ButtonHeight, ButtonHeight);
     
-    [self setBtnWithimgName:@"chushou" titleName:@"出售" rect:salesOut];
-    [self setBtnWithimgName:@"chuzu" titleName:@"出租" rect:rentOut];
-    [self setBtnWithimgName:@"qiugou" titleName:@"求购" rect:WanPurch];
-    [self setBtnWithimgName:@"qiuzu" titleName:@"求租" rect:WanRent];
+    [self setBtnWithimgName:@"chushou" titleName:@"出售" rect:salesOut andAction:@selector(salesOut)];
+    [self setBtnWithimgName:@"chuzu" titleName:@"出租" rect:rentOut andAction:@selector(RentOut)];
+    [self setBtnWithimgName:@"qiugou" titleName:@"求购" rect:WanPurch andAction:@selector(WanaPurchse)];
+    [self setBtnWithimgName:@"qiuzu" titleName:@"求租" rect:WanRent andAction:@selector(WanaRent)];
     
     [self Move:nil];
     
@@ -73,9 +73,9 @@
 }
 
 
-- (void) setBtnWithimgName:(NSString *)imgName titleName:(NSString *)titleName rect :(CGRect ) currentCGR {
+- (void) setBtnWithimgName:(NSString *)imgName titleName:(NSString *)titleName rect :(CGRect ) currentCGR andAction:(SEL)action {
     UIButton *btn = [[UIButton alloc]initWithFrame:currentCGR];
-    [btn addTarget:self action:@selector(salesOut) forControlEvents:UIControlEventTouchUpInside];
+    [btn addTarget:self action:action forControlEvents:UIControlEventTouchUpInside];
     CGRect titleRect = CGRectMake(currentCGR.origin.x, currentCGR.origin.y + 2 + ButtonHeight, ButtonHeight, 30);
     UILabel *title = [[UILabel alloc]initWithFrame:titleRect];
     title.textAlignment = NSTextAlignmentCenter;
@@ -88,9 +88,35 @@
 }
 
 -(void)salesOut {
+    //出售
     PostCategory *Chose = [PostCategory new];
+    Chose.Status = SalesOut;
     Chose.title = @"请选择种类";
     [self.navigationController pushViewController:Chose animated:YES];
 }
 
+
+-(void)RentOut {
+    //出租
+    PostCategory *Chose = [PostCategory new];
+    Chose.Status = RentOut;
+    Chose.title = @"请选择种类";
+    [self.navigationController pushViewController:Chose animated:YES];
+}
+
+-(void)WanaPurchse {
+    //求购
+    PostCategory *Chose = [PostCategory new];
+    Chose.Status = WantBuy;
+    Chose.title = @"请选择种类";
+    [self.navigationController pushViewController:Chose animated:YES];
+}
+
+-(void)WanaRent {
+    //求租
+    PostCategory *Chose = [PostCategory new];
+    Chose.Status = WantRent;
+    Chose.title = @"请选择种类";
+    [self.navigationController pushViewController:Chose animated:YES];
+}
 @end

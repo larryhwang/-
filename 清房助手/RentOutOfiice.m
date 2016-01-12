@@ -1,15 +1,12 @@
 //
-//  SaleOutOfiice.m
+//  RentOutOfiice.m
 //  清房助手
 //
-//  Created by Larry on 1/4/16.
+//  Created by Larry on 1/12/16.
 //  Copyright © 2016 HuiZhou S&F NetworkTechCo.,Ltd . All rights reserved.
 //
 
-#import "SaleOutOfiice.h"
-
-
-#import "SaleOutPostEditForm.h"
+#import "RentOutOfiice.h"
 #import "EditCell.h"
 #import "SelectRegionVC.h"
 #import "LoacationNameTool.h"
@@ -74,7 +71,7 @@
 #define saveAlertTag       72
 #define checkLastTag       73
 
-@interface SaleOutOfiice (){
+@interface RentOutOfiice (){
     NSString *_RegionName;
     
     
@@ -97,53 +94,14 @@
 
 @end
 
-@implementation SaleOutOfiice
+@implementation RentOutOfiice
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+    // Do any additional setup after loading the view.
 }
 
 
-
--(BOOL)controllerWillPopHandler {
-    NSLog(@"%d",[[self.PostDataDic allKeys] count]);
-    
-    if ([[self.PostDataDic allKeys] count] ==0 ) {  //如果加载了上次数据或者 已经被编辑了
-        if(_isLoadLastPara ==YES) {
-            NSLog(@"TopVC in nav :%@",self.navigationController.topViewController);
-            
-            UIAlertView *AW = [[UIAlertView alloc]initWithTitle:nil
-                                                        message:@"资料尚未保存"
-                                                       delegate:self
-                                              cancelButtonTitle:@"放弃编辑"
-                                              otherButtonTitles:@"留在此页", @"保存并退出",nil];
-            AW.tag = saveAlertTag;
-            [AW show];
-            return NO;
-        }
-        _isLoadLastPara = NO;    //复位
-        return YES;
-    }
-    
-    NSLog(@"TopVC in nav :%@",self.navigationController.topViewController);
-    
-    
-    if (_isFromSelectDescribePage) {
-        _isFromSelectDescribePage = NO;
-        return NO;
-    }
-    
-    UIAlertView *AW = [[UIAlertView alloc]initWithTitle:nil
-                                                message:@"资料尚未保存"
-                                               delegate:self
-                                      cancelButtonTitle:@"放弃编辑"
-                                      otherButtonTitles:@"留在此页", @"保存并退出",nil];
-    AW.tag = saveAlertTag;
-    [AW show];
-    return NO;
-    
-}
 
 -(void)cellSetting {
     NSLog(@"zi:%p",self.ScoSwitch);
@@ -491,7 +449,7 @@
         }
     };
     [main addSubview:Jibie];
-
+    
     
     
     //看房时间
@@ -537,7 +495,7 @@
     
     //房价
     EditCell    *Price= [[EditCell alloc]initWithFrame:CGRectMake(CellPaddingToVertical/2,  CGRectGetMaxY(LookAroundTime.frame) -CellClipPadding , Screen_width - CellPaddingToVertical, CellHeight)];
-    Price.title = @"售价:";
+    Price.title = @"租金:";
     UITextField  *TF_HousePrice = [[UITextField alloc]initWithFrame:CGRectMake(100 +60, 0, 130, 50)];
     //TF_HousePrice.backgroundColor = [UIColor orangeColor];
     TF_HousePrice.keyboardType  = UIKeyboardTypeNumberPad ;
@@ -545,7 +503,7 @@
     [Price addSubview:TF_HousePrice];
     UILabel *LABLE_TF_HousePrice = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(TF_HousePrice.frame), 0, 50, 50)];
     [LABLE_TF_HousePrice setTextColor:[UIColor lightGrayColor]];
-    LABLE_TF_HousePrice.text = @"万";
+    LABLE_TF_HousePrice.text = @"元/月";
     [Price addSubview:LABLE_TF_HousePrice];
     
     [self.cellMARR addObject:Price];
@@ -557,58 +515,7 @@
     [main addSubview:Price];
     
     
-    
-    
-    
-    EditCell *loan = [[EditCell alloc]initWithFrame:CGRectMake(CellPaddingToVertical/2, CGRectGetMaxY(Price.frame)-CellClipPadding , Screen_width - CellPaddingToVertical, CellHeight)];
-    loan.isOptionalCell = YES ;
-    loan.title = @"按揭:";
-    loan.placeHoderString = @"请选择";
-    loan.otherAction =^{
-        PopSelectViewController *select = [[PopSelectViewController alloc]init];
-        NSArray *Optdata  = [NSArray arrayWithObjects:@"可按揭",@"不可按揭",nil];
-        select.pikerDataArr = Optdata;
-        select.providesPresentationContextTransitionStyle = YES;
-        select.definesPresentationContext = YES;
-        select.modalPresentationStyle = UIModalPresentationOverCurrentContext;
-        self.preferredContentSize = CGSizeMake(Screen_width/2, 50);
-        UIView *modalView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, Screen_width, Screen_height)];
-        modalView.tag =ModalViewTag;
-        modalView.backgroundColor = [[UIColor lightGrayColor] colorWithAlphaComponent:.4];
-        [self.view addSubview:modalView];
-        select.DismissView = ^(){
-            [modalView removeFromSuperview];
-        };  //取消
-        
-        select.SureBtnAciton =^(NSString *passString) {
-            loan.contentString = passString;
-            if([passString isEqualToString:@"可按揭"]){
-                passString =@"1";
-            }else {
-                passString =@"0";
-            }
-            [self.PostDataDic setObject:passString forKey:@"anjie"];
-        };
-        [self presentViewController:select animated:YES completion:nil];
-    };
-    
-    [self.cellMARR addObject:loan];
-    loan.updateAction = ^ {
-        if (self.LatPostDataDic[@"anjie"]) {
-            if([self.LatPostDataDic[@"anjie"] isEqualToString:@"0"] )
-            {
-                loan.contentString = @"可按揭";
-            }else {
-                loan.contentString = @"不可按揭";
-            }
-        }
-    };
-    [main addSubview:loan];
-    
-    
-    
-    
-    EditCell *ExpiryTime = [[EditCell alloc]initWithFrame:CGRectMake(CellPaddingToVertical/2, CGRectGetMaxY(loan.frame)-CellClipPadding , Screen_width - CellPaddingToVertical, CellHeight)];
+    EditCell *ExpiryTime = [[EditCell alloc]initWithFrame:CGRectMake(CellPaddingToVertical/2, CGRectGetMaxY(Price.frame)-CellClipPadding , Screen_width - CellPaddingToVertical, CellHeight)];
     ExpiryTime.isOptionalCell = YES ;
     ExpiryTime.title = @"有效期:";
     ExpiryTime.placeHoderString = @"请选择";
@@ -748,7 +655,6 @@
     
     
     self.footerView = footerView;
-    
     [main addSubview:picture];
     [self.view addSubview:main];
 }
@@ -958,7 +864,44 @@
     
 }
 
-
+-(BOOL)controllerWillPopHandler {
+    NSLog(@"%d",[[self.PostDataDic allKeys] count]);
+    
+    if ([[self.PostDataDic allKeys] count] ==0 ) {  //如果加载了上次数据或者 已经被编辑了
+        if(_isLoadLastPara ==YES) {
+            NSLog(@"TopVC in nav :%@",self.navigationController.topViewController);
+            
+            UIAlertView *AW = [[UIAlertView alloc]initWithTitle:nil
+                                                        message:@"资料尚未保存"
+                                                       delegate:self
+                                              cancelButtonTitle:@"放弃编辑"
+                                              otherButtonTitles:@"留在此页", @"保存并退出",nil];
+            AW.tag = saveAlertTag;
+            [AW show];
+            return NO;
+        }
+        _isLoadLastPara = NO;    //复位
+        return YES;
+    }
+    
+    NSLog(@"TopVC in nav :%@",self.navigationController.topViewController);
+    
+    
+    if (_isFromSelectDescribePage) {
+        _isFromSelectDescribePage = NO;
+        return NO;
+    }
+    
+    UIAlertView *AW = [[UIAlertView alloc]initWithTitle:nil
+                                                message:@"资料尚未保存"
+                                               delegate:self
+                                      cancelButtonTitle:@"放弃编辑"
+                                      otherButtonTitles:@"留在此页", @"保存并退出",nil];
+    AW.tag = saveAlertTag;
+    [AW show];
+    return NO;
+    
+}
 
 
 @end

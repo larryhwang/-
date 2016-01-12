@@ -10,4 +10,7 @@
 
 @interface PostCategory : UIViewController
 
+
+@property(nonatomic,assign) CellStatus Status;
+
 @end

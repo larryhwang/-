@@ -1,15 +1,13 @@
 //
-//  SaleOutOfiice.m
+//  SaleoutChangFangViewController.m
 //  清房助手
 //
-//  Created by Larry on 1/4/16.
+//  Created by Larry on 1/11/16.
 //  Copyright © 2016 HuiZhou S&F NetworkTechCo.,Ltd . All rights reserved.
 //
 
-#import "SaleOutOfiice.h"
+#import "SaleoutChangFangViewController.h"
 
-
-#import "SaleOutPostEditForm.h"
 #import "EditCell.h"
 #import "SelectRegionVC.h"
 #import "LoacationNameTool.h"
@@ -74,7 +72,7 @@
 #define saveAlertTag       72
 #define checkLastTag       73
 
-@interface SaleOutOfiice (){
+@interface SaleoutChangFangViewController (){
     NSString *_RegionName;
     
     
@@ -97,13 +95,12 @@
 
 @end
 
-@implementation SaleOutOfiice
+@implementation SaleoutChangFangViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+    
 }
-
 
 
 -(BOOL)controllerWillPopHandler {
@@ -198,26 +195,12 @@
     [main addSubview:Title];
     
     
-    //BuildingName
-    EditCell    *BuildingName  = [[EditCell alloc]initWithFrame:CGRectMake(CellPaddingToVertical/2, CGRectGetMaxY(Title.frame)+ GroupPadding, Screen_width - CellPaddingToVertical, CellHeight)];
-    BuildingName.title = @"写字楼名称:";
-    BuildingName.placeHoderString = @"1～20字";
-    [self.cellMARR addObject:BuildingName];
-    BuildingName.updateAction = ^ {
-        if (self.LatPostDataDic[@"mingcheng"]) {
-            BuildingName.contentString = self.LatPostDataDic[@"mingcheng"];
-        }
-        
-    };
-    
-    
-    [self dealTextfield:BuildingName.contentFiled isTextCenter:NO];
-    [main addSubview:BuildingName];
+
     
     
     
     //RegionOption
-    EditCell    *RegionOption  = [[EditCell alloc]initWithFrame:CGRectMake(CellPaddingToVertical/2, CGRectGetMaxY(BuildingName.frame)-CellClipPadding , Screen_width - CellPaddingToVertical, CellHeight)];
+    EditCell    *RegionOption  = [[EditCell alloc]initWithFrame:CGRectMake(CellPaddingToVertical/2, CGRectGetMaxY(Title.frame)+GroupPadding , Screen_width - CellPaddingToVertical, CellHeight)];
     self.RegionTF = RegionOption;
     RegionOption.title = @"区域:";
     RegionOption.isOptionalCell = YES;
@@ -285,10 +268,8 @@
     //HouseType
     EditCell *HouseType = [[EditCell alloc]initWithFrame:CGRectMake(CellPaddingToVertical/2, CGRectGetMaxY(DetailedAdress.frame)+ GroupPadding , Screen_width - CellPaddingToVertical, CellHeight)];
     HouseType.isOptionalCell = YES ;
-    HouseType.title = @"写字楼类型:";
+    HouseType.title = @"厂房类型:";
     HouseType.placeHoderString = @"请选择:";
-    
-    
     [self.cellMARR addObject:HouseType];
     HouseType.updateAction = ^ {
         if (self.LatPostDataDic[@"leixing"]) {
@@ -298,7 +279,7 @@
     
     HouseType.otherAction =^{
         PopSelectViewController *select = [[PopSelectViewController alloc]init];
-        NSArray *Optdata  = [NSArray arrayWithObjects:@"办公楼",@"商务酒店",@"商务公寓",@"其他",nil];
+        NSArray *Optdata  = [NSArray arrayWithObjects:@"标准楼房",@"铁皮房",@"钢结构",@"仓库",@"工业园",nil];
         select.pikerDataArr = Optdata;
         select.providesPresentationContextTransitionStyle = YES;
         select.definesPresentationContext = YES;
@@ -322,42 +303,13 @@
     
     
     
-    EditCell *FlatLocation = [[EditCell alloc]initWithFrame:CGRectMake(CellPaddingToVertical/2,  CGRectGetMaxY(HouseType.frame)-CellClipPadding, Screen_width - CellPaddingToVertical, CellHeight)];
-    FlatLocation.title = @"楼层:";
-    
-    
-    UITextField *blockTF = [[UITextField alloc]initWithFrame:CGRectMake(100, 0, 60, 50)];
-    blockTF.textAlignment = NSTextAlignmentCenter;
-    blockTF.inputAccessoryView = self.keyBoardBar;
-    blockTF.delegate = self;
-    blockTF.tag = [self.tfArrs count];
-    [self.tfArrs addObject:blockTF];
-    NSLog(@"%d",blockTF.tag);
-    [FlatLocation addSubview:blockTF];
-    blockTF.keyboardType = UIKeyboardTypeNumberPad;
-    
-    UILabel *foorLable = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(blockTF.frame)+2,0, 30, 50)];
-    
-    foorLable.text = @"层";
-    [foorLable setTextColor:[UIColor lightGrayColor]];
-    [FlatLocation addSubview:foorLable];
-    
-    
-    
-    
-    [self.cellMARR addObject:FlatLocation];
-    FlatLocation.updateAction = ^ {
-        if (self.LatPostDataDic[@"louceng"]) {
-            blockTF.text = self.LatPostDataDic[@"louceng"];
-        }
-    };
-    [main addSubview:FlatLocation];
+   
     
     
     
     
     //面积
-    EditCell   *Area = [[EditCell alloc]initWithFrame:CGRectMake(CellPaddingToVertical/2,  CGRectGetMaxY(FlatLocation.frame) -CellClipPadding , Screen_width - CellPaddingToVertical, CellHeight)];
+    EditCell   *Area = [[EditCell alloc]initWithFrame:CGRectMake(CellPaddingToVertical/2,  CGRectGetMaxY(HouseType.frame) -CellClipPadding , Screen_width - CellPaddingToVertical, CellHeight)];
     Area.title = @"面积:";
     UITextField  *TF_Area = [[UITextField alloc]initWithFrame:CGRectMake(100 +60, 0, 90, 50)];
     
@@ -454,48 +406,11 @@
     
     
     //写字楼级别
-    EditCell *Jibie = [[EditCell alloc]initWithFrame:CGRectMake(CellPaddingToVertical/2, CGRectGetMaxY(Decoration.frame)-CellClipPadding,Screen_width - CellPaddingToVertical, CellHeight)];
-    Jibie.isOptionalCell = YES;
-    Jibie.title = @"写字楼级别 :";
-    Jibie.placeHoderString = @"请选择";
     
-    Jibie.otherAction =^{
-        PopSelectViewController *select = [[PopSelectViewController alloc]init];
-        NSArray *Optdata  = [NSArray arrayWithObjects:@"甲",@"乙",@"丙",@"其他",nil];
-        select.pikerDataArr = Optdata;
-        select.providesPresentationContextTransitionStyle = YES;
-        select.definesPresentationContext = YES;
-        select.modalPresentationStyle = UIModalPresentationOverCurrentContext;
-        self.preferredContentSize = CGSizeMake(Screen_width/2, 50);
-        
-        UIView *modalView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, Screen_width, Screen_height)];
-        modalView.tag =ModalViewTag;
-        modalView.backgroundColor = [[UIColor lightGrayColor] colorWithAlphaComponent:.4];
-        [self.view addSubview:modalView];
-        select.DismissView = ^(){
-            [modalView removeFromSuperview];
-        };  //取消
-        
-        select.SureBtnAciton =^(NSString *passString) {
-            Decoration.contentString = passString;
-            [self.PostDataDic setObject:passString forKey:@"zhuangxiu"];
-        };
-        [self presentViewController:select animated:YES completion:nil];
-        NSLog(@"表格位置:%f",Decoration.frame.origin.y);
-    };
-    
-    [self.cellMARR addObject:Decoration];
-    Jibie.updateAction = ^ {
-        if (self.LatPostDataDic[@"zhuangxiu"]) {
-            Jibie.contentString = self.LatPostDataDic[@"zhuangxiu"];
-        }
-    };
-    [main addSubview:Jibie];
-
     
     
     //看房时间
-    EditCell *LookAroundTime = [[EditCell alloc]initWithFrame:CGRectMake(CellPaddingToVertical/2, CGRectGetMaxY(Jibie.frame)+ GroupPadding , Screen_width - CellPaddingToVertical, CellHeight)];
+    EditCell *LookAroundTime = [[EditCell alloc]initWithFrame:CGRectMake(CellPaddingToVertical/2, CGRectGetMaxY(Decoration.frame)+ GroupPadding , Screen_width - CellPaddingToVertical, CellHeight)];
     LookAroundTime.isOptionalCell = YES ;
     LookAroundTime.title = @"看房时间:";
     LookAroundTime.placeHoderString = @"请选择";
@@ -752,213 +667,6 @@
     [main addSubview:picture];
     [self.view addSubview:main];
 }
-
-
--(void)appendName:(NSString *)locationName {
-    //长区域拼接
-    NSRange isHave = [_lastRegionName rangeOfString:locationName];
-    if (!(isHave.length)) {
-        _RegionName  = [_RegionName stringByAppendingString:[NSString stringWithFormat:@"%@ ",locationName]];
-        self.RegionTF.contentString = _RegionName;
-        self.lastRegionName = _RegionName;
-    }
-}
-
-
-- (void)textFieldDidEndEditing:(UITextField *)textField
-{
-    NSInteger EditedTextFieldTag = textField.tag ;
-    switch (EditedTextFieldTag) {
-        case biaotiTag:
-            NSLog(@"标题是:%@",textField.text);
-            NSLog(@"%@ %p %p",self,self,self.PostDataDic);
-            [self.PostDataDic setObject:textField.text forKey:@"biaoti"];
-            break;
-        case mingchengTag:
-            NSLog(@"名称是:%@",textField.text);
-            [self.PostDataDic setObject:textField.text forKey:@"mingcheng"];
-            break;
-        case dizhiTag:
-            NSLog(@"地址:%@",textField.text);
-            [self.PostDataDic setObject:textField.text forKey:@"dizhi"];
-            break;
-        case dongTag:  //在 出售商铺中 是 层
-            NSLog(@"栋数是:%@",textField.text);
-            [self.PostDataDic setObject:textField.text forKey:@"louceng"];
-            break;
-        case danyuanTag:   //出商铺中的面积
-            NSLog(@"单元:%@",textField.text);
-            //            [self.PostDataDic setObject:textField.text forKey:@"danyuan"];
-            [self.PostDataDic setObject:textField.text forKey:@"mianji"];
-            NSLog(@"%@",self.LatPostDataDic[@"mianji"]);   //            LatPostDataDic[@"mianji"]
-            break;
-        case loucengTag:  //出售商铺中的管理费
-            NSLog(@"楼层:%@",textField.text);
-            [self.PostDataDic setObject:textField.text forKey:@"guanlifei"];
-            //            [self.PostDataDic setObject:textField.text forKey:@"louceng"];
-            break;
-        case zongloucengTag:  //出售商铺中的  售价
-            NSLog(@"总楼层:%@",textField.text);
-            [self.PostDataDic setObject:textField.text forKey:@"shoujia"];
-            break;
-        case mianjiTag:
-            NSLog(@"面积:%@",textField.text);
-            [self.PostDataDic setObject:textField.text forKey:@"mianji"];
-            break;
-            
-        case fangshuTag:  //商铺出售中的 联系电话
-            NSLog(@"房数:%@",textField.text);
-            //            [self.PostDataDic setObject:textField.text forKey:@"fangshu"];//
-            [self.PostDataDic setObject:textField.text forKey:@"usertel"];//usertel
-            break;
-            
-        case tingshuTag:
-            NSLog(@"厅数:%@",textField.text);
-            [self.PostDataDic setObject:textField.text forKey:@"tingshu"];
-            break;
-            
-        case toiletsTag:
-            NSLog(@"卫生间:%@",textField.text);
-            [self.PostDataDic setObject:textField.text forKey:@"toilets"];
-            break;
-            
-        case balconysTag:
-            NSLog(@"阳台数:%@",textField.text);
-            [self.PostDataDic setObject:textField.text forKey:@"balconys"];
-            break;
-            
-        case fanglingTag:
-            NSLog(@"房龄:%@",textField.text);
-            [self.PostDataDic setObject:textField.text forKey:@"fangling"];
-            break;
-            
-        case shoujiaTag:
-            NSLog(@"售价:%@",textField.text);
-            [self.PostDataDic setObject:textField.text forKey:@"shoujia"];
-            break;
-            
-#define userNameTag     14                  //参数文档中未见
-#define usertelTag      15
-#define OwnerTag        16
-#define OwnerName       17
-            
-            //usertel
-            
-        case userNameTag:
-            NSLog(@"联系人姓名:%@",textField.text);
-#warning 这里只显示，不允许修改
-            [self.PostDataDic setObject:textField.text forKey:@"ownername"];
-            break;
-            
-        case usertelTag:
-            NSLog(@"联系人电话:%@",textField.text);
-            [self.PostDataDic setObject:textField.text forKey:@"usertel"];
-            break;
-            
-        case OwnerTag:
-            NSLog(@"业主姓名:%@",textField.text);
-            [self.PostDataDic setObject:textField.text forKey:@"ownername"];
-            break;
-            
-        case OwnerName:
-            NSLog(@"业主电话:%@",textField.text);
-            [self.PostDataDic setObject:textField.text forKey:@"ownertel"];
-            break;
-            
-        default:
-            break;
-    }
-}
-
-#pragma mark   －alertViewDelegate
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex NS_DEPRECATED_IOS(2_0, 9_0) {
-    NSLog(@"弹窗序号:%d",buttonIndex);
-    if(alertView.tag == SuccessAlertTag) {
-        [self.navigationController popViewControllerAnimated:YES];
-        
-        //删除缓存数据
-        
-        if([[NSUserDefaults standardUserDefaults] objectForKey:self.typeStr]){
-            [[NSUserDefaults standardUserDefaults] removeObjectForKey:self.typeStr];
-        }
-    }
-    
-    if(alertView.tag == saveAlertTag) {
-        if(buttonIndex == 0) {
-            
-            [self.navigationController setNavigationBarHidden:YES animated:YES];
-            [self.navigationController setNavigationBarHidden:NO animated:YES];
-            [[NSUserDefaults standardUserDefaults] removeObjectForKey:self.typeStr];
-            NSLog(@"取消");
-            
-            
-            
-            [self.navigationController popViewControllerAnimated:YES];
-        } else if(buttonIndex ==1) {
-            // 留在此页
-            NSLog(@"保留到此页");
-        } else {
-            //保存并退出
-            NSLog(@"保存并退出");
-            //问题: 1.再次进入后的加载数据，然后再保存，仅有地址参数
-            
-            [self FormatRegionParam];
-            
-            NSDictionary *oldSavedDic = [[NSUserDefaults standardUserDefaults] objectForKey:self.typeStr];
-            
-            
-            NSLog(@"数量:%d", [[self.PostDataDic allKeys] count]);
-            if([[self.PostDataDic allKeys] count] > 0) {
-                NSLog(@"%@ %p %p",self,self,self.PostDataDic);
-                NSLog(@"保存:%@",self.PostDataDic);
-                [[NSUserDefaults standardUserDefaults]setObject:self.PostDataDic forKey:self.typeStr];  //11是状态码，代表 是出售 住宅
-            } else {
-                [[NSUserDefaults standardUserDefaults] removeObjectForKey:self.typeStr];
-            }
-            
-            [self.navigationController setNavigationBarHidden:YES animated:YES];
-            [self.navigationController setNavigationBarHidden:NO animated:YES];
-            [self.navigationController popToRootViewControllerAnimated:YES];  //
-            
-        }
-    }
-    
-    //是否继续
-    if(alertView.tag == checkLastTag) {
-        if(buttonIndex==0){
-            //继续填写
-            _isLoadLastPara = YES;
-            [self loadLastParamDic];
-        } else {
-            //重写填写
-            [[NSUserDefaults standardUserDefaults] removeObjectForKey:self.typeStr];
-            NSLog(@"BB");
-        }
-    }
-}
-
--(void)loadLastParamDic {
-    //上传参数赋值
-    NSDictionary *tempDic = [[NSUserDefaults standardUserDefaults] objectForKey:self.typeStr];
-    NSMutableDictionary *oldDic= [NSMutableDictionary dictionaryWithDictionary:tempDic];
-    if([[oldDic allKeys] count]>0)
-        //重载数据前需要进行判断，如果新键的值变更了，以新的值为准，如果没有则赋予旧值
-        self.PostDataDic = oldDic;
-    
-    //表象参数赋值
-    for (EditCell *cell in self.cellMARR) {
-        NSLog(@"Father,Arr%p",self.cellMARR);
-        NSLog(@"MianJI 2：%p",cell);
-        NSLog(@"BlockAdress2 :%p",cell.updateAction);
-        NSLog(@"cell名字:%@",cell.title);
-        if (cell.updateAction) {
-            cell.updateAction();
-        }
-    }
-    
-}
-
-
 
 
 @end

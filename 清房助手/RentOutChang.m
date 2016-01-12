@@ -1,15 +1,16 @@
 //
-//  SaleOutOfiice.m
+//  RentOutChang.m
 //  清房助手
 //
-//  Created by Larry on 1/4/16.
+//  Created by Larry on 1/12/16.
 //  Copyright © 2016 HuiZhou S&F NetworkTechCo.,Ltd . All rights reserved.
 //
 
-#import "SaleOutOfiice.h"
+#import "RentOutChang.h"
 
 
-#import "SaleOutPostEditForm.h"
+
+
 #import "EditCell.h"
 #import "SelectRegionVC.h"
 #import "LoacationNameTool.h"
@@ -26,6 +27,10 @@
 #import "commonFile.h"
 #import "WMNavigationController.h"
 #import "AppDelegate.h"
+
+
+
+#import "SaleOutShangPu.h"
 
 
 
@@ -74,10 +79,9 @@
 #define saveAlertTag       72
 #define checkLastTag       73
 
-@interface SaleOutOfiice (){
+
+@interface RentOutChang (){
     NSString *_RegionName;
-    
-    
     NSString *_lastRegionName;
     NSString *_imgs;
     
@@ -97,53 +101,15 @@
 
 @end
 
-@implementation SaleOutOfiice
+@implementation RentOutChang
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+    // Do any additional setup after loading the view.
 }
 
 
 
--(BOOL)controllerWillPopHandler {
-    NSLog(@"%d",[[self.PostDataDic allKeys] count]);
-    
-    if ([[self.PostDataDic allKeys] count] ==0 ) {  //如果加载了上次数据或者 已经被编辑了
-        if(_isLoadLastPara ==YES) {
-            NSLog(@"TopVC in nav :%@",self.navigationController.topViewController);
-            
-            UIAlertView *AW = [[UIAlertView alloc]initWithTitle:nil
-                                                        message:@"资料尚未保存"
-                                                       delegate:self
-                                              cancelButtonTitle:@"放弃编辑"
-                                              otherButtonTitles:@"留在此页", @"保存并退出",nil];
-            AW.tag = saveAlertTag;
-            [AW show];
-            return NO;
-        }
-        _isLoadLastPara = NO;    //复位
-        return YES;
-    }
-    
-    NSLog(@"TopVC in nav :%@",self.navigationController.topViewController);
-    
-    
-    if (_isFromSelectDescribePage) {
-        _isFromSelectDescribePage = NO;
-        return NO;
-    }
-    
-    UIAlertView *AW = [[UIAlertView alloc]initWithTitle:nil
-                                                message:@"资料尚未保存"
-                                               delegate:self
-                                      cancelButtonTitle:@"放弃编辑"
-                                      otherButtonTitles:@"留在此页", @"保存并退出",nil];
-    AW.tag = saveAlertTag;
-    [AW show];
-    return NO;
-    
-}
 
 -(void)cellSetting {
     NSLog(@"zi:%p",self.ScoSwitch);
@@ -198,26 +164,12 @@
     [main addSubview:Title];
     
     
-    //BuildingName
-    EditCell    *BuildingName  = [[EditCell alloc]initWithFrame:CGRectMake(CellPaddingToVertical/2, CGRectGetMaxY(Title.frame)+ GroupPadding, Screen_width - CellPaddingToVertical, CellHeight)];
-    BuildingName.title = @"写字楼名称:";
-    BuildingName.placeHoderString = @"1～20字";
-    [self.cellMARR addObject:BuildingName];
-    BuildingName.updateAction = ^ {
-        if (self.LatPostDataDic[@"mingcheng"]) {
-            BuildingName.contentString = self.LatPostDataDic[@"mingcheng"];
-        }
-        
-    };
     
-    
-    [self dealTextfield:BuildingName.contentFiled isTextCenter:NO];
-    [main addSubview:BuildingName];
     
     
     
     //RegionOption
-    EditCell    *RegionOption  = [[EditCell alloc]initWithFrame:CGRectMake(CellPaddingToVertical/2, CGRectGetMaxY(BuildingName.frame)-CellClipPadding , Screen_width - CellPaddingToVertical, CellHeight)];
+    EditCell    *RegionOption  = [[EditCell alloc]initWithFrame:CGRectMake(CellPaddingToVertical/2, CGRectGetMaxY(Title.frame)+GroupPadding , Screen_width - CellPaddingToVertical, CellHeight)];
     self.RegionTF = RegionOption;
     RegionOption.title = @"区域:";
     RegionOption.isOptionalCell = YES;
@@ -285,10 +237,8 @@
     //HouseType
     EditCell *HouseType = [[EditCell alloc]initWithFrame:CGRectMake(CellPaddingToVertical/2, CGRectGetMaxY(DetailedAdress.frame)+ GroupPadding , Screen_width - CellPaddingToVertical, CellHeight)];
     HouseType.isOptionalCell = YES ;
-    HouseType.title = @"写字楼类型:";
+    HouseType.title = @"厂房类型:";
     HouseType.placeHoderString = @"请选择:";
-    
-    
     [self.cellMARR addObject:HouseType];
     HouseType.updateAction = ^ {
         if (self.LatPostDataDic[@"leixing"]) {
@@ -298,7 +248,7 @@
     
     HouseType.otherAction =^{
         PopSelectViewController *select = [[PopSelectViewController alloc]init];
-        NSArray *Optdata  = [NSArray arrayWithObjects:@"办公楼",@"商务酒店",@"商务公寓",@"其他",nil];
+        NSArray *Optdata  = [NSArray arrayWithObjects:@"标准楼房",@"铁皮房",@"钢结构",@"仓库",@"工业园",nil];
         select.pikerDataArr = Optdata;
         select.providesPresentationContextTransitionStyle = YES;
         select.definesPresentationContext = YES;
@@ -322,42 +272,13 @@
     
     
     
-    EditCell *FlatLocation = [[EditCell alloc]initWithFrame:CGRectMake(CellPaddingToVertical/2,  CGRectGetMaxY(HouseType.frame)-CellClipPadding, Screen_width - CellPaddingToVertical, CellHeight)];
-    FlatLocation.title = @"楼层:";
     
-    
-    UITextField *blockTF = [[UITextField alloc]initWithFrame:CGRectMake(100, 0, 60, 50)];
-    blockTF.textAlignment = NSTextAlignmentCenter;
-    blockTF.inputAccessoryView = self.keyBoardBar;
-    blockTF.delegate = self;
-    blockTF.tag = [self.tfArrs count];
-    [self.tfArrs addObject:blockTF];
-    NSLog(@"%d",blockTF.tag);
-    [FlatLocation addSubview:blockTF];
-    blockTF.keyboardType = UIKeyboardTypeNumberPad;
-    
-    UILabel *foorLable = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(blockTF.frame)+2,0, 30, 50)];
-    
-    foorLable.text = @"层";
-    [foorLable setTextColor:[UIColor lightGrayColor]];
-    [FlatLocation addSubview:foorLable];
-    
-    
-    
-    
-    [self.cellMARR addObject:FlatLocation];
-    FlatLocation.updateAction = ^ {
-        if (self.LatPostDataDic[@"louceng"]) {
-            blockTF.text = self.LatPostDataDic[@"louceng"];
-        }
-    };
-    [main addSubview:FlatLocation];
     
     
     
     
     //面积
-    EditCell   *Area = [[EditCell alloc]initWithFrame:CGRectMake(CellPaddingToVertical/2,  CGRectGetMaxY(FlatLocation.frame) -CellClipPadding , Screen_width - CellPaddingToVertical, CellHeight)];
+    EditCell   *Area = [[EditCell alloc]initWithFrame:CGRectMake(CellPaddingToVertical/2,  CGRectGetMaxY(HouseType.frame) -CellClipPadding , Screen_width - CellPaddingToVertical, CellHeight)];
     Area.title = @"面积:";
     UITextField  *TF_Area = [[UITextField alloc]initWithFrame:CGRectMake(100 +60, 0, 90, 50)];
     
@@ -454,48 +375,11 @@
     
     
     //写字楼级别
-    EditCell *Jibie = [[EditCell alloc]initWithFrame:CGRectMake(CellPaddingToVertical/2, CGRectGetMaxY(Decoration.frame)-CellClipPadding,Screen_width - CellPaddingToVertical, CellHeight)];
-    Jibie.isOptionalCell = YES;
-    Jibie.title = @"写字楼级别 :";
-    Jibie.placeHoderString = @"请选择";
     
-    Jibie.otherAction =^{
-        PopSelectViewController *select = [[PopSelectViewController alloc]init];
-        NSArray *Optdata  = [NSArray arrayWithObjects:@"甲",@"乙",@"丙",@"其他",nil];
-        select.pikerDataArr = Optdata;
-        select.providesPresentationContextTransitionStyle = YES;
-        select.definesPresentationContext = YES;
-        select.modalPresentationStyle = UIModalPresentationOverCurrentContext;
-        self.preferredContentSize = CGSizeMake(Screen_width/2, 50);
-        
-        UIView *modalView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, Screen_width, Screen_height)];
-        modalView.tag =ModalViewTag;
-        modalView.backgroundColor = [[UIColor lightGrayColor] colorWithAlphaComponent:.4];
-        [self.view addSubview:modalView];
-        select.DismissView = ^(){
-            [modalView removeFromSuperview];
-        };  //取消
-        
-        select.SureBtnAciton =^(NSString *passString) {
-            Decoration.contentString = passString;
-            [self.PostDataDic setObject:passString forKey:@"zhuangxiu"];
-        };
-        [self presentViewController:select animated:YES completion:nil];
-        NSLog(@"表格位置:%f",Decoration.frame.origin.y);
-    };
-    
-    [self.cellMARR addObject:Decoration];
-    Jibie.updateAction = ^ {
-        if (self.LatPostDataDic[@"zhuangxiu"]) {
-            Jibie.contentString = self.LatPostDataDic[@"zhuangxiu"];
-        }
-    };
-    [main addSubview:Jibie];
-
     
     
     //看房时间
-    EditCell *LookAroundTime = [[EditCell alloc]initWithFrame:CGRectMake(CellPaddingToVertical/2, CGRectGetMaxY(Jibie.frame)+ GroupPadding , Screen_width - CellPaddingToVertical, CellHeight)];
+    EditCell *LookAroundTime = [[EditCell alloc]initWithFrame:CGRectMake(CellPaddingToVertical/2, CGRectGetMaxY(Decoration.frame)+ GroupPadding , Screen_width - CellPaddingToVertical, CellHeight)];
     LookAroundTime.isOptionalCell = YES ;
     LookAroundTime.title = @"看房时间:";
     LookAroundTime.placeHoderString = @"请选择";
@@ -537,7 +421,7 @@
     
     //房价
     EditCell    *Price= [[EditCell alloc]initWithFrame:CGRectMake(CellPaddingToVertical/2,  CGRectGetMaxY(LookAroundTime.frame) -CellClipPadding , Screen_width - CellPaddingToVertical, CellHeight)];
-    Price.title = @"售价:";
+    Price.title = @"租金:";
     UITextField  *TF_HousePrice = [[UITextField alloc]initWithFrame:CGRectMake(100 +60, 0, 130, 50)];
     //TF_HousePrice.backgroundColor = [UIColor orangeColor];
     TF_HousePrice.keyboardType  = UIKeyboardTypeNumberPad ;
@@ -545,7 +429,7 @@
     [Price addSubview:TF_HousePrice];
     UILabel *LABLE_TF_HousePrice = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(TF_HousePrice.frame), 0, 50, 50)];
     [LABLE_TF_HousePrice setTextColor:[UIColor lightGrayColor]];
-    LABLE_TF_HousePrice.text = @"万";
+    LABLE_TF_HousePrice.text = @"元/月";
     [Price addSubview:LABLE_TF_HousePrice];
     
     [self.cellMARR addObject:Price];
@@ -556,59 +440,9 @@
     };
     [main addSubview:Price];
     
+
     
-    
-    
-    
-    EditCell *loan = [[EditCell alloc]initWithFrame:CGRectMake(CellPaddingToVertical/2, CGRectGetMaxY(Price.frame)-CellClipPadding , Screen_width - CellPaddingToVertical, CellHeight)];
-    loan.isOptionalCell = YES ;
-    loan.title = @"按揭:";
-    loan.placeHoderString = @"请选择";
-    loan.otherAction =^{
-        PopSelectViewController *select = [[PopSelectViewController alloc]init];
-        NSArray *Optdata  = [NSArray arrayWithObjects:@"可按揭",@"不可按揭",nil];
-        select.pikerDataArr = Optdata;
-        select.providesPresentationContextTransitionStyle = YES;
-        select.definesPresentationContext = YES;
-        select.modalPresentationStyle = UIModalPresentationOverCurrentContext;
-        self.preferredContentSize = CGSizeMake(Screen_width/2, 50);
-        UIView *modalView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, Screen_width, Screen_height)];
-        modalView.tag =ModalViewTag;
-        modalView.backgroundColor = [[UIColor lightGrayColor] colorWithAlphaComponent:.4];
-        [self.view addSubview:modalView];
-        select.DismissView = ^(){
-            [modalView removeFromSuperview];
-        };  //取消
-        
-        select.SureBtnAciton =^(NSString *passString) {
-            loan.contentString = passString;
-            if([passString isEqualToString:@"可按揭"]){
-                passString =@"1";
-            }else {
-                passString =@"0";
-            }
-            [self.PostDataDic setObject:passString forKey:@"anjie"];
-        };
-        [self presentViewController:select animated:YES completion:nil];
-    };
-    
-    [self.cellMARR addObject:loan];
-    loan.updateAction = ^ {
-        if (self.LatPostDataDic[@"anjie"]) {
-            if([self.LatPostDataDic[@"anjie"] isEqualToString:@"0"] )
-            {
-                loan.contentString = @"可按揭";
-            }else {
-                loan.contentString = @"不可按揭";
-            }
-        }
-    };
-    [main addSubview:loan];
-    
-    
-    
-    
-    EditCell *ExpiryTime = [[EditCell alloc]initWithFrame:CGRectMake(CellPaddingToVertical/2, CGRectGetMaxY(loan.frame)-CellClipPadding , Screen_width - CellPaddingToVertical, CellHeight)];
+    EditCell *ExpiryTime = [[EditCell alloc]initWithFrame:CGRectMake(CellPaddingToVertical/2, CGRectGetMaxY(Price.frame)-CellClipPadding , Screen_width - CellPaddingToVertical, CellHeight)];
     ExpiryTime.isOptionalCell = YES ;
     ExpiryTime.title = @"有效期:";
     ExpiryTime.placeHoderString = @"请选择";
@@ -752,7 +586,6 @@
     [main addSubview:picture];
     [self.view addSubview:main];
 }
-
 
 -(void)appendName:(NSString *)locationName {
     //长区域拼接
@@ -959,6 +792,44 @@
 }
 
 
+-(BOOL)controllerWillPopHandler {
+    NSLog(@"%d",[[self.PostDataDic allKeys] count]);
+    
+    if ([[self.PostDataDic allKeys] count] ==0 ) {  //如果加载了上次数据或者 已经被编辑了
+        if(_isLoadLastPara ==YES) {
+            NSLog(@"TopVC in nav :%@",self.navigationController.topViewController);
+            
+            UIAlertView *AW = [[UIAlertView alloc]initWithTitle:nil
+                                                        message:@"资料尚未保存"
+                                                       delegate:self
+                                              cancelButtonTitle:@"放弃编辑"
+                                              otherButtonTitles:@"留在此页", @"保存并退出",nil];
+            AW.tag = saveAlertTag;
+            [AW show];
+            return NO;
+        }
+        _isLoadLastPara = NO;    //复位
+        return YES;
+    }
+    
+    NSLog(@"TopVC in nav :%@",self.navigationController.topViewController);
+    
+    
+    if (_isFromSelectDescribePage) {
+        _isFromSelectDescribePage = NO;
+        return NO;
+    }
+    
+    UIAlertView *AW = [[UIAlertView alloc]initWithTitle:nil
+                                                message:@"资料尚未保存"
+                                               delegate:self
+                                      cancelButtonTitle:@"放弃编辑"
+                                      otherButtonTitles:@"留在此页", @"保存并退出",nil];
+    AW.tag = saveAlertTag;
+    [AW show];
+    return NO;
+    
+}
 
 
 @end

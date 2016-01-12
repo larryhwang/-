@@ -19,7 +19,13 @@
 #import "AppDelegate.h"
 #import "SaleOutOfiice.h"
 #import "SaleOutShangPu.h"
+#import "SaleoutChangFangViewController.h"
 
+
+#import "RentOutFlatView.h"
+#import "RentOutShangPu.h"
+#import "RentOutOfiice.h"
+#import "RentOutChang.h"
 
 @interface PostCategory ()<UITableViewDataSource,UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *CategoryTable;
@@ -66,38 +72,128 @@
     SaleOutPostEditForm *editForm = [[SaleOutPostEditForm alloc]init];
     AppDelegate *app = [UIApplication sharedApplication].delegate;
     [tableView deselectRowAtIndexPath:indexPath animated:YES]; //解除遗留灰色
+
+    if (self.Status==SalesOut) {
+        if (indexPath.row ==0) {
+            NSLog(@"%@",app.provnceIndexDic);
+            editForm.indexData  = app.provnceIndexDic;
+            editForm.PreStatus  = SalesOut;
+            editForm.Fenlei = FlatType;
+            editForm.username   = app.usrInfoDic[@"username"];
+            editForm.userId     = app.usrInfoDic[@"userid"];
+            editForm.typeStr    = @"11";
+            editForm.title = @"住宅出售";
+            [self.navigationController pushViewController:editForm animated:YES];
+        } else if (indexPath.row ==1) {
+            SaleOutShangPu *pu = [[SaleOutShangPu alloc]init];
+            pu.typeStr    = @"12";
+            pu.PreStatus = SalesOut;
+            pu.Fenlei = ShangPuType;
+            pu.username   = app.usrInfoDic[@"username"];
+            pu.userId     = app.usrInfoDic[@"userid"];
+            pu.indexData  = app.provnceIndexDic;
+            pu.title = @"商铺出售";
+            
+            [self.navigationController pushViewController:pu animated:YES];
+        }else if (indexPath.row ==2) {
+            //  cell.textLabel.text = @"写字楼";
+            SaleOutOfiice *saleOffice = [SaleOutOfiice new];
+            saleOffice.Fenlei = OfficeType;
+            saleOffice.PreStatus = SalesOut;
+            saleOffice.typeStr    = @"13";
+            saleOffice.username   = app.usrInfoDic[@"username"];
+            saleOffice.userId     = app.usrInfoDic[@"userid"];
+            saleOffice.indexData  = app.provnceIndexDic;
+            saleOffice.title = @"出售写字楼";
+            [self.navigationController pushViewController:saleOffice animated:YES];
+        }else  {
+            SaleoutChangFangViewController *chang =[SaleoutChangFangViewController new];
+            chang.PreStatus = SalesOut;
+            chang.Fenlei = FactoryType;
+            chang.typeStr    = @"14";
+            chang.username   = app.usrInfoDic[@"username"];
+            chang.userId     = app.usrInfoDic[@"userid"];
+            chang.indexData  = app.provnceIndexDic;
+            chang.title = @"出售工厂";
+            [self.navigationController pushViewController:chang animated:YES];
+        }
+    }//end_出售
+else if (self.Status==RentOut){
+      NSLog(@"出租");
+        if (indexPath.row ==0) {
+            NSLog(@"住宅出租");
+            RentOutFlatView  *rentFlat = [RentOutFlatView new];
+            rentFlat.indexData  = app.provnceIndexDic;
+            rentFlat.PreStatus  = RentOut;
+            rentFlat.Fenlei = FlatType;
+            rentFlat.username   = app.usrInfoDic[@"username"];
+            rentFlat.userId     = app.usrInfoDic[@"userid"];
+            rentFlat.typeStr    = @"21";
+            rentFlat.title = @"住宅出租";
+            [self.navigationController pushViewController:rentFlat animated:YES];
+        } else if (indexPath.row ==1) {
+          NSLog(@"商铺出租");
+            RentOutShangPu *rentShangpu = [RentOutShangPu new];
+            rentShangpu.indexData  = app.provnceIndexDic;
+            rentShangpu.PreStatus  = RentOut;
+            rentShangpu.Fenlei = ShangPuType;
+            rentShangpu.username   = app.usrInfoDic[@"username"];
+            rentShangpu.userId     = app.usrInfoDic[@"userid"];
+            rentShangpu.typeStr    = @"22";
+            rentShangpu.title = @"商铺出租";
+            [self.navigationController pushViewController:rentShangpu animated:YES];
+            
+        }else if (indexPath.row ==2) {
+          NSLog(@"写字楼出租");
+            RentOutOfiice *RentOffice =[RentOutOfiice new];
+            RentOffice.indexData  = app.provnceIndexDic;
+            RentOffice.PreStatus  = RentOut;
+            RentOffice.Fenlei = OfficeType;
+            RentOffice.username   = app.usrInfoDic[@"username"];
+            RentOffice.userId     = app.usrInfoDic[@"userid"];
+            RentOffice.typeStr    = @"22";
+            RentOffice.title = @"写字楼出租";
+            [self.navigationController pushViewController:RentOffice animated:YES];
+            
+        }else  {
+          NSLog(@"出租工厂");
+            RentOutChang *rentChang = [RentOutChang new];
+            rentChang.indexData  = app.provnceIndexDic;
+            rentChang.PreStatus  = RentOut;
+            rentChang.Fenlei = OfficeType;
+            rentChang.username   = app.usrInfoDic[@"username"];
+            rentChang.userId     = app.usrInfoDic[@"userid"];
+            rentChang.typeStr    = @"22";
+            rentChang.title = @"厂房出租";
+            [self.navigationController pushViewController:rentChang animated:YES];
+            
+        }
+    }//end_出租
+else if (self.Status==WantBuy){
+         NSLog(@"求购");
     if (indexPath.row ==0) {
-
-        NSLog(@"%@",app.provnceIndexDic);
-        editForm.indexData  = app.provnceIndexDic;
-        editForm.username   = app.usrInfoDic[@"username"];
-        editForm.userId     = app.usrInfoDic[@"userid"];
-        editForm.typeStr    = @"11";
-
-        editForm.title = @"住宅出售";
-        [self.navigationController pushViewController:editForm animated:YES];
+        NSLog(@"住宅求购");
+        
     } else if (indexPath.row ==1) {
-        
-        SaleOutShangPu *pu = [[SaleOutShangPu alloc]init];
-        pu.typeStr    = @"12";
-        pu.username   = app.usrInfoDic[@"username"];
-        pu.userId     = app.usrInfoDic[@"userid"];
-        pu.indexData  = app.provnceIndexDic;
-        pu.title = @"商铺出售";
-        
-        [self.navigationController pushViewController:pu animated:YES];
+        NSLog(@"商铺求购");
     }else if (indexPath.row ==2) {
-      //  cell.textLabel.text = @"写字楼";
-        SaleOutOfiice *saleOffice = [SaleOutOfiice new];
-        saleOffice.typeStr    = @"12";
-        saleOffice.username   = app.usrInfoDic[@"username"];
-        saleOffice.userId     = app.usrInfoDic[@"userid"];
-        saleOffice.indexData  = app.provnceIndexDic;
-        saleOffice.title = @"出售写字楼";
-        [self.navigationController pushViewController:saleOffice animated:YES];
+        NSLog(@"写字楼求购");
     }else  {
-        //cell.textLabel.text = @"广场";
+        NSLog(@"工厂求购");
     }
+}// end_求购
+else if (self.Status==WantRent){
+    NSLog(@"求租");
+    if (indexPath.row ==0) {
+        NSLog(@"住宅求租");
+    } else if (indexPath.row ==1) {
+        NSLog(@"商铺求租");
+    }else if (indexPath.row ==2) {
+        NSLog(@"写字楼求租");
+    }else  {
+        NSLog(@"工厂求租");
+    }
+}// end_求租
     
 }
 

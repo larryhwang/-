@@ -487,7 +487,7 @@
     select.OptBtnTitlesArra = [NSArray arrayWithObjects:@"客梯",@"货梯",@"扶梯",@"空调",@"网络", nil];
     select.OptBtnSqlTittles_NARR =[NSArray arrayWithObjects:@"keti",@"huoti",@"futi",@"kongtiao",@"wangluo", nil];
     FlatAttachMent.isOptionalCell = YES;
-    FlatAttachMent.title = @"写字楼级别:";
+    FlatAttachMent.title = @"商铺配套:";
     FlatAttachMent.placeHoderString = @"请选择";
     UIView *modalView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, Screen_width, Screen_height)];
     modalView.tag =ModalViewTag;

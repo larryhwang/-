@@ -957,11 +957,7 @@
     FlatAttachMent.otherAction =^{
         
         [self.view addSubview:modalView];
-       
-
         select.HandleDic = self.PostDataDic;  //字典地址传过去，在select对象里面进行 参数的设置
-        
-
         select.HandleTextField = weakFlatAttachMent.contentFiled;   //输入框的地址传过去，同样在里面进行设置
         select.providesPresentationContextTransitionStyle = YES;
         select.definesPresentationContext = YES;
@@ -1087,7 +1083,6 @@
             TF_HousePrice.text = self.LatPostDataDic[@"shoujia"];
         }
     };
-    
     [main addSubview:Price];
     
     
@@ -1333,8 +1328,34 @@
     //默认参数补齐
     [self.PostDataDic setObject:_userId forKey:@"userid"];
     [self.PostDataDic setObject:@"1" forKey:@"isfangyuan"];
-    [self.PostDataDic setObject:@"0" forKey:@"zushou"];    //0出售   1出租
-    [self.PostDataDic setObject:@"0" forKey:@"fenlei"];     //0-住宅，1-商铺，2-写字楼，3-厂房
+    
+    
+    if (self.PreStatus == SalesOut) {
+       [self.PostDataDic setObject:@"0" forKey:@"zushou"];
+    } else if (self.PreStatus == RentOut){
+       [self.PostDataDic setObject:@"1" forKey:@"zushou"];
+    } else if (self.PreStatus == WantBuy){
+      [self.PostDataDic setObject:@"1" forKey:@"zugou"];
+    }else {
+       [self.PostDataDic setObject:@"0" forKey:@"zugou"];
+    }
+
+    
+    
+    if(self.Fenlei ==FlatType){
+      [self.PostDataDic setObject:@"0" forKey:@"fenlei"];
+    }else if (self.Fenlei ==ShangPuType){
+      [self.PostDataDic setObject:@"1" forKey:@"fenlei"];
+    }
+    else if (self.Fenlei ==OfficeType){
+      [self.PostDataDic setObject:@"2" forKey:@"fenlei"];
+    }
+    else if (self.Fenlei ==FactoryType){
+      [self.PostDataDic setObject:@"3" forKey:@"fenlei"];
+    }
+    
+    
+    
     [self.PostDataDic setObject:@"0" forKey:@"zhuangtai"];  // 0/交易中 ，1／已完成 ，2/已过期
 
 
@@ -1588,8 +1609,6 @@
 #define OwnerTag        16
 #define OwnerName       17
             
-            //usertel
-            
         case userNameTag:
             NSLog(@"联系人姓名:%@",textField.text);
 #warning 这里只显示，不允许修改
@@ -1620,8 +1639,6 @@
 
 
 //相册代理方法
-
-#pragma mark -
 #pragma mark - Control
 
 /**
@@ -1816,12 +1833,10 @@
         NSLog(@"保存并退出");
 
         //参数拼接，这里不用做保存
-//        [self loadLastParamDic];   //加载上一次保存的数据，这里有逻辑错误,如果上次的某个键值为空的话，再次即便更改这个键值也会，也会变得空
+//       [self loadLastParamDic];   //加载上一次保存的数据，这里有逻辑错误,如果上次的某个键值为空的话，再次即便更改这个键值也会，也会变得空
         [self FormatRegionParam];
             
-            NSDictionary *oldSavedDic = [[NSUserDefaults standardUserDefaults] objectForKey:self.typeStr];
-            
-        
+        NSDictionary *oldSavedDic = [[NSUserDefaults standardUserDefaults] objectForKey:self.typeStr];
         NSLog(@"数量:%d", [[self.PostDataDic allKeys] count]);
             if([[self.PostDataDic allKeys] count] > 0) {
                 NSLog(@"保存:%@",self.PostDataDic);

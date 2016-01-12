@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "&#x6e05;&#x623f;&#x52a9;&#x624b;/PopViewController/SaleOutShangPu.m"
-            timestampString = "474170684.423559"
+            timestampString = "474199275.59079"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "334"
-            endingLineNumber = "334"
+            startingLineNumber = "374"
+            endingLineNumber = "374"
             landmarkName = "-cellSetting"
             landmarkType = "5">
          </BreakpointContent>
@@ -26,39 +26,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "&#x6e05;&#x623f;&#x52a9;&#x624b;/PopViewController/SaleOutShangPu.m"
-            timestampString = "474174220.180252"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "787"
-            endingLineNumber = "787"
-            landmarkName = "-textFieldDidEndEditing:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "&#x6e05;&#x623f;&#x52a9;&#x624b;/PopViewController/SaleOutShangPu.m"
-            timestampString = "474174220.180252"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "826"
-            endingLineNumber = "826"
-            landmarkName = "-textFieldDidEndEditing:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "&#x6e05;&#x623f;&#x52a9;&#x624b;/PopViewController/SaleOutShangPu.m"
-            timestampString = "474174220.180252"
+            timestampString = "474199275.59079"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "827"
@@ -74,11 +42,43 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "&#x6e05;&#x623f;&#x52a9;&#x624b;/PopViewController/SaleOutShangPu.m"
-            timestampString = "474174220.180252"
+            timestampString = "474199275.59079"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "827"
-            endingLineNumber = "827"
+            startingLineNumber = "866"
+            endingLineNumber = "866"
+            landmarkName = "-textFieldDidEndEditing:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "&#x6e05;&#x623f;&#x52a9;&#x624b;/PopViewController/SaleOutShangPu.m"
+            timestampString = "474199275.59079"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "867"
+            endingLineNumber = "867"
+            landmarkName = "-textFieldDidEndEditing:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "&#x6e05;&#x623f;&#x52a9;&#x624b;/PopViewController/SaleOutShangPu.m"
+            timestampString = "474199275.59079"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "867"
+            endingLineNumber = "867"
             landmarkName = "-textFieldDidEndEditing:"
             landmarkType = "5">
          </BreakpointContent>
@@ -90,11 +90,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "&#x6e05;&#x623f;&#x52a9;&#x624b;/SaleOutPostEditForm.m"
-            timestampString = "474195814.598068"
+            timestampString = "474272535.663637"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1803"
-            endingLineNumber = "1803"
+            startingLineNumber = "1820"
+            endingLineNumber = "1820"
             landmarkName = "@implementation SaleOutPostEditForm"
             landmarkType = "3">
          </BreakpointContent>
@@ -106,11 +106,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "&#x6e05;&#x623f;&#x52a9;&#x624b;/SaleOutPostEditForm.m"
-            timestampString = "474195814.598068"
+            timestampString = "474272535.663637"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1805"
-            endingLineNumber = "1805"
+            startingLineNumber = "1822"
+            endingLineNumber = "1822"
             landmarkName = "@implementation SaleOutPostEditForm"
             landmarkType = "3">
          </BreakpointContent>
@@ -122,11 +122,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "&#x6e05;&#x623f;&#x52a9;&#x624b;/SaleOutPostEditForm.m"
-            timestampString = "474195814.598068"
+            timestampString = "474272535.663637"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1807"
-            endingLineNumber = "1807"
+            startingLineNumber = "1824"
+            endingLineNumber = "1824"
             landmarkName = "@implementation SaleOutPostEditForm"
             landmarkType = "3">
          </BreakpointContent>
@@ -138,11 +138,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "&#x6e05;&#x623f;&#x52a9;&#x624b;/SaleOutPostEditForm.m"
-            timestampString = "474195814.598068"
+            timestampString = "474272535.663637"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1800"
-            endingLineNumber = "1800"
+            startingLineNumber = "1817"
+            endingLineNumber = "1817"
             landmarkName = "@implementation SaleOutPostEditForm"
             landmarkType = "3">
          </BreakpointContent>
@@ -154,11 +154,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "&#x6e05;&#x623f;&#x52a9;&#x624b;/PopViewController/SaleOutShangPu.m"
-            timestampString = "474174220.180252"
+            timestampString = "474199275.59079"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "911"
-            endingLineNumber = "911"
+            startingLineNumber = "951"
+            endingLineNumber = "951"
             landmarkName = "@implementation SaleOutShangPu"
             landmarkType = "3">
          </BreakpointContent>
@@ -170,11 +170,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "&#x6e05;&#x623f;&#x52a9;&#x624b;/PopViewController/SaleOutShangPu.m"
-            timestampString = "474174220.180252"
+            timestampString = "474199275.59079"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "910"
-            endingLineNumber = "910"
+            startingLineNumber = "950"
+            endingLineNumber = "950"
             landmarkName = "@implementation SaleOutShangPu"
             landmarkType = "3">
          </BreakpointContent>
@@ -186,11 +186,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "&#x6e05;&#x623f;&#x52a9;&#x624b;/SaleOutPostEditForm.m"
-            timestampString = "474195814.598068"
+            timestampString = "474272535.663637"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1819"
-            endingLineNumber = "1819"
+            startingLineNumber = "1836"
+            endingLineNumber = "1836"
             landmarkName = "@implementation SaleOutPostEditForm"
             landmarkType = "3">
          </BreakpointContent>
@@ -202,11 +202,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "&#x6e05;&#x623f;&#x52a9;&#x624b;/PopViewController/SaleOutShangPu.m"
-            timestampString = "474174220.180252"
+            timestampString = "474199275.59079"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "894"
-            endingLineNumber = "894"
+            startingLineNumber = "934"
+            endingLineNumber = "934"
             landmarkName = "@implementation SaleOutShangPu"
             landmarkType = "3">
          </BreakpointContent>
@@ -250,11 +250,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "&#x6e05;&#x623f;&#x52a9;&#x624b;/SaleOutPostEditForm.m"
-            timestampString = "474195814.598068"
+            timestampString = "474260409.895541"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1504"
-            endingLineNumber = "1504"
+            startingLineNumber = "1525"
+            endingLineNumber = "1525"
             landmarkName = "-scrollViewDidScroll:"
             landmarkType = "5">
          </BreakpointContent>
@@ -266,11 +266,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "&#x6e05;&#x623f;&#x52a9;&#x624b;/SaleOutPostEditForm.m"
-            timestampString = "474195814.598068"
+            timestampString = "474260409.895541"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1504"
-            endingLineNumber = "1504"
+            startingLineNumber = "1525"
+            endingLineNumber = "1525"
             landmarkName = "-scrollViewDidScroll:"
             landmarkType = "5">
          </BreakpointContent>
@@ -282,11 +282,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "&#x6e05;&#x623f;&#x52a9;&#x624b;/SaleOutPostEditForm.m"
-            timestampString = "474195814.598068"
+            timestampString = "474260409.895541"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1505"
-            endingLineNumber = "1505"
+            startingLineNumber = "1526"
+            endingLineNumber = "1526"
             landmarkName = "-scrollViewDidScroll:"
             landmarkType = "5">
             <Locations>
@@ -298,11 +298,11 @@
                   moduleName = "&#x6e05;&#x623f;&#x52a9;&#x624b;"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Larry/Documents/%E6%B8%85%E6%88%BF%E5%8A%A9%E6%89%8B/%E6%B8%85%E6%88%BF%E5%8A%A9%E6%89%8B/SaleOutPostEditForm.m"
-                  timestampString = "474196705.035643"
+                  timestampString = "474302068.222776"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "1505"
-                  endingLineNumber = "1505"
+                  startingLineNumber = "1526"
+                  endingLineNumber = "1526"
                   offsetFromSymbolStart = "164">
                </Location>
                <Location
@@ -313,11 +313,11 @@
                   moduleName = "&#x6e05;&#x623f;&#x52a9;&#x624b;"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Larry/Documents/%E6%B8%85%E6%88%BF%E5%8A%A9%E6%89%8B/%E6%B8%85%E6%88%BF%E5%8A%A9%E6%89%8B/SaleOutPostEditForm.m"
-                  timestampString = "474196705.035889"
+                  timestampString = "474302068.223006"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "1505"
-                  endingLineNumber = "1505"
+                  startingLineNumber = "1526"
+                  endingLineNumber = "1526"
                   offsetFromSymbolStart = "180">
                </Location>
             </Locations>
@@ -330,11 +330,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "&#x6e05;&#x623f;&#x52a9;&#x624b;/SaleOutPostEditForm.m"
-            timestampString = "474195814.598068"
+            timestampString = "474260409.895541"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1506"
-            endingLineNumber = "1506"
+            startingLineNumber = "1527"
+            endingLineNumber = "1527"
             landmarkName = "-scrollViewDidScroll:"
             landmarkType = "5">
          </BreakpointContent>
@@ -346,11 +346,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "&#x6e05;&#x623f;&#x52a9;&#x624b;/SaleOutPostEditForm.m"
-            timestampString = "474195814.598068"
+            timestampString = "474260409.895541"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1512"
-            endingLineNumber = "1512"
+            startingLineNumber = "1533"
+            endingLineNumber = "1533"
             landmarkName = "-scrollViewDidScroll:"
             landmarkType = "5">
          </BreakpointContent>
@@ -426,7 +426,7 @@
                   moduleName = "&#x6e05;&#x623f;&#x52a9;&#x624b;"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Larry/Documents/%E6%B8%85%E6%88%BF%E5%8A%A9%E6%89%8B/%E6%B8%85%E6%88%BF%E5%8A%A9%E6%89%8B/SaleOutPostEditForm.m"
-                  timestampString = "474196705.041016"
+                  timestampString = "474302068.228582"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "218"
@@ -441,7 +441,7 @@
                   moduleName = "&#x6e05;&#x623f;&#x52a9;&#x624b;"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Larry/Documents/%E6%B8%85%E6%88%BF%E5%8A%A9%E6%89%8B/%E6%B8%85%E6%88%BF%E5%8A%A9%E6%89%8B/SaleOutPostEditForm.m"
-                  timestampString = "474196705.041223"
+                  timestampString = "474302068.228801"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "218"
@@ -474,7 +474,7 @@
                   moduleName = "&#x6e05;&#x623f;&#x52a9;&#x624b;"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Larry/Documents/%E6%B8%85%E6%88%BF%E5%8A%A9%E6%89%8B/%E6%B8%85%E6%88%BF%E5%8A%A9%E6%89%8B/SaleOutPostEditForm.m"
-                  timestampString = "474196705.042478"
+                  timestampString = "474302068.230015"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "220"
@@ -489,7 +489,7 @@
                   moduleName = "&#x6e05;&#x623f;&#x52a9;&#x624b;"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Larry/Documents/%E6%B8%85%E6%88%BF%E5%8A%A9%E6%89%8B/%E6%B8%85%E6%88%BF%E5%8A%A9%E6%89%8B/SaleOutPostEditForm.m"
-                  timestampString = "474196705.042726"
+                  timestampString = "474302068.23026"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "0"
@@ -504,7 +504,7 @@
                   moduleName = "&#x6e05;&#x623f;&#x52a9;&#x624b;"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Larry/Documents/%E6%B8%85%E6%88%BF%E5%8A%A9%E6%89%8B/%E6%B8%85%E6%88%BF%E5%8A%A9%E6%89%8B/SaleOutPostEditForm.m"
-                  timestampString = "474196705.043011"
+                  timestampString = "474302068.23048"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "0"
@@ -568,12 +568,62 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "&#x6e05;&#x623f;&#x52a9;&#x624b;/PopViewController/SaleOutShangPu.m"
-            timestampString = "474174530.382101"
+            filePath = "&#x6e05;&#x623f;&#x52a9;&#x624b;/PostCategory.m"
+            timestampString = "474302068.081979"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "37"
-            endingLineNumber = "37">
+            startingLineNumber = "123"
+            endingLineNumber = "123"
+            landmarkName = "-tableView:didSelectRowAtIndexPath:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "&#x6e05;&#x623f;&#x52a9;&#x624b;/PostCategory.m"
+            timestampString = "474302068.081979"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "126"
+            endingLineNumber = "126"
+            landmarkName = "-tableView:didSelectRowAtIndexPath:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "&#x6e05;&#x623f;&#x52a9;&#x624b;/PostCategory.m"
+            timestampString = "474302068.081979"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "122"
+            endingLineNumber = "122"
+            landmarkName = "-tableView:didSelectRowAtIndexPath:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "&#x6e05;&#x623f;&#x52a9;&#x624b;/PopViewController/SaleOutShangPu.m"
+            timestampString = "474300399.220566"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "930"
+            endingLineNumber = "930"
+            landmarkName = "@implementation SaleOutShangPu"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

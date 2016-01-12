@@ -11,6 +11,7 @@
 #import "CZKeyboardToolbar.h"
 #import "MUtiSelectViewController.h"
 #import <JYBMultiImageSelector/JYBMultiImageSelector.h>
+#import "Common.h"
 
 
 
@@ -36,8 +37,13 @@
 @property(nonatomic,strong)   NSMutableArray  *tfArrs;
 @property(nonatomic,strong)   NSMutableArray  *footArrs;
 
+@property(nonatomic,assign) CellStatus PreStatus;
 
 
+/**
+ *  房屋分类
+ */
+@property(nonatomic,assign) BuildingType Fenlei;
 /**
  *  发布类型，4种乘以4种
  */
