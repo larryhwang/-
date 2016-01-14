@@ -11,7 +11,7 @@
 #define Padding     2
 #define CellHeight  44
 
-
+#define CellPaddingToVertical 10
 
 @implementation QFTableView_Sco
 
@@ -33,7 +33,7 @@
 
     //增加Cell后，重置所有Cell
     [_Cell_NSArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        [(UIView *)obj setFrame:CGRectMake(0, orignY + (Padding + CellHeight) * idx ,ScreenWidth, CellHeight)];
+        [(UIView *)obj setFrame:CGRectMake(CellPaddingToVertical/2, orignY + (Padding + CellHeight) * idx ,ScreenWidth-CellPaddingToVertical, CellHeight)];
         [self addSubview:obj];
     }];
 

@@ -27,6 +27,8 @@
 #import "RentOutOfiice.h"
 #import "RentOutChang.h"
 
+#import "WannaFlatVC.h"
+
 @interface PostCategory ()<UITableViewDataSource,UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *CategoryTable;
 
@@ -170,10 +172,12 @@ else if (self.Status==RentOut){
         }
     }//end_出租
 else if (self.Status==WantBuy){
-         NSLog(@"求购");
     if (indexPath.row ==0) {
         NSLog(@"住宅求购");
-        
+        WannaFlatVC *QiuzuFlat = [WannaFlatVC new];
+        QiuzuFlat.title = @"住房求购";
+        QiuzuFlat.iSQiuzu = NO;
+       [self.navigationController pushViewController:QiuzuFlat animated:YES];
     } else if (indexPath.row ==1) {
         NSLog(@"商铺求购");
     }else if (indexPath.row ==2) {
@@ -186,6 +190,10 @@ else if (self.Status==WantRent){
     NSLog(@"求租");
     if (indexPath.row ==0) {
         NSLog(@"住宅求租");
+        WannaFlatVC *QiuzuFlat = [WannaFlatVC new];
+        QiuzuFlat.title = @"住房求租";
+        QiuzuFlat.iSQiuzu = YES;
+        [self.navigationController pushViewController:QiuzuFlat animated:YES];
     } else if (indexPath.row ==1) {
         NSLog(@"商铺求租");
     }else if (indexPath.row ==2) {

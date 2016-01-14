@@ -211,8 +211,7 @@
         selectRegion.delegate = self ;
         selectRegion.indexData = self.indexData ;
         self.RegionTF.contentString = @"";
-        
-        [self.navigationController pushViewController:selectRegion animated:YES];
+      [self.navigationController pushViewController:selectRegion animated:YES];
         NSLog(@"跳转已经执行完");
     };
     [main addSubview:RegionOption];
@@ -597,7 +596,6 @@
     }
 }
 
-
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
     NSInteger EditedTextFieldTag = textField.tag ;
@@ -790,7 +788,6 @@
     }
     
 }
-
 
 -(BOOL)controllerWillPopHandler {
     NSLog(@"%d",[[self.PostDataDic allKeys] count]);
