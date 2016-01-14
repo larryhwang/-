@@ -153,7 +153,7 @@ else if (self.Status==RentOut){
             RentOffice.Fenlei = OfficeType;
             RentOffice.username   = app.usrInfoDic[@"username"];
             RentOffice.userId     = app.usrInfoDic[@"userid"];
-            RentOffice.typeStr    = @"22";
+            RentOffice.typeStr    = @"23";
             RentOffice.title = @"写字楼出租";
             [self.navigationController pushViewController:RentOffice animated:YES];
             
@@ -165,7 +165,7 @@ else if (self.Status==RentOut){
             rentChang.Fenlei = OfficeType;
             rentChang.username   = app.usrInfoDic[@"username"];
             rentChang.userId     = app.usrInfoDic[@"userid"];
-            rentChang.typeStr    = @"22";
+            rentChang.typeStr    = @"24";
             rentChang.title = @"厂房出租";
             [self.navigationController pushViewController:rentChang animated:YES];
             
@@ -175,6 +175,7 @@ else if (self.Status==WantBuy){
     if (indexPath.row ==0) {
         NSLog(@"住宅求购");
         WannaFlatVC *QiuzuFlat = [WannaFlatVC new];
+        QiuzuFlat.typeStr = @"31";
         QiuzuFlat.title = @"住房求购";
         QiuzuFlat.iSQiuzu = NO;
        [self.navigationController pushViewController:QiuzuFlat animated:YES];
@@ -191,6 +192,7 @@ else if (self.Status==WantRent){
     if (indexPath.row ==0) {
         NSLog(@"住宅求租");
         WannaFlatVC *QiuzuFlat = [WannaFlatVC new];
+           QiuzuFlat.typeStr = @"41";
         QiuzuFlat.title = @"住房求租";
         QiuzuFlat.iSQiuzu = YES;
         [self.navigationController pushViewController:QiuzuFlat animated:YES];

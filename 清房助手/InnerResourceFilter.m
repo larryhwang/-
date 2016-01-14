@@ -146,6 +146,7 @@
    [self.PostDictionary setObject:_QFPramaIsFangyuan forKey:@"isfangyuan"];
     
     QFTableView_Sco *mainContent   = [[QFTableView_Sco alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth,ScreenHeight)];
+    mainContent.GroupFlagNoArr = @[@6];
     self.main = mainContent ;
     [self.view addSubview:mainContent];
     
@@ -379,6 +380,7 @@
                 [CustomsPriceRange addSubview:UnintLable];
                 // [self.main.Cell_NSArr insertObject:CustomsPriceRange atIndex:3];
                 [self addCell:CustomsPriceRange After:PriceRange];
+               
                 [self.main layoutSubviews];
             } else {
                 if ([passString isEqualToString:@"不限"]) {

@@ -7,8 +7,10 @@
 //
 
 #import "FilterViewController.h"
+#import "SaleOutPostEditForm.h"
 
-@interface WannaFlatVC : FilterViewController
+
+@interface WannaFlatVC : SaleOutPostEditForm
 
 
 @property(nonatomic,assign) BOOL iSQiuzu;

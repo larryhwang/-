@@ -7,12 +7,22 @@
 //
 
 #import "QFTableView_Sco.h"
+#import "commonFile.h"
+
 
 #define Padding     2
 #define CellHeight  44
 
 #define CellPaddingToVertical 10
 
+
+
+@interface QFTableView_Sco(){
+    CGRect _tempRect;
+    
+}
+
+@end
 @implementation QFTableView_Sco
 
 
@@ -29,13 +39,37 @@
 -(void)layoutSubviews {
     NSLog(@"触发");
     CGFloat orignY = 12;
-    
-
+    int count = ((int)[_GroupFlagNoArr count]);
+    int Dcount = ((int)[_Cell_NSArr count]);
     //增加Cell后，重置所有Cell
-    [_Cell_NSArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        [(UIView *)obj setFrame:CGRectMake(CellPaddingToVertical/2, orignY + (Padding + CellHeight) * idx ,ScreenWidth-CellPaddingToVertical, CellHeight)];
-        [self addSubview:obj];
-    }];
+    
+    //摆放算法
+    
+    int cellIndex =0;
+    for (int i=0; i<count; i++) {  //第几组
+        int m = [(NSNumber *)_GroupFlagNoArr[i] intValue];  // 第几小组的数量
+        for (int j=0; j<m; j++) {
+            //每个组里的第一个单元格要间隔开
+            
+            UIView *SinleView = _Cell_NSArr[cellIndex] ;
+            cellIndex ++;
+            if (j==0 && i==0) {
+                [(UIView *)SinleView setFrame:CGRectMake(CellPaddingToVertical/2, orignY + GroupPadding,ScreenWidth-CellPaddingToVertical, CellHeight)];
+                _tempRect = SinleView.frame;
+                [self addSubview:SinleView];
+            } else if(j==0 && i!=0){
+                [(UIView *)SinleView setFrame:CGRectMake(CellPaddingToVertical/2, CGRectGetMaxY(_tempRect) + GroupPadding,ScreenWidth-CellPaddingToVertical, CellHeight)];
+                _tempRect = SinleView.frame;
+                [self addSubview:SinleView];
+            } else {
+                [(UIView *)SinleView setFrame:CGRectMake(CellPaddingToVertical/2, CGRectGetMaxY(_tempRect) -CellClipPadding,ScreenWidth-CellPaddingToVertical, CellHeight)];
+                _tempRect = SinleView.frame;
+                [self addSubview:SinleView];
+                
+            }
+        }
+    }
+    
 
 }
 

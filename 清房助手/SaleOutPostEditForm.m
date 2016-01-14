@@ -1538,12 +1538,13 @@
 #pragma mark UITextfiledDelegate
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
+    if(textField.text) _isLoadLastPara = YES;
     NSInteger EditedTextFieldTag = textField.tag ;
     switch (EditedTextFieldTag) {
           case biaotiTag:
             NSLog(@"标题是:%@",textField.text);
             NSLog(@"%@",self);
-            [_PostDataDic setObject:textField.text forKey:@"biaoti"];
+            [self.PostDataDic setObject:textField.text forKey:@"biaoti"];
             break;
           case mingchengTag:
               NSLog(@"名称是:%@",textField.text);
@@ -1838,6 +1839,7 @@
             
         NSDictionary *oldSavedDic = [[NSUserDefaults standardUserDefaults] objectForKey:self.typeStr];
         NSLog(@"数量:%d", [[self.PostDataDic allKeys] count]);
+             NSLog(@"预保存:%@",self.PostDataDic);
             if([[self.PostDataDic allKeys] count] > 0) {
                 NSLog(@"保存:%@",self.PostDataDic);
               [[NSUserDefaults standardUserDefaults]setObject:self.PostDataDic forKey:self.typeStr];  //11是状态码，代表 是出售 住宅

@@ -12,6 +12,6 @@
 
 @property(nonatomic,strong)  NSMutableArray  *Cell_NSArr;
 
-@property(nonatomic,assign) NSNumber *GroupFlagNo;
+@property(nonatomic,strong)  NSArray  *GroupFlagNoArr;
 
 @end

@@ -95,6 +95,7 @@
 -(void)setTitle:(NSString *)Title {
     CoreLabel *label=[[CoreLabel alloc] initWithFrame:CGRectMake(10, 0, 110, 50)];
     label.font = [UIFont systemFontOfSize:15];
+    
     label.text =Title;
     if ([Title length]==3) {  //2字
         [label addAttr:CoreLabelAttrKern value:@(37) range:NSMakeRange(0, 1)];

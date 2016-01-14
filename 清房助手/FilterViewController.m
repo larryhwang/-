@@ -407,9 +407,8 @@
         };
         [self presentViewController:select animated:YES completion:nil]; };
     [self.main.Cell_NSArr addObject:LiftCell];
-    
+    self.main.GroupFlagNoArr = @[@5];
     [self.main layoutSubviews];
-
 
 }
 
@@ -442,6 +441,7 @@
     _RegionName = @"";
     //装载Cell的容器
     QFTableView_Sco *mainContent   = [[QFTableView_Sco alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth,ScreenHeight)];
+    mainContent.GroupFlagNoArr = @[@5];
     self.main = mainContent ;
     [self.view addSubview:mainContent];
     
