@@ -209,6 +209,9 @@
 		46AFDFA81BCB84A200B49CBE /* UIImageView+HighlightedWebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 46AFDF961BCB84A200B49CBE /* UIImageView+HighlightedWebCache.m */; };
 		46AFDFA91BCB84A200B49CBE /* UIImageView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 46AFDF981BCB84A200B49CBE /* UIImageView+WebCache.m */; };
 		46AFDFAA1BCB84A200B49CBE /* UIView+WebCacheOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 46AFDF9A1BCB84A200B49CBE /* UIView+WebCacheOperation.m */; };
+		46B1D0CA1C489DD0008417D9 /* WannaShangPu.m in Sources */ = {isa = PBXBuildFile; fileRef = 46B1D0C91C489DD0008417D9 /* WannaShangPu.m */; };
+		46B1D0CD1C48C5F2008417D9 /* WannaOffice.m in Sources */ = {isa = PBXBuildFile; fileRef = 46B1D0CC1C48C5F2008417D9 /* WannaOffice.m */; };
+		46B1D0D01C48D7E0008417D9 /* WannaChang.m in Sources */ = {isa = PBXBuildFile; fileRef = 46B1D0CF1C48D7E0008417D9 /* WannaChang.m */; };
 		46B21AC61C30C48B0053AE7F /* QFDateSelectStartToEnd.m in Sources */ = {isa = PBXBuildFile; fileRef = 46B21AC41C30C48B0053AE7F /* QFDateSelectStartToEnd.m */; };
 		46B21AC71C30C48B0053AE7F /* QFDateSelectStartToEnd.xib in Resources */ = {isa = PBXBuildFile; fileRef = 46B21AC51C30C48B0053AE7F /* QFDateSelectStartToEnd.xib */; };
 		46B21ACA1C3108750053AE7F /* InnerResourceFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 46B21AC91C3108750053AE7F /* InnerResourceFilter.m */; };
@@ -637,6 +640,12 @@
 		46AFDF981BCB84A200B49CBE /* UIImageView+WebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+WebCache.m"; sourceTree = "<group>"; };
 		46AFDF991BCB84A200B49CBE /* UIView+WebCacheOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+WebCacheOperation.h"; sourceTree = "<group>"; };
 		46AFDF9A1BCB84A200B49CBE /* UIView+WebCacheOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+WebCacheOperation.m"; sourceTree = "<group>"; };
+		46B1D0C81C489DD0008417D9 /* WannaShangPu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WannaShangPu.h; sourceTree = "<group>"; };
+		46B1D0C91C489DD0008417D9 /* WannaShangPu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WannaShangPu.m; sourceTree = "<group>"; };
+		46B1D0CB1C48C5F2008417D9 /* WannaOffice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WannaOffice.h; sourceTree = "<group>"; };
+		46B1D0CC1C48C5F2008417D9 /* WannaOffice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WannaOffice.m; sourceTree = "<group>"; };
+		46B1D0CE1C48D7E0008417D9 /* WannaChang.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WannaChang.h; sourceTree = "<group>"; };
+		46B1D0CF1C48D7E0008417D9 /* WannaChang.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WannaChang.m; sourceTree = "<group>"; };
 		46B21AC31C30C48B0053AE7F /* QFDateSelectStartToEnd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QFDateSelectStartToEnd.h; sourceTree = "<group>"; };
 		46B21AC41C30C48B0053AE7F /* QFDateSelectStartToEnd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QFDateSelectStartToEnd.m; sourceTree = "<group>"; };
 		46B21AC51C30C48B0053AE7F /* QFDateSelectStartToEnd.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QFDateSelectStartToEnd.xib; sourceTree = "<group>"; };
@@ -974,6 +983,8 @@
 				46BBE8CE1C0FD2FB00DE4B14 /* RegionOpt */,
 				46BBE8B11C0FD23900DE4B14 /* PopViewController */,
 				4628480A1C0FCC2F00273B3A /* SaleOutPostEditForm.h */,
+				46B1D0C81C489DD0008417D9 /* WannaShangPu.h */,
+				46B1D0C91C489DD0008417D9 /* WannaShangPu.m */,
 				4628480B1C0FCC2F00273B3A /* SaleOutPostEditForm.m */,
 				462847F61C0FCB5600273B3A /* FlatDescirbeVcontroller.h */,
 				462847F71C0FCB5600273B3A /* FlatDescirbeVcontroller.m */,
@@ -1661,6 +1672,8 @@
 				46BBE8B71C0FD23900DE4B14 /* PopSelectViewController.xib */,
 				46BBE8B81C0FD23900DE4B14 /* SelectViewContorller.h */,
 				46BBE8B91C0FD23900DE4B14 /* SelectViewContorller.m */,
+				46B1D0CE1C48D7E0008417D9 /* WannaChang.h */,
+				46B1D0CF1C48D7E0008417D9 /* WannaChang.m */,
 				461518591C39FE8400E030D6 /* SaleOutOfiice.h */,
 				4615185A1C39FE8400E030D6 /* SaleOutOfiice.m */,
 				464185BC1C3E572800650E26 /* SaleOutShangPu.h */,
@@ -1669,6 +1682,8 @@
 				46789C471C43B0090094DE54 /* SaleoutChangFangViewController.m */,
 				46789C491C44DA2B0094DE54 /* RentOutFlatView.h */,
 				46789C4A1C44DA2B0094DE54 /* RentOutFlatView.m */,
+				46B1D0CB1C48C5F2008417D9 /* WannaOffice.h */,
+				46B1D0CC1C48C5F2008417D9 /* WannaOffice.m */,
 			);
 			path = PopViewController;
 			sourceTree = "<group>";
@@ -2116,6 +2131,7 @@
 				46E8BAF41C2E4B86009E808D /* QFOrderFilter.m in Sources */,
 				465415311C2C4AAE003E5743 /* MyOrderCell.m in Sources */,
 				4677DE1C1C1672D700011D70 /* TableViewController.m in Sources */,
+				46B1D0D01C48D7E0008417D9 /* WannaChang.m in Sources */,
 				46C716CD1BC69FB800287742 /* NSObject+MJCoding.m in Sources */,
 				46BBE8BC1C0FD23900DE4B14 /* PopSelectViewController.m in Sources */,
 				4646C6891C2700CB00896964 /* QiuzuCell.m in Sources */,
@@ -2142,6 +2158,7 @@
 				46C716CB1BC69FB800287742 /* MJIvar.m in Sources */,
 				46252F8E1BDA648C00C1FA66 /* MJRefreshFooterView.m in Sources */,
 				46BB59A91C23B2F30021DCEA /* QFLocateButton.m in Sources */,
+				46B1D0CA1C489DD0008417D9 /* WannaShangPu.m in Sources */,
 				468ED0211BD5E0E5001605A7 /* SCPopView.m in Sources */,
 				4654153F1C2CCA5A003E5743 /* QFMyOrderTrackDetailVC.m in Sources */,
 				46B21ACA1C3108750053AE7F /* InnerResourceFilter.m in Sources */,
@@ -2213,6 +2230,7 @@
 				4628481E1C0FCC6C00273B3A /* SandBoxTool.m in Sources */,
 				4610F4F41BD22456002A05E9 /* FreeCell.m in Sources */,
 				468E28921BCD025600560500 /* DescribeCell.m in Sources */,
+				46B1D0CD1C48C5F2008417D9 /* WannaOffice.m in Sources */,
 				46BBE8BA1C0FD23900DE4B14 /* MUtiSelectViewController.m in Sources */,
 				46C716CC1BC69FB800287742 /* MJType.m in Sources */,
 				4646C6981C270D5300896964 /* ZuGouDetailCell.m in Sources */,

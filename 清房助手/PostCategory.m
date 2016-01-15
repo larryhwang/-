@@ -22,12 +22,16 @@
 #import "SaleoutChangFangViewController.h"
 
 
+
 #import "RentOutFlatView.h"
 #import "RentOutShangPu.h"
 #import "RentOutOfiice.h"
 #import "RentOutChang.h"
 
 #import "WannaFlatVC.h"
+#import "WannaShangPu.h"
+#import "WannaOffice.h"
+#import "WannaChang.h"
 
 @interface PostCategory ()<UITableViewDataSource,UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *CategoryTable;
@@ -181,10 +185,25 @@ else if (self.Status==WantBuy){
        [self.navigationController pushViewController:QiuzuFlat animated:YES];
     } else if (indexPath.row ==1) {
         NSLog(@"商铺求购");
+        WannaShangPu *wangShangu = [WannaShangPu new];
+        wangShangu.typeStr = @"32";
+        wangShangu.title = @"商铺求购";
+        wangShangu.iSQiuzu = NO;
+        [self.navigationController pushViewController:wangShangu animated:YES];
     }else if (indexPath.row ==2) {
         NSLog(@"写字楼求购");
+        WannaOffice *wanaOffice = [WannaOffice new];
+        wanaOffice.title = @"写字楼求购";
+        wanaOffice.typeStr = @"33";
+        wanaOffice.iSQiuzu = NO;
+        [self.navigationController pushViewController:wanaOffice animated:YES];
     }else  {
         NSLog(@"工厂求购");
+        WannaChang *wangChang = [WannaChang new];
+        wangChang.title = @"工厂求购";
+        wangChang.typeStr = @"34";
+        wangChang.iSQiuzu = NO;
+        [self.navigationController pushViewController:wangChang animated:YES];
     }
 }// end_求购
 else if (self.Status==WantRent){
@@ -192,16 +211,31 @@ else if (self.Status==WantRent){
     if (indexPath.row ==0) {
         NSLog(@"住宅求租");
         WannaFlatVC *QiuzuFlat = [WannaFlatVC new];
-           QiuzuFlat.typeStr = @"41";
+        QiuzuFlat.typeStr = @"41";
         QiuzuFlat.title = @"住房求租";
         QiuzuFlat.iSQiuzu = YES;
         [self.navigationController pushViewController:QiuzuFlat animated:YES];
     } else if (indexPath.row ==1) {
         NSLog(@"商铺求租");
+        WannaShangPu *wangShangu = [WannaShangPu new];
+        wangShangu.typeStr = @"42";
+        wangShangu.title = @"商铺求租";
+        wangShangu.iSQiuzu = YES;
+        [self.navigationController pushViewController:wangShangu animated:YES];
     }else if (indexPath.row ==2) {
         NSLog(@"写字楼求租");
+        WannaOffice *wanaOffice = [WannaOffice new];
+        wanaOffice.title = @"写字楼求租";
+        wanaOffice.typeStr = @"43";
+        wanaOffice.iSQiuzu = YES;
+        [self.navigationController pushViewController:wanaOffice animated:YES];
     }else  {
         NSLog(@"工厂求租");
+        WannaChang *wangChang = [WannaChang new];
+        wangChang.title   = @"工厂求租";
+        wangChang.typeStr = @"44";
+        wangChang.iSQiuzu = YES;
+        [self.navigationController pushViewController:wangChang animated:YES];
     }
 }// end_求租
     
