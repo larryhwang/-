@@ -62,8 +62,8 @@
     
     
     //江哥账号 ／ 有头像
-    PramaDic[@"userid"] = @"15018639039";
-    PramaDic[@"psword"] = @"5798161";
+//    PramaDic[@"userid"] = @"15018639039";
+//    PramaDic[@"psword"] = @"5798161";
     
 
     AFHTTPRequestOperationManager *mgr1  = [AFHTTPRequestOperationManager manager];

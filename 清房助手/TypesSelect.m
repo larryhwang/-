@@ -59,6 +59,11 @@
    [btn becameSelected];
     //传值，
     self.changeServiceType(btn.QFSelectedServiceType);
+ 
+//  self.(btn.QFSelectedServicePramaFlag);
+    //字典代理设值
+    [self.delegate setServiceTypeDicWith:btn.QFSelectedServicePramaFlag];
+    
   //  然后退出
     [self hide];
     
@@ -83,6 +88,7 @@
         CGFloat btnY = CGRectGetMaxY(label.frame) + BtnPaddingToHorizon;  //CGFloat *btnX =
         OrderTypeSelectBtn *btn = [[OrderTypeSelectBtn alloc]initWithFrame:CGRectMake(BtnPaddingToVertical, btnY, BtnType1Width, 30)];
         btn.QFSelectedServiceType = @"房产证在手－按揭付款";
+        btn.QFSelectedServicePramaFlag = @"0";
         [btn setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
         [btn addTarget:self action:@selector(FirstlocationClick:) forControlEvents:UIControlEventTouchUpInside];
         [btn setTitle:@"按揭付款" forState:UIControlStateNormal];
@@ -92,6 +98,7 @@
         CGFloat btn1x = CGRectGetMaxX(btn.frame) + BtnsHorizontal;
         OrderTypeSelectBtn *btn1 = [[OrderTypeSelectBtn alloc]initWithFrame:CGRectMake(btn1x, btnY, BtnType2Width, 30)];
         btn1.QFSelectedServiceType = @"房产证在手－一次性付款";
+        btn1.QFSelectedServicePramaFlag = @"1";
         [btn1 addTarget:self action:@selector(FirstlocationClick:) forControlEvents:UIControlEventTouchUpInside];
         [btn1 setTitle:@"一次付款" forState:UIControlStateNormal];
         [self addSubview:btn1];
@@ -105,6 +112,7 @@
         CGFloat btn2Y = CGRectGetMaxY(label2.frame) + BtnPaddingToHorizon;  //CGFloat *btnX =
         OrderTypeSelectBtn *btn2 = [[OrderTypeSelectBtn alloc]initWithFrame:CGRectMake(BtnPaddingToVertical, btn2Y, BtnType1Width, 30)];
         btn2.QFSelectedServiceType = @"房产证不在手－按揭付款";
+        btn2.QFSelectedServicePramaFlag = @"2";
         [btn2 setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
         [btn2 addTarget:self action:@selector(FirstlocationClick:) forControlEvents:UIControlEventTouchUpInside];
         [btn2 setTitle:@"按揭付款" forState:UIControlStateNormal];
@@ -114,6 +122,7 @@
         CGFloat btn3x = CGRectGetMaxX(btn2.frame) + BtnsHorizontal;
         OrderTypeSelectBtn *btn3 = [[OrderTypeSelectBtn alloc]initWithFrame:CGRectMake(btn3x, btn2Y, BtnType2Width, 30)];
         btn3.QFSelectedServiceType = @"房产证不在手－一次性付款";
+        btn3.QFSelectedServicePramaFlag = @"3";
         [btn3 addTarget:self action:@selector(FirstlocationClick:) forControlEvents:UIControlEventTouchUpInside];
         [btn3 setTitle:@"一次付款" forState:UIControlStateNormal];
         [self addSubview:btn3];

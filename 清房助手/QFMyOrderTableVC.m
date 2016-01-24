@@ -66,6 +66,7 @@
 -(void)RightBtnClick {
     QFOrderFilter *filter = [[QFOrderFilter alloc]init];
     filter.uptableData = ^(NSDictionary *dic) {
+        NSLog(@"%@",dic);
         self.QFSingleCellData_Arr = dic[@"data"];
         [self.QFMyOrderTable reloadData];
     };
@@ -77,7 +78,17 @@
     AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
     NSString *url = @"http://www.123qf.cn:81/testApp/integrateFindByUser.api?page=1";
     [mgr POST:url parameters:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
-       self.QFSingleCellData_Arr = responseObject[@"data"];
+        NSLog(@"%@",responseObject);
+        if ([responseObject[@"code"] isEqualToString: @"0"]) {
+            self.QFSingleCellData_Arr = @[];
+            UIAlertView *aleat=[[UIAlertView alloc] initWithTitle:@"提醒" message:@"暂无相关信息" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+            [aleat show];
+        } else{
+          self.QFSingleCellData_Arr = responseObject[@"data"];
+        }
+    
+        NSLog(@"%@",responseObject[@"data"]);
+        
        [self.QFMyOrderTable reloadData];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"%@",error);
@@ -90,7 +101,13 @@
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.QFSingleCellData_Arr count];
+    if (self.QFSingleCellData_Arr) {
+        NSLog(@"%@",self.QFSingleCellData_Arr);
+        return [self.QFSingleCellData_Arr count];
+    } else {
+        return 0;
+    }
+
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -99,12 +116,8 @@
     NSLog(@"%@",dic);
     
     MyOrderCell    *Cell = [[MyOrderCell alloc]init];
-    
     Cell = [[[NSBundle mainBundle]loadNibNamed:@"MyOrderCell" owner:nil options:nil] firstObject];
-    
     Cell.QFCellDataDic = dic;
-
-  
     return Cell;
 }
 
@@ -133,11 +146,8 @@
     [MBProgressHUD  hideHUD];
         
     NSDictionary *dict = responseObject[@"data"];
-        
         NSLog(@"dict : %@",dict);
-        
         detailVC.QFHeadViewDic = dict[@"user"];  //表头信息
-        
         detailVC.QFTableArr    = dict[@"info"];  //追踪的数组信息
         
     [self.navigationController pushViewController:detailVC animated:YES];

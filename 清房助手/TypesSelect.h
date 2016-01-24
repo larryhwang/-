@@ -12,6 +12,7 @@
 @protocol typeSelectdelegate <NSObject>
 
 -(void)transArrowImg;
+-(void )setServiceTypeDicWith:(NSString *)str;
 
 @end
 
@@ -20,10 +21,11 @@
  *  用于在选中之后更新UI
  */
 typedef void (^ChangeServiceLabelVarBlock) (NSString *str);
-typedef void (^UpdateFatherVCTrikBoard) (void);
-typedef void (^ShowFatherVCTrikBoard) (void);
-typedef void (^HideFatherVCTrikBoard) (void);
-@interface TypesSelect : UIView
+typedef void (^ChangeServiceDicSetBlock)   (NSString *str);
+typedef void (^UpdateFatherVCTrikBoard)    (void);
+typedef void (^ShowFatherVCTrikBoard)      (void);
+typedef void (^HideFatherVCTrikBoard)      (void);
+@interface   TypesSelect : UIView
 
 
 @property(nonatomic,copy) ChangeServiceLabelVarBlock  changeServiceType;
@@ -31,9 +33,14 @@ typedef void (^HideFatherVCTrikBoard) (void);
 /**
  *  更新档板是否隐藏
  */
+
 @property(nonatomic,copy) UpdateFatherVCTrikBoard    updateTrickBoard;
-@property(nonatomic,copy) ShowFatherVCTrikBoard      ShowTrickBoard;
-@property(nonatomic,copy) HideFatherVCTrikBoard      HideTrickBoard;
+
+
+@property(nonatomic,copy) ChangeServiceDicSetBlock    btnSetDicBlock;
+
+@property(nonatomic,copy)   ShowFatherVCTrikBoard      ShowTrickBoard;
+@property(nonatomic,copy)   HideFatherVCTrikBoard      HideTrickBoard;
 @property(nonatomic,assign)     BOOL      isPop;
 @property(nonatomic,assign) id<typeSelectdelegate> delegate;
 +(instancetype)typeselectViewWithFrame:(CGRect)frame;

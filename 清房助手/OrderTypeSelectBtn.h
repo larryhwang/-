@@ -11,5 +11,7 @@
 @interface OrderTypeSelectBtn : QFLocateButton
 
 @property(nonatomic,copy) NSString *QFSelectedServiceType;
+@property(nonatomic,copy) NSString *QFSelectedServicePramaFlag;
+
 
 @end

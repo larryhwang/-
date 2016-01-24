@@ -245,8 +245,6 @@
     [main.Cell_NSArr addObject:Title];
     
     
-    
-    
     //RegionOption
     EditCell    *RegionOption  = [[EditCell alloc]init];
     self.RegionTF = RegionOption;

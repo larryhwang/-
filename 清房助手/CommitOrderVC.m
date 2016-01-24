@@ -42,7 +42,7 @@
 @property(nonatomic,strong)   NSMutableArray  *tfArrs;
 @property (weak, nonatomic) IBOutlet UIButton *QFPostBtn;
 @property(nonatomic,strong)  NSMutableDictionary  *QF_pramaNSM_Dic;
-
+@property(nonatomic,copy)   NSString *OrderNo;
 
 
 @end
@@ -75,7 +75,7 @@
     
     self.QFPostBtn.backgroundColor = DeafaultColor;
     [self.QFPostBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    
+    [self.QF_pramaNSM_Dic setObject:@"0" forKey:@"servicetype"];
     UIBarButtonItem *backItem = [[UIBarButtonItem alloc] init];
     backItem.title = @"";
     self.navigationItem.backBarButtonItem = backItem;
@@ -220,9 +220,11 @@
     textfied.font = [UIFont systemFontOfSize:15];
     textfied.tag = TFCountTag ++;
     [self.tfArrs addObject:textfied];
+    
     if (isTextCenter) {
         textfied.textAlignment = NSTextAlignmentCenter;
     }
+    
     textfied.delegate = self;
     
 }
@@ -249,6 +251,7 @@
         self.QFServiceTypeName.text = TypNname;
         //        _isPop =
     };
+    
     
     popView.updateTrickBoard =^(){
         if (self.QFOptionsView.isPop) {
@@ -315,11 +318,82 @@
 - (IBAction)Post:(id)sender {
     //提交数据
     //微信支付
-    NSLog(@"POST_ Dic_Prama :%@",self.QF_pramaNSM_Dic);
-    NSString *orderno   = [NSString stringWithFormat:@"%ld",time(0)];
-    [GBWXPayManager wxpayWithOrderID:orderno orderTitle:@"测试" amount:@"0.01"];
     
+    
+    //填写资料的检查是否为空
+    if(!self.QF_pramaNSM_Dic[@"sellername"])
+    {
+        [MBProgressHUD showError:@"请输入卖家姓名"];
+        return;
+    }
+    
+    
+    
+    if(!self.QF_pramaNSM_Dic[@"sellertel"])
+    {
+        [MBProgressHUD showError:@"请输入卖家电话"];
+        return;
+    }
+    
+    
+    if(!self.QF_pramaNSM_Dic[@"buyername"])
+    {
+        [MBProgressHUD showError:@"请输入买家姓名"];
+        return;
+    }
+    
+    
+    if(!self.QF_pramaNSM_Dic[@"buyertel"])
+    {
+        [MBProgressHUD showError:@"请输入买家电话"];
+        return;
+    }
+    
+    if(!self.QF_pramaNSM_Dic[@"paytype"])
+    {
+        [MBProgressHUD showError:@"请选择支付方式"];
+        return;
+    }
+
+    [MBProgressHUD showMessage:@"正在提交"];
+    
+    NSString *url = @"http://www.123qf.cn:81/testApp/integrateAdd.api";
+    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
+    NSLog(@"订单提交首次参数：%@",self.QF_pramaNSM_Dic);
+    [mgr POST:url parameters:self.QF_pramaNSM_Dic success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+        [MBProgressHUD hideHUD];
+        NSLog(@"GG:%@",responseObject);
+        self.OrderNo = responseObject[@"data"];
+        //提交完订单数据后再转入支付接口
+        
+        
+        
+        //区分是现金 刷卡 还是微信支付
+        if ([self.QF_pramaNSM_Dic[@"paytype"] isEqualToString:@"1"]) {
+            NSString *orderno   = [NSString stringWithFormat:@"%ld",time(0)];
+            [GBWXPayManager wxpayWithOrderID:orderno orderTitle:@"服务费" amount:@"0.01"];
+        } else {
+            //现金
+            NSLog(@"现金");
+            
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"订单提交成功"
+                                                            message:nil
+                                                           delegate:self
+                                                  cancelButtonTitle:@"好的"otherButtonTitles:nil, nil];
+            [alert show];
+        }
+            } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
+        NSLog(@"%@",error);
+    }];
 }
+
+
+//servicetype
+//sellername
+//sellertel
+//buyername
+//buyertel
+//paytype
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
     NSInteger TF_tag = textField.tag;
@@ -327,7 +401,7 @@
     switch (TF_tag) {
         case 0:
             NSLog(@"卖家姓text：%@",textField.text);
-            [self.QF_pramaNSM_Dic setObject:str forKey:@"sellername"];
+            [self.QF_pramaNSM_Dic setObject:str forKey:@"sellername"];//麻辣牛蛙
             break;
         case 1:
             [self.QF_pramaNSM_Dic setObject:str forKey:@"sellertel"];
@@ -353,7 +427,7 @@
     
     
     NSString *orderno   = [NSString stringWithFormat:@"%ld",time(0)];
-    [GBWXPayManager wxpayWithOrderID:orderno orderTitle:@"测试" amount:@"0.01"];
+    [GBWXPayManager wxpayWithOrderID:orderno orderTitle:@"服务费" amount:@"0.01"];
     
     
     
@@ -397,25 +471,35 @@
     if (alertView.tag ==1) {
 #warning 这里需要补充数据
         // 成功的弹窗。先上传保存数据，然后跳转返回
-        [MBProgressHUD showMessage:@"正在提交"];
-        NSString *url = @"";
+        [MBProgressHUD showMessage:@"正在提交"];//setPay.api
+        NSString *url = @"http://www.123qf.cn:81/testApp/setPay.api";
         AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
-        
-        [mgr POST:url parameters:self.QF_pramaNSM_Dic success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+        NSDictionary *dic = @{@"ordernum":self.OrderNo};
+        [mgr POST:url parameters:dic success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
             [MBProgressHUD hideHUD];
-            if (true) {
+            NSLog(@"%@",responseObject);
+            if (responseObject[@"code"]) {
                 [MBProgressHUD showSuccess:@"上传成功"];
+            } else {
+                [MBProgressHUD showError:@"上传失败"];
             }
+            
         } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
             NSLog(@"%@",error);
         }];
         
         [self.navigationController popViewControllerAnimated:YES];
-        
-        
     }else {
-        
+        [self.navigationController popViewControllerAnimated:YES];
+  
     }
 }
+
+
+
+-(void )setServiceTypeDicWith:(NSString *)str {
+   [self.QF_pramaNSM_Dic setObject:str forKey:@"servicetype"];
+}
+
 
 @end

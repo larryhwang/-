@@ -62,7 +62,7 @@
         req.timeStamp           = stamp.intValue;
         req.package             = [dict objectForKey:@"package"];
         req.sign                = [dict objectForKey:@"sign"];
-        
+    
         BOOL status = [WXApi sendReq:req];
         NSLog(@"%d",status);
         
