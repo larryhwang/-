@@ -79,7 +79,7 @@
     NSString *url = @"http://www.123qf.cn:81/testApp/integrateFindByUser.api?page=1";
     [mgr POST:url parameters:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
         NSLog(@"%@",responseObject);
-        if ([responseObject[@"code"] isEqualToString: @"0"]) {
+        if ([responseObject[@"code"] isEqualToString: @"00202"]) {
             self.QFSingleCellData_Arr = @[];
             UIAlertView *aleat=[[UIAlertView alloc] initWithTitle:@"提醒" message:@"暂无相关信息" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
             [aleat show];
@@ -88,7 +88,6 @@
         }
     
         NSLog(@"%@",responseObject[@"data"]);
-        
        [self.QFMyOrderTable reloadData];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"%@",error);
@@ -144,12 +143,10 @@
     NSLog(@"%@",responseObject);
         
     [MBProgressHUD  hideHUD];
-        
     NSDictionary *dict = responseObject[@"data"];
         NSLog(@"dict : %@",dict);
         detailVC.QFHeadViewDic = dict[@"user"];  //表头信息
         detailVC.QFTableArr    = dict[@"info"];  //追踪的数组信息
-        
     [self.navigationController pushViewController:detailVC animated:YES];
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         NSLog(@"%@",error);

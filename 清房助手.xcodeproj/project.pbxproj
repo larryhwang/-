@@ -33,6 +33,7 @@
 		4616EE241C24E44500BAF5C3 /* 640x1136_4.png in Resources */ = {isa = PBXBuildFile; fileRef = 4616EE201C24E44500BAF5C3 /* 640x1136_4.png */; };
 		4617E63A1C1BADD5007BECBF /* FilterSelectJieViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4617E6391C1BADD5007BECBF /* FilterSelectJieViewController.m */; };
 		46184CEC1C465C40004CE58D /* WannaFlatVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 46184CEB1C465C40004CE58D /* WannaFlatVC.m */; };
+		461AAD7A1C55077F00A6F006 /* ShareIcons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 461AAD791C55077F00A6F006 /* ShareIcons.xcassets */; };
 		46252F8B1BDA648C00C1FA66 /* MJRefresh.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 46252F7B1BDA648C00C1FA66 /* MJRefresh.bundle */; };
 		46252F8C1BDA648C00C1FA66 /* MJRefreshBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 46252F7E1BDA648C00C1FA66 /* MJRefreshBaseView.m */; };
 		46252F8D1BDA648C00C1FA66 /* MJRefreshConst.m in Sources */ = {isa = PBXBuildFile; fileRef = 46252F801BDA648C00C1FA66 /* MJRefreshConst.m */; };
@@ -294,6 +295,10 @@
 		46E5C7BB1C34D88500F4829D /* UserInfo_Four.xib in Resources */ = {isa = PBXBuildFile; fileRef = 46E5C7B91C34D88500F4829D /* UserInfo_Four.xib */; };
 		46E5C8031C35283E00F4829D /* hsf_20151231155029_0.png in Resources */ = {isa = PBXBuildFile; fileRef = 46E5C8021C35283E00F4829D /* hsf_20151231155029_0.png */; };
 		46E5C80A1C35969100F4829D /* UIImage+CJZ.m in Sources */ = {isa = PBXBuildFile; fileRef = 46E5C8091C35969100F4829D /* UIImage+CJZ.m */; };
+		46E6CE161C59FA9100B9FE2E /* HXEasyCustomShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = 46E6CE131C59FA9100B9FE2E /* HXEasyCustomShareView.m */; };
+		46E6CE171C59FA9100B9FE2E /* HXShareScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 46E6CE151C59FA9100B9FE2E /* HXShareScrollView.m */; };
+		46E6CE1B1C5A174300B9FE2E /* SharePopVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 46E6CE191C5A174300B9FE2E /* SharePopVC.m */; };
+		46E6CE1C1C5A174300B9FE2E /* SharePopVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 46E6CE1A1C5A174300B9FE2E /* SharePopVC.xib */; };
 		46E8BAF41C2E4B86009E808D /* QFOrderFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 46E8BAF21C2E4B86009E808D /* QFOrderFilter.m */; };
 		46E8BAF51C2E4B86009E808D /* QFOrderFilter.xib in Resources */ = {isa = PBXBuildFile; fileRef = 46E8BAF31C2E4B86009E808D /* QFOrderFilter.xib */; };
 		46FBF74D1BDD17FF00F68EE6 /* pStar.png in Resources */ = {isa = PBXBuildFile; fileRef = 46FBF74C1BDD17FF00F68EE6 /* pStar.png */; };
@@ -355,6 +360,7 @@
 		4617E6391C1BADD5007BECBF /* FilterSelectJieViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterSelectJieViewController.m; sourceTree = "<group>"; };
 		46184CEA1C465C40004CE58D /* WannaFlatVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WannaFlatVC.h; path = ../../WannaFlatVC.h; sourceTree = "<group>"; };
 		46184CEB1C465C40004CE58D /* WannaFlatVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WannaFlatVC.m; path = ../../WannaFlatVC.m; sourceTree = "<group>"; };
+		461AAD791C55077F00A6F006 /* ShareIcons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ShareIcons.xcassets; sourceTree = "<group>"; };
 		462226461BDDBDD500E0D2E9 /* Common.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
 		46252F7B1BDA648C00C1FA66 /* MJRefresh.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MJRefresh.bundle; sourceTree = "<group>"; };
 		46252F7C1BDA648C00C1FA66 /* MJRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefresh.h; sourceTree = "<group>"; };
@@ -785,6 +791,13 @@
 		46E5C8021C35283E00F4829D /* hsf_20151231155029_0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hsf_20151231155029_0.png; sourceTree = "<group>"; };
 		46E5C8081C35969100F4829D /* UIImage+CJZ.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+CJZ.h"; sourceTree = "<group>"; };
 		46E5C8091C35969100F4829D /* UIImage+CJZ.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+CJZ.m"; sourceTree = "<group>"; };
+		46E6CE121C59FA9100B9FE2E /* HXEasyCustomShareView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXEasyCustomShareView.h; sourceTree = "<group>"; };
+		46E6CE131C59FA9100B9FE2E /* HXEasyCustomShareView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXEasyCustomShareView.m; sourceTree = "<group>"; };
+		46E6CE141C59FA9100B9FE2E /* HXShareScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXShareScrollView.h; sourceTree = "<group>"; };
+		46E6CE151C59FA9100B9FE2E /* HXShareScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXShareScrollView.m; sourceTree = "<group>"; };
+		46E6CE181C5A174300B9FE2E /* SharePopVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SharePopVC.h; sourceTree = "<group>"; };
+		46E6CE191C5A174300B9FE2E /* SharePopVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SharePopVC.m; sourceTree = "<group>"; };
+		46E6CE1A1C5A174300B9FE2E /* SharePopVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SharePopVC.xib; sourceTree = "<group>"; };
 		46E8BAF11C2E4B85009E808D /* QFOrderFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QFOrderFilter.h; sourceTree = "<group>"; };
 		46E8BAF21C2E4B86009E808D /* QFOrderFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QFOrderFilter.m; sourceTree = "<group>"; };
 		46E8BAF31C2E4B86009E808D /* QFOrderFilter.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QFOrderFilter.xib; sourceTree = "<group>"; };
@@ -911,6 +924,16 @@
 			name = Main;
 			sourceTree = "<group>";
 		};
+		461AAD7B1C550A4C00A6F006 /* SharePopView */ = {
+			isa = PBXGroup;
+			children = (
+				46E6CE181C5A174300B9FE2E /* SharePopVC.h */,
+				46E6CE191C5A174300B9FE2E /* SharePopVC.m */,
+				46E6CE1A1C5A174300B9FE2E /* SharePopVC.xib */,
+			);
+			name = SharePopView;
+			sourceTree = "<group>";
+		};
 		46252F7A1BDA648C00C1FA66 /* MJRefresh */ = {
 			isa = PBXGroup;
 			children = (
@@ -949,6 +972,7 @@
 		462847DC1C0EEEBF00273B3A /* Interface */ = {
 			isa = PBXGroup;
 			children = (
+				461AAD7B1C550A4C00A6F006 /* SharePopView */,
 				46B23C931C336CC200C78B43 /* UserInfo */,
 				46BC5E4E1C29892400B1247A /* MutiTask */,
 				4678205E1C28E1C60076C761 /* LesveMsgVC */,
@@ -1068,6 +1092,7 @@
 				464356701BC615C700A44526 /* other */,
 				464356601BC613A500A44526 /* resource */,
 				464356281BC6093B00A44526 /* Supporting Files */,
+				461AAD791C55077F00A6F006 /* ShareIcons.xcassets */,
 			);
 			path = "清房助手";
 			sourceTree = "<group>";
@@ -1746,6 +1771,7 @@
 		46C7169B1BC66EF400287742 /* Lib */ = {
 			isa = PBXGroup;
 			children = (
+				46E6CE111C59FA4A00B9FE2E /* HXShare */,
 				468C23011C3F6125005159DD /* GBTagListView2.0 */,
 				46B23D001C33B26B00C78B43 /* Masonry */,
 				46252F7A1BDA648C00C1FA66 /* MJRefresh */,
@@ -1812,6 +1838,17 @@
 				4654154F1C2D3C05003E5743 /* QFOrderStatusTool.m */,
 			);
 			name = Tool;
+			sourceTree = "<group>";
+		};
+		46E6CE111C59FA4A00B9FE2E /* HXShare */ = {
+			isa = PBXGroup;
+			children = (
+				46E6CE121C59FA9100B9FE2E /* HXEasyCustomShareView.h */,
+				46E6CE131C59FA9100B9FE2E /* HXEasyCustomShareView.m */,
+				46E6CE141C59FA9100B9FE2E /* HXShareScrollView.h */,
+				46E6CE151C59FA9100B9FE2E /* HXShareScrollView.m */,
+			);
+			name = HXShare;
 			sourceTree = "<group>";
 		};
 		46ECF35E1C14633900DB6D36 /* Search */ = {
@@ -1982,6 +2019,7 @@
 				464356721BC61E9F00A44526 /* log1.png in Resources */,
 				462847D91C0EEDC200273B3A /* qiugou.png in Resources */,
 				462847D81C0EEDC200273B3A /* chuzu.png in Resources */,
+				461AAD7A1C55077F00A6F006 /* ShareIcons.xcassets in Resources */,
 				4658E27C1C37A15500F7B98F /* RentOutCell.xib in Resources */,
 				468ED02B1BD62537001605A7 /* search-people.png in Resources */,
 				46E5C7AC1C34B64F00F4829D /* head.png in Resources */,
@@ -2016,6 +2054,7 @@
 				46BBE8DD1C0FD31C00DE4B14 /* SelectCityVC.xib in Resources */,
 				46BBE8AB1C0FD19400DE4B14 /* loadingIndicator@2x.png in Resources */,
 				46BBE8BD1C0FD23900DE4B14 /* PopSelectViewController.xib in Resources */,
+				46E6CE1C1C5A174300B9FE2E /* SharePopVC.xib in Resources */,
 				46BBE8A91C0FD19400DE4B14 /* goods_add_plus@3x.png in Resources */,
 				4643566B1BC6149600A44526 /* logo.png in Resources */,
 				4673A4FC1BC89BCB00700099 /* background-logo(1).png in Resources */,
@@ -2176,6 +2215,7 @@
 				462847E41C0EEF0B00273B3A /* PostCategory.m in Sources */,
 				4678206B1C291E6B0076C761 /* LeavMsgCell.m in Sources */,
 				46E5C7BA1C34D88500F4829D /* UserInfo_Four.m in Sources */,
+				46E6CE171C59FA9100B9FE2E /* HXShareScrollView.m in Sources */,
 				4658E27B1C37A15500F7B98F /* RentOutCell.m in Sources */,
 				46AFDFA91BCB84A200B49CBE /* UIImageView+WebCache.m in Sources */,
 				4673A5081BC8DCD200700099 /* QFSearchBar.m in Sources */,
@@ -2185,6 +2225,7 @@
 				46AFDF9C1BCB84A200B49CBE /* NSData+ImageContentType.m in Sources */,
 				46B23D241C33B26B00C78B43 /* View+MASAdditions.m in Sources */,
 				468C23041C3F6125005159DD /* GBTagListView.m in Sources */,
+				46E6CE161C59FA9100B9FE2E /* HXEasyCustomShareView.m in Sources */,
 				46BBE8C81C0FD25C00DE4B14 /* CoreLabel.m in Sources */,
 				4646C6771C26A0B100896964 /* CZNewFeatureController.m in Sources */,
 				465415441C2CCBB1003E5743 /* detailHeadView.m in Sources */,
@@ -2206,6 +2247,7 @@
 				46B23D1E1C33B26B00C78B43 /* MASConstraintMaker.m in Sources */,
 				46AFDFA11BCB84A200B49CBE /* SDWebImageDownloaderOperation.m in Sources */,
 				46252F911BDA648C00C1FA66 /* UIScrollView+MJRefresh.m in Sources */,
+				46E6CE1B1C5A174300B9FE2E /* SharePopVC.m in Sources */,
 				4616EE171C24C9CD00BAF5C3 /* InnerCustomer.m in Sources */,
 				46256C511BCF776F00E05C5F /* FlatDetailCell.m in Sources */,
 				46C716D81BC7645E00287742 /* MBProgressHUD.m in Sources */,

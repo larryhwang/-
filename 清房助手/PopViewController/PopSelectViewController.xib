@@ -124,7 +124,7 @@
                     <include reference="y4p-tb-i5c"/>
                 </mask>
             </variation>
-            <point key="canvasLocation" x="655" y="618"/>
+            <point key="canvasLocation" x="575" y="607"/>
         </view>
     </objects>
 </document>

@@ -1102,7 +1102,7 @@
         select.modalPresentationStyle = UIModalPresentationOverCurrentContext;
         self.preferredContentSize = CGSizeMake(Screen_width/2, 50);
         UIView *modalView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, Screen_width, Screen_height)];
-        modalView.tag =ModalViewTag;
+        modalView.tag = ModalViewTag;
         modalView.backgroundColor = [[UIColor lightGrayColor] colorWithAlphaComponent:.4];
         [self.view addSubview:modalView];
         select.DismissView = ^(){
@@ -1360,7 +1360,6 @@
 
 
     [self FormatRegionParam];
-    
     [MBProgressHUD showMessage:@"正在发布"];
     NSLog(@"上传数据:%@",_PostDataDic);
     NSLog(@"已选状态%@",_hasSelectedAttachMent);

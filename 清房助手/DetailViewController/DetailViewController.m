@@ -23,6 +23,12 @@
 
 #import "AppDelegate.h"
 
+#import "SharePopVC.h"
+#import "HXEasyCustomShareView.h"
+
+
+#import "PopSelectViewController.h"
+
 #define  HeavyFont     [UIFont fontWithName:@"Helvetica-Bold" size:25]
 #define  ToolHeight  50    //固定底部的大小
 #define LeftViewWidth   ScreenWidth/4
@@ -33,15 +39,17 @@
 #define DETAILTABLE   11
 #define ImgScoviewTag 12
 
-
 #define  checkNoBtnHeight  30
 #define  checkNoBtnWidght  100
 
 #define DSystenVersion            ([[[UIDevice currentDevice] systemVersion] doubleValue])
 #define SSystemVersion            ([[UIDevice currentDevice] systemVersion])
 
+#define ModalViewTag   99
+
+
 @interface DetailViewController ()
-<UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate,UIAlertViewDelegate,MFMessageComposeViewControllerDelegate>
+<UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate,UIAlertViewDelegate,MFMessageComposeViewControllerDelegate,SharePopdelegate>
 @property (strong, nonatomic)  UIScrollView *scrollView3;
 @property (strong, nonatomic)  UITableView *detailInfoTable;
 @property (strong, nonatomic)  NSMutableArray *imagesData;
@@ -104,11 +112,12 @@
 }
 #pragma mark -初始化导航栏(收藏和分享)
 - (void)initNavController {
-    UIButton  *h = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 24, 24)];
+    UIButton  *h = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 24, 24)];  //收藏按钮
     UIImage *img = [UIImage imageNamed:@"pStar"];
     [h setImage:img forState:UIControlStateNormal];
     UIBarButtonItem *star = [[UIBarButtonItem alloc]initWithCustomView:h];
-    UIBarButtonItem *share = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:nil];
+    UIBarButtonItem *share = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(share)];
+    
     UIBarButtonItem *flexSible = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
     flexSible.width = 4.f ;
     NSArray *arr = [NSArray arrayWithObjects:star,flexSible,share,nil];
@@ -130,12 +139,51 @@
     [rightTool setFrame:CGRectMake(0, 0, tool, 42.f)];  //78
     [rightTool setItems:arr];
     UIBarButtonItem *Right = [[UIBarButtonItem alloc]initWithCustomView:rightTool];
-  self.navigationItem.rightBarButtonItem = Right ;
+    self.navigationItem.rightBarButtonItem = Right ;
     DSNavigationBar *TrunscleNavBar = [[DSNavigationBar alloc]init];
     [TrunscleNavBar setNavigationBarWithColor:DeafaultColor2];
    [self.navigationController setValue:TrunscleNavBar forKey:@"navigationBar"];
 }
 
+
+
+-(void)share {
+    NSLog(@"分享啊");
+    
+    UIView *modalView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight)];
+    modalView.tag =ModalViewTag;
+    modalView.backgroundColor = [[UIColor lightGrayColor] colorWithAlphaComponent:.4];
+    [self.navigationController.view addSubview:modalView];
+    
+    
+    SharePopVC *view = [[SharePopVC alloc]init];
+    view.providesPresentationContextTransitionStyle = YES;
+    view.definesPresentationContext = YES;
+    view.delegate = self;
+    view.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+    view.DismissView = ^ {
+        [modalView removeFromSuperview];
+    };
+    [self presentViewController:view animated:YES completion:nil];
+//
+    
+    NSArray *shareAry = @[@{@"image":@"shareView_wx",
+                            @"title":@"微信"},
+                          @{@"image":@"shareView_friend",
+                            @"title":@"朋友圈"},
+                          @{@"image":@"shareView_qq",
+                            @"title":@"QQ"},
+                          @{@"image":@"shareView_wb",
+                            @"title":@"新浪微博"},
+                          @{@"image":@"shareView_qzone",
+                            @"title":@"QQ空间"},
+                          @{@"image":@"shareView_msg",
+                            @"title":@"短信"},
+                          @{@"image":@"share_copyLink",
+                            @"title":@"复制链接"}];
+
+
+}
 #pragma mark -初始化表
 -(void)initTable {
     self.detailInfoTable = [[UITableView alloc]init];
@@ -143,7 +191,7 @@
     self.detailInfoTable.delegate = self ;
     self.detailInfoTable.dataSource = self;
     self.detailInfoTable.allowsSelection = NO ;
-    [self.detailInfoTable setFrame:CGRectMake(0, 0, ScreenWidth,ScreenHeight)];
+   [self.detailInfoTable setFrame:CGRectMake(0, 0, ScreenWidth,ScreenHeight)];
     self.detailInfoTable.separatorStyle = UITableViewCellSeparatorStyleNone ;
     [self.view addSubview:self.detailInfoTable];
 }
@@ -346,7 +394,7 @@
 #pragma mark -ScrollView delegate
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    
+
     if (scrollView.tag ==ImgScoviewTag) {
         NSInteger pageIndex = scrollView.contentOffset.x / CGRectGetWidth(scrollView.frame);
         NSString  *nowSelected =[NSString stringWithFormat:@"%d/%d",pageIndex + 1,self.ImgTotal];
@@ -450,7 +498,6 @@
     checkTeleNoBtn.layer.cornerRadius = 4;
     checkTeleNoBtn.layer.borderWidth  = 1;
     checkTeleNoBtn.layer.borderColor  = [DeafaultColor3 CGColor];
-    
     [checkTeleNoBtn setTitleColor:DeafaultColor3 forState:UIControlStateNormal];
     [checkTeleNoBtn setFrame:CGRectMake(2*ScreenWidth/3 ,35  ,checkNoBtnWidght, checkNoBtnHeight)];
 
@@ -676,6 +723,13 @@
     
  self.scrollView3.delegate = nil;
  self.detailInfoTable.delegate = nil;
+    
+}
+
+
+#pragma mark -sharedPopDelegate
+
+-(void)removeDimBack {
     
 }
 
