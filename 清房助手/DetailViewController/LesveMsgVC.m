@@ -63,7 +63,8 @@
     NSLog(@"理由哦 %@",checkReson);
     if (_checkReson.length >0) {
         //提交信息并返回上一个菜单
-        NSString *postUrl = @"http://www.123qf.cn:81/testApp/fkyuan/insertSelectOwnerInfoReason.api";
+      //  NSString *postUrl = @"http://www.123qf.cn:81/testApp/fkyuan/insertSelectOwnerInfoReason.api";
+          NSString *postUrl = @"http://www.123qf.cn/app/fkyuan/insertSelectOwnerInfoReason.api";
         NSMutableDictionary *pram= [NSMutableDictionary new];
         pram[@"kid"] = usrInfoDic[@"id"];
         pram[@"content"] = _checkReson;

@@ -357,7 +357,8 @@
 
     [MBProgressHUD showMessage:@"正在提交"];
     
-    NSString *url = @"http://www.123qf.cn:81/testApp/integrateAdd.api";
+  //  NSString *url = @"http://www.123qf.cn:81/testApp/integrateAdd.api";
+     NSString *url = @"http://www.123qf.cn/app/integrateAdd.api";
     AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
     NSLog(@"订单提交首次参数：%@",self.QF_pramaNSM_Dic);
     [mgr POST:url parameters:self.QF_pramaNSM_Dic success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
@@ -472,7 +473,8 @@
 #warning 这里需要补充数据
         // 成功的弹窗。先上传保存数据，然后跳转返回
         [MBProgressHUD showMessage:@"正在提交"];//setPay.api
-        NSString *url = @"http://www.123qf.cn:81/testApp/setPay.api";
+//        NSString *url = @"http://www.123qf.cn:81/testApp/setPay.api";
+        NSString *url = @"http://www.123qf.cn/app/setPay.api";
         AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
         NSDictionary *dic = @{@"ordernum":self.OrderNo};
         [mgr POST:url parameters:dic success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {

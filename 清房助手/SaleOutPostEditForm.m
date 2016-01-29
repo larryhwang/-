@@ -1376,7 +1376,8 @@
     //先把图片上传过去
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
      manager.requestSerializer.timeoutInterval  = 30.0;
-    NSString *url2 = @"http://www.123qf.cn:81/testApp/file/upload.front?userID=15018639039";
+   // NSString *url2 = @"http://www.123qf.cn:81/testApp/file/upload.front?userID=15018639039";
+     NSString *url2 = @"http://www.123qf.cn/app/file/upload.front?userID=15018639039";
     [manager POST:url2 parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         for (NSData *imgData in self.SelectedImgsData_MARR) {
           [formData appendPartWithFileData:imgData name:@"1.jpg" fileName:@"1.jpg" mimeType:@"image/jpg"];
@@ -1399,7 +1400,8 @@
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
      manager.requestSerializer.timeoutInterval  = 60.0;
-    NSString *url4 = @"http://www.123qf.cn:81/testApp/user/releaseFKYuan.api";
+  //   NSString *url4 = @"http://www.123qf.cn:81/testApp/user/releaseFKYuan.api";
+      NSString *url4 = @"http://www.123qf.cn/app/user/releaseFKYuan.api";
 
     NSDictionary *parameters =@{
                                 @"userid":@"15018639039",

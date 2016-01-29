@@ -42,16 +42,20 @@
     self.type = type;
     if (self.type == FangYuan) {
         //公司房源
-         _LeftListUrl  = @"http://www.123qf.cn:81/testApp/fkyuan/companyFKyuan.api?isfangyuan=1-c";
+       //  _LeftListUrl  = @"http://www.123qf.cn:81/testApp/fkyuan/companyFKyuan.api?isfangyuan=1-c";
+          _LeftListUrl  = @"http://www.123qf.cn/app/fkyuan/companyFKyuan.api?isfangyuan=1-c";
         
         //个人房源
-         _RightListUrl = @"http://www.123qf.cn:81/testApp/fkyuan/companyFKyuan.api?isfangyuan=1-u";
+        // _RightListUrl = @"http://www.123qf.cn:81/testApp/fkyuan/companyFKyuan.api?isfangyuan=1-u";
+         _RightListUrl = @"http://www.123qf.cn/app/fkyuan/companyFKyuan.api?isfangyuan=1-u";
     } else {
          // 公司客源
-          _LeftListUrl  = @"http://www.123qf.cn:81/testApp/fkyuan/companyFKyuan.api?isfangyuan=0-c";
+         // _LeftListUrl  = @"http://www.123qf.cn:81/testApp/fkyuan/companyFKyuan.api?isfangyuan=0-c";
+         _LeftListUrl  = @"http://www.123qf.cn/app/fkyuan/companyFKyuan.api?isfangyuan=0-c";
        
           // 个人客源
-          _RightListUrl = @"http://www.123qf.cn:81/testApp/fkyuan/companyFKyuan.api?isfangyuan=0-u";
+         //  _RightListUrl = @"http://www.123qf.cn:81/testApp/fkyuan/companyFKyuan.api?isfangyuan=0-u";
+         _RightListUrl = @"http://www.123qf.cn/app/fkyuan/companyFKyuan.api?isfangyuan=0-u";
 
 
     }

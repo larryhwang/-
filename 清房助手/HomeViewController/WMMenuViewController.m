@@ -119,7 +119,8 @@
     AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
     NSDictionary *dic = appDelegate.usrInfoDic;
     
-    NSString *urlStr = [NSString stringWithFormat:@"http://www.123qf.cn:81/portrait/%@/%@",dic[@"userid"],dic[@"portrait"]];
+  //   NSString *urlStr = [NSString stringWithFormat:@"http://www.123qf.cn:81/portrait/%@/%@",dic[@"userid"],dic[@"portrait"]];
+      NSString *urlStr = [NSString stringWithFormat:@"http://www.123qf.cn/portrait/%@/%@",dic[@"userid"],dic[@"portrait"]];
     
     NSLog(@"%@",urlStr);
     NSURL *url = [NSURL URLWithString:urlStr];

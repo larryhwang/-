@@ -17,6 +17,7 @@
 #import "InnerTabBarController.h"
 #import "ZuGouDetailViewController.h"
 
+#import "DetailViewController.h"
 
 #import "UserInfoVC_iSIX.h"
 #import "UserInfoVC_iFive.h"
@@ -131,6 +132,14 @@ static const CGFloat menuStartNarrowRatio  = 0.70;
  */
 - (void)handlePan:(UIPanGestureRecognizer *)recognizer {
     // 当滑动水平X大于75时禁止滑动
+    
+    NSLog(@"%@",self.messageNav.viewControllers);
+    
+    if ([[self.messageNav.viewControllers lastObject] isKindOfClass:[DetailViewController class]]) {
+        return;
+    }
+    
+    NSLog(@"手势:%@",recognizer);
     if (recognizer.state == UIGestureRecognizerStateBegan) {
         self.panStartX = [recognizer locationInView:self.view].x;
     }

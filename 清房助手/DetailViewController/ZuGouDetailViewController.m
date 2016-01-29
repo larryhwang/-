@@ -156,7 +156,8 @@
  *  检查业主信息
  */
 -(void)checkKeyuanInfo {
-    NSString *URL =@"http://www.123qf.cn:81/testApp/fkyuan/selectOwnerInfo.api";
+  //  NSString *URL =@"http://www.123qf.cn:81/testApp/fkyuan/selectOwnerInfo.api";
+      NSString *URL =@"http://www.123qf.cn/app/fkyuan/selectOwnerInfo.api";
     NSMutableDictionary *pramaDic = [NSMutableDictionary new];
     NSLog(@"FangData:%@",self.FangData);
     pramaDic[@"kid"] = self.FangData[@"id"];
@@ -330,7 +331,8 @@
 -(void)getDataFromNet {
     AFHTTPRequestOperationManager *mgr  = [AFHTTPRequestOperationManager manager];
     self.sharedMgr = mgr ;
-    NSString *url3 = [NSString stringWithFormat:@"http://www.123qf.cn:81/testApp/keyuan/seekHouse.api?fenlei=%@&keyuan_id=%@",self.fenlei,self.keYuanID];
+ //   NSString *url3 = [NSString stringWithFormat:@"http://www.123qf.cn:81/testApp/keyuan/seekHouse.api?fenlei=%@&keyuan_id=%@",self.fenlei,self.keYuanID];
+       NSString *url3 = [NSString stringWithFormat:@"http://www.123qf.cn/app/keyuan/seekHouse.api?fenlei=%@&keyuan_id=%@",self.fenlei,self.keYuanID];
     [MBProgressHUD showMessage:@"加载中"];
     [mgr POST:url3
    parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {

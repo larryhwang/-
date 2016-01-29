@@ -136,7 +136,8 @@
     
     AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
     NSDictionary *dic = appDelegate.usrInfoDic;
-    NSString *urlStr = [NSString stringWithFormat:@"http://www.123qf.cn:81/portrait/%@/%@",dic[@"userid"],dic[@"portrait"]];
+ //   NSString *urlStr = [NSString stringWithFormat:@"http://www.123qf.cn:81/portrait/%@/%@",dic[@"userid"],dic[@"portrait"]];
+       NSString *urlStr = [NSString stringWithFormat:@"http://www.123qf.cn/portrait/%@/%@",dic[@"userid"],dic[@"portrait"]];
     NSLog(@"indexImg：%@",urlStr);
     NSURL *url = [NSURL URLWithString:urlStr];
     
@@ -297,7 +298,8 @@
         }
         
             [self.pramaDic setObject:cityName forKey:@"shi"];
-        NSString *url = [NSString stringWithFormat:@"http://www.123qf.cn:81/testApp/area/selectArea.api?parentid=%@",code];
+    //    NSString *url = [NSString stringWithFormat:@"http://www.123qf.cn:81/testApp/area/selectArea.api?parentid=%@",code];
+            NSString *url = [NSString stringWithFormat:@"http://www.123qf.cn/app/area/selectArea.api?parentid=%@",code];
          NSLog(@"更改后:%@",self.pramaDic);
         
 
@@ -332,7 +334,8 @@
     
     
     //获取城市省份
-     NSString *url = @"http://www.123qf.cn:81/testApp/area/selectArea.api?parentid=0";
+  //   NSString *url = @"http://www.123qf.cn:81/testApp/area/selectArea.api?parentid=0";
+       NSString *url = @"http://www.123qf.cn/app/area/selectArea.api?parentid=0";
      [self.shareMgr POST:url parameters:nil success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
      selet.QFProvinces_Arr = responseObject[@"data"];
      [self.navigationController pushViewController:selet animated:YES];
@@ -418,7 +421,8 @@
     }else {
          _status = WantBuy;
          self.ResultTableView.searchStyle  =_status;
-        _CurrentRuest = @"http://www.123qf.cn:81/testApp/keyuan/rentalOrBuyHouseSearch.api";
+      //  _CurrentRuest = @"http://www.123qf.cn:81/testApp/keyuan/rentalOrBuyHouseSearch.api";
+          _CurrentRuest = @"http://www.123qf.cn/app/keyuan/rentalOrBuyHouseSearch.api";
     }
        [self LoadNetDataWithCurentURl];
 }
@@ -460,7 +464,8 @@
         self.ResultTableView.searchStyle  =_status;
          NSLog(@"当前状态%d",_status);
                             //出租列表 ,服务器暂无数据
-        self.CurrentRuest = @"http://www.123qf.cn:81/testApp/fangyuan/rentalOrBuyHouseSearch.api";
+      //  self.CurrentRuest = @"http://www.123qf.cn:81/testApp/fangyuan/rentalOrBuyHouseSearch.api";
+          self.CurrentRuest = @"http://www.123qf.cn/app/fangyuan/rentalOrBuyHouseSearch.api";
         
          NSMutableDictionary *parameters = [NSMutableDictionary new];
         
@@ -477,7 +482,8 @@
     }else {
         _status = WantRent;
         self.ResultTableView.searchStyle  =_status;
-        self.CurrentRuest= @"http://www.123qf.cn:81/testApp/keyuan/rentalOrBuyHouseSearch.api";  //求租列表
+       // self.CurrentRuest= @"http://www.123qf.cn:81/testApp/keyuan/rentalOrBuyHouseSearch.api";  //求租列表
+          self.CurrentRuest = @"http://www.123qf.cn/app/fangyuan/rentalOrBuyHouseSearch.api";
 
     }
     [self LoadNetDataWithCurentURl];
@@ -702,7 +708,7 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
         [tableView deselectRowAtIndexPath:indexPath animated:YES]; //解除遗留灰色
 
-    
+ //   self.HomeVCdelegate = nil;
     NSDictionary *SingleData = self.DataArr[indexPath.row];
     if (_status ==SalesOut) {
         //出售详情页
@@ -711,6 +717,7 @@
         NSString *name = [self judgeNullValue:SingleData[@"mingcheng"]];
         NSString *Category = [NSString stringWithFormat:@"%@",SingleData[@"fenlei"]];
         [self.HomeVCdelegate QFshowDetailWithFangYuanID:Id andFenlei:Category userID:userID XiaoquName:name ListStatus:_preName];
+        self.HomeVCdelegate = nil;
     } else if (_status == RentOut) {
         //出租详情页  (服务器暂无数据，小灰手机也没有参考的)
         

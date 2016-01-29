@@ -597,8 +597,8 @@
 
 -(void)filterClick {
     NSLog(@"筛选");
-    NSString *url = @"http://www.123qf.cn:81/testApp/fkyuan/companyFKyuan.api";
-
+//    NSString *url = @"http://www.123qf.cn:81/testApp/fkyuan/companyFKyuan.api";
+  NSString *url = @"http://www.123qf.cn/app/fkyuan/companyFKyuan.api";
     //拼接参数
     
     

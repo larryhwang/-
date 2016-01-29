@@ -517,7 +517,8 @@
     
     //开始网络请求
     [MBProgressHUD showMessage:@"正在加载"];
-    NSString *basicURL = @"http://www.123qf.cn:81/testApp/seach/echoSeachFKYuanList.api";
+   // NSString *basicURL = @"http://www.123qf.cn:81/testApp/seach/echoSeachFKYuanList.api";
+     NSString *basicURL = @"http://www.123qf.cn/app/seach/echoSeachFKYuanList.api";
     AFHTTPRequestOperationManager *manger =[AFHTTPRequestOperationManager manager];
      manger.requestSerializer.timeoutInterval  = 5.0;
     [manger POST:basicURL parameters:_PostDictionary success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {

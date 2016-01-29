@@ -154,9 +154,11 @@
     NSLog(@"分享啊");
     
     UIView *modalView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight)];
+    modalView.userInteractionEnabled = NO;
     modalView.tag =ModalViewTag;
     modalView.backgroundColor = [[UIColor lightGrayColor] colorWithAlphaComponent:.4];
-    [self.navigationController.view addSubview:modalView];
+   [self.navigationController.view addSubview:modalView];  //这种状况下，向右滑动会触发菜单显示
+  //  [self.view addSubview:modalView];
     
     
     NSArray *shareAry = @[@{@"image":@"shareView_wx",
@@ -182,9 +184,11 @@
     view.modalPresentationStyle = UIModalPresentationOverCurrentContext;
     view.DismissView = ^ {
         [modalView removeFromSuperview];
-    };
-   [self presentViewController:view animated:YES completion:nil];
 
+    };
+   [self presentViewController:view animated:YES completion:^{
+     
+  }];
 
    
 
@@ -443,7 +447,8 @@
     //http://www.123qf.cn:81/testApp/fkyuan/selectOwnerInfo.api?kid=5&currentpage=1
     
     //    self.sharedMgr po
-    NSString *URL =@"http://www.123qf.cn:81/testApp/fkyuan/selectOwnerInfo.api";
+ //   NSString *URL =@"http://www.123qf.cn:81/testApp/fkyuan/selectOwnerInfo.api";
+       NSString *URL =@"http://www.123qf.cn/app/fkyuan/selectOwnerInfo.api";
     NSMutableDictionary *pramaDic = [NSMutableDictionary new];
     pramaDic[@"fid"] = self.FangData[@"id"];
     pramaDic[@"currentpage"] = @"1";
@@ -475,7 +480,8 @@
 }
 
 -(void)checkOwnerInfo {
-    NSString *URL =@"http://www.123qf.cn:81/testApp/fkyuan/selectOwnerInfo.api";
+  //  NSString *URL =@"http://www.123qf.cn:81/testApp/fkyuan/selectOwnerInfo.api";
+      NSString *URL =@"http://www.123qf.cn/app/fkyuan/selectOwnerInfo.api";
     NSMutableDictionary *pramaDic = [NSMutableDictionary new];
     pramaDic[@"fid"] = self.FangData[@"id"];
     pramaDic[@"currentpage"] = @"1";

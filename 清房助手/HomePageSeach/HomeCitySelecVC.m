@@ -49,7 +49,8 @@
     NSString *code = dic[@"code"];
     NSString *locateName = dic[@"name"];
     NSRange rangeOfshi = [locateName rangeOfString:@"市"];
-    NSString *url = [NSString stringWithFormat:@"http://www.123qf.cn:81/testApp/area/selectArea.api?parentid=%@",code];
+//    NSString *url = [NSString stringWithFormat:@"http://www.123qf.cn:81/testApp/area/selectArea.api?parentid=%@",code];
+        NSString *url = [NSString stringWithFormat:@"http://www.123qf.cn/app/area/selectArea.api?parentid=%@",code];
     clickDepth ++ ;
 
     //保留省市名称

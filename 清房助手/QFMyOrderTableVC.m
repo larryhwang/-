@@ -76,7 +76,8 @@
 
 -(void)getTableDataFromNet {
     AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
-    NSString *url = @"http://www.123qf.cn:81/testApp/integrateFindByUser.api?page=1";
+  //  NSString *url = @"http://www.123qf.cn:81/testApp/integrateFindByUser.api?page=1";
+      NSString *url = @"http://www.123qf.cn/app/integrateFindByUser.api?page=1";
     [mgr POST:url parameters:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
         NSLog(@"%@",responseObject);
         if ([responseObject[@"code"] isEqualToString: @"00202"]) {
@@ -124,7 +125,8 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
   //integratePicFind.api  ordernum
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    NSString *url= @"http://www.123qf.cn:81/testApp/integratePicFind.api";
+  //  NSString *url= @"http://www.123qf.cn:81/testApp/integratePicFind.api";
+      NSString *url= @"http://www.123qf.cn/app/integratePicFind.api";
     
     NSDictionary *CellDic = self.QFSingleCellData_Arr [indexPath.row];
     NSMutableDictionary *pramam_dic = [NSMutableDictionary new];

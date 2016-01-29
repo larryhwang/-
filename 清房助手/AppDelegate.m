@@ -32,10 +32,6 @@
         }
         return _QFUserPermissionDic_NSMArr;
 }
-
-
-
-
 //  关闭用户手势反馈，默认为开启。
 //  [[PgyManager sharedPgyManager] setEnableFeedback:NO];
 

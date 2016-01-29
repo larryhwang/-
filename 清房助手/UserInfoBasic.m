@@ -47,7 +47,8 @@
  */
 -(void)displayDataFromNet {
     //头像
-    NSString *urlStr = [NSString stringWithFormat:@"http://www.123qf.cn:81/portrait/%@/%@",self.QFDataDic[@"userid"],self.QFDataDic[@"portrait"]];
+  //  NSString *urlStr = [NSString stringWithFormat:@"http://www.123qf.cn:81/portrait/%@/%@",self.QFDataDic[@"userid"],self.QFDataDic[@"portrait"]];
+      NSString *urlStr = [NSString stringWithFormat:@"http://www.123qf.cn/portrait/%@/%@",self.QFDataDic[@"userid"],self.QFDataDic[@"portrait"]];
     NSURL *url = [NSURL URLWithString:urlStr];
     [self.iCoView sd_setImageWithURL:url completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         self.iCoView.image = image;

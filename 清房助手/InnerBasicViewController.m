@@ -228,8 +228,9 @@
         
         NSString *imgCollects = SingleData[@"tupian"];
         NSArray *imgArray = [imgCollects componentsSeparatedByString:@","];
-        NSString *imgURL = [NSString stringWithFormat:@"http://www.123qf.cn/testWeb/img/%@/userfile/qfzs/fy/mini/%@",SingleData[@"userid"],[imgArray firstObject]];
-        
+        //NSString *ImgfullUrl = [NSString stringWithFormat:@"http://www.123qf.cn/img/%@/userfile/qfzs/fy/mini/%@",self.uerID,imgName];
+     //   NSString *imgURL = [NSString stringWithFormat:@"http://www.123qf.cn/testWeb/img/%@/userfile/qfzs/fy/mini/%@",SingleData[@"userid"],[imgArray firstObject]];
+         NSString *imgURL = [NSString stringWithFormat:@"http://www.123qf.cn/img/%@/userfile/qfzs/fy/mini/%@",SingleData[@"userid"],[imgArray firstObject]];
         
         NSString *BigTitle = [NSString stringWithFormat:@"%@",SingleData[@"biaoti"]];
         NSArray *titlePartArra = [BigTitle componentsSeparatedByString:@" "]; //

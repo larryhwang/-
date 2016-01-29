@@ -68,7 +68,8 @@
 -(void)filterClick {
     NSLog(@"哈哈");
     
-    NSString *url = @"http://www.123qf.cn:81/testApp/integrateFindByUser.api?page=1";
+  //  NSString *url = @"http://www.123qf.cn:81/testApp/integrateFindByUser.api?page=1";
+      NSString *url = @"http://www.123qf.cn/app/integrateFindByUser.api?page=1";
     NSLog(@"before : postDic: %@",self.QFPostDic);
     
    // 从网上获得数据

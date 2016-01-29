@@ -77,7 +77,8 @@
     NSString *proVNname = dict[@"name"]; //城市名
     NSString *code = dict[@"code"];
     [self.delegate appendName:proVNname];     //保存当前选择的城市名
-    NSString *url = [NSString stringWithFormat:@"http://www.123qf.cn:81/testApp/area/selectArea.api?parentid=%@",code];
+ //   NSString *url = [NSString stringWithFormat:@"http://www.123qf.cn:81/testApp/area/selectArea.api?parentid=%@",code];
+       NSString *url = [NSString stringWithFormat:@"http://www.123qf.cn/app/area/selectArea.api?parentid=%@",code];
     if ([proVNname isEqualToString:@"市辖区"]) {
         UIViewController *ed = [self.navigationController.viewControllers objectAtIndex:3]; //奇怪的是，序号是0也是一样的
         [self.navigationController popToViewController:ed animated:YES];

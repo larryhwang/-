@@ -84,7 +84,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+   // self.view.userInteractionEnabled = NO ;
     UIView *popContentView = [[UIView alloc]initWithFrame:CGRectMake(0, ScreenHeight - 220, Screen_width, 220)];
     _contentView  = popContentView ;
     

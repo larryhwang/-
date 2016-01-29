@@ -97,7 +97,8 @@
     }
     
    [param setObject:intputStr forKey:@"param"];
-    NSString *SeachBasicURL = @"http://www.123qf.cn:81/testApp/seach/echoSeach.api";
+ //   NSString *SeachBasicURL = @"http://www.123qf.cn:81/testApp/seach/echoSeach.api";
+       NSString *SeachBasicURL = @"http://www.123qf.cn/app/seach/echoSeach.api";
     NSString *url = @"http://www.123qf.cn:81/testApp/fangyuan/rentalOrBuyHouseSearch.api";
     [_AFNmanager POST:SeachBasicURL parameters:param success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"数据接收%@",responseObject);
