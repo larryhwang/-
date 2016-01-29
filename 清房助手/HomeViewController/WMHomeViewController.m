@@ -211,7 +211,8 @@
  *  获取地名，用于筛选
  */
 -(void)localNameGet {
-    NSString *url = @"http://www.123qf.cn:81/testApp/area/selectArea.api?parentid=4413";  //惠州市
+  //  NSString *url = @"http://www.123qf.cn:81/testApp/area/selectArea.api?parentid=4413";  //惠州市
+      NSString *url = @"http://www.123qf.cn/app/area/selectArea.api?parentid=4413";  //惠州市
     AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
     [mgr POST:url parameters:nil success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
        NSLog(@"地点:%@",responseObject);
@@ -539,7 +540,7 @@
         
         NSString *imgCollects = SingleData[@"tupian"];
         NSArray *imgArray = [imgCollects componentsSeparatedByString:@","];
-        NSString *imgURL = [NSString stringWithFormat:@"http://www.123qf.cn/testWeb/img/%@/userfile/qfzs/fy/mini/%@",SingleData[@"userid"],[imgArray firstObject]];
+        NSString *imgURL = [NSString stringWithFormat:@"http://www.123qf.cn/img/%@/userfile/qfzs/fy/mini/%@",SingleData[@"userid"],[imgArray firstObject]];
         
         
         NSString *BigTitle = [NSString stringWithFormat:@"%@%@",_preName,SingleData[@"biaoti"]];

@@ -68,8 +68,8 @@
 
     AFHTTPRequestOperationManager *mgr1  = [AFHTTPRequestOperationManager manager];
     mgr1.requestSerializer.timeoutInterval  = 6.0;
-    NSString *completeUrl = @"http://www.123qf.cn:81/testApp/user/loginUser.front";
-
+ //   NSString *completeUrl = @"http://www.123qf.cn:81/testApp/user/loginUser.front";
+ NSString *completeUrl = @"http://www.123qf.cn/app/user/loginUser.front";
 
   [MBProgressHUD showMessage:@"正在登录"];
    [mgr1 POST:completeUrl parameters:PramaDic success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -83,14 +83,13 @@
            [[NSUserDefaults standardUserDefaults]setObject:passWord forKey:@"pw"];
            
            
-           
-           [self getdata];  //测试数据，可删
        }
        long Cp=[responseObject[@"code"] integerValue];
        if (Cp==1) {
            //获取到省份的数据，并且按首字母拼音分开了
            AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
-           [LoacationNameTool dictionaryWithUrl:@"http://www.123qf.cn:81/testApp/area/selectArea.api?parentid=0"];
+        //   [LoacationNameTool dictionaryWithUrl:@"http://www.123qf.cn:81/testApp/area/selectArea.api?parentid=0"];
+              [LoacationNameTool dictionaryWithUrl:@"http://www.123qf.cn/app/area/selectArea.api?parentid=0"];
 
            NSLog(@"省市资料:%@",appDelegate.provnceIndexDic);
            
@@ -111,21 +110,6 @@
     
 
 }
--(void)getdata {
-    AFHTTPRequestOperationManager *mgr  = [AFHTTPRequestOperationManager manager];
-    mgr.requestSerializer.timeoutInterval  = 5.0;
-
-    NSString *com2= @"http://www.123qf.cn:81/testApp/fangyuan/detailsHouse.api?fenlei=3&fangyuan_id=268";
-    NSLog(@"即将抓取:%@",com2);
-    [mgr POST:com2 parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"登陆时的抓的详细信息%@",responseObject);
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"%@",error);
-        [MBProgressHUD hideHUD];
-        [MBProgressHUD showError:@"网络超时，稍后尝试"];
-    }];
-}
-
 
 /**
  *  返回该用户数据
@@ -133,7 +117,8 @@
  *  @return NSDictionary
  */
 -(void)getUserInfoAndPermissions {
-    NSString *url = @"http://www.123qf.cn:81/testApp/user/getUserInfo.api";
+   // NSString *url = @"http://www.123qf.cn:81/testApp/user/getUserInfo.api";
+    NSString *url = @"http://www.123qf.cn/app/user/getUserInfo.api";
     __block  NSDictionary *dic = NULL;
     AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
     [mgr POST:url parameters:nil success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {

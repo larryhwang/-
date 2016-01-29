@@ -85,7 +85,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    UIView *popContentView = [[UIView alloc]initWithFrame:CGRectMake(0, ScreenHeight - 300, Screen_width, 300)];
+    UIView *popContentView = [[UIView alloc]initWithFrame:CGRectMake(0, ScreenHeight - 220, Screen_width, 220)];
     _contentView  = popContentView ;
     
   
@@ -114,7 +114,7 @@
     
     
     //"取消"  --底部
-    UIButton *footView = [[UIButton alloc] initWithFrame:CGRectMake(0, 300-54, Screen_width, 54)];
+    UIButton *footView = [[UIButton alloc] initWithFrame:CGRectMake(0, 220-54, Screen_width, 54)];
     CGPoint footViewPoint = CGPointMake(Screen_width/2, 54/2);
     UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 100, 54)];
     [btn.titleLabel setFont:[UIFont systemFontOfSize:15]];
@@ -138,6 +138,7 @@
 
 
 -(void)buttonAction:(UIButton *)button {
+    [self diss];
     [self.delegate QFsharedWith:button.tag];
 }
 
@@ -153,10 +154,18 @@
 -(void)layoutShareBtnIttems {
     
     NSDictionary  *dic  = [_QFImgSAndTittleSDicArr firstObject];
-    CGRect rect = CGRectMake(0, 54 + 15, HXIcoWidth, HXIcoWidth);
+    CGRect rect = CGRectMake(Screen_width/4 - 54/2, 54 + 15, HXIcoWidth, HXIcoWidth);
     UIView  *view = [self ittemShareViewWithFrame:rect dic:dic Andindex:0];
     NSLog(@"%@",_contentView);
     [_contentView addSubview: view];
+    
+    NSDictionary  *dic1  = _QFImgSAndTittleSDicArr[1];
+    CGRect rect1 = CGRectMake(3*Screen_width/4 -54/2, 54 + 15, HXIcoWidth, HXIcoWidth);
+    UIView  *view1 = [self ittemShareViewWithFrame:rect1 dic:dic1 Andindex:1];
+    NSLog(@"%@",_contentView);
+    [_contentView addSubview: view1];
+
+    
 
 }
 

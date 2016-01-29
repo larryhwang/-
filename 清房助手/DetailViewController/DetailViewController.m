@@ -29,7 +29,7 @@
 
 #import "PopSelectViewController.h"
 
-
+#import "AppDelegate.h"
 #import "OpenShareHeader.h"
 
 #define  HeavyFont     [UIFont fontWithName:@"Helvetica-Bold" size:25]
@@ -199,14 +199,16 @@
     self.detailInfoTable.allowsSelection = NO ;
    [self.detailInfoTable setFrame:CGRectMake(0, 0, ScreenWidth,ScreenHeight)];
     self.detailInfoTable.separatorStyle = UITableViewCellSeparatorStyleNone ;
-    [self.view addSubview:self.detailInfoTable];
+   [self.view addSubview:self.detailInfoTable];
 }
 
 -(void)getDataFromNet {
     AFHTTPRequestOperationManager *mgr  = [AFHTTPRequestOperationManager manager];
      mgr.requestSerializer.timeoutInterval  = 5.0;
     self.sharedMgr = mgr;
-    NSString *url3 = [NSString stringWithFormat:@"http://www.123qf.cn:81/testApp/fangyuan/detailsHouse.api?fenlei=%@&fangyuan_id=%@",self.FenLei,self.DisplayId];
+  //  NSString *url3 = [NSString stringWithFormat:@"http://www.123qf.cn:81/testApp/fangyuan/detailsHouse.api?fenlei=%@&fangyuan_id=%@",self.FenLei,self.DisplayId];
+    
+       NSString *url3 = [NSString stringWithFormat:@"http://www.123qf.cn/app/fangyuan/detailsHouse.api?fenlei=%@&fangyuan_id=%@",self.FenLei,self.DisplayId];
     [MBProgressHUD showMessage:@"加载中"];
     [mgr POST:url3
    parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -220,8 +222,8 @@
        NSString *collect = self.FangData[@"tupian"];
        NSArray *imgArray = [collect componentsSeparatedByString:@","];
        self.ImgTotal = [imgArray count];
-       for (NSString *imgName in imgArray) {
-           NSString *ImgfullUrl = [NSString stringWithFormat:@"http://www.123qf.cn/testWeb/img/%@/userfile/qfzs/fy/mini/%@",self.uerID,imgName];
+       for (NSString *imgName in imgArray) {//http://www.123qf.cn/img/    http://www.123qf.cn/testWeb/img/
+           NSString *ImgfullUrl = [NSString stringWithFormat:@"http://www.123qf.cn/img/%@/userfile/qfzs/fy/mini/%@",self.uerID,imgName];
            NSLog(@"详情页的图片地址%@",ImgfullUrl);
            [self.imagesData addObject:ImgfullUrl];
        }   //所有图片地址
@@ -740,31 +742,51 @@
 }
 
 -(void)QFsharedWith:(NSInteger)index {
+    
+    AppDelegate *app =  [UIApplication sharedApplication].delegate;
+    NSLog(@"%@",app.usrInfoDic);
     OSMessage *msg=[[OSMessage alloc]init];
     msg.title=self.FangData[@"biaoti"];
-    NSString *urlLink = [NSString stringWithFormat:@"http://www.123qf.cn/front/fkyuan/wap_cz_zz.jsp?zhuangtai=0&fid=%@&fenlei=0",self.FangData[@"id"]];
+    NSString *urlLink = [NSString stringWithFormat:@"http://www.123qf.cn/front/fkyuan/wap_cz_zz.jsp?zhuangtai=0&fid=%@&fenlei=0&userID=%@",self.FangData[@"id"],app.usrInfoDic[@"userid"]];
     NSLog(@"%@",urlLink);
     msg.link=urlLink;
-
+    
     UIImageView *imageView = [UIImageView new];
     [imageView sd_setImageWithURL:self.imagesData[0] placeholderImage:nil];
     msg.image = imageView.image;
-    switch (index) {
-            //微信好友分享
-        case 0:
-            NSLog(@"序号为0的触发");
-            [OpenShare shareToWeixinSession:msg Success:^(OSMessage *message) {
-                NSLog(@"微信分享到会话成功：\n%@",message);
-            } Fail:^(OSMessage *message, NSError *error) {
-                NSLog(@"微信分享到会话失败：\n%@\n%@",error,message);
-            }];
-
-            
-            break;
-       case 1:
-      
-            break;
-    }
+    
+   // NSString *recodUrl = @"http://www.123qf.cn/app/share/saveShareUser.api";
+    NSString *RecodrUrl = [NSString stringWithFormat:@"http://www.123qf.cn/app/share/saveShareUser.api?fid=%@",self.FangData[@"id"]];
+  
+    
+    [self.sharedMgr POST:RecodrUrl parameters:nil success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+        
+        NSLog(@"%@",responseObject);
+        switch (index) {
+                //微信好友分享
+            case 0:
+                NSLog(@"序号为0的触发");
+                [OpenShare shareToWeixinSession:msg Success:^(OSMessage *message) {
+                    NSLog(@"微信分享到会话成功：\n%@",message);
+                } Fail:^(OSMessage *message, NSError *error) {
+                    NSLog(@"微信分享到会话失败：\n%@\n%@",error,message);
+                }];
+                
+                
+                break;
+            case 1:
+                NSLog(@"序号为1的触发");
+                [OpenShare shareToWeixinTimeline:msg Success:^(OSMessage *message) {
+                    NSLog(@"微信分享到会话成功：\n%@",message);
+                } Fail:^(OSMessage *message, NSError *error) {
+                    NSLog(@"微信分享到会话失败：\n%@\n%@",error,message);
+                }];
+                break;
+        }
+        
+    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
+        NSLog(@"%@",error);
+    }];
 }
 
 
