@@ -717,7 +717,6 @@
         NSString *name = [self judgeNullValue:SingleData[@"mingcheng"]];
         NSString *Category = [NSString stringWithFormat:@"%@",SingleData[@"fenlei"]];
         [self.HomeVCdelegate QFshowDetailWithFangYuanID:Id andFenlei:Category userID:userID XiaoquName:name ListStatus:_preName];
-        self.HomeVCdelegate = nil;
     } else if (_status == RentOut) {
         //出租详情页  (服务器暂无数据，小灰手机也没有参考的)
         
