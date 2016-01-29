@@ -398,7 +398,8 @@
         _status = SalesOut ;   //出售列表
         self.ResultTableView.searchStyle  =_status;
          NSLog(@"当前状态%d",_status);
-        _CurrentRuest =@"http://www.123qf.cn:81/testApp/fangyuan/rentalOrBuyHouseSearch.api";
+    //    _CurrentRuest =@"http://www.123qf.cn:81/testApp/fangyuan/rentalOrBuyHouseSearch.api";
+            _CurrentRuest =@"http://www.123qf.cn/app/fangyuan/rentalOrBuyHouseSearch.api";
         NSMutableDictionary *parameters = [NSMutableDictionary new];
         if(_pramaDic ==nil) {  //即初始化
             NSDictionary *dict = @{

@@ -17,6 +17,7 @@
 
 #import "GBWXPayManager.h"
 
+#import "OpenShareHeader.h"
 
 @interface AppDelegate ()<WXApiDelegate>
 
@@ -82,8 +83,13 @@
     
     
     
-#pragma 向微信注册
+#pragma 向微信注册 - 支付功能
     [WXApi registerApp:APP_ID withDescription:nil];
+    
+    
+    
+#pragma mark - 微信分享注册
+    [OpenShare connectWeixinWithAppId:APP_ID];
     return YES;
 }
 
@@ -143,6 +149,12 @@
     
     //    调用checkUpdateWithDelegete后可用此方法来更新本地的版本号，如果有更新的话，在调用了此方法后再次调用将不提示更新信息。
     //        [[PgyUpdateManager sharedPgyManager] updateLocalBuildNumber];
+    
+    
+    
+    
+    
+    
 }
 
 
@@ -153,6 +165,10 @@
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
+    if ([OpenShare handleOpenURL:url]) {
+        return YES;
+    }
+    
     return  [WXApi handleOpenURL:url delegate:self];
 }
 

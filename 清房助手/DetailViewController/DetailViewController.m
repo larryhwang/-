@@ -24,10 +24,13 @@
 #import "AppDelegate.h"
 
 #import "SharePopVC.h"
-#import "HXEasyCustomShareView.h"
+
 
 
 #import "PopSelectViewController.h"
+
+
+#import "OpenShareHeader.h"
 
 #define  HeavyFont     [UIFont fontWithName:@"Helvetica-Bold" size:25]
 #define  ToolHeight  50    //固定底部的大小
@@ -156,17 +159,6 @@
     [self.navigationController.view addSubview:modalView];
     
     
-    SharePopVC *view = [[SharePopVC alloc]init];
-    view.providesPresentationContextTransitionStyle = YES;
-    view.definesPresentationContext = YES;
-    view.delegate = self;
-    view.modalPresentationStyle = UIModalPresentationOverCurrentContext;
-    view.DismissView = ^ {
-        [modalView removeFromSuperview];
-    };
-    [self presentViewController:view animated:YES completion:nil];
-//
-    
     NSArray *shareAry = @[@{@"image":@"shareView_wx",
                             @"title":@"微信"},
                           @{@"image":@"shareView_friend",
@@ -181,6 +173,20 @@
                             @"title":@"短信"},
                           @{@"image":@"share_copyLink",
                             @"title":@"复制链接"}];
+    
+    SharePopVC *view = [[SharePopVC alloc]init];
+    view.QFImgSAndTittleSDicArr  = shareAry ;
+    view.providesPresentationContextTransitionStyle = YES;
+    view.definesPresentationContext = YES;
+    view.delegate = self;
+    view.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+    view.DismissView = ^ {
+        [modalView removeFromSuperview];
+    };
+   [self presentViewController:view animated:YES completion:nil];
+
+
+   
 
 
 }
@@ -732,5 +738,36 @@
 -(void)removeDimBack {
     
 }
+
+-(void)QFsharedWith:(NSInteger)index {
+    OSMessage *msg=[[OSMessage alloc]init];
+    msg.title=self.FangData[@"biaoti"];
+    NSString *urlLink = [NSString stringWithFormat:@"http://www.123qf.cn/front/fkyuan/wap_cz_zz.jsp?zhuangtai=0&fid=%@&fenlei=0",self.FangData[@"id"]];
+    NSLog(@"%@",urlLink);
+    msg.link=urlLink;
+
+    UIImageView *imageView = [UIImageView new];
+    [imageView sd_setImageWithURL:self.imagesData[0] placeholderImage:nil];
+    msg.image = imageView.image;
+    switch (index) {
+            //微信好友分享
+        case 0:
+            NSLog(@"序号为0的触发");
+            [OpenShare shareToWeixinSession:msg Success:^(OSMessage *message) {
+                NSLog(@"微信分享到会话成功：\n%@",message);
+            } Fail:^(OSMessage *message, NSError *error) {
+                NSLog(@"微信分享到会话失败：\n%@\n%@",error,message);
+            }];
+
+            
+            break;
+       case 1:
+      
+            break;
+    }
+}
+
+
+
 
 @end

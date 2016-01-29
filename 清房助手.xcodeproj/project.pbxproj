@@ -295,10 +295,14 @@
 		46E5C7BB1C34D88500F4829D /* UserInfo_Four.xib in Resources */ = {isa = PBXBuildFile; fileRef = 46E5C7B91C34D88500F4829D /* UserInfo_Four.xib */; };
 		46E5C8031C35283E00F4829D /* hsf_20151231155029_0.png in Resources */ = {isa = PBXBuildFile; fileRef = 46E5C8021C35283E00F4829D /* hsf_20151231155029_0.png */; };
 		46E5C80A1C35969100F4829D /* UIImage+CJZ.m in Sources */ = {isa = PBXBuildFile; fileRef = 46E5C8091C35969100F4829D /* UIImage+CJZ.m */; };
-		46E6CE161C59FA9100B9FE2E /* HXEasyCustomShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = 46E6CE131C59FA9100B9FE2E /* HXEasyCustomShareView.m */; };
-		46E6CE171C59FA9100B9FE2E /* HXShareScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 46E6CE151C59FA9100B9FE2E /* HXShareScrollView.m */; };
 		46E6CE1B1C5A174300B9FE2E /* SharePopVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 46E6CE191C5A174300B9FE2E /* SharePopVC.m */; };
 		46E6CE1C1C5A174300B9FE2E /* SharePopVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 46E6CE1A1C5A174300B9FE2E /* SharePopVC.xib */; };
+		46E6CE2B1C5B071800B9FE2E /* OpenShare+Alipay.m in Sources */ = {isa = PBXBuildFile; fileRef = 46E6CE1F1C5B071800B9FE2E /* OpenShare+Alipay.m */; };
+		46E6CE2C1C5B071800B9FE2E /* OpenShare+QQ.m in Sources */ = {isa = PBXBuildFile; fileRef = 46E6CE211C5B071800B9FE2E /* OpenShare+QQ.m */; };
+		46E6CE2D1C5B071800B9FE2E /* OpenShare+Renren.m in Sources */ = {isa = PBXBuildFile; fileRef = 46E6CE231C5B071800B9FE2E /* OpenShare+Renren.m */; };
+		46E6CE2E1C5B071800B9FE2E /* OpenShare+Weibo.m in Sources */ = {isa = PBXBuildFile; fileRef = 46E6CE251C5B071800B9FE2E /* OpenShare+Weibo.m */; };
+		46E6CE2F1C5B071800B9FE2E /* OpenShare+Weixin.m in Sources */ = {isa = PBXBuildFile; fileRef = 46E6CE271C5B071800B9FE2E /* OpenShare+Weixin.m */; };
+		46E6CE301C5B071800B9FE2E /* OpenShare.m in Sources */ = {isa = PBXBuildFile; fileRef = 46E6CE291C5B071800B9FE2E /* OpenShare.m */; };
 		46E8BAF41C2E4B86009E808D /* QFOrderFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 46E8BAF21C2E4B86009E808D /* QFOrderFilter.m */; };
 		46E8BAF51C2E4B86009E808D /* QFOrderFilter.xib in Resources */ = {isa = PBXBuildFile; fileRef = 46E8BAF31C2E4B86009E808D /* QFOrderFilter.xib */; };
 		46FBF74D1BDD17FF00F68EE6 /* pStar.png in Resources */ = {isa = PBXBuildFile; fileRef = 46FBF74C1BDD17FF00F68EE6 /* pStar.png */; };
@@ -791,13 +795,22 @@
 		46E5C8021C35283E00F4829D /* hsf_20151231155029_0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hsf_20151231155029_0.png; sourceTree = "<group>"; };
 		46E5C8081C35969100F4829D /* UIImage+CJZ.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+CJZ.h"; sourceTree = "<group>"; };
 		46E5C8091C35969100F4829D /* UIImage+CJZ.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+CJZ.m"; sourceTree = "<group>"; };
-		46E6CE121C59FA9100B9FE2E /* HXEasyCustomShareView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXEasyCustomShareView.h; sourceTree = "<group>"; };
-		46E6CE131C59FA9100B9FE2E /* HXEasyCustomShareView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXEasyCustomShareView.m; sourceTree = "<group>"; };
-		46E6CE141C59FA9100B9FE2E /* HXShareScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXShareScrollView.h; sourceTree = "<group>"; };
-		46E6CE151C59FA9100B9FE2E /* HXShareScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXShareScrollView.m; sourceTree = "<group>"; };
 		46E6CE181C5A174300B9FE2E /* SharePopVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SharePopVC.h; sourceTree = "<group>"; };
 		46E6CE191C5A174300B9FE2E /* SharePopVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SharePopVC.m; sourceTree = "<group>"; };
 		46E6CE1A1C5A174300B9FE2E /* SharePopVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SharePopVC.xib; sourceTree = "<group>"; };
+		46E6CE1E1C5B071800B9FE2E /* OpenShare+Alipay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "OpenShare+Alipay.h"; sourceTree = "<group>"; };
+		46E6CE1F1C5B071800B9FE2E /* OpenShare+Alipay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "OpenShare+Alipay.m"; sourceTree = "<group>"; };
+		46E6CE201C5B071800B9FE2E /* OpenShare+QQ.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "OpenShare+QQ.h"; sourceTree = "<group>"; };
+		46E6CE211C5B071800B9FE2E /* OpenShare+QQ.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "OpenShare+QQ.m"; sourceTree = "<group>"; };
+		46E6CE221C5B071800B9FE2E /* OpenShare+Renren.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "OpenShare+Renren.h"; sourceTree = "<group>"; };
+		46E6CE231C5B071800B9FE2E /* OpenShare+Renren.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "OpenShare+Renren.m"; sourceTree = "<group>"; };
+		46E6CE241C5B071800B9FE2E /* OpenShare+Weibo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "OpenShare+Weibo.h"; sourceTree = "<group>"; };
+		46E6CE251C5B071800B9FE2E /* OpenShare+Weibo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "OpenShare+Weibo.m"; sourceTree = "<group>"; };
+		46E6CE261C5B071800B9FE2E /* OpenShare+Weixin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "OpenShare+Weixin.h"; sourceTree = "<group>"; };
+		46E6CE271C5B071800B9FE2E /* OpenShare+Weixin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "OpenShare+Weixin.m"; sourceTree = "<group>"; };
+		46E6CE281C5B071800B9FE2E /* OpenShare.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenShare.h; sourceTree = "<group>"; };
+		46E6CE291C5B071800B9FE2E /* OpenShare.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenShare.m; sourceTree = "<group>"; };
+		46E6CE2A1C5B071800B9FE2E /* OpenShareHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenShareHeader.h; sourceTree = "<group>"; };
 		46E8BAF11C2E4B85009E808D /* QFOrderFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QFOrderFilter.h; sourceTree = "<group>"; };
 		46E8BAF21C2E4B86009E808D /* QFOrderFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QFOrderFilter.m; sourceTree = "<group>"; };
 		46E8BAF31C2E4B86009E808D /* QFOrderFilter.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QFOrderFilter.xib; sourceTree = "<group>"; };
@@ -1771,7 +1784,7 @@
 		46C7169B1BC66EF400287742 /* Lib */ = {
 			isa = PBXGroup;
 			children = (
-				46E6CE111C59FA4A00B9FE2E /* HXShare */,
+				46E6CE1D1C5B071800B9FE2E /* openshare */,
 				468C23011C3F6125005159DD /* GBTagListView2.0 */,
 				46B23D001C33B26B00C78B43 /* Masonry */,
 				46252F7A1BDA648C00C1FA66 /* MJRefresh */,
@@ -1840,15 +1853,25 @@
 			name = Tool;
 			sourceTree = "<group>";
 		};
-		46E6CE111C59FA4A00B9FE2E /* HXShare */ = {
+		46E6CE1D1C5B071800B9FE2E /* openshare */ = {
 			isa = PBXGroup;
 			children = (
-				46E6CE121C59FA9100B9FE2E /* HXEasyCustomShareView.h */,
-				46E6CE131C59FA9100B9FE2E /* HXEasyCustomShareView.m */,
-				46E6CE141C59FA9100B9FE2E /* HXShareScrollView.h */,
-				46E6CE151C59FA9100B9FE2E /* HXShareScrollView.m */,
+				46E6CE1E1C5B071800B9FE2E /* OpenShare+Alipay.h */,
+				46E6CE1F1C5B071800B9FE2E /* OpenShare+Alipay.m */,
+				46E6CE201C5B071800B9FE2E /* OpenShare+QQ.h */,
+				46E6CE211C5B071800B9FE2E /* OpenShare+QQ.m */,
+				46E6CE221C5B071800B9FE2E /* OpenShare+Renren.h */,
+				46E6CE231C5B071800B9FE2E /* OpenShare+Renren.m */,
+				46E6CE241C5B071800B9FE2E /* OpenShare+Weibo.h */,
+				46E6CE251C5B071800B9FE2E /* OpenShare+Weibo.m */,
+				46E6CE261C5B071800B9FE2E /* OpenShare+Weixin.h */,
+				46E6CE271C5B071800B9FE2E /* OpenShare+Weixin.m */,
+				46E6CE281C5B071800B9FE2E /* OpenShare.h */,
+				46E6CE291C5B071800B9FE2E /* OpenShare.m */,
+				46E6CE2A1C5B071800B9FE2E /* OpenShareHeader.h */,
 			);
-			name = HXShare;
+			name = openshare;
+			path = Category/openshare;
 			sourceTree = "<group>";
 		};
 		46ECF35E1C14633900DB6D36 /* Search */ = {
@@ -2175,10 +2198,12 @@
 				46BBE8BC1C0FD23900DE4B14 /* PopSelectViewController.m in Sources */,
 				4646C6891C2700CB00896964 /* QiuzuCell.m in Sources */,
 				463B40641BDD142900B1D26D /* DSNavigationBar.m in Sources */,
+				46E6CE2E1C5B071800B9FE2E /* OpenShare+Weibo.m in Sources */,
 				46C716CF1BC69FB800287742 /* NSObject+MJKeyValue.m in Sources */,
 				46789C511C450F4C0094DE54 /* RentOutOfiice.m in Sources */,
 				4616EDD71C24569200BAF5C3 /* SettingViewCotroller.m in Sources */,
 				4692C9CF1C1AC7B40056E706 /* QFTableView_Sco.m in Sources */,
+				46E6CE2D1C5B071800B9FE2E /* OpenShare+Renren.m in Sources */,
 				468ED02F1BD62B74001605A7 /* MenuListCell.m in Sources */,
 				46789C541C4512E30094DE54 /* RentOutChang.m in Sources */,
 				4628481D1C0FCC6C00273B3A /* PostTool.m in Sources */,
@@ -2186,6 +2211,7 @@
 				46BBE8C91C0FD25C00DE4B14 /* CoreLabelModel.m in Sources */,
 				46714B781BC7C11F00E7AEE9 /* WMCommon.m in Sources */,
 				46B23D1C1C33B26B00C78B43 /* MASCompositeConstraint.m in Sources */,
+				46E6CE301C5B071800B9FE2E /* OpenShare.m in Sources */,
 				4615185C1C39FE8400E030D6 /* SaleOutOfiice.m in Sources */,
 				46B21AC61C30C48B0053AE7F /* QFDateSelectStartToEnd.m in Sources */,
 				4673A50F1BC8DDA500700099 /* UIView+Frame.m in Sources */,
@@ -2203,6 +2229,7 @@
 				46B21ACA1C3108750053AE7F /* InnerResourceFilter.m in Sources */,
 				46789C4E1C4507140094DE54 /* RentOutShangPu.m in Sources */,
 				46714B7E1BC7C11F00E7AEE9 /* WMNavigationController.m in Sources */,
+				46E6CE2F1C5B071800B9FE2E /* OpenShare+Weixin.m in Sources */,
 				46BBE8CA1C0FD25C00DE4B14 /* CZKeyboardToolbar.m in Sources */,
 				4654153B1C2C5208003E5743 /* QFMyOrderTableVC.m in Sources */,
 				46C716CA1BC69FB800287742 /* MJFoundation.m in Sources */,
@@ -2215,7 +2242,6 @@
 				462847E41C0EEF0B00273B3A /* PostCategory.m in Sources */,
 				4678206B1C291E6B0076C761 /* LeavMsgCell.m in Sources */,
 				46E5C7BA1C34D88500F4829D /* UserInfo_Four.m in Sources */,
-				46E6CE171C59FA9100B9FE2E /* HXShareScrollView.m in Sources */,
 				4658E27B1C37A15500F7B98F /* RentOutCell.m in Sources */,
 				46AFDFA91BCB84A200B49CBE /* UIImageView+WebCache.m in Sources */,
 				4673A5081BC8DCD200700099 /* QFSearchBar.m in Sources */,
@@ -2225,7 +2251,6 @@
 				46AFDF9C1BCB84A200B49CBE /* NSData+ImageContentType.m in Sources */,
 				46B23D241C33B26B00C78B43 /* View+MASAdditions.m in Sources */,
 				468C23041C3F6125005159DD /* GBTagListView.m in Sources */,
-				46E6CE161C59FA9100B9FE2E /* HXEasyCustomShareView.m in Sources */,
 				46BBE8C81C0FD25C00DE4B14 /* CoreLabel.m in Sources */,
 				4646C6771C26A0B100896964 /* CZNewFeatureController.m in Sources */,
 				465415441C2CCBB1003E5743 /* detailHeadView.m in Sources */,
@@ -2262,6 +2287,7 @@
 				46714B771BC7C11F00E7AEE9 /* WMBaseViewController.m in Sources */,
 				46AFDFA61BCB84A200B49CBE /* UIImage+MultiFormat.m in Sources */,
 				465415231C2C015A003E5743 /* GBWXPayManager.m in Sources */,
+				46E6CE2B1C5B071800B9FE2E /* OpenShare+Alipay.m in Sources */,
 				46B23D211C33B26B00C78B43 /* MASViewConstraint.m in Sources */,
 				46252F901BDA648C00C1FA66 /* UIScrollView+MJExtension.m in Sources */,
 				46AFDF9F1BCB84A200B49CBE /* SDWebImageDecoder.m in Sources */,
@@ -2313,6 +2339,7 @@
 				46BBE8DC1C0FD31C00DE4B14 /* SelectCityVC.m in Sources */,
 				4643562A1BC6093B00A44526 /* main.m in Sources */,
 				46BB59A31C23B02E0021DCEA /* PopSeletedView.m in Sources */,
+				46E6CE2C1C5B071800B9FE2E /* OpenShare+QQ.m in Sources */,
 				46BC5E581C298A0000B1247A /* MutiTaskOrderBusinessVC.m in Sources */,
 				465415501C2D3C05003E5743 /* QFOrderStatusTool.m in Sources */,
 				46714B821BC7C11F00E7AEE9 /* WMPopAnimation.m in Sources */,

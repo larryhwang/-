@@ -22,7 +22,7 @@
  *
  *  @param index 区别分享类型
  */
--(void)sharedWith:(NSInteger) index;
+-(void)QFsharedWith:(NSInteger) index;
 
 
 
@@ -34,4 +34,6 @@
 
 @property(nonatomic,assign) id <SharePopdelegate>  delegate;
 @property (nonatomic, copy) void (^DismissView)(void);
+@property(nonatomic,strong)  NSArray  *QFImgSAndTittleSDicArr;
+
 @end
