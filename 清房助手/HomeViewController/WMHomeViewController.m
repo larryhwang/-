@@ -425,11 +425,20 @@
         [self.pramaDic setObject:@"0" forKey:@"zushou"];
         [self.pramaDic setObject:@"1" forKey:@"currentpage"];
     }else {
+        // 求购
          _status = WantBuy;
          self.ResultTableView.searchStyle  =_status;
       //  _CurrentRuest = @"http://www.123qf.cn:81/testApp/keyuan/rentalOrBuyHouseSearch.api";
           _CurrentRuest = @"http://www.123qf.cn/app/keyuan/rentalOrBuyHouseSearch.api";
+        NSDictionary *dict = @{
+                               @"sum":@"20",
+                               @"zugou":@"1",
+                               @"shengfen":@"广东省",
+                               @"shi":@"惠州市",
+                               @"currentpage" :@"1"};
+         [self.pramaDic setValuesForKeysWithDictionary:dict];
     }
+   
        [self LoadNetDataWithCurentURl];
 }
 
@@ -466,6 +475,7 @@
 
 -(void)RightTableLoad {
     if (_isWant == NO) {
+        //出租
         _status = RentOut;
         self.ResultTableView.searchStyle  =_status;
          NSLog(@"当前状态%d",_status);
@@ -486,10 +496,18 @@
         
 
     }else {
+        //求租
         _status = WantRent;
         self.ResultTableView.searchStyle  =_status;
        // self.CurrentRuest= @"http://www.123qf.cn:81/testApp/keyuan/rentalOrBuyHouseSearch.api";  //求租列表
-          self.CurrentRuest = @"http://www.123qf.cn/app/fangyuan/rentalOrBuyHouseSearch.api";
+          self.CurrentRuest = @"http://www.123qf.cn/app/keyuan/rentalOrBuyHouseSearch.api";
+        NSDictionary *dic = @{
+                              @"sum":@"20",
+                              @"zugou":@"0",
+                              @"shengfen":@"广东省",
+                              @"currentpage" :@"1"};
+        
+        [self.pramaDic setValuesForKeysWithDictionary:dic];
 
     }
     [self LoadNetDataWithCurentURl];
@@ -598,15 +616,15 @@
         }
         
 #pragma mark 售价高亮属性
-        NSString *PriceString = [NSString stringWithFormat:@"%@万元",SingleData[@"shoujia"]];
+        NSString *PriceString = [NSString stringWithFormat:@"%@元/月",SingleData[@"shoujia"]];
         NSMutableAttributedString *HiligntNo = [[NSMutableAttributedString alloc]initWithString:PriceString];
-        NSRange NoRange = NSMakeRange(0, [PriceString length]-2);
+        NSRange NoRange = NSMakeRange(0, [PriceString length]-3);
         [HiligntNo addAttribute:NSForegroundColorAttributeName value:[UIColor redColor]  range:NoRange];
-        [HiligntNo addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:18 ]  range:NoRange];
+        [HiligntNo addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:16 ]  range:NoRange];
         
         NSString *imgCollects = SingleData[@"tupian"];
         NSArray *imgArray = [imgCollects componentsSeparatedByString:@","];
-        NSString *imgURL = [NSString stringWithFormat:@"http://www.123qf.cn/testWeb/img/%@/userfile/qfzs/fy/mini/%@",SingleData[@"userid"],[imgArray firstObject]];
+        NSString *imgURL = [NSString stringWithFormat:@"http://www.123qf.cn/img/%@/userfile/qfzs/fy/mini/%@",SingleData[@"userid"],[imgArray firstObject]];
         
         
         NSString *BigTitle = [NSString stringWithFormat:@"%@%@",_preName,SingleData[@"biaoti"]];

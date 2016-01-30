@@ -428,10 +428,11 @@
 #pragma mark - Utils
 - (void)setupScrollViewImages
 {
+    NSLog(@"%@",self.imagesData);
     [self.imagesData enumerateObjectsUsingBlock:^(NSString *imageName, NSUInteger idx, BOOL *stop) {
         UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(CGRectGetWidth(self.scrollView3.frame) * idx, 0, CGRectGetWidth(self.scrollView3.frame), CGRectGetHeight(self.scrollView3.frame))];
         imageView.contentMode = UIViewContentModeScaleAspectFill;
-        [imageView sd_setImageWithURL:self.imagesData[idx] placeholderImage:nil];
+        [imageView sd_setImageWithURL:self.imagesData[idx] placeholderImage:[UIImage imageNamed:@"DeafaultImage"]];
         [self.scrollView3 addSubview:imageView];
     }];
     
