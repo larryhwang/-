@@ -45,6 +45,8 @@
 
 - (IBAction)loginClick:(id)sender {
 #warning 加密处理
+    
+    [self.view endEditing:YES];
     NSString   *userName = self.userName.text;
     NSString   *passWord = self.passWord.text;
     

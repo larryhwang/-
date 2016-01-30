@@ -68,12 +68,12 @@
                   moduleName = "&#x6e05;&#x623f;&#x52a9;&#x624b;"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Larry/Documents/%E6%B8%85%E6%88%BF%E5%8A%A9%E6%89%8B/%E6%B8%85%E6%88%BF%E5%8A%A9%E6%89%8B/DetailViewController/DetailViewController.m"
-                  timestampString = "475839449.192199"
+                  timestampString = "475851282.750618"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "432"
                   endingLineNumber = "432"
-                  offsetFromSymbolStart = "91">
+                  offsetFromSymbolStart = "94">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -83,12 +83,12 @@
                   moduleName = "&#x6e05;&#x623f;&#x52a9;&#x624b;"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Larry/Documents/%E6%B8%85%E6%88%BF%E5%8A%A9%E6%89%8B/%E6%B8%85%E6%88%BF%E5%8A%A9%E6%89%8B/DetailViewController/DetailViewController.m"
-                  timestampString = "475839449.192658"
+                  timestampString = "475851282.750885"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "432"
                   endingLineNumber = "432"
-                  offsetFromSymbolStart = "78">
+                  offsetFromSymbolStart = "76">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -116,12 +116,12 @@
                   moduleName = "&#x6e05;&#x623f;&#x52a9;&#x624b;"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Larry/Documents/%E6%B8%85%E6%88%BF%E5%8A%A9%E6%89%8B/%E6%B8%85%E6%88%BF%E5%8A%A9%E6%89%8B/HomeViewController/WMHomeViewController.m"
-                  timestampString = "475839449.202631"
+                  timestampString = "475851282.752954"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "149"
                   endingLineNumber = "149"
-                  offsetFromSymbolStart = "1288">
+                  offsetFromSymbolStart = "1274">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -131,12 +131,12 @@
                   moduleName = "&#x6e05;&#x623f;&#x52a9;&#x624b;"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Larry/Documents/%E6%B8%85%E6%88%BF%E5%8A%A9%E6%89%8B/%E6%B8%85%E6%88%BF%E5%8A%A9%E6%89%8B/HomeViewController/WMHomeViewController.m"
-                  timestampString = "475839449.203206"
+                  timestampString = "475851282.753292"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "149"
                   endingLineNumber = "149"
-                  offsetFromSymbolStart = "117">
+                  offsetFromSymbolStart = "78">
                </Location>
             </Locations>
          </BreakpointContent>
