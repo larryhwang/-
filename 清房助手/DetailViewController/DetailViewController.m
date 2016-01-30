@@ -553,10 +553,22 @@
             
             
 #pragma mark -价格高亮属性
-            NSString *StringPrice = [NSString stringWithFormat:@"%@万",self.FangData[@"shoujia"]];
-            NSRange   RedPart = NSMakeRange(0, [StringPrice length] -1 );
+            NSString *StringPrice = nil;
+            NSRange   RedPart ;
+            NSNumber *no = [NSNumber numberWithInt:0];
+            if([(NSNumber *)self.FangData[@"zushou"] isEqualToNumber:no]) {
+                StringPrice = [NSString stringWithFormat:@"%@万(可按揭)",self.FangData[@"shoujia"]];
+                RedPart = NSMakeRange(0, [StringPrice length] -6);
+            } else{
+                StringPrice = [NSString stringWithFormat:@"%@元/月",self.FangData[@"shoujia"]];
+                RedPart = NSMakeRange(0, [StringPrice length] -3);
+
+            }
+            
+            
+         //   NSRange   RedPart = NSMakeRange(0, [StringPrice length] -1 );
             NSMutableAttributedString *priceAttri = [[NSMutableAttributedString alloc]initWithString:StringPrice];
-            [priceAttri addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:25 ] range:RedPart];
+            [priceAttri addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:23 ] range:RedPart];
             [priceAttri addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range:RedPart];
             LocationCell.Price.text = StringPrice;
             [LocationCell.Price setAttributedText:priceAttri];
@@ -571,11 +583,11 @@
             DetailCell.FloatNo.text =  [NSString stringWithFormat:@"%@/%@层 ",self.FangData[@"louceng"],self.FangData[@"zonglouceng"]];
             DetailCell.LookTime.text = self.FangData[@"kanfangtime"];
             //带有HTML，考虑加载HTML啊
-            DetailCell.WithFacility.text = @" 空调 电视 洗衣机";
+            DetailCell.WithFacility.text = [self getAttacMentFromDataDic];
             DetailCell.ExtryTime.text =[NSString stringWithFormat:@"%@个月",self.FangData[@"youxiaoqi"]];
             NSString *chaoxingStr = self.FangData[@"chaoxiang"];
             DetailCell.Direction.text = [self judgeNullValue:chaoxingStr];
-            DetailCell.Area.text = [NSString stringWithFormat:@"%@",self.FangData[@"mianji"]];
+            DetailCell.Area.text = [NSString stringWithFormat:@"%@㎡",self.FangData[@"mianji"]];
             DetailCell.Type.text = self.FangData[@"leixing"];
             return DetailCell;
         }
@@ -796,6 +808,51 @@
 }
 
 
+-(NSString *)getAttacMentFromDataDic {
+    NSString *str = @"";
 
+    //    &meiqi=true
+    //    &kuandai=true
+    //    &dianti=true
+    //    &tingchechang=true
+    //    &dianshi=true
+    //    &jiadian=true
+    //    &dianhua=true
+    //    &lingbaoruzhu=true
+    
+    if (![self.FangData[@"meiqi"] isKindOfClass:[NSNull class]]) {
+        str = [str stringByAppendingString:@" 煤气"];
+    }
+    
+    if (![self.FangData[@"kuandai"] isKindOfClass:[NSNull class]]) {
+        str = [str stringByAppendingString:@" 宽带"];
+    }
+    
+    if (![self.FangData[@"dianti"] isKindOfClass:[NSNull class]]) {
+        str = [str stringByAppendingString:@" 电梯"];
+    }
+    
+    if (![self.FangData[@"tingchechang"] isKindOfClass:[NSNull class]]) {
+        str = [str stringByAppendingString:@" 停车场"];
+    }
+    
+    if (![self.FangData[@"dianshi"] isKindOfClass:[NSNull class]]) {
+        str = [str stringByAppendingString:@" 电视"];
+    }
+    
+    if (![self.FangData[@"jiadian"] isKindOfClass:[NSNull class]]) {
+        str = [str stringByAppendingString:@" 家电"];
+    }
+    
+    if (![self.FangData[@"dianhua"] isKindOfClass:[NSNull class]]) {
+        str = [str stringByAppendingString:@" 电话"];
+    }
+    
+    if (![self.FangData[@"lingbaoruzhu"] isKindOfClass:[NSNull class]]) {
+        str = [str stringByAppendingString:@" 拎包即住"];
+    }
+    
+    return str;
+}
 
 @end

@@ -26,7 +26,7 @@
     [self setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self setTitleColor:[UIColor grayColor] forState:UIControlStateHighlighted];
 
-    
+    [self setCurrentCityName:@"惠州市"];
     return self;
 }
 

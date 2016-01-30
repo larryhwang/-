@@ -770,9 +770,9 @@
 		46C716D51BC7645E00287742 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		46CB1A551BFF096000762ACE /* NULLValueJudge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NULLValueJudge.h; sourceTree = "<group>"; };
 		46CB1A561BFF096000762ACE /* NULLValueJudge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NULLValueJudge.m; sourceTree = "<group>"; };
-		46D33C0B1BCB4B9C00B30F2A /* SalesCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SalesCell.h; sourceTree = "<group>"; };
-		46D33C0C1BCB4B9C00B30F2A /* SalesCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SalesCell.m; sourceTree = "<group>"; };
-		46D33C0D1BCB4B9C00B30F2A /* SalesCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SalesCell.xib; sourceTree = "<group>"; };
+		46D33C0B1BCB4B9C00B30F2A /* SalesCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SalesCell.h; path = ../../HomeViewController/View/SalesCell.h; sourceTree = "<group>"; };
+		46D33C0C1BCB4B9C00B30F2A /* SalesCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SalesCell.m; path = ../../HomeViewController/View/SalesCell.m; sourceTree = "<group>"; };
+		46D33C0D1BCB4B9C00B30F2A /* SalesCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SalesCell.xib; path = ../../HomeViewController/View/SalesCell.xib; sourceTree = "<group>"; };
 		46D648311BC8E67E000F23EF /* jian-down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "jian-down.png"; sourceTree = "<group>"; };
 		46D648361BC8E82C000F23EF /* QFTitleButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QFTitleButton.h; sourceTree = "<group>"; };
 		46D648371BC8E82C000F23EF /* QFTitleButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QFTitleButton.m; sourceTree = "<group>"; };
@@ -1442,9 +1442,6 @@
 				46D648371BC8E82C000F23EF /* QFTitleButton.m */,
 				4673A5061BC8DCD200700099 /* QFSearchBar.h */,
 				4673A5071BC8DCD200700099 /* QFSearchBar.m */,
-				46D33C0B1BCB4B9C00B30F2A /* SalesCell.h */,
-				46D33C0C1BCB4B9C00B30F2A /* SalesCell.m */,
-				46D33C0D1BCB4B9C00B30F2A /* SalesCell.xib */,
 				468ED02C1BD62B74001605A7 /* MenuListCell.h */,
 				468ED02D1BD62B74001605A7 /* MenuListCell.m */,
 				468ED02E1BD62B74001605A7 /* MenuListCell.xib */,
@@ -1563,6 +1560,9 @@
 				4646C69D1C27137300896964 /* ZuGouDescribeCell.h */,
 				4646C69E1C27137300896964 /* ZuGouDescribeCell.m */,
 				4646C69F1C27137300896964 /* ZuGouDescribeCell.xib */,
+				46D33C0B1BCB4B9C00B30F2A /* SalesCell.h */,
+				46D33C0C1BCB4B9C00B30F2A /* SalesCell.m */,
+				46D33C0D1BCB4B9C00B30F2A /* SalesCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";

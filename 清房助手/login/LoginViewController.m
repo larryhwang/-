@@ -32,12 +32,13 @@
     [super viewDidLoad];
     [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:NO];
      NSString *name = [[NSUserDefaults standardUserDefaults]objectForKey:@"acount"];
+    NSString *pw = [[NSUserDefaults standardUserDefaults]objectForKey:@"pw"];
     if (name.length>0) {
         self.userName.text = name;
     }   else {
         self.userName.text =@"";
     }
-    self.passWord.text = @"";
+    self.passWord.text = pw;
 }
 
 
@@ -47,23 +48,21 @@
     NSString   *passWord = self.passWord.text;
     
     NSMutableDictionary *PramaDic = [NSMutableDictionary new];
-    //http://127.0.0.1:8080/qfzsapi/user/loginUser.front?userID=admin&psWord=2
-    //http://www.123qf.cn/testApp/user/loginUser.front?userID=15018639039&psWord=5798161"
-    PramaDic[@"userid"] = @"17090239027";
-    PramaDic[@"psword"] = @"123456";
+//    PramaDic[@"userid"] = @"17090239027";
+//    PramaDic[@"psword"] = @"123456";
     
-//        PramaDic[@"userid"] = userName;
-//        PramaDic[@"psword"] = passWord;
+        PramaDic[@"userid"] = userName;
+        PramaDic[@"psword"] = passWord;
 
     
     //这个账号有订单跟踪数据
-    PramaDic[@"userid"] = @"13725007900";
-    PramaDic[@"psword"] = @"123456";
+//    PramaDic[@"userid"] = @"13725007900";
+//    PramaDic[@"psword"] = @"123456";
     
     
     //江哥账号 ／ 有头像
-    PramaDic[@"userid"] = @"15018639039";
-    PramaDic[@"psword"] = @"5798161";
+//    PramaDic[@"userid"] = @"15018639039";
+//    PramaDic[@"psword"] = @"5798161";
     
 
     AFHTTPRequestOperationManager *mgr1  = [AFHTTPRequestOperationManager manager];

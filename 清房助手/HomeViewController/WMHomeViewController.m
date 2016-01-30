@@ -181,7 +181,7 @@
     self.navigationItem.titleView = _searchVC.searchBar;
     self.definesPresentationContext = YES;
     
-    [self setOriginPopView];  //设置弹窗功能
+    [self setOriginPopView];   //设置弹窗功能
     [self localNameGet];
     
 
@@ -251,10 +251,16 @@
 
 -(void)CitySelect {
     //区域筛选 弹窗
-    NSLog(@"hi ,pop");
+    UIView *modalView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight)];
+    modalView.userInteractionEnabled = NO;
+    modalView.backgroundColor = [[UIColor lightGrayColor] colorWithAlphaComponent:.4];
+       NSLog(@"hi ,pop");
     if (!_popStatus) {
+        //[self.view addSubview:modalView];  //这种状况下，向右滑动会触发菜单显示
+
         [self popViewMoveOut];
     } else {
+       // [modalView removeFromSuperview];
         [self popViewHide];
     }
 }
@@ -557,8 +563,17 @@
         [cell.QFImageView sd_setImageWithURL:[NSURL URLWithString:imgURL] placeholderImage:PlaceHoder];
         cell.title.text = [titlePartArra firstObject];
         cell.area.text  = [NSString stringWithFormat:@"面积:%@㎡",SingleData[@"mianji"]];
-        cell.style.text = @"两室";
-        cell.elevator.text = @"电梯";
+        cell.style.text = [NSString stringWithFormat:@"%@室%@厅%@卫%@阳台", [self judgeNullValue: SingleData[@"fangshu"]],
+                           [self judgeNullValue: SingleData[@"tingshu"]],
+                           [self judgeNullValue: SingleData[@"toilets"]],
+                           [self judgeNullValue: SingleData[@"balconys"]]];//@"%@室%@厅%阳台";;
+        
+       if([SingleData[@"dianti"] isKindOfClass:[NSNull class]]){
+            cell.elevator.text = @"";
+       } else {
+            cell.elevator.text = @"电梯";
+       }
+       
         cell.price.text =[NSString stringWithFormat:@"%@万",PriceString];
        [cell.price setAttributedText:HiligntNo];
         
@@ -587,7 +602,7 @@
         NSMutableAttributedString *HiligntNo = [[NSMutableAttributedString alloc]initWithString:PriceString];
         NSRange NoRange = NSMakeRange(0, [PriceString length]-2);
         [HiligntNo addAttribute:NSForegroundColorAttributeName value:[UIColor redColor]  range:NoRange];
-        [HiligntNo addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:20 ]  range:NoRange];
+        [HiligntNo addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:18 ]  range:NoRange];
         
         NSString *imgCollects = SingleData[@"tupian"];
         NSArray *imgArray = [imgCollects componentsSeparatedByString:@","];
@@ -602,8 +617,20 @@
         [cell.QFImageView sd_setImageWithURL:[NSURL URLWithString:imgURL] placeholderImage:PlaceHoder];
         cell.title.text = [titlePartArra firstObject];
         cell.area.text  = [NSString stringWithFormat:@"面积:%@㎡",SingleData[@"mianji"]];
-        cell.style.text = @"两室";
-        cell.elevator.text = @"电梯";
+        cell.style.text = [NSString stringWithFormat:@"%@室%@厅%@卫%@阳台", [self judgeNullValue: SingleData[@"fangshu"]],
+                           [self judgeNullValue: SingleData[@"tingshu"]],
+                           [self judgeNullValue: SingleData[@"toilets"]],
+                           [self judgeNullValue: SingleData[@"balconys"]]];//@"%@室%@厅%阳台";;
+        
+        
+        if([SingleData[@"dianti"] isKindOfClass:[NSNull class]]){
+            cell.elevator.text = @"";
+        } else {
+            cell.elevator.text = @"电梯";
+        }
+       
+        
+        
         cell.price.text =[NSString stringWithFormat:@"%@万",PriceString];
         [cell.price setAttributedText:HiligntNo];
         
@@ -698,6 +725,7 @@
 //    return cell;
     }
 
+
 -(NSString *)judgeNullValue:(NSString *)string{
     if ([string isKindOfClass:[NSNull class]]) {
         return @"";
@@ -766,6 +794,7 @@
 //弹窗小按钮所执行的操作,第一级的按钮和第二级按钮
 -(void)popViewSectionOneBtnclickWithName:(NSString *)name requesNo:(NSString *)code andType:(NSInteger)type {
     [self popViewHide];
+    [self.NavSeacherBtn setTitle:name forState:UIControlStateNormal];
     if(type ==0) {
       [self.pramaDic setObject:name forKey:@"qu"];
         if ([name isEqualToString:@"全市区"]) {
