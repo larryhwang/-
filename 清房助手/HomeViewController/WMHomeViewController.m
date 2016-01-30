@@ -144,8 +144,8 @@
     NSURL *url = [NSURL URLWithString:urlStr];
     
     UIImageView *Imgview = [[UIImageView alloc]init];
-   [self.view addSubview:Imgview];
-    if(dic[@"portrait"]){
+   [self.view addSubview:Imgview];  //value	__NSCFString *	@"imgDef.jpg"	0x00007fdd9ab0caf0
+    if(![dic[@"portrait"] isEqualToString:@"imgDef.jpg"]){
         [Imgview sd_setImageWithURL:url completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
             NSLog(@"indexImg:%@",error);
             [IconBtn setBackgroundImage:image forState:UIControlStateNormal];

@@ -30,6 +30,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+     self.userName.keyboardType = UIKeyboardTypeNumberPad ;
     [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:NO];
      NSString *name = [[NSUserDefaults standardUserDefaults]objectForKey:@"acount"];
     NSString *pw = [[NSUserDefaults standardUserDefaults]objectForKey:@"pw"];
@@ -144,6 +145,7 @@
 }
 
 -(void)BasicUIset {
+    self.userName.keyboardType = UIKeyboardTypeNumberPad ;
     self.view.backgroundColor =  QFUIRGBColor(3, 164, 255);    //浅蓝的感觉
     if (isI4 || isI5) {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(willShow:) name:UIKeyboardWillShowNotification object:nil];
