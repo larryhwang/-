@@ -284,6 +284,7 @@
 		46D648381BC8E82C000F23EF /* QFTitleButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 46D648371BC8E82C000F23EF /* QFTitleButton.m */; };
 		46D6483A1BC8E925000F23EF /* navigationbar_arrow_down@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 46D648391BC8E925000F23EF /* navigationbar_arrow_down@2x.png */; };
 		46D6BCA31C2B15EA00883F50 /* FormCellInMutiTast.m in Sources */ = {isa = PBXBuildFile; fileRef = 46D6BCA21C2B15EA00883F50 /* FormCellInMutiTast.m */; };
+		46DAA8A31C5CBD14001EB60B /* LauchVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 46DAA8A21C5CBD14001EB60B /* LauchVC.m */; };
 		46E5C7A81C34B45200F4829D /* UserInfoBasic.m in Sources */ = {isa = PBXBuildFile; fileRef = 46E5C7A71C34B45200F4829D /* UserInfoBasic.m */; };
 		46E5C7AA1C34B63F00F4829D /* logoInfo.png in Resources */ = {isa = PBXBuildFile; fileRef = 46E5C7A91C34B63F00F4829D /* logoInfo.png */; };
 		46E5C7AC1C34B64F00F4829D /* head.png in Resources */ = {isa = PBXBuildFile; fileRef = 46E5C7AB1C34B64F00F4829D /* head.png */; };
@@ -779,6 +780,8 @@
 		46D648391BC8E925000F23EF /* navigationbar_arrow_down@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "navigationbar_arrow_down@2x.png"; sourceTree = "<group>"; };
 		46D6BCA11C2B15EA00883F50 /* FormCellInMutiTast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FormCellInMutiTast.h; sourceTree = "<group>"; };
 		46D6BCA21C2B15EA00883F50 /* FormCellInMutiTast.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FormCellInMutiTast.m; sourceTree = "<group>"; };
+		46DAA8A11C5CBD14001EB60B /* LauchVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LauchVC.h; sourceTree = "<group>"; };
+		46DAA8A21C5CBD14001EB60B /* LauchVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LauchVC.m; sourceTree = "<group>"; };
 		46E5C7A61C34B45200F4829D /* UserInfoBasic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfoBasic.h; sourceTree = "<group>"; };
 		46E5C7A71C34B45200F4829D /* UserInfoBasic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfoBasic.m; sourceTree = "<group>"; };
 		46E5C7A91C34B63F00F4829D /* logoInfo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logoInfo.png; sourceTree = "<group>"; };
@@ -1184,6 +1187,8 @@
 				4643566E1BC6159300A44526 /* PrefixHeader.pch */,
 				464356341BC6093B00A44526 /* Assets.xcassets */,
 				469C78791BD9D32F00B22410 /* Launch Screen.storyboard */,
+				46DAA8A11C5CBD14001EB60B /* LauchVC.h */,
+				46DAA8A21C5CBD14001EB60B /* LauchVC.m */,
 				464356391BC6093B00A44526 /* Info.plist */,
 				4697FB391BCBAF8F00D7E24C /* StringFile.strings */,
 			);
@@ -2332,6 +2337,7 @@
 				46714B7F1BC7C11F00E7AEE9 /* WMNavigationInteractiveTransition.m in Sources */,
 				46184CEC1C465C40004CE58D /* WannaFlatVC.m in Sources */,
 				4616EE121C24C9B500BAF5C3 /* InnerFangVC.m in Sources */,
+				46DAA8A31C5CBD14001EB60B /* LauchVC.m in Sources */,
 				465415261C2C015A003E5743 /* WXUtil.mm in Sources */,
 				46AFDFA51BCB84A200B49CBE /* UIImage+GIF.m in Sources */,
 				4628481A1C0FCC6C00273B3A /* LoacationNameTool.m in Sources */,
