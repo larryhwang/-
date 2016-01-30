@@ -64,6 +64,8 @@
 @property(nonatomic,strong)  NSMutableArray  *LocationNameDicPartOne_NSarr;
 @property(nonatomic,strong)  NSMutableArray  *LocationNameDicPartTwo_NSarr;
 
+@property(nonatomic,weak) UIView *sharedModelView;
+
 
 /**
  *  城市下拉选择按钮
@@ -192,7 +194,7 @@
 -(void)setOriginPopView {
     PopSeletedView *pop = [[PopSeletedView alloc]init];
     pop.PopViewdelegate =self;
-    [self.view addSubview:pop];
+ //   [self.view addSubview:pop];
     [pop setHidden:YES];
     _popView = pop;
 }
@@ -251,18 +253,25 @@
 
 -(void)CitySelect {
     //区域筛选 弹窗
-    UIView *modalView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight)];
-    modalView.userInteractionEnabled = NO;
-    modalView.backgroundColor = [[UIColor lightGrayColor] colorWithAlphaComponent:.4];
-       NSLog(@"hi ,pop");
     if (!_popStatus) {
-        //[self.view addSubview:modalView];  //这种状况下，向右滑动会触发菜单显示
-
+        UIView *modalView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight)];
+        self.sharedModelView = modalView;
+        UITapGestureRecognizer *tapGesture =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(CitySelect)];
+        [modalView addGestureRecognizer:tapGesture];
+        modalView.backgroundColor = [[UIColor lightGrayColor] colorWithAlphaComponent:.4];
+        [self.view addSubview:modalView];
+        [self.view addSubview:_popView];
         [self popViewMoveOut];
+        
     } else {
-       // [modalView removeFromSuperview];
+        [self.sharedModelView removeFromSuperview];
         [self popViewHide];
+      //  [_popView removeFromSuperview];
     }
+}
+
+-(void)TouchModalview {
+    
 }
 
 -(void)popViewMoveOut {
