@@ -86,7 +86,7 @@
     self.tableView.dataSource      = self;
     self.tableView.separatorStyle  = UITableViewCellSeparatorStyleNone;
     self.tableView.rowHeight       = 50 * (self.common.screenW / 320);  //i6 = 100
-    self.tableView.backgroundColor = [UIColor redColor];
+ //  self.tableView.backgroundColor = [UIColor redColor];
     
  
     
@@ -170,7 +170,11 @@
     if (isI4) {
         return 42;
     }
-    return 42;
+    
+    if (isI6) {
+       return 60;
+    }
+    return 65;  //IP6
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -180,7 +184,14 @@
     // 没有用系统自带的类而用了自己重新定义的cell，仅仅为了之后扩展方便，无他
     MenuListCell *cell = [[MenuListCell alloc]init];
   
-    cell = [[[NSBundle mainBundle]loadNibNamed:@"MenuListCell" owner:nil options:nil] firstObject];
+    if (isI6p) {
+       cell = [[[NSBundle mainBundle]loadNibNamed:@"MenuListCell" owner:nil options:nil] lastObject];
+    } else if(isI6){
+     cell = [[[NSBundle mainBundle]loadNibNamed:@"MenuListCell" owner:nil options:nil] objectAtIndex:1];
+    } else {
+     cell = [[[NSBundle mainBundle]loadNibNamed:@"MenuListCell" owner:nil options:nil]firstObject];
+    }
+   
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     cell.backgroundColor = [UIColor clearColor];
     if (indexPath.row == 0) {
