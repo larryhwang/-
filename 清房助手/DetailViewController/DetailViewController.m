@@ -406,10 +406,10 @@
 #pragma mark -ScrollView delegate
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-
     if (scrollView.tag ==ImgScoviewTag) {
         NSInteger pageIndex = scrollView.contentOffset.x / CGRectGetWidth(scrollView.frame);
-        NSString  *nowSelected =[NSString stringWithFormat:@"%d/%d",pageIndex + 1,self.ImgTotal];
+        NSLog(@"当前页:%d",pageIndex);
+        NSString  *nowSelected =[NSString stringWithFormat:@"%ld/%ld",pageIndex + 1,(long)self.ImgTotal];
         [self.CountLabel setTitle:nowSelected forState:UIControlStateNormal];
         self.CountLabel.titleLabel.text = nowSelected ;
         NSMutableAttributedString *HeavyNo = [[NSMutableAttributedString alloc]initWithString:nowSelected];
@@ -419,9 +419,6 @@
     }else {
         return ;
     }
-
-
-    
 }
 
 
@@ -431,12 +428,18 @@
     NSLog(@"%@",self.imagesData);
     [self.imagesData enumerateObjectsUsingBlock:^(NSString *imageName, NSUInteger idx, BOOL *stop) {
         UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(CGRectGetWidth(self.scrollView3.frame) * idx, 0, CGRectGetWidth(self.scrollView3.frame), CGRectGetHeight(self.scrollView3.frame))];
+        imageView.userInteractionEnabled = YES;
+        UITapGestureRecognizer  *tapGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(ScanGallery)];
+        [imageView addGestureRecognizer:tapGesture];
         imageView.contentMode = UIViewContentModeScaleAspectFill;
         [imageView sd_setImageWithURL:self.imagesData[idx] placeholderImage:[UIImage imageNamed:@"DeafaultImage"]];
         [self.scrollView3 addSubview:imageView];
     }];
-    
     NSLog(@"完成滚动图设置");
+}
+
+-(void)ScanGallery {
+   // NSLog(@"图片被点击了 %d",selecedImg.tag);
 }
 
 #pragma mark -表代理方法
