@@ -88,13 +88,7 @@
     self.tableView.rowHeight       = 50 * (self.common.screenW / 320);  //i6 = 100
     self.tableView.backgroundColor = [UIColor redColor];
     
-    if (isI5) {
-        self.tableView.rowHeight = 42;
-    }
-    
-    if (isI4) {
-        self.tableView.rowHeight = 30;
-    }
+ 
     
     NSLog(@"高度:%f",   self.tableView.rowHeight);
     self.tableView.tableFooterView = [[UIView alloc] init];
@@ -165,6 +159,18 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return 6;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+  
+    if (isI5) {
+        return 42;
+    }
+    
+    if (isI4) {
+        return 42;
+    }
+    return 42;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {

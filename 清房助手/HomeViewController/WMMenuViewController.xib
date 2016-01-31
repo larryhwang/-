@@ -200,7 +200,9 @@
                 <constraint firstItem="eGt-Fe-0zL" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="If5-Ce-x0H"/>
                 <constraint firstItem="eGt-Fe-0zL" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="KCX-oz-P2a"/>
                 <constraint firstItem="eGt-Fe-0zL" firstAttribute="trailing" secondItem="uDq-qB-jNZ" secondAttribute="trailing" id="KrM-8T-oAM"/>
-                <constraint firstItem="Mp4-C3-CDa" firstAttribute="top" secondItem="eGt-Fe-0zL" secondAttribute="bottom" constant="89" id="Kte-ZS-PXh"/>
+                <constraint firstItem="Mp4-C3-CDa" firstAttribute="top" secondItem="eGt-Fe-0zL" secondAttribute="bottom" constant="89" id="Kte-ZS-PXh">
+                    <variation key="widthClass=compact" constant="20"/>
+                </constraint>
                 <constraint firstAttribute="bottom" secondItem="Mp4-C3-CDa" secondAttribute="bottom" constant="8" id="LHe-xb-WAf"/>
                 <constraint firstItem="YkR-PW-D1O" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="MdG-OQ-Xdo"/>
                 <constraint firstAttribute="trailing" secondItem="uDq-qB-jNZ" secondAttribute="trailing" constant="50" id="Nz4-fh-fDI"/>
