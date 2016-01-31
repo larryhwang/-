@@ -192,7 +192,8 @@
     
     _HttpManager   =  [AFHTTPRequestOperationManager manager];
     _HttpManager.requestSerializer.timeoutInterval  = 5.0;
-     NSString *url = @"http://www.123qf.cn:81/testApp/seach/echoSeachFKYuanList.api";
+//     NSString *url = @"http://www.123qf.cn:81/testApp/seach/echoSeachFKYuanList.api";
+         NSString *url = @"http://www.123qf.cn/app/seach/echoSeachFKYuanList.api";
     
    [_HttpManager POST:url parameters:param success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
     NSLog(@"%@",responseObject);

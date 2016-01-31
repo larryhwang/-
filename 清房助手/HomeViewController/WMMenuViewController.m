@@ -86,9 +86,14 @@
     self.tableView.dataSource      = self;
     self.tableView.separatorStyle  = UITableViewCellSeparatorStyleNone;
     self.tableView.rowHeight       = 50 * (self.common.screenW / 320);  //i6 = 100
+    self.tableView.backgroundColor = [UIColor redColor];
     
     if (isI5) {
         self.tableView.rowHeight = 42;
+    }
+    
+    if (isI4) {
+        self.tableView.rowHeight = 30;
     }
     
     NSLog(@"高度:%f",   self.tableView.rowHeight);
@@ -194,6 +199,11 @@
     }
 
     cell.MenuTitle.text = self.listArray[indexPath.row];
+    
+    if (isI4) {
+        [cell.MenuTitle setFont:[UIFont systemFontOfSize:15]];
+    }
+    
     return cell;
 }
 
