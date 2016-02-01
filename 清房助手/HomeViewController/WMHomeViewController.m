@@ -519,7 +519,7 @@
        // self.CurrentRuest= @"http://www.123qf.cn:81/testApp/keyuan/rentalOrBuyHouseSearch.api";  //求租列表
           self.CurrentRuest = @"http://www.123qf.cn/app/keyuan/rentalOrBuyHouseSearch.api";
         NSDictionary *dic = @{
-                              @"sum":@"20",
+                              @"sum":@"10",
                               @"zugou":@"0",
                               @"shengfen":@"广东省",
                               @"currentpage" :[NSString stringWithFormat:@"%d",self.currentPage]};
