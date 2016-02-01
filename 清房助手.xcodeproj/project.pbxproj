@@ -305,6 +305,18 @@
 		46E6CE301C5B071800B9FE2E /* OpenShare.m in Sources */ = {isa = PBXBuildFile; fileRef = 46E6CE291C5B071800B9FE2E /* OpenShare.m */; };
 		46E8BAF41C2E4B86009E808D /* QFOrderFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 46E8BAF21C2E4B86009E808D /* QFOrderFilter.m */; };
 		46E8BAF51C2E4B86009E808D /* QFOrderFilter.xib in Resources */ = {isa = PBXBuildFile; fileRef = 46E8BAF31C2E4B86009E808D /* QFOrderFilter.xib */; };
+		46FAB1231C5F4A1800D84CBC /* jdy_browseLoading@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 46FAB10E1C5F4A1800D84CBC /* jdy_browseLoading@2x.png */; };
+		46FAB1241C5F4A1800D84CBC /* jdy_browseLoading@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 46FAB10F1C5F4A1800D84CBC /* jdy_browseLoading@3x.png */; };
+		46FAB1251C5F4A1800D84CBC /* JDYBrowseCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 46FAB1111C5F4A1800D84CBC /* JDYBrowseCollectionViewCell.m */; };
+		46FAB1261C5F4A1800D84CBC /* JDYBrowseLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 46FAB1141C5F4A1800D84CBC /* JDYBrowseLoadingView.m */; };
+		46FAB1271C5F4A1800D84CBC /* JDYBrowseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 46FAB1161C5F4A1800D84CBC /* JDYBrowseModel.m */; };
+		46FAB1281C5F4A1800D84CBC /* JDYBrowseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 46FAB1181C5F4A1800D84CBC /* JDYBrowseViewController.m */; };
+		46FAB1291C5F4A1800D84CBC /* JDYBrowseZoomScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 46FAB11A1C5F4A1800D84CBC /* JDYBrowseZoomScrollView.m */; };
+		46FAB12A1C5F4A1800D84CBC /* UIImage+JDYScale.m in Sources */ = {isa = PBXBuildFile; fileRef = 46FAB11C1C5F4A1800D84CBC /* UIImage+JDYScale.m */; };
+		46FAB12B1C5F4A1800D84CBC /* UINavigationController+JDYRotateControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 46FAB11E1C5F4A1800D84CBC /* UINavigationController+JDYRotateControl.m */; };
+		46FAB12C1C5F4A1800D84CBC /* UIView+JDYAutolayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 46FAB1201C5F4A1800D84CBC /* UIView+JDYAutolayout.m */; };
+		46FAB12D1C5F4A1800D84CBC /* UIView+JDYLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 46FAB1221C5F4A1800D84CBC /* UIView+JDYLayout.m */; };
+		46FAB1301C5F4AD700D84CBC /* JDYCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 46FAB12F1C5F4AD700D84CBC /* JDYCollectionViewCell.m */; };
 		46FBF74D1BDD17FF00F68EE6 /* pStar.png in Resources */ = {isa = PBXBuildFile; fileRef = 46FBF74C1BDD17FF00F68EE6 /* pStar.png */; };
 		7785FD4973E36DF183E5705C /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 93DCD64313F5A1A452276E13 /* libPods.a */; };
 /* End PBXBuildFile section */
@@ -815,6 +827,29 @@
 		46E8BAF11C2E4B85009E808D /* QFOrderFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QFOrderFilter.h; sourceTree = "<group>"; };
 		46E8BAF21C2E4B86009E808D /* QFOrderFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QFOrderFilter.m; sourceTree = "<group>"; };
 		46E8BAF31C2E4B86009E808D /* QFOrderFilter.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QFOrderFilter.xib; sourceTree = "<group>"; };
+		46FAB10E1C5F4A1800D84CBC /* jdy_browseLoading@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "jdy_browseLoading@2x.png"; sourceTree = "<group>"; };
+		46FAB10F1C5F4A1800D84CBC /* jdy_browseLoading@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "jdy_browseLoading@3x.png"; sourceTree = "<group>"; };
+		46FAB1101C5F4A1800D84CBC /* JDYBrowseCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JDYBrowseCollectionViewCell.h; sourceTree = "<group>"; };
+		46FAB1111C5F4A1800D84CBC /* JDYBrowseCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JDYBrowseCollectionViewCell.m; sourceTree = "<group>"; };
+		46FAB1121C5F4A1800D84CBC /* JDYBrowseDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JDYBrowseDefine.h; sourceTree = "<group>"; };
+		46FAB1131C5F4A1800D84CBC /* JDYBrowseLoadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JDYBrowseLoadingView.h; sourceTree = "<group>"; };
+		46FAB1141C5F4A1800D84CBC /* JDYBrowseLoadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JDYBrowseLoadingView.m; sourceTree = "<group>"; };
+		46FAB1151C5F4A1800D84CBC /* JDYBrowseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JDYBrowseModel.h; sourceTree = "<group>"; };
+		46FAB1161C5F4A1800D84CBC /* JDYBrowseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JDYBrowseModel.m; sourceTree = "<group>"; };
+		46FAB1171C5F4A1800D84CBC /* JDYBrowseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JDYBrowseViewController.h; sourceTree = "<group>"; };
+		46FAB1181C5F4A1800D84CBC /* JDYBrowseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JDYBrowseViewController.m; sourceTree = "<group>"; };
+		46FAB1191C5F4A1800D84CBC /* JDYBrowseZoomScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JDYBrowseZoomScrollView.h; sourceTree = "<group>"; };
+		46FAB11A1C5F4A1800D84CBC /* JDYBrowseZoomScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JDYBrowseZoomScrollView.m; sourceTree = "<group>"; };
+		46FAB11B1C5F4A1800D84CBC /* UIImage+JDYScale.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+JDYScale.h"; sourceTree = "<group>"; };
+		46FAB11C1C5F4A1800D84CBC /* UIImage+JDYScale.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+JDYScale.m"; sourceTree = "<group>"; };
+		46FAB11D1C5F4A1800D84CBC /* UINavigationController+JDYRotateControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+JDYRotateControl.h"; sourceTree = "<group>"; };
+		46FAB11E1C5F4A1800D84CBC /* UINavigationController+JDYRotateControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+JDYRotateControl.m"; sourceTree = "<group>"; };
+		46FAB11F1C5F4A1800D84CBC /* UIView+JDYAutolayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+JDYAutolayout.h"; sourceTree = "<group>"; };
+		46FAB1201C5F4A1800D84CBC /* UIView+JDYAutolayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+JDYAutolayout.m"; sourceTree = "<group>"; };
+		46FAB1211C5F4A1800D84CBC /* UIView+JDYLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+JDYLayout.h"; sourceTree = "<group>"; };
+		46FAB1221C5F4A1800D84CBC /* UIView+JDYLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+JDYLayout.m"; sourceTree = "<group>"; };
+		46FAB12E1C5F4AD700D84CBC /* JDYCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JDYCollectionViewCell.h; sourceTree = "<group>"; };
+		46FAB12F1C5F4AD700D84CBC /* JDYCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JDYCollectionViewCell.m; sourceTree = "<group>"; };
 		46FBF74C1BDD17FF00F68EE6 /* pStar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pStar.png; sourceTree = "<group>"; };
 		636FD223987F79DDC4D5924B /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		93DCD64313F5A1A452276E13 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1785,6 +1820,7 @@
 		46C7169B1BC66EF400287742 /* Lib */ = {
 			isa = PBXGroup;
 			children = (
+				46FAB10D1C5F4A1800D84CBC /* JDYBrowse */,
 				46E6CE1D1C5B071800B9FE2E /* openshare */,
 				468C23011C3F6125005159DD /* GBTagListView2.0 */,
 				46B23D001C33B26B00C78B43 /* Masonry */,
@@ -1893,6 +1929,36 @@
 				4677DE161C16710600011D70 /* Controller */,
 			);
 			path = Search;
+			sourceTree = "<group>";
+		};
+		46FAB10D1C5F4A1800D84CBC /* JDYBrowse */ = {
+			isa = PBXGroup;
+			children = (
+				46FAB12E1C5F4AD700D84CBC /* JDYCollectionViewCell.h */,
+				46FAB12F1C5F4AD700D84CBC /* JDYCollectionViewCell.m */,
+				46FAB10E1C5F4A1800D84CBC /* jdy_browseLoading@2x.png */,
+				46FAB10F1C5F4A1800D84CBC /* jdy_browseLoading@3x.png */,
+				46FAB1101C5F4A1800D84CBC /* JDYBrowseCollectionViewCell.h */,
+				46FAB1111C5F4A1800D84CBC /* JDYBrowseCollectionViewCell.m */,
+				46FAB1121C5F4A1800D84CBC /* JDYBrowseDefine.h */,
+				46FAB1131C5F4A1800D84CBC /* JDYBrowseLoadingView.h */,
+				46FAB1141C5F4A1800D84CBC /* JDYBrowseLoadingView.m */,
+				46FAB1151C5F4A1800D84CBC /* JDYBrowseModel.h */,
+				46FAB1161C5F4A1800D84CBC /* JDYBrowseModel.m */,
+				46FAB1171C5F4A1800D84CBC /* JDYBrowseViewController.h */,
+				46FAB1181C5F4A1800D84CBC /* JDYBrowseViewController.m */,
+				46FAB1191C5F4A1800D84CBC /* JDYBrowseZoomScrollView.h */,
+				46FAB11A1C5F4A1800D84CBC /* JDYBrowseZoomScrollView.m */,
+				46FAB11B1C5F4A1800D84CBC /* UIImage+JDYScale.h */,
+				46FAB11C1C5F4A1800D84CBC /* UIImage+JDYScale.m */,
+				46FAB11D1C5F4A1800D84CBC /* UINavigationController+JDYRotateControl.h */,
+				46FAB11E1C5F4A1800D84CBC /* UINavigationController+JDYRotateControl.m */,
+				46FAB11F1C5F4A1800D84CBC /* UIView+JDYAutolayout.h */,
+				46FAB1201C5F4A1800D84CBC /* UIView+JDYAutolayout.m */,
+				46FAB1211C5F4A1800D84CBC /* UIView+JDYLayout.h */,
+				46FAB1221C5F4A1800D84CBC /* UIView+JDYLayout.m */,
+			);
+			path = JDYBrowse;
 			sourceTree = "<group>";
 		};
 		C1601311CBEE81D2050A5A8E /* Frameworks */ = {
@@ -2084,6 +2150,7 @@
 				46BBE8DF1C0FD31C00DE4B14 /* SelectJie.xib in Resources */,
 				4677DE211C16741F00011D70 /* SeachRusultDisplayController.xib in Resources */,
 				46BBE8DD1C0FD31C00DE4B14 /* SelectCityVC.xib in Resources */,
+				46FAB1241C5F4A1800D84CBC /* jdy_browseLoading@3x.png in Resources */,
 				46BBE8AB1C0FD19400DE4B14 /* loadingIndicator@2x.png in Resources */,
 				46BBE8BD1C0FD23900DE4B14 /* PopSelectViewController.xib in Resources */,
 				46E6CE1C1C5A174300B9FE2E /* SharePopVC.xib in Resources */,
@@ -2100,6 +2167,7 @@
 				46E5C8031C35283E00F4829D /* hsf_20151231155029_0.png in Resources */,
 				46D648321BC8E67E000F23EF /* jian-down.png in Resources */,
 				46BBE8E11C0FD31C00DE4B14 /* SelectQu.xib in Resources */,
+				46FAB1231C5F4A1800D84CBC /* jdy_browseLoading@2x.png in Resources */,
 				4673A5041BC8BE0200700099 /* tab_me_nor@2x.png in Resources */,
 				46E5C7BB1C34D88500F4829D /* UserInfo_Four.xib in Resources */,
 				4646C6A61C27145500896964 /* ZuGouDetailViewController.xib in Resources */,
@@ -2201,7 +2269,9 @@
 				46AFDFA81BCB84A200B49CBE /* UIImageView+HighlightedWebCache.m in Sources */,
 				46E8BAF41C2E4B86009E808D /* QFOrderFilter.m in Sources */,
 				465415311C2C4AAE003E5743 /* MyOrderCell.m in Sources */,
+				46FAB1291C5F4A1800D84CBC /* JDYBrowseZoomScrollView.m in Sources */,
 				4677DE1C1C1672D700011D70 /* TableViewController.m in Sources */,
+				46FAB12D1C5F4A1800D84CBC /* UIView+JDYLayout.m in Sources */,
 				46E05B091C5E24B300571A21 /* ScanGalleryVC.m in Sources */,
 				46B1D0D01C48D7E0008417D9 /* WannaChang.m in Sources */,
 				46C716CD1BC69FB800287742 /* NSObject+MJCoding.m in Sources */,
@@ -2246,6 +2316,7 @@
 				4643565E1BC611F100A44526 /* LoginViewController.m in Sources */,
 				46714B7B1BC7C11F00E7AEE9 /* WMMenuTableViewCell.m in Sources */,
 				46C716D61BC7645E00287742 /* MBProgressHUD+CZ.m in Sources */,
+				46FAB1261C5F4A1800D84CBC /* JDYBrowseLoadingView.m in Sources */,
 				46789C481C43B0090094DE54 /* SaleoutChangFangViewController.m in Sources */,
 				46AFDFA21BCB84A200B49CBE /* SDWebImageManager.m in Sources */,
 				46BC5E5D1C2999AB00B1247A /* CommitOrderVC.m in Sources */,
@@ -2274,23 +2345,28 @@
 				46BBE8B01C0FD1A800DE4B14 /* pinyin.m in Sources */,
 				46D33C0E1BCB4B9C00B30F2A /* SalesCell.m in Sources */,
 				466C32DB1C325E6300CDF467 /* HomeCitySelecVC.m in Sources */,
+				46FAB1301C5F4AD700D84CBC /* JDYCollectionViewCell.m in Sources */,
 				4617E63A1C1BADD5007BECBF /* FilterSelectJieViewController.m in Sources */,
 				468E288D1BCD021A00560500 /* FactoryDetailCell.m in Sources */,
 				46BC5E641C29A8CF00B1247A /* TypesSelect.m in Sources */,
 				462847F91C0FCB5600273B3A /* FlatDescirbeVcontroller.m in Sources */,
 				46252F921BDA648C00C1FA66 /* UIView+MJExtension.m in Sources */,
+				46FAB1271C5F4A1800D84CBC /* JDYBrowseModel.m in Sources */,
 				46B23D1E1C33B26B00C78B43 /* MASConstraintMaker.m in Sources */,
 				46AFDFA11BCB84A200B49CBE /* SDWebImageDownloaderOperation.m in Sources */,
 				46252F911BDA648C00C1FA66 /* UIScrollView+MJRefresh.m in Sources */,
 				46E6CE1B1C5A174300B9FE2E /* SharePopVC.m in Sources */,
 				4616EE171C24C9CD00BAF5C3 /* InnerCustomer.m in Sources */,
 				46256C511BCF776F00E05C5F /* FlatDetailCell.m in Sources */,
+				46FAB1251C5F4A1800D84CBC /* JDYBrowseCollectionViewCell.m in Sources */,
+				46FAB1281C5F4A1800D84CBC /* JDYBrowseViewController.m in Sources */,
 				46C716D81BC7645E00287742 /* MBProgressHUD.m in Sources */,
 				46BBE8BE1C0FD23900DE4B14 /* SelectViewContorller.m in Sources */,
 				468ED01B1BD5E0DD001605A7 /* SCNavTabBarController.m in Sources */,
 				46D648381BC8E82C000F23EF /* QFTitleButton.m in Sources */,
 				4697FB331BCB9BAE00D7E24C /* DetailViewController.m in Sources */,
 				46AFDFA71BCB84A200B49CBE /* UIImage+WebP.m in Sources */,
+				46FAB12A1C5F4A1800D84CBC /* UIImage+JDYScale.m in Sources */,
 				46AFDFA01BCB84A200B49CBE /* SDWebImageDownloader.m in Sources */,
 				46BBE8E01C0FD31C00DE4B14 /* SelectQu.m in Sources */,
 				46714B791BC7C11F00E7AEE9 /* WMHomeViewController.m in Sources */,
@@ -2323,6 +2399,7 @@
 				46256C4C1BCF5B7300E05C5F /* FlatLocationCell.m in Sources */,
 				46B23C971C336CE200C78B43 /* UserInfoVC_iSIX.m in Sources */,
 				4616EDDA1C24651600BAF5C3 /* SettingPage_TableVC.m in Sources */,
+				46FAB12B1C5F4A1800D84CBC /* UINavigationController+JDYRotateControl.m in Sources */,
 				46E5C7B51C34D11900F4829D /* UserInfo_iSIXP.m in Sources */,
 				4646C6781C26A0B100896964 /* CZNewFeatureCell.m in Sources */,
 				46AFDFAA1BCB84A200B49CBE /* UIView+WebCacheOperation.m in Sources */,
@@ -2339,6 +2416,7 @@
 				46252F8D1BDA648C00C1FA66 /* MJRefreshConst.m in Sources */,
 				462847E31C0EEF0B00273B3A /* PostViewController.m in Sources */,
 				46714B761BC7C11F00E7AEE9 /* HomeViewController.m in Sources */,
+				46FAB12C1C5F4A1800D84CBC /* UIView+JDYAutolayout.m in Sources */,
 				46714B7F1BC7C11F00E7AEE9 /* WMNavigationInteractiveTransition.m in Sources */,
 				46184CEC1C465C40004CE58D /* WannaFlatVC.m in Sources */,
 				4616EE121C24C9B500BAF5C3 /* InnerFangVC.m in Sources */,
