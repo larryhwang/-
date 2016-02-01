@@ -289,6 +289,7 @@
 }
 
 -(void)popViewHide {
+    [self.sharedModelView removeFromSuperview];
     [UIView animateWithDuration:.5 animations:^{
         [_popView setFrame:_popView.popViewOriginRect];
         _popStatus = NO;
