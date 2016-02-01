@@ -81,6 +81,7 @@
 @property(nonatomic,strong)  AFHTTPRequestOperationManager  *sharedMgr;
 @property(nonatomic,strong)  NSDictionary  *CheckBtnInfoDic;
 @property(nonatomic,strong)  NSMutableArray  *ImgArr;
+@property(nonatomic,strong)  NSMutableArray  *ImgViewArr;
 
 
 
@@ -101,6 +102,13 @@
         _ImgArr = [NSMutableArray new];
     }
     return _ImgArr;
+}
+
+-(NSMutableArray *)ImgViewArr {
+    if (_ImgViewArr ==nil) {
+        _ImgViewArr = [NSMutableArray new];
+    }
+    return _ImgViewArr;
 }
 
 
@@ -454,31 +462,25 @@
         imageView.contentMode = UIViewContentModeScaleAspectFill;
         [imageView sd_setImageWithURL:self.imagesData[idx] placeholderImage:[UIImage imageNamed:@"DeafaultImage"]];
         [self.ImgArr addObject:imageView.image];
+        [self.ImgViewArr addObject:imageView];
         [self.scrollView3 addSubview:imageView];
     }];
     NSLog(@"完成滚动图设置");
 }
 
 -(void)ScanGallery {
-   // NSLog(@"图片被点击了 %d",selecedImg.tag);
-//    ScanGalleryVC *scanPicVC = [ScanGalleryVC new];
-//    scanPicVC.DispImg = self.ImgArr;
-//    scanPicVC.index = _nowSelectedIndex;
-//    
-//    [self presentViewController:scanPicVC animated:YES completion:nil];
-    
-    NSArray *bigUrlArray = @[@"http://7xjtvh.com1.z0.glb.clouddn.com/browse01.jpg",@"http://7xjtvh.com1.z0.glb.clouddn.com/browse02.jpg",@"http://7xjtvh.com1.z0.glb.clouddn.com/browse03.jpg",@"http://7xjtvh.com1.z0.glb.clouddn.com/browse04.jpg",@"http://7xjtvh.com1.z0.glb.clouddn.com/browse05.jpg",@"http://7xjtvh.com1.z0.glb.clouddn.com/browse06.jpg",@"http://7xjtvh.com1.z0.glb.clouddn.com/browse07.jpg",@"http://7xjtvh.com1.z0.glb.clouddn.com/browse08.jpg",@"http://7xjtvh.com1.z0.glb.clouddn.com/browse09.jpg",@"http://7xjtvh.com1.z0.glb.clouddn.com/browse03.jpg"];
+
     NSMutableArray *browseItemArray = [[NSMutableArray alloc]init];
     int i = 0;
     for(i = 0;i < [self.ImgArr count];i++)
     {
-        UIImageView *imageView = [self.view viewWithTag:i + 100];
+        UIImageView *imageView = self.ImgViewArr[_nowSelectedIndex];
         JDYBrowseModel *browseItem = [[JDYBrowseModel alloc]init];
         browseItem.bigImageUrl = self.imagesData[i];// 大图url地址
         browseItem.smallImageView = imageView;// 小图
         [browseItemArray addObject:browseItem];
     }
-  //  JDYCollectionViewCell *cell = (JDYCollectionViewCell *)[_collectionView cellForItemAtIndexPath:indexPath];
+
     JDYBrowseViewController *bvc = [[JDYBrowseViewController alloc]initWithBrowseItemArray:browseItemArray currentIndex:_nowSelectedIndex];
     [bvc showBrowseViewController];
     
@@ -490,11 +492,7 @@
 }
 
 -(void)CheckBtn {
-    //http://www.123qf.cn:81/testApp/fkyuan/selectOwnerInfo.api?kid=5&currentpage=1
-    
-    //    self.sharedMgr po
- //   NSString *URL =@"http://www.123qf.cn:81/testApp/fkyuan/selectOwnerInfo.api";
-       NSString *URL =@"http://www.123qf.cn/app/fkyuan/selectOwnerInfo.api";
+    NSString *URL =@"http://www.123qf.cn/app/fkyuan/selectOwnerInfo.api";
     NSMutableDictionary *pramaDic = [NSMutableDictionary new];
     pramaDic[@"fid"] = self.FangData[@"id"];
     pramaDic[@"currentpage"] = @"1";
@@ -526,7 +524,6 @@
 }
 
 -(void)checkOwnerInfo {
-  //  NSString *URL =@"http://www.123qf.cn:81/testApp/fkyuan/selectOwnerInfo.api";
       NSString *URL =@"http://www.123qf.cn/app/fkyuan/selectOwnerInfo.api";
     NSMutableDictionary *pramaDic = [NSMutableDictionary new];
     pramaDic[@"fid"] = self.FangData[@"id"];
