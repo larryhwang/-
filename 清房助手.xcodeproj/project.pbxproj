@@ -283,6 +283,7 @@
 		46D648381BC8E82C000F23EF /* QFTitleButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 46D648371BC8E82C000F23EF /* QFTitleButton.m */; };
 		46D6483A1BC8E925000F23EF /* navigationbar_arrow_down@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 46D648391BC8E925000F23EF /* navigationbar_arrow_down@2x.png */; };
 		46D6BCA31C2B15EA00883F50 /* FormCellInMutiTast.m in Sources */ = {isa = PBXBuildFile; fileRef = 46D6BCA21C2B15EA00883F50 /* FormCellInMutiTast.m */; };
+		46E05B091C5E24B300571A21 /* ScanGalleryVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 46E05B081C5E24B300571A21 /* ScanGalleryVC.m */; };
 		46E5C7A81C34B45200F4829D /* UserInfoBasic.m in Sources */ = {isa = PBXBuildFile; fileRef = 46E5C7A71C34B45200F4829D /* UserInfoBasic.m */; };
 		46E5C7AA1C34B63F00F4829D /* logoInfo.png in Resources */ = {isa = PBXBuildFile; fileRef = 46E5C7A91C34B63F00F4829D /* logoInfo.png */; };
 		46E5C7AC1C34B64F00F4829D /* head.png in Resources */ = {isa = PBXBuildFile; fileRef = 46E5C7AB1C34B64F00F4829D /* head.png */; };
@@ -777,6 +778,8 @@
 		46D648391BC8E925000F23EF /* navigationbar_arrow_down@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "navigationbar_arrow_down@2x.png"; sourceTree = "<group>"; };
 		46D6BCA11C2B15EA00883F50 /* FormCellInMutiTast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FormCellInMutiTast.h; sourceTree = "<group>"; };
 		46D6BCA21C2B15EA00883F50 /* FormCellInMutiTast.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FormCellInMutiTast.m; sourceTree = "<group>"; };
+		46E05B071C5E24B300571A21 /* ScanGalleryVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScanGalleryVC.h; sourceTree = "<group>"; };
+		46E05B081C5E24B300571A21 /* ScanGalleryVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScanGalleryVC.m; sourceTree = "<group>"; };
 		46E5C7A61C34B45200F4829D /* UserInfoBasic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfoBasic.h; sourceTree = "<group>"; };
 		46E5C7A71C34B45200F4829D /* UserInfoBasic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfoBasic.m; sourceTree = "<group>"; };
 		46E5C7A91C34B63F00F4829D /* logoInfo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logoInfo.png; sourceTree = "<group>"; };
@@ -983,6 +986,7 @@
 		462847DC1C0EEEBF00273B3A /* Interface */ = {
 			isa = PBXGroup;
 			children = (
+				46E05B061C5E247D00571A21 /* ScanGalleryVC */,
 				461AAD7B1C550A4C00A6F006 /* SharePopView */,
 				46B23C931C336CC200C78B43 /* UserInfo */,
 				46BC5E4E1C29892400B1247A /* MutiTask */,
@@ -1850,6 +1854,15 @@
 			name = Tool;
 			sourceTree = "<group>";
 		};
+		46E05B061C5E247D00571A21 /* ScanGalleryVC */ = {
+			isa = PBXGroup;
+			children = (
+				46E05B071C5E24B300571A21 /* ScanGalleryVC.h */,
+				46E05B081C5E24B300571A21 /* ScanGalleryVC.m */,
+			);
+			name = ScanGalleryVC;
+			sourceTree = "<group>";
+		};
 		46E6CE1D1C5B071800B9FE2E /* openshare */ = {
 			isa = PBXGroup;
 			children = (
@@ -2189,6 +2202,7 @@
 				46E8BAF41C2E4B86009E808D /* QFOrderFilter.m in Sources */,
 				465415311C2C4AAE003E5743 /* MyOrderCell.m in Sources */,
 				4677DE1C1C1672D700011D70 /* TableViewController.m in Sources */,
+				46E05B091C5E24B300571A21 /* ScanGalleryVC.m in Sources */,
 				46B1D0D01C48D7E0008417D9 /* WannaChang.m in Sources */,
 				46C716CD1BC69FB800287742 /* NSObject+MJCoding.m in Sources */,
 				46BBE8BC1C0FD23900DE4B14 /* PopSelectViewController.m in Sources */,

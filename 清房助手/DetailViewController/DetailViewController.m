@@ -26,6 +26,8 @@
 #import "SharePopVC.h"
 
 
+#import "ScanGalleryVC.h"
+
 
 #import "PopSelectViewController.h"
 
@@ -51,8 +53,11 @@
 #define ModalViewTag   99
 
 
-@interface DetailViewController ()
-<UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate,UIAlertViewDelegate,MFMessageComposeViewControllerDelegate,SharePopdelegate>
+@interface DetailViewController ()<UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate,UIAlertViewDelegate,MFMessageComposeViewControllerDelegate,SharePopdelegate>
+
+{
+    NSInteger  _nowSelectedIndex;
+}
 @property (strong, nonatomic)  UIScrollView *scrollView3;
 @property (strong, nonatomic)  UITableView *detailInfoTable;
 @property (strong, nonatomic)  NSMutableArray *imagesData;
@@ -70,6 +75,7 @@
 @property(nonatomic,strong)      UIButton *CountLabel;
 @property(nonatomic,strong)  AFHTTPRequestOperationManager  *sharedMgr;
 @property(nonatomic,strong)  NSDictionary  *CheckBtnInfoDic;
+@property(nonatomic,strong)  NSMutableArray  *ImgArr;
 
 
 
@@ -84,6 +90,14 @@
     }
     return _FangData;
 }
+
+-(NSMutableArray*)ImgArr {
+    if (_ImgArr ==nil) {
+        _ImgArr = [NSMutableArray new];
+    }
+    return _ImgArr;
+}
+
 
 -(void)viewDidAppear:(BOOL)animated {
     self.navigationController.navigationBar.translucent = YES ;
@@ -408,6 +422,7 @@
 {
     if (scrollView.tag ==ImgScoviewTag) {
         NSInteger pageIndex = scrollView.contentOffset.x / CGRectGetWidth(scrollView.frame);
+        _nowSelectedIndex = pageIndex;
         NSLog(@"当前页:%d",pageIndex);
         NSString  *nowSelected =[NSString stringWithFormat:@"%ld/%ld",pageIndex + 1,(long)self.ImgTotal];
         [self.CountLabel setTitle:nowSelected forState:UIControlStateNormal];
@@ -433,6 +448,7 @@
         [imageView addGestureRecognizer:tapGesture];
         imageView.contentMode = UIViewContentModeScaleAspectFill;
         [imageView sd_setImageWithURL:self.imagesData[idx] placeholderImage:[UIImage imageNamed:@"DeafaultImage"]];
+        [self.ImgArr addObject:imageView.image];
         [self.scrollView3 addSubview:imageView];
     }];
     NSLog(@"完成滚动图设置");
@@ -440,6 +456,11 @@
 
 -(void)ScanGallery {
    // NSLog(@"图片被点击了 %d",selecedImg.tag);
+    ScanGalleryVC *scanPicVC = [ScanGalleryVC new];
+    scanPicVC.DispImg = self.ImgArr;
+    scanPicVC.index = _nowSelectedIndex;
+    
+    [self presentViewController:scanPicVC animated:YES completion:nil];
 }
 
 #pragma mark -表代理方法

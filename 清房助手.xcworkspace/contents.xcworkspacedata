@@ -5,6 +5,9 @@
       location = "group:QFMyOrderTableVC.h">
    </FileRef>
    <FileRef
+      location = "group:File">
+   </FileRef>
+   <FileRef
       location = "group:QFMyOrderTableVC.m">
    </FileRef>
    <FileRef

@@ -67,6 +67,9 @@
 @property(nonatomic,weak) UIView *sharedModelView;
 
 
+@property(nonatomic,assign) int currentPage;
+
+
 /**
  *  城市下拉选择按钮
  */
@@ -127,7 +130,7 @@
     
   //  [self.tableView addHeaderWithTarget:self action:@selector(refreshData)];
   //  [self.tableView headerBeginRefreshing];
-  //  [self.tableView addFooterWithTarget:self action:@selector(loadMoreData)];
+   [self.tableView addFooterWithTarget:self action:@selector(loadMoreData)];
     
     [self tableInit];  //页面初始化
     
@@ -209,6 +212,8 @@
     AFHTTPRequestOperationManager *mgr  = [AFHTTPRequestOperationManager manager];
     mgr.requestSerializer.timeoutInterval  = 5.0;
     self.shareMgr = mgr ;
+    
+     self.currentPage = 1;
 }
 /**
  *  获取地名，用于筛选
@@ -413,6 +418,7 @@
 
 
 -(void)LeftTableLoad {
+      self.currentPage = 1;
     if (_isWant == NO) {
         _status = SalesOut ;   //出售列表
         self.ResultTableView.searchStyle  =_status;
@@ -426,13 +432,13 @@
                                    @"zushou":@"0",
                                    @"shengfen":@"广东省",
                                    @"shi":@"惠州市",
-                                   @"currentpage" :@"1"};
+                                   @"currentpage" :[NSString stringWithFormat:@"%d",self.currentPage]};
             [parameters setValuesForKeysWithDictionary:dict];
              self.pramaDic = parameters;
         }
-        [self.pramaDic setObject:@"20" forKey:@"sum"];
+      
         [self.pramaDic setObject:@"0" forKey:@"zushou"];
-        [self.pramaDic setObject:@"1" forKey:@"currentpage"];
+
     }else {
         // 求购
          _status = WantBuy;
@@ -444,7 +450,7 @@
                                @"zugou":@"1",
                                @"shengfen":@"广东省",
                                @"shi":@"惠州市",
-                               @"currentpage" :@"1"};
+                               @"currentpage" :[NSString stringWithFormat:@"%d",self.currentPage]};
          [self.pramaDic setValuesForKeysWithDictionary:dict];
     }
    
@@ -465,7 +471,7 @@
                  if ([DataArra isKindOfClass:[NSArray class]]) {
                      self.userID  = responseObject[@""];
                      self.DataArr = DataArra;
-                     [self.tableView reloadData];
+                    [self.tableView reloadData];
                  }else {
                      self.DataArr = @[];
                      [self.tableView reloadData];
@@ -483,6 +489,7 @@
 
 
 -(void)RightTableLoad {
+    self.currentPage = 1;
     if (_isWant == NO) {
         //出租
         _status = RentOut;
@@ -498,7 +505,8 @@
                                  @"sum":@"20",
                                  @"zushou":@"1",
                                  @"shengfen":@"广东省",
-                                 @"currentpage" :@"1"};
+                                 @"currentpage" :[NSString stringWithFormat:@"%d",self.currentPage]
+                             };
         
         [parameters setValuesForKeysWithDictionary:dic];
         self.pramaDic = parameters;
@@ -514,7 +522,7 @@
                               @"sum":@"20",
                               @"zugou":@"0",
                               @"shengfen":@"广东省",
-                              @"currentpage" :@"1"};
+                              @"currentpage" :[NSString stringWithFormat:@"%d",self.currentPage]};
         
         [self.pramaDic setValuesForKeysWithDictionary:dic];
 
@@ -524,6 +532,7 @@
 #pragma mark -顶部TabBar 切换
 -(void)TabBarBtnClick :(UIButton *)btn {
     btn.selected = YES ;
+  
     UIButton *anotherBtn = btn.tag ? _TabBarBtns[0]: _TabBarBtns[1] ;
     [UIView animateWithDuration:0.3f animations:^{
         anotherBtn.selected = NO;
@@ -551,9 +560,7 @@
 }
 
 -(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-//    return 5;
       return self.DataArr.count;
-   
 }
 
 
@@ -803,7 +810,27 @@
 }
 
 -(void)loadMoreData {
-    NSLog(@"上拉");
+    _currentPage ++;
+    [self.pramaDic setObject:[NSString stringWithFormat:@"%d",self.currentPage] forKey:@"currentpage"];
+       [self.shareMgr POST:self.CurrentRuest parameters:self.pramaDic success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+           NSLog(@"追加:%@",responseObject);
+          [self.tableView footerEndRefreshing];
+           if ([(NSNumber *)responseObject[@"code"] isEqualToNumber:[NSNumber numberWithInt:1]]) {
+               NSArray *appendArr = responseObject[@"data"];
+               self.DataArr = [self.DataArr arrayByAddingObjectsFromArray:appendArr];
+               [self.tableView reloadData];
+           } else {
+               [MBProgressHUD showError:@"无更多数据了哟"];
+// NSLog(@"无更多数据了哟");
+           }
+       } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
+           [self.tableView headerEndRefreshing];
+           [MBProgressHUD showError:@"网络超时，稍后尝试"];
+           NSLog(@"%@",error);
+           NSLog(@"网络超时");
+           NSLog(@"%@",error);
+       }];
+      NSLog(@"上拉");
 }
 
 #pragma mark -侧滑过来的数据初始化
