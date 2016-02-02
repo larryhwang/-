@@ -23,4 +23,49 @@
     }];
 }
 
+
+
+/**
+ *  判断返回是否成功
+ *
+ *  @param Datarespon <#Datarespon description#>
+ *
+ *  @return <#return value description#>
+ */
+
++(BOOL)isRequestSuccessWith:(NSDictionary *)Datarespon andKeyStr:(NSString *)str {
+    NSNumber *no = [NSNumber numberWithInt:0];
+    if([(NSNumber *)Datarespon[str] isEqualToNumber:no]) {
+        return true;
+    } else {
+       return false;
+    }
+}
+
+
+
+
+
+
+/**
+ *  心跳请求,若成功则返回消息列表数组
+ *
+ *  @param success 执行片段
+ */
++(void)keepDectectMessageWithSucess:(void(^)(NSArray *MsgArr)) success {
+    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
+    NSString *urlString = @"http://www.123qf.cn/app/pant.api";//http://www.123qf.cn/app/user/getUserInfo.api";;//pant.api
+    [mgr GET:urlString parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        if([self isRequestSuccessWith:responseObject andKeyStr:@"c"]) {
+            NSArray *arr = responseObject[@"d"];
+            success(arr);
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"heartBeatErr:%@",error);
+    }];
+ 
+}
+
+
+
 @end

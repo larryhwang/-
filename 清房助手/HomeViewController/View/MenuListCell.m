@@ -12,6 +12,7 @@
 
 - (void)awakeFromNib {
     // Initialization code
+    self.height = 100;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

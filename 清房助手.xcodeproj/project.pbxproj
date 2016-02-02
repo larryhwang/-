@@ -276,6 +276,7 @@
 		46C716D61BC7645E00287742 /* MBProgressHUD+CZ.m in Sources */ = {isa = PBXBuildFile; fileRef = 46C716D21BC7645E00287742 /* MBProgressHUD+CZ.m */; };
 		46C716D71BC7645E00287742 /* MBProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 46C716D31BC7645E00287742 /* MBProgressHUD.bundle */; };
 		46C716D81BC7645E00287742 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 46C716D51BC7645E00287742 /* MBProgressHUD.m */; };
+		46CA3D6F1C60439400055F68 /* MsgRedIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 46CA3D6E1C60439400055F68 /* MsgRedIcon.png */; };
 		46CB1A571BFF096000762ACE /* NULLValueJudge.m in Sources */ = {isa = PBXBuildFile; fileRef = 46CB1A561BFF096000762ACE /* NULLValueJudge.m */; };
 		46D33C0E1BCB4B9C00B30F2A /* SalesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 46D33C0C1BCB4B9C00B30F2A /* SalesCell.m */; };
 		46D33C0F1BCB4B9C00B30F2A /* SalesCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 46D33C0D1BCB4B9C00B30F2A /* SalesCell.xib */; };
@@ -779,6 +780,7 @@
 		46C716D31BC7645E00287742 /* MBProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MBProgressHUD.bundle; sourceTree = "<group>"; };
 		46C716D41BC7645E00287742 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		46C716D51BC7645E00287742 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
+		46CA3D6E1C60439400055F68 /* MsgRedIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MsgRedIcon.png; sourceTree = "<group>"; };
 		46CB1A551BFF096000762ACE /* NULLValueJudge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NULLValueJudge.h; sourceTree = "<group>"; };
 		46CB1A561BFF096000762ACE /* NULLValueJudge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NULLValueJudge.m; sourceTree = "<group>"; };
 		46D33C0B1BCB4B9C00B30F2A /* SalesCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SalesCell.h; path = ../../HomeViewController/View/SalesCell.h; sourceTree = "<group>"; };
@@ -1176,6 +1178,7 @@
 		464356601BC613A500A44526 /* resource */ = {
 			isa = PBXGroup;
 			children = (
+				46CA3D6E1C60439400055F68 /* MsgRedIcon.png */,
 				46BC5E5F1C299CE100B1247A /* arrowRightBlack.png */,
 				4616EDE71C24770600BAF5C3 /* Newfeature */,
 				4616EDC31C240A9B00BAF5C3 /* InnerXXX */,
@@ -2111,6 +2114,7 @@
 				4646C68A1C2700CB00896964 /* QiuzuCell.xib in Resources */,
 				468E288E1BCD021A00560500 /* FactoryDetailCell.xib in Resources */,
 				46BBE8AD1C0FD19400DE4B14 /* Overlay@2x.png in Resources */,
+				46CA3D6F1C60439400055F68 /* MsgRedIcon.png in Resources */,
 				46BBE8A81C0FD19400DE4B14 /* goods_add_plus@2x.png in Resources */,
 				465415411C2CCAFE003E5743 /* detailHeadView.xib in Resources */,
 				462847FA1C0FCB5600273B3A /* FlatDescirbeVcontroller.xib in Resources */,

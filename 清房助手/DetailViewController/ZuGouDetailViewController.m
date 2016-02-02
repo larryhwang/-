@@ -18,6 +18,8 @@
 #import "DSNavigationBar.h"
 #import "AFNetworking.h"
 
+#import "HttpTool.h"
+
 #import "LesveMsgVC.h"
 
 
@@ -286,6 +288,7 @@
 
 - (void)initNavController {
     UIButton  *h = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 24, 24)];
+    [h addTarget:self action:@selector(StarAction) forControlEvents:UIControlEventTouchUpInside];
     UIImage *img = [UIImage imageNamed:@"pStar"];
     [h setImage:img forState:UIControlStateNormal];
     UIBarButtonItem *star = [[UIBarButtonItem alloc]initWithCustomView:h];
@@ -316,6 +319,30 @@
     [TrunscleNavBar setNavigationBarWithColor:DeafaultColor2];
     [self.navigationController setValue:TrunscleNavBar forKey:@"navigationBar"];
 }
+
+-(void)StarAction {
+    //    URL  /user/saveCollectRow.api  //http://www.123qf.cn/app/user/saveCollectRow.api
+    //
+    //    参数
+    //    fid
+    //    kid
+    
+    
+    NSString *Request = [NSString stringWithFormat:@"http://www.123qf.cn/app/user/saveCollectRow.api?kid=%@",self.FangData[@"id"]];
+    
+    
+    
+    
+    [self.sharedMgr POST:Request parameters:nil success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+        if ([HttpTool isRequestSuccessWith:responseObject andKeyStr:@"zugou"]) {
+            [MBProgressHUD showSuccess:@"已收藏,在我的收藏中可见"];
+        }
+    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
+        NSLog(@"%@",error);
+    }];
+    
+}
+
 
 -(void)initTable {
     self.detailInfoTable = [[UITableView alloc]init];

@@ -18,6 +18,7 @@
 #import "FreeCell.h"
 #import <MessageUI/MessageUI.h>
 #import "MJRefresh.h"
+#import "HttpTool.h"
 #import "LesveMsgVC.h"
 
 
@@ -143,6 +144,9 @@
 #pragma mark -初始化导航栏(收藏和分享)
 - (void)initNavController {
     UIButton  *h = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 24, 24)];  //收藏按钮
+    
+    [h addTarget:self action:@selector(StarAction) forControlEvents:UIControlEventTouchUpInside];
+    
     UIImage *img = [UIImage imageNamed:@"pStar"];
     [h setImage:img forState:UIControlStateNormal];
     UIBarButtonItem *star = [[UIBarButtonItem alloc]initWithCustomView:h];
@@ -175,7 +179,28 @@
    [self.navigationController setValue:TrunscleNavBar forKey:@"navigationBar"];
 }
 
+-(void)StarAction {
+//    URL  /user/saveCollectRow.api  //http://www.123qf.cn/app/user/saveCollectRow.api
+//    
+//    参数
+//    fid
+//    kid
 
+    
+    NSString *Request = [NSString stringWithFormat:@"http://www.123qf.cn/app/user/saveCollectRow.api?fid=%@",self.FangData[@"id"]];
+
+    
+    
+    
+    [self.sharedMgr POST:Request parameters:nil success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+        if ([HttpTool isRequestSuccessWith:responseObject andKeyStr:@"zushou"]) {
+            [MBProgressHUD showSuccess:@"已收藏,在我的收藏中可见"];
+        }
+    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
+        NSLog(@"%@",error);
+    }];
+    
+}
 
 -(void)share {
     NSLog(@"分享啊");
@@ -232,6 +257,8 @@
     self.detailInfoTable.separatorStyle = UITableViewCellSeparatorStyleNone ;
    [self.view addSubview:self.detailInfoTable];
 }
+
+
 
 -(void)getDataFromNet {
     AFHTTPRequestOperationManager *mgr  = [AFHTTPRequestOperationManager manager];
@@ -401,9 +428,6 @@
 
         return ;
     }
-
-
-
 }
 
 

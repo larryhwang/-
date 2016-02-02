@@ -17,5 +17,8 @@
                            success:(void (^) (id responseObject))success
                            failure:(void (^)(NSError *error))failure;
 
++(BOOL)isRequestSuccessWith:(NSDictionary *)Datarespon andKeyStr:(NSString *)str;
+
++(void)keepDectectMessageWithSucess:(void(^)(NSArray *MsgArr)) success ;
 
 @end

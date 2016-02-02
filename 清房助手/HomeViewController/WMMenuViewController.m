@@ -15,7 +15,7 @@
 #import "PostViewController.h"
 #import "MBProgressHUD+CZ.h"
 
-
+#import "HttpTool.h"
 
 #import "UIImageView+WebCache.h"
 
@@ -81,7 +81,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.common = [WMCommon getInstance];
-    self.listArray = @[@"房源查询", @"客源查询", @"信息发布", @"内部房源", @"内部客源",@"售后业务"];
+    self.listArray = @[@"我的信息",@"房源查询", @"客源查询", @"信息发布", @"内部房源", @"内部客源",@"售后业务",@"我的收藏"];
     self.tableView.delegate        = self;
     self.tableView.dataSource      = self;
     self.tableView.separatorStyle  = UITableViewCellSeparatorStyleNone;
@@ -97,6 +97,9 @@
     self.headerImageView.layer.cornerRadius = 40;
     [self updateHeadimg];
     [self updateNameAndTele];
+    
+    
+    [NSTimer timerWithTimeInterval:6 target:self selector:@selector(RequestUnreadMsg) userInfo:nil repeats:YES];
 }
 
 - (void)btnClick:(id)sender {
@@ -158,7 +161,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 6;
+    return 8;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -172,7 +175,7 @@
     }
     
     if (isI6) {
-       return 60;
+       return 56;
     }
     return 65;  //IP6
 }
@@ -186,8 +189,10 @@
   
     if (isI6p) {
        cell = [[[NSBundle mainBundle]loadNibNamed:@"MenuListCell" owner:nil options:nil] lastObject];
+        cell.height = 100;
     } else if(isI6){
      cell = [[[NSBundle mainBundle]loadNibNamed:@"MenuListCell" owner:nil options:nil] objectAtIndex:1];
+           cell.height = 100;
     } else {
      cell = [[[NSBundle mainBundle]loadNibNamed:@"MenuListCell" owner:nil options:nil]firstObject];
     }
@@ -263,4 +268,17 @@
                                 return scaledImage;
    }
 
+
+-(void)RequestUnreadMsg {
+    NSLog(@"数据请求");
+    [HttpTool keepDectectMessageWithSucess:^(NSArray *MsgArr) {
+        int count = [MsgArr count];
+        
+        //我的消息，提示红色数量
+        
+        //播放系统声音
+        
+        //保存数组的信息，用于展示 我的信息 之用
+    }];
+}
 @end
