@@ -11,7 +11,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="40"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="39.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="40"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4UB-9z-QfN">
@@ -21,7 +21,6 @@
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4hi-Ff-hfa">
                         <rect key="frame" x="59" y="10" width="80" height="21"/>
                         <animations/>
-                        <color key="backgroundColor" red="0.20000000300000001" green="0.20000000300000001" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -33,7 +32,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
                                 <animations/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="2" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="chU-Mi-wDg">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="chU-Mi-wDg">
                                 <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
@@ -50,15 +49,16 @@
             <connections>
                 <outlet property="Icon" destination="4UB-9z-QfN" id="J0c-zZ-zVa"/>
                 <outlet property="MenuTitle" destination="4hi-Ff-hfa" id="14e-2j-W8N"/>
+                <outlet property="MsgCountLabel" destination="chU-Mi-wDg" id="2az-iB-g7f"/>
                 <outlet property="MsgView" destination="4bZ-QG-pJv" id="EqI-jZ-KtW"/>
             </connections>
-            <point key="canvasLocation" x="54" y="-96"/>
+            <point key="canvasLocation" x="18" y="-308"/>
         </tableViewCell>
         <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="64" id="Ddc-Vg-aJU" userLabel="Menu List Cell_I6" customClass="MenuListCell">
             <rect key="frame" x="0.0" y="0.0" width="320" height="56"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Ddc-Vg-aJU" id="IsV-LC-UyD">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="55.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="56"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6aD-33-PxT" userLabel="Icon6">
@@ -79,7 +79,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
                                 <animations/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="2" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Waz-gp-3Wd">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Waz-gp-3Wd">
                                 <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
@@ -96,15 +96,16 @@
             <connections>
                 <outlet property="Icon" destination="6aD-33-PxT" id="CRO-Pm-7Et"/>
                 <outlet property="MenuTitle" destination="WmS-cJ-EEb" id="No3-UL-rDO"/>
+                <outlet property="MsgCountLabel" destination="Waz-gp-3Wd" id="5n8-C1-NXd"/>
                 <outlet property="MsgView" destination="2vu-dR-0YA" id="cGe-lg-5w7"/>
             </connections>
-            <point key="canvasLocation" x="-16" y="112"/>
+            <point key="canvasLocation" x="24" y="-165"/>
         </tableViewCell>
         <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="64" id="omO-uR-zUM" userLabel="Menu List Cell_I6P" customClass="MenuListCell">
             <rect key="frame" x="0.0" y="0.0" width="320" height="65"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="omO-uR-zUM" id="YLr-Qy-NyE">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="64.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="65"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vSr-hf-uMd" userLabel="Icon6">
@@ -125,7 +126,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
                                 <animations/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="2" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wax-xI-5z4">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wax-xI-5z4">
                                 <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
@@ -142,9 +143,10 @@
             <connections>
                 <outlet property="Icon" destination="vSr-hf-uMd" id="r9o-mg-0iP"/>
                 <outlet property="MenuTitle" destination="gZq-Sj-eFB" id="zWG-2C-mYc"/>
+                <outlet property="MsgCountLabel" destination="wax-xI-5z4" id="n3Z-ax-Eag"/>
                 <outlet property="MsgView" destination="mLw-cx-xLs" id="fPS-Kg-n08"/>
             </connections>
-            <point key="canvasLocation" x="148" y="355.5"/>
+            <point key="canvasLocation" x="24" y="-8.5"/>
         </tableViewCell>
     </objects>
     <resources>

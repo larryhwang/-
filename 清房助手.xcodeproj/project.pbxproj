@@ -278,6 +278,7 @@
 		46C716D81BC7645E00287742 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 46C716D51BC7645E00287742 /* MBProgressHUD.m */; };
 		46CA3D6F1C60439400055F68 /* MsgRedIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 46CA3D6E1C60439400055F68 /* MsgRedIcon.png */; };
 		46CB1A571BFF096000762ACE /* NULLValueJudge.m in Sources */ = {isa = PBXBuildFile; fileRef = 46CB1A561BFF096000762ACE /* NULLValueJudge.m */; };
+		46CB4D141C6089A40028AA6F /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46CB4D131C6089A40028AA6F /* AudioToolbox.framework */; };
 		46D33C0E1BCB4B9C00B30F2A /* SalesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 46D33C0C1BCB4B9C00B30F2A /* SalesCell.m */; };
 		46D33C0F1BCB4B9C00B30F2A /* SalesCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 46D33C0D1BCB4B9C00B30F2A /* SalesCell.xib */; };
 		46D648321BC8E67E000F23EF /* jian-down.png in Resources */ = {isa = PBXBuildFile; fileRef = 46D648311BC8E67E000F23EF /* jian-down.png */; };
@@ -783,6 +784,7 @@
 		46CA3D6E1C60439400055F68 /* MsgRedIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MsgRedIcon.png; sourceTree = "<group>"; };
 		46CB1A551BFF096000762ACE /* NULLValueJudge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NULLValueJudge.h; sourceTree = "<group>"; };
 		46CB1A561BFF096000762ACE /* NULLValueJudge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NULLValueJudge.m; sourceTree = "<group>"; };
+		46CB4D131C6089A40028AA6F /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		46D33C0B1BCB4B9C00B30F2A /* SalesCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SalesCell.h; path = ../../HomeViewController/View/SalesCell.h; sourceTree = "<group>"; };
 		46D33C0C1BCB4B9C00B30F2A /* SalesCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SalesCell.m; path = ../../HomeViewController/View/SalesCell.m; sourceTree = "<group>"; };
 		46D33C0D1BCB4B9C00B30F2A /* SalesCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SalesCell.xib; path = ../../HomeViewController/View/SalesCell.xib; sourceTree = "<group>"; };
@@ -863,6 +865,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				46CB4D141C6089A40028AA6F /* AudioToolbox.framework in Frameworks */,
 				4654152D1C2C01DD003E5743 /* SystemConfiguration.framework in Frameworks */,
 				4654152B1C2C01D2003E5743 /* libz.tbd in Frameworks */,
 				465415291C2C01C7003E5743 /* libsqlite3.0.tbd in Frameworks */,
@@ -1967,6 +1970,7 @@
 		C1601311CBEE81D2050A5A8E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				46CB4D131C6089A40028AA6F /* AudioToolbox.framework */,
 				4654152C1C2C01DD003E5743 /* SystemConfiguration.framework */,
 				4654152A1C2C01D2003E5743 /* libz.tbd */,
 				465415281C2C01C7003E5743 /* libsqlite3.0.tbd */,

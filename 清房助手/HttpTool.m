@@ -34,7 +34,7 @@
  */
 
 +(BOOL)isRequestSuccessWith:(NSDictionary *)Datarespon andKeyStr:(NSString *)str {
-    NSNumber *no = [NSNumber numberWithInt:0];
+    NSNumber *no = [NSNumber numberWithInt:1];
     if([(NSNumber *)Datarespon[str] isEqualToNumber:no]) {
         return true;
     } else {
@@ -54,14 +54,20 @@
  */
 +(void)keepDectectMessageWithSucess:(void(^)(NSArray *MsgArr)) success {
     AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
+    mgr.requestSerializer.timeoutInterval = .5;
     NSString *urlString = @"http://www.123qf.cn/app/pant.api";//http://www.123qf.cn/app/user/getUserInfo.api";;//pant.api
     [mgr GET:urlString parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"%@",responseObject);
         if([self isRequestSuccessWith:responseObject andKeyStr:@"c"]) {
             NSArray *arr = responseObject[@"d"];
             success(arr);
+        } else {
+            NSArray *arr =@[];
+            success(arr);
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"heartBeatErr:%@",error);
+        NSLog(@"失败");
+      //  NSLog(@"heartBeatErr:%@",error);
     }];
  
 }

@@ -14,6 +14,7 @@
 
 @property (weak, nonatomic) IBOutlet UIView *MsgView;
 
+@property (weak, nonatomic) IBOutlet UILabel *MsgCountLabel;
 
 
 

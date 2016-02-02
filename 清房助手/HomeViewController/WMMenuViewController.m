@@ -21,9 +21,14 @@
 
 #import "AppDelegate.h"
 
+#import <AudioToolbox/AudioToolbox.h>
+
 @interface WMMenuViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (strong, nonatomic) WMCommon *common;
 @property (strong ,nonatomic) NSArray  *listArray;
+@property(nonatomic,strong)  NSTimer  *ReuqeustTimer;
+
+@property(nonatomic,assign) int CurrentMsgCount;
 
 /**
  *  名字
@@ -63,6 +68,9 @@
  */
 @property (weak, nonatomic) IBOutlet UIButton *userInfoBtn;
 
+
+
+@property(nonatomic,strong)  MenuListCell  *MsgMenuCell;
 @end
 
 @implementation WMMenuViewController
@@ -99,7 +107,8 @@
     [self updateNameAndTele];
     
     
-    [NSTimer timerWithTimeInterval:6 target:self selector:@selector(RequestUnreadMsg) userInfo:nil repeats:YES];
+//    [NSTimer timerWithTimeInterval:6 target:self selector:@selector(RequestUnreadMsg) userInfo:nil repeats:YES];
+   self.ReuqeustTimer = [NSTimer scheduledTimerWithTimeInterval:6 target:self selector:@selector(RequestUnreadMsg) userInfo:nil repeats:YES];
 }
 
 - (void)btnClick:(id)sender {
@@ -202,7 +211,7 @@
     if (indexPath.row == 0) {
         UIImage *img = [UIImage imageNamed:@"search-house"];
         cell.Icon.image = img;
-        [cell.MsgView setHidden:NO];
+        self.MsgMenuCell = cell ;
         
     } else if (indexPath.row ==1) {
         UIImage *img = [UIImage imageNamed:@"search-people"];
@@ -272,15 +281,34 @@
 
 
 -(void)RequestUnreadMsg {
+    
+    //如果未读消息数量不变
     NSLog(@"数据请求");
     [HttpTool keepDectectMessageWithSucess:^(NSArray *MsgArr) {
-        int count = [MsgArr count];
+        int count = (int) [MsgArr count];
+        if(count ==0) {
+            [self.MsgMenuCell.MsgView setHidden:YES];
+        }
         
-        //我的消息，提示红色数量
+        if(count ==self.CurrentMsgCount) {    //如果和之前的数量不变
+            return ;
+        } else {
+            //如果有新增
+            
+            self.CurrentMsgCount = count;
+            //我的消息，提示红色数量
+            self.MsgMenuCell.MsgCountLabel.text = [NSString stringWithFormat:@"%d",self.CurrentMsgCount];
+            //震动与声音
+          AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+          AudioServicesPlaySystemSound(1007);
+            //保存数组的信息，用于展示 我的信息 之用
+        }
         
-        //播放系统声音
+
+        NSLog(@"以获取消息:%@",MsgArr);
         
-        //保存数组的信息，用于展示 我的信息 之用
+
+  
     }];
 }
 @end
