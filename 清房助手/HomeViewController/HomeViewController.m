@@ -30,6 +30,8 @@
 
 #import "MBProgressHUD+CZ.h"
 
+#import "MsgViewController.h"
+
 typedef enum Slidestate {
     kStateHome,
     kStateMenu
@@ -278,6 +280,12 @@ static const CGFloat menuStartNarrowRatio  = 0.70;
 }
 
 
+-(void)transtoMyMsg {
+    MsgViewController *msgVC = [MsgViewController new];
+    msgVC.title = @"我的信息";
+    [self.messageNav pushViewController:msgVC animated:YES];
+}
+
 /**
  *  跳转到  信息发布
  */
@@ -296,8 +304,6 @@ static const CGFloat menuStartNarrowRatio  = 0.70;
     }else{
         [MBProgressHUD showError:@"权限不足，请联系管理员"];
     }
-    
-
 }
 
 
@@ -330,6 +336,14 @@ static const CGFloat menuStartNarrowRatio  = 0.70;
 }
 
 
+/**
+ *  跳转到收藏
+ */
+-(void)tranStoMyStars {
+//    MsgViewController *msgVC = [MsgViewController new];
+//    msgVC.title = @"";
+    
+}
 
 /**
  *  跳转到 内部客源

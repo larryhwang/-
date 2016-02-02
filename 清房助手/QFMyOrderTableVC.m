@@ -13,9 +13,21 @@
 #import "MBProgressHUD+CZ.h"
 #import "QFOrderFilter.h"
 
+#import "MJRefresh.h"
+
+#import "AppDelegate.h"
+
 @interface QFMyOrderTableVC ()<UITableViewDataSource,UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *QFMyOrderTable;
 @property(nonatomic,strong)  NSArray  *QFSingleCellData_Arr;
+
+@property(nonatomic,strong)  NSMutableDictionary  *PramaDic;
+
+@property(nonatomic,assign) int nowPageIndex;
+
+@property(nonatomic,strong)  AFHTTPRequestOperationManager  *shareMgr;
+
+@property(nonatomic,copy) NSString *CurrentRuest;
 
 @end
 
@@ -32,14 +44,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.edgesForExtendedLayout = UIRectEdgeNone;
-    
+    self.nowPageIndex = 1;
     UIBarButtonItem *backItem = [[UIBarButtonItem alloc] init];
     backItem.title = @" ";
     self.navigationItem.backBarButtonItem = backItem;
     
     [self getTableDataFromNet];
     
-    self.QFMyOrderTable.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.QFMyOrderTable.separatorStyle = UITableViewCellSeparatorStyleNone; //
+
+    [self.QFMyOrderTable addFooterWithTarget:self action:@selector(loadMoreData)];
     
     [self initNav];
 }
@@ -60,6 +74,8 @@
     self.navigationItem.rightBarButtonItem =gripeBarBtn;
 }
 
+
+
 /**
  *  订单筛选按钮点击
  */
@@ -75,23 +91,41 @@
 }
 
 -(void)getTableDataFromNet {
-    AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
-  //  NSString *url = @"http://www.123qf.cn:81/testApp/integrateFindByUser.api?page=1";
-      NSString *url = @"http://www.123qf.cn/app/integrateFindByUser.api?page=1";
-    [mgr POST:url parameters:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
-        NSLog(@"%@",responseObject);
+    [MBProgressHUD showMessage:@"正在加载"];
+    AppDelegate *delegate = [UIApplication sharedApplication].delegate;
+    NSString *userName = delegate.usrInfoDic[@"username"];
+    NSMutableDictionary *dict = [NSMutableDictionary new];
+    [dict setObject:[NSString stringWithFormat:@"%d",self.nowPageIndex] forKey:@"page"];  //@{@"page":@"1"};
+     self.PramaDic = dict;
+    NSString *url;
+    NSLog(@"权限列表:%@",delegate.QFUserPermissionDic_NSMArr);
+    // "订单跟踪(负责人)"
+    url = @"http://www.123qf.cn/app/integrateFindByUser.api";  //中介公司账号用
+
+    for (NSString *PerMisionName in delegate.QFUserPermissionDic_NSMArr) {
+        if ([PerMisionName rangeOfString:@"订单跟踪"].length) {
+            url = @"http://www.123qf.cn/app/integrateFind.api";  //四方
+           [self.PramaDic setObject:userName forKey:@"pname"];
+        }
+            self.CurrentRuest = url;
+    }
+    
+    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
+    self.shareMgr = mgr ;
+   [self.shareMgr POST:url parameters:self.PramaDic success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         if ([responseObject[@"code"] isEqualToString: @"00202"]) {
             self.QFSingleCellData_Arr = @[];
             UIAlertView *aleat=[[UIAlertView alloc] initWithTitle:@"提醒" message:@"暂无相关信息" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
             [aleat show];
         } else{
-          self.QFSingleCellData_Arr = responseObject[@"data"];
+            self.QFSingleCellData_Arr = responseObject[@"data"];
         }
-    
+       
+       [MBProgressHUD hideHUD];
         NSLog(@"%@",responseObject[@"data"]);
-       [self.QFMyOrderTable reloadData];
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"%@",error);
+        [self.QFMyOrderTable reloadData];
+    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
+         NSLog(@"%@",error);
     }];
 }
 
@@ -153,10 +187,29 @@
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         NSLog(@"%@",error);
     }];
-    
-
-    
 }
 
+
+-(void)loadMoreData {
+    self.nowPageIndex ++;
+    [self.PramaDic setObject:[NSString stringWithFormat:@"%d",self.nowPageIndex] forKey:@"currentpage"];
+    [self.shareMgr POST:self.CurrentRuest parameters:self.PramaDic success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+        NSLog(@"追加:%@",responseObject);
+        [self.QFMyOrderTable footerEndRefreshing];
+        if ([responseObject[@"code"] isEqualToString:@"1"]) {
+            NSArray *appendArr = responseObject[@"data"];
+            self.QFSingleCellData_Arr = [self.QFSingleCellData_Arr arrayByAddingObjectsFromArray:appendArr];
+            [self.QFMyOrderTable reloadData];
+        } else {
+            [MBProgressHUD showError:@"无更多数据了哟"];
+        }
+    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
+        [self.QFMyOrderTable headerEndRefreshing];
+        [MBProgressHUD showError:@"网络超时，稍后尝试"];
+        NSLog(@"%@",error);
+        NSLog(@"网络超时");
+    }];
+    NSLog(@"上拉");
+}
 
 @end

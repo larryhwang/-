@@ -6,6 +6,9 @@
 //  Copyright (c) 2015年 wamaker. All rights reserved.
 //
 
+
+
+
 #import "WMMenuViewController.h"
 #import "WMMenuTableViewCell.h"
 #import "WMCommon.h"
@@ -26,7 +29,8 @@
 @interface WMMenuViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (strong, nonatomic) WMCommon *common;
 @property (strong ,nonatomic) NSArray  *listArray;
-@property(nonatomic,strong)  NSTimer  *ReuqeustTimer;
+@property(nonatomic,strong)   NSArray   *MethodArray;
+@property(nonatomic,strong)  NSTimer   *ReuqeustTimer;
 
 @property(nonatomic,assign) int CurrentMsgCount;
 
@@ -76,6 +80,9 @@
 @implementation WMMenuViewController
 
 
+
+
+
 //设置按钮
 - (IBAction)settingBtnClick:(id)sender {
     NSLog(@"setting @@@————@@@@");
@@ -90,6 +97,7 @@
     [super viewDidLoad];
     self.common = [WMCommon getInstance];
     self.listArray = @[@"我的信息",@"房源查询", @"客源查询", @"信息发布", @"内部房源", @"内部客源",@"售后业务",@"我的收藏"];
+    self.MethodArray = @[@"transtoMyMsg",@"OnlyBack",@"transToRentAndSale",@"transToPost",@"transToPost",@"transtoInnerKeyuan",@"transtoMutiTask",@"tranStoMyStars"];
     self.tableView.delegate        = self;
     self.tableView.dataSource      = self;
     self.tableView.separatorStyle  = UITableViewCellSeparatorStyleNone;
@@ -242,31 +250,26 @@
 
 #pragma mark 侧栏菜单选择
 
+
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+// 被夹在这中间的代码针对于此警告都会无视并且不显示出来
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 #warning 侧栏菜单选择
     [tableView deselectRowAtIndexPath:indexPath animated:YES]; //解除遗留灰色
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    if (indexPath.row == 0) {
-        [self.delegate OnlyBack];  //仅仅回到
-    } else if (indexPath.row == 1) {
-        [self.delegate transToRentAndSale];
-         //客源查询
-    } else if (indexPath.row ==2) {
-        //发布
-        [self.delegate transToPost];
-    } else if (indexPath.row ==3){
-        //内部房源
-        [self.delegate transtoInnerFang];
-    } else if (indexPath.row ==4) {
-        //内部客源
-        [self.delegate transtoInnerKeyuan];
-    }else {
-        //综合业务
-        [self.delegate transtoMutiTask];
-    }
-
+    [self CallDelegateMethodWithIndexPath:indexPath];
     
 }
+
+
+
+-(void)CallDelegateMethodWithIndexPath:(NSIndexPath *)indexPath {
+    NSString *methodName = self.MethodArray[indexPath.row];
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+    [self.delegate performSelector:NSSelectorFromString(methodName)];
+}
+#pragma clang diagnostic pop
 
 - (UIImage *)scaleImage:(UIImage *)image toScale:(float)scaleSize
 {

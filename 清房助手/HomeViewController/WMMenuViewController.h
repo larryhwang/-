@@ -18,8 +18,6 @@
  */
 -(void)transToUserInfo;
 
-
-
 /**
  *  房源、客源查询
  */
@@ -50,6 +48,13 @@
 - (void)transtoMutiTask;
 
 
+/**
+ *  我的收藏
+ */
+-(void)tranStoMyStars;
+
+
+-(void)transtoMyMsg;
 
 /**
  *  设置
@@ -61,7 +66,7 @@
 - (void)didSelectItem:(NSString *)title;
 
 - (void)OnlyBack;
-- (void)transToPostEdit;
+
 
 @end
 

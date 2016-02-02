@@ -187,7 +187,7 @@
     self.definesPresentationContext = YES;
     
     [self setOriginPopView];   //设置弹窗功能
-    [self localNameGet];
+ //   [self localNameGet];
     
 
 
