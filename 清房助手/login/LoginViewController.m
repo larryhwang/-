@@ -68,12 +68,12 @@
 //    PramaDic[@"psword"] = @"5798161";
     
 
-//    [self LoginWith:PramaDic];
+   [self LoginWith:PramaDic];
  
     
     
-    HomeViewController *home = [HomeViewController new];
-    KeyWindow.rootViewController = home;
+//    HomeViewController *home = [HomeViewController new];
+//    KeyWindow.rootViewController = home;
 
 }
 
@@ -118,7 +118,7 @@
             
             NSLog(@"省市资料:%@",appDelegate.provnceIndexDic);
             
-            //  [self getUserInfoAndPermissions];
+             [self getUserInfoAndPermissions];
             
             
             

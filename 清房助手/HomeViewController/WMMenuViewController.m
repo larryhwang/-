@@ -171,7 +171,7 @@
     }
     
     if (isI4) {
-        return 42;
+        return 40;
     }
     
     if (isI6) {
@@ -202,6 +202,8 @@
     if (indexPath.row == 0) {
         UIImage *img = [UIImage imageNamed:@"search-house"];
         cell.Icon.image = img;
+        [cell.MsgView setHidden:NO];
+        
     } else if (indexPath.row ==1) {
         UIImage *img = [UIImage imageNamed:@"search-people"];
         cell.Icon.image = img;

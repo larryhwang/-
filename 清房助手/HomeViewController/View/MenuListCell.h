@@ -12,6 +12,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *Icon;
 @property (weak, nonatomic) IBOutlet UILabel *MenuTitle;
 
+@property (weak, nonatomic) IBOutlet UIView *MsgView;
 
 
 
