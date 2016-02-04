@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "WMBaseViewController.h"
+#import "MsgViewController.h"
 
 @protocol WMMenuViewControllerDelegate <NSObject>
 @optional
@@ -66,6 +67,9 @@
 - (void)didSelectItem:(NSString *)title;
 
 - (void)OnlyBack;
+
+
+-(void)PassMSgData:(MsgViewController *)MsgVC;
 
 
 @end

@@ -26,11 +26,18 @@
 
 #import <AudioToolbox/AudioToolbox.h>
 
+#import "MsgViewController.h"
+#import "QFMyOrderTableVC.h"
+
 @interface WMMenuViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (strong, nonatomic) WMCommon *common;
 @property (strong ,nonatomic) NSArray  *listArray;
 @property(nonatomic,strong)   NSArray   *MethodArray;
+@property(nonatomic,strong)  NSArray   *ImageNameArr;
 @property(nonatomic,strong)  NSTimer   *ReuqeustTimer;
+
+@property(nonatomic,strong)  NSMutableArray  *MsgMArr;
+@property(nonatomic,strong)  NSMutableArray  *OrderMArr;
 
 @property(nonatomic,assign) int CurrentMsgCount;
 
@@ -74,14 +81,11 @@
 
 
 
-@property(nonatomic,strong)  MenuListCell  *MsgMenuCell;
+@property(nonatomic,weak)  MenuListCell  *MsgMenuCell;
+@property(nonatomic,weak)  MenuListCell  *OderMenuCell;
 @end
 
 @implementation WMMenuViewController
-
-
-
-
 
 //设置按钮
 - (IBAction)settingBtnClick:(id)sender {
@@ -91,13 +95,12 @@
     [self.delegate transToSetting];
 }
 
-
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.common = [WMCommon getInstance];
     self.listArray = @[@"我的信息",@"房源查询", @"客源查询", @"信息发布", @"内部房源", @"内部客源",@"售后业务",@"我的收藏"];
     self.MethodArray = @[@"transtoMyMsg",@"OnlyBack",@"transToRentAndSale",@"transToPost",@"transToPost",@"transtoInnerKeyuan",@"transtoMutiTask",@"tranStoMyStars"];
+    self.ImageNameArr = @[@"MsgmenuIcon",@"search-house",@"search-people",@"pen",@"house",@"people",@"afterMarket",@"pStar"];
     self.tableView.delegate        = self;
     self.tableView.dataSource      = self;
     self.tableView.separatorStyle  = UITableViewCellSeparatorStyleNone;
@@ -167,11 +170,6 @@
     [self.delegate transToUserInfo];
 }
 
-
-
-
-
-
 #pragma mark - tableView代理方法及数据源方法
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
@@ -216,30 +214,16 @@
    
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     cell.backgroundColor = [UIColor clearColor];
-    if (indexPath.row == 0) {
-        UIImage *img = [UIImage imageNamed:@"search-house"];
-        cell.Icon.image = img;
+    
+    if (indexPath.row==0) {
         self.MsgMenuCell = cell ;
-        
-    } else if (indexPath.row ==1) {
-        UIImage *img = [UIImage imageNamed:@"search-people"];
-        cell.Icon.image = img;
-    }else if (indexPath.row ==2) {
-        UIImage *img = [UIImage imageNamed:@"pen"];
-        cell.Icon.image = img;
-    }else if (indexPath.row ==3){
-        UIImage *img = [UIImage imageNamed:@"house"];
-        cell.Icon.image = img;
-    }else if (indexPath.row ==4){
-        UIImage *img = [UIImage imageNamed:@"people"];
-        cell.Icon.image = img;
     }
-    else {
-        UIImage *img = [UIImage imageNamed:@"afterMarket"];
-        cell.Icon.image = img;
+    
+    if (indexPath.row ==6) {
+        self.OderMenuCell = cell;
     }
-
-    cell.MenuTitle.text = self.listArray[indexPath.row];
+    
+     [self setCell:cell andIndex:indexPath];
     
     if (isI4) {
         [cell.MenuTitle setFont:[UIFont systemFontOfSize:15]];
@@ -284,13 +268,13 @@
 
 
 -(void)RequestUnreadMsg {
-    
     //如果未读消息数量不变
     NSLog(@"数据请求");
+    NSMutableArray *MsgArrMsg = [NSMutableArray new];    NSMutableArray *MsgArrOrder = [NSMutableArray new];
     [HttpTool keepDectectMessageWithSucess:^(NSArray *MsgArr) {
         int count = (int) [MsgArr count];
         if(count ==0) {
-            [self.MsgMenuCell.MsgView setHidden:YES];
+            [self MsgTipsClean];
         }
         
         if(count ==self.CurrentMsgCount) {    //如果和之前的数量不变
@@ -298,20 +282,104 @@
         } else {
             //如果有新增
             
+            //区分订单消息和网页消息
+            
+            [MsgArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                if ([(NSString *)obj[@"type"] isEqualToString:@"1"]) {
+                    NSLog(@"消息原:%@",obj);
+                    NSString *String = obj[@"date"];
+                    NSMutableDictionary *realDiC = [self dictionaryWithJsonString:String];
+                    [realDiC setObject: obj[@"createtime"]forKey:@"createtime"];
+                    [realDiC setObject:obj[@"rhid"]  forKey:@"rhid"];
+                    NSLog(@"过滤后的消息:%@",realDiC);
+                   [MsgArrMsg addObject:realDiC];
+                } else {
+                    NSLog(@"订单");
+                    [MsgArrOrder addObject:obj];
+                }
+            }];
+            
+            self.MsgMArr = MsgArrMsg;  self.OrderMArr = MsgArrOrder;
+            
+            
+            //订单消息
+            if ([MsgArrOrder count]>0) {
+                [self.OderMenuCell.MsgView setHidden:NO];
+                 self.OderMenuCell.MsgCountLabel.text = [NSString stringWithFormat:@"%lu",(unsigned long)[MsgArrOrder count]];
+            }
+            
+            //留言消息
+            if ([MsgArrMsg count]>0) {
+                [self.MsgMenuCell.MsgView setHidden:NO];
+                 self.MsgMenuCell.MsgCountLabel.text = [NSString stringWithFormat:@"%lu",(unsigned long)[MsgArrMsg count]];
+               
+                
+            }
             self.CurrentMsgCount = count;
             //我的消息，提示红色数量
-            self.MsgMenuCell.MsgCountLabel.text = [NSString stringWithFormat:@"%d",self.CurrentMsgCount];
             //震动与声音
           AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
           AudioServicesPlaySystemSound(1007);
             //保存数组的信息，用于展示 我的信息 之用
         }
-        
-
         NSLog(@"以获取消息:%@",MsgArr);
+        NSDictionary *dict = [MsgArr firstObject];
         
+        NSLog(@"%@",dict[@"date"]);
+        
+        NSString *String = dict[@"date"];
+        
+        NSDictionary *realData = [self dictionaryWithJsonString:String];
+        
+        NSLog(@"过滤后的消息:%@",realData);
 
-  
     }];
 }
+
+-(void)MsgTipsClean {
+    [self.MsgMenuCell.MsgView setHidden:YES];
+}
+
+-(void)OrederTipsClean {
+    [self.OderMenuCell.MsgView setHidden:YES];
+}
+
+
+-(void)setCell:(MenuListCell *)cell andIndex:(NSIndexPath *)indexpath {
+    cell.Icon.image = [UIImage imageNamed:self.ImageNameArr[indexpath.row]];
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    cell.backgroundColor = [UIColor clearColor];
+    cell.MenuTitle.text = self.listArray[indexpath.row];
+}
+
+- (NSMutableDictionary *)dictionaryWithJsonString:(NSString *)jsonString {
+    if (jsonString == nil) {
+        return nil;
+    }
+    
+    NSData *jsonData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
+    NSError *err;
+    NSMutableDictionary *dic = [NSJSONSerialization JSONObjectWithData:jsonData
+                                                        options:NSJSONReadingMutableContainers
+                                                          error:&err];
+    if(err) {
+        NSLog(@"json解析失败：%@",err);
+        return nil;
+    }
+    return dic;
+}
+
+-(UIImage *)setCellImgWithIndexPath:(NSIndexPath *)indexPath {
+    UIImage *img = [UIImage imageNamed:self.ImageNameArr[indexPath.row]];
+    return img;
+}
+
+
+-(void)PassMSgData:(MsgViewController *)MsgVC{
+    MsgVC.MsgArr = self.MsgMArr;
+}
+
+
+
+
 @end

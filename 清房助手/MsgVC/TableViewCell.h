@@ -10,4 +10,6 @@
 
 @interface TableViewCell : UITableViewCell
 
+@property(nonatomic,strong)  NSDictionary  *CellDic;
+
 @end

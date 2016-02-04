@@ -284,6 +284,15 @@ static const CGFloat menuStartNarrowRatio  = 0.70;
     MsgViewController *msgVC = [MsgViewController new];
     msgVC.title = @"我的信息";
     [self.messageNav pushViewController:msgVC animated:YES];
+    [self.menuVC performSelector:@selector(PassMSgData:) withObject:msgVC];
+    [self.menuVC performSelector:@selector(MsgTipsClean) withObject:nil];
+    
+
+    [self showHome];
+    
+    
+    
+    
 }
 
 /**
@@ -333,6 +342,8 @@ static const CGFloat menuStartNarrowRatio  = 0.70;
     } else {
         [MBProgressHUD showError:@"权限不足，请联系管理员"];
     }
+    
+    [self.menuVC performSelector:@selector(OrederTipsClean) withObject:nil];
 }
 
 
@@ -343,16 +354,16 @@ static const CGFloat menuStartNarrowRatio  = 0.70;
 //    MsgViewController *msgVC = [MsgViewController new];
 //    msgVC.title = @"";
     
+    
 }
 
 /**
  *  跳转到 内部客源
  */
 -(void)transtoInnerKeyuan {
-
     InnerTabBarController *innerTabarVC_KE =[[InnerTabBarController alloc]initWithTabBarType:Keyuan];
     [self showHome];
-    KeyWindow.rootViewController = innerTabarVC_KE;
+     KeyWindow.rootViewController = innerTabarVC_KE;
 }
 
 
@@ -370,12 +381,28 @@ static const CGFloat menuStartNarrowRatio  = 0.70;
 }
 
 - (void)OnlyBack {  //回到首页(出租、出售)
-    UIButton *left  = self.homeVC.LeftTab;
-    UIButton *right = self.homeVC.RightTab;
-    [left  setTitle: @"出售" forState:UIControlStateNormal];
-    [right setTitle: @"出租" forState:UIControlStateNormal];
-    self.homeVC.isWant = NO;
+    
+
+    NSArray *VcArrs = self.messageNav.viewControllers;
+    
+    [VcArrs enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if ([(UIViewController *)obj isKindOfClass:[WMHomeViewController class]]) {
+            *stop = YES;
+            [self.messageNav popToViewController:obj animated:YES];
+            [self showHome];
+            UIButton *left  = self.homeVC.LeftTab;
+            UIButton *right = self.homeVC.RightTab;
+             self.homeVC.isWant = NO;
+            [left  setTitle: @"出售" forState:UIControlStateNormal];
+            [right setTitle: @"出租" forState:UIControlStateNormal];
+        }
+    }];
+    
    [self.homeVC LeftInit];
+    
+    
+    
+    
    [self showHome];
 }
 
@@ -420,5 +447,27 @@ static const CGFloat menuStartNarrowRatio  = 0.70;
     }else {
         return NO;
     }
+}
+
+
+/**
+ *  是否已经存在
+ *
+ *  @param viewController <#viewController description#>
+ *
+ *  @return <#return value description#>
+ */
+-(BOOL)isExsistInVCStacks:(Class )viewController {
+    NSArray *VcArrs = self.messageNav.viewControllers;
+     __block  BOOL flag = NO;
+    [VcArrs enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if ([(UIViewController *)obj isKindOfClass:[WMHomeViewController class]]) {
+            *stop = YES;
+            flag = YES;
+        }
+    }];
+    return flag;
+    
+
 }
 @end

@@ -9,7 +9,7 @@
 #import "MsgViewController.h"
 #import "TableViewCell.h"
 
-@interface MsgViewController ()
+@interface MsgViewController ()<UITableViewDataSource,UITableViewDataSource>
 
 @end
 
@@ -17,11 +17,19 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+    self.edgesForExtendedLayout = UIRectEdgeNone;
+    self.MsgTable.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
+    NSLog(@"TTT:%@",self.MsgArr);
+}
+
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath;{
+    return 148;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 5; 
+ //   return 5;
     return [self.MsgArr count];
 }
 
@@ -34,6 +42,7 @@
     if (nil == nil)
     {
         cell = [[[NSBundle mainBundle]loadNibNamed:@"TableViewCell" owner:nil options:nil]lastObject];
+        cell.CellDic = [self.MsgArr objectAtIndex:indexPath.row];
     }
     return cell;
 }
