@@ -14,15 +14,19 @@
 
 @interface MsgViewController ()<UITableViewDataSource,UITableViewDataSource>
 
+@property(nonatomic,strong)  AFHTTPRequestOperationManager  *ShareMgr;
+@property(nonatomic,strong)  NSMutableArray  *MsgRhidArr;
+
 @end
 
 @implementation MsgViewController
 
 - (void)viewDidLoad {
+ 
     [super viewDidLoad];
     self.edgesForExtendedLayout = UIRectEdgeNone;
     self.MsgTable.separatorStyle = UITableViewCellSeparatorStyleNone;
-    
+
     NSLog(@"TTT:%@",self.MsgArr);
     
     [self RequestUnreadMsg];
@@ -37,46 +41,99 @@
 -(void)getNetData {
    
     
-    
-    
 }
 
 -(void)RequestUnreadMsg {
     //如果未读消息数量不变
+    // 先追加，再存取
+    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *pathDirectory = [paths objectAtIndex:0];
+    
+    NSString *path = [pathDirectory stringByAppendingPathComponent:@"MsgArr.archive"];
+    NSMutableArray *lastMsgArr = [NSKeyedUnarchiver unarchiveObjectWithFile:path];
+    
+    NSLog(@"取出的数组:%@",lastMsgArr);
     [MBProgressHUD showMessage:@"加载中"];
     NSLog(@"数据请求");
-    NSMutableArray *MsgArrMsg = [NSMutableArray new];    NSMutableArray *MsgArrOrder = [NSMutableArray new];
+    NSMutableArray *MsgArrMsg = [NSMutableArray new];    NSMutableArray *MsgRhid = [NSMutableArray new];
     [HttpTool keepDectectMessageWithSucess:^(NSArray *MsgArr) {
         int count = (int) [MsgArr count];
         if(count ==0) {
-            return ;
-        }
-        [MsgArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            if ([(NSString *)obj[@"type"] isEqualToString:@"1"]) {
-                NSLog(@"消息原:%@",obj);
-                NSString *String = obj[@"date"];
-                NSMutableDictionary *realDiC = [self dictionaryWithJsonString:String];
-                [realDiC setObject: obj[@"createtime"]forKey:@"createtime"];
-                [realDiC setObject:obj[@"rhid"]  forKey:@"rhid"];
-                NSLog(@"过滤后的消息:%@",realDiC);
-                [MsgArrMsg addObject:realDiC];
-            } else {
-                NSLog(@"订单");
-                [MsgArrOrder addObject:obj];
+            if ([lastMsgArr count]) {
+                self.MsgArr = lastMsgArr;
+                [MBProgressHUD hideHUD];
+               [self.MsgTable reloadData];
+            }else {
+                [MBProgressHUD hideHUD];
+                [MBProgressHUD showError:@"暂无消息"];
             }
-        }];
+            return ;
+        } else {
+            [MsgArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                if ([(NSString *)obj[@"type"] isEqualToString:@"1"]) {
+                    NSLog(@"消息原:%@",obj);
+                    NSString *String = obj[@"date"];
+                    NSMutableDictionary *realDiC = [self dictionaryWithJsonString:String];
+                    [realDiC setObject: obj[@"createtime"]forKey:@"createtime"]; //时间
+                    [MsgRhid addObject:obj[@"rhid"]];  //消息标记码
+                    NSLog(@"过滤后的消息:%@",realDiC);
+                    [MsgArrMsg addObject:realDiC];
+                } else {
+                    
+                }
+            }];
+        }
+      
+        self.MsgRhidArr = MsgRhid ;
         
-        self.MsgArr = MsgArrMsg;
+        NSArray   *arr = [NSArray new];
+        if ([MsgArrMsg count] &&[lastMsgArr count]) {
+           arr   =     [MsgArrMsg arrayByAddingObjectsFromArray:lastMsgArr];
+        }
+       
+        BOOL sucess = [NSKeyedArchiver archiveRootObject:arr toFile:path];
+        if (sucess)
+        {
+            NSLog(@"archive sucess");
+        }
+ 
+        //获取到网络端的数据后再追加到本地数据
+        self.MsgArr = arr;
         [MBProgressHUD hideHUD];
         [self.MsgTable reloadData];
        
-        
+        [self cleanMsgUreadFlag];
         NSLog(@"以获取消息:%@",MsgArrMsg);
     
         
     }];
 }
 
+
+-(void)cleanMsgUreadFlag  {
+    // updatePant.back
+        self.ShareMgr = [AFHTTPRequestOperationManager manager];
+    NSString *url = @"http://www.123qf.cn/app/updatePant.api?rhid=";   // self.ShareMgr
+    
+  __block    NSString *Rhids = [self.MsgRhidArr firstObject];
+
+
+    [self.MsgRhidArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if (idx >0) {
+           Rhids = [Rhids stringByAppendingString:[NSString stringWithFormat:@",%@",(NSString *)obj]];
+        }
+    }];
+    
+    url = [url stringByAppendingString:Rhids];
+   [self.ShareMgr POST:url parameters:nil success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+        NSLog(@"shabi:%@",responseObject);
+       NSLog(@"DEBUG");
+   } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
+       NSLog(@"HHHH%@",error);
+   }];
+
+}
 
 - (NSMutableDictionary *)dictionaryWithJsonString:(NSString *)jsonString {
     if (jsonString == nil) {
@@ -100,7 +157,7 @@
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
- //   return 5;
+ 
     return [self.MsgArr count];
 }
 

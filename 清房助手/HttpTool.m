@@ -67,7 +67,7 @@
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"失败");
-      //  NSLog(@"heartBeatErr:%@",error);
+       NSLog(@"heartBeatErr:%@",error);
     }];
  
 }

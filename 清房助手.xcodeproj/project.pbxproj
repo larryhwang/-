@@ -1054,6 +1054,7 @@
 		462847DC1C0EEEBF00273B3A /* Interface */ = {
 			isa = PBXGroup;
 			children = (
+				4630636D1C635DAC00DAD5D7 /* Favorite */,
 				46215FB41C60DD7900011229 /* MsgVC */,
 				46E05B061C5E247D00571A21 /* ScanGalleryVC */,
 				461AAD7B1C550A4C00A6F006 /* SharePopView */,
@@ -1126,6 +1127,13 @@
 				46BBE8C71C0FD25C00DE4B14 /* EditCell.m */,
 			);
 			name = View;
+			sourceTree = "<group>";
+		};
+		4630636D1C635DAC00DAD5D7 /* Favorite */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Favorite;
 			sourceTree = "<group>";
 		};
 		463B40611BDD142200B1D26D /* Controller */ = {

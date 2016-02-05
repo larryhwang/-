@@ -271,6 +271,7 @@
     //如果未读消息数量不变
     NSLog(@"数据请求");
     NSMutableArray *MsgArrMsg = [NSMutableArray new];    NSMutableArray *MsgArrOrder = [NSMutableArray new];
+    NSMutableArray *MsgRhid = [NSMutableArray new];
     [HttpTool keepDectectMessageWithSucess:^(NSArray *MsgArr) {
         int count = (int) [MsgArr count];
         if(count ==0) {
@@ -290,8 +291,11 @@
                     NSString *String = obj[@"date"];
                     NSMutableDictionary *realDiC = [self dictionaryWithJsonString:String];
                     [realDiC setObject: obj[@"createtime"]forKey:@"createtime"];
+                    [realDiC setObject:obj[@"rhid"] forKey:@"rhid"];
                     [realDiC setObject:obj[@"rhid"]  forKey:@"rhid"];
                     NSLog(@"过滤后的消息:%@",realDiC);
+                    
+                    [MsgRhid addObject:obj[@"rhid"]];
                    [MsgArrMsg addObject:realDiC];
                 } else {
                     NSLog(@"订单");
@@ -376,7 +380,7 @@
 
 
 -(void)PassMSgData:(MsgViewController *)MsgVC{
-    MsgVC.MsgArr = self.MsgMArr;
+ //   MsgVC.MsgArr = self.MsgMArr;
 }
 
 
