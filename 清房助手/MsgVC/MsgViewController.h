@@ -8,10 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
+#import "WMHomeViewController.h"
+
 @interface MsgViewController : UIViewController
 
 
 @property (weak, nonatomic) IBOutlet UITableView *MsgTable;
+@property (weak, nonatomic) id<WMHomeViewControllerDelegate> HomeVCdelegate;
 
 
 @property(nonatomic,strong)  NSArray  *MsgArr;

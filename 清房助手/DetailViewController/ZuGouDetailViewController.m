@@ -288,13 +288,14 @@
 
 - (void)initNavController {
     UIButton  *h = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 24, 24)];
+    h.backgroundColor = [UIColor redColor];
     [h addTarget:self action:@selector(StarAction) forControlEvents:UIControlEventTouchUpInside];
     UIImage *img = [UIImage imageNamed:@"pStar"];
     [h setImage:img forState:UIControlStateNormal];
     UIBarButtonItem *star = [[UIBarButtonItem alloc]initWithCustomView:h];
     UIBarButtonItem *share = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:nil];
     UIBarButtonItem *flexSible = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
-    flexSible.width = 4.f ;
+    flexSible.width = 6.f ;
     NSArray *arr = [NSArray arrayWithObjects:star,flexSible,share,nil];
     UIToolbar *rightTool =  [[UIToolbar alloc]init];
     rightTool.barTintColor = [UIColor blueColor];

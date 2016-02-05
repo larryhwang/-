@@ -31,6 +31,7 @@
 #import "MBProgressHUD+CZ.h"
 
 #import "MsgViewController.h"
+#import "MyFavoriteVC.h"
 
 typedef enum Slidestate {
     kStateHome,
@@ -338,6 +339,10 @@ static const CGFloat menuStartNarrowRatio  = 0.70;
         MutiTaskOrderBusinessVC *OrderTask = [[MutiTaskOrderBusinessVC alloc]init];
         OrderTask.title =@"售后业务";
         [self showHome];
+        
+        UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
+        self.messageNav.navigationItem.backBarButtonItem = item;
+        
         [self.messageNav pushViewController:OrderTask animated:YES];
     } else {
         [MBProgressHUD showError:@"权限不足，请联系管理员"];
@@ -351,9 +356,11 @@ static const CGFloat menuStartNarrowRatio  = 0.70;
  *  跳转到收藏
  */
 -(void)tranStoMyStars {
-//    MsgViewController *msgVC = [MsgViewController new];
-//    msgVC.title = @"";
-    
+    MyFavoriteVC *StarsVC = [MyFavoriteVC new];
+    StarsVC.HomeVCdelegate = self;
+    StarsVC.title = @"我的收藏";
+    [self.messageNav pushViewController:StarsVC animated:YES];
+    [self showHome];
     
 }
 
@@ -381,10 +388,7 @@ static const CGFloat menuStartNarrowRatio  = 0.70;
 }
 
 - (void)OnlyBack {  //回到首页(出租、出售)
-    
-
     NSArray *VcArrs = self.messageNav.viewControllers;
-    
     [VcArrs enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         if ([(UIViewController *)obj isKindOfClass:[WMHomeViewController class]]) {
             *stop = YES;
@@ -397,12 +401,7 @@ static const CGFloat menuStartNarrowRatio  = 0.70;
             [right setTitle: @"出租" forState:UIControlStateNormal];
         }
     }];
-    
    [self.homeVC LeftInit];
-    
-    
-    
-    
    [self showHome];
 }
 

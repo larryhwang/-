@@ -278,7 +278,7 @@
             [self MsgTipsClean];
         }
         
-        if(count ==self.CurrentMsgCount) {    //如果和之前的数量不变
+        if(count ==self.CurrentMsgCount || count ==0) {    //如果和之前的数量不变
             return ;
         } else {
             //如果有新增

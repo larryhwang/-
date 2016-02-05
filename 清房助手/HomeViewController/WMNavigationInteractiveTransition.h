@@ -12,6 +12,8 @@
 
 @interface WMNavigationInteractiveTransition : NSObject <UINavigationControllerDelegate>
 - (instancetype)initWithViewController:(UIViewController *)vc;
+
+
 - (void)handleControllerPop:(UIPanGestureRecognizer *)recognizer;
 - (UIPercentDrivenInteractiveTransition *)interactivePopTransition;
 

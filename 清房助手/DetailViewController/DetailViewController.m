@@ -185,17 +185,20 @@
 //    参数
 //    fid
 //    kid
-
-    
     NSString *Request = [NSString stringWithFormat:@"http://www.123qf.cn/app/user/saveCollectRow.api?fid=%@",self.FangData[@"id"]];
-
-    
-    
-    
+    NSLog(@"%@ %@",self.FangData,Request);
     [self.sharedMgr POST:Request parameters:nil success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-        if ([HttpTool isRequestSuccessWith:responseObject andKeyStr:@"zushou"]) {
+        NSLog(@"TTGG:%@",responseObject);
+        
+        if ([responseObject[@"code"] isEqualToString:@"00404"]) {
+            [MBProgressHUD showSuccess:@"已收藏过了"];
+        } else if ([responseObject[@"code"] isEqualToString:@"1"])
+        {
             [MBProgressHUD showSuccess:@"已收藏,在我的收藏中可见"];
         }
+        
+        
+        
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         NSLog(@"%@",error);
     }];
@@ -596,9 +599,11 @@
     
 #warning 描述地方
     NSString *miaoshuStr =  self.FangData[@"fangyuanmiaoshu"];
-    NSRange isHaveHTML = [miaoshuStr rangeOfString:@"style"];
+    NSRange isHaveHTML  = [miaoshuStr rangeOfString:@"style"];
+    NSRange isHaveHTML1 = [miaoshuStr rangeOfString:@"p"];
+    
     //判断是不是网页
-    if(isHaveHTML.length) {
+    if(isHaveHTML.length || isHaveHTML1.length) {
         DescribieCell = [DescribeCell freeCellWithHtmlStr:miaoshuStr];   //+(instancetype)freeCellWithHtmlStr:(NSString *)htmlStr]
         self.DescribeCellHeight = 200;
     }else {
@@ -617,8 +622,6 @@
             LocationCell.LouPanName.text = [self judgeNullValue:self.FangData[@"mingcheng"]];
             if(self.isInner)
             [self setCheckBtn:LocationCell]; //如果是内部请求,添加查看按钮
-            
-            
 #pragma mark -价格高亮属性
             NSString *StringPrice = nil;
             NSRange   RedPart ;
@@ -629,11 +632,7 @@
             } else{
                 StringPrice = [NSString stringWithFormat:@"%@元/月",self.FangData[@"shoujia"]];
                 RedPart = NSMakeRange(0, [StringPrice length] -3);
-
             }
-            
-            
-         //   NSRange   RedPart = NSMakeRange(0, [StringPrice length] -1 );
             NSMutableAttributedString *priceAttri = [[NSMutableAttributedString alloc]initWithString:StringPrice];
             [priceAttri addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:23 ] range:RedPart];
             [priceAttri addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range:RedPart];

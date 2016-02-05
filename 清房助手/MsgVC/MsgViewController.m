@@ -161,9 +161,13 @@
     return [self.MsgArr count];
 }
 
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    [self.MsgTable setEditing:false animated:true];
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString    *identifer = @"identifer";
+    static NSString    *identifer = @"UITableViewCell";
     TableViewCell *cell = [TableViewCell new];
     
      cell = [tableView dequeueReusableCellWithIdentifier:identifer];
@@ -174,4 +178,40 @@
     }
     return cell;
 }
+
+- (nullable NSArray<UITableViewRowAction *> *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    void(^rowActionHandler)(UITableViewRowAction *, NSIndexPath *) = ^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
+        [self.MsgTable setEditing:false animated:true];
+        
+        NSLog(@"%@",action.title);
+        
+        if(indexPath.row ==0) {
+            NSLog(@"0");
+        }
+        
+        if(indexPath.row ==1) {
+            NSLog(@"1");
+        }
+        
+        if(indexPath.row ==2) {
+            NSLog(@"2");
+        }
+    };
+    
+    UIButton *buttonForImage = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+    //
+    //    UITableViewRowAction *action1 = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault image:[buttonForImage imageForState:UIControlStateNormal] handler:rowActionHandler];
+    //
+    //    UITableViewRowAction *action2 = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:@"disenable" handler:rowActionHandler];
+    //    action2.enabled = false;
+    
+    UITableViewRowAction *action2 = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"取消" handler:rowActionHandler];
+    UITableViewRowAction *action3 = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"删除" handler:rowActionHandler];
+    
+    return @[action2,action3];
+}
+
+
+
 @end
