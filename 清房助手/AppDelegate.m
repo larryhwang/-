@@ -142,7 +142,7 @@
         
         [alertView show];
     }
-    
+
     //    调用checkUpdateWithDelegete后可用此方法来更新本地的版本号，如果有更新的话，在调用了此方法后再次调用将不提示更新信息。
     //        [[PgyUpdateManager sharedPgyManager] updateLocalBuildNumber];
     

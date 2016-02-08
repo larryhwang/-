@@ -19,6 +19,11 @@
 #define ImgWidth  236
 #define ImgHeight 76
 
+
+
+//本页面用来描述发布的四大选项
+
+
 @interface PostViewController ()
 @property (weak, nonatomic)  UIView *FucntionContentView;
 
@@ -58,6 +63,10 @@
         [tittleImgView setFrame:CGRectMake((SCREEN_WIDTH - ImgWidth)/2, self.view.frame.origin.y + 2*ImgHeight -70 , ImgWidth, ImgHeight)];
     }
     
+    if(isI4) {
+        [tittleImgView setFrame:CGRectMake((SCREEN_WIDTH - ImgWidth)/2, self.view.frame.origin.y + 2*ImgHeight -80 , ImgWidth, ImgHeight)];
+    }
+    
     tittleImgView.image = [UIImage imageNamed:@"wenzi"];
     [self.view addSubview:tittleImgView];
 }
@@ -67,6 +76,11 @@
 - (void)Move:(id)sender {
     [UIView animateWithDuration:1.f animations:^{
         CGPoint  First  =  CGPointMake(self.view.center.x, self.view.center.y + 10);
+        
+        
+        if (isI4) {
+            First = CGPointMake(self.view.center.x, self.view.center.y + 50);
+        }
         self.FucntionContentView.center = First ;
     } completion:^(BOOL finished) {
     }];

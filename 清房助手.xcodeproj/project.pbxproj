@@ -18,8 +18,6 @@
 		4616EDC71C240AEE00BAF5C3 /* afterMarket.png in Resources */ = {isa = PBXBuildFile; fileRef = 4616EDC41C240AEE00BAF5C3 /* afterMarket.png */; };
 		4616EDC81C240AEE00BAF5C3 /* company.png in Resources */ = {isa = PBXBuildFile; fileRef = 4616EDC51C240AEE00BAF5C3 /* company.png */; };
 		4616EDC91C240AEE00BAF5C3 /* person.png in Resources */ = {isa = PBXBuildFile; fileRef = 4616EDC61C240AEE00BAF5C3 /* person.png */; };
-		4616EDCF1C2436CE00BAF5C3 /* PgySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4616EDCE1C2436CE00BAF5C3 /* PgySDK.framework */; };
-		4616EDD11C2436D000BAF5C3 /* PgyUpdate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4616EDD01C2436D000BAF5C3 /* PgyUpdate.framework */; };
 		4616EDD41C24509700BAF5C3 /* SettingInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4616EDD31C24509700BAF5C3 /* SettingInterface.storyboard */; };
 		4616EDD71C24569200BAF5C3 /* SettingViewCotroller.m in Sources */ = {isa = PBXBuildFile; fileRef = 4616EDD61C24569200BAF5C3 /* SettingViewCotroller.m */; };
 		4616EDDA1C24651600BAF5C3 /* SettingPage_TableVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4616EDD91C24651600BAF5C3 /* SettingPage_TableVC.m */; };
@@ -159,6 +157,8 @@
 		4673A50F1BC8DDA500700099 /* UIView+Frame.m in Sources */ = {isa = PBXBuildFile; fileRef = 4673A50E1BC8DDA500700099 /* UIView+Frame.m */; };
 		4673A5121BC8DEE000700099 /* searchbar_textfield_search_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4673A5101BC8DEE000700099 /* searchbar_textfield_search_icon@2x.png */; };
 		4673A5131BC8DEE000700099 /* searchbar_textfield_background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4673A5111BC8DEE000700099 /* searchbar_textfield_background@2x.png */; };
+		46754BE51C6618EA0005C5DB /* PgySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46754BE31C6618E90005C5DB /* PgySDK.framework */; };
+		46754BE61C6618EA0005C5DB /* PgyUpdate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46754BE41C6618EA0005C5DB /* PgyUpdate.framework */; };
 		4677DE1C1C1672D700011D70 /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4677DE1B1C1672D700011D70 /* TableViewController.m */; };
 		4677DE201C16741F00011D70 /* SeachRusultDisplayController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4677DE1E1C16741F00011D70 /* SeachRusultDisplayController.m */; };
 		4677DE211C16741F00011D70 /* SeachRusultDisplayController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4677DE1F1C16741F00011D70 /* SeachRusultDisplayController.xib */; };
@@ -368,8 +368,6 @@
 		4616EDC41C240AEE00BAF5C3 /* afterMarket.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = afterMarket.png; sourceTree = "<group>"; };
 		4616EDC51C240AEE00BAF5C3 /* company.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = company.png; sourceTree = "<group>"; };
 		4616EDC61C240AEE00BAF5C3 /* person.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = person.png; sourceTree = "<group>"; };
-		4616EDCE1C2436CE00BAF5C3 /* PgySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PgySDK.framework; path = Pods/PgySDK.framework; sourceTree = "<group>"; };
-		4616EDD01C2436D000BAF5C3 /* PgyUpdate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PgyUpdate.framework; path = Pods/PgyUpdate.framework; sourceTree = "<group>"; };
 		4616EDD31C24509700BAF5C3 /* SettingInterface.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = SettingInterface.storyboard; path = ../../SettingInterface.storyboard; sourceTree = "<group>"; };
 		4616EDD51C24569200BAF5C3 /* SettingViewCotroller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewCotroller.h; sourceTree = "<group>"; };
 		4616EDD61C24569200BAF5C3 /* SettingViewCotroller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewCotroller.m; sourceTree = "<group>"; };
@@ -589,6 +587,8 @@
 		4673A50E1BC8DDA500700099 /* UIView+Frame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Frame.m"; sourceTree = "<group>"; };
 		4673A5101BC8DEE000700099 /* searchbar_textfield_search_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "searchbar_textfield_search_icon@2x.png"; sourceTree = "<group>"; };
 		4673A5111BC8DEE000700099 /* searchbar_textfield_background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "searchbar_textfield_background@2x.png"; sourceTree = "<group>"; };
+		46754BE31C6618E90005C5DB /* PgySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PgySDK.framework; path = ../../Downloads/PgySDK/sdk/PgySDK.framework; sourceTree = "<group>"; };
+		46754BE41C6618EA0005C5DB /* PgyUpdate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PgyUpdate.framework; path = ../../Downloads/PgySDK/sdk/PgyUpdate.framework; sourceTree = "<group>"; };
 		4677DE1A1C1672D700011D70 /* TableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TableViewController.h; path = Search/Controller/TableViewController.h; sourceTree = "<group>"; };
 		4677DE1B1C1672D700011D70 /* TableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TableViewController.m; path = Search/Controller/TableViewController.m; sourceTree = "<group>"; };
 		4677DE1D1C16741F00011D70 /* SeachRusultDisplayController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SeachRusultDisplayController.h; path = Search/Controller/SeachRusultDisplayController.h; sourceTree = "<group>"; };
@@ -895,9 +895,9 @@
 				4654152B1C2C01D2003E5743 /* libz.tbd in Frameworks */,
 				465415291C2C01C7003E5743 /* libsqlite3.0.tbd in Frameworks */,
 				7785FD4973E36DF183E5705C /* libPods.a in Frameworks */,
+				46754BE51C6618EA0005C5DB /* PgySDK.framework in Frameworks */,
+				46754BE61C6618EA0005C5DB /* PgyUpdate.framework in Frameworks */,
 				46BBE8AA1C0FD19400DE4B14 /* JYBMultiImageSelector.framework in Frameworks */,
-				4616EDCF1C2436CE00BAF5C3 /* PgySDK.framework in Frameworks */,
-				4616EDD11C2436D000BAF5C3 /* PgyUpdate.framework in Frameworks */,
 				465415271C2C015A003E5743 /* libWeChatSDK.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2042,12 +2042,12 @@
 		C1601311CBEE81D2050A5A8E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				46754BE31C6618E90005C5DB /* PgySDK.framework */,
+				46754BE41C6618EA0005C5DB /* PgyUpdate.framework */,
 				46CB4D131C6089A40028AA6F /* AudioToolbox.framework */,
 				4654152C1C2C01DD003E5743 /* SystemConfiguration.framework */,
 				4654152A1C2C01D2003E5743 /* libz.tbd */,
 				465415281C2C01C7003E5743 /* libsqlite3.0.tbd */,
-				4616EDD01C2436D000BAF5C3 /* PgyUpdate.framework */,
-				4616EDCE1C2436CE00BAF5C3 /* PgySDK.framework */,
 				93DCD64313F5A1A452276E13 /* libPods.a */,
 			);
 			name = Frameworks;
@@ -2699,7 +2699,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Huizhou S&F Network Technology Co., Ltd. (YTPF55AM99)";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

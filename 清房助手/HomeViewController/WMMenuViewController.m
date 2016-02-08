@@ -99,7 +99,7 @@
     [super viewDidLoad];
     self.common = [WMCommon getInstance];
     self.listArray = @[@"我的信息",@"房源查询", @"客源查询", @"信息发布", @"内部房源", @"内部客源",@"售后业务",@"我的收藏"];
-    self.MethodArray = @[@"transtoMyMsg",@"OnlyBack",@"transToRentAndSale",@"transToPost",@"transToPost",@"transtoInnerKeyuan",@"transtoMutiTask",@"tranStoMyStars"];
+    self.MethodArray = @[@"transtoMyMsg",@"OnlyBack",@"transToRentAndSale",@"transToPost",@"transtoInnerFang",@"transtoInnerKeyuan",@"transtoMutiTask",@"tranStoMyStars"];
     self.ImageNameArr = @[@"MsgmenuIcon",@"search-house",@"search-people",@"pen",@"house",@"people",@"afterMarket",@"pStar"];
     self.tableView.delegate        = self;
     self.tableView.dataSource      = self;
@@ -380,7 +380,7 @@
 
 
 -(void)PassMSgData:(MsgViewController *)MsgVC{
- //   MsgVC.MsgArr = self.MsgMArr;
+    MsgVC.MsgArr = self.MsgMArr;
 }
 
 

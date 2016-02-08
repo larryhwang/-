@@ -87,19 +87,25 @@
       
         self.MsgRhidArr = MsgRhid ;
         
+        
         NSArray   *arr = [NSArray new];
         if ([MsgArrMsg count] &&[lastMsgArr count]) {
-           arr   =     [MsgArrMsg arrayByAddingObjectsFromArray:lastMsgArr];
+           arr   =  [MsgArrMsg arrayByAddingObjectsFromArray:lastMsgArr];
+           self.MsgArr = arr;
         }
-       
-        BOOL sucess = [NSKeyedArchiver archiveRootObject:arr toFile:path];
+        BOOL sucess = [NSKeyedArchiver archiveRootObject:self.MsgArr toFile:path];
         if (sucess)
         {
             NSLog(@"archive sucess");
         }
  
         //获取到网络端的数据后再追加到本地数据
-        self.MsgArr = arr;
+        
+        NSLog(@"最后:a%@",arr);
+        
+       
+       
+        
         [MBProgressHUD hideHUD];
         [self.MsgTable reloadData];
        

@@ -122,9 +122,7 @@
 }
 
 
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    [self setEditing:false animated:true];
-}
+
 
 - (nullable NSArray<UITableViewRowAction *> *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath {
     
@@ -304,8 +302,9 @@
     
     
     if (_status ==SalesOut) {
+//        UITableViewCell
         _preName = @"[出售]";
-        static NSString *ID = @"identifer";
+        static NSString *ID = @"UITableViewCell";
         SalesCell *cell =[tableView dequeueReusableCellWithIdentifier:ID];
         if (cell ==nil) {
             cell = [[[NSBundle mainBundle]loadNibNamed:@"SalesCell" owner:nil options:nil] firstObject];
@@ -571,6 +570,34 @@
 
 -(void)canleStar {
     
+}
+
+
+//先要设Cell可编辑
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return YES;
+}
+
+//定义编辑样式
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView setEditing:YES animated:YES];
+    return UITableViewCellEditingStyleDelete;
+}
+
+////进入编辑模式，按下出现的编辑按钮后
+//- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    [tableView setEditing:NO animated:YES];
+//}
+
+//以下方法可以不是必须要实现，添加如下方法可实现特定效果：
+
+//修改编辑按钮文字
+- (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return @"删除";
 }
 
 @end
