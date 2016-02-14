@@ -9,9 +9,6 @@
 /* Begin PBXBuildFile section */
 		460732401BD11C970025D41A /* UILabel+UILabel_SizeWithTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 4607323F1BD11C970025D41A /* UILabel+UILabel_SizeWithTest.m */; };
 		460CB3DB1C646CEF00C8CBA5 /* MyFavoriteVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 460CB3DA1C646CEF00C8CBA5 /* MyFavoriteVC.m */; };
-		460CB3E21C64E45000C8CBA5 /* UITableViewCell+JZExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 460CB3DE1C64E45000C8CBA5 /* UITableViewCell+JZExtension.m */; };
-		460CB3E31C64E45000C8CBA5 /* UITableViewRowAction+JZExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 460CB3E01C64E45000C8CBA5 /* UITableViewRowAction+JZExtension.m */; };
-		460CB3E41C64E45000C8CBA5 /* UITableViewRowAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 460CB3E11C64E45000C8CBA5 /* UITableViewRowAction.m */; };
 		4610C2B91C2A92640029AEBF /* OrderTypeSelectBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = 4610C2B81C2A92640029AEBF /* OrderTypeSelectBtn.m */; };
 		4610F4F41BD22456002A05E9 /* FreeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4610F4F31BD22456002A05E9 /* FreeCell.m */; };
 		4615185C1C39FE8400E030D6 /* SaleOutOfiice.m in Sources */ = {isa = PBXBuildFile; fileRef = 4615185A1C39FE8400E030D6 /* SaleOutOfiice.m */; };
@@ -355,10 +352,6 @@
 		4607323F1BD11C970025D41A /* UILabel+UILabel_SizeWithTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+UILabel_SizeWithTest.m"; sourceTree = "<group>"; };
 		460CB3D91C646CEF00C8CBA5 /* MyFavoriteVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyFavoriteVC.h; sourceTree = "<group>"; };
 		460CB3DA1C646CEF00C8CBA5 /* MyFavoriteVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyFavoriteVC.m; sourceTree = "<group>"; };
-		460CB3DE1C64E45000C8CBA5 /* UITableViewCell+JZExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableViewCell+JZExtension.m"; sourceTree = "<group>"; };
-		460CB3DF1C64E45000C8CBA5 /* UITableViewRowAction+JZExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableViewRowAction+JZExtension.h"; sourceTree = "<group>"; };
-		460CB3E01C64E45000C8CBA5 /* UITableViewRowAction+JZExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableViewRowAction+JZExtension.m"; sourceTree = "<group>"; };
-		460CB3E11C64E45000C8CBA5 /* UITableViewRowAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UITableViewRowAction.m; sourceTree = "<group>"; };
 		4610C2B71C2A92640029AEBF /* OrderTypeSelectBtn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderTypeSelectBtn.h; sourceTree = "<group>"; };
 		4610C2B81C2A92640029AEBF /* OrderTypeSelectBtn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderTypeSelectBtn.m; sourceTree = "<group>"; };
 		4610F4F21BD22456002A05E9 /* FreeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FreeCell.h; sourceTree = "<group>"; };
@@ -933,17 +926,6 @@
 			children = (
 			);
 			name = RowActionLib;
-			sourceTree = "<group>";
-		};
-		460CB3DD1C64E45000C8CBA5 /* JZTableViewRowAction */ = {
-			isa = PBXGroup;
-			children = (
-				460CB3DE1C64E45000C8CBA5 /* UITableViewCell+JZExtension.m */,
-				460CB3DF1C64E45000C8CBA5 /* UITableViewRowAction+JZExtension.h */,
-				460CB3E01C64E45000C8CBA5 /* UITableViewRowAction+JZExtension.m */,
-				460CB3E11C64E45000C8CBA5 /* UITableViewRowAction.m */,
-			);
-			path = JZTableViewRowAction;
 			sourceTree = "<group>";
 		};
 		4616EDC01C2409B900BAF5C3 /* InnerFangResource */ = {
@@ -1894,7 +1876,6 @@
 		46C7169B1BC66EF400287742 /* Lib */ = {
 			isa = PBXGroup;
 			children = (
-				460CB3DD1C64E45000C8CBA5 /* JZTableViewRowAction */,
 				460CB3DC1C64E41700C8CBA5 /* RowActionLib */,
 				46FAB10D1C5F4A1800D84CBC /* JDYBrowse */,
 				46E6CE1D1C5B071800B9FE2E /* openshare */,
@@ -2393,7 +2374,6 @@
 				46B21ACA1C3108750053AE7F /* InnerResourceFilter.m in Sources */,
 				46789C4E1C4507140094DE54 /* RentOutShangPu.m in Sources */,
 				46714B7E1BC7C11F00E7AEE9 /* WMNavigationController.m in Sources */,
-				460CB3E21C64E45000C8CBA5 /* UITableViewCell+JZExtension.m in Sources */,
 				46E6CE2F1C5B071800B9FE2E /* OpenShare+Weixin.m in Sources */,
 				46BBE8CA1C0FD25C00DE4B14 /* CZKeyboardToolbar.m in Sources */,
 				4654153B1C2C5208003E5743 /* QFMyOrderTableVC.m in Sources */,
@@ -2404,7 +2384,6 @@
 				46FAB1261C5F4A1800D84CBC /* JDYBrowseLoadingView.m in Sources */,
 				46789C481C43B0090094DE54 /* SaleoutChangFangViewController.m in Sources */,
 				46AFDFA21BCB84A200B49CBE /* SDWebImageManager.m in Sources */,
-				460CB3E41C64E45000C8CBA5 /* UITableViewRowAction.m in Sources */,
 				46BC5E5D1C2999AB00B1247A /* CommitOrderVC.m in Sources */,
 				462847E41C0EEF0B00273B3A /* PostCategory.m in Sources */,
 				4678206B1C291E6B0076C761 /* LeavMsgCell.m in Sources */,
@@ -2413,7 +2392,6 @@
 				46AFDFA91BCB84A200B49CBE /* UIImageView+WebCache.m in Sources */,
 				4673A5081BC8DCD200700099 /* QFSearchBar.m in Sources */,
 				4628481B1C0FCC6C00273B3A /* LocateTool.m in Sources */,
-				460CB3E31C64E45000C8CBA5 /* UITableViewRowAction+JZExtension.m in Sources */,
 				4646C6931C270AFD00896964 /* ZuGouHeadCell.m in Sources */,
 				46AFDF9B1BCB84A200B49CBE /* MKAnnotationView+WebCache.m in Sources */,
 				46AFDF9C1BCB84A200B49CBE /* NSData+ImageContentType.m in Sources */,
@@ -2680,7 +2658,7 @@
 					"$(PROJECT_DIR)/Pods",
 				);
 				INFOPLIST_FILE = "清房助手/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2707,7 +2685,7 @@
 					"$(PROJECT_DIR)/Pods",
 				);
 				INFOPLIST_FILE = "清房助手/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",

@@ -14,8 +14,6 @@
 #import "SalesCell.h"
 #import "KeyuanCell.h"
 
-#import "UITableViewRowAction+JZExtension.h"
-
 #define SingleBtnWidth   ScreenWidth/2
 #define TopTabBarHeight  32
 
