@@ -99,8 +99,8 @@
     
     
     
-    [self registerLocalNotification:10];
-
+  //  [self registerLocalNotification:10];
+    [self  registerRemoteNotification];
     return YES;
 }
 
@@ -273,4 +273,24 @@
     // 执行通知注册
     [[UIApplication sharedApplication] scheduleLocalNotification:notification];
 }
+
+
+-(void)registerRemoteNotification {
+    if (DSystenVersion >=8.0) {
+        UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeSound | UIUserNotificationTypeBadge |UIUserNotificationTypeAlert categories:nil];
+        //请求通知权限的授权
+        [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
+        
+        //注册远程通知
+        [[UIApplication sharedApplication] registerForRemoteNotifications];
+    } else {
+        [[UIApplication sharedApplication] registerForRemoteNotificationTypes:UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeBadge|UIRemoteNotificationTypeSound];
+    }
+}
+
+
+-(void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+    NSLog(@"通知密钥:%@",deviceToken);
+}
+
 @end
