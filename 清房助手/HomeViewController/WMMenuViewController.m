@@ -277,14 +277,11 @@
         if(count ==0) {
             [self MsgTipsClean];
         }
-        
         if(count ==self.CurrentMsgCount || count ==0) {    //如果和之前的数量不变
             return ;
         } else {
             //如果有新增
-            
             //区分订单消息和网页消息
-            
             [MsgArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                 if ([(NSString *)obj[@"type"] isEqualToString:@"1"]) {
                     NSLog(@"消息原:%@",obj);

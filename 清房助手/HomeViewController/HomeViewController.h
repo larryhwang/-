@@ -13,5 +13,7 @@
 
 @interface HomeViewController : WMBaseViewController
 
+-(void)transtoMyMsg;
+
 @end
 

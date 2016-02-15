@@ -46,7 +46,6 @@
 -(void)RequestUnreadMsg {
     //如果未读消息数量不变
     // 先追加，再存取
-    
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *pathDirectory = [paths objectAtIndex:0];
     
@@ -86,8 +85,6 @@
         }
       
         self.MsgRhidArr = MsgRhid ;
-        
-        
         NSArray   *arr = [NSArray new];
         if ([MsgArrMsg count] &&[lastMsgArr count]) {
            arr   =  [MsgArrMsg arrayByAddingObjectsFromArray:lastMsgArr];

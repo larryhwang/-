@@ -53,17 +53,28 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch
+    
     [NSThread sleepForTimeInterval:2.0];
-    self.window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
+      self.window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
     WMCommon *common = [WMCommon getInstance];
     common.screenW = [[UIScreen mainScreen] bounds].size.width;
     common.screenH = [[UIScreen mainScreen] bounds].size.height;
+     NSLog(@"通知信息:%@",launchOptions);
+    
+    if(launchOptions[UIApplicationLaunchOptionsLocalNotificationKey]) {  // 从被杀死的状态中调起的话 如果从通知，其他应用调用起来
+        NSLog(@"%@",launchOptions);  //执行特定跳转
+        UIApplication *app = [UIApplication sharedApplication];
+        // 应用程序右上角数字
+        app.applicationIconBadgeNumber = 0;
+    }
+    
+    
     LoginViewController *login = [LoginViewController new];
     CZNewFeatureController *featurePage = [[CZNewFeatureController alloc]init];
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"SecondLanch"]) {
         self.window.rootViewController = login;
     }else {
-       self.window.rootViewController = featurePage;    //第一次启动则进入新特性
+        self.window.rootViewController = featurePage;    //第一次启动则进入新特性
      [[NSUserDefaults standardUserDefaults]setObject:@"1" forKey:@"SecondLanch"];
     }
    [self.window  makeKeyAndVisible];
@@ -71,7 +82,6 @@
    
 
 #pragma 蒲公英内测信息
-    
     [[PgyUpdateManager sharedPgyManager] startManagerWithAppId:PGY_APPKEY];
     [[PgyManager sharedPgyManager] startManagerWithAppId:PGY_APPKEY];
     [[PgyUpdateManager sharedPgyManager] checkUpdate];  //检查更新
@@ -86,7 +96,22 @@
     
 #pragma mark - 微信分享注册
     [OpenShare connectWeixinWithAppId:APP_ID];
+    
+    
+    
+    [self registerLocalNotification:10];
+
     return YES;
+}
+
+
+-(void)application:(UIApplication *)application didReceiveLocalNotification:(nonnull UILocalNotification *)notification {
+    if (application.applicationState ==UIApplicationStateActive) return ;  //如果在前台接受到通知就直接返回
+    if (application.applicationState ==UIApplicationStateInactive) {      //在程序未杀死且处于后台时接到通知
+        NSLog(@"这里执行跳转");
+        HomeViewController *MainVC = (HomeViewController *) application.keyWindow.rootViewController;
+        [MainVC transtoMyMsg];
+    }
 }
 
 
@@ -201,10 +226,51 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+
+    application.applicationIconBadgeNumber = 0;
+
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
+
+-(void)registerLocalNotification:(NSInteger)alertTime {
+    UILocalNotification *notification = [[UILocalNotification alloc] init];
+    // 设置触发通知的时间
+    NSDate *fireDate = [NSDate dateWithTimeIntervalSinceNow:alertTime];
+    NSLog(@"fireDate=%@",fireDate);
+    
+    notification.fireDate = fireDate;
+    // 时区
+    notification.timeZone = [NSTimeZone defaultTimeZone];
+    // 设置重复的间隔
+    notification.repeatInterval = kCFCalendarUnitSecond;
+    
+    // 通知内容
+    notification.alertBody =  @"您有新消息";
+    notification.applicationIconBadgeNumber = 1;
+    // 通知被触发时播放的声音
+    notification.soundName = UILocalNotificationDefaultSoundName;
+    // 通知参数
+    NSDictionary *userDict = [NSDictionary dictionaryWithObject:@"开始学习iOS开发了" forKey:@"key"];
+    notification.userInfo = userDict;
+    
+    // ios8后，需要添加这个注册，才能得到授权
+    if ([[UIApplication sharedApplication]respondsToSelector:@selector(registerUserNotificationSettings:)]) {
+        UIUserNotificationType type =  UIUserNotificationTypeAlert | UIUserNotificationTypeBadge | UIUserNotificationTypeSound;
+        UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:type
+                                                                                 categories:nil];
+        [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
+        // 通知重复提示的单位，可以是天、周、月
+        notification.repeatInterval = NSCalendarUnitDay;
+    } else {
+        // 通知重复提示的单位，可以是天、周、月
+        notification.repeatInterval = NSCalendarUnitDay;
+    }
+    
+    // 执行通知注册
+    [[UIApplication sharedApplication] scheduleLocalNotification:notification];
+}
 @end
