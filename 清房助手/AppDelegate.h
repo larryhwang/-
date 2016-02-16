@@ -11,7 +11,8 @@
 #import <PgyUpdate/PgyUpdateManager.h>
 
 
-#define PGY_APPKEY  @"1532dd72458c0cd6552d9ab261f5c7df"  //蒲公英Key
+#define PGY_APPKEY    @"1532dd72458c0cd6552d9ab261f5c7df"  //蒲公英Key
+#define UMENG_APPKEY  @"56c286f0e0f55ad0480027fb"  //友盟Key
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 

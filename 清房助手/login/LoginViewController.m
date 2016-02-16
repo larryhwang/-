@@ -14,6 +14,7 @@
 #import "HomeViewController.h"
 #import "AppDelegate.h"
 #import "LoacationNameTool.h"
+#import "UMessage.h"
 
 @interface LoginViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *userName;
@@ -58,6 +59,9 @@
         PramaDic[@"psword"] = passWord;
 
     
+    
+    
+    
     //这个账号有订单跟踪数据
 //    PramaDic[@"userid"] = @"13725007900";
 //    PramaDic[@"psword"] = @"123456";
@@ -68,6 +72,11 @@
 //    PramaDic[@"psword"] = @"5798161";
     
 
+    
+
+    
+    
+    
    [self LoginWith:PramaDic];
  
     
@@ -106,6 +115,16 @@
             [[NSUserDefaults standardUserDefaults]setObject:userName forKey:@"acount"];
             [[NSUserDefaults standardUserDefaults]setObject:passWord forKey:@"pw"];
             
+            //绑定设备标签
+            
+//            [UMessage addTag:userName
+//                    response:^(id responseObject, NSInteger remain, NSError *error) {
+//                        //add your codes
+//                    }];
+            
+            
+            [UMessage addAlias:userName type:kUMessageAliasTypeSina response:^(id responseObject, NSError *error) {
+            }];
             
         }
         long Cp=[responseObject[@"code"] integerValue];

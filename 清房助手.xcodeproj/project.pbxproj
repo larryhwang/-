@@ -130,6 +130,7 @@
 		4658E27C1C37A15500F7B98F /* RentOutCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4658E27A1C37A15500F7B98F /* RentOutCell.xib */; };
 		466C32DB1C325E6300CDF467 /* HomeCitySelecVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 466C32D91C325E6300CDF467 /* HomeCitySelecVC.m */; };
 		466C32DC1C325E6300CDF467 /* HomeCitySelecVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 466C32DA1C325E6300CDF467 /* HomeCitySelecVC.xib */; };
+		466D4EBF1C72CB7400F7A6AC /* libUMessage_Sdk_1.2.6.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 466D4EBD1C72CB7400F7A6AC /* libUMessage_Sdk_1.2.6.a */; };
 		46714B751BC7C11F00E7AEE9 /* UIImage+WM.m in Sources */ = {isa = PBXBuildFile; fileRef = 46714B5D1BC7C11F00E7AEE9 /* UIImage+WM.m */; };
 		46714B761BC7C11F00E7AEE9 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 46714B5F1BC7C11F00E7AEE9 /* HomeViewController.m */; };
 		46714B771BC7C11F00E7AEE9 /* WMBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 46714B611BC7C11F00E7AEE9 /* WMBaseViewController.m */; };
@@ -543,6 +544,8 @@
 		466C32D81C325E6300CDF467 /* HomeCitySelecVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeCitySelecVC.h; sourceTree = "<group>"; };
 		466C32D91C325E6300CDF467 /* HomeCitySelecVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeCitySelecVC.m; sourceTree = "<group>"; };
 		466C32DA1C325E6300CDF467 /* HomeCitySelecVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeCitySelecVC.xib; sourceTree = "<group>"; };
+		466D4EBD1C72CB7400F7A6AC /* libUMessage_Sdk_1.2.6.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libUMessage_Sdk_1.2.6.a; sourceTree = "<group>"; };
+		466D4EBE1C72CB7400F7A6AC /* UMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMessage.h; sourceTree = "<group>"; };
 		46714B5C1BC7C11F00E7AEE9 /* UIImage+WM.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+WM.h"; sourceTree = "<group>"; };
 		46714B5D1BC7C11F00E7AEE9 /* UIImage+WM.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+WM.m"; sourceTree = "<group>"; };
 		46714B5E1BC7C11F00E7AEE9 /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
@@ -889,6 +892,7 @@
 				465415291C2C01C7003E5743 /* libsqlite3.0.tbd in Frameworks */,
 				7785FD4973E36DF183E5705C /* libPods.a in Frameworks */,
 				46754BE51C6618EA0005C5DB /* PgySDK.framework in Frameworks */,
+				466D4EBF1C72CB7400F7A6AC /* libUMessage_Sdk_1.2.6.a in Frameworks */,
 				46754BE61C6618EA0005C5DB /* PgyUpdate.framework in Frameworks */,
 				46BBE8AA1C0FD19400DE4B14 /* JYBMultiImageSelector.framework in Frameworks */,
 				465415271C2C015A003E5743 /* libWeChatSDK.a in Frameworks */,
@@ -1446,6 +1450,15 @@
 			name = View;
 			sourceTree = "<group>";
 		};
+		466D4EBC1C72CB3E00F7A6AC /* UMeng */ = {
+			isa = PBXGroup;
+			children = (
+				466D4EBD1C72CB7400F7A6AC /* libUMessage_Sdk_1.2.6.a */,
+				466D4EBE1C72CB7400F7A6AC /* UMessage.h */,
+			);
+			name = UMeng;
+			sourceTree = "<group>";
+		};
 		46714B5B1BC7BFFB00E7AEE9 /* HomeViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -1876,6 +1889,7 @@
 		46C7169B1BC66EF400287742 /* Lib */ = {
 			isa = PBXGroup;
 			children = (
+				466D4EBC1C72CB3E00F7A6AC /* UMeng */,
 				460CB3DC1C64E41700C8CBA5 /* RowActionLib */,
 				46FAB10D1C5F4A1800D84CBC /* JDYBrowse */,
 				46E6CE1D1C5B071800B9FE2E /* openshare */,
@@ -2663,6 +2677,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/清房助手/GBWXPay/WxPay/SDKExport",
+					"$(PROJECT_DIR)/清房助手",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "HuiZhou-S-F-NetworkTechCo.-Ltd-";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2690,6 +2705,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/清房助手/GBWXPay/WxPay/SDKExport",
+					"$(PROJECT_DIR)/清房助手",
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "HuiZhou-S-F-NetworkTechCo.-Ltd-";

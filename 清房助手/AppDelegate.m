@@ -17,7 +17,9 @@
 
 #import "GBWXPayManager.h"
 
-#import "OpenShareHeader.h"
+#import "OpenShareHeader.h"  //开源分享
+
+#import "UMessage.h"
 
 @interface AppDelegate ()<WXApiDelegate>
 
@@ -69,6 +71,69 @@
     }
     
     
+    //友盟推送设置
+    
+    //set AppKey and AppSecret
+    [UMessage startWithAppkey:UMENG_APPKEY launchOptions:launchOptions];
+    
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= _IPHONE80_
+    if((DSystenVersion >= 8.0))
+    {
+        //register remoteNotification types （iOS 8.0及其以上版本）
+        UIMutableUserNotificationAction *action1 = [[UIMutableUserNotificationAction alloc] init];
+        action1.identifier = @"action1_identifier";
+        action1.title=@"Accept";
+        action1.activationMode = UIUserNotificationActivationModeForeground;//当点击的时候启动程序
+        
+        UIMutableUserNotificationAction *action2 = [[UIMutableUserNotificationAction alloc] init];  //第二按钮
+        action2.identifier = @"action2_identifier";
+        action2.title=@"Reject";
+        action2.activationMode = UIUserNotificationActivationModeBackground;//当点击的时候不启动程序，在后台处理
+        action2.authenticationRequired = YES;//需要解锁才能处理，如果action.activationMode = UIUserNotificationActivationModeForeground;则这个属性被忽略；
+        action2.destructive = YES;
+        
+        UIMutableUserNotificationCategory *categorys = [[UIMutableUserNotificationCategory alloc] init];
+        categorys.identifier = @"category1";//这组动作的唯一标示
+        [categorys setActions:@[action1,action2] forContext:(UIUserNotificationActionContextDefault)];
+        
+        UIUserNotificationSettings *userSettings = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeBadge|UIUserNotificationTypeSound|UIUserNotificationTypeAlert
+                                                                                     categories:[NSSet setWithObject:categorys]];
+        [UMessage registerRemoteNotificationAndUserNotificationSettings:userSettings];
+        
+    } else{
+        //register remoteNotification types (iOS 8.0以下)
+        [UMessage registerForRemoteNotificationTypes:UIRemoteNotificationTypeBadge
+         |UIRemoteNotificationTypeSound
+         |UIRemoteNotificationTypeAlert];
+    }
+#else
+    
+    //register remoteNotification types (iOS 8.0以下)
+    [UMessage registerForRemoteNotificationTypes:UIRemoteNotificationTypeBadge
+     |UIRemoteNotificationTypeSound
+     |UIRemoteNotificationTypeAlert];
+    
+#endif
+    //for log
+    [UMessage setLogEnabled:YES];
+
+  //  self.usrInfoDic
+    NSString *user =  self.usrInfoDic[@"userid"];
+    
+    [UMessage addTag:user
+            response:^(id responseObject, NSInteger remain, NSError *error) {
+                //add your codes
+            }];
+
+    
+    
+    //end友盟
+    
+    
+    
+    
+    
+    
     LoginViewController *login = [LoginViewController new];
     CZNewFeatureController *featurePage = [[CZNewFeatureController alloc]init];
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"SecondLanch"]) {
@@ -100,7 +165,7 @@
     
     
   //  [self registerLocalNotification:10];
-    [self  registerRemoteNotification];
+ //   [self  registerRemoteNotification];
     return YES;
 }
 
@@ -269,7 +334,6 @@
         // 通知重复提示的单位，可以是天、周、月
         notification.repeatInterval = NSCalendarUnitDay;
     }
-    
     // 执行通知注册
     [[UIApplication sharedApplication] scheduleLocalNotification:notification];
 }
@@ -280,7 +344,6 @@
         UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeSound | UIUserNotificationTypeBadge |UIUserNotificationTypeAlert categories:nil];
         //请求通知权限的授权
         [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
-        
         //注册远程通知
         [[UIApplication sharedApplication] registerForRemoteNotifications];
     } else {
@@ -291,6 +354,22 @@
 
 -(void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     NSLog(@"通知密钥:%@",deviceToken);
+    [UMessage registerDeviceToken:deviceToken];
 }
+
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
+{
+    NSLog(@"UMENG：%@",userInfo);
+    [UMessage didReceiveRemoteNotification:userInfo];
+}
+
+- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error
+{
+    //如果注册不成功，打印错误信息，可以在网上找到对应的解决方案
+    //如果注册成功，可以删掉这个方法
+    NSLog(@"错误:application:didFailToRegisterForRemoteNotificationsWithError: %@", error);
+}
+
 
 @end
