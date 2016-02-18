@@ -33,6 +33,8 @@
 		4617E63A1C1BADD5007BECBF /* FilterSelectJieViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4617E6391C1BADD5007BECBF /* FilterSelectJieViewController.m */; };
 		46184CEC1C465C40004CE58D /* WannaFlatVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 46184CEB1C465C40004CE58D /* WannaFlatVC.m */; };
 		461AAD7A1C55077F00A6F006 /* ShareIcons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 461AAD791C55077F00A6F006 /* ShareIcons.xcassets */; };
+		461F745D1C756D33003717D0 /* ShangPuDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 461F745B1C756D33003717D0 /* ShangPuDetailCell.m */; };
+		461F745E1C756D33003717D0 /* ShangPuDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 461F745C1C756D33003717D0 /* ShangPuDetailCell.xib */; };
 		46215FB31C60AA4500011229 /* PermissionTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 46215FB21C60AA4500011229 /* PermissionTool.m */; };
 		46215FBE1C60DEEF00011229 /* TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 46215FBC1C60DEEF00011229 /* TableViewCell.m */; };
 		46215FBF1C60DEEF00011229 /* TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 46215FBD1C60DEEF00011229 /* TableViewCell.xib */; };
@@ -387,6 +389,9 @@
 		46184CEA1C465C40004CE58D /* WannaFlatVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WannaFlatVC.h; path = ../../WannaFlatVC.h; sourceTree = "<group>"; };
 		46184CEB1C465C40004CE58D /* WannaFlatVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WannaFlatVC.m; path = ../../WannaFlatVC.m; sourceTree = "<group>"; };
 		461AAD791C55077F00A6F006 /* ShareIcons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ShareIcons.xcassets; sourceTree = "<group>"; };
+		461F745A1C756D33003717D0 /* ShangPuDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShangPuDetailCell.h; sourceTree = "<group>"; };
+		461F745B1C756D33003717D0 /* ShangPuDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShangPuDetailCell.m; sourceTree = "<group>"; };
+		461F745C1C756D33003717D0 /* ShangPuDetailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShangPuDetailCell.xib; sourceTree = "<group>"; };
 		46215FB11C60AA4500011229 /* PermissionTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PermissionTool.h; sourceTree = "<group>"; };
 		46215FB21C60AA4500011229 /* PermissionTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PermissionTool.m; sourceTree = "<group>"; };
 		46215FBB1C60DEEF00011229 /* TableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewCell.h; sourceTree = "<group>"; };
@@ -1668,6 +1673,9 @@
 				46D33C0B1BCB4B9C00B30F2A /* SalesCell.h */,
 				46D33C0C1BCB4B9C00B30F2A /* SalesCell.m */,
 				46D33C0D1BCB4B9C00B30F2A /* SalesCell.xib */,
+				461F745A1C756D33003717D0 /* ShangPuDetailCell.h */,
+				461F745B1C756D33003717D0 /* ShangPuDetailCell.m */,
+				461F745C1C756D33003717D0 /* ShangPuDetailCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2230,6 +2238,7 @@
 				46BBE8AB1C0FD19400DE4B14 /* loadingIndicator@2x.png in Resources */,
 				46BBE8BD1C0FD23900DE4B14 /* PopSelectViewController.xib in Resources */,
 				46E6CE1C1C5A174300B9FE2E /* SharePopVC.xib in Resources */,
+				461F745E1C756D33003717D0 /* ShangPuDetailCell.xib in Resources */,
 				46BBE8A91C0FD19400DE4B14 /* goods_add_plus@3x.png in Resources */,
 				4643566B1BC6149600A44526 /* logo.png in Resources */,
 				4673A4FC1BC89BCB00700099 /* background-logo(1).png in Resources */,
@@ -2490,6 +2499,7 @@
 				46B23D221C33B26B00C78B43 /* NSArray+MASAdditions.m in Sources */,
 				465415241C2C015A003E5743 /* ApiXml.mm in Sources */,
 				46E5C7B01C34C2A500F4829D /* UserInfoVC_iFive.m in Sources */,
+				461F745D1C756D33003717D0 /* ShangPuDetailCell.m in Sources */,
 				46E5C80A1C35969100F4829D /* UIImage+CJZ.m in Sources */,
 				46714B751BC7C11F00E7AEE9 /* UIImage+WM.m in Sources */,
 				4646C6A01C27137300896964 /* ZuGouDescribeCell.m in Sources */,
@@ -2610,7 +2620,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -2634,7 +2644,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Huizhou S&F Network Technology Co., Ltd. (YTPF55AM99)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Huizhou S&F Network Technology Co., Ltd. (YTPF55AM99)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -2650,7 +2661,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -2672,7 +2683,7 @@
 					"$(PROJECT_DIR)/Pods",
 				);
 				INFOPLIST_FILE = "清房助手/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2681,7 +2692,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "HuiZhou-S-F-NetworkTechCo.-Ltd-";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "65522454-fca9-4d52-a13f-01095b768dd9";
 			};
 			name = Debug;
 		};
@@ -2691,7 +2702,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Huizhou S&F Network Technology Co., Ltd. (YTPF55AM99)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Huizhou S&F Network Technology Co., Ltd. (YTPF55AM99)";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2700,7 +2711,7 @@
 					"$(PROJECT_DIR)/Pods",
 				);
 				INFOPLIST_FILE = "清房助手/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2710,7 +2721,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "HuiZhou-S-F-NetworkTechCo.-Ltd-";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "65522454-fca9-4d52-a13f-01095b768dd9";
 			};
 			name = Release;
 		};

@@ -180,6 +180,9 @@
 }
 
 
+
+
+
 #pragma mark - 微信支付回调
 -(void) onResp:(BaseResp*)resp
 {
@@ -361,7 +364,16 @@
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
 {
     NSLog(@"UMENG：%@",userInfo);
+    
     [UMessage didReceiveRemoteNotification:userInfo];
+    
+    if (application.applicationState ==UIApplicationStateActive) return ;  //如果在前台接受到通知就直接返回
+    if (application.applicationState ==UIApplicationStateInactive) {      //在程序未杀死且处于后台时接到通知
+        NSLog(@"这里执行跳转");
+        HomeViewController *MainVC = (HomeViewController *) application.keyWindow.rootViewController;
+        [MainVC transtoMyMsg];
+    }
+
 }
 
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error

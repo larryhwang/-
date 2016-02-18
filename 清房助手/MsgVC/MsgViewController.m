@@ -16,6 +16,7 @@
 
 @property(nonatomic,strong)  AFHTTPRequestOperationManager  *ShareMgr;
 @property(nonatomic,strong)  NSMutableArray  *MsgRhidArr;
+@property(nonatomic,weak) NSDictionary *SingleMsgData;
 
 @end
 
@@ -29,7 +30,12 @@
 
     NSLog(@"TTT:%@",self.MsgArr);
     
-    [self RequestUnreadMsg];
+    
+    [NSTimer scheduledTimerWithTimeInterval:3.0f target:self selector:@selector(RequestUnreadMsg) userInfo:nil repeats:NO];
+    
+
+    
+    
 }
 
 
@@ -106,7 +112,7 @@
         [MBProgressHUD hideHUD];
         [self.MsgTable reloadData];
        
-        [self cleanMsgUreadFlag];
+     
         NSLog(@"以获取消息:%@",MsgArrMsg);
     
         
@@ -116,12 +122,9 @@
 
 -(void)cleanMsgUreadFlag  {
     // updatePant.back
-        self.ShareMgr = [AFHTTPRequestOperationManager manager];
+    self.ShareMgr = [AFHTTPRequestOperationManager manager];
     NSString *url = @"http://www.123qf.cn/app/updatePant.api?rhid=";   // self.ShareMgr
-    
   __block    NSString *Rhids = [self.MsgRhidArr firstObject];
-
-
     [self.MsgRhidArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         if (idx >0) {
            Rhids = [Rhids stringByAppendingString:[NSString stringWithFormat:@",%@",(NSString *)obj]];
@@ -172,13 +175,16 @@
 {
     static NSString    *identifer = @"UITableViewCell";
     TableViewCell *cell = [TableViewCell new];
-    
-     cell = [tableView dequeueReusableCellWithIdentifier:identifer];
+   
+  //   cell = [tableView dequeueReusableCellWithIdentifier:identifer];
     if (nil == nil)
     {
         cell = [[[NSBundle mainBundle]loadNibNamed:@"TableViewCell" owner:nil options:nil]lastObject];
+        self.SingleMsgData = [self.MsgArr objectAtIndex:indexPath.row];
         cell.CellDic = [self.MsgArr objectAtIndex:indexPath.row];
     }
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+   
     return cell;
 }
 
@@ -202,8 +208,7 @@
         }
     };
     
-    UIButton *buttonForImage = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
-    //
+
     //    UITableViewRowAction *action1 = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault image:[buttonForImage imageForState:UIControlStateNormal] handler:rowActionHandler];
     //
     //    UITableViewRowAction *action2 = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:@"disenable" handler:rowActionHandler];
@@ -213,6 +218,11 @@
     UITableViewRowAction *action3 = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"删除" handler:rowActionHandler];
     
     return @[action2,action3];
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+   //  [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
 }
 
 

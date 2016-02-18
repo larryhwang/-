@@ -10,7 +10,7 @@
 
 
 
-@interface TableViewCell() {
+@interface TableViewCell()<UIAlertViewDelegate> {
     __weak IBOutlet UILabel *MsgType;
     __weak IBOutlet UILabel *MsgTime;
     __weak IBOutlet UILabel *MsgName;
@@ -23,6 +23,13 @@
 
 @implementation TableViewCell
 
+- (IBAction)test:(id)sender {
+     NSLog(@"DEBUG");
+    if (Tele.text.length >1) {
+       [self TeleTap:nil];
+    }
+    
+}
 
 //
 //fid = 297;
@@ -47,6 +54,11 @@
     WeChat.text  = _CellDic[@"weixinNum"];
     Descibe.text = _CellDic[@"miaoshu"];
     
+    if (Tele.text.length >1) {
+   UITapGestureRecognizer *TeleTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(TeleTap:)];
+        [Tele addGestureRecognizer:TeleTap];
+    }
+    
 }
 
 - (void)awakeFromNib {
@@ -57,6 +69,28 @@
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
+}
+
+-(void)TeleTap:(id)sender {
+
+    UIAlertView *AW = [[UIAlertView alloc]initWithTitle:nil
+                                                message:_CellDic[@"phone"]
+                                               delegate:self
+                                      cancelButtonTitle:@"取消"
+                                      otherButtonTitles:@"呼叫", nil];
+    AW.tag = 0;
+    [AW show];
+}
+
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    NSString *tele =[NSString stringWithFormat:@"tel://%@", _CellDic[@"phone"]];//;
+    if(buttonIndex == 1 && alertView.tag==0 ) {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:tele]];
+    } else {
+        
+        return ;
+    }
 }
 
 @end
