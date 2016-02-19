@@ -53,7 +53,7 @@
     
     self.QFMyOrderTable.separatorStyle = UITableViewCellSeparatorStyleNone; //
 
-    [self.QFMyOrderTable addFooterWithTarget:self action:@selector(loadMoreData)];
+   [self.QFMyOrderTable addFooterWithTarget:self action:@selector(loadMoreData)];
     
     [self initNav];
 }
@@ -106,13 +106,18 @@
         if ([PerMisionName rangeOfString:@"订单跟踪"].length) {
             url = @"http://www.123qf.cn/app/integrateFind.api";  //四方
            [self.PramaDic setObject:userName forKey:@"pname"];
+         }
+        
+        if ([PerMisionName isEqualToString:@"订单跟踪(负责人)"]) {
+           url = @"http://www.123qf.cn/app/integrateFindByCounty.api?page=1";
         }
-            self.CurrentRuest = url;
+          self.CurrentRuest = url;
     }
     
     AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
     self.shareMgr = mgr ;
    [self.shareMgr POST:url parameters:self.PramaDic success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+       NSLog(@"接受到的数据: %@",responseObject);
         if ([responseObject[@"code"] isEqualToString: @"00202"]) {
             self.QFSingleCellData_Arr = @[];
             UIAlertView *aleat=[[UIAlertView alloc] initWithTitle:@"提醒" message:@"暂无相关信息" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
@@ -157,11 +162,9 @@
 
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-  //integratePicFind.api  ordernum
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-  //  NSString *url= @"http://www.123qf.cn:81/testApp/integratePicFind.api";
-      NSString *url= @"http://www.123qf.cn/app/integratePicFind.api";
-    
+
+   [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    NSString *url= @"http://www.123qf.cn/app/integratePicFind.api";
     NSDictionary *CellDic = self.QFSingleCellData_Arr [indexPath.row];
     NSMutableDictionary *pramam_dic = [NSMutableDictionary new];
     pramam_dic[@"ordernum"] = CellDic[@"ordernum"];
