@@ -25,21 +25,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.edgesForExtendedLayout = UIRectEdgeNone;
-    
     UIBarButtonItem *backItem = [[UIBarButtonItem alloc] init];
     backItem.title = @" ";
     self.navigationItem.backBarButtonItem = backItem;
-
-    
-
-
 }
 
 
 
 #pragma mark MethodDelegate
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    
     if ([PermissionTool isHavePermisson:@"订单跟踪(负责人)"]) {
         return 1;
     } else  {
