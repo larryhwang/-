@@ -66,7 +66,7 @@
                         <constraint firstAttribute="height" constant="30" id="KQR-28-VDk"/>
                         <constraint firstAttribute="width" constant="60" id="xRT-Xj-SbB"/>
                     </constraints>
-                    <state key="normal" title="联系我们">
+                    <state key="normal" title="关于清房">
                         <color key="titleColor" red="0.80000001190000003" green="1" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
                     <variation key="default">
