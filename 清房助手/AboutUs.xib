@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9060" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AboutUs">
+            <connections>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ijf-OJ-qdW">
+                    <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                    <animations/>
+                    <string key="text">       清房助手是一款专注于房地产中介公司建设标准的智能建站互联网平台，核心优势是：楼盘数据、收集客户、新闻同步、智能平台、办公OA系统、资源共享、自动升级。提高房产从业人士工作效率及业务商机转化效率，加快中介公司房源与客源流动性。帮助清房助手客户以更少的投资获得更佳的销售业绩，实现中介站点“联”化。</string>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="log1.png" translatesAutoresizingMaskIntoConstraints="NO" id="oh4-a1-9Fh">
+                    <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                    <animations/>
+                </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yZ1-l2-cx2">
+                    <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                    <animations/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="25" id="8Uh-0V-cBr"/>
+                    </constraints>
+                    <state key="normal" backgroundImage="返回.png"/>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="8Uh-0V-cBr"/>
+                        </mask>
+                    </variation>
+                    <variation key="widthClass=compact">
+                        <mask key="constraints">
+                            <include reference="8Uh-0V-cBr"/>
+                        </mask>
+                    </variation>
+                    <connections>
+                        <action selector="dismiss:" destination="-1" eventType="touchUpInside" id="qDB-T0-SwZ"/>
+                    </connections>
+                </button>
+            </subviews>
+            <animations/>
+            <color key="backgroundColor" red="0.043137254901960784" green="0.40000000000000002" blue="0.99607843137254903" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstItem="ijf-OJ-qdW" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="25" id="996-Jf-Fdx"/>
+                <constraint firstItem="oh4-a1-9Fh" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="71" id="JQc-vs-0g0">
+                    <variation key="widthClass=compact" constant="80"/>
+                </constraint>
+                <constraint firstItem="yZ1-l2-cx2" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="38" id="KjF-Ok-utJ"/>
+                <constraint firstItem="oh4-a1-9Fh" firstAttribute="top" secondItem="yZ1-l2-cx2" secondAttribute="bottom" constant="17" id="MLG-gu-3tj"/>
+                <constraint firstItem="ijf-OJ-qdW" firstAttribute="top" secondItem="oh4-a1-9Fh" secondAttribute="bottom" constant="59" id="XaX-Ku-a7M"/>
+                <constraint firstAttribute="trailing" secondItem="ijf-OJ-qdW" secondAttribute="trailing" constant="25" id="bTW-zS-eyy"/>
+                <constraint firstItem="yZ1-l2-cx2" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leadingMargin" id="lJj-Me-DdV"/>
+                <constraint firstItem="ijf-OJ-qdW" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="100" id="n3T-an-VQt">
+                    <variation key="widthClass=compact" constant="250"/>
+                </constraint>
+                <constraint firstItem="oh4-a1-9Fh" firstAttribute="leading" secondItem="ijf-OJ-qdW" secondAttribute="leading" id="o6i-h6-BvF"/>
+                <constraint firstAttribute="trailing" secondItem="oh4-a1-9Fh" secondAttribute="trailing" constant="34" id="xmA-a0-rg9"/>
+            </constraints>
+            <variation key="default">
+                <mask key="subviews">
+                    <exclude reference="ijf-OJ-qdW"/>
+                    <exclude reference="oh4-a1-9Fh"/>
+                    <exclude reference="yZ1-l2-cx2"/>
+                </mask>
+                <mask key="constraints">
+                    <exclude reference="KjF-Ok-utJ"/>
+                    <exclude reference="lJj-Me-DdV"/>
+                    <exclude reference="996-Jf-Fdx"/>
+                    <exclude reference="XaX-Ku-a7M"/>
+                    <exclude reference="bTW-zS-eyy"/>
+                    <exclude reference="n3T-an-VQt"/>
+                    <exclude reference="JQc-vs-0g0"/>
+                    <exclude reference="MLG-gu-3tj"/>
+                    <exclude reference="o6i-h6-BvF"/>
+                    <exclude reference="xmA-a0-rg9"/>
+                </mask>
+            </variation>
+            <variation key="widthClass=compact">
+                <mask key="subviews">
+                    <include reference="ijf-OJ-qdW"/>
+                    <include reference="oh4-a1-9Fh"/>
+                    <include reference="yZ1-l2-cx2"/>
+                </mask>
+                <mask key="constraints">
+                    <include reference="KjF-Ok-utJ"/>
+                    <include reference="lJj-Me-DdV"/>
+                    <include reference="996-Jf-Fdx"/>
+                    <include reference="XaX-Ku-a7M"/>
+                    <include reference="bTW-zS-eyy"/>
+                    <include reference="n3T-an-VQt"/>
+                    <include reference="JQc-vs-0g0"/>
+                    <include reference="MLG-gu-3tj"/>
+                    <include reference="o6i-h6-BvF"/>
+                    <include reference="xmA-a0-rg9"/>
+                </mask>
+            </variation>
+        </view>
+    </objects>
+    <resources>
+        <image name="log1.png" width="603" height="178"/>
+        <image name="返回.png" width="57" height="57"/>
+    </resources>
+</document>

@@ -119,6 +119,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self.PostDataDic setObject:@"1" forKey:@"fenlei"];   //分类
+    [self.PostDataDic setObject:@"0" forKey:@"zushou"];  //出售
     
 }
 
@@ -948,9 +950,7 @@
             [self.navigationController setNavigationBarHidden:NO animated:YES];
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:self.typeStr];
             NSLog(@"取消");
-            
-            
-            
+
             [self.navigationController popViewControllerAnimated:YES];
         } else if(buttonIndex ==1) {
             // 留在此页
@@ -1002,7 +1002,6 @@
     if([[oldDic allKeys] count]>0)
         //重载数据前需要进行判断，如果新键的值变更了，以新的值为准，如果没有则赋予旧值
         self.PostDataDic = oldDic;
-    
     //表象参数赋值
     for (EditCell *cell in self.cellMARR) {
         NSLog(@"Father,Arr%p",self.cellMARR);

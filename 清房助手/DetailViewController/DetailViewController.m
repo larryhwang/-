@@ -685,17 +685,14 @@ typedef NS_ENUM(NSInteger,Fenlei)  {
     } //end_住宅类
 #pragma mark -商铺类
      else if([self.FenLei isEqualToString:@"1"]) {  //商铺类
-//        FactoryLoactionCell *cell = [[FactoryLoactionCell alloc]init];
-//        cell.textLabel.text = @"商铺";
-//        return cell;
-         
-         
          FlatLocationCell  *LocationCell  = [FlatLocationCell new];
          ShangPuDetailCell *ShangPuDetail = [ShangPuDetailCell new];
          DescribeCell  *DescribieCell = NULL;
          NSString *miaoshuStr =  self.FangData[@"fangyuanmiaoshu"];
          NSRange isHaveHTML  = [miaoshuStr rangeOfString:@"style"];
          NSRange isHaveHTML1 = [miaoshuStr rangeOfString:@"p"];
+         
+         NSLog(@"数据%@",self.FangData);
          
          //判断是不是网页
          if(isHaveHTML.length || isHaveHTML1.length) {
@@ -743,14 +740,17 @@ typedef NS_ENUM(NSInteger,Fenlei)  {
              
              NSLog(@"%@",self.FangData);
 
-             
+             NSNumberFormatter *formatter = [[NSNumberFormatter alloc]init];
              ShangPuDetail.ZhuangXiu.text = self.FangData[@"zhuangxiu"];
              ShangPuDetail.Mianji.text = [NSString stringWithFormat:@"%@㎡",self.FangData[@"mianji"]];;
-             NSNumberFormatter *formatter = [[NSNumberFormatter alloc]init];
-             ShangPuDetail.LouCeng.text =  [formatter stringFromNumber:self.FangData[@"louceng"]];
-             ShangPuDetail.GuanLiFei.text = [self judgeNullValue: self.FangData[@"guanlifei"]];
+//
+            ShangPuDetail.LouCeng.text =  [formatter stringFromNumber:self.FangData[@"louceng"]];
+
+           ShangPuDetail.GuanLiFei.text = [self judgeNullValue: self.FangData[@"guanlifei"]];
+             
+            
              ShangPuDetail.YouXiaoQi.text =   [NSString stringWithFormat:@"%@个月",[formatter stringFromNumber:self.FangData[@"youxiaoqi"]]];
-             ShangPuDetail.KangFangTime.text = self.FangData[@"kanfangtime"];
+            ShangPuDetail.KangFangTime.text = self.FangData[@"kanfangtime"];
              ShangPuDetail.PeitTao.text = [self getShangPuFromDataDic];
              ShangPuDetail.LeiXing.text = self.FangData[@"leixing"];
 
@@ -797,7 +797,6 @@ typedef NS_ENUM(NSInteger,Fenlei)  {
            return 131;
    }
   else {
-      //return self.DescribeCellHeight + 10 ;
       if(isI5){
          return self.DescribeCellHeight + 60 ;
   } else {
@@ -933,19 +932,61 @@ typedef NS_ENUM(NSInteger,Fenlei)  {
 
 -(void)QFsharedWith:(NSInteger)index {
     
+    NSString *firstStr ;
+    NSString *secondStr ;
+    
+    NSString *Basic = @"http://www.123qf.cn/front/fkyuan/";
+    
+    NSNumber *ZeroFlag = [NSNumber numberWithInt:0];
+    NSNumber *OneFlag  = [NSNumber numberWithInt:1];
+    NSNumber *TwoFlag  = [NSNumber numberWithInt:2];
+
+    
+    if ([self.FangData[@"zushou"] isEqualToNumber:ZeroFlag]) {
+        firstStr = @"cs";
+    } else if (![self.FangData[@"zushou"] isEqualToNumber:ZeroFlag]) {
+        firstStr = @"cz";
+    }
+    
+    
+    if ([self.FangData[@"fenlei"] isEqualToNumber:ZeroFlag]) {
+        secondStr = @"zz";
+    } else if ([self.FangData[@"fenlei"] isEqualToNumber:OneFlag]) {
+        secondStr = @"sp";
+     }else if ([self.FangData[@"fenlei"] isEqualToNumber:TwoFlag]) {
+        secondStr = @"xzl";
+     }else {
+        secondStr = @"cf";
+     }
+    
+
+    
     AppDelegate *app =  [UIApplication sharedApplication].delegate;
     NSLog(@"%@",app.usrInfoDic);
     OSMessage *msg=[[OSMessage alloc]init];
     msg.title=self.FangData[@"biaoti"];
-    NSString *urlLink = [NSString stringWithFormat:@"http://www.123qf.cn/front/fkyuan/wap_cz_zz.jsp?zhuangtai=0&fid=%@&fenlei=0&userID=%@",self.FangData[@"id"],app.usrInfoDic[@"userid"]];
-    NSLog(@"%@",urlLink);
+   // NSString *urlLink = [NSString stringWithFormat:@"http://www.123qf.cn/front/fkyuan/wap_cz_zz.jsp?zhuangtai=1&fid=%@&fenlei=0&userID=%@",self.FangData[@"id"],app.usrInfoDic[@"userid"]];
+    
+    NSString *urlLink =[NSString stringWithFormat:@"http://www.123qf.cn/front/fkyuan/wap_%@_%@.jsp?zhuangtai=0&fid=%@&fenlei=0&userID=%@",firstStr,secondStr,self.FangData[@"id"],app.usrInfoDic[@"userid"]];
+
+    
+    NSLog(@"urlLink：%@",urlLink);
     msg.link=urlLink;
     
+    
+    
     UIImageView *imageView = [UIImageView new];
-    [imageView sd_setImageWithURL:self.imagesData[0] placeholderImage:nil];
+    NSLog(@"%@",self.imagesData);
+    if ([self.imagesData count]>1) {  //[self.imagesData count]>0
+      [imageView sd_setImageWithURL:self.imagesData[0] placeholderImage:nil];
+    } else {
+        imageView.image = [UIImage imageNamed:@"DeafaultImage"];
+    }
+    
     msg.image = imageView.image;
     
    // NSString *recodUrl = @"http://www.123qf.cn/app/share/saveShareUser.api";
+    
     NSString *RecodrUrl = [NSString stringWithFormat:@"http://www.123qf.cn/app/share/saveShareUser.api?fid=%@",self.FangData[@"id"]];
   
     

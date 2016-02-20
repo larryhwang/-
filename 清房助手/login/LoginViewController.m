@@ -15,6 +15,7 @@
 #import "AppDelegate.h"
 #import "LoacationNameTool.h"
 #import "UMessage.h"
+#import "AboutUs.h"
 
 @interface LoginViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *userName;
@@ -92,8 +93,6 @@
  *  @return NSDictionary
  */
 
-
-
 -(void)LoginWith:(NSDictionary *)paraDic {
     NSString   *userName = self.userName.text;
     NSString   *passWord = self.passWord.text;
@@ -128,21 +127,15 @@
             
         }
         long Cp=[responseObject[@"code"] integerValue];
-
+        
         if (Cp==1) {
             //获取到省份的数据，并且按首字母拼音分开了
             AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
             //   [LoacationNameTool dictionaryWithUrl:@"http://www.123qf.cn:81/testApp/area/selectArea.api?parentid=0"];
             [LoacationNameTool dictionaryWithUrl:@"http://www.123qf.cn/app/area/selectArea.api?parentid=0"];
-            
             NSLog(@"省市资料:%@",appDelegate.provnceIndexDic);
-            
              [self getUserInfoAndPermissions];
-            
-            
-            
-            
-            
+
         }else{
             //错误弹窗
             [self loginErroAlert];
@@ -224,6 +217,16 @@
                                       cancelButtonTitle:@"确定"
                                       otherButtonTitles:nil];
     [AW show];
+}
+
+
+- (IBAction)about:(id)sender {
+    UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"SettingInterface" bundle:[NSBundle mainBundle]];
+    UIViewController *SettingViewController = (UIViewController*)[storyboard instantiateViewControllerWithIdentifier:@"settingPage"];
+    SettingViewController.title = @"设置";
+    AboutUs *aboutUsVC = [AboutUs new];
+    [self presentViewController:aboutUsVC animated:YES completion:nil];
+    
 }
 
 @end

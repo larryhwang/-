@@ -466,7 +466,5 @@ static const CGFloat menuStartNarrowRatio  = 0.70;
         }
     }];
     return flag;
-    
-
 }
 @end

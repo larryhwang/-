@@ -569,7 +569,7 @@
 {
     
     NSDictionary *SingleData = self.DataArr[indexPath.row];
-    if (_status ==SalesOut) {
+    if (_status ==SalesOut) {   //出售的列表Cell也要
         _preName = @"[出售]";
         
         static NSString *ID = @"identifer";
@@ -598,10 +598,21 @@
         [cell.QFImageView sd_setImageWithURL:[NSURL URLWithString:imgURL] placeholderImage:PlaceHoder];
         cell.title.text = [titlePartArra firstObject];
         cell.area.text  = [NSString stringWithFormat:@"面积:%@㎡",SingleData[@"mianji"]];
-        cell.style.text = [NSString stringWithFormat:@"%@室%@厅%@卫%@阳台", [self judgeNullValue: SingleData[@"fangshu"]],
-                           [self judgeNullValue: SingleData[@"tingshu"]],
-                           [self judgeNullValue: SingleData[@"toilets"]],
-                           [self judgeNullValue: SingleData[@"balconys"]]];//@"%@室%@厅%阳台";;
+        
+        
+        NSNumber *flag = [NSNumber numberWithInt:0];
+        
+        if ([SingleData[@"fenlei"] isEqualToNumber:flag]) {
+            cell.style.text = [NSString stringWithFormat:@"%@室%@厅%@卫%@阳台", [self judgeNullValue: SingleData[@"fangshu"]],
+                               [self judgeNullValue: SingleData[@"tingshu"]],
+                               [self judgeNullValue: SingleData[@"toilets"]],
+                               [self judgeNullValue: SingleData[@"balconys"]]];//@"%@室%@厅%阳台";;
+        } else {
+             cell.style.text = @"";
+        }
+
+        
+        
         
        if([SingleData[@"dianti"] isKindOfClass:[NSNull class]]){
             cell.elevator.text = @"";

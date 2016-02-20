@@ -11,7 +11,8 @@
 
 #import <PgySDK/PgyManager.h>
 #import <PgyUpdate/PgyUpdateManager.h>
-
+#import "AboutUs.h"
+#import "LoginViewController.h"
 
 @interface SettingViewCotroller ()
 
@@ -35,9 +36,7 @@
 
     
     [[PgyUpdateManager sharedPgyManager] checkUpdate];  //检查更新
-    
-    
-    
+
     [[PgyUpdateManager sharedPgyManager] checkUpdateWithDelegete:self selector:@selector(updateMethod:)];
     NSLog(@"就在这里啊");
 
@@ -64,4 +63,21 @@
     //    调用checkUpdateWithDelegete后可用此方法来更新本地的版本号，如果有更新的话，在调用了此方法后再次调用将不提示更新信息。
     //        [[PgyUpdateManager sharedPgyManager] updateLocalBuildNumber];
 }
+
+
+
+- (IBAction)AboutUs:(id)sender {
+    AboutUs *aboutUsVC = [AboutUs new];
+    [self presentViewController:aboutUsVC animated:YES completion:nil];
+}
+
+
+- (IBAction)LogOut:(id)sender {
+    LoginViewController *Login = [LoginViewController new];
+    KeyWindow.rootViewController = nil ;
+    KeyWindow.rootViewController = Login ;
+    
+}
+
+
 @end

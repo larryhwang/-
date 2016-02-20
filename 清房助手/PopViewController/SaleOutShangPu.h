@@ -9,7 +9,7 @@
 #import "SaleOutPostEditForm.h"
 
 @interface SaleOutShangPu : SaleOutPostEditForm
-
+   
 
 
 @end
