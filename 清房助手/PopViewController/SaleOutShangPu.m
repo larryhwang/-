@@ -699,7 +699,7 @@
             } else {
                 passString = @"6";
             }
-            [self.PostDataDic setObject:passString forKey:@"youxiaoq"];
+            [self.PostDataDic setObject:passString forKey:@"youxiaoqi"];
         };
         [self presentViewController:select animated:YES completion:nil];
     };

@@ -1167,7 +1167,7 @@
             } else {
                  passString = @"6";
             }
-            [self.PostDataDic setObject:passString forKey:@"youxiaoq"];
+            [self.PostDataDic setObject:passString forKey:@"youxiaoqi"];
         };
         [self presentViewController:select animated:YES completion:nil];
     };
@@ -1448,7 +1448,7 @@
                                 };
 
 
-     NSLog(@"最后参数:%@",self.PostDataDic);
+    NSLog(@"最后参数:%@",self.PostDataDic);
     [manager POST:url4 parameters:self.PostDataDic success:^(AFHTTPRequestOperation *operation, id responseObject) {
     NSLog(@"第二次提交的返回数据%@",responseObject);
         NSString *sucessFlagStr = responseObject[@"code"];

@@ -172,6 +172,11 @@
 		46789C4E1C4507140094DE54 /* RentOutShangPu.m in Sources */ = {isa = PBXBuildFile; fileRef = 46789C4D1C4507140094DE54 /* RentOutShangPu.m */; };
 		46789C511C450F4C0094DE54 /* RentOutOfiice.m in Sources */ = {isa = PBXBuildFile; fileRef = 46789C501C450F4C0094DE54 /* RentOutOfiice.m */; };
 		46789C541C4512E30094DE54 /* RentOutChang.m in Sources */ = {isa = PBXBuildFile; fileRef = 46789C531C4512E30094DE54 /* RentOutChang.m */; };
+		467B8A6E1C7BF129001F55AA /* FactoryLactCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 467B8A6C1C7BF129001F55AA /* FactoryLactCell.m */; };
+		467B8A6F1C7BF129001F55AA /* FactoryLactCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 467B8A6D1C7BF129001F55AA /* FactoryLactCell.xib */; };
+		467B8A731C7BF950001F55AA /* FactoryDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 467B8A711C7BF950001F55AA /* FactoryDetailCell.m */; };
+		467B8A741C7BF950001F55AA /* FactoryDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 467B8A721C7BF950001F55AA /* FactoryDetailCell.xib */; };
+		467B8A761C7C58A7001F55AA /* shareIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 467B8A751C7C58A7001F55AA /* shareIcon.png */; };
 		468C23041C3F6125005159DD /* GBTagListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 468C23031C3F6125005159DD /* GBTagListView.m */; };
 		468E28721BCCD47400560500 /* image1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 468E286C1BCCD47400560500 /* image1.jpg */; };
 		468E28731BCCD47400560500 /* image2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 468E286D1BCCD47400560500 /* image2.jpg */; };
@@ -182,8 +187,6 @@
 		468E28791BCCF27C00560500 /* CountBackImg.png in Resources */ = {isa = PBXBuildFile; fileRef = 468E28781BCCF27C00560500 /* CountBackImg.png */; };
 		468E28881BCCFEA400560500 /* FactoryLoactionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 468E28861BCCFEA400560500 /* FactoryLoactionCell.m */; };
 		468E28891BCCFEA400560500 /* FactoryLoactionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 468E28871BCCFEA400560500 /* FactoryLoactionCell.xib */; };
-		468E288D1BCD021A00560500 /* FactoryDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 468E288B1BCD021A00560500 /* FactoryDetailCell.m */; };
-		468E288E1BCD021A00560500 /* FactoryDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 468E288C1BCD021A00560500 /* FactoryDetailCell.xib */; };
 		468E28921BCD025600560500 /* DescribeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 468E28901BCD025600560500 /* DescribeCell.m */; };
 		468ED01B1BD5E0DD001605A7 /* SCNavTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 468ED01A1BD5E0DD001605A7 /* SCNavTabBarController.m */; };
 		468ED0201BD5E0E5001605A7 /* SCNavTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 468ED01D1BD5E0E5001605A7 /* SCNavTabBar.m */; };
@@ -614,6 +617,13 @@
 		46789C501C450F4C0094DE54 /* RentOutOfiice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RentOutOfiice.m; sourceTree = "<group>"; };
 		46789C521C4512E30094DE54 /* RentOutChang.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RentOutChang.h; sourceTree = "<group>"; };
 		46789C531C4512E30094DE54 /* RentOutChang.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RentOutChang.m; sourceTree = "<group>"; };
+		467B8A6B1C7BF129001F55AA /* FactoryLactCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FactoryLactCell.h; sourceTree = "<group>"; };
+		467B8A6C1C7BF129001F55AA /* FactoryLactCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FactoryLactCell.m; sourceTree = "<group>"; };
+		467B8A6D1C7BF129001F55AA /* FactoryLactCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FactoryLactCell.xib; sourceTree = "<group>"; };
+		467B8A701C7BF950001F55AA /* FactoryDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FactoryDetailCell.h; sourceTree = "<group>"; };
+		467B8A711C7BF950001F55AA /* FactoryDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FactoryDetailCell.m; sourceTree = "<group>"; };
+		467B8A721C7BF950001F55AA /* FactoryDetailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FactoryDetailCell.xib; sourceTree = "<group>"; };
+		467B8A751C7C58A7001F55AA /* shareIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shareIcon.png; sourceTree = "<group>"; };
 		468C23021C3F6125005159DD /* GBTagListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GBTagListView.h; sourceTree = "<group>"; };
 		468C23031C3F6125005159DD /* GBTagListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GBTagListView.m; sourceTree = "<group>"; };
 		468E286C1BCCD47400560500 /* image1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = image1.jpg; sourceTree = "<group>"; };
@@ -626,9 +636,6 @@
 		468E28851BCCFEA400560500 /* FactoryLoactionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FactoryLoactionCell.h; sourceTree = "<group>"; };
 		468E28861BCCFEA400560500 /* FactoryLoactionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FactoryLoactionCell.m; sourceTree = "<group>"; };
 		468E28871BCCFEA400560500 /* FactoryLoactionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FactoryLoactionCell.xib; sourceTree = "<group>"; };
-		468E288A1BCD021A00560500 /* FactoryDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FactoryDetailCell.h; sourceTree = "<group>"; };
-		468E288B1BCD021A00560500 /* FactoryDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FactoryDetailCell.m; sourceTree = "<group>"; };
-		468E288C1BCD021A00560500 /* FactoryDetailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FactoryDetailCell.xib; sourceTree = "<group>"; };
 		468E288F1BCD025600560500 /* DescribeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DescribeCell.h; sourceTree = "<group>"; };
 		468E28901BCD025600560500 /* DescribeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DescribeCell.m; sourceTree = "<group>"; };
 		468ED0181BD5E0D6001605A7 /* CommonMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommonMacro.h; sourceTree = "<group>"; };
@@ -1637,9 +1644,6 @@
 				468E28851BCCFEA400560500 /* FactoryLoactionCell.h */,
 				468E28861BCCFEA400560500 /* FactoryLoactionCell.m */,
 				468E28871BCCFEA400560500 /* FactoryLoactionCell.xib */,
-				468E288A1BCD021A00560500 /* FactoryDetailCell.h */,
-				468E288B1BCD021A00560500 /* FactoryDetailCell.m */,
-				468E288C1BCD021A00560500 /* FactoryDetailCell.xib */,
 				468E288F1BCD025600560500 /* DescribeCell.h */,
 				468E28901BCD025600560500 /* DescribeCell.m */,
 				46256C491BCF5B7300E05C5F /* FlatLocationCell.h */,
@@ -1665,6 +1669,12 @@
 				461F745A1C756D33003717D0 /* ShangPuDetailCell.h */,
 				461F745B1C756D33003717D0 /* ShangPuDetailCell.m */,
 				461F745C1C756D33003717D0 /* ShangPuDetailCell.xib */,
+				467B8A6B1C7BF129001F55AA /* FactoryLactCell.h */,
+				467B8A6C1C7BF129001F55AA /* FactoryLactCell.m */,
+				467B8A6D1C7BF129001F55AA /* FactoryLactCell.xib */,
+				467B8A701C7BF950001F55AA /* FactoryDetailCell.h */,
+				467B8A711C7BF950001F55AA /* FactoryDetailCell.m */,
+				467B8A721C7BF950001F55AA /* FactoryDetailCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1681,6 +1691,7 @@
 		4697FB251BCB9A1300D7E24C /* DeatilViewController */ = {
 			isa = PBXGroup;
 			children = (
+				467B8A751C7C58A7001F55AA /* shareIcon.png */,
 				463B40611BDD142200B1D26D /* Controller */,
 				468E28811BCCFE7B00560500 /* View */,
 			);
@@ -2215,7 +2226,6 @@
 				4616EE241C24E44500BAF5C3 /* 640x1136_4.png in Resources */,
 				4646C6A11C27137300896964 /* ZuGouDescribeCell.xib in Resources */,
 				4646C68A1C2700CB00896964 /* QiuzuCell.xib in Resources */,
-				468E288E1BCD021A00560500 /* FactoryDetailCell.xib in Resources */,
 				46BBE8AD1C0FD19400DE4B14 /* Overlay@2x.png in Resources */,
 				46CA3D6F1C60439400055F68 /* MsgRedIcon.png in Resources */,
 				46BBE8A81C0FD19400DE4B14 /* goods_add_plus@2x.png in Resources */,
@@ -2233,8 +2243,10 @@
 				4646C6AB1C2742B500896964 /* LesveMsgVC.xib in Resources */,
 				4616EE1B1C24CED100BAF5C3 /* company@2x.png in Resources */,
 				468E28791BCCF27C00560500 /* CountBackImg.png in Resources */,
+				467B8A761C7C58A7001F55AA /* shareIcon.png in Resources */,
 				4697FB371BCBAF8F00D7E24C /* StringFile.strings in Resources */,
 				4616EDC81C240AEE00BAF5C3 /* company.png in Resources */,
+				467B8A741C7BF950001F55AA /* FactoryDetailCell.xib in Resources */,
 				46E5C7B11C34C2A500F4829D /* UserInfoVC_iFive.xib in Resources */,
 				4654154C1C2CD46E003E5743 /* 60x60-hui (1).png in Resources */,
 				46A4BC1A1C775CEE00A89CC7 /* AboutUs.xib in Resources */,
@@ -2261,6 +2273,7 @@
 				46BBE8DD1C0FD31C00DE4B14 /* SelectCityVC.xib in Resources */,
 				46FAB1241C5F4A1800D84CBC /* jdy_browseLoading@3x.png in Resources */,
 				46BBE8AB1C0FD19400DE4B14 /* loadingIndicator@2x.png in Resources */,
+				467B8A6F1C7BF129001F55AA /* FactoryLactCell.xib in Resources */,
 				46BBE8BD1C0FD23900DE4B14 /* PopSelectViewController.xib in Resources */,
 				46E6CE1C1C5A174300B9FE2E /* SharePopVC.xib in Resources */,
 				461F745E1C756D33003717D0 /* ShangPuDetailCell.xib in Resources */,
@@ -2393,6 +2406,7 @@
 				463B40641BDD142900B1D26D /* DSNavigationBar.m in Sources */,
 				46E6CE2E1C5B071800B9FE2E /* OpenShare+Weibo.m in Sources */,
 				46C716CF1BC69FB800287742 /* NSObject+MJKeyValue.m in Sources */,
+				467B8A6E1C7BF129001F55AA /* FactoryLactCell.m in Sources */,
 				46789C511C450F4C0094DE54 /* RentOutOfiice.m in Sources */,
 				4616EDD71C24569200BAF5C3 /* SettingViewCotroller.m in Sources */,
 				4692C9CF1C1AC7B40056E706 /* QFTableView_Sco.m in Sources */,
@@ -2461,7 +2475,6 @@
 				466C32DB1C325E6300CDF467 /* HomeCitySelecVC.m in Sources */,
 				46FAB1301C5F4AD700D84CBC /* JDYCollectionViewCell.m in Sources */,
 				4617E63A1C1BADD5007BECBF /* FilterSelectJieViewController.m in Sources */,
-				468E288D1BCD021A00560500 /* FactoryDetailCell.m in Sources */,
 				46BC5E641C29A8CF00B1247A /* TypesSelect.m in Sources */,
 				462847F91C0FCB5600273B3A /* FlatDescirbeVcontroller.m in Sources */,
 				46252F921BDA648C00C1FA66 /* UIView+MJExtension.m in Sources */,
@@ -2538,6 +2551,7 @@
 				4616EE121C24C9B500BAF5C3 /* InnerFangVC.m in Sources */,
 				465415261C2C015A003E5743 /* WXUtil.mm in Sources */,
 				46AFDFA51BCB84A200B49CBE /* UIImage+GIF.m in Sources */,
+				467B8A731C7BF950001F55AA /* FactoryDetailCell.m in Sources */,
 				4628481A1C0FCC6C00273B3A /* LoacationNameTool.m in Sources */,
 				468ED0201BD5E0E5001605A7 /* SCNavTabBar.m in Sources */,
 				460CB3DB1C646CEF00C8CBA5 /* MyFavoriteVC.m in Sources */,

@@ -1,9 +1,9 @@
 //
-//  DetailCell.h
+//  FactoryDetailCell.h
 //  清房助手
 //
-//  Created by Larry on 15/10/13.
-//  Copyright © 2015年 Larry. All rights reserved.
+//  Created by Larry on 2/23/16.
+//  Copyright © 2016 HuiZhou S&F NetworkTechCo.,Ltd . All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
@@ -11,17 +11,16 @@
 @interface FactoryDetailCell : UITableViewCell
 
 
-@property (weak, nonatomic) IBOutlet UILabel *Decoration;
+@property (weak, nonatomic) IBOutlet UILabel *QFZhuangXiu;
 
-@property (weak, nonatomic) IBOutlet UILabel *ManerFee;
+@property (weak, nonatomic) IBOutlet UILabel *QFMianJi;
 
-@property (weak, nonatomic) IBOutlet UILabel *LookTime;
-@property (weak, nonatomic) IBOutlet UILabel *Area;
-@property (weak, nonatomic) IBOutlet UILabel *Type;
+@property (weak, nonatomic) IBOutlet UILabel *QFGuanLi;
 
+@property (weak, nonatomic) IBOutlet UILabel *QFLeiXing;
 
-@property (weak, nonatomic) IBOutlet UILabel *Expiry;
+@property (weak, nonatomic) IBOutlet UILabel *QFKangTime;
 
-
+@property (weak, nonatomic) IBOutlet UILabel *YouXiaoqi;
 
 @end

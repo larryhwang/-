@@ -94,7 +94,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    [self.PostDataDic setObject:@"true" forKey:@"zushou"];
 }
 
 -(void)cellSetting {
@@ -774,11 +774,7 @@
     [main addSubview:Price];
     
     
-    
-    
-    
-    
-    
+
     
     
     EditCell *ExpiryTime = [[EditCell alloc]initWithFrame:CGRectMake(CellPaddingToVertical/2, CGRectGetMaxY(Price.frame)-CellClipPadding , Screen_width - CellPaddingToVertical, CellHeight)];
@@ -811,19 +807,19 @@
             } else {
                 passString = @"6";
             }
-            [self.PostDataDic setObject:passString forKey:@"youxiaoq"];
+            [self.PostDataDic setObject:passString forKey:@"youxiaoqi"];
         };
         [self presentViewController:select animated:YES completion:nil];
     };
     
     [self.cellMARR addObject:ExpiryTime];
     ExpiryTime.updateAction = ^ {
-        if (self.LatPostDataDic[@"youxiaoq"]) {
-            if([self.LatPostDataDic[@"youxiaoq"] isEqualToString:@"1"])
+        if (self.LatPostDataDic[@"youxiaoqi"]) {
+            if([self.LatPostDataDic[@"youxiaoqi"] isEqualToString:@"1"])
             {       ExpiryTime.contentString = @"一个月"; }
-            if([self.LatPostDataDic[@"youxiaoq"] isEqualToString:@"3"])
+            if([self.LatPostDataDic[@"youxiaoqi"] isEqualToString:@"3"])
             {       ExpiryTime.contentString = @"三个月"; }
-            if([self.LatPostDataDic[@"youxiaoq"] isEqualToString:@"6"])
+            if([self.LatPostDataDic[@"youxiaoqi"] isEqualToString:@"6"])
             {       ExpiryTime.contentString = @"六个月"; }
         }
     };
@@ -870,7 +866,6 @@
     
     
     UIView *footerView = [[UIView alloc]initWithFrame:CGRectMake(CellPaddingToVertical/2, CGRectGetMaxY(picture.frame)+GroupPadding, CellWidth, CellHeight*4 +FootButtonHeight +10 )];
-    //  footerView.backgroundColor = [UIColor greenColor];
     [main addSubview:footerView];
     
     // Tittle
@@ -878,7 +873,7 @@
     ContactName.title  = @"联系人:";
     ContactName.placeHoderString = @" ";
     
-    ContactName.contentString = _username;      //此处固定，并不可以更改
+    ContactName.contentString = self.username;      //此处固定，并不可以更改
     ContactName.contentFiled.userInteractionEnabled = NO;
     
     [self dealTextfield:ContactName.contentFiled isTextCenter:NO];
@@ -926,6 +921,58 @@
     [main addSubview:picture];
     [self.view addSubview:main];
 }
+
+
+-(void)appendName:(NSString *)locationName {
+    //长区域拼接
+    NSRange isHave = [_RegionName rangeOfString:locationName];
+    if (!(isHave.length)) {
+        _RegionName  = [_RegionName stringByAppendingString:[NSString stringWithFormat:@"%@ ",locationName]];
+        self.RegionTF.contentString = _RegionName;
+        self.lastRegionName = _RegionName;
+    }
+}
+
+
+-(BOOL)controllerWillPopHandler {
+    NSLog(@"%d",[[self.PostDataDic allKeys] count]);
+    
+    if ([[self.PostDataDic allKeys] count] ==0 ) {  //如果加载了上次数据或者 已经被编辑了
+        if(_isLoadLastPara ==YES) {
+            NSLog(@"TopVC in nav :%@",self.navigationController.topViewController);
+            
+            UIAlertView *AW = [[UIAlertView alloc]initWithTitle:nil
+                                                        message:@"资料尚未保存"
+                                                       delegate:self
+                                              cancelButtonTitle:@"放弃编辑"
+                                              otherButtonTitles:@"留在此页", @"保存并退出",nil];
+            AW.tag = saveAlertTag;
+            [AW show];
+            return NO;
+        }
+        _isLoadLastPara = NO;    //复位
+        return YES;
+    }
+    
+    NSLog(@"TopVC in nav :%@",self.navigationController.topViewController);
+    
+    
+    if (_isFromSelectDescribePage) {
+        _isFromSelectDescribePage = NO;
+        return NO;
+    }
+    
+    UIAlertView *AW = [[UIAlertView alloc]initWithTitle:nil
+                                                message:@"资料尚未保存"
+                                               delegate:self
+                                      cancelButtonTitle:@"放弃编辑"
+                                      otherButtonTitles:@"留在此页", @"保存并退出",nil];
+    AW.tag = saveAlertTag;
+    [AW show];
+    return NO;
+    
+}
+
 
 
 @end

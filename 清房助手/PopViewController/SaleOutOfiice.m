@@ -477,7 +477,7 @@
         };  //取消
         
         select.SureBtnAciton =^(NSString *passString) {
-            Decoration.contentString = passString;
+            Jibie.contentString = passString;
             [self.PostDataDic setObject:passString forKey:@"zhuangxiu"];
         };
         [self presentViewController:select animated:YES completion:nil];
@@ -638,7 +638,7 @@
             } else {
                 passString = @"6";
             }
-            [self.PostDataDic setObject:passString forKey:@"youxiaoq"];
+            [self.PostDataDic setObject:passString forKey:@"youxiaoqi"];
         };
         [self presentViewController:select animated:YES completion:nil];
     };

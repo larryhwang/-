@@ -41,6 +41,9 @@
 #import "JDYCollectionViewCell.h"
 #import "JDYBrowseDefine.h"
 
+#import "FactoryLactCell.h"
+#import "FactoryDetailCell.h"
+
 
 #define  HeavyFont     [UIFont fontWithName:@"Helvetica-Bold" size:25]
 #define  ToolHeight  50    //固定底部的大小
@@ -153,18 +156,23 @@ typedef NS_ENUM(NSInteger,Fenlei)  {
 }
 #pragma mark -初始化导航栏(收藏和分享)
 - (void)initNavController {
-    UIButton  *h = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 24, 24)];  //收藏按钮
+    UIButton  *h = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 26, 26)];  //收藏按钮
+    UIButton  *ShareBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 26, 26)];  //分享按钮
     
     [h addTarget:self action:@selector(StarAction) forControlEvents:UIControlEventTouchUpInside];
+    [ShareBtn addTarget:self action:@selector(share) forControlEvents:UIControlEventTouchUpInside];
     
     UIImage *img = [UIImage imageNamed:@"pStar"];
-    [h setImage:img forState:UIControlStateNormal];
+    UIImage *ShareIcon = [UIImage imageNamed:@"shareIcon"];
+    [h        setImage:img forState:UIControlStateNormal];
+    [ShareBtn setImage:ShareIcon forState:UIControlStateNormal];
     UIBarButtonItem *star = [[UIBarButtonItem alloc]initWithCustomView:h];
-    UIBarButtonItem *share = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(share)];
-    
+   // UIBarButtonItem *share = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(share)];
+    UIBarButtonItem *share = [[UIBarButtonItem alloc]initWithCustomView:ShareBtn];
     UIBarButtonItem *flexSible = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
-    flexSible.width = 4.f ;
-    NSArray *arr = [NSArray arrayWithObjects:star,flexSible,share,nil];
+    flexSible.width = 10.f ;
+ //   NSArray *arr = [NSArray arrayWithObjects:star,flexSible,share,nil];
+       NSArray *arr = [NSArray arrayWithObjects:share,flexSible,star,nil];
     UIToolbar *rightTool =  [[UIToolbar alloc]init];
     rightTool.barTintColor = [UIColor blueColor];
     rightTool.clipsToBounds = YES ;
@@ -183,7 +191,8 @@ typedef NS_ENUM(NSInteger,Fenlei)  {
     [rightTool setFrame:CGRectMake(0, 0, tool, 42.f)];  //78
     [rightTool setItems:arr];
     UIBarButtonItem *Right = [[UIBarButtonItem alloc]initWithCustomView:rightTool];
-    self.navigationItem.rightBarButtonItem = Right ;
+//    self.navigationItem.rightBarButtonItem = Right ;
+    self.navigationItem.rightBarButtonItems = arr;
     DSNavigationBar *TrunscleNavBar = [[DSNavigationBar alloc]init];
     [TrunscleNavBar setNavigationBarWithColor:DeafaultColor2];
    [self.navigationController setValue:TrunscleNavBar forKey:@"navigationBar"];
@@ -206,9 +215,6 @@ typedef NS_ENUM(NSInteger,Fenlei)  {
         {
             [MBProgressHUD showSuccess:@"已收藏,在我的收藏中可见"];
         }
-        
-        
-        
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         NSLog(@"%@",error);
     }];
@@ -277,9 +283,7 @@ typedef NS_ENUM(NSInteger,Fenlei)  {
     AFHTTPRequestOperationManager *mgr  = [AFHTTPRequestOperationManager manager];
      mgr.requestSerializer.timeoutInterval  = 5.0;
     self.sharedMgr = mgr;
-  //  NSString *url3 = [NSString stringWithFormat:@"http://www.123qf.cn:81/testApp/fangyuan/detailsHouse.api?fenlei=%@&fangyuan_id=%@",self.FenLei,self.DisplayId];
-    
-       NSString *url3 = [NSString stringWithFormat:@"http://www.123qf.cn/app/fangyuan/detailsHouse.api?fenlei=%@&fangyuan_id=%@",self.FenLei,self.DisplayId];
+    NSString *url3 = [NSString stringWithFormat:@"http://www.123qf.cn/app/fangyuan/detailsHouse.api?fenlei=%@&fangyuan_id=%@",self.FenLei,self.DisplayId];
     [MBProgressHUD showMessage:@"加载中"];
     [mgr POST:url3
    parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -292,9 +296,6 @@ typedef NS_ENUM(NSInteger,Fenlei)  {
        
 //       房屋类型(0-住宅，1-商铺，2-写字楼，3-厂房）
        
-       
-       
-             
        NSLog(@"单个数据详情%@",self.FangData);
        
        //图片设置
@@ -341,13 +342,15 @@ typedef NS_ENUM(NSInteger,Fenlei)  {
     self.Publisher = Company ;
  
     Company.textColor = [UIColor whiteColor];
-    NSString *Coname = self.FangData[@"name"];
+//    NSString *Coname = self.FangData[@"name"];
+    NSString *Coname = self.FangData[@"publisher"];
     NSLog(@"%@",Coname);
         if ([Coname length]>4) {
-            NSRange  range = NSMakeRange(0, 3);
-            Coname = [NSString stringWithFormat:@"%@..",[Coname substringWithRange:range]];
+            NSRange  range = NSMakeRange(0, 2);
+            Coname = [NSString stringWithFormat:@"%@",[Coname substringWithRange:range]];
         }
     Company.text = Coname ;  //@"丰登地产";
+    NSLog(@"删减后的:%@",Company.text);
     //  Company.text = @"地产";
     UIFont *Deafult = [UIFont systemFontOfSize:17];
     CGSize MaxLeftSzie = CGSizeMake(LeftViewWidth-Padding,ToolHeight-Padding);
@@ -358,13 +361,29 @@ typedef NS_ENUM(NSInteger,Fenlei)  {
     CGSize companyLabelSize = [self sizeWithString:Company.text font:Deafult maxSize:MaxLeftSzie];
 
     UILabel *ContactName  = [[UILabel alloc]init];
+    NSString *ComNameStr = self.FangData[@"name"];
     self.Name = ContactName;
     ContactName.textColor = [UIColor whiteColor];
-    NSLog(@"%@",self.FangData[@"publisher"]);
-    if ([(self.FangData[@"publisher"]) isKindOfClass:[NSNull class]]) {
+    NSLog(@"%@",self.FangData[@"name"]);
+    if ([(self.FangData[@"name"]) isKindOfClass:[NSNull class]]) {
         ContactName.text = @"";
     }else {
-        ContactName.text = self.FangData[@"publisher"];
+        if ([ComNameStr length]>4) {
+            NSRange  range;
+            if (isI5) {
+                range = NSMakeRange(0, 3);
+            } else if(isI6) {
+                range = NSMakeRange(0, 4);
+            } else if (isI6p) {
+                range = NSMakeRange(0, 5);
+            } else if (isI4){
+                range = NSMakeRange(0, 3);
+            }
+//            NSRange  range = NSMakeRange(3, 4);
+            ComNameStr = [NSString stringWithFormat:@"%@..",[ComNameStr substringWithRange:range]];
+        }
+
+        ContactName.text = ComNameStr;
       //    ContactName.text = @"暴走";
 
     }
@@ -411,7 +430,7 @@ typedef NS_ENUM(NSInteger,Fenlei)  {
     MsgView.backgroundColor = DeafaultColor3;
     UIImageView *MsgIcon =[[UIImageView alloc]init];
     MsgIcon.image  = [UIImage imageNamed:@"mail"];
-    [MsgIcon setFrame:CGRectMake((LeftViewWidth - 40)/2, (ToolHeight-20)/2, 40, 20)];
+    [MsgIcon setFrame:CGRectMake((LeftViewWidth - 30)/2, (ToolHeight-20)/2, 30, 20)];
     [MsgView addSubview:MsgIcon];
    [footer addSubview:MsgView];
     [MsgView addGestureRecognizer:MsgTap];
@@ -637,7 +656,7 @@ typedef NS_ENUM(NSInteger,Fenlei)  {
         if (indexPath.row ==0) {
             LocationCell.Title.text = [NSString stringWithFormat:@"%@%@",self.PreTitle,self.FangData[@"biaoti"]];
             LocationCell.PostTime.text = self.FangData[@"weituodate"];
-            LocationCell.Region.text = self.FangData[@"qu"];
+            LocationCell.Region.text = [self GetQuYuNameFromNetData];
             LocationCell.LouPanName.text = [self judgeNullValue:self.FangData[@"mingcheng"]];
             if(self.isInner)
             [self setCheckBtn:LocationCell]; //如果是内部请求,添加查看按钮
@@ -646,8 +665,14 @@ typedef NS_ENUM(NSInteger,Fenlei)  {
             NSRange   RedPart ;
             NSNumber *no = [NSNumber numberWithInt:0];
             if([(NSNumber *)self.FangData[@"zushou"] isEqualToNumber:no]) {
-                StringPrice = [NSString stringWithFormat:@"%@万(可按揭)",self.FangData[@"shoujia"]];
-                RedPart = NSMakeRange(0, [StringPrice length] -6);
+                if ([self.FangData[@"anjie"] isEqualToNumber:@(YES)]) {
+                     StringPrice = [NSString stringWithFormat:@"%@万(可按揭)",self.FangData[@"shoujia"]];
+                     RedPart = NSMakeRange(0, [StringPrice length] -6);
+                } else {
+                     StringPrice = [NSString stringWithFormat:@"%@万",self.FangData[@"shoujia"]];
+                     RedPart = NSMakeRange(0, [StringPrice length] -1);
+                }
+
             } else{
                 StringPrice = [NSString stringWithFormat:@"%@元/月",self.FangData[@"shoujia"]];
                 RedPart = NSMakeRange(0, [StringPrice length] -3);
@@ -666,7 +691,12 @@ typedef NS_ENUM(NSInteger,Fenlei)  {
             
             NSLog(@"租房数据:%@",self.FangData);
             [self judgeNullValue:self.FangData[@"fangshu"]];
-            DetailCell.FlatType.text = [NSString stringWithFormat:@"%@房%@厅",[self judgeNullValue:self.FangData[@"fangshu"]],[self judgeNullValue:self.FangData[@"tingshu"]]];
+            DetailCell.FlatType.text = [NSString stringWithFormat:@"%@房%@厅%@卫%@阳台",
+                                            [self judgeNullValue:self.FangData[@"fangshu"]],
+                                            [self judgeNullValue:self.FangData[@"tingshu"]],
+                                            [self judgeNullValue:self.FangData[@"toilets"]],
+                                            [self judgeNullValue:self.FangData[@"balconys"]]];
+            
             DetailCell.Decrorelation.text = self.FangData[@"zhuangxiu"];
             DetailCell.FloatNo.text =  [NSString stringWithFormat:@"%@/%@层 ",[self judgeNullValue:self.FangData[@"louceng"]], [self judgeNullValue:self.FangData[@"zonglouceng"]]];
             DetailCell.LookTime.text = self.FangData[@"kanfangtime"];
@@ -711,7 +741,8 @@ typedef NS_ENUM(NSInteger,Fenlei)  {
          if (indexPath.row ==0) {
              LocationCell.Title.text = [NSString stringWithFormat:@"%@%@",self.PreTitle,self.FangData[@"biaoti"]];
              LocationCell.PostTime.text = self.FangData[@"weituodate"];
-             LocationCell.Region.text = self.FangData[@"qu"];
+             LocationCell.Region.text = [self GetQuYuNameFromNetData];
+             LocationCell.TittlePre.text = @"商铺名称:";
              LocationCell.LouPanName.text = [self judgeNullValue:self.FangData[@"mingcheng"]];
              if(self.isInner)
                  [self setCheckBtn:LocationCell]; //如果是内部请求,添加查看按钮
@@ -720,8 +751,13 @@ typedef NS_ENUM(NSInteger,Fenlei)  {
              NSRange   RedPart ;
              NSNumber *no = [NSNumber numberWithInt:0];
              if([(NSNumber *)self.FangData[@"zushou"] isEqualToNumber:no]) {
-                 StringPrice = [NSString stringWithFormat:@"%@万(可按揭)",self.FangData[@"shoujia"]];
-                 RedPart = NSMakeRange(0, [StringPrice length] -6);
+                 if ([self.FangData[@"anjie"] isEqualToNumber:@(YES)]) {
+                     StringPrice = [NSString stringWithFormat:@"%@万(可按揭)",self.FangData[@"shoujia"]];
+                     RedPart = NSMakeRange(0, [StringPrice length] -6);
+                 } else {
+                     StringPrice = [NSString stringWithFormat:@"%@万",self.FangData[@"shoujia"]];
+                     RedPart = NSMakeRange(0, [StringPrice length] -1);
+                 }
              } else{
                  StringPrice = [NSString stringWithFormat:@"%@元/月",self.FangData[@"shoujia"]];
                  RedPart = NSMakeRange(0, [StringPrice length] -3);
@@ -746,9 +782,9 @@ typedef NS_ENUM(NSInteger,Fenlei)  {
 //
             ShangPuDetail.LouCeng.text =  [formatter stringFromNumber:self.FangData[@"louceng"]];
 
-           ShangPuDetail.GuanLiFei.text = [self judgeNullValue: self.FangData[@"guanlifei"]];
+             NSString *GuanLiFeiStr = [formatter stringFromNumber:self.FangData[@"guanlifei"]];
              
-            
+             ShangPuDetail.GuanLiFei.text = [NSString stringWithFormat:@"%@元/平米",GuanLiFeiStr];
              ShangPuDetail.YouXiaoQi.text =   [NSString stringWithFormat:@"%@个月",[formatter stringFromNumber:self.FangData[@"youxiaoqi"]]];
             ShangPuDetail.KangFangTime.text = self.FangData[@"kanfangtime"];
              ShangPuDetail.PeitTao.text = [self getShangPuFromDataDic];
@@ -765,18 +801,169 @@ typedef NS_ENUM(NSInteger,Fenlei)  {
 
          
          
-    }
+    } //end_商铺
      else if ([self.FenLei isEqualToString:@"2"]) {  //写字楼
-         FactoryLoactionCell *cell = [[FactoryLoactionCell alloc]init];
-         cell.textLabel.text = @"写字楼";
-         return cell;
+         FlatLocationCell  *LocationCell  = [FlatLocationCell new];
+         ShangPuDetailCell *ShangPuDetail = [ShangPuDetailCell new];
+         DescribeCell  *DescribieCell = NULL;
+         NSString *miaoshuStr =  self.FangData[@"fangyuanmiaoshu"];
+         NSRange isHaveHTML  = [miaoshuStr rangeOfString:@"style"];
+         NSRange isHaveHTML1 = [miaoshuStr rangeOfString:@"p"];
+         
+         NSLog(@"数据%@",self.FangData);
+         
+         //判断是不是网页
+         if(isHaveHTML.length || isHaveHTML1.length) {
+             DescribieCell = [DescribeCell freeCellWithHtmlStr:miaoshuStr];   //+(instancetype)freeCellWithHtmlStr:(NSString *)htmlStr]
+             self.DescribeCellHeight = 200;
+         }else {
+             DescribieCell = [DescribeCell freeCellWithTitle:@"描述" andContext:self.FangData[@"fangyuanmiaoshu"]];
+             self.DescribeCellHeight = DescribieCell.CellHight;
+             DescribieCell.iSSeparetorLine = NO ;
+         }
+         FreeCell  *testCell = [FreeCell freeCellWithTitle:@"地址" andContext:self.FangData[@"dizhi"]];
+         self.FreeCellHeight  = testCell.CellHight;
+         LocationCell  =  [[[NSBundle mainBundle]loadNibNamed:@"FlatLocationCell" owner:nil options:nil] firstObject];
+         ShangPuDetail = [[[NSBundle mainBundle]loadNibNamed:@"ShangPuDetailCell" owner:nil options:nil] firstObject];
+         
+         if (indexPath.row ==0) {
+             LocationCell.Title.text = [NSString stringWithFormat:@"%@%@",self.PreTitle,self.FangData[@"biaoti"]];
+             LocationCell.PostTime.text = self.FangData[@"weituodate"];
+            LocationCell.Region.text = [self GetQuYuNameFromNetData];
+             LocationCell.TittlePre.text = @"写字楼名称:";
+             LocationCell.LouPanName.text = [self judgeNullValue:self.FangData[@"mingcheng"]];
+             if(self.isInner)
+                [self setCheckBtn:LocationCell]; //如果是内部请求,添加查看按钮
+#pragma mark -价格高亮属性
+             NSString *StringPrice = nil;
+             NSRange   RedPart ;
+             NSNumber *no = [NSNumber numberWithInt:0];
+             if([(NSNumber *)self.FangData[@"zushou"] isEqualToNumber:no]) {
+                 if ([self.FangData[@"anjie"] isEqualToNumber:@(YES)]) {
+                     StringPrice = [NSString stringWithFormat:@"%@万(可按揭)",self.FangData[@"shoujia"]];
+                     RedPart = NSMakeRange(0, [StringPrice length] -6);
+                 } else {
+                     StringPrice = [NSString stringWithFormat:@"%@万",self.FangData[@"shoujia"]];
+                     RedPart = NSMakeRange(0, [StringPrice length] -1);
+                 }
+             } else{
+                 StringPrice = [NSString stringWithFormat:@"%@元/月",self.FangData[@"shoujia"]];
+                 RedPart = NSMakeRange(0, [StringPrice length] -3);
+             }
+             NSMutableAttributedString *priceAttri = [[NSMutableAttributedString alloc]initWithString:StringPrice];
+             [priceAttri addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:23 ] range:RedPart];
+             [priceAttri addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range:RedPart];
+             LocationCell.Price.text = StringPrice;
+             [LocationCell.Price setAttributedText:priceAttri];
+             
+#pragma mark -添加查看业主信息
+             return LocationCell;
+         }else if (indexPath.row ==1) {
+             return testCell;
+         }else if (indexPath.row ==2){
+             
+             NSLog(@"%@",self.FangData);
+             
+             NSNumberFormatter *formatter = [[NSNumberFormatter alloc]init];
+             ShangPuDetail.ZhuangXiu.text = self.FangData[@"zhuangxiu"];
+             ShangPuDetail.Mianji.text = [NSString stringWithFormat:@"%@㎡",self.FangData[@"mianji"]];;
+             ShangPuDetail.LouCeng.text =  [formatter stringFromNumber:self.FangData[@"louceng"]];
+             NSString *GuanLiFeiStr = [formatter stringFromNumber:self.FangData[@"guanlifei"]];
+             ShangPuDetail.GuanLiFei.text = [NSString stringWithFormat:@"%@元/平米",GuanLiFeiStr];
+             ShangPuDetail.YouXiaoQi.text =   [NSString stringWithFormat:@"%@个月",[formatter stringFromNumber:self.FangData[@"youxiaoqi"]]];
+             ShangPuDetail.KangFangTime.text = self.FangData[@"kanfangtime"];
+             ShangPuDetail.PeitTao.text = [self getShangPuFromDataDic];
+             ShangPuDetail.LeiXing.text = self.FangData[@"leixing"];
+             
+             
+             return ShangPuDetail;
+             
+             
+         }
+         else {
+             return DescribieCell;
+         }
 
      }
      else {
          //工厂
-         FactoryLoactionCell *cell = [[FactoryLoactionCell alloc]init];
-         cell.textLabel.text = @"工厂";
-         return cell;
+         FactoryLactCell  *LocationCell  = [FactoryLactCell new];
+         FactoryDetailCell *ShangPuDetail = [FactoryDetailCell new];
+         LocationCell  =  [[[NSBundle mainBundle]loadNibNamed:@"FactoryLactCell" owner:nil options:nil] firstObject];
+         ShangPuDetail =  [[[NSBundle mainBundle]loadNibNamed:@"FactoryDetailCell" owner:nil options:nil] firstObject];
+
+         
+         DescribeCell  *DescribieCell = NULL;
+         NSString *miaoshuStr =  self.FangData[@"fangyuanmiaoshu"];
+         NSRange isHaveHTML  = [miaoshuStr rangeOfString:@"style"];
+         NSRange isHaveHTML1 = [miaoshuStr rangeOfString:@"p"];
+         NSLog(@"数据%@",self.FangData);
+         //判断是不是网页
+         if(isHaveHTML.length || isHaveHTML1.length) {
+             DescribieCell = [DescribeCell freeCellWithHtmlStr:miaoshuStr];   //+(instancetype)freeCellWithHtmlStr:(NSString *)htmlStr]
+             self.DescribeCellHeight = 200;
+         }else {
+             DescribieCell = [DescribeCell freeCellWithTitle:@"描述" andContext:self.FangData[@"fangyuanmiaoshu"]];
+             self.DescribeCellHeight = DescribieCell.CellHight;
+             DescribieCell.iSSeparetorLine = NO ;
+         }
+         FreeCell  *testCell = [FreeCell freeCellWithTitle:@"地址" andContext:self.FangData[@"dizhi"]];
+         self.FreeCellHeight  = testCell.CellHight;
+         
+         
+         
+         if (indexPath.row ==0) {
+             LocationCell.QFTitle.text = [NSString stringWithFormat:@"%@%@",self.PreTitle,self.FangData[@"biaoti"]];
+             LocationCell.QFPostTime.text = self.FangData[@"weituodate"];
+             LocationCell.QFQuyu.text = [self GetQuYuNameFromNetData];
+
+             if(self.isInner)
+                 [self setCheckBtn:LocationCell]; //如果是内部请求,添加查看按钮
+#pragma mark -价格高亮属性
+             NSString *StringPrice = nil;
+             NSRange   RedPart ;
+             NSNumber *no = [NSNumber numberWithInt:0];
+             if([(NSNumber *)self.FangData[@"zushou"] isEqualToNumber:no]) {
+                 if ([self.FangData[@"anjie"] isEqualToNumber:@(YES)]) {
+                     StringPrice = [NSString stringWithFormat:@"%@万(可按揭)",self.FangData[@"shoujia"]];
+                     RedPart = NSMakeRange(0, [StringPrice length] -6);
+                 } else {
+                     StringPrice = [NSString stringWithFormat:@"%@万",self.FangData[@"shoujia"]];
+                     RedPart = NSMakeRange(0, [StringPrice length] -1);
+                 }             } else{
+                 StringPrice = [NSString stringWithFormat:@"%@元/月",self.FangData[@"shoujia"]];
+                 RedPart = NSMakeRange(0, [StringPrice length] -3);
+             }
+             NSMutableAttributedString *priceAttri = [[NSMutableAttributedString alloc]initWithString:StringPrice];
+             [priceAttri addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:23 ] range:RedPart];
+             [priceAttri addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range:RedPart];
+             LocationCell.QFPrice.text = StringPrice;
+            [LocationCell.QFPrice setAttributedText:priceAttri];
+             
+#pragma mark -添加查看业主信息
+             return LocationCell;
+         }else if (indexPath.row ==1) {
+             return testCell;
+         }else if (indexPath.row ==2){
+        
+             NSNumberFormatter *formatter = [[NSNumberFormatter alloc]init];
+             ShangPuDetail.QFZhuangXiu.text = self.FangData[@"zhuangxiu"];
+             ShangPuDetail.QFMianJi.text = [NSString stringWithFormat:@"%@㎡",self.FangData[@"mianji"]];;
+             NSString *GuanLiFeiStr = [formatter stringFromNumber:self.FangData[@"guanlifei"]];
+             ShangPuDetail.QFGuanLi.text = [NSString stringWithFormat:@"%@元/平米",GuanLiFeiStr];
+             ShangPuDetail.YouXiaoqi.text =   [NSString stringWithFormat:@"%@个月",[formatter stringFromNumber:self.FangData[@"youxiaoqi"]]];
+             ShangPuDetail.QFKangTime.text = self.FangData[@"kanfangtime"];
+             ShangPuDetail.QFLeiXing.text = self.FangData[@"leixing"];
+             
+             
+             return ShangPuDetail;
+             
+             
+         }
+         else {
+             return DescribieCell;
+         }
+         
 
      }
    
@@ -794,6 +981,11 @@ typedef NS_ENUM(NSInteger,Fenlei)  {
        return  self.FreeCellHeight + 5;
     }
    else if (indexPath.row ==2) {
+       
+       NSNumber *Three = [NSNumber numberWithInt:3];
+       if ([self.FangData[@"fenlei"] isEqualToNumber:Three]) {
+           return 100;
+       }
            return 131;
    }
   else {
@@ -1024,35 +1216,35 @@ typedef NS_ENUM(NSInteger,Fenlei)  {
 -(NSString *)getAttacMentFromDataDic {
     NSString *str = @"";
     
-    if (![self.FangData[@"meiqi"] isKindOfClass:[NSNull class]]) {
+    if (![self.FangData[@"meiqi"] isKindOfClass:[NSNull class]]&&[self.FangData[@"meiqi"] isEqualToNumber:@(YES)]) {
         str = [str stringByAppendingString:@" 煤气"];
     }
     
-    if (![self.FangData[@"kuandai"] isKindOfClass:[NSNull class]]) {
+    if (![self.FangData[@"kuandai"] isKindOfClass:[NSNull class]]&&[self.FangData[@"kuandai"] isEqualToNumber:@(YES)]) {
         str = [str stringByAppendingString:@" 宽带"];
     }
     
-    if (![self.FangData[@"dianti"] isKindOfClass:[NSNull class]]) {
+    if (![self.FangData[@"dianti"] isKindOfClass:[NSNull class]]&&[self.FangData[@"dianti"] isEqualToNumber:@(YES)]) {
         str = [str stringByAppendingString:@" 电梯"];
     }
     
-    if (![self.FangData[@"tingchechang"] isKindOfClass:[NSNull class]]) {
+    if (![self.FangData[@"tingchechang"] isKindOfClass:[NSNull class]]&&[self.FangData[@"tingchechang"] isEqualToNumber:@(YES)]) {
         str = [str stringByAppendingString:@" 停车场"];
     }
     
-    if (![self.FangData[@"dianshi"] isKindOfClass:[NSNull class]]) {
+    if (![self.FangData[@"dianshi"] isKindOfClass:[NSNull class]]&&[self.FangData[@"dianshi"] isEqualToNumber:@(YES)]) {
         str = [str stringByAppendingString:@" 电视"];
     }
     
-    if (![self.FangData[@"jiadian"] isKindOfClass:[NSNull class]]) {
+    if (![self.FangData[@"jiadian"] isKindOfClass:[NSNull class]]&&[self.FangData[@"jiadian"] isEqualToNumber:@(YES)]) {
         str = [str stringByAppendingString:@" 家电"];
     }
     
-    if (![self.FangData[@"dianhua"] isKindOfClass:[NSNull class]]) {
+    if (![self.FangData[@"dianhua"] isKindOfClass:[NSNull class]]&&[self.FangData[@"dianhua"] isEqualToNumber:@(YES)]) {
         str = [str stringByAppendingString:@" 电话"];
     }
     
-    if (![self.FangData[@"lingbaoruzhu"] isKindOfClass:[NSNull class]]) {
+    if (![self.FangData[@"lingbaoruzhu"] isKindOfClass:[NSNull class]]&&[self.FangData[@"lingbaoruzhu"] isEqualToNumber:@(YES)]) {
         str = [str stringByAppendingString:@" 拎包即住"];
     }
     
@@ -1060,48 +1252,64 @@ typedef NS_ENUM(NSInteger,Fenlei)  {
 }
 
 
-//             property (weak, nonatomic) IBOutlet UILabel *ZhuangXiu;
-//
-//             @property (weak, nonatomic) IBOutlet UILabel *Mianji;
-//
-//             @property (weak, nonatomic) IBOutlet UILabel *LouCeng;
-//
-//             @property (weak, nonatomic) IBOutlet UILabel *LeiXing;
-//
-//             @property (weak, nonatomic) IBOutlet UILabel *GuanLiFei;
-//
-//             @property (weak, nonatomic) IBOutlet UILabel *YouXiaoQi;
-//
-//             @property (weak, nonatomic) IBOutlet UILabel *KangFangTime;
-//
-//             @property (weak, nonatomic) IBOutlet UILabel *PeitTao;
+
 -(NSString *)getShangPuFromDataDic {
     NSString *str = @"";
      //有关配套的字段   futi = "<null>";  huoti = "<null>";     keti = "<null>";   kongtiao = "<null>";   wangluo = "<null>";
-    if (![self.FangData[@"futi"] isKindOfClass:[NSNull class]]) {
+    if ([self.FangData[@"futi"] isEqualToNumber:@(YES)]) {
         str = [str stringByAppendingString:@" 扶梯"];
     }
     
-    if (![self.FangData[@"huoti"] isKindOfClass:[NSNull class]]) {
+    if ([self.FangData[@"huoti"] isEqualToNumber:@(YES)]) {
         str = [str stringByAppendingString:@" 货梯"];
     }
     
-    if (![self.FangData[@"keti"] isKindOfClass:[NSNull class]]) {
+    if ([self.FangData[@"keti"] isEqualToNumber:@(YES)]) {
         str = [str stringByAppendingString:@" 客梯"];
     }
     
-    if (![self.FangData[@"kongtiao"] isKindOfClass:[NSNull class]]) {
+    if ([self.FangData[@"kongtiao"] isEqualToNumber:@(YES)]) {
         str = [str stringByAppendingString:@" 空调"];
     }
     
-    if (![self.FangData[@"wangluo"] isKindOfClass:[NSNull class]]) {
+    if ([self.FangData[@"wangluo"] isEqualToNumber:@(YES)]) {
         str = [str stringByAppendingString:@" 网络"];
     }
     
+    NSLog(@"WangLuo :%d",(BOOL)self.FangData[@"wangluo"]);
+    
+    if ([self.FangData[@"wangluo"] isEqualToNumber:@(YES)]) {
+        str = [str stringByAppendingString:@" 网络"];
+    }
+
     return str;
 }
 
+-(NSString *)GetQuYuNameFromNetData {
+    NSString *str = @"";
+    //有关配套的字段   futi = "<null>";  huoti = "<null>";     keti = "<null>";   kongtiao = "<null>";   wangluo = "<null>";
+    NSLog(@"%@",self.FangData[@"shengfen"]);
+    NSLog(@"%d",[self.FangData[@"shengfen"] isKindOfClass:[NSNull class]]);
+    NSLog(@"%d",![(NSString *)self.FangData[@"shengfen"] length]);
+    if ([self.FangData[@"shengfen"] length]) {
+        str = [str stringByAppendingString:self.FangData[@"shengfen"]];
+    }
+    
+    if ([self.FangData[@"shi"] length]) {
+        str = [str stringByAppendingString:self.FangData[@"shi"]];
+    }
+    
+    if ([self.FangData[@"qu"] length]) {
+        str = [str stringByAppendingString:self.FangData[@"qu"]];
+    }
+    
+    if ([self.FangData[@"region"] length]) {
+        str = [str stringByAppendingString:self.FangData[@"region"]];
+    }
+    
+    return str;
 
+}
 
 
 @end

@@ -13,7 +13,7 @@
 @protocol SelectRegionDelegate <NSObject>
 
 -(void)appendName:(NSString *)locationName;
-- (void)updateTableData;
+
 @end
 
 

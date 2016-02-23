@@ -72,7 +72,7 @@
 #define saveAlertTag       72
 #define checkLastTag       73
 
-@interface SaleoutChangFangViewController (){
+@interface SaleoutChangFangViewController ()<SelectRegionDelegate>{
     NSString *_RegionName;
     
     
@@ -100,6 +100,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+//    usertel=15018639039   //*
+//    &weituodate=2016-02-23 11:48:08&  //*
+    AppDelegate *delegate = [UIApplication sharedApplication].delegate;
+
+    [self.PostDataDic setObject:delegate.usrInfoDic[@"tel"] forKey:@"userid"];
+    [self.PostDataDic setObject:[self getNowTime] forKey:@"weituodate"];
 }
 
 
@@ -143,7 +149,7 @@
 }
 
 -(void)cellSetting {
-    NSLog(@"zi:%p",self.ScoSwitch);
+
     self.ScoSwitch = NO;
     //监听键盘事件
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(willShow:) name:UIKeyboardWillShowNotification object:nil];
@@ -553,19 +559,19 @@
             } else {
                 passString = @"6";
             }
-            [self.PostDataDic setObject:passString forKey:@"youxiaoq"];
+            [self.PostDataDic setObject:passString forKey:@"youxiaoqi"];
         };
         [self presentViewController:select animated:YES completion:nil];
     };
     
     [self.cellMARR addObject:ExpiryTime];
     ExpiryTime.updateAction = ^ {
-        if (self.LatPostDataDic[@"youxiaoq"]) {
-            if([self.LatPostDataDic[@"youxiaoq"] isEqualToString:@"1"])
+        if (self.LatPostDataDic[@"youxiaoqi"]) {
+            if([self.LatPostDataDic[@"youxiaoqi"] isEqualToString:@"1"])
             {       ExpiryTime.contentString = @"一个月"; }
-            if([self.LatPostDataDic[@"youxiaoq"] isEqualToString:@"3"])
+            if([self.LatPostDataDic[@"youxiaoqi"] isEqualToString:@"3"])
             {       ExpiryTime.contentString = @"三个月"; }
-            if([self.LatPostDataDic[@"youxiaoq"] isEqualToString:@"6"])
+            if([self.LatPostDataDic[@"youxiaoqi"] isEqualToString:@"6"])
             {       ExpiryTime.contentString = @"六个月"; }
         }
     };
@@ -666,6 +672,136 @@
     
     [main addSubview:picture];
     [self.view addSubview:main];
+}
+
+
+-(void)appendName:(NSString *)locationName {
+    //长区域拼接
+    NSRange isHave = [_lastRegionName rangeOfString:locationName];
+    if (!(isHave.length)) {
+        _RegionName  = [_RegionName stringByAppendingString:[NSString stringWithFormat:@"%@ ",locationName]];
+        self.RegionTF.contentString = _RegionName;
+        self.lastRegionName = _RegionName;
+    }
+}
+
+
+
+
+
+
+#pragma mark UITextfiledDelegate
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    if(textField.text) _isLoadLastPara = YES;
+    NSInteger EditedTextFieldTag = textField.tag ;
+    switch (EditedTextFieldTag) {
+        case biaotiTag:
+            NSLog(@"标题是:%@",textField.text);
+            NSLog(@"%@",self);
+            [self.PostDataDic setObject:textField.text forKey:@"biaoti"];
+            break;
+        case mingchengTag:
+            NSLog(@"名称是:%@",textField.text);
+            [self.PostDataDic setObject:textField.text forKey:@"dizhi"];
+            break;
+        case dizhiTag:
+            NSLog(@"地址:%@",textField.text);
+            [self.PostDataDic setObject:textField.text forKey:@"mianji"];
+            break;
+        case dongTag:
+            NSLog(@"栋数是:%@",textField.text);
+            [self.PostDataDic setObject:textField.text forKey:@"guanlifei"];
+            break;
+        case danyuanTag:
+            NSLog(@"单元:%@",textField.text);
+            [self.PostDataDic setObject:textField.text forKey:@"shoujia"];
+            break;
+        case loucengTag:
+            NSLog(@"楼层:%@",textField.text);
+            [self.PostDataDic setObject:textField.text forKey:@"louceng"];
+            break;
+        case zongloucengTag:
+            NSLog(@"总楼层:%@",textField.text);
+            [self.PostDataDic setObject:textField.text forKey:@"zonglouceng"];
+            break;
+        case mianjiTag:
+            NSLog(@"面积:%@",textField.text);
+            [self.PostDataDic setObject:textField.text forKey:@"mianji"];
+            break;
+            
+        case fangshuTag:
+            NSLog(@"房数:%@",textField.text);
+            [self.PostDataDic setObject:textField.text forKey:@"fangshu"];
+            break;
+            
+        case tingshuTag:
+            NSLog(@"厅数:%@",textField.text);
+            [self.PostDataDic setObject:textField.text forKey:@"tingshu"];
+            break;
+            
+        case toiletsTag:
+            NSLog(@"卫生间:%@",textField.text);
+            [self.PostDataDic setObject:textField.text forKey:@"toilets"];
+            break;
+            
+        case balconysTag:
+            NSLog(@"阳台数:%@",textField.text);
+            [self.PostDataDic setObject:textField.text forKey:@"balconys"];
+            break;
+            
+        case fanglingTag:
+            NSLog(@"房龄:%@",textField.text);
+            [self.PostDataDic setObject:textField.text forKey:@"fangling"];
+            break;
+            
+        case shoujiaTag:
+            NSLog(@"售价:%@",textField.text);
+            [self.PostDataDic setObject:textField.text forKey:@"shoujia"];
+            break;
+            
+#define userNameTag     14                  //参数文档中未见
+#define usertelTag      15
+#define OwnerTag        16
+#define OwnerName       17
+            
+        case userNameTag:
+            NSLog(@"联系人姓名:%@",textField.text);
+#warning 这里只显示，不允许修改
+            [self.PostDataDic setObject:textField.text forKey:@"ownername"];
+            break;
+            
+        case usertelTag:
+            NSLog(@"联系人电话:%@",textField.text);
+            [self.PostDataDic setObject:textField.text forKey:@"usertel"];
+            break;
+            
+        case OwnerTag:
+            NSLog(@"业主姓名:%@",textField.text);
+            [self.PostDataDic setObject:textField.text forKey:@"ownername"];
+            break;
+            
+        case OwnerName:
+            NSLog(@"业主电话:%@",textField.text);
+            [self.PostDataDic setObject:textField.text forKey:@"ownertel"];
+            break;
+            
+        default:
+            break;
+    }
+    
+}
+
+/**
+ *  获取当前时间
+ *
+ *  @return <#return value description#>
+ */
+-(NSString *)getNowTime {
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    NSString *strDate = [dateFormatter stringFromDate:[NSDate date]];
+    return strDate;
 }
 
 

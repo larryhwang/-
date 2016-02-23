@@ -9,13 +9,61 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "&#x6e05;&#x623f;&#x52a9;&#x624b;/DetailViewController/DetailViewController.m"
-            timestampString = "477632107.143018"
+            filePath = "&#x6e05;&#x623f;&#x52a9;&#x624b;/SaleOutPostEditForm.m"
+            timestampString = "477908165.333452"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "744"
-            endingLineNumber = "744"
-            landmarkName = "-tableView:cellForRowAtIndexPath:"
+            startingLineNumber = "1452"
+            endingLineNumber = "1452"
+            landmarkName = "-PostAll"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[SaleOutPostEditForm PostAll]"
+                  moduleName = "&#x6e05;&#x623f;&#x52a9;&#x624b;"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Larry/Documents/%E6%B8%85%E6%88%BF%E5%8A%A9%E6%89%8B/%E6%B8%85%E6%88%BF%E5%8A%A9%E6%89%8B/SaleOutPostEditForm.m"
+                  timestampString = "477915275.181519"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "1452"
+                  endingLineNumber = "1452"
+                  offsetFromSymbolStart = "1624">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__30-[SaleOutPostEditForm PostAll]_block_invoke"
+                  moduleName = "&#x6e05;&#x623f;&#x52a9;&#x624b;"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Larry/Documents/%E6%B8%85%E6%88%BF%E5%8A%A9%E6%89%8B/%E6%B8%85%E6%88%BF%E5%8A%A9%E6%89%8B/SaleOutPostEditForm.m"
+                  timestampString = "477915275.182341"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "1452"
+                  endingLineNumber = "1452"
+                  offsetFromSymbolStart = "64">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "&#x6e05;&#x623f;&#x52a9;&#x624b;/SaleOutPostEditForm.m"
+            timestampString = "477908165.333452"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1454"
+            endingLineNumber = "1454"
+            landmarkName = "-PostAll"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -26,28 +74,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "&#x6e05;&#x623f;&#x52a9;&#x624b;/DetailViewController/DetailViewController.m"
-            timestampString = "477659060.582982"
+            timestampString = "477911743.950348"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "981"
-            endingLineNumber = "981"
-            landmarkName = "-QFsharedWith:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "&#x6e05;&#x623f;&#x52a9;&#x624b;/DetailViewController/DetailViewController.m"
-            timestampString = "477659060.582982"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "983"
-            endingLineNumber = "983"
-            landmarkName = "-QFsharedWith:"
+            startingLineNumber = "302"
+            endingLineNumber = "302"
+            landmarkName = "-getDataFromNet"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -59,6 +91,38 @@
             continueAfterRunningActions = "No"
             scope = "0"
             stopOnStyle = "0">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "&#x6e05;&#x623f;&#x52a9;&#x624b;/DetailViewController/DetailViewController.m"
+            timestampString = "477913540.52873"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "355"
+            endingLineNumber = "355"
+            landmarkName = "-initFootView"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "&#x6e05;&#x623f;&#x52a9;&#x624b;/HomeViewController/WMHomeViewController.m"
+            timestampString = "477915036.243318"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "471"
+            endingLineNumber = "471"
+            landmarkName = "-LoadNetDataWithCurentURl"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

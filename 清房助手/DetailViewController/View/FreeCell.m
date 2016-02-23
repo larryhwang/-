@@ -34,8 +34,8 @@
         CGSize MaxSize = CGSizeMake(ScreenWidth - Pading, 500);
         _iSSeparetorLine = YES ;
         _HeaderPart = title;
-        NSString *allContent = [NSString stringWithFormat:@"   %@:   %@",self.HeaderPart,text];
-        NSRange preTitle = NSMakeRange(3, 5);
+        NSString *allContent = [NSString stringWithFormat:@"  %@:   %@",self.HeaderPart,text];
+        NSRange preTitle = NSMakeRange(2, 5);
         UIFont *DeafualtFont = [UIFont systemFontOfSize:17];
         _ContextSize = [self sizeWithString:allContent font:DeafualtFont maxSize:MaxSize];
         _CellHight = _ContextSize.height + 2;
@@ -98,7 +98,7 @@
 
 -(void)layoutSubviews {
     if(_iSSeparetorLine) {
-        UIView *separateLine = [[UIView alloc]initWithFrame:CGRectMake(0, _ContextSize.height+8, ScreenWidth, 2)];
+        UIView *separateLine = [[UIView alloc]initWithFrame:CGRectMake(0, _ContextSize.height+8, ScreenWidth, 1)];
         separateLine.backgroundColor = [UIColor lightGrayColor];
         [self.contentView addSubview:separateLine];   //增加分割线
     }

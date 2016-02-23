@@ -1,14 +1,14 @@
 //
-//  FactoryDetailCell.m
+//  FactoryLactCell.m
 //  清房助手
 //
 //  Created by Larry on 2/23/16.
 //  Copyright © 2016 HuiZhou S&F NetworkTechCo.,Ltd . All rights reserved.
 //
 
-#import "FactoryDetailCell.h"
+#import "FactoryLactCell.h"
 
-@implementation FactoryDetailCell
+@implementation FactoryLactCell
 
 - (void)awakeFromNib {
     // Initialization code

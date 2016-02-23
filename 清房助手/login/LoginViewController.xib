@@ -446,7 +446,9 @@
                 <constraint firstAttribute="bottom" secondItem="6WR-01-1Xp" secondAttribute="bottom" constant="214" id="mVj-Ou-nEw"/>
                 <constraint firstItem="wjc-vf-yQr" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="15" id="ohK-wx-DDM"/>
                 <constraint firstAttribute="bottom" secondItem="6WR-01-1Xp" secondAttribute="bottom" constant="222" id="tOU-rZ-Qkz"/>
-                <constraint firstItem="6WR-01-1Xp" firstAttribute="top" secondItem="Ike-JF-AS6" secondAttribute="bottom" constant="20" id="wc5-yW-qEe"/>
+                <constraint firstItem="6WR-01-1Xp" firstAttribute="top" secondItem="Ike-JF-AS6" secondAttribute="bottom" constant="20" id="wc5-yW-qEe">
+                    <variation key="widthClass=compact" constant="60"/>
+                </constraint>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <nil key="simulatedTopBarMetrics"/>
@@ -491,9 +493,9 @@
                     <include reference="6WR-01-1Xp"/>
                 </mask>
                 <mask key="constraints">
-                    <include reference="0mD-dH-JSX"/>
+                    <exclude reference="0mD-dH-JSX"/>
                     <include reference="5n6-MY-yM5"/>
-                    <include reference="Bk4-yZ-icn"/>
+                    <exclude reference="Bk4-yZ-icn"/>
                     <include reference="U6V-Hm-5n6"/>
                     <include reference="be5-Te-Lzq"/>
                     <exclude reference="mVj-Ou-nEw"/>

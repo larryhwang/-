@@ -596,7 +596,7 @@
         PlaceHoder = [PlaceHoder imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
         
         [cell.QFImageView sd_setImageWithURL:[NSURL URLWithString:imgURL] placeholderImage:PlaceHoder];
-        cell.title.text = [titlePartArra firstObject];
+        cell.title.text = BigTitle; // [titlePartArra firstObject];
         cell.area.text  = [NSString stringWithFormat:@"面积:%@㎡",SingleData[@"mianji"]];
         
         
