@@ -557,7 +557,7 @@
 #pragma mark -tableViewDelegate
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 100;
+    return 130;
 }
 
 -(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -570,8 +570,8 @@
     
     NSDictionary *SingleData = self.DataArr[indexPath.row];
     if (_status ==SalesOut) {   //出售的列表Cell也要
-        _preName = @"[出售]";
-        
+     //   _preName = @"[出售]";
+        _preName = @"";
         static NSString *ID = @"identifer";
         SalesCell *cell =[tableView dequeueReusableCellWithIdentifier:ID];
         if (cell ==nil) {
