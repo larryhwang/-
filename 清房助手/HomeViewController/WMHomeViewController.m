@@ -567,7 +567,7 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+    NSNumber *flag = [NSNumber numberWithInt:0];
     NSDictionary *SingleData = self.DataArr[indexPath.row];
     if (_status ==SalesOut) {   //出售的列表Cell也要
      //   _preName = @"[出售]";
@@ -589,7 +589,6 @@
         NSArray *imgArray = [imgCollects componentsSeparatedByString:@","];
         NSString *imgURL = [NSString stringWithFormat:@"http://www.123qf.cn/img/%@/userfile/qfzs/fy/mini/%@",SingleData[@"userid"],[imgArray firstObject]];
         
-        
         NSString *BigTitle = [NSString stringWithFormat:@"%@%@",_preName,SingleData[@"biaoti"]];
         NSArray *titlePartArra = [BigTitle componentsSeparatedByString:@" "]; //
         UIImage  *PlaceHoder = [UIImage imageNamed:@"DeafaultImage"];
@@ -600,7 +599,7 @@
         cell.area.text  = [NSString stringWithFormat:@"面积:%@㎡",SingleData[@"mianji"]];
         
         
-        NSNumber *flag = [NSNumber numberWithInt:0];
+    
         
         if ([SingleData[@"fenlei"] isEqualToNumber:flag]) {
             cell.style.text = [NSString stringWithFormat:@"%@室%@厅%@卫%@阳台", [self judgeNullValue: SingleData[@"fangshu"]],
@@ -635,7 +634,7 @@
         
 
     } else if (_status ==RentOut) {
-        _preName = @"[出租]";
+        _preName = @"";
         //这里服务器暂无数据
         static NSString *ID = @"identifer";
         SalesCell *cell =[tableView dequeueReusableCellWithIdentifier:ID];
@@ -663,10 +662,14 @@
         [cell.QFImageView sd_setImageWithURL:[NSURL URLWithString:imgURL] placeholderImage:PlaceHoder];
         cell.title.text = [titlePartArra firstObject];
         cell.area.text  = [NSString stringWithFormat:@"面积:%@㎡",SingleData[@"mianji"]];
-        cell.style.text = [NSString stringWithFormat:@"%@室%@厅%@卫%@阳台", [self judgeNullValue: SingleData[@"fangshu"]],
-                           [self judgeNullValue: SingleData[@"tingshu"]],
-                           [self judgeNullValue: SingleData[@"toilets"]],
-                           [self judgeNullValue: SingleData[@"balconys"]]];//@"%@室%@厅%阳台";;
+        if ([SingleData[@"fenlei"] isEqualToNumber:flag]) {
+            cell.style.text = [NSString stringWithFormat:@"%@室%@厅%@卫%@阳台", [self judgeNullValue: SingleData[@"fangshu"]],
+                               [self judgeNullValue: SingleData[@"tingshu"]],
+                               [self judgeNullValue: SingleData[@"toilets"]],
+                               [self judgeNullValue: SingleData[@"balconys"]]];//@"%@室%@厅%阳台";;
+        } else {
+            cell.style.text = @"";
+        }
         
         
         if([SingleData[@"dianti"] isKindOfClass:[NSNull class]]){

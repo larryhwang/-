@@ -1449,6 +1449,16 @@
 
 
     NSLog(@"最后参数:%@",self.PostDataDic);
+    
+    
+    NSData *data = [NSJSONSerialization dataWithJSONObject:self.PostDataDic options: NSJSONWritingPrettyPrinted error:NULL];
+    
+
+    
+//    NSString *jsonStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+//    
+//    NSLog(@"转换啊:%@",jsonStr);
+    
     [manager POST:url4 parameters:self.PostDataDic success:^(AFHTTPRequestOperation *operation, id responseObject) {
     NSLog(@"第二次提交的返回数据%@",responseObject);
         NSString *sucessFlagStr = responseObject[@"code"];

@@ -94,7 +94,16 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.PostDataDic setObject:@"true" forKey:@"zushou"];
+    // [self.PostDataDic setObject:@"true" forKey:@"zushou"];
+     // [self.PostDataDic setObject:true forKey:@"zushou"];
+  //  NSNumber  *ONE = [NSNumber numberWithInt:1];
+    
+    bool bool_true = true ;
+  //  [self.PostDataDic setObject:@(true) forKey:@"zushou"];  //不行
+    //  [self.PostDataDic setObject:@(bool_true) forKey:@"zushou"];  //不行
+    
+    self.PostDataDic[@"zushou"] = @"true";
+    
 }
 
 -(void)cellSetting {

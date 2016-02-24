@@ -38,7 +38,7 @@
                         <animations/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="fWb-eW-cGJ"/>
-                            <constraint firstAttribute="width" constant="56" id="whp-jw-h2z"/>
+                            <constraint firstAttribute="width" constant="58" id="whp-jw-h2z"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -112,7 +112,7 @@
                 <constraints>
                     <constraint firstItem="dN5-aV-Xdv" firstAttribute="top" secondItem="0tv-WP-xZc" secondAttribute="bottom" id="0Qq-Zn-zB4"/>
                     <constraint firstItem="FTZ-L1-d7k" firstAttribute="top" secondItem="dN5-aV-Xdv" secondAttribute="top" id="3Ti-5H-RbD"/>
-                    <constraint firstItem="GsI-QQ-NBT" firstAttribute="leading" secondItem="dN5-aV-Xdv" secondAttribute="trailing" id="4Lm-CR-Jcf"/>
+                    <constraint firstItem="GsI-QQ-NBT" firstAttribute="leading" secondItem="dN5-aV-Xdv" secondAttribute="trailing" constant="2" id="4Lm-CR-Jcf"/>
                     <constraint firstItem="0tv-WP-xZc" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="4PP-OP-kaq"/>
                     <constraint firstAttribute="trailingMargin" secondItem="FTZ-L1-d7k" secondAttribute="trailing" constant="-4" id="53a-CW-8f6"/>
                     <constraint firstItem="FTZ-L1-d7k" firstAttribute="top" secondItem="dN5-aV-Xdv" secondAttribute="top" id="5CS-jZ-4Vq"/>

@@ -106,6 +106,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    AppDelegate *delegate = [UIApplication sharedApplication].delegate ;
+    [self.PostDataDic setObject:delegate.usrInfoDic[@"tel"] forKey:@"usertel"];
 }
 
 
@@ -471,19 +473,19 @@
             } else {
                 passString = @"6";
             }
-            [self.PostDataDic setObject:passString forKey:@"youxiaoq"];
+            [self.PostDataDic setObject:passString forKey:@"youxiaoqi"];
         };
         [self presentViewController:select animated:YES completion:nil];
     };
     
     [self.cellMARR addObject:ExpiryTime];
     ExpiryTime.updateAction = ^ {
-        if (self.LatPostDataDic[@"youxiaoq"]) {
-            if([self.LatPostDataDic[@"youxiaoq"] isEqualToString:@"1"])
+        if (self.LatPostDataDic[@"youxiaoqi"]) {
+            if([self.LatPostDataDic[@"youxiaoqi"] isEqualToString:@"1"])
             {       ExpiryTime.contentString = @"一个月"; }
-            if([self.LatPostDataDic[@"youxiaoq"] isEqualToString:@"3"])
+            if([self.LatPostDataDic[@"youxiaoqi"] isEqualToString:@"3"])
             {       ExpiryTime.contentString = @"三个月"; }
-            if([self.LatPostDataDic[@"youxiaoq"] isEqualToString:@"6"])
+            if([self.LatPostDataDic[@"youxiaoqi"] isEqualToString:@"6"])
             {       ExpiryTime.contentString = @"六个月"; }
         }
     };
@@ -607,20 +609,20 @@
             break;
         case mingchengTag:
             NSLog(@"名称是:%@",textField.text);
-            [self.PostDataDic setObject:textField.text forKey:@"mingcheng"];
+            [self.PostDataDic setObject:textField.text forKey:@"dizhi"];
             break;
         case dizhiTag:
             NSLog(@"地址:%@",textField.text);
-            [self.PostDataDic setObject:textField.text forKey:@"dizhi"];
+            [self.PostDataDic setObject:textField.text forKey:@"mianji"];
             break;
         case dongTag:  //在 出售商铺中 是 层
             NSLog(@"栋数是:%@",textField.text);
-            [self.PostDataDic setObject:textField.text forKey:@"louceng"];
+            [self.PostDataDic setObject:textField.text forKey:@"guanlifei"];
             break;
         case danyuanTag:   //出商铺中的面积
             NSLog(@"单元:%@",textField.text);
             //            [self.PostDataDic setObject:textField.text forKey:@"danyuan"];
-            [self.PostDataDic setObject:textField.text forKey:@"mianji"];
+            [self.PostDataDic setObject:textField.text forKey:@"shoujia"];
             NSLog(@"%@",self.LatPostDataDic[@"mianji"]);   //            LatPostDataDic[@"mianji"]
             break;
         case loucengTag:  //出售商铺中的管理费
@@ -630,7 +632,7 @@
             break;
         case zongloucengTag:  //出售商铺中的  售价
             NSLog(@"总楼层:%@",textField.text);
-            [self.PostDataDic setObject:textField.text forKey:@"shoujia"];
+            [self.PostDataDic setObject:textField.text forKey:@"usertel"];
             break;
         case mianjiTag:
             NSLog(@"面积:%@",textField.text);
@@ -759,6 +761,8 @@
         if(buttonIndex==0){
             //继续填写
             _isLoadLastPara = YES;
+            
+            NSLog(@"分类:%@",self.typeStr);
             [self loadLastParamDic];
         } else {
             //重写填写

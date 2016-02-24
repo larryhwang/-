@@ -73,12 +73,13 @@
 
 @interface RentOutOfiice (){
     NSString *_RegionName;
-    
-    
+
     NSString *_lastRegionName;
+    
     NSString *_imgs;
     
     NSString *_username;
+    
     NSString *_userId;
     
     float _count;
@@ -435,7 +436,7 @@
         };  //取消
         
         select.SureBtnAciton =^(NSString *passString) {
-            Decoration.contentString = passString;
+            Jibie.contentString = passString;
             [self.PostDataDic setObject:passString forKey:@"zhuangxiu"];
         };
         [self presentViewController:select animated:YES completion:nil];
@@ -545,19 +546,19 @@
             } else {
                 passString = @"6";
             }
-            [self.PostDataDic setObject:passString forKey:@"youxiaoq"];
+            [self.PostDataDic setObject:passString forKey:@"youxiaoqi"];
         };
         [self presentViewController:select animated:YES completion:nil];
     };
     
     [self.cellMARR addObject:ExpiryTime];
     ExpiryTime.updateAction = ^ {
-        if (self.LatPostDataDic[@"youxiaoq"]) {
-            if([self.LatPostDataDic[@"youxiaoq"] isEqualToString:@"1"])
+        if (self.LatPostDataDic[@"youxiaoqi"]) {
+            if([self.LatPostDataDic[@"youxiaoqi"] isEqualToString:@"1"])
             {       ExpiryTime.contentString = @"一个月"; }
-            if([self.LatPostDataDic[@"youxiaoq"] isEqualToString:@"3"])
+            if([self.LatPostDataDic[@"youxiaoqi"] isEqualToString:@"3"])
             {       ExpiryTime.contentString = @"三个月"; }
-            if([self.LatPostDataDic[@"youxiaoq"] isEqualToString:@"6"])
+            if([self.LatPostDataDic[@"youxiaoqi"] isEqualToString:@"6"])
             {       ExpiryTime.contentString = @"六个月"; }
         }
     };

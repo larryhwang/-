@@ -166,7 +166,7 @@ else if (self.Status==RentOut){
             RentOutChang *rentChang = [RentOutChang new];
             rentChang.indexData  = app.provnceIndexDic;
             rentChang.PreStatus  = RentOut;
-            rentChang.Fenlei = OfficeType;
+            rentChang.Fenlei = FactoryType;
             rentChang.username   = app.usrInfoDic[@"username"];
             rentChang.userId     = app.usrInfoDic[@"userid"];
             rentChang.typeStr    = @"24";
