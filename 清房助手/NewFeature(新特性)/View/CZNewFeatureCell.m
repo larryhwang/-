@@ -119,6 +119,7 @@
 - (void)start
 {
     LoginViewController *login = [[LoginViewController alloc]init];
+    KeyWindow.rootViewController = nil;
     KeyWindow.rootViewController = login;
 
 }

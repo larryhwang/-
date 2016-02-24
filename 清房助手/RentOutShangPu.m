@@ -74,7 +74,7 @@
 #define checkLastTag       73
 
 
-@interface RentOutShangPu (){
+@interface RentOutShangPu ()<UIActionSheetDelegate,UIAlertViewDelegate>{
     NSString *_RegionName;
     
     
@@ -101,7 +101,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+  //  [self.PostDataDic setObject:@"true" forKey:@"zushou"];
+    [self.PostDataDic setObject:@"1" forKey:@"zushou"];
+
 }
 
 
@@ -893,6 +895,7 @@
 -(void)loadLastParamDic {
     //上传参数赋值
     NSDictionary *tempDic = [[NSUserDefaults standardUserDefaults] objectForKey:self.typeStr];
+    NSLog(@"取出的:%@",tempDic);
     NSMutableDictionary *oldDic= [NSMutableDictionary dictionaryWithDictionary:tempDic];
     if([[oldDic allKeys] count]>0)
         //重载数据前需要进行判断，如果新键的值变更了，以新的值为准，如果没有则赋予旧值
