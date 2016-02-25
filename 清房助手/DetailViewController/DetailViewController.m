@@ -167,12 +167,12 @@ typedef NS_ENUM(NSInteger,Fenlei)  {
     [h        setImage:img forState:UIControlStateNormal];
     [ShareBtn setImage:ShareIcon forState:UIControlStateNormal];
     UIBarButtonItem *star = [[UIBarButtonItem alloc]initWithCustomView:h];
-   // UIBarButtonItem *share = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(share)];
+
     UIBarButtonItem *share = [[UIBarButtonItem alloc]initWithCustomView:ShareBtn];
     UIBarButtonItem *flexSible = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
     flexSible.width = 10.f ;
- //   NSArray *arr = [NSArray arrayWithObjects:star,flexSible,share,nil];
-       NSArray *arr = [NSArray arrayWithObjects:share,flexSible,star,nil];
+
+    NSArray *arr = [NSArray arrayWithObjects:share,flexSible,star,nil];
     UIToolbar *rightTool =  [[UIToolbar alloc]init];
     rightTool.barTintColor = [UIColor blueColor];
     rightTool.clipsToBounds = YES ;
@@ -190,8 +190,7 @@ typedef NS_ENUM(NSInteger,Fenlei)  {
 
     [rightTool setFrame:CGRectMake(0, 0, tool, 42.f)];  //78
     [rightTool setItems:arr];
-    UIBarButtonItem *Right = [[UIBarButtonItem alloc]initWithCustomView:rightTool];
-//    self.navigationItem.rightBarButtonItem = Right ;
+
     self.navigationItem.rightBarButtonItems = arr;
     DSNavigationBar *TrunscleNavBar = [[DSNavigationBar alloc]init];
     [TrunscleNavBar setNavigationBarWithColor:DeafaultColor2];
@@ -342,16 +341,13 @@ typedef NS_ENUM(NSInteger,Fenlei)  {
     self.Publisher = Company ;
  
     Company.textColor = [UIColor whiteColor];
-//    NSString *Coname = self.FangData[@"name"];
     NSString *Coname = self.FangData[@"publisher"];
     NSLog(@"%@",Coname);
         if ([Coname length]>4) {
             NSRange  range = NSMakeRange(0, 2);
             Coname = [NSString stringWithFormat:@"%@",[Coname substringWithRange:range]];
         }
-    Company.text = Coname ;  //@"丰登地产";
-    NSLog(@"删减后的:%@",Company.text);
-    //  Company.text = @"地产";
+    Company.text = Coname ;
     UIFont *Deafult = [UIFont systemFontOfSize:17];
     CGSize MaxLeftSzie = CGSizeMake(LeftViewWidth-Padding,ToolHeight-Padding);
     if (Coname == nil) {

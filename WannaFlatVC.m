@@ -6,6 +6,16 @@
 //  Copyright © 2016 HuiZhou S&F NetworkTechCo.,Ltd . All rights reserved.
 //
 
+/*
+ 
+ 说明:这是求购房子的发布页面
+ 
+ zuGou True  String
+ 租购（0-求租，1-求购）
+ 
+ */
+
+
 #import "WannaFlatVC.h"
 #import  "QFTableView_Sco.h"
 #import  "EditCell.h"
@@ -134,6 +144,12 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     self.edgesForExtendedLayout = UIRectEdgeNone;
+    self.PreStatus = WantBuy ;
+    [self.PostDataDic setObject:@"万元" forKey:@"unit"];
+    NSLog(@"%@",self.PostDataDic);
+     NSLog(@"DEBUG");
+    
+    
 }
 
 -(void)cellSetting {
@@ -345,9 +361,6 @@
     
 
     
-    
-    
-    
     //装修情况(需移动)
     EditCell *Decoration = [[EditCell alloc]init];
     Decoration.isOptionalCell = YES;
@@ -373,7 +386,7 @@
         
         select.SureBtnAciton =^(NSString *passString) {
             Decoration.contentString = passString;
-            [self.PostDataDic setObject:passString forKey:@"zhuangxiu"];
+            [self.PostDataDic setObject:passString forKey:@"zhuangxiuyaoqiu"];
         };
         [self presentViewController:select animated:YES completion:nil];
         NSLog(@"表格位置:%f",Decoration.frame.origin.y);
@@ -556,11 +569,22 @@
                     // [self.PostDictionary setObject:@"" forKey:@"mianji"];
                 } else {
                     //自己截取最大值和最小值
-                    [self getMaxAndMinArea:passString];
                     
+                    NSRange range = [passString rangeOfString:@"以上"];
+                    NSLog(@"%d,%d",range.length,range.location); //第3位置的后2个
+                    NSRange MinNo = NSMakeRange(0, passString.length -range.length);
+                    if (range.length) {
+                        NSString *tempMin = [passString substringWithRange:MinNo];
+                        NSLog(@"截取后的:%@",tempMin);
+                        [self.PostDataDic setObject:tempMin forKey:@"pricel"];
+                    } else {
+                        [self getMaxAndMinArea:passString];
+                        NSLog(@"%@ %@",_MaxAcreageStr,_MinPriceStr);
+                        [self.PostDataDic setObject:_MinAcreageStr forKey:@"pricef"];
+                        [self.PostDataDic setObject:_MaxAcreageStr forKey:@"pricel"];
+                    }
                     
-                    [self.PostDataDic setObject:_MinAcreageStr forKey:@"fmianji"];
-                    [self.PostDataDic setObject:_MaxAcreageStr forKey:@"lmianji"];
+
                     [self removeCellWithTag:AcreageCellTag];
                 }
             }
@@ -600,19 +624,19 @@
             } else {
                 passString = @"6";
             }
-            [self.PostDataDic setObject:passString forKey:@"youxiaoq"];
+            [self.PostDataDic setObject:passString forKey:@"youxiaoqi"];
         };
         [self presentViewController:select animated:YES completion:nil];
     };
     
     [self.cellMARR addObject:ExpiryTime];
     ExpiryTime.updateAction = ^ {
-        if (self.LatPostDataDic[@"youxiaoq"]) {
-            if([self.LatPostDataDic[@"youxiaoq"] isEqualToString:@"1"])
+        if (self.LatPostDataDic[@"youxiaoqi"]) {
+            if([self.LatPostDataDic[@"youxiaoqi"] isEqualToString:@"1"])
             {       ExpiryTime.contentString = @"一个月"; }
-            if([self.LatPostDataDic[@"youxiaoq"] isEqualToString:@"3"])
+            if([self.LatPostDataDic[@"youxiaoqi"] isEqualToString:@"3"])
             {       ExpiryTime.contentString = @"三个月"; }
-            if([self.LatPostDataDic[@"youxiaoq"] isEqualToString:@"6"])
+            if([self.LatPostDataDic[@"youxiaoqi"] isEqualToString:@"6"])
             {       ExpiryTime.contentString = @"六个月"; }
         }
     };
@@ -655,7 +679,7 @@
     ContactName.title  = @"联系人:";
     ContactName.placeHoderString = @" ";
     
-    ContactName.contentString = _username;      //此处固定，并不可以更改
+    ContactName.contentString = self.username;      //此处固定，并不可以更改
     ContactName.contentFiled.userInteractionEnabled = NO;
     
     [self dealTextfield:ContactName.contentFiled isTextCenter:NO];
@@ -901,23 +925,23 @@
             break;
         case mingchengTag:
             NSLog(@"名称是:%@",textField.text);
-            [self.PostDataDic setObject:textField.text forKey:@"mingcheng"];
+            [self.PostDataDic setObject:textField.text forKey:@"fangshu"];  //
             break;
         case dizhiTag:
             NSLog(@"地址:%@",textField.text);
-            [self.PostDataDic setObject:textField.text forKey:@"dizhi"];
+            [self.PostDataDic setObject:textField.text forKey:@"tingshu"];
             break;
         case dongTag:
             NSLog(@"栋数是:%@",textField.text);
-            [self.PostDataDic setObject:textField.text forKey:@"dong"];
+            [self.PostDataDic setObject:textField.text forKey:@"toilets"];
             break;
         case danyuanTag:
             NSLog(@"单元:%@",textField.text);
-            [self.PostDataDic setObject:textField.text forKey:@"danyuan"];
+            [self.PostDataDic setObject:textField.text forKey:@"balconys"];
             break;
         case loucengTag:
             NSLog(@"楼层:%@",textField.text);
-            [self.PostDataDic setObject:textField.text forKey:@"louceng"];
+            [self.PostDataDic setObject:textField.text forKey:@"acreage"];
             break;
         case zongloucengTag:
             NSLog(@"总楼层:%@",textField.text);
@@ -925,7 +949,7 @@
             break;
         case mianjiTag:
             NSLog(@"面积:%@",textField.text);
-            [self.PostDataDic setObject:textField.text forKey:@"mianji"];
+            [self.PostDataDic setObject:textField.text forKey:@"usertel"];
             break;
             
         case fangshuTag:
@@ -989,4 +1013,16 @@
     }
     
 }
+
+-(void)appendName:(NSString *)locationName {
+    //长区域拼接
+    NSRange isHave = [_RegionName rangeOfString:locationName];
+    if (!(isHave.length)) {
+        _RegionName  = [_RegionName stringByAppendingString:[NSString stringWithFormat:@"%@ ",locationName]];
+        self.RegionTF.contentString = _RegionName;
+        self.lastRegionName = _RegionName;
+    }
+}
+
+
 @end

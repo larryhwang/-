@@ -179,6 +179,9 @@ else if (self.Status==WantBuy){
     if (indexPath.row ==0) {
         NSLog(@"住宅求购");
         WannaFlatVC *QiuzuFlat = [WannaFlatVC new];
+        QiuzuFlat.indexData = app.provnceIndexDic;
+        QiuzuFlat.username   = app.usrInfoDic[@"username"];
+        QiuzuFlat.userId     = app.usrInfoDic[@"userid"];
         QiuzuFlat.typeStr = @"31";
         QiuzuFlat.title = @"住房求购";
         QiuzuFlat.iSQiuzu = NO;
@@ -186,6 +189,9 @@ else if (self.Status==WantBuy){
     } else if (indexPath.row ==1) {
         NSLog(@"商铺求购");
         WannaShangPu *wangShangu = [WannaShangPu new];
+        wangShangu.indexData = app.provnceIndexDic;
+        wangShangu.username   = app.usrInfoDic[@"username"];
+        wangShangu.userId     = app.usrInfoDic[@"userid"];
         wangShangu.typeStr = @"32";
         wangShangu.title = @"商铺求购";
         wangShangu.iSQiuzu = NO;
@@ -193,6 +199,9 @@ else if (self.Status==WantBuy){
     }else if (indexPath.row ==2) {
         NSLog(@"写字楼求购");
         WannaOffice *wanaOffice = [WannaOffice new];
+        wanaOffice.indexData = app.provnceIndexDic;
+        wanaOffice.username   = app.usrInfoDic[@"username"];
+        wanaOffice.userId     = app.usrInfoDic[@"userid"];
         wanaOffice.title = @"写字楼求购";
         wanaOffice.typeStr = @"33";
         wanaOffice.iSQiuzu = NO;
@@ -200,6 +209,9 @@ else if (self.Status==WantBuy){
     }else  {
         NSLog(@"工厂求购");
         WannaChang *wangChang = [WannaChang new];
+        wangChang.indexData = app.provnceIndexDic;
+        wangChang.username   = app.usrInfoDic[@"username"];
+        wangChang.userId     = app.usrInfoDic[@"userid"];
         wangChang.title = @"工厂求购";
         wangChang.typeStr = @"34";
         wangChang.iSQiuzu = NO;
@@ -211,6 +223,9 @@ else if (self.Status==WantRent){
     if (indexPath.row ==0) {
         NSLog(@"住宅求租");
         WannaFlatVC *QiuzuFlat = [WannaFlatVC new];
+        QiuzuFlat.indexData = app.provnceIndexDic;
+        QiuzuFlat.username   = app.usrInfoDic[@"username"];
+        QiuzuFlat.userId     = app.usrInfoDic[@"userid"];
         QiuzuFlat.typeStr = @"41";
         QiuzuFlat.title = @"住房求租";
         QiuzuFlat.iSQiuzu = YES;
@@ -218,6 +233,9 @@ else if (self.Status==WantRent){
     } else if (indexPath.row ==1) {
         NSLog(@"商铺求租");
         WannaShangPu *wangShangu = [WannaShangPu new];
+        wangShangu.indexData = app.provnceIndexDic;
+        wangShangu.username   = app.usrInfoDic[@"username"];
+        wangShangu.userId     = app.usrInfoDic[@"userid"];
         wangShangu.typeStr = @"42";
         wangShangu.title = @"商铺求租";
         wangShangu.iSQiuzu = YES;
@@ -225,6 +243,9 @@ else if (self.Status==WantRent){
     }else if (indexPath.row ==2) {
         NSLog(@"写字楼求租");
         WannaOffice *wanaOffice = [WannaOffice new];
+        wanaOffice.indexData = app.provnceIndexDic;
+        wanaOffice.username   = app.usrInfoDic[@"username"];
+        wanaOffice.userId     = app.usrInfoDic[@"userid"];
         wanaOffice.title = @"写字楼求租";
         wanaOffice.typeStr = @"43";
         wanaOffice.iSQiuzu = YES;
@@ -232,6 +253,9 @@ else if (self.Status==WantRent){
     }else  {
         NSLog(@"工厂求租");
         WannaChang *wangChang = [WannaChang new];
+        wangChang.indexData = app.provnceIndexDic;
+        wangChang.username   = app.usrInfoDic[@"username"];
+        wangChang.userId     = app.usrInfoDic[@"userid"];
         wangChang.title   = @"工厂求租";
         wangChang.typeStr = @"44";
         wangChang.iSQiuzu = YES;

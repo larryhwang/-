@@ -140,7 +140,7 @@
 #define saveAlertTag       72
 #define checkLastTag       73
 
-@interface WannaChang (){
+@interface WannaChang ()<SelectRegionDelegate>{
     NSString *_RegionName;
     NSString *_lastRegionName;
     NSString *_imgs;
@@ -600,4 +600,8 @@
     };
     
 }
+
+
+
+
 @end

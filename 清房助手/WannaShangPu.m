@@ -18,6 +18,7 @@
 #import  "MBProgressHUD+CZ.h"
 #import "commonFile.h"
 #import "FlatDescirbeVcontroller.h"
+#import "ZuGouDetailShangPuCell.h"
 
 #define ModalViewTag   99
 
@@ -82,7 +83,7 @@
 #define checkLastTag       73
 
 
-@interface WannaShangPu (){
+@interface WannaShangPu ()<SelectRegionDelegate>{
     
     NSString *_RegionName;
     NSString *_imgs;
@@ -133,7 +134,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    self.Fenlei = ShangPuType;
 }
 
 -(void)cellSetting {
@@ -334,7 +335,7 @@
         
         select.SureBtnAciton =^(NSString *passString) {
             Decoration.contentString = passString;
-            [self.PostDataDic setObject:passString forKey:@"zhuangxiu"];
+            [self.PostDataDic setObject:passString forKey:@"zhuangxiuyaoqiu"];
         };
         [self presentViewController:select animated:YES completion:nil];
         NSLog(@"表格位置:%f",Decoration.frame.origin.y);
@@ -342,8 +343,8 @@
     
     [self.cellMARR addObject:Decoration];
     Decoration.updateAction = ^ {
-        if (self.LatPostDataDic[@"zhuangxiu"]) {
-            Decoration.contentString = self.LatPostDataDic[@"zhuangxiu"];
+        if (self.LatPostDataDic[@"zhuangxiuyaoqiu"]) {
+            Decoration.contentString = self.LatPostDataDic[@"zhuangxiuyaoqiu"];
         }
     };
     
@@ -431,9 +432,19 @@
                     //自己截取最大值和最小值
                     [self getMaxAndMinArea:passString];
                     
+                    NSRange range = [passString rangeOfString:@"以上"];
+                    NSLog(@"%d,%d",range.length,range.location); //第3位置的后2个
+                    NSRange MinNo = NSMakeRange(0, passString.length -range.length);
+                    if (range.length) {
+                        NSString *tempMin = [passString substringWithRange:MinNo];
+                        NSLog(@"截取后的:%@",tempMin);
+                        [self.PostDataDic setObject:tempMin forKey:@"pricel"];
+                    } else {
+                        [self getMaxAndMinArea:passString];
+                        [self.PostDataDic setObject:_MinAcreageStr forKey:@"pricef"];
+                        [self.PostDataDic setObject:_MaxAcreageStr forKey:@"pricel"];
+                    }
                     
-                    [self.PostDataDic setObject:_MinAcreageStr forKey:@"fmianji"];
-                    [self.PostDataDic setObject:_MaxAcreageStr forKey:@"lmianji"];
                     [self removeCellWithTag:AcreageCellTag];
                 }
             }
@@ -473,19 +484,19 @@
             } else {
                 passString = @"6";
             }
-            [self.PostDataDic setObject:passString forKey:@"youxiaoq"];
+            [self.PostDataDic setObject:passString forKey:@"youxiaoqi"];
         };
         [self presentViewController:select animated:YES completion:nil];
     };
     
     [self.cellMARR addObject:ExpiryTime];
     ExpiryTime.updateAction = ^ {
-        if (self.LatPostDataDic[@"youxiaoq"]) {
-            if([self.LatPostDataDic[@"youxiaoq"] isEqualToString:@"1"])
+        if (self.LatPostDataDic[@"youxiaoqi"]) {
+            if([self.LatPostDataDic[@"youxiaoqi"] isEqualToString:@"1"])
             {       ExpiryTime.contentString = @"一个月"; }
-            if([self.LatPostDataDic[@"youxiaoq"] isEqualToString:@"3"])
+            if([self.LatPostDataDic[@"youxiaoqi"] isEqualToString:@"3"])
             {       ExpiryTime.contentString = @"三个月"; }
-            if([self.LatPostDataDic[@"youxiaoq"] isEqualToString:@"6"])
+            if([self.LatPostDataDic[@"youxiaoqi"] isEqualToString:@"6"])
             {       ExpiryTime.contentString = @"六个月"; }
         }
     };
@@ -528,7 +539,7 @@
     ContactName.title  = @"联系人:";
     ContactName.placeHoderString = @" ";
     
-    ContactName.contentString = _username;      //此处固定，并不可以更改
+    ContactName.contentString = self.username;      //此处固定，并不可以更改
     ContactName.contentFiled.userInteractionEnabled = NO;
     
     [self dealTextfield:ContactName.contentFiled isTextCenter:NO];
@@ -586,5 +597,177 @@
     };
     
 }
+
+
+-(void)appendName:(NSString *)locationName {
+    //长区域拼接
+    NSRange isHave = [_RegionName rangeOfString:locationName];
+    if (!(isHave.length)) {
+        _RegionName  = [_RegionName stringByAppendingString:[NSString stringWithFormat:@"%@ ",locationName]];
+        self.RegionTF.contentString = _RegionName;
+        self.lastRegionName = _RegionName;
+    }
+}
+
+-(void)getMaxAndMinArea:(NSString *) str {
+    //    "60-90",@"90-120",@"120以上"
+    /**
+     *      NSString *_MinAcreageStr;
+     NSString *_MaxAcreageStr;
+     */
+    if ([str isEqualToString:@"60-90"]) {
+        _MinAcreageStr = @"60";
+        _MaxAcreageStr = @"90";
+    } else if ([str isEqualToString:@"90-120"]) {
+        _MinAcreageStr = @"90";
+        _MaxAcreageStr = @"120";
+    }else {
+        _MinAcreageStr = @"120";
+    }
+}
+
+-(BOOL)controllerWillPopHandler {
+    NSLog(@"%d",[[self.PostDataDic allKeys] count]);
+    
+    if ([[self.PostDataDic allKeys] count] ==0 ) {  //如果加载了上次数据或者 已经被编辑了
+        if(_isLoadLastPara ==YES) {
+            NSLog(@"TopVC in nav :%@",self.navigationController.topViewController);
+            
+            UIAlertView *AW = [[UIAlertView alloc]initWithTitle:nil
+                                                        message:@"资料尚未保存"
+                                                       delegate:self
+                                              cancelButtonTitle:@"放弃编辑"
+                                              otherButtonTitles:@"留在此页", @"保存并退出",nil];
+            AW.tag = saveAlertTag;
+            [AW show];
+            return NO;
+        }
+        _isLoadLastPara = NO;    //复位
+        return YES;
+    }
+    
+    NSLog(@"TopVC in nav :%@",self.navigationController.topViewController);
+    
+    
+    if (_isFromSelectDescribePage) {
+        _isFromSelectDescribePage = NO;
+        return NO;
+    }
+    
+    UIAlertView *AW = [[UIAlertView alloc]initWithTitle:nil
+                                                message:@"资料尚未保存"
+                                               delegate:self
+                                      cancelButtonTitle:@"放弃编辑"
+                                      otherButtonTitles:@"留在此页", @"保存并退出",nil];
+    AW.tag = saveAlertTag;
+    [AW show];
+    return NO;
+    
+}
+
+
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    if(textField.text) _isLoadLastPara = YES;
+    NSInteger EditedTextFieldTag = textField.tag ;
+    switch (EditedTextFieldTag) {
+        case biaotiTag:
+            NSLog(@"标题是:%@",textField.text);
+            NSLog(@"%@",self);
+            [self.PostDataDic setObject:textField.text forKey:@"biaoti"];
+            break;
+        case mingchengTag:
+            NSLog(@"名称是:%@",textField.text);
+            [self.PostDataDic setObject:textField.text forKey:@"acreage"];
+            break;
+        case dizhiTag:
+            NSLog(@"地址:%@",textField.text);
+            [self.PostDataDic setObject:textField.text forKey:@"dizhi"];
+            break;
+        case dongTag:
+            NSLog(@"栋数是:%@",textField.text);
+            [self.PostDataDic setObject:textField.text forKey:@"tel"];
+            break;
+        case danyuanTag:
+            NSLog(@"单元:%@",textField.text);
+            [self.PostDataDic setObject:textField.text forKey:@"danyuan"];
+            break;
+        case loucengTag:
+            NSLog(@"楼层:%@",textField.text);
+            [self.PostDataDic setObject:textField.text forKey:@"louceng"];
+            break;
+        case zongloucengTag:
+            NSLog(@"总楼层:%@",textField.text);
+            [self.PostDataDic setObject:textField.text forKey:@"zonglouceng"];
+            break;
+        case mianjiTag:
+            NSLog(@"面积:%@",textField.text);
+            [self.PostDataDic setObject:textField.text forKey:@"mingcheng"];
+            break;
+            
+        case fangshuTag:
+            NSLog(@"房数:%@",textField.text);
+            [self.PostDataDic setObject:textField.text forKey:@"fangshu"];
+            break;
+            
+        case tingshuTag:
+            NSLog(@"厅数:%@",textField.text);
+            [self.PostDataDic setObject:textField.text forKey:@"tingshu"];
+            break;
+            
+        case toiletsTag:
+            NSLog(@"卫生间:%@",textField.text);
+            [self.PostDataDic setObject:textField.text forKey:@"toilets"];
+            break;
+            
+        case balconysTag:
+            NSLog(@"阳台数:%@",textField.text);
+            [self.PostDataDic setObject:textField.text forKey:@"balconys"];
+            break;
+            
+        case fanglingTag:
+            NSLog(@"房龄:%@",textField.text);
+            [self.PostDataDic setObject:textField.text forKey:@"fangling"];
+            break;
+            
+        case shoujiaTag:
+            NSLog(@"售价:%@",textField.text);
+            [self.PostDataDic setObject:textField.text forKey:@"shoujia"];
+            break;
+            
+#define userNameTag     14                  //参数文档中未见
+#define usertelTag      15
+#define OwnerTag        16
+#define OwnerName       17
+            
+        case userNameTag:
+            NSLog(@"联系人姓名:%@",textField.text);
+#warning 这里只显示，不允许修改
+            [self.PostDataDic setObject:textField.text forKey:@"ownername"];
+            break;
+            
+        case usertelTag:
+            NSLog(@"联系人电话:%@",textField.text);
+            [self.PostDataDic setObject:textField.text forKey:@"usertel"];
+            break;
+            
+        case OwnerTag:
+            NSLog(@"业主姓名:%@",textField.text);
+            [self.PostDataDic setObject:textField.text forKey:@"ownername"];
+            break;
+            
+        case OwnerName:
+            NSLog(@"业主电话:%@",textField.text);
+            [self.PostDataDic setObject:textField.text forKey:@"ownertel"];
+            break;
+            
+        default:
+            break;
+    }
+    
+}
+
+
+
 
 @end

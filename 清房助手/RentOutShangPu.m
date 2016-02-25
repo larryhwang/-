@@ -402,7 +402,7 @@
         
         select.SureBtnAciton =^(NSString *passString) {
             Decoration.contentString = passString;
-            [self.PostDataDic setObject:passString forKey:@"zhuangxiu"];
+            [self.PostDataDic setObject:passString forKey:@"zhuangxiuyaoqiu"];
         };
         [self presentViewController:select animated:YES completion:nil];
         NSLog(@"表格位置:%f",Decoration.frame.origin.y);
@@ -410,8 +410,8 @@
     
     [self.cellMARR addObject:Decoration];
     Decoration.updateAction = ^ {
-        if (self.LatPostDataDic[@"zhuangxiu"]) {
-            Decoration.contentString = self.LatPostDataDic[@"zhuangxiu"];
+        if (self.LatPostDataDic[@"zhuangxiuyaoqiu"]) {
+            Decoration.contentString = self.LatPostDataDic[@"zhuangxiuyaoqiu"];
         }
     };
     [main addSubview:Decoration];

@@ -703,12 +703,36 @@
         
 
       //  NSString
+//        NSString *PriceString = [NSString stringWithFormat:@"%@万元",SingleData[@"pricel"]];
+//        NSMutableAttributedString *HiligntNo = [[NSMutableAttributedString alloc]initWithString:PriceString];
+//        NSRange NoRange = NSMakeRange(0, [PriceString length]-2);
+//        [HiligntNo addAttribute:NSForegroundColorAttributeName value:[UIColor redColor]  range:NoRange];
+//        [HiligntNo addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:20 ]  range:NoRange];
+//        [cell.priceLabel setAttributedText:HiligntNo]; //将红色属性添加进去
+//        cell.priceLabel.text = PriceString;//@"110万";
         
-        NSString *PriceString = [NSString stringWithFormat:@"%@万元",SingleData[@"pricel"]];
-        NSMutableAttributedString *HiligntNo = [[NSMutableAttributedString alloc]initWithString:PriceString];
-        NSRange NoRange = NSMakeRange(0, [PriceString length]-2);
+        NSNumber *ZeroNo ;
+        NSString *price;
+        if ([SingleData[@"pricef"] length]==0 && [SingleData[@"pricel"] length] == 0) {
+            price = @"价格不限";
+        } else {
+            price =[NSString stringWithFormat:@"%@-%@%@",SingleData[@"pricef"],SingleData[@"pricel"],SingleData[@"unit"]];
+        }
+        //添加高亮属性
+        NSMutableAttributedString *HiligntNo = [[NSMutableAttributedString alloc]initWithString:price];
+        NSRange NoRange ;
+     if ([SingleData[@"pricef"] length]==0 && [SingleData[@"pricel"] length] == 0) {
+            NoRange = NSMakeRange(0, 4);
+        }
+        else {
+            NoRange = NSMakeRange(0, [price length]-2);
+        }
+        
         [HiligntNo addAttribute:NSForegroundColorAttributeName value:[UIColor redColor]  range:NoRange];
-        [HiligntNo addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:20 ]  range:NoRange];
+        cell.priceLabel.text = price;
+        [cell.priceLabel setAttributedText:HiligntNo]; //将红色属性添加进去
+
+        
         
         cell.titileLabel.text =[NSString stringWithFormat:@"%@%@",_preName,SingleData[@"biaoti"]]; //[self judgeNullValue:SingleData[@"biaoti"]]; //SingleData[@"biaoti"];
         cell.acreaLabel.text =[NSString stringWithFormat:@"面积:%@㎡",[self judgeNullValue: SingleData[@"acreage"]]];//@"面积:110㎡";
@@ -722,8 +746,7 @@
                                                            
         cell.attachmentLabel.text =@"   ";
         cell.requestDescrbeLabel.text = [self judgeNullValue:SingleData[@"fangyuanmiaoshu"]];   // @"阳光采光要好";
-        cell.priceLabel.text = PriceString;//@"110万";
-        [cell.priceLabel setAttributedText:HiligntNo]; //将红色属性添加进去
+
         cell.publisherLabel.text = [self judgeNullValue:SingleData[@"publisher"]]; //@"内马尔";
         cell.postTimeLabel.text  = [self judgeNullValue:SingleData[@"weituodate"]];  //@"2015-12-10 10:32:28";
         return cell;

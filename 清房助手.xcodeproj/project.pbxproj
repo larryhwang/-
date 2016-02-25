@@ -33,6 +33,8 @@
 		4617E63A1C1BADD5007BECBF /* FilterSelectJieViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4617E6391C1BADD5007BECBF /* FilterSelectJieViewController.m */; };
 		46184CEC1C465C40004CE58D /* WannaFlatVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 46184CEB1C465C40004CE58D /* WannaFlatVC.m */; };
 		461AAD7A1C55077F00A6F006 /* ShareIcons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 461AAD791C55077F00A6F006 /* ShareIcons.xcassets */; };
+		461BFBB11C7F0F5D00348118 /* ZuGouDetailShangPuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 461BFBAF1C7F0F5D00348118 /* ZuGouDetailShangPuCell.m */; };
+		461BFBB21C7F0F5D00348118 /* ZuGouDetailShangPuCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 461BFBB01C7F0F5D00348118 /* ZuGouDetailShangPuCell.xib */; };
 		461F745D1C756D33003717D0 /* ShangPuDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 461F745B1C756D33003717D0 /* ShangPuDetailCell.m */; };
 		461F745E1C756D33003717D0 /* ShangPuDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 461F745C1C756D33003717D0 /* ShangPuDetailCell.xib */; };
 		46215FB31C60AA4500011229 /* PermissionTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 46215FB21C60AA4500011229 /* PermissionTool.m */; };
@@ -394,6 +396,9 @@
 		46184CEA1C465C40004CE58D /* WannaFlatVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WannaFlatVC.h; path = ../WannaFlatVC.h; sourceTree = "<group>"; };
 		46184CEB1C465C40004CE58D /* WannaFlatVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WannaFlatVC.m; path = ../WannaFlatVC.m; sourceTree = "<group>"; };
 		461AAD791C55077F00A6F006 /* ShareIcons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ShareIcons.xcassets; sourceTree = "<group>"; };
+		461BFBAE1C7F0F5D00348118 /* ZuGouDetailShangPuCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZuGouDetailShangPuCell.h; sourceTree = "<group>"; };
+		461BFBAF1C7F0F5D00348118 /* ZuGouDetailShangPuCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZuGouDetailShangPuCell.m; sourceTree = "<group>"; };
+		461BFBB01C7F0F5D00348118 /* ZuGouDetailShangPuCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZuGouDetailShangPuCell.xib; sourceTree = "<group>"; };
 		461F745A1C756D33003717D0 /* ShangPuDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShangPuDetailCell.h; sourceTree = "<group>"; };
 		461F745B1C756D33003717D0 /* ShangPuDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShangPuDetailCell.m; sourceTree = "<group>"; };
 		461F745C1C756D33003717D0 /* ShangPuDetailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShangPuDetailCell.xib; sourceTree = "<group>"; };
@@ -1675,6 +1680,9 @@
 				467B8A701C7BF950001F55AA /* FactoryDetailCell.h */,
 				467B8A711C7BF950001F55AA /* FactoryDetailCell.m */,
 				467B8A721C7BF950001F55AA /* FactoryDetailCell.xib */,
+				461BFBAE1C7F0F5D00348118 /* ZuGouDetailShangPuCell.h */,
+				461BFBAF1C7F0F5D00348118 /* ZuGouDetailShangPuCell.m */,
+				461BFBB01C7F0F5D00348118 /* ZuGouDetailShangPuCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2246,6 +2254,7 @@
 				467B8A761C7C58A7001F55AA /* shareIcon.png in Resources */,
 				4697FB371BCBAF8F00D7E24C /* StringFile.strings in Resources */,
 				4616EDC81C240AEE00BAF5C3 /* company.png in Resources */,
+				461BFBB21C7F0F5D00348118 /* ZuGouDetailShangPuCell.xib in Resources */,
 				467B8A741C7BF950001F55AA /* FactoryDetailCell.xib in Resources */,
 				46E5C7B11C34C2A500F4829D /* UserInfoVC_iFive.xib in Resources */,
 				4654154C1C2CD46E003E5743 /* 60x60-hui (1).png in Resources */,
@@ -2482,6 +2491,7 @@
 				46B23D1E1C33B26B00C78B43 /* MASConstraintMaker.m in Sources */,
 				46AFDFA11BCB84A200B49CBE /* SDWebImageDownloaderOperation.m in Sources */,
 				46252F911BDA648C00C1FA66 /* UIScrollView+MJRefresh.m in Sources */,
+				461BFBB11C7F0F5D00348118 /* ZuGouDetailShangPuCell.m in Sources */,
 				46E6CE1B1C5A174300B9FE2E /* SharePopVC.m in Sources */,
 				4616EE171C24C9CD00BAF5C3 /* InnerCustomer.m in Sources */,
 				46256C511BCF776F00E05C5F /* FlatDetailCell.m in Sources */,
@@ -2730,6 +2740,7 @@
 					"$(PROJECT_DIR)/清房助手/GBWXPay/WxPay/SDKExport",
 					"$(PROJECT_DIR)/清房助手",
 				);
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "HuiZhou-S-F-NetworkTechCo.-Ltd-";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";

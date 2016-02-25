@@ -341,9 +341,16 @@
 -(void)dealTextfield :(UITextField *)textfied isTextCenter:(BOOL)isTextCenter{
     if (isTextCenter) {
         textfied.textAlignment = NSTextAlignmentCenter;
+        
     }
+    
+    EditCell *tempS = (EditCell *) [textfied superview];
+    
+    NSLog(@"追加Tag的记录:%d,%@",textfied.tag,tempS.title);
+    NSAssert(![tempS.title isEqualToString:@"面积"],@"Find it !");
     textfied.delegate = self;
     textfied.tag = [self.tfArrs count];
+     NSLog(@"追加Tag的记录:%d,%@",textfied.tag,tempS.title);
     [self.tfArrs addObject:textfied];
 }
 
@@ -1174,12 +1181,12 @@
     
     [self.cellMARR addObject:ExpiryTime];
     ExpiryTime.updateAction = ^ {
-        if (self.LatPostDataDic[@"youxiaoq"]) {
-            if([self.LatPostDataDic[@"youxiaoq"] isEqualToString:@"1"])
+        if (self.LatPostDataDic[@"youxiaoqi"]) {
+            if([self.LatPostDataDic[@"youxiaoqi"] isEqualToString:@"1"])
             {       ExpiryTime.contentString = @"一个月"; }
-            if([self.LatPostDataDic[@"youxiaoq"] isEqualToString:@"3"])
+            if([self.LatPostDataDic[@"youxiaoqi"] isEqualToString:@"3"])
             {       ExpiryTime.contentString = @"三个月"; }
-            if([self.LatPostDataDic[@"youxiaoq"] isEqualToString:@"6"])
+            if([self.LatPostDataDic[@"youxiaoqi"] isEqualToString:@"6"])
             {       ExpiryTime.contentString = @"六个月"; }
         }
     };
@@ -1326,7 +1333,11 @@
     
     
     //默认参数补齐
-    [self.PostDataDic setObject:_userId forKey:@"userid"];
+    
+    if(_userId) {
+      [self.PostDataDic setObject:_userId forKey:@"userid"];
+    }
+    
     [self.PostDataDic setObject:@"1" forKey:@"isfangyuan"];
     
     
@@ -1335,9 +1346,11 @@
     } else if (self.PreStatus == RentOut){
        [self.PostDataDic setObject:@"1" forKey:@"zushou"];
     } else if (self.PreStatus == WantBuy){
-      [self.PostDataDic setObject:@"1" forKey:@"zugou"];
+      [self.PostDataDic setObject:@"true" forKey:@"zugou"];
+      [self.PostDataDic setObject:@"0" forKey:@"isfangyuan"];
     }else {
        [self.PostDataDic setObject:@"0" forKey:@"zugou"];
+       [self.PostDataDic setObject:@"0" forKey:@"isfangyuan"];
     }
 
     
@@ -1449,15 +1462,6 @@
 
 
     NSLog(@"最后参数:%@",self.PostDataDic);
-    
-    
-    NSData *data = [NSJSONSerialization dataWithJSONObject:self.PostDataDic options: NSJSONWritingPrettyPrinted error:NULL];
-    
-
-    
-//    NSString *jsonStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-//    
-//    NSLog(@"转换啊:%@",jsonStr);
     
     [manager POST:url4 parameters:self.PostDataDic success:^(AFHTTPRequestOperation *operation, id responseObject) {
     NSLog(@"第二次提交的返回数据%@",responseObject);
