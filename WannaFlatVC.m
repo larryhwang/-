@@ -144,10 +144,15 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     self.edgesForExtendedLayout = UIRectEdgeNone;
-    self.PreStatus = WantBuy ;
+    
+    if (self.iSQiuzu) {
+        self.PreStatus = WantRent ;
+    } else {
+       self.PreStatus = WantBuy ;
+    }
     [self.PostDataDic setObject:@"万元" forKey:@"unit"];
     NSLog(@"%@",self.PostDataDic);
-     NSLog(@"DEBUG");
+
     
     
 }
@@ -804,15 +809,39 @@
      NSString *_MaxAcreageStr;
      */
     
-    if ([str isEqualToString:@"60-90"]) {
-        _MinAcreageStr = @"60";
-        _MaxAcreageStr = @"90";
-    } else if ([str isEqualToString:@"90-120"]) {
-        _MinAcreageStr = @"90";
-        _MaxAcreageStr = @"120";
-    }else {
-        _MinAcreageStr = @"120";
+    
+    
+        //      Optdata  = [NSArray arrayWithObjects:@"300-600",@"600-800",@"800-1200",@"1200-1600",@"不限",@"自定义",nil];
+    
+    
+    if (self.iSQiuzu) {
+        if ([str isEqualToString:@"300-600"]) {
+            _MinAcreageStr = @"300";
+            _MaxAcreageStr = @"600";
+        } else if ([str isEqualToString:@"600-800"]) {
+            _MinAcreageStr = @"600";
+            _MaxAcreageStr = @"800";
+        } else if ([str isEqualToString:@"800-1200"]) {
+            _MinAcreageStr = @"800";
+            _MaxAcreageStr = @"1200";
+        } else if ([str isEqualToString:@"1200-1600"]) {
+            _MinAcreageStr = @"1200";
+            _MaxAcreageStr = @"1600";
+        }
+    } else {
+        if ([str isEqualToString:@"60-90"]) {
+            _MinAcreageStr = @"60";
+            _MaxAcreageStr = @"90";
+        } else if ([str isEqualToString:@"90-120"]) {
+            _MinAcreageStr = @"90";
+            _MaxAcreageStr = @"120";
+        }else {
+            _MinAcreageStr = @"120";
+        }
+    
     }
+
+    
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex NS_DEPRECATED_IOS(2_0, 9_0) {

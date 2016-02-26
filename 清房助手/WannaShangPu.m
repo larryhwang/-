@@ -135,6 +135,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.Fenlei = ShangPuType;
+    
+    if (self.iSQiuzu) {
+        self.PreStatus = WantRent ;
+    } else {
+        self.PreStatus = WantBuy ;
+    }
 }
 
 -(void)cellSetting {

@@ -186,6 +186,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    
+    if (self.iSQiuzu) {
+        self.PreStatus = WantRent ;
+    } else {
+        self.PreStatus = WantBuy ;
+    }
+    
      self.Fenlei = OfficeType;
     
 }

@@ -1330,7 +1330,7 @@
 
 
 -(void)LogPostDic {
-    
+    //租购（0-求租，1-求购）
     
     //默认参数补齐
     
@@ -1346,11 +1346,12 @@
     } else if (self.PreStatus == RentOut){
        [self.PostDataDic setObject:@"1" forKey:@"zushou"];
     } else if (self.PreStatus == WantBuy){
-      [self.PostDataDic setObject:@"true" forKey:@"zugou"];
+      [self.PostDataDic setObject:@"true" forKey:@"zugou"];   //求购
       [self.PostDataDic setObject:@"0" forKey:@"isfangyuan"];
     }else {
-       [self.PostDataDic setObject:@"0" forKey:@"zugou"];
+      [self.PostDataDic setObject:@"0" forKey:@"zugou"];     //求租
        [self.PostDataDic setObject:@"0" forKey:@"isfangyuan"];
+        [self.PostDataDic setObject:@"元" forKey:@"unit"];
     }
 
     
