@@ -298,7 +298,6 @@
         if (self.LatPostDataDic[@"mianji"]) {
             TF_Area.text = self.LatPostDataDic[@"mianji"];
         }
-        
     };
     
     [Area addSubview:LABLE_Area];
@@ -419,7 +418,7 @@
                 }
                 
                 [CustomsAcreageRange addSubview:UnintLable];
-                // [self.main.Cell_NSArr insertObject:CustomsAcreageRange atIndex:4];
+
                 [self addCell:CustomsAcreageRange After:AcreageCell];
                 self.main.GroupFlagNoArr = @[@1,@4,@3,@1,@2];
                 [main layoutSubviews];
@@ -427,7 +426,6 @@
             } else {
                 //如果不是自定义 ，先保存数据
                 if([passString isEqualToString:@"不限"]) {
-                    // [self.PostDictionary setObject:@"" forKey:@"mianji"];
                 } else {
                     //自己截取最大值和最小值
                     [self getMaxAndMinArea:passString];
@@ -439,6 +437,7 @@
                         NSString *tempMin = [passString substringWithRange:MinNo];
                         NSLog(@"截取后的:%@",tempMin);
                         [self.PostDataDic setObject:tempMin forKey:@"pricel"];
+                        [self.PostDataDic setObject:@"" forKey:@"pricef"];
                     } else {
                         [self getMaxAndMinArea:passString];
                         [self.PostDataDic setObject:_MinAcreageStr forKey:@"pricef"];
@@ -557,6 +556,7 @@
     ContactNo.placeHoderString = @" ";
     [self dealTextfield:ContactNo.contentFiled isTextCenter:NO];
     ContactNo.contentFiled.keyboardType = UIKeyboardTypeNumberPad;
+    ContactNo.contentFiled.text  = self.userId ;
     [self.footArrs addObject:ContactNo];
     [self.cellMARR addObject:ContactNo];
     ContactNo.updateAction = ^ {
@@ -679,6 +679,7 @@
         case mingchengTag:
             NSLog(@"名称是:%@",textField.text);
             [self.PostDataDic setObject:textField.text forKey:@"acreage"];
+            [self.PostDataDic setObject:textField.text forKey:@"mianji"];
             break;
         case dizhiTag:
             NSLog(@"地址:%@",textField.text);
@@ -686,7 +687,7 @@
             break;
         case dongTag:
             NSLog(@"栋数是:%@",textField.text);
-            [self.PostDataDic setObject:textField.text forKey:@"tel"];
+            [self.PostDataDic setObject:textField.text forKey:@"usertel"];
             break;
         case danyuanTag:
             NSLog(@"单元:%@",textField.text);

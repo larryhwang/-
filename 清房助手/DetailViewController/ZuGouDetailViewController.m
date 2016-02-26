@@ -332,76 +332,62 @@
 
     }  //end_商铺
      else {    //start_写字楼
-        NSDictionary *dic = self.FangData;
-        ZuGouHeadCell *Headcell = [[ZuGouHeadCell alloc]init];
-        ZuGouDetailCell *Detailcell = [[ZuGouDetailCell alloc]init];
-        ZuGouDescribeCell *Describecell = [[ZuGouDescribeCell alloc]init];
-
-        if (indexPath.row ==0) {
-            NSNumber *ZeroNo = [NSNumber numberWithInt:0];
-            Headcell  =  [[[NSBundle mainBundle]loadNibNamed:@"ZuGouHeadCell" owner:nil options:nil] firstObject];
-            Headcell.QFtitle.text  = dic[@"biaoti"];
-            
-            NSString *price;
-            if ([dic[@"pricef"] length]==0 && [dic[@"pricel"] length] == 0) {
-                   price = @"价格不限";
-            } else {
-                 price =[NSString stringWithFormat:@"%@-%@%@",dic[@"pricef"],dic[@"pricel"],dic[@"unit"]];
-            }
-            //添加高亮属性
-            NSMutableAttributedString *HiligntNo = [[NSMutableAttributedString alloc]initWithString:price];
-            NSRange NoRange ;
-            if ([dic[@"zugou"] isEqualToNumber:ZeroNo]) {
-                //求租
-                NoRange = NSMakeRange(0, [price length]-1);
-            } else if ([dic[@"pricef"] length]==0 && [dic[@"pricel"] length] == 0) {
-                NoRange = NSMakeRange(0, 4);
-            }
-            else {
-                NoRange = NSMakeRange(0, [price length]-2);
-            }
-            
-            [HiligntNo addAttribute:NSForegroundColorAttributeName value:[UIColor redColor]  range:NoRange];
-            [HiligntNo addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:20 ]  range:NoRange];
-            
-            Headcell.QFprice.text = price;
-            [Headcell.QFprice setAttributedText:HiligntNo];
-            Headcell.QFweiTuoDate.text = dic[@"weituodate"];
-            return Headcell;
-        }else if (indexPath.row ==1)
-        {
-            Detailcell  =  [[[NSBundle mainBundle]loadNibNamed:@"ZuGouDetailCell" owner:nil options:nil] firstObject];
-            NSString *test = [NSString stringWithFormat:@"%@%@%@%@",[self judgeNullValue:dic[@"shengfen"]],
-                              [self judgeNullValue:dic[@"shi"]],
-                              [self judgeNullValue:dic[@"qu"]],
-                              [self judgeNullValue:dic[@"region"]]];
-            NSLog(@"RegionLabel %@",test);
-            Detailcell.regionLabel.text = [NSString stringWithFormat:@"%@%@%@%@",[self judgeNullValue:dic[@"shengfen"]],
-                                           [self judgeNullValue:dic[@"shi"]],
-                                           [self judgeNullValue:dic[@"qu"]],
-                                           [self judgeNullValue:dic[@"region"]]];
-            
-            
-            Detailcell.RoomStyleLabel.text =[NSString stringWithFormat:@"%@室%@厅%@卫%@阳台", [self judgeNullValue: dic[@"fangshu"]],
-                                             [self judgeNullValue: dic[@"tingshu"]],
-                                             [self judgeNullValue: dic[@"toilets"]],
-                                             [self judgeNullValue: dic[@"balconys"]]];   //@"%@室%@厅%阳台";
-            NSString *mianjiStr = [self judgeNullValue:dic[@"acreage"]];
-            Detailcell.aceaLabel.text =(mianjiStr.length)?[NSString stringWithFormat:@"%@㎡",dic[@"acreage"]]: @"不限";  //如果返回面积为空，则显示面积不限
-            Detailcell.DecorationLabel.text = dic[@"zhuangxiuyaoqiu"];  //@"简装修";
-            Detailcell.Expritime.text = [NSString stringWithFormat:@"%@个月",dic[@"youxiaoqi"]];   //@"三个月";
-            //配套设施
-            
-            Detailcell.attachMent.text = [self getAttacMentFromDataDic];
-            
-            return Detailcell;
-        }else
-        {
-            Describecell =  [[[NSBundle mainBundle]loadNibNamed:@"ZuGouDescribeCell" owner:nil options:nil] firstObject];
-            Describecell.contentCell.numberOfLines = 0;
-            Describecell.contentCell.text = dic[@"fangyuanmiaoshu"];
-            return Describecell;
-        }
+         NSDictionary *dic = self.FangData;
+         ZuGouHeadCell *Headcell = [[ZuGouHeadCell alloc]init];
+         ZuGouDescribeCell *Describecell = [[ZuGouDescribeCell alloc]init];
+         ZuGouDetailShangPuCell *Detailcell = [[ZuGouDetailShangPuCell alloc]init];
+         if (indexPath.row ==0) {
+             NSNumber *ZeroNo = [NSNumber numberWithInt:0];
+             Headcell  =  [[[NSBundle mainBundle]loadNibNamed:@"ZuGouHeadCell" owner:nil options:nil] firstObject];
+             Headcell.QFtitle.text  = dic[@"biaoti"];
+             NSString *price =[NSString stringWithFormat:@"%@-%@%@",dic[@"pricef"],dic[@"pricel"],dic[@"unit"]];
+             //添加高亮属性
+             NSMutableAttributedString *HiligntNo = [[NSMutableAttributedString alloc]initWithString:price];
+             NSRange NoRange ;
+             if ([dic[@"zugou"] isEqualToNumber:ZeroNo]) {
+                 //求租
+                 NoRange = NSMakeRange(0, [price length]-1);
+             } else {
+                 NoRange = NSMakeRange(0, [price length]-2);
+             }
+             [HiligntNo addAttribute:NSForegroundColorAttributeName value:[UIColor redColor]  range:NoRange];
+             [HiligntNo addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:20 ]  range:NoRange];
+             
+             Headcell.QFprice.text = price;
+             [Headcell.QFprice setAttributedText:HiligntNo];
+             Headcell.QFweiTuoDate.text = dic[@"weituodate"];
+             return Headcell;
+         }else if (indexPath.row ==1)
+         {
+             Detailcell  =  [[[NSBundle mainBundle]loadNibNamed:@"ZuGouDetailShangPuCell" owner:nil options:nil] firstObject];
+             NSString *test = [NSString stringWithFormat:@"%@%@%@%@",[self judgeNullValue:dic[@"shengfen"]],
+                               [self judgeNullValue:dic[@"shi"]],
+                               [self judgeNullValue:dic[@"qu"]],
+                               [self judgeNullValue:dic[@"region"]]];
+             NSLog(@"RegionLabel %@",test);
+             Detailcell.regionLabel.text = [NSString stringWithFormat:@"%@%@%@%@",[self judgeNullValue:dic[@"shengfen"]],
+                                            [self judgeNullValue:dic[@"shi"]],
+                                            [self judgeNullValue:dic[@"qu"]],
+                                            [self judgeNullValue:dic[@"region"]]];
+             
+             
+             Detailcell.RoomStyleLabel.text =dic[@"leixing"];   //@"%@室%@厅%阳台";
+             NSString *mianjiStr = [self judgeNullValue:dic[@"acreage"]];
+             Detailcell.aceaLabel.text =(mianjiStr.length)?[NSString stringWithFormat:@"%@㎡",dic[@"acreage"]]: @"不限";  //如果返回面积为空，则显示面积不限
+             Detailcell.DecorationLabel.text = dic[@"zhuangxiuyaoqiu"];  //@"简装修";
+             Detailcell.Expritime.text = [NSString stringWithFormat:@"%@个月",dic[@"youxiaoqi"]];   //@"三个月";
+             //配套设施
+             
+             Detailcell.attachMent.text = [self getAttacMentFromDataDic];
+             
+             return Detailcell;
+         }else
+         {
+             Describecell =  [[[NSBundle mainBundle]loadNibNamed:@"ZuGouDescribeCell" owner:nil options:nil] firstObject];
+             Describecell.contentCell.numberOfLines = 0;
+             Describecell.contentCell.text = dic[@"fangyuanmiaoshu"];
+             return Describecell;
+         }
 
     } //end_写字楼
 
@@ -435,7 +421,7 @@
         return 100;
     }
     else if (indexPath.row ==1) {
-        if ([self.FangData[@"fenlei"] isEqualToNumber:[NSNumber numberWithInt:1]]) {
+        if ([self.FangData[@"fenlei"] isEqualToNumber:[NSNumber numberWithInt:1]]||[self.FangData[@"fenlei"] isEqualToNumber:[NSNumber numberWithInt:2]]) {
             return 150;
         } else {
            return  200;
@@ -445,16 +431,6 @@
         return 100;
     }
 }
-
-
-//
-//[h addTarget:self action:@selector(StarAction) forControlEvents:UIControlEventTouchUpInside];
-//[ShareBtn addTarget:self action:@selector(share) forControlEvents:UIControlEventTouchUpInside];
-//
-
-//    UIButton  *ShareBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 26, 26)];  //分享按钮
-//UIImage *img = [UIImage imageNamed:@"pStar"];
-//UIImage *ShareIcon = [UIImage imageNamed:@"shareIcon"];
 
 
 

@@ -132,7 +132,7 @@
                 <outlet property="roomsContLabel" destination="uBd-7e-hgc" id="ifu-IG-58I"/>
                 <outlet property="titileLabel" destination="yaF-8k-VT7" id="tIj-P6-LCF"/>
             </connections>
-            <point key="canvasLocation" x="497.5" y="301"/>
+            <point key="canvasLocation" x="210.5" y="200"/>
         </tableViewCell>
     </objects>
 </document>

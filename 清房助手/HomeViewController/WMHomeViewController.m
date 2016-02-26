@@ -319,20 +319,15 @@
         }
         
             [self.pramaDic setObject:cityName forKey:@"shi"];
-    //    NSString *url = [NSString stringWithFormat:@"http://www.123qf.cn:81/testApp/area/selectArea.api?parentid=%@",code];
             NSString *url = [NSString stringWithFormat:@"http://www.123qf.cn/app/area/selectArea.api?parentid=%@",code];
          NSLog(@"更改后:%@",self.pramaDic);
         
 
         //更新标题
         [self.NavSeacherBtn setTitle:_nowCityName forState:UIControlStateNormal];
-        
         //重新布局布局弹窗内的地方按钮
         [self.shareMgr POST:url parameters:nil success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
              //数组赋值
-            
-            
-            
             NSArray *ar = responseObject[@"data"];
             self.LocationNameDicPartOne_NSarr = [NSMutableArray arrayWithArray:ar];
             NSLog(@"2JJ：%@",self.LocationNameDic_NSArr);
@@ -341,7 +336,7 @@
                                       @"code":@"0000",  //此处不详
                                       };
             
-            [(NSMutableArray *)self.LocationNameDic_NSArr insertObject:firstDic atIndex:0]; // 这个实际上是 LocationNameDicPartOne_NSarr
+            [(NSMutableArray *)self.LocationNameDic_NSArr insertObject:firstDic atIndex:0]; // 这个实际上是
             _popView.LocationNameDicPartOne_NSarr = self.LocationNameDicPartOne_NSarr;
             
             [_popView layoutSectionA];
@@ -569,8 +564,7 @@
 {
     NSNumber *flag = [NSNumber numberWithInt:0];
     NSDictionary *SingleData = self.DataArr[indexPath.row];
-    if (_status ==SalesOut) {   //出售的列表Cell也要
-     //   _preName = @"[出售]";
+    if (_status ==SalesOut) {
         _preName = @"";
         static NSString *ID = @"identifer";
         SalesCell *cell =[tableView dequeueReusableCellWithIdentifier:ID];
@@ -700,18 +694,7 @@
         if (cell ==nil) {
             cell = [[[NSBundle mainBundle]loadNibNamed:@"KeyuanCell" owner:nil options:nil] firstObject];
         }
-        
 
-      //  NSString
-//        NSString *PriceString = [NSString stringWithFormat:@"%@万元",SingleData[@"pricel"]];
-//        NSMutableAttributedString *HiligntNo = [[NSMutableAttributedString alloc]initWithString:PriceString];
-//        NSRange NoRange = NSMakeRange(0, [PriceString length]-2);
-//        [HiligntNo addAttribute:NSForegroundColorAttributeName value:[UIColor redColor]  range:NoRange];
-//        [HiligntNo addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:20 ]  range:NoRange];
-//        [cell.priceLabel setAttributedText:HiligntNo]; //将红色属性添加进去
-//        cell.priceLabel.text = PriceString;//@"110万";
-        
-        NSNumber *ZeroNo ;
         NSString *price;
         if ([SingleData[@"pricef"] length]==0 && [SingleData[@"pricel"] length] == 0) {
             price = @"价格不限";
@@ -734,34 +717,31 @@
 
         
         
-        cell.titileLabel.text =[NSString stringWithFormat:@"%@%@",_preName,SingleData[@"biaoti"]]; //[self judgeNullValue:SingleData[@"biaoti"]]; //SingleData[@"biaoti"];
-        cell.acreaLabel.text =[NSString stringWithFormat:@"面积:%@㎡",[self judgeNullValue: SingleData[@"acreage"]]];//@"面积:110㎡";
-        cell.roomsContLabel.text = [NSString stringWithFormat:@"%@室%@厅%@卫%@阳台", [self judgeNullValue: SingleData[@"fangshu"]],
-                                                                                [self judgeNullValue: SingleData[@"tingshu"]],
-                                                                                [self judgeNullValue: SingleData[@"toilets"]],
-                                                                                [self judgeNullValue: SingleData[@"balconys"]]];//@"%@室%@厅%阳台";
-
-                                                                              
-                                                           
-                                                           
+        cell.titileLabel.text =[NSString stringWithFormat:@"%@%@",_preName,SingleData[@"biaoti"]];
+        cell.acreaLabel.text =[NSString stringWithFormat:@"面积:%@㎡",[self judgeNullValue: SingleData[@"acreage"]]];
+        
+        
+        if ([SingleData[@"fenlei"] isEqualToNumber:[NSNumber numberWithInt:1]] ||[SingleData[@"fenlei"] isEqualToNumber:[NSNumber numberWithInt:2]]) {
+            [cell.roomsContLabel setHidden:YES];
+        } else {
+            cell.roomsContLabel.text = [NSString stringWithFormat:@"%@室%@厅%@卫%@阳台", [self judgeNullValue: SingleData[@"fangshu"]],
+                                        [self judgeNullValue: SingleData[@"tingshu"]],
+                                        [self judgeNullValue: SingleData[@"toilets"]],
+                                        [self judgeNullValue: SingleData[@"balconys"]]];
+        }
         cell.attachmentLabel.text =@"   ";
         cell.requestDescrbeLabel.text = [self judgeNullValue:SingleData[@"fangyuanmiaoshu"]];   // @"阳光采光要好";
-
-        cell.publisherLabel.text = [self judgeNullValue:SingleData[@"publisher"]]; //@"内马尔";
-        cell.postTimeLabel.text  = [self judgeNullValue:SingleData[@"weituodate"]];  //@"2015-12-10 10:32:28";
+        cell.publisherLabel.text = [self judgeNullValue:SingleData[@"publisher"]];
+        cell.postTimeLabel.text  = [self judgeNullValue:SingleData[@"weituodate"]];
         return cell;
         
     }else {
         _preName =@"[求租]";
         static NSString *ID = @"identiferWantRent";
-        
         KeyuanCell *cell =[tableView dequeueReusableCellWithIdentifier:ID];
         if (cell ==nil) {
             cell = [[[NSBundle mainBundle]loadNibNamed:@"KeyuanCell" owner:nil options:nil] firstObject];
         }
-        
-        
-        //  NSString
         
         NSString *PriceString = [NSString stringWithFormat:@"%@元/月",SingleData[@"pricel"]];
         NSMutableAttributedString *HiligntNo = [[NSMutableAttributedString alloc]initWithString:PriceString];
@@ -769,33 +749,20 @@
         [HiligntNo addAttribute:NSForegroundColorAttributeName value:[UIColor redColor]  range:NoRange];
         [HiligntNo addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:20 ]  range:NoRange];
         
-        cell.titileLabel.text =[NSString stringWithFormat:@"%@%@",_preName,SingleData[@"biaoti"]]; //[self judgeNullValue:SingleData[@"biaoti"]]; //SingleData[@"biaoti"];
+        cell.titileLabel.text =[NSString stringWithFormat:@"%@%@",_preName,SingleData[@"biaoti"]];
         cell.acreaLabel.text =[NSString stringWithFormat:@"面积:%@㎡",[self judgeNullValue: SingleData[@"acreage"]]];//@"面积:110㎡";
         cell.roomsContLabel.text = [NSString stringWithFormat:@"%@室%@厅%@阳台", [self judgeNullValue: SingleData[@"fangshu"]],
                                     [self judgeNullValue: SingleData[@"fangshu"]],
-                                    [self judgeNullValue: SingleData[@"fangshu"]]];//@"%@室%@厅%阳台";
-        
-        
-        
-        
+                                    [self judgeNullValue: SingleData[@"fangshu"]]];
         cell.attachmentLabel.text =@"   ";
         cell.requestDescrbeLabel.text = [self judgeNullValue:SingleData[@"fangyuanmiaoshu"]];   // @"阳光采光要好";
         cell.priceLabel.text = PriceString;//@"110万";
         [cell.priceLabel setAttributedText:HiligntNo]; //将红色属性添加进去
-        cell.publisherLabel.text = [self judgeNullValue:SingleData[@"publisher"]]; //@"内马尔";
-        cell.postTimeLabel.text  = [self judgeNullValue:SingleData[@"weituodate"]];  //@"2015-12-10 10:32:28";
+        cell.publisherLabel.text = [self judgeNullValue:SingleData[@"publisher"]];
+        cell.postTimeLabel.text  = [self judgeNullValue:SingleData[@"weituodate"]];
         return cell;
-        
-        
-
     }
-    
-    
-    
-//    UITableViewCell *cell = [[UITableViewCell alloc]init];
-//    cell.textLabel.text = @"求租啊";
-//    return cell;
-    }
+}
 
 
 -(NSString *)judgeNullValue:(NSString *)string{
@@ -818,7 +785,6 @@
         NSString *Category = [NSString stringWithFormat:@"%@",SingleData[@"fenlei"]];
         [self.HomeVCdelegate QFshowDetailWithFangYuanID:Id andFenlei:Category userID:userID XiaoquName:name ListStatus:_preName];
     } else if (_status == RentOut) {
-        //出租详情页  (服务器暂无数据，小灰手机也没有参考的)
         
         NSString *Id = SingleData[@"id"];   //将房源ID传过去
         NSString *userID = SingleData[@"userid"];
@@ -859,7 +825,6 @@
                [self.tableView reloadData];
            } else {
                [MBProgressHUD showError:@"无更多数据了哟"];
-// NSLog(@"无更多数据了哟");
            }
        } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
            [self.tableView headerEndRefreshing];

@@ -942,6 +942,7 @@
         case loucengTag:
             NSLog(@"楼层:%@",textField.text);
             [self.PostDataDic setObject:textField.text forKey:@"acreage"];
+            [self.PostDataDic setObject:textField.text forKey:@"mianji"];
             break;
         case zongloucengTag:
             NSLog(@"总楼层:%@",textField.text);
