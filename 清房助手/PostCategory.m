@@ -39,7 +39,6 @@
 @end
 @implementation PostCategory
 
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.edgesForExtendedLayout = UIRectEdgeNone;
@@ -50,27 +49,41 @@
 
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    
+    if (self.Status == WantBuy || self.Status== WantRent) {
+        return 3;
+    }
+    
     return 4;
 }
 
--(void)saveDataAlert {
-    NSLog(@"已拦截");
-}
+
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
     cell.selectionStyle = UITableViewCellSelectionStyleDefault;
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    if (indexPath.row ==0) {
-        cell.textLabel.text  =@"住宅";
-    } else if (indexPath.row ==1) {
-        cell.textLabel.text = @"商铺";
-    }else if (indexPath.row ==2) {
-        cell.textLabel.text = @"写字楼";
-    }else  {
-        cell.textLabel.text = @"厂房";
+    if (self.Status == WantBuy || self.Status== WantRent) {
+        if (indexPath.row ==0) {
+            cell.textLabel.text  =@"住宅";
+        } else if (indexPath.row ==1) {
+            cell.textLabel.text = @"商铺";
+        }else if (indexPath.row ==2) {
+            cell.textLabel.text = @"写字楼";
+        }
+    }  else {
+        if (indexPath.row ==0) {
+            cell.textLabel.text  =@"住宅";
+        } else if (indexPath.row ==1) {
+            cell.textLabel.text = @"商铺";
+        }else if (indexPath.row ==2) {
+            cell.textLabel.text = @"写字楼";
+        }else  {
+            cell.textLabel.text = @"厂房";
+        }
     }
-    return cell;
+    
+     return cell;
     
 }
 
@@ -78,7 +91,6 @@
     SaleOutPostEditForm *editForm = [[SaleOutPostEditForm alloc]init];
     AppDelegate *app = [UIApplication sharedApplication].delegate;
     [tableView deselectRowAtIndexPath:indexPath animated:YES]; //解除遗留灰色
-
     if (self.Status==SalesOut) {
         if (indexPath.row ==0) {
             NSLog(@"%@",app.provnceIndexDic);
@@ -256,12 +268,13 @@ else if (self.Status==WantRent){
         wangChang.indexData = app.provnceIndexDic;
         wangChang.username   = app.usrInfoDic[@"username"];
         wangChang.userId     = app.usrInfoDic[@"userid"];
-        wangChang.title   = @"工厂求租";
-        wangChang.typeStr = @"44";
-        wangChang.iSQiuzu = YES;
+        wangChang.title      = @"工厂求租";
+        wangChang.typeStr    = @"44";
+        wangChang.iSQiuzu    = YES;
         [self.navigationController pushViewController:wangChang animated:YES];
     }
 }// end_求租
+    
     
 }
 

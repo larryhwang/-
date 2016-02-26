@@ -16,5 +16,4 @@
 @property (weak, nonatomic) IBOutlet UILabel *Region;
 @property (weak, nonatomic) IBOutlet UILabel *TittlePre;
 
-
 @end

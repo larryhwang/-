@@ -1331,16 +1331,11 @@
 
 -(void)LogPostDic {
     //租购（0-求租，1-求购）
-    
-    //默认参数补齐
-    
     if(_userId) {
       [self.PostDataDic setObject:_userId forKey:@"userid"];
     }
     
     [self.PostDataDic setObject:@"1" forKey:@"isfangyuan"];
-    
-    
     if (self.PreStatus == SalesOut) {
        [self.PostDataDic setObject:@"0" forKey:@"zushou"];
     } else if (self.PreStatus == RentOut){
@@ -1354,8 +1349,7 @@
         [self.PostDataDic setObject:@"元" forKey:@"unit"];
     }
 
-    
-    
+
     if(self.Fenlei ==FlatType){
       [self.PostDataDic setObject:@"0" forKey:@"fenlei"];
     }else if (self.Fenlei ==ShangPuType){
@@ -1368,11 +1362,8 @@
       [self.PostDataDic setObject:@"3" forKey:@"fenlei"];
     }
     
-    
-    
+
     [self.PostDataDic setObject:@"0" forKey:@"zhuangtai"];  // 0/交易中 ，1／已完成 ，2/已过期
-
-
     [self FormatRegionParam];
     [MBProgressHUD showMessage:@"正在发布"];
     NSLog(@"上传数据:%@",_PostDataDic);
