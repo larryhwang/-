@@ -55,13 +55,12 @@
 
 - (void)viewDidLoad {
    [super viewDidLoad];
- //  [self initNav];
-//    self.edgesForExtendedLayout = UIRectEdgeNone ;
+    self.tableView.height = 100;
+
 
 }
 
 -(void)pramaInit {
-//    展示公司客源的URL
     self.CurrentRuest = @"";
     
 }
@@ -112,5 +111,8 @@
              }];
 }
 
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 100;
+}
 
 @end

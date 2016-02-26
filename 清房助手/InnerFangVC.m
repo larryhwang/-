@@ -8,7 +8,7 @@
 
 #import "InnerFangVC.h"
 
-@interface InnerFangVC ()
+@interface InnerFangVC ()<UITableViewDelegate,UITableViewDataSource>
 
 @end
 
@@ -16,6 +16,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.tableView.height = 130;
     self.navigationController.navigationBar.barTintColor = [DeafaultColor2 colorWithAlphaComponent:0.5];
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],NSForegroundColorAttributeName, nil]];
@@ -26,6 +27,8 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+
 
 /*
 #pragma mark - Navigation

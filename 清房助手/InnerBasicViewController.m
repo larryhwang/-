@@ -59,7 +59,7 @@
     NSString   *_RightListUrl;
     NSString   *_CurentUrl;
 }
-@property (weak, nonatomic)  IBOutlet UITableView *tableView;
+
 @property(nonatomic,strong)  AFHTTPRequestOperationManager            *shareMgr;
 @property(nonatomic,strong)  NSMutableDictionary                      *pramaDic;
 @property(nonatomic,strong)  NSArray                                  *DataArr;
@@ -93,6 +93,7 @@
 
 -(id)initWithUrl:(NSString *)CurrentTableUrl;{
     self = [super init];
+    
     UIButton *RightBarBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 65, 27)];
     UIImageView *img = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"筛选"]];
     [img setFrame:CGRectMake(0, 0, 27, 27)];
@@ -365,9 +366,7 @@
 
 }
 
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 100;
-}
+
 #pragma mark 点击后进入详情页
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -475,6 +474,8 @@
 }
 
 
-
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 130;
+}
 
 @end

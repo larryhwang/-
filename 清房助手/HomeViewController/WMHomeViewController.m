@@ -773,9 +773,7 @@
 }
 #pragma mark -点击查看详情
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-        [tableView deselectRowAtIndexPath:indexPath animated:YES]; //解除遗留灰色
-
- //   self.HomeVCdelegate = nil;
+    [tableView deselectRowAtIndexPath:indexPath animated:YES]; //解除遗留灰色
     NSDictionary *SingleData = self.DataArr[indexPath.row];
     if (_status ==SalesOut) {
         //出售详情页
@@ -785,7 +783,6 @@
         NSString *Category = [NSString stringWithFormat:@"%@",SingleData[@"fenlei"]];
         [self.HomeVCdelegate QFshowDetailWithFangYuanID:Id andFenlei:Category userID:userID XiaoquName:name ListStatus:_preName];
     } else if (_status == RentOut) {
-        
         NSString *Id = SingleData[@"id"];   //将房源ID传过去
         NSString *userID = SingleData[@"userid"];
         NSString *name = [self judgeNullValue:SingleData[@"mingcheng"]];

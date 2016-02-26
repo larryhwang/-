@@ -32,7 +32,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "&#x6e05;&#x623f;&#x52a9;&#x624b;/DetailViewController/DetailViewController.m"
@@ -260,11 +260,11 @@
                   moduleName = "&#x6e05;&#x623f;&#x52a9;&#x624b;"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Larry/Documents/%E6%B8%85%E6%88%BF%E5%8A%A9%E6%89%8B/%E6%B8%85%E6%88%BF%E5%8A%A9%E6%89%8B/SaleOutPostEditForm.m"
-                  timestampString = "478164267.893511"
+                  timestampString = "478168213.96947"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "1466"
-                  endingLineNumber = "1466"
+                  startingLineNumber = "1458"
+                  endingLineNumber = "1458"
                   offsetFromSymbolStart = "1624">
                </Location>
                <Location
@@ -275,11 +275,11 @@
                   moduleName = "&#x6e05;&#x623f;&#x52a9;&#x624b;"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Larry/Documents/%E6%B8%85%E6%88%BF%E5%8A%A9%E6%89%8B/%E6%B8%85%E6%88%BF%E5%8A%A9%E6%89%8B/SaleOutPostEditForm.m"
-                  timestampString = "478164267.893729"
+                  timestampString = "478168213.969749"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "1466"
-                  endingLineNumber = "1466"
+                  startingLineNumber = "1458"
+                  endingLineNumber = "1458"
                   offsetFromSymbolStart = "64">
                </Location>
             </Locations>
@@ -484,7 +484,7 @@
                   moduleName = "&#x6e05;&#x623f;&#x52a9;&#x624b;"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Larry/Documents/%E6%B8%85%E6%88%BF%E5%8A%A9%E6%89%8B/%E6%B8%85%E6%88%BF%E5%8A%A9%E6%89%8B/WannaShangPu.m"
-                  timestampString = "478164267.901151"
+                  timestampString = "478168213.976744"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "192"
@@ -499,7 +499,7 @@
                   moduleName = "&#x6e05;&#x623f;&#x52a9;&#x624b;"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Larry/Documents/%E6%B8%85%E6%88%BF%E5%8A%A9%E6%89%8B/%E6%B8%85%E6%88%BF%E5%8A%A9%E6%89%8B/WannaShangPu.m"
-                  timestampString = "478164267.901358"
+                  timestampString = "478168213.976944"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "192"
@@ -570,6 +570,22 @@
             startingLineNumber = "153"
             endingLineNumber = "153"
             landmarkName = "-viewDidLoad"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "&#x6e05;&#x623f;&#x52a9;&#x624b;/InnerCustomer.m"
+            timestampString = "478166991.248161"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "115"
+            endingLineNumber = "115"
+            landmarkName = "-tableView:heightForRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
