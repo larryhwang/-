@@ -1121,9 +1121,7 @@ typedef NS_ENUM(NSInteger,Fenlei)  {
     
     NSString *firstStr ;
     NSString *secondStr ;
-    
-    NSString *Basic = @"http://www.123qf.cn/front/fkyuan/";
-    
+
     NSNumber *ZeroFlag = [NSNumber numberWithInt:0];
     NSNumber *OneFlag  = [NSNumber numberWithInt:1];
     NSNumber *TwoFlag  = [NSNumber numberWithInt:2];
@@ -1145,34 +1143,22 @@ typedef NS_ENUM(NSInteger,Fenlei)  {
      }else {
         secondStr = @"cf";
      }
-    
 
-    
     AppDelegate *app =  [UIApplication sharedApplication].delegate;
     NSLog(@"%@",app.usrInfoDic);
     OSMessage *msg=[[OSMessage alloc]init];
     msg.title=self.FangData[@"biaoti"];
-   // NSString *urlLink = [NSString stringWithFormat:@"http://www.123qf.cn/front/fkyuan/wap_cz_zz.jsp?zhuangtai=1&fid=%@&fenlei=0&userID=%@",self.FangData[@"id"],app.usrInfoDic[@"userid"]];
-    
     NSString *urlLink =[NSString stringWithFormat:@"http://www.123qf.cn/front/fkyuan/wap_%@_%@.jsp?zhuangtai=0&fid=%@&fenlei=0&userID=%@",firstStr,secondStr,self.FangData[@"id"],app.usrInfoDic[@"userid"]];
 
     
     NSLog(@"urlLink：%@",urlLink);
     msg.link=urlLink;
+
     
+    msg.image = [self.ImgArr firstObject];
     
-    
-    UIImageView *imageView = [UIImageView new];
-    NSLog(@"%@",self.imagesData);
-    if ([self.imagesData count]>1) {  //[self.imagesData count]>0
-      [imageView sd_setImageWithURL:self.imagesData[0] placeholderImage:nil];
-    } else {
-        imageView.image = [UIImage imageNamed:@"DeafaultImage"];
-    }
-    
-    msg.image = imageView.image;
-    
-   // NSString *recodUrl = @"http://www.123qf.cn/app/share/saveShareUser.api";
+    NSLog(@"%@",msg.image);
+
     
     NSString *RecodrUrl = [NSString stringWithFormat:@"http://www.123qf.cn/app/share/saveShareUser.api?fid=%@",self.FangData[@"id"]];
   
