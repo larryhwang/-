@@ -12,8 +12,6 @@
 
 @property (weak, nonatomic) IBOutlet UIImageView *iCoView;
 
-
-
 @property (weak, nonatomic) IBOutlet UILabel *QFuserName;
 
 @property (weak, nonatomic) IBOutlet UILabel *QFcompanyName;
@@ -49,6 +47,15 @@
     [self.navigationController popViewControllerAnimated:YES];
      self.navigationController.navigationBarHidden = NO;
 }
+
+
+
+
+- (IBAction)changeImg:(id)sender {
+    [self changeImg];
+}
+
+
 
 
 @end

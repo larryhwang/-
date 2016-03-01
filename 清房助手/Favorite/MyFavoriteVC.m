@@ -494,14 +494,14 @@
 
 
 -(NSString *)judgeNullValue:(NSString *)string{
-    if ([string isKindOfClass:[NSNull class]]) {
+    if ([string isKindOfClass:[NSNull class]] || string == nil) {
             return @"";
     }
     else  return string;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 100;
+    return 130;
 }
 
 
@@ -589,8 +589,8 @@
 //{
 //    [tableView setEditing:NO animated:YES];
 //}
-
 //以下方法可以不是必须要实现，添加如下方法可实现特定效果：
+
 
 //修改编辑按钮文字
 - (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath

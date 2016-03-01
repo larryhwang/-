@@ -22,8 +22,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [[PgyUpdateManager sharedPgyManager] startManagerWithAppId:PGY_APPKEY];
-    [[PgyManager sharedPgyManager] startManagerWithAppId:PGY_APPKEY];
+//    [[PgyUpdateManager sharedPgyManager] startManagerWithAppId:PGY_APPKEY];
+//    [[PgyManager sharedPgyManager] startManagerWithAppId:PGY_APPKEY];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -35,10 +35,10 @@
 - (IBAction)checkUpadate:(id)sender {
 
     
-    [[PgyUpdateManager sharedPgyManager] checkUpdate];  //检查更新
-
-    [[PgyUpdateManager sharedPgyManager] checkUpdateWithDelegete:self selector:@selector(updateMethod:)];
-    NSLog(@"就在这里啊");
+//    [[PgyUpdateManager sharedPgyManager] checkUpdate];  //检查更新
+//
+//    [[PgyUpdateManager sharedPgyManager] checkUpdateWithDelegete:self selector:@selector(updateMethod:)];
+//    NSLog(@"就在这里啊");
 
 }
 

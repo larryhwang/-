@@ -107,7 +107,6 @@
     return _PostDataDic;
 }
 
-
 -(NSMutableArray *)footArrs {
     if (_footArrs ==nil) {
         _footArrs = [NSMutableArray new];
@@ -115,14 +114,12 @@
     return _footArrs;
 }
 
-
 -(NSMutableSet *)hasSelectedAttachMent {
     if (_hasSelectedAttachMent == nil) {
         _hasSelectedAttachMent = [NSMutableSet new];
     }
     return _hasSelectedAttachMent;
 }
-
 
 -(NSMutableArray *)tfArrs {
     if (_tfArrs ==nil) {
@@ -146,14 +143,12 @@
     return _keyBoardBar;
 }
 
-
 -(NSMutableArray*)cellMARR {
     if (_cellMARR==nil) {
         _cellMARR = [NSMutableArray new];
     }
     return _cellMARR;
 }
-
 
 #pragma mark 键盘以及表视图的滚动 CZKeyboardToolbarDelegate
 -(void)keyboardToolbar:(CZKeyboardToolbar *)toolbar btndidSelected:(UIBarButtonItem *)item{
@@ -1309,9 +1304,6 @@
     
 }
 
-
-
-
 /**
  *  区域选择拼补
  */
@@ -1369,9 +1361,6 @@
     NSLog(@"上传数据:%@",_PostDataDic);
     NSLog(@"已选状态%@",_hasSelectedAttachMent);
 
-    
-
-    
     //格式化图片
     for (UIImage *img in self.haSelectedImgs_MARR) {
         NSData *imageData =  UIImageJPEGRepresentation(img,.8);
@@ -1382,7 +1371,8 @@
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
      manager.requestSerializer.timeoutInterval  = 30.0;
    // NSString *url2 = @"http://www.123qf.cn:81/testApp/file/upload.front?userID=15018639039";
-     NSString *url2 = @"http://www.123qf.cn/app/file/upload.front?userID=15018639039";
+    AppDelegate *app = [UIApplication sharedApplication].delegate;
+    NSString *url2 = [NSString stringWithFormat:@"http://www.123qf.cn/app/file/upload.front?userID=%@",app.usrInfoDic[@"userid"]];//
     [manager POST:url2 parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         for (NSData *imgData in self.SelectedImgsData_MARR) {
           [formData appendPartWithFileData:imgData name:@"1.jpg" fileName:@"1.jpg" mimeType:@"image/jpg"];
@@ -1513,13 +1503,7 @@
     }
 }
 
-
-
-
-
 #pragma mark DealingTextfield
-
-
 
 #pragma mark RegionOptDelegate
 -(void)updateTableData {
@@ -1539,8 +1523,6 @@
         }
    [self.view endEditing:YES];
 }
-
-
 
 #pragma mark UITextfiledDelegate
 - (void)textFieldDidEndEditing:(UITextField *)textField
@@ -1824,14 +1806,10 @@
     
     if(alertView.tag == saveAlertTag) {
       if(buttonIndex == 0) {
-          
           [self.navigationController setNavigationBarHidden:YES animated:YES];
           [self.navigationController setNavigationBarHidden:NO animated:YES];
           [[NSUserDefaults standardUserDefaults] removeObjectForKey:self.typeStr];
           NSLog(@"取消");
-          
-
-       
     [self.navigationController popViewControllerAnimated:YES];
         } else if(buttonIndex ==1) {
           // 留在此页

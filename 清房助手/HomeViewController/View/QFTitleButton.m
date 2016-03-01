@@ -18,6 +18,7 @@
         self.imageView.contentMode = UIViewContentModeCenter;
         // 文字对齐
         self.titleLabel.textAlignment = NSTextAlignmentRight;
+        [self.titleLabel setFont:[UIFont systemFontOfSize:15]];
         // 文字颜色
         [self setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         // 字体

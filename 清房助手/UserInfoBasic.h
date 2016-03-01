@@ -15,5 +15,8 @@
 -(void)displayDataFromNet;
 
 
+-(void)changeImg;
+
+
 
 @end

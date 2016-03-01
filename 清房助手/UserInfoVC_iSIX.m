@@ -58,4 +58,12 @@
 
 
 
+
+
+- (IBAction)changeImg:(id)sender {
+    [self changeImg];
+}
+
+
+
 @end

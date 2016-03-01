@@ -263,7 +263,7 @@ static const CGFloat menuStartNarrowRatio  = 0.70;
     }
     infoVC.title = @"个人信息";
     [self.messageNav pushViewController:infoVC animated:NO];
-    self.messageNav.interactivePopGestureRecognizer.enabled = NO;
+     self.messageNav.interactivePopGestureRecognizer.enabled = NO;
     [self showHome];
 }
 

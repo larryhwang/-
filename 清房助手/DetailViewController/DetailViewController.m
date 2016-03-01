@@ -204,6 +204,8 @@ typedef NS_ENUM(NSInteger,Fenlei)  {
 //    fid
 //    kid
     NSString *Request = [NSString stringWithFormat:@"http://www.123qf.cn/app/user/saveCollectRow.api?fid=%@",self.FangData[@"id"]];
+    
+    
     NSLog(@"%@ %@",self.FangData,Request);
     [self.sharedMgr POST:Request parameters:nil success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         NSLog(@"TTGG:%@",responseObject);
@@ -228,9 +230,6 @@ typedef NS_ENUM(NSInteger,Fenlei)  {
     modalView.tag =ModalViewTag;
     modalView.backgroundColor = [[UIColor lightGrayColor] colorWithAlphaComponent:.4];
    [self.navigationController.view addSubview:modalView];  //这种状况下，向右滑动会触发菜单显示
-  //  [self.view addSubview:modalView];
-    
-    
     NSArray *shareAry = @[@{@"image":@"shareView_wx",
                             @"title":@"微信"},
                           @{@"image":@"shareView_friend",
@@ -254,16 +253,14 @@ typedef NS_ENUM(NSInteger,Fenlei)  {
     view.modalPresentationStyle = UIModalPresentationOverCurrentContext;
     view.DismissView = ^ {
         [modalView removeFromSuperview];
-
     };
    [self presentViewController:view animated:YES completion:^{
-     
-  }];
-
-   
-
+}];
 
 }
+
+
+
 #pragma mark -初始化表
 -(void)initTable {
     self.detailInfoTable = [[UITableView alloc]init];
@@ -341,7 +338,7 @@ typedef NS_ENUM(NSInteger,Fenlei)  {
     self.Publisher = Company ;
  
     Company.textColor = [UIColor whiteColor];
-    NSString *Coname = self.FangData[@"publisher"];
+    NSString *Coname =  [self  judgeNullValue:self.FangData[@"publisher"]];
     NSLog(@"%@",Coname);
         if ([Coname length]>4) {
             NSRange  range = NSMakeRange(0, 2);
@@ -357,7 +354,7 @@ typedef NS_ENUM(NSInteger,Fenlei)  {
     CGSize companyLabelSize = [self sizeWithString:Company.text font:Deafult maxSize:MaxLeftSzie];
 
     UILabel *ContactName  = [[UILabel alloc]init];
-    NSString *ComNameStr = self.FangData[@"name"];
+    NSString *ComNameStr =  [self judgeNullValue:self.FangData[@"name"]];
     self.Name = ContactName;
     ContactName.textColor = [UIColor whiteColor];
     NSLog(@"%@",self.FangData[@"name"]);
@@ -407,7 +404,7 @@ typedef NS_ENUM(NSInteger,Fenlei)  {
     CGSize MaxCenter = CGSizeMake(MiddleViewWidth - Padding,ToolHeight - Padding);
     TeleIcon.image  = [UIImage imageNamed:@"tel"];
     [TeleIcon setFrame:CGRectMake(5, 5, 30, 30)];
-    teleLabel.text = self.FangData[@"tel"]; //@"18720984176";
+    teleLabel.text = [self judgeNullValue:self.FangData[@"tel"]]; //@"18720984176";
     CGSize TeleLabelSize = [self sizeWithString:teleLabel.text font:Deafult maxSize:MaxCenter];
     [TeleIcon setFrame:CGRectMake((MiddleViewWidth -30 -Padding -TeleLabelSize.width)/2 , (ToolHeight - 30)/2,30, 30)];
     [teleLabel setFrame:CGRectMake(TeleIcon.frame.origin.x + Padding - 5 + 30, (ToolHeight - TeleLabelSize.height)/2,TeleLabelSize.width, TeleLabelSize.height)];
@@ -668,7 +665,6 @@ typedef NS_ENUM(NSInteger,Fenlei)  {
                      StringPrice = [NSString stringWithFormat:@"%@万",self.FangData[@"shoujia"]];
                      RedPart = NSMakeRange(0, [StringPrice length] -1);
                 }
-
             } else{
                 StringPrice = [NSString stringWithFormat:@"%@元/月",self.FangData[@"shoujia"]];
                 RedPart = NSMakeRange(0, [StringPrice length] -3);
@@ -778,7 +774,7 @@ typedef NS_ENUM(NSInteger,Fenlei)  {
 //
             ShangPuDetail.LouCeng.text =  [formatter stringFromNumber:self.FangData[@"louceng"]];
 
-             NSString *GuanLiFeiStr = [formatter stringFromNumber:self.FangData[@"guanlifei"]];
+             NSString *GuanLiFeiStr = [self judgeNullValue:[formatter stringFromNumber:self.FangData[@"guanlifei"]]];
              
              ShangPuDetail.GuanLiFei.text = [NSString stringWithFormat:@"%@元/平米",GuanLiFeiStr];
              ShangPuDetail.YouXiaoQi.text =   [NSString stringWithFormat:@"%@个月",[formatter stringFromNumber:self.FangData[@"youxiaoqi"]]];
@@ -799,6 +795,7 @@ typedef NS_ENUM(NSInteger,Fenlei)  {
          
     } //end_商铺
      else if ([self.FenLei isEqualToString:@"2"]) {  //写字楼
+         
          FlatLocationCell  *LocationCell  = [FlatLocationCell new];
          ShangPuDetailCell *ShangPuDetail = [ShangPuDetailCell new];
          DescribeCell  *DescribieCell = NULL;
@@ -912,7 +909,6 @@ typedef NS_ENUM(NSInteger,Fenlei)  {
              LocationCell.QFTitle.text = [NSString stringWithFormat:@"%@%@",self.PreTitle,self.FangData[@"biaoti"]];
              LocationCell.QFPostTime.text = self.FangData[@"weituodate"];
              LocationCell.QFQuyu.text = [self GetQuYuNameFromNetData];
-
              if(self.isInner)
                  [self setCheckBtn:LocationCell]; //如果是内部请求,添加查看按钮
 #pragma mark -价格高亮属性
@@ -946,7 +942,7 @@ typedef NS_ENUM(NSInteger,Fenlei)  {
              ShangPuDetail.QFZhuangXiu.text = self.FangData[@"zhuangxiu"];
              ShangPuDetail.QFMianJi.text = [NSString stringWithFormat:@"%@㎡",self.FangData[@"mianji"]];;
              NSString *GuanLiFeiStr = [formatter stringFromNumber:self.FangData[@"guanlifei"]];
-             ShangPuDetail.QFGuanLi.text = [NSString stringWithFormat:@"%@元/平米",GuanLiFeiStr];
+             ShangPuDetail.QFGuanLi.text = [self judgeNullValue:[NSString stringWithFormat:@"%@元/平米",GuanLiFeiStr]];
              ShangPuDetail.YouXiaoqi.text =   [NSString stringWithFormat:@"%@个月",[formatter stringFromNumber:self.FangData[@"youxiaoqi"]]];
              ShangPuDetail.QFKangTime.text = self.FangData[@"kanfangtime"];
              ShangPuDetail.QFLeiXing.text = self.FangData[@"leixing"];
@@ -1024,6 +1020,9 @@ typedef NS_ENUM(NSInteger,Fenlei)  {
 #warning 缺少非空处理,可能引起报错
 - (CGSize)sizeWithString:(NSString *)str font:(UIFont *)font maxSize:(CGSize)maxSize
 {
+    if ([str isKindOfClass:[NSNull class]]) {
+        return CGSizeMake(20, 20);
+    }
     NSDictionary *dict = @{NSFontAttributeName:font};
     CGSize size =  [str boundingRectWithSize:maxSize options:NSStringDrawingUsesLineFragmentOrigin attributes:dict context:nil].size;
     return size;
@@ -1097,7 +1096,7 @@ typedef NS_ENUM(NSInteger,Fenlei)  {
 }
 
 -(NSString *)judgeNullValue:(NSString *)string{
-    if ([string isKindOfClass:[NSNull class]]) {
+    if ([string isKindOfClass:[NSNull class]] || string ==nil ) {
         return @"";
     }
     else  return string;
@@ -1252,29 +1251,29 @@ typedef NS_ENUM(NSInteger,Fenlei)  {
 -(NSString *)getShangPuFromDataDic {
     NSString *str = @"";
      //有关配套的字段   futi = "<null>";  huoti = "<null>";     keti = "<null>";   kongtiao = "<null>";   wangluo = "<null>";
-    if ([self.FangData[@"futi"] isEqualToNumber:@(YES)]) {
+    if (![self.FangData[@"futi"] isKindOfClass:[NSNull class]] &&[self.FangData[@"futi"] isEqualToNumber:@(YES)]) {
         str = [str stringByAppendingString:@" 扶梯"];
     }
     
-    if ([self.FangData[@"huoti"] isEqualToNumber:@(YES)]) {
+    if (![self.FangData[@"huoti"] isKindOfClass:[NSNull class]] &&[self.FangData[@"huoti"] isEqualToNumber:@(YES)]) {
         str = [str stringByAppendingString:@" 货梯"];
     }
     
-    if ([self.FangData[@"keti"] isEqualToNumber:@(YES)]) {
+    if (![self.FangData[@"keti"] isKindOfClass:[NSNull class]] &&[self.FangData[@"keti"] isEqualToNumber:@(YES)]) {
         str = [str stringByAppendingString:@" 客梯"];
     }
     
-    if ([self.FangData[@"kongtiao"] isEqualToNumber:@(YES)]) {
+    if (![self.FangData[@"kongtiao"] isKindOfClass:[NSNull class]] &&[self.FangData[@"kongtiao"] isEqualToNumber:@(YES)]) {
         str = [str stringByAppendingString:@" 空调"];
     }
     
-    if ([self.FangData[@"wangluo"] isEqualToNumber:@(YES)]) {
+    if (![self.FangData[@"wangluo"] isKindOfClass:[NSNull class]] && [self.FangData[@"wangluo"] isEqualToNumber:@(YES)]) {
         str = [str stringByAppendingString:@" 网络"];
     }
     
     NSLog(@"WangLuo :%d",(BOOL)self.FangData[@"wangluo"]);
     
-    if ([self.FangData[@"wangluo"] isEqualToNumber:@(YES)]) {
+    if (![self.FangData[@"wangluo"] isKindOfClass:[NSNull class]] &&[self.FangData[@"wangluo"] isEqualToNumber:@(YES)]) {
         str = [str stringByAppendingString:@" 网络"];
     }
 

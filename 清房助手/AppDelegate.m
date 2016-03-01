@@ -128,12 +128,7 @@
     
     
     //end友盟
-    
-    
-    
-    
-    
-    
+
     LoginViewController *login = [LoginViewController new];
     CZNewFeatureController *featurePage = [[CZNewFeatureController alloc]init];
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"SecondLanch"]) {
@@ -148,10 +143,10 @@
 
 #pragma 蒲公英内测信息  
 #warning 适应AppStore
-    [[PgyUpdateManager sharedPgyManager] startManagerWithAppId:PGY_APPKEY];
-    [[PgyManager sharedPgyManager] startManagerWithAppId:PGY_APPKEY];
-    [[PgyUpdateManager sharedPgyManager] checkUpdate];  //检查更新
-    [[PgyManager sharedPgyManager] setEnableFeedback:NO];
+//    [[PgyUpdateManager sharedPgyManager] startManagerWithAppId:PGY_APPKEY];
+//    [[PgyManager sharedPgyManager] startManagerWithAppId:PGY_APPKEY];
+//    [[PgyUpdateManager sharedPgyManager] checkUpdate];  //检查更新
+//    [[PgyManager sharedPgyManager] setEnableFeedback:NO];
     
     
     

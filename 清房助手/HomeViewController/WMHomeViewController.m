@@ -122,19 +122,18 @@
 
     [self ParameterInit];
     [self TopTabBarUISet];  //顶部切换设置
-  //  [self registerLocalNotification:5]; //通知测试
+
 
     UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
     self.navigationItem.backBarButtonItem = item;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
-  //  [self.tableView addHeaderWithTarget:self action:@selector(refreshData)];
-  //  [self.tableView headerBeginRefreshing];
+
    [self.tableView addFooterWithTarget:self action:@selector(loadMoreData)];
     
     [self tableInit];  //页面初始化
     
-  //  self.navigationItem.backBarButtonItem.title = @"返回";
+
     UIButton *IconBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [IconBtn setBackgroundImage:[UIImage imageNamed:@"head"] forState:UIControlStateNormal];
     IconBtn.frame = CGRectMake(0, 0, 33, 33);
@@ -158,18 +157,16 @@
     IconBtn.layer.masksToBounds = YES;
     IconBtn.layer.cornerRadius = 16;
 
-
     [IconBtn addTarget:self action:@selector(clicked) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:IconBtn];
-    
-    
+
     QFTitleButton *CityBtn = [[QFTitleButton alloc]init];
     self.NavSeacherBtn = CityBtn;
     CityBtn.backgroundColor = [UIColor clearColor];
     CityBtn.tintColor = [UIColor whiteColor];
     [CityBtn setImage:[UIImage imageNamed:@"arrowDown"] forState:UIControlStateNormal];
     [CityBtn setTitle:@"惠州" forState:UIControlStateNormal];
-    CityBtn.frame = CGRectMake(0, 0,95,23);
+     CityBtn.frame = CGRectMake(0, 0,70,23);  //城市选择按钮
     [CityBtn addTarget:self action:@selector(CitySelect) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:CityBtn];
 
@@ -182,10 +179,9 @@
     NSLog(@"_searchVC:%@",_searchVC);
     _searchVC.searchResultsUpdater = tableVC;
     _searchVC.hidesNavigationBarDuringPresentation = NO;
-    [_searchVC.searchBar sizeToFit];
+   [_searchVC.searchBar sizeToFit];
     self.navigationItem.titleView = _searchVC.searchBar;
     self.definesPresentationContext = YES;
-    
    [self setOriginPopView];   //设置弹窗功能
    [self localNameGet];
     
@@ -197,7 +193,6 @@
 -(void)setOriginPopView {
     PopSeletedView *pop = [[PopSeletedView alloc]init];
     pop.PopViewdelegate =self;
- //   [self.view addSubview:pop];
     [pop setHidden:YES];
     _popView = pop;
 }
@@ -249,7 +244,6 @@
     if (_popStatus) {
         [self popViewHide];
     }
-    
     if ([self.HomeVCdelegate respondsToSelector:@selector(leftBtnClicked)]) {
         [self.HomeVCdelegate leftBtnClicked];
     }
@@ -271,7 +265,6 @@
     } else {
         [self.sharedModelView removeFromSuperview];
         [self popViewHide];
-      //  [_popView removeFromSuperview];
     }
 }
 
@@ -791,10 +784,7 @@
 
     } else if (_status == WantBuy) {
         //求购详情页
-
         [self.HomeVCdelegate QFShowZugouDetailWithFanLei:SingleData[@"fenlei"] andKeyuanID:SingleData[@"id"] andTitle:SingleData[@"biaoti"]];
-        
-        
     }else {
          //求租详情页
         _preName =@"[求组]";

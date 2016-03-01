@@ -17,12 +17,13 @@
 #import "MBProgressHUD+CZ.h"
 #import "DSNavigationBar.h"
 #import "AFNetworking.h"
-
+#import "SharePopVC.h"
 #import "HttpTool.h"
-
+#import "UIImageView+WebCache.h"
 #import "LesveMsgVC.h"
 #import "ZuGouDetailShangPuCell.h"
-
+#import "OpenShareHeader.h"
+#import "AppDelegate.h"
 
 #define  HeavyFont     [UIFont fontWithName:@"Helvetica-Bold" size:25]
 #define  ToolHeight  50    //固定底部的大小
@@ -34,12 +35,13 @@
 #define DETAILTABLE   11
 #define ImgScoviewTag 12
 
+#define ModalViewTag   99
 
 #define DSystenVersion            ([[[UIDevice currentDevice] systemVersion] doubleValue])
 #define SSystemVersion            ([[UIDevice currentDevice] systemVersion])
 
 
-@interface ZuGouDetailViewController ()<UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate,UIAlertViewDelegate,MFMessageComposeViewControllerDelegate> {
+@interface ZuGouDetailViewController ()<UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate,UIAlertViewDelegate,MFMessageComposeViewControllerDelegate,SharePopdelegate> {
 //    isThereOwnerInfo;
 }
 
@@ -78,14 +80,11 @@
     [self initNavController];
     [self getDataFromNet];
     
-    
-    
     UIBarButtonItem *backItem = [[UIBarButtonItem alloc] init];
     backItem.title = @"";
     self.navigationItem.backBarButtonItem = backItem;
+   
 
-    
-    
 }
 
 -(NSDictionary *)FangData {
@@ -446,19 +445,17 @@
     [h        setImage:img forState:UIControlStateNormal];
     [ShareBtn setImage:ShareIcon forState:UIControlStateNormal];
     UIBarButtonItem *star = [[UIBarButtonItem alloc]initWithCustomView:h];
-    
     UIBarButtonItem *share = [[UIBarButtonItem alloc]initWithCustomView:ShareBtn];
     UIBarButtonItem *flexSible = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
     flexSible.width = 10.f ;
-    //   NSArray *arr = [NSArray arrayWithObjects:star,flexSible,share,nil];
+
     NSArray *arr = [NSArray arrayWithObjects:share,flexSible,star,nil];
     UIToolbar *rightTool =  [[UIToolbar alloc]init];
     rightTool.barTintColor = [UIColor blueColor];
     rightTool.clipsToBounds = YES ;
     rightTool.opaque = NO ;
     [rightTool setBackgroundImage:[UIImage new]forToolbarPosition:UIBarPositionAny barMetrics:UIBarMetricsDefault];
-    [rightTool setShadowImage:[UIImage new]
-           forToolbarPosition:UIToolbarPositionAny];
+    [rightTool setShadowImage:[UIImage new] forToolbarPosition:UIToolbarPositionAny];
     rightTool.tintColor = [UIColor whiteColor];
     CGFloat tool;
     if (isI6p) {
@@ -479,18 +476,18 @@
 
 -(void)StarAction {
     //    URL  /user/saveCollectRow.api  //http://www.123qf.cn/app/user/saveCollectRow.api
-    //
     //    参数
     //    fid
     //    kid
-    
-    
     NSString *Request = [NSString stringWithFormat:@"http://www.123qf.cn/app/user/saveCollectRow.api?kid=%@",self.FangData[@"id"]];
-    
-    
-    
+    if ([[self.FangData allKeys] containsObject:@"zugou"]) { //客源
+       Request = [NSString stringWithFormat:@"http://www.123qf.cn/app/user/saveCollectRow.api?kid=%@",self.FangData[@"id"]];
+    } else {
+       Request = [NSString stringWithFormat:@"http://www.123qf.cn/app/user/saveCollectRow.api?fid=%@",self.FangData[@"id"]];
+    }
     
     [self.sharedMgr POST:Request parameters:nil success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+        NSLog(@"%@",responseObject);
         if ([HttpTool isRequestSuccessWith:responseObject andKeyStr:@"zugou"]) {
             [MBProgressHUD showSuccess:@"已收藏,在我的收藏中可见"];
         }
@@ -784,9 +781,163 @@
     if (![self.FangData[@"lingbaoruzhu"] isKindOfClass:[NSNull class]]&&[self.FangData[@"lingbaoruzhu"] isEqualToNumber:@(YES)]) {
         str = [str stringByAppendingString:@" 拎包即住"];
     }
-    
     return str;
 }
+
+
+
+-(void)share {
+    NSLog(@"分享啊");
+    
+    UIView *modalView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight)];
+    modalView.userInteractionEnabled = NO;
+    modalView.tag =ModalViewTag;
+    modalView.backgroundColor = [[UIColor lightGrayColor] colorWithAlphaComponent:.4];
+    [self.navigationController.view addSubview:modalView];  //这种状况下，向右滑动会触发菜单显示
+    NSArray *shareAry = @[@{@"image":@"shareView_wx",
+                            @"title":@"微信"},
+                          @{@"image":@"shareView_friend",
+                            @"title":@"朋友圈"},
+                          @{@"image":@"shareView_qq",
+                            @"title":@"QQ"},
+                          @{@"image":@"shareView_wb",
+                            @"title":@"新浪微博"},
+                          @{@"image":@"shareView_qzone",
+                            @"title":@"QQ空间"},
+                          @{@"image":@"shareView_msg",
+                            @"title":@"短信"},
+                          @{@"image":@"share_copyLink",
+                            @"title":@"复制链接"}];
+    
+    SharePopVC *view = [[SharePopVC alloc]init];
+    view.QFImgSAndTittleSDicArr  = shareAry ;
+    view.providesPresentationContextTransitionStyle = YES;
+    view.definesPresentationContext = YES;
+    view.delegate = self;
+    view.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+    view.DismissView = ^ {
+        [modalView removeFromSuperview];
+    };
+    [self presentViewController:view animated:YES completion:^{
+    }];
+    
+}
+
+
+
+-(void)QFsharedWith:(NSInteger)index {
+    
+    NSString *firstStr ;
+    NSString *secondStr ;
+    
+    NSString *Basic = @"http://www.123qf.cn/front/fkyuan/";
+    
+    NSNumber *ZeroFlag = [NSNumber numberWithInt:0];
+    NSNumber *OneFlag  = [NSNumber numberWithInt:1];
+    NSNumber *TwoFlag  = [NSNumber numberWithInt:2];
+    
+    
+    NSLog(@"要分享的数据:%@",self.FangData);
+    
+    if ([self.FangData[@"zushou"] isEqualToNumber:ZeroFlag]) {
+        firstStr = @"cs";
+    } else if ([self.FangData[@"zushou"] isEqualToNumber:OneFlag]) {
+        firstStr = @"cz";
+    } else if ([self.FangData[@"zugou"] isEqualToNumber:OneFlag]) //求购
+    {
+        firstStr = @"qg";
+    } else if ([self.FangData[@"zugou"] isEqualToNumber:ZeroFlag]) {  //求助
+        firstStr = @"qz";
+    }
+    
+    
+    if ([self.FangData[@"fenlei"] isEqualToNumber:ZeroFlag]) {
+        secondStr = @"zz";
+    } else if ([self.FangData[@"fenlei"] isEqualToNumber:OneFlag]) {
+        secondStr = @"sp";
+    }else if ([self.FangData[@"fenlei"] isEqualToNumber:TwoFlag]) {
+        secondStr = @"xzl";
+    }else {
+        secondStr = @"cf";
+    }
+    
+    
+    
+    AppDelegate *app =  [UIApplication sharedApplication].delegate;
+    NSLog(@"%@",app.usrInfoDic);
+    OSMessage *msg=[[OSMessage alloc]init];
+    msg.title=self.FangData[@"biaoti"];
+    // NSString *urlLink = [NSString stringWithFormat:@"http://www.123qf.cn/front/fkyuan/wap_cz_zz.jsp?zhuangtai=1&fid=%@&fenlei=0&userID=%@",self.FangData[@"id"],app.usrInfoDic[@"userid"]];
+    
+    NSString *urlLink =[NSString stringWithFormat:@"http://www.123qf.cn/front/fkyuan/wap_%@_%@.jsp?zhuangtai=0&fid=%@&fenlei=0&userID=%@",firstStr,secondStr,self.FangData[@"id"],app.usrInfoDic[@"userid"]];
+    
+    if ([[self.FangData allKeys]containsObject:@"zugou"]) {
+       urlLink =[NSString stringWithFormat:@"http://www.123qf.cn/front/fkyuan/wap_%@_%@.jsp?zhuangtai=1&fid=%@&fenlei=0&userID=%@",firstStr,secondStr,self.FangData[@"id"],app.usrInfoDic[@"userid"]];
+    } else if([[self.FangData allKeys]containsObject:@"zushou"]) {
+       urlLink =[NSString stringWithFormat:@"http://www.123qf.cn/front/fkyuan/wap_%@_%@.jsp?zhuangtai=0&fid=%@&fenlei=0&userID=%@",firstStr,secondStr,self.FangData[@"id"],app.usrInfoDic[@"userid"]];
+    }
+    
+    NSLog(@"urlLink：%@",urlLink);
+    msg.link=urlLink;
+    
+    
+    
+    UIImageView *imageView = [UIImageView new];
+    NSLog(@"%@",self.imagesData);
+    if ([self.imagesData count]>1) {  //[self.imagesData count]>0
+        [imageView sd_setImageWithURL:self.imagesData[0] placeholderImage:nil];
+    } else {
+        imageView.image = [UIImage imageNamed:@"DeafaultImage"];
+    }
+    
+    msg.image = imageView.image;
+    
+    // NSString *recodUrl = @"http://www.123qf.cn/app/share/saveShareUser.api";
+    
+ //   NSString *RecodrUrl = [NSString stringWithFormat:@"http://www.123qf.cn/app/share/saveShareUser.api?fid=%@",self.FangData[@"id"]];
+    NSString *RecodrUrl;
+    
+
+    
+    if ([[self.FangData allKeys]containsObject:@"zugou"]) {
+        RecodrUrl = [NSString stringWithFormat:@"http://www.123qf.cn/app/share/saveShareUser.api?fid=%@",self.FangData[@"id"]];
+    } else if([[self.FangData allKeys]containsObject:@"zushou"]) {
+        RecodrUrl = [NSString stringWithFormat:@"http://www.123qf.cn/app/share/saveShareUser.api?kid=%@",self.FangData[@"id"]];
+    }
+    
+    //先保存分享的信息
+    [self.sharedMgr POST:RecodrUrl parameters:nil success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+        
+        NSLog(@"%@",responseObject);
+        switch (index) {
+                //微信好友分享
+            case 0:
+                NSLog(@"序号为0的触发");
+                [OpenShare shareToWeixinSession:msg Success:^(OSMessage *message) {
+                    NSLog(@"微信分享到会话成功：\n%@",message);
+                } Fail:^(OSMessage *message, NSError *error) {
+                    NSLog(@"微信分享到会话失败：\n%@\n%@",error,message);
+                }];
+                
+                
+                break;
+            case 1:
+                NSLog(@"序号为1的触发");
+                [OpenShare shareToWeixinTimeline:msg Success:^(OSMessage *message) {
+                    NSLog(@"微信分享到会话成功：\n%@",message);
+                } Fail:^(OSMessage *message, NSError *error) {
+                    NSLog(@"微信分享到会话失败：\n%@\n%@",error,message);
+                }];
+                break;
+        }
+        
+    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
+        NSLog(@"%@",error);
+    }];
+}
+
+
+
 
 
 

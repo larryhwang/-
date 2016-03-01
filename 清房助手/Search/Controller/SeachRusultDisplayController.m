@@ -39,7 +39,7 @@
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 100;
+    return 130;
 }
 
 
@@ -88,10 +88,11 @@
 
 -(void)QFshowDetailWithFangYuanID:(NSString *)FangId andFenlei:(NSString *)Fenlei userID:(NSString *)UserId XiaoquName:(NSString *)name ListStatus:(NSString *)status {
     DetailViewController *test = [DetailViewController new];
+    NSString *FenLeiStr = [NSString stringWithFormat:@"%@",Fenlei];
     test.title = name;
     test.PreTitle = status;
     test.DisplayId = FangId;
-    test.FenLei = Fenlei;
+    test.FenLei = FenLeiStr;
     test.uerID = UserId;
    [self.navigationController pushViewController:test animated:YES];
 }
@@ -100,7 +101,7 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     NSDictionary *dic = self.dataFromNet[indexPath.row];
-    [self QFshowDetailWithFangYuanID:dic[@"id"] andFenlei:dic[@"fenlei"] userID:dic[@"userid"] XiaoquName:dic[@"mingcheng"] ListStatus:_preName];
+    [self QFshowDetailWithFangYuanID:dic[@"id"] andFenlei:(NSString *)dic[@"fenlei"] userID:dic[@"userid"] XiaoquName:dic[@"mingcheng"] ListStatus:_preName];
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -226,4 +227,7 @@
     self.dataFromNet = array;
     [self.tableview reloadData];
 }
+
+
+
 @end
